@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <th:block th:fragment="footerFragment">
     <style>
         body {
             margin: 0;
@@ -44,29 +45,25 @@
     </style>
 </head>
 <body>
-    <main>
-        <!-- 페이지의 메인 콘텐츠 -->
-    </main>
-    <th:block th:fragment="footer">
-        <footer>
-            <p>&copy; 2024 StarMaker</p>
-            <p>
-                <span class="bold-text">고객센터</span> 1234-5678 <span class="bold-text">e-mail</span> starmaker@gmail.com
-            </p>
-            <p>
-                <span class="icons">
-                    <a href="https://www.instagram.com/dang.seu.man/" aria-label="Instagram">
-                        <img src="img/instagram.png" alt="Instagram" >
-                    </a>
-                    <a href="http://pf.kakao.com/_PxbgxcG" aria-label="KakaoTalk">
-                        <img src="img/KakaoTalk.png" alt="KakaoTalk">
-                    </a>
-                    <a href="https://www.youtube.com/channel/UCtv-8yPXWcpg__Dri7ueVZg" aria-label="YouTube">
-                        <img src="img/youtube.png" alt="YouTube" >
-                    </a>
-                </span>
-            </p>
-        </footer>
-    </th:block>
+    <footer>
+        <p>&copy; 2024 StarMaker</p>
+        <p>
+            <span class="bold-text">고객센터</span> 1234-5678 <span class="bold-text">e-mail</span> starmaker@gmail.com
+        </p>
+        <p>
+            <span class="icons">
+                <a href="https://www.instagram.com/dang.seu.man/" aria-label="Instagram">
+                    <img src="img/instagram.png" alt="Instagram" >
+                </a>
+                <a href="http://pf.kakao.com/_PxbgxcG" aria-label="KakaoTalk">
+                    <img src="img/KakaoTalk.png" alt="KakaoTalk">
+                </a>
+                <a href="https://www.youtube.com/channel/UCtv-8yPXWcpg__Dri7ueVZg" aria-label="YouTube">
+                    <img src="img/youtube.png" alt="YouTube" >
+                </a>
+            </span>
+        </p>
+    </footer>
+</th:block>
 </body>
 </html>
