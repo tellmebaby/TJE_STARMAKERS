@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<html xmlns:th="http://www.thymeleaf.org">
     <th:block th:fragment="footerFragment">
     <style>
         body {
@@ -29,7 +25,7 @@
         .bold-text {
             font-weight: bold;
         }
-        .social-icons a {
+        .icons a {
             margin: 0; /* 아이콘 간의 간격을 없앰 */
             font-size: 1.5em;
             vertical-align: middle;
@@ -43,8 +39,6 @@
             margin: 0;
         }
     </style>
-</head>
-<body>
     <footer>
         <p>&copy; 2024 StarMaker</p>
         <p>
@@ -65,5 +59,4 @@
         </p>
     </footer>
 </th:block>
-</body>
 </html>
