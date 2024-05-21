@@ -1,4 +1,4 @@
-package com.example.demo.Controller;
+package com.aloha.starmakers.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
