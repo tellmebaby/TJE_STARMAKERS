@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+ layout:decorate="layout/default_layout">
+ <head>
+    <link rel="stylesheet" href="../css/style.css">
+    <title>main</title>
+ </head>
+<th:block layout:fragment="content" class="starPost">
+  <div class="top">
+    홍보요청
+  </div>
+  <div class="channel">
+    <button>무료홍보</button>
+    <button>유료홍보</button>
+    <button>디자인 의뢰</button>
+  </div>
+  <div class="category">
+    <div class="check">
+        <div class="site">
+            <b>사이트</b>
+            <input type="checkbox" id="youtube" name="youtube">
+            <label for="youtube">유튜브</label>
+            <input type="checkbox" id="instargram" name="instargram">
+            <label for="instargram">인스타그램</label>
+            <input type="checkbox" id="afreeca" name="afreeca">
+            <label for="afreeca">아프리카</label>
+            <input type="checkbox" id="chizizic" name="chizizic">
+            <label for="chizizic">치지직</label>
+        </div>
+        <div class="field">
+            <b>분야</b>
+            <input type="checkbox" id="food" name="food">
+            <label for="food">음식</label>
+            <input type="checkbox" id="travel" name="travel">
+            <label for="travel">여행</label>
+            <input type="checkbox" id="game" name="game">
+            <label for="game">게임</label>
+            <input type="checkbox" id="music" name="music">
+            <label for="music">음악</label>
+            <input type="checkbox" id="animal" name="animal">
+            <label for="animal">동물</label>
+            <input type="checkbox" id="workOut" name="workOut">
+            <label for="workOut">운동</label>
+            <input type="checkbox" id="asmr" name="asmr">
+            <label for="asmr">ASMR</label>
+        </div>
+        <input type="text" id="starPostTitle"placeholder="제목을 입력해주세요">
+    </div>
+    
+  </div>
+</th:block>
+</html>

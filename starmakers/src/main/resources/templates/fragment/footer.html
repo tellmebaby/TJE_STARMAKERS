@@ -1,20 +1,14 @@
-
-    <footer class="footer">
-        <div class="copyright">
-            &copy; 2024 Starmaker
-        </div>
-        <div class="contact-info">
-            고객센터: 1234-5678 | email@email.com
-        </div>
-        <div class="social-icons">
-            <a href="https://www.instagram.com" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram 1">
-            </a>
-            <a href="https://www.instagram.com" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram 2">
-            </a>
-            <a href="https://www.instagram.com" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram 3">
-            </a>
-        </div>
-    </footer>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="footerFragment">
+  <footer>
+    <div class="mt-5">
+      <div class="text-center">
+        <p>
+          <small class="text-muted">Copyright © Hnev.log Tistory Corp. All Rights Reserved.</small>
+        </p>
+      </div>
+    </div>
+  </footer>
+</th:block>
+</html>
