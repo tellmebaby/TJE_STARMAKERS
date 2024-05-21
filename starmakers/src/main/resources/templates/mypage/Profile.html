@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <th:block th:replace="~{fragment/header::headerFragment}"></th:block>
+    <div class="container" style="height: 1000px;">
+        <h3>김조은 님</h3>
+        <p>
+            <table style="width: 1000px;">
+                <tr>
+                    <td>회원 정보</td>
+                    <td>아이디</td>
+                    <td>joeun123</td>
+                </tr>
+                <tr>
+                    <td>결제 내역</td>
+                    <td>이름</td>
+                    <td>김조은</td>
+                </tr>
+                <tr>
+                    <td>내가 쓴 글</td>
+                    <td>전화번호</td>
+                    <td>010-1234-5678</td>
+                </tr>
+                <tr>
+                    <td>1:1 문의</td>
+                    <td>이메일</td>
+                    <td>joeun123@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>회원 탈퇴</td>
+                    <td>주소</td>
+                    <td>인천광역시 부평구 경원대로 1366</td>
+                </tr>
+            </table>
+        </p>
+    </div>
+    <th:block th:replace="~{fragment/footer::footerFragment}"></th:block>
+</body>
+</html>
