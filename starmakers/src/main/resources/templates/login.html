@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 화면</title>
+    <!-- 부트스트랩 CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .login-form {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-form text-center">
+        <form>
+            <h1 class="h3 mb-3 font-weight-normal">로그인</h1>
+            <label for="inputEmail" class="sr-only">이메일 주소</label>
+            <input type="email" id="inputEmail" class="form-control mb-2" placeholder="이메일 주소" required autofocus>
+            <label for="inputPassword" class="sr-only">비밀번호</label>
+            <input type="password" id="inputPassword" class="form-control mb-2" placeholder="비밀번호" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+            <a>
+                <img src="/img/login_btn_img.png">
+            </a>
+            <p class="mt-5 mb-3 text-muted">&copy; 2024</p>
+        </form>
+    </div>
+
+    <!-- 부트스트랩 JS 및 의존성 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
