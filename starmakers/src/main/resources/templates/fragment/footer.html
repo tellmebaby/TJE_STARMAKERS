@@ -1,20 +1,72 @@
-
-    <footer class="footer">
-        <div class="copyright">
-            &copy; 2024 Starmaker
-        </div>
-        <div class="contact-info">
-            고객센터: 1234-5678 | email@email.com
-        </div>
-        <div class="social-icons">
-            <a href="https://www.instagram.com" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram 1">
-            </a>
-            <a href="https://www.instagram.com" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram 2">
-            </a>
-            <a href="https://www.instagram.com" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram 3">
-            </a>
-        </div>
-    </footer>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+        footer {
+            background-color: #E7ECF6;
+            color: black;
+            text-align: center;
+            padding: 2em 0; /* 패딩 값을 2em로 변경하여 위아래 간격을 추가 */
+        }
+        footer a {
+            color: black;
+            margin: 0;
+            text-decoration: none;
+        }
+        .bold-text {
+            font-weight: bold;
+        }
+        .social-icons a {
+            margin: 0; /* 아이콘 간의 간격을 없앰 */
+            font-size: 1.5em;
+            vertical-align: middle;
+        }
+        .icons img {
+            width: 1.0em;
+            height: 1.0em;
+            vertical-align: middle;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <!-- 페이지의 메인 콘텐츠 -->
+    </main>
+    <th:block th:fragment="footer">
+        <footer>
+            <p>&copy; 2024 StarMaker</p>
+            <p>
+                <span class="bold-text">고객센터</span> 1234-5678 <span class="bold-text">e-mail</span> starmaker@gmail.com
+            </p>
+            <p>
+                <span class="icons">
+                    <a href="https://www.instagram.com/dang.seu.man/" aria-label="Instagram">
+                        <img src="img/instagram.png" alt="Instagram" >
+                    </a>
+                    <a href="http://pf.kakao.com/_PxbgxcG" aria-label="KakaoTalk">
+                        <img src="img/KakaoTalk.png" alt="KakaoTalk">
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCtv-8yPXWcpg__Dri7ueVZg" aria-label="YouTube">
+                        <img src="img/youtube.png" alt="YouTube" >
+                    </a>
+                </span>
+            </p>
+        </footer>
+    </th:block>
+</body>
+</html>
