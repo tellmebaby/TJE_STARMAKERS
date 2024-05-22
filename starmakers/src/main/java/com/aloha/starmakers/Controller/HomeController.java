@@ -35,14 +35,13 @@ public class HomeController {
 
 
     @GetMapping("/{path}")
-    public String getMethodName2(@PathVariable("path") String path) {        
+    public String home(@PathVariable("path") String path) {        
         return path;
     }
 
-    @GetMapping("/{path}/{path2}")
-    public String getMethodName2(@PathVariable("path") String path,
-                                    @PathVariable("path2") String path2  ) {        
-        return path+"/"+path2;
+    @GetMapping("/user/{path}")
+    public String user(@PathVariable("path") String path ) {        
+        return "user/" + path;
     } 
     
 }
