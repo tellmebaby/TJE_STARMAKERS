@@ -85,8 +85,7 @@
 </head>
 <body>
     <th:block layout:fragment="content">
-    
-<div class="container">
+
     <h3>Q&A 게시판</h3>
 
     <div class="search-container">
@@ -113,7 +112,9 @@
         </thead>
         
         
-        <tbody>
+
+
+
         <th:if="${qnaList.isNotEmpty()}">
             <!-- 여기에 예시 데이터를 추가합니다. -->
             <!-- 첫 번째 예시 데이터 -->
@@ -159,6 +160,7 @@
                 <td align="center">2024-05-18 14:00:00</td> <!-- 예시 날짜 및 시간 -->
                 <td align="center">답변 완료</td> <!-- 상태에 따라 변경할 수 있습니다. -->
             </tr>
+
         </tbody>
         
     </table>
@@ -166,6 +168,15 @@
        <a href="/page/board/qnaBoard/qnaInsert">질문하기</a>
     </div>
 </div>
+    
+    </th:block>
+
+
+        <!-- </th:block> -->
+
+        
+        
+    </table>
     
     </th:block>
 
