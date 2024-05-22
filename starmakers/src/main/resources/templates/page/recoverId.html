@@ -8,6 +8,8 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .find-id-form {
+            display: flex;
+            height: 60vh;
             width: 100%;
             max-width: 400px;
             padding: 15px;
@@ -15,6 +17,11 @@
             background-color: #fff;
             border-radius: 5px;
             /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+            flex-direction: column;
+            justify-content: center;
+        }
+        .recover-id-msg {
+            text-align: center;
         }
     </style>
 </head>
@@ -24,7 +31,10 @@
 
     <div class="find-id-form">
         <form>
-            <h1 class="h3 mb-3 font-weight-normal text-center">아이디 찾기</h1>
+            <div class="recover-id-msg">
+                <h1 class="h3 mb-3 font-weight-normal text-center">아이디 찾기</h1>
+                <span>이름과 이메일을 입력해주세요.</span>
+            </div>
             <div class="form-group">
                 <label for="inputUsername">이름</label>
                 <input type="text" id="inputUsername" class="form-control" placeholder="사용자 이름" required autofocus>
