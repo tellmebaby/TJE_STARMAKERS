@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{/layout/default_layout}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,16 +16,21 @@
             margin-bottom: 10px;
         }
         .search-container select, .search-container input[type="text"] {
+            border-radius: 2px;
             margin-left: 5px;
             padding: 5px;
             background-color: rgba(0, 0, 0, 0.1);
+            border: none;
         }
         .search-container button {
+            border-radius: 2px;
             margin-left: 5px;
-            padding: 5px;
+            padding: 0 10px;
             background-color: rgba(145, 172, 207, 1);
+            border: none;
         }
         .search-container button:hover {
+            padding: 0 10px;
             background-color: rgba(51, 130, 246, 1);
             color: white;
         }
@@ -33,15 +39,24 @@
             border-collapse: collapse;
         }
         th {
-            padding: 8px;
+            padding: 14px;
             text-align: center;
+        }
+        td {
+            padding: 7px;
+            border-bottom: 0.7px solid #000;
         }
         thead {
             border-bottom: 2px solid #000;
         }
+        .no-data {
+            height: 400px;
+        }
     </style>
 </head>
 <body>
+
+    <th:block th:replace="~{../../../../fragment/header :: headerFragment}"></th:block>
 
     <h3>Q&A 게시판</h3>
 
@@ -61,40 +76,67 @@
             <tr>
                 <td width="50"></td>
                 <th width="300">제목</th>
-                <th width="200">이름</th>
-                <th width="200">아이디</th>
+                <th width="200">작성자</th>
                 <th width="200">작성일</th>
+                <th width="200">조회수</th>
                 <th width="150">상태</th>
             </tr>
         </thead>
         
-        <th:block th:if="${qnaList.isEmpty()}">
+        
+
+        <th:block th:if="${qnaList.isNotEmpty()}">
+            <!-- 여기에 예시 데이터를 추가합니다. -->
+            <!-- 첫 번째 예시 데이터 -->
             <tr>
-                <td colspan="6" align="center">
-                    조회된 게시글이 없습니다.
-                </td>
+                <td align="center">Q</td> <!-- 숫자는 게시글 번호일 수 있습니다. -->
+                <td>예시 제목 1</td>
+                <td align="center">예시 작성자 1</td>
+                <td align="center">2024-05-22 10:00:00</td> <!-- 예시 날짜 및 시간 -->
+                <td align="center">2024-05-22 10:00:00</td> <!-- 예시 날짜 및 시간 -->
+                <td align="center">답변 대기</td> <!-- 상태에 따라 변경할 수 있습니다. -->
+            </tr>
+            <!-- 두 번째 예시 데이터 -->
+            <tr>
+                <td align="center">Q</td> <!-- 게시글 번호 -->
+                <td>예시 제목 2</td>
+                <td align="center">예시 작성자 2</td>
+                <td align="center">2024-05-21 09:00:00</td> <!-- 예시 날짜 및 시간 -->
+                <td align="center">2024-05-21 09:00:00</td> <!-- 예시 날짜 및 시간 -->
+                <td align="center">답변 대기</td> <!-- 상태에 따라 변경할 수 있습니다. -->
+            </tr>
+            <!-- 여기까지 예시 데이터입니다. -->
+            <tr>
+                <td align="center">Q</td> <!-- 게시글 번호 -->
+                <td>예시 제목 3</td>
+                <td align="center">예시 작성자 3</td>
+                <td align="center">2024-05-20 18:00:00</td> <!-- 예시 날짜 및 시간 -->
+                <td align="center">2024-05-20 18:00:00</td> <!-- 예시 날짜 및 시간 -->
+                <td align="center">답변 완료</td> <!-- 상태에 따라 변경할 수 있습니다. -->
+            </tr>
+            <tr>
+                <td align="center">Q</td> <!-- 게시글 번호 -->
+                <td>예시 제목 4</td>
+                <td align="center">예시 작성자 4</td>
+                <td align="center">2024-05-19 11:00:00</td> <!-- 예시 날짜 및 시간 -->
+                <td align="center">2024-05-19 11:00:00</td> <!-- 예시 날짜 및 시간 -->
+                <td align="center">답변 완료</td> <!-- 상태에 따라 변경할 수 있습니다. -->
+            </tr>
+            <tr>
+                <td align="center">Q</td> <!-- 게시글 번호 -->
+                <td>예시 제목 5</td>
+                <td align="center">예시 작성자 5</td>
+                <td align="center">2024-05-18 13:00:00</td> <!-- 예시 날짜 및 시간 -->
+                <td align="center">2024-05-18 14:00:00</td> <!-- 예시 날짜 및 시간 -->
+                <td align="center">답변 완료</td> <!-- 상태에 따라 변경할 수 있습니다. -->
             </tr>
         </th:block>
 
-        <th:block th:each="qna : ${qnaList}">
-            <tr>
-                <!-- <td align="center" th:text="${qnaBoard.qnaNo}"></td> -->
-                <th align="center" th:text="Q"></th>
-                <td align="center">
-                    <a th:href="|/qnaBoard/qnaPost?qnaNo=${qnaBoard.qnaNo}|" th:text="${qnaBoard.title}"></a>
-                </td>
-                <td align="center" th:text="${qnaBoard.writer}"></td>
-                <td align="center">
-                    <span th:text="${#dates.format(qnaBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
-                </td>
-                <td align="center">
-                    <span th:text="${#dates.format(qnaBoard.updDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
-                </td>
-                <td align="center" th:text="${qnaBoard.status}"></td>
-            </tr>
-        </th:block>
+        
         
     </table>
+
+    <th:block th:replace="~{../../../../fragment/footer::footerFragment}"></th:block>
 
 </body>
 </html>
