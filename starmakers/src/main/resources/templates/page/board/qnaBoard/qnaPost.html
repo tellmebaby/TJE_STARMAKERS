@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{/layout/default_layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A</title>
+    <style>
+        .container {
+          width: 90%;
+          margin: 0 auto;
+        }
+       .title-container {
+          width: 960px;
+          margin: 0 auto 15px;
+          padding: 30px 30px;
+          border: 1px solid;
+          border-radius: 10px;
+        }
+        .content-container {
+          width: 960px;
+          margin: 0 auto;
+          padding: 30px 30px;
+          border: 1px solid;
+        }
+        .title-container hr {
+          margin-top: 10px;
+        }
+        h1 {
+          margin-top: 40px;
+          margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <th:block layout:fragment="content">
+
+    <center>
+    <h1>Q&A</h1>
+    <label>운영원칙에 위배되는 글은 관리자에 의해 무통보 삭제될 수 있습니다.</label>
+    </center>
+
+    <div class="title-container">
+        <span>제목</span>
+        <hr>
+    </div>
+    <div class="content-container">
+        <span>내용</span>
+    </div>
+
+    </th:block>
+
+</body>
+</html>

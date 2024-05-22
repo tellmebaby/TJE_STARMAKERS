@@ -1,19 +1,298 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{/layout/default_layout}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default_layout}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Index Page</title>
 </head>
+
 <body>
+    <div layout:fragment="content">
+        <style>
+            #promotionCarousel img {
+                width: 200px;
+                height: 250px;
+            }
 
-    <!-- th:replace : 프래그먼트를 가져오는 속성 -->
-    <th:block th:replace="~{fragment/header :: headerFragment}"></th:block>
-    <div class="container" style="height: 1000px;">
-        <h3>content</h3>
+            #bannerCarousel img {
+                width: -webkit-fill-available;
+                height: 200px;
+            }
+
+
+
+            .event-banner {
+                background: #f8f9fa;
+                text-align: center;
+                margin: 20px 0;
+            }
+
+            .bg-image {
+                position: relative;
+                background-image: url('https://plus.unsplash.com/premium_photo-1661963965541-adda6e4c6a1e?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+                background-size: cover;
+                background-position: center;
+            }
+
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.3);
+                /* 반투명한 검은색 오버레이 */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                color: white;
+                /* 텍스트 색상을 흰색으로 변경 */
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                /* 텍스트 그림자 추가 */
+                padding: 20px;
+                /* 텍스트 여백 조정 */
+            }
+
+            .jumbotron {
+                height: 400px;
+            }
+
+            .carousel-control-prev,
+            .carousel-control-next {
+                color: black;
+                /* 화살표 색상을 검정색으로 설정 */
+                width: 10%;
+                /* 화살표의 너비를 조정 */
+                left: -7%;
+                /* 왼쪽 여백을 화살표의 너비의 반으로 설정하여 가운데 정렬 */
+                right: auto;
+                /* 오른쪽 위치를 자동으로 설정하여 오른쪽 여백 제거 */
+            }
+
+            .carousel-control-prev-icon,
+            .carousel-control-next-icon {
+                background-color: black;
+                border-radius: 50%;
+                /* 동그란 모양으로 만듭니다. */
+            }
+
+            .carousel-control-next {
+                left: auto;
+                /* 오른쪽에 위치하는 다음 화살표의 위치를 자동으로 설정하여 가운데 정렬 */
+                right: -7%;
+                /* 오른쪽 여백을 화살표의 너비의 반으로 설정하여 가운데 정렬 */
+            }
+        </style>
+
+        </style>
+
+
+        <div class="jumbotron text-center bg-image">
+            <div class="overlay d-flex flex-column align-items-center">
+                <h1 class="display-4">스타가 되는 첫걸음</h1>
+                <p class="lead">스타가 되고 싶은 당신을 위한 홍보 플랫폼</p>
+                <div class="d-flex">
+                    <a href="#" class="btn btn-primary btn-lg mr-3">무료로 참여하기</a>
+                    <a href="#" class="btn btn-secondary btn-lg">스타 보러가기</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="form-group row justify-content-center">
+                <input type="text" class="form-control col-md-6" placeholder="검색 키워드 입력">
+                <button class="btn btn-primary col-md-2">검색</button>
+            </div>
+
+            <div id="promotionCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
+                                            class="card-img-top" alt="홍보글 제목">
+                                        <div class="card-body">
+                                            <h5 class="card-title">홍보글 제목</h5>
+                                            <p class="card-text">작성자</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
+                                            class="card-img-top" alt="홍보글 제목">
+                                        <div class="card-body">
+                                            <h5 class="card-title">홍보글 제목</h5>
+                                            <p class="card-text">작성자</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/7f/3e/f4/7f3ef45a988289588cf84dff469245a8.jpg"
+                                            class="card-img-top" alt="홍보글 제목">
+                                        <div class="card-body">
+                                            <h5 class="card-title">홍보글 제목</h5>
+                                            <p class="card-text">작성자</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
+                                            class="card-img-top" alt="홍보글 제목">
+                                        <div class="card-body">
+                                            <h5 class="card-title">홍보글 제목</h5>
+                                            <p class="card-text">작성자</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Repeat this carousel-item structure for the next sets of cards -->
+                    <div class="carousel-item">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/c3/b2/bd/c3b2bdc709bc5ffd1070cb6f3b137230.jpg"
+                                            class="card-img-top" alt="홍보글 제목">
+                                        <div class="card-body">
+                                            <h5 class="card-title">홍보글 제목</h5>
+                                            <p class="card-text">작성자</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
+                                            class="card-img-top" alt="홍보글 제목">
+                                        <div class="card-body">
+                                            <h5 class="card-title">홍보글 제목</h5>
+                                            <p class="card-text">작성자</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/c3/b2/bd/c3b2bdc709bc5ffd1070cb6f3b137230.jpg"
+                                            class="card-img-top" alt="홍보글 제목">
+                                        <div class="card-body">
+                                            <h5 class="card-title">홍보글 제목</h5>
+                                            <p class="card-text">작성자</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
+                                            class="card-img-top" alt="홍보글 제목">
+                                        <div class="card-body">
+                                            <h5 class="card-title">홍보글 제목</h5>
+                                            <p class="card-text">작성자</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#promotionCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#promotionCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+
+
+
+
+            <div id="bannerCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <div class="event-banner">
+                            <img src="/img/sampleBanner.png">
+                        </div>
+                    </div>
+
+                    <div class="carousel-item ">
+                        <div class="event-banner">
+                            <img src="/img/sampleBanner2.png">
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="event-banner">
+                            <img src="/img/sampleBanner3.png">
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="event-banner">
+                            <img src="/img/sampleBanner4.png">
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <!-- 좌우 화살표와 인디케이터를 추가합니다. -->
+                <a class="carousel-control-prev" href="#bannerCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#bannerCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 style="display: flex; justify-content: space-between; align-items: center;">이벤트 후기 <span class="text-muted" style="font-size: 0.8rem;"><a href="#">더 보기></a></span></h3>
+
+
+                    <ul class="list-group">
+                        <li class="list-group-item">이게 진짜 되네..[2] <span class="badge badge-secondary">22</span></li>
+                        <li class="list-group-item">이게 진짜 되네..[3] <span class="badge badge-secondary">22</span></li>
+                        <li class="list-group-item">이게 진짜 안되네.. <span class="badge badge-secondary">12</span></li>
+                        <li class="list-group-item">이게 진짜 되네..[7] <span class="badge badge-secondary">32</span></li>
+                        <li class="list-group-item">이게 진짜 되네..[2] <span class="badge badge-secondary">34</span></li>
+                        <!-- 추가 항목들 -->
+                    </ul>
+                    
+                </div>                
+                <div class="col-md-6">
+                    <h3 style="display: flex; justify-content: space-between; align-items: center;">공지사항 <span class="text-muted" style="font-size: 0.8rem;"><a href="#">더 보기></a></span></h3>
+                    <ul class="list-group">
+                        <li class="list-group-item">이건 공지입니다[2] <span class="badge badge-secondary">22</span></li>
+                        <li class="list-group-item">공지 어쩌고 저쩌고...[3] <span class="badge badge-secondary">40</span></li>
+                        <li class="list-group-item">이게 진짜 안되네.. <span class="badge badge-secondary">12</span></li>
+                        <li class="list-group-item">이게 진짜 되네..[7] <span class="badge badge-secondary">32</span></li>
+                        <li class="list-group-item">이게 진짜 되네..[2] <span class="badge badge-secondary">34</span></li>
+                        <!-- 추가 항목들 -->
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <th:block th:replace="~{fragment/footer :: footerFragment}"></th:block>
-
 </body>
+
+
+
+
 </html>
