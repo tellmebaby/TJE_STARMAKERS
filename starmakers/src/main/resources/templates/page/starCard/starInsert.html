@@ -3,22 +3,21 @@
   layout:decorate="~{/layout/default_layout}">
 
 <head>
-  <link rel="stylesheet" href="../css/style.css">
+  <!-- <link rel="stylesheet" href="../css/style.css"> -->
   <title>main</title>
   <!-- include libraries(jQuery, bootstrap) -->
-  <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> -->
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 
   <!-- include summernote css/js-->
   <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
 </head>
-<!-- th:replace : 프래그먼트를 가져오는 속성 -->
-<th:block th:replace="~{fragment/header::headerFragment}"></th:block>
 
 
+<!-- layout:decorate 쓸 때 본문 내용은 <th:block layout:fragment="content"></th:block> 안에 적어야 화면에 뜸 -->
 <th:block layout:fragment="content" class="starPost">
   <div class="top">
     홍보요청
@@ -65,10 +64,9 @@
 
 
 
-    <textarea name="content" id="summernote" value="" style="width: 80%;"></textarea>
+    <textarea name="content" id="summernote" value=""></textarea>
 
 
-    <th:block th:replace="~{fragment/footer::footerFragment}"></th:block>
 
     <script>
       $(document).ready(function () {
@@ -76,10 +74,27 @@
           height: 300,                 // set editor height
           minHeight: null,             // set minimum height of editor
           maxHeight: null,             // set maximum height of editor
-          focus: true                  // set focus to editable area after initializing summernote
+          focus: true,                  // set focus to editable area after initializing summernote
+          lang: "ko-KR",
+          placeholder: "홍보할 내용을 입력하세요."
         });
       });
-
+      $('#summernote').summernote({
+        toolbar: [
+            // [groupName, [list of button]]
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+            ['color', ['forecolor','color']],
+            ['table', ['table']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['insert',['picture','link','video']],
+            ['view', ['fullscreen', 'help']]
+          ],
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+      });
     </script>
   </div>
 </th:block>

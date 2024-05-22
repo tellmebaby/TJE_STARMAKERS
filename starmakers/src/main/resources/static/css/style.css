@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: black;
+}
+
+
+
+.starPost {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}

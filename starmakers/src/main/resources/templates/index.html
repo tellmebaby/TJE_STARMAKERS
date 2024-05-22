@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{/layout/default_layout}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +9,15 @@
 <body>
 
     <!-- th:replace : 프래그먼트를 가져오는 속성 -->
-    <th:block th:replace="~{fragment/header :: headerFragment}"></th:block>
+    <!-- <th:block th:replace="~{fragment/header :: headerFragment}"></th:block> -->
+    <th:block layout:fragment="content">
+
     <div class="container" style="height: 1000px;">
         <h3>content</h3>
     </div>
-    <th:block th:replace="~{fragment/footer :: footerFragment}"></th:block>
+
+    </th:block>
+    <!-- <th:block th:replace="~{fragment/footer :: footerFragment}"></th:block> -->
 
 </body>
 </html>
