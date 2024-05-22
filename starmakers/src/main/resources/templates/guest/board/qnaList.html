@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A</title>
+    <style>
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+        .search-container select, .search-container input[type="text"] {
+            margin-left: 5px;
+            padding: 5px;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        .search-container button {
+            margin-left: 5px;
+            padding: 5px;
+            background-color: rgba(145, 172, 207, 1);
+        }
+        .search-container button:hover {
+            background-color: rgba(51, 130, 246, 1);
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            padding: 8px;
+            text-align: center;
+        }
+        thead {
+            border-bottom: 2px solid #000;
+        }
+    </style>
+</head>
+<body>
+
+    <h3>Q&A 게시판</h3>
+
+    <div class="search-container">
+        <select>
+            <option value="제목내용">제목+내용</option>
+            <option value="제목">제목</option>
+            <option value="내용">내용</option>
+            <option value="작성자">작성자</option>
+        </select>
+        <input type="text" placeholder="검색어를 입력하세요">
+        <button type="button">검색</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <td width="50"></td>
+                <th width="300">제목</th>
+                <th width="200">이름</th>
+                <th width="200">아이디</th>
+                <th width="200">작성일</th>
+                <th width="150">상태</th>
+            </tr>
+        </thead>
+        
+        <th:block th:if="${qnaList.isEmpty()}">
+            <tr>
+                <td colspan="6" align="center">
+                    조회된 게시글이 없습니다.
+                </td>
+            </tr>
+        </th:block>
+
+        <th:block th:each="qna : ${qnaList}">
+            <tr>
+                <!-- <td align="center" th:text="${qnaBoard.qnaNo}"></td> -->
+                <th align="center" th:text="Q"></th>
+                <td align="center">
+                    <a th:href="|/qnaBoard/qnaPost?qnaNo=${qnaBoard.qnaNo}|" th:text="${qnaBoard.title}"></a>
+                </td>
+                <td align="center" th:text="${qnaBoard.writer}"></td>
+                <td align="center">
+                    <span th:text="${#dates.format(qnaBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                </td>
+                <td align="center">
+                    <span th:text="${#dates.format(qnaBoard.updDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                </td>
+                <td align="center" th:text="${qnaBoard.status}"></td>
+            </tr>
+        </th:block>
+        
+    </table>
+
+</body>
+</html>
