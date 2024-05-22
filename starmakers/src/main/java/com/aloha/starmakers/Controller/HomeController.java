@@ -43,5 +43,6 @@ public class HomeController {
     public String user(@PathVariable("path") String path ) {        
         return "user/" + path;
     } 
+
     
 }
