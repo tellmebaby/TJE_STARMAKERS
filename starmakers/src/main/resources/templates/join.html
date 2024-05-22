@@ -7,13 +7,6 @@
     <!-- 부트스트랩 CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f8f9fa;
-        }
         .signup-form {
             width: 100%;
             max-width: 400px;
@@ -21,22 +14,32 @@
             margin: auto;
             background-color: #fff;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+        }
+        .join-check-gender {
+            display: flex;
+            justify-content: space-evenly;
         }
     </style>
 </head>
 <body>
+
+    <th:block th:replace="~{fragment/header :: headerFragment}"></th:block>
+
     <div class="signup-form">
         <form>
             <h1 class="h3 mb-3 font-weight-normal text-center">회원가입</h1>
+            
             <div class="form-group">
-                <label for="inputUsername">아이디</label>
-                <input type="text" id="inputUsername" class="form-control" placeholder="사용자 이름" required autofocus>
-            </div>
-            <div class="form-group">
-                <label for="inputUsername">사용자 이름</label>
-                <input type="text" id="inputUsername" class="form-control" placeholder="사용자 이름" required autofocus>
-            </div>
+                <label for="inputUserid">아이디</label>
+                <form>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="아이디">
+                            <button type="submit" class="btn btn-secondary">검색</button>
+                        </div>
+                    </form>
+                </div>
+                        
             <div class="form-group">
                 <label for="inputPassword">비밀번호</label>
                 <input type="password" id="inputPassword" class="form-control" placeholder="비밀번호" required>
@@ -46,17 +49,46 @@
                 <input type="password" id="confirmPassword" class="form-control" placeholder="비밀번호 확인" required>
             </div>
             <div class="form-group">
-                <label for="inputUsername">사용자 이름</label>
+                <label for="inputUsername">이름</label>
                 <input type="text" id="inputUsername" class="form-control" placeholder="사용자 이름" required autofocus>
+            </div>
+            <div class="form-group">
+                <div class="join-check-gender">
+                    <div class="form-check text-start my-3">
+                      <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        남성
+                      </label>
+                    </div>
+                    <div class="form-check text-start my-3">
+                      <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        여성
+                      </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail">생년월일</label>
+                <input type="date" id="inputBirth" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="inputEmail">이메일 주소</label>
                 <input type="email" id="inputEmail" class="form-control" placeholder="이메일 주소" required>
             </div>
+            <div class="form-group">
+                <label for="inputEmail">전화번호</label>
+                <input type="text" id="inputPhone" class="form-control" placeholder="전화번호" required>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail">주소</label>
+                <input type="text" id="inputAddress" class="form-control" placeholder="주소" required>
+            </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">가입하기</button>
-            <p class="mt-5 mb-3 text-muted text-center">&copy; 2024</p>
         </form>
     </div>
+
+    <th:block th:replace="~{fragment/footer :: footerFragment}"></th:block>
 
     <!-- 부트스트랩 JS 및 의존성 -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
