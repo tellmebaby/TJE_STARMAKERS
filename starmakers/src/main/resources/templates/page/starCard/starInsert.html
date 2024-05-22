@@ -18,7 +18,7 @@
 <!-- th:replace : 프래그먼트를 가져오는 속성 -->
 <th:block th:replace="~{fragment/header::headerFragment}"></th:block>
 
-
+<!-- layout:decorate 쓸 때 본문 내용은 <th:block layout:fragment="content"></th:block> 안에 적어야 화면에 뜸 -->
 <th:block layout:fragment="content" class="starPost">
   <div class="top">
     홍보요청
