@@ -7,17 +7,39 @@
     <title>Q&A</title>
     <style>
         .container {
-          width: 90%;
+          width: 960px;
           margin: 0 auto;
           margin-top: 35px;
+        }
+        .writer {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+            padding: 10px 0;
+            width: 960px;
+            margin-top: 50px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        .writer label:first-child {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .writer label:last-child {
+            font-size: 15px;
+            color: rgba(192, 190, 183, 1);
         }
        .title-container {
           width: 960px;
           margin: 0 auto 15px;
-          margin-top: 50px;
+
           padding: 30px 30px;
           border: 1px solid;
           border-radius: 10px;
+        }
+        .title-container span {
+          font-weight: bold;
+          font-size: 20px;
         }
         .content-container {
           width: 960px;
@@ -32,13 +54,22 @@
           margin-top: 40px;
           margin-bottom: 10px;
         }
-        .button-container {
+
+        /* 버튼 */
+        .button-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 10px 0;
+            width: 960px;
+        }
+        .button-container1 {
             text-align: right;
             padding: 10px 0;
         }
-        .button-container button {
+        .button-container1 button {
             margin-left: 5px;
-            padding: 7px 12px;
+            padding: 7px 20px;
             background-color: rgba(37, 37, 37, 1);
             border-radius: 3px;
             color: white;
@@ -48,12 +79,36 @@
             font-weight: normal;
             border: none;
         }
-        .button-container button:hover {
+        .button-container1 button:hover {
             background-color: white;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
             font-weight: bolder;
             color: black;
         }
+        .button-container2 {
+            text-align: right;
+            padding: 10px 0;
+        }
+        .button-container2 button {
+            margin-left: 5px;
+            padding: 7px 20px;
+            background-color: rgba(192, 190, 183, 1);
+            border-radius: 3px;
+            color: black;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+        }
+        .button-container2 button:hover {
+            background-color: black;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+            font-weight: bolder;
+            color: white;
+        }
+
+
         .answer {
           margin-left: 30px;
           font-weight: bold;
@@ -71,7 +126,7 @@
 </head>
 <body>
 
-    <th:block layout:fragment="content">
+  <th:block layout:fragment="content">
 
   <div class="container">
 
@@ -80,43 +135,120 @@
     <label>운영원칙에 위배되는 글은 관리자에 의해 무통보 삭제될 수 있습니다.</label>
     </center>
 
+    <div class="writer">
+      <label>${qnaBoard.writer}</label>
+      <label>${qnaBoard.regDate}</label>
+    </div>
     <div class="title-container">
         <span>제목 - 엉기조차 벙기조차</span>
         <hr>
     </div>
     <div class="content-container">
-        <span>내용 - 
-          어쩌구 저쩌구 이러쿵 저러쿵 엉기조차 벙기조차 엉기벙기 버벙기
-          옛날에 한 부부가 살았습니다. 부부에게는 고민이 하나 있었습니다.
-          바로 아이가 생기지 않는다는 것이었습니다. 부부는 매일같이 물을 떠 놓고 빌었습니다.
-          머지않아 그들에게도 아이가 생겼고, 건강한 사내아이가 태어났습니다.
-          부부는 귀한 아이가 잘 살길 바라는 마음으로 용하다는 
-        </span>
+      <span>내용 - 
+        아주 오랜 옛날에
+        자식이 없는 노부부가 외딴 산속에
+        다정하게 살고 있었으나 늘 마음 한구석에는
+        자식걱정만이 그득할 뿐이었다.<br>
+
+        조석으로 산신령님께 치성을 다하여 소원을
+        빈 결과 지성이면 감천이라고나 할까?
+        아들을 점지받아 건강한 옥동자를 늘그막에
+        낳게 되어 기쁨이 이만저만이 아니었다.<br>
+
+        귀한 옥동자의 이름을 지어야 하겠는데
+        용한 작명가를 찾아가 이름을 지어달라고 하니
+        귀한 아들은 이름을 길게 지어야
+        건강하게 오래살며, 만약 이름을 한자라도
+        빼먹고 부르면 제명대로 살지 못할 것이라고 하며
+        지어준 이름이 있었으니,
+        그 이름이 무엇인고 하니 보고는 놀라지 말지어다.<br>
+
+        "엉기조차 벙기조차 벙기조차 엉기조차 엉기벙기 버벙기"<br>
+
+        라고 지어 주었으니,
+        노인네가 그 긴 이름을 어떻게 한자도
+        빼먹지 않고 어떻게 외워 부르면서
+        키울까하고 걱정도 되면서도 귀한 아들이니
+        만지면 터질까 넘어지면 다칠까하며,
+        금지옥엽으로 키웠다.<br>
+
+        어느해 7살이 되던해
+        어느 여름날 아들 친구들이 허겁지겁
+        숨이 막히게 뛰어와서는 한다는 말이
+        할아버지, 할머니 큰일났어요.<br>
+
+        "지금 엉기조차 벙기조차 벙기조차 엉기조차
+        엉기벙기 버벙기가
+        우리들과 물놀이를 하다가 물에 빠져서
+        엉기조차 벙기조차 벙기조차 엉기조차
+        엉기벙기 버벙기가 죽게 생겼어요.
+        빨리 동네 사람들을 불러모아 물에빠진
+        엉기조차 벙기조차 벙기조차 엉기조차
+        엉기벙기 버벙기를 구해야 하겠어요."
+        하였다.<br>
+
+        이에 깜짝놀란 노부부가<br>
+
+        "뭐라고 우리 귀한 아들
+        엉기조차 벙기조차 벙기조차 엉기조차
+        엉기벙기 버벙기가 물에 빠져 죽게 되었다고?
+        그럼 큰일 났구나?"<br>
+
+        하면서 동네사람들에게 말하였다.<br>
+
+        "동네사람들 큰일났어요.
+        우리 귀한 아들 엉기조차 벙기조차 벙기조차
+        엉기조차 엉기벙기 버벙기가 물에 빠져서
+        곧 죽게 되었답니다.
+        빨리가서 우리아들
+        엉기조차 벙기조차 벙기조차 엉기조차
+        엉기벙기 버벙기를 구해 주세요."<br>
+
+        하였다.<br>
+
+      </span>
     </div>
-    <div class="button-container">
-      <button type="button" onclick="moveList()">목록</button>
-      <button type="button" onclick="update()">수정</button>
+
+    <div class="button-wrapper">
+      <div class="button-container1">
+        <button type="button" onclick="moveList()">목록</button>
+      </div>
+      <div class="button-container2">
+        <button type="button" onclick="update()">수정</button>
+      </div>
     </div>
+
     <label class="answer">답변</label>
     <div class="answer-container">
-      <span>답변</span>
+      <span>그러는 동안에 시간은 많이 흘렀고
+        마을 사람들이 냇가에 도착하여 보니,
+        엉기조차 벙기조차 벙기조차 엉기조차
+        엉기벙기 버벙기는 이미
+        이세상 사람이 아니었다.
+        이에 할아버지가 울면서
+        얼마나 오래 살겠다고 부르기도 성가신
+        이름을 그렇게 길게 지어가지고
+        귀한 아들의 명만 단축하였다고
+        통곡하였으나 이미 때는 늦으리 였다.</span>
   </div>
 
   </div>
 
-    </th:block>
+  <script>
+    function moveList() {
+      location.href = '/page/board/qnaBoard/qnaList'
+    }
+  
+    function update() {
+      location.href = '/page/board/qnaBoard/qnaList'
+    }
+    
 
-    <script>
+  </script>
+  
+</th:block>
 
-      function moveList() {
-        location.href = '/page/board/qnaBoard/qnaList'
-      }
-
-      function update() {
-        location.href = ''
-      }
-
-    </script>
+    
 
 </body>
 </html>
