@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{/layout/default_layout}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,9 +36,7 @@
         }
     </style>
 </head>
-<body>
-
-    <th:block th:replace="~{fragment/header :: headerFragment}"></th:block>
+<th:block layout:fragment="content" class="login">
 
     <div class="login-form text-center">
         <form>
@@ -107,5 +106,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-</body>
+</th:block>
 </html>
