@@ -36,6 +36,7 @@ layout:decorate="~{/layout/default_layout}">
         }
     </style>
 </head>
+<body>
 <th:block layout:fragment="content" class="login">
 
     <div class="login-form text-center">
@@ -98,7 +99,6 @@ layout:decorate="~{/layout/default_layout}">
     </div>
     
 
-    <th:block th:replace="~{fragment/footer :: footerFragment}"></th:block>
     
     <!-- 부트스트랩 JS 및 의존성 -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -107,4 +107,5 @@ layout:decorate="~{/layout/default_layout}">
 
 
 </th:block>
+</body>
 </html>
