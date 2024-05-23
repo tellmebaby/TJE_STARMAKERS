@@ -12,7 +12,7 @@
     <div layout:fragment="content">
         <style>
             #promotionCarousel img {
-                width: 200px;
+                width: 100%;
                 height: 250px;
             }
 
@@ -63,14 +63,10 @@
 
             .carousel-control-prev,
             .carousel-control-next {
+                width: 40px;
                 color: black;
-                /* 화살표 색상을 검정색으로 설정 */
-                width: 10%;
-                /* 화살표의 너비를 조정 */
-                left: -7%;
-                /* 왼쪽 여백을 화살표의 너비의 반으로 설정하여 가운데 정렬 */
+                left: -5%;
                 right: auto;
-                /* 오른쪽 위치를 자동으로 설정하여 오른쪽 여백 제거 */
             }
 
             .carousel-control-prev-icon,
@@ -82,10 +78,43 @@
 
             .carousel-control-next {
                 left: auto;
-                /* 오른쪽에 위치하는 다음 화살표의 위치를 자동으로 설정하여 가운데 정렬 */
-                right: -7%;
-                /* 오른쪽 여백을 화살표의 너비의 반으로 설정하여 가운데 정렬 */
+                right: -5%;
             }
+
+
+            #promotionCarousel .row {
+                justify-content: space-between;
+            }
+
+            #promotionCarousel .col-lg-3 {
+                padding-right: 0;
+                padding-left: 0;
+                flex: 0 0 24%;
+            }
+
+            .board-h {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .text-muted {
+                font-size: 0.8rem;
+            }
+
+            .search-input {
+                margin-right: 15px;
+            }
+
+            .list-group-item {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .badge-secondary {
+                margin-right: 10px;
+            }
+            
         </style>
 
         </style>
@@ -104,7 +133,7 @@
 
         <div class="container">
             <div class="form-group row justify-content-center">
-                <input type="text" class="form-control col-md-6" placeholder="검색 키워드 입력">
+                <input type="text" class="form-control col-md-6 search-input" placeholder="검색 키워드 입력">
                 <button class="btn btn-primary col-md-2">검색</button>
             </div>
 
@@ -217,6 +246,7 @@
 
 
 
+
             <div id="bannerCarousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
 
@@ -262,7 +292,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <h3 style="display: flex; justify-content: space-between; align-items: center;">이벤트 후기 <span class="text-muted" style="font-size: 0.8rem;"><a href="#">더 보기></a></span></h3>
+                    <h3 class="board-h">이벤트 후기 <span class="text-muted"><a href="#">더 보기></a></span></h3>
 
 
                     <ul class="list-group">
@@ -273,10 +303,10 @@
                         <li class="list-group-item">이게 진짜 되네..[2] <span class="badge badge-secondary">34</span></li>
                         <!-- 추가 항목들 -->
                     </ul>
-                    
-                </div>                
+
+                </div>
                 <div class="col-md-6">
-                    <h3 style="display: flex; justify-content: space-between; align-items: center;">공지사항 <span class="text-muted" style="font-size: 0.8rem;"><a href="#">더 보기></a></span></h3>
+                    <h3 class="board-h">공지사항 <span class="text-muted"><a href="#">더 보기></a></span></h3>
                     <ul class="list-group">
                         <li class="list-group-item">이건 공지입니다[2] <span class="badge badge-secondary">22</span></li>
                         <li class="list-group-item">공지 어쩌고 저쩌고...[3] <span class="badge badge-secondary">40</span></li>
