@@ -39,9 +39,9 @@ public class HomeController {
         return path;
     }
 
-    @GetMapping("/user/{path}")
+    @GetMapping("/page/{path}")
     public String user(@PathVariable("path") String path ) {        
-        return "user/" + path;
+        return "page/" + path;
     } 
 
    
