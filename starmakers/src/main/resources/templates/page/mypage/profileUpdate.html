@@ -6,19 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
      <!-- include libraries(jQuery, bootstrap) -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>  -->
     <style>
         body {
             font-family: Arial, sans-serif;
         }
-        .container {
-            margin-top: 50px;
-            margin-bottom: 210px;
-            width: 100%;
-            height: 100%;
-        }
+
         .nav-links {
             display: flex;
             flex-direction: column;
@@ -36,11 +31,12 @@
             text-decoration: none;
             font-size: 30px;
         }
+
         .nav-links a:hover {
             color: #000;
         }
 
-        h1 {
+        .nav-links h1 {
             font-size: 42px;
             margin-bottom: 100px;
             font-weight: bolder;
@@ -84,7 +80,7 @@
             width: 70%;
         }
         .table-margin {
-            margin-top: 164px;
+            margin-top: 140px;
         }  
     </style>
 </head>
@@ -92,50 +88,50 @@
     <th:block layout:fragment="content">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-2 mr-2">
                     <div class="side-menu">
                         <div class="nav-links">
                             <h1>김조은님,</h1>
-                            <a href="/page/mypage/profile">회원 정보</a>
-                            <a href="/page/mypage/payment">결제 내역</a>
-                            <a href="/page/mypage/promotion">내가 쓴 글</a>
-                            <a href="/page/mypage/inquiry">1 : 1 문의</a>
-                            <a href="/page/mypage/userDelete">회원 탈퇴</a>
+                            <a href="/page/mypage/profile" >회원 정보</a>
+                            <a href="/page/mypage/payment"  >결제 내역</a>
+                            <a href="/page/mypage/promotion"  >내가 쓴 글</a>
+                            <a href="/page/mypage/inquiry"  >1 : 1 문의</a>
+                            <a href="/page/mypage/userDelete"  >회원 탈퇴</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-8">
                     <div class="box">
                         <div class="table-margin"></div>
-                        <table class="table">
+                        <table class="table my-0 py-0">
                             <tr>
-                                <td class="fw-bold fs-2 text-center align-middle border-0">아이디</td>
-                                <td class="fs-2 align-middle border-0">joeun123</td>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">아이디</td>
+                                <td class="fs-5 align-middle border-0">joeun123</td>
                             </tr>
                             <tr>
-                                <td class="fw-bold fs-2 text-center align-middle border-0">이름</td>
-                                <td class="fs-2 align-middle border-0">김조은</td>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">이름</td>
+                                <td class="fs-5 align-middle border-0">김조은</td>
                             </tr>
                             <tr>
-                                <td class="fw-bold fs-2 text-center align-middle border-0">전화번호</td>
-                                <td class="fs-2 align-middle border-0">
-                                     <input type="text" class="form-control fs-2" id="" placeholder="전화번호" value="010-1234-5678">
+                                <td class="fw-bold fs-5 text-center align-middle border-0">전화번호</td>
+                                <td class="fs-5 align-middle border-0">
+                                     <input type="text" class="form-control fs-5" id="" placeholder="전화번호" value="010-1234-5678">
                                 </td>
                             </tr>
                             <tr>
-                                <td class="fw-bold fs-2 text-center align-middle border-0">이메일</td>
-                                <td class="fs-2 align-middle border-0">
-                                     <input type="text" class="form-control fs-2" id="" placeholder="이메일" value="joeun123@gmail.com">
+                                <td class="fw-bold fs-5 text-center align-middle border-0">이메일</td>
+                                <td class="fs-5 align-middle border-0">
+                                     <input type="text" class="form-control fs-5" id="" placeholder="이메일" value="joeun123@gmail.com">
                                 </td>
                             </tr>
                             <tr>
-                                <td class="fw-bold fs-2 text-center align-middle border-0">생년월일</td>
-                                <td class="fs-2 align-middle border-0">2002-02-02</td>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">생년월일</td>
+                                <td class="fs-5 align-middle border-0">2002-02-02</td>
                             </tr>
                             <tr>
-                                <td class="fw-bold fs-2 text-center align-middle border-0">주소</td>
-                                <td class="fs-2 align-middle border-0">
-                                     <input type="text" class="form-control fs-2" id="" placeholder="주소" value="인천광역시 부평구 경원대로 1366">
+                                <td class="fw-bold fs-5 text-center align-middle border-0">주소</td>
+                                <td class="fs-5 align-middle border-0">
+                                     <input type="text" class="form-control fs-5" id="" placeholder="주소" value="인천광역시 부평구 경원대로 1366">
                                 </td>
                             </tr>
                         </table>

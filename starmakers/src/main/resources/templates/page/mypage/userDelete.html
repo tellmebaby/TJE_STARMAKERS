@@ -6,19 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- include libraries(jQuery, bootstrap) -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
         }
-        .container {
-            margin-top: 50px;
-            margin-bottom: 210px;
-            width: 100%;
-            height: 100%;
-        }
+
         .nav-links {
             display: flex;
             flex-direction: column;
@@ -37,7 +30,7 @@
         .nav-links a.active {
             font-weight: bold;
         }
-        h1 {
+        .nav-links h1 {
             font-size: 42px;
             margin-bottom: 100px;
             font-weight: bolder;
@@ -75,6 +68,7 @@
 </head>
 <body>
     <th:block layout:fragment="content">
+
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
@@ -97,11 +91,33 @@
                             <br>
                             <span style="font-size: 20px;">결제하신 상품에 대한 환불 또한 어려워지므로 탈퇴하시기 전 다시 한번 확인 부탁드립니다.</span>
                         </div>
-                        <div class="update">
-                            <input type="checkbox" name="checkbox" id="checkbox" class="checkbox"><span style="font-size: 20px; margin-left: 8px;">위 내용을 확인합니다.</span>
-                            <input type="button" class="button" value="탈퇴하기">
+                            <!-- Button trigger modal -->
+                            
+
+                           
+                            <div class="update">
+                                <input type="checkbox" name="checkbox" id="checkbox" class="checkbox"><span style="font-size: 20px; margin-left: 8px;">위 내용을 확인합니다.</span>
+                                <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">탈퇴하기</button>
                         </div>
                     </div>
+                </div>
+            </div>
+             <!-- Modal -->
+             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">경고</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    정말 탈퇴하시겠습니까?
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary">확인</button>
+                    </div>
+                </div>
                 </div>
             </div>
     </th:block>

@@ -5,20 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-     <!-- include libraries(jQuery, bootstrap) -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+    
     <style>
         body {
             font-family: Arial, sans-serif;
         }
-        .container {
-            margin-top: 50px;
-            margin-bottom: 210px;
-            width: 100%;
-            height: 100%;
-        }
+
         .nav-links {
             display: flex;
             flex-direction: column;
@@ -40,7 +32,7 @@
             color: #000;
         }
 
-        h1 {
+        .nav-links h1 {
             font-size: 42px;
             margin-bottom: 100px;
             font-weight: bolder;
@@ -78,15 +70,16 @@
             width: 70%;
         }
         .table-margin {
-            margin-top: 164px;
+            margin-top: 140px;
         }
     </style>
 </head>
 <body>
+    <th:block th:replace="~{fragment/header :: headerFragment}"></th:block>
     <th:block layout:fragment="content">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="side-menu">
                         <div class="nav-links">
                             <h1>김조은님,</h1>
@@ -103,34 +96,34 @@
                         <div class="table-margin"></div>
                         <table class="table">
                             <tr>
-                                <td class="fw-bold fs-2 text-center align-middle border-0">아이디</td>
-                                <td class="fs-2 align-middle border-0">joeun123</td>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">아이디</td>
+                                <td class="fs-5 align-middle border-0">joeun123</td>
                             </tr>
                             <tr>
-                                <td class="fw-bold fs-2 text-center align-middle border-0">이름</td>
-                                <td class="fs-2 align-middle border-0">김조은</td>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">이름</td>
+                                <td class="fs-5 align-middle border-0">김조은</td>
                             </tr>
                             <tr>
-                                <td class="fw-bold fs-2 text-center align-middle border-0">전화번호</td>
-                                <td class="fs-2 align-middle border-0">
+                                <td class="fw-bold fs-5 text-center align-middle border-0">전화번호</td>
+                                <td class="fs-5 align-middle border-0">
                                     <span>010-1234-5678</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="fw-bold fs-2 text-center align-middle border-0">이메일</td>
-                                <td class="fs-2 align-middle border-0">
+                                <td class="fw-bold fs-5 text-center align-middle border-0">이메일</td>
+                                <td class="fs-5 align-middle border-0">
                                     <span>joeun123@gmail.com</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="fw-bold fs-2 text-center align-middle border-0">생년월일</td>
-                                <td class="fs-2 align-middle border-0">
+                                <td class="fw-bold fs-5 text-center align-middle border-0">생년월일</td>
+                                <td class="fs-5 align-middle border-0">
                                     <span>2002-02-02</span>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="fw-bold fs-2 text-center align-middle border-0">주소</td>
-                                <td class="fs-2 align-middle border-0">
+                                <td class="fw-bold fs-5 text-center align-middle border-0">주소</td>
+                                <td class="fs-5 align-middle border-0">
                                     <span>인천광역시 부평구 경원대로 1366</span>
                                 </td>
                             </tr>
@@ -143,5 +136,6 @@
             </div>
         </div>
     </th:block>
+    <th:block th:replace="~{fragment/footer :: footerFragment}"></th:block>
 </body>
 </html>
