@@ -3,103 +3,228 @@
   layout:decorate="~{/layout/default_layout}">
 
 <head>
-  <!-- <link rel="stylesheet" href="../css/style.css"> -->
+  <link rel="stylesheet" href="/css/style.css">
   <title>main</title>
   <!-- include libraries(jQuery, bootstrap) -->
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"> -->
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+  <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> -->
 
   <!-- include summernote css/js-->
-  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+  <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet"> -->
+  <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css"
+    integrity="sha256-IKhQVXDfwbVELwiR0ke6dX+pJt0RSmWky3WB2pNx9Hg=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"
+    integrity="sha256-5slxYrL5Ct3mhMAp/dgnb5JSnTYMtkr4dHby34N10qw=" crossorigin="anonymous"></script>
+
+  <!-- language pack -->
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/lang/summernote-ko-KR.min.js"
+    integrity="sha256-y2bkXLA0VKwUx5hwbBKnaboRThcu7YOFyuYarJbCnoQ=" crossorigin="anonymous"></script>
+
 
 </head>
 
 
 <!-- layout:decorate 쓸 때 본문 내용은 <th:block layout:fragment="content"></th:block> 안에 적어야 화면에 뜸 -->
-<th:block layout:fragment="content" class="starPost">
-  <div class="top">
-    홍보요청
-  </div>
-  <div class="channel">
-    <button>무료홍보</button>
-    <button>유료홍보</button>
-    <button>디자인 의뢰</button>
-  </div>
-  <div class="category">
-    <div class="check">
-      <div class="site">
-        <b>사이트</b>
-        <input type="checkbox" id="youtube" name="youtube">
-        <label for="youtube">유튜브</label>
-        <input type="checkbox" id="instargram" name="instargram">
-        <label for="instargram">인스타그램</label>
-        <input type="checkbox" id="afreeca" name="afreeca">
-        <label for="afreeca">아프리카</label>
-        <input type="checkbox" id="chizizic" name="chizizic">
-        <label for="chizizic">치지직</label>
+<th:block layout:fragment="content" class="align-items-center ml-5">
+  <div class="body lg" style="max-width: 900 ;">
+    <h1 class="d-flex justify-content-center mb-3">
+      홍보요청
+    </h1>
+    <form action="" method="post" id="starPost">
+      <div class="d-flex justify-content-center" id="channel">
+        <button type="submit" class="btn btn-outline-secondary">무료홍보</button>
+        <button type="submit" class="btn btn-outline-secondary">유료홍보</button>
+        <button type="submit" class="btn btn-outline-secondary">디자인 의뢰</button>
       </div>
-      <div class="field">
-        <b>분야</b>
-        <input type="checkbox" id="food" name="food">
-        <label for="food">음식</label>
-        <input type="checkbox" id="travel" name="travel">
-        <label for="travel">여행</label>
-        <input type="checkbox" id="game" name="game">
-        <label for="game">게임</label>
-        <input type="checkbox" id="music" name="music">
-        <label for="music">음악</label>
-        <input type="checkbox" id="animal" name="animal">
-        <label for="animal">동물</label>
-        <input type="checkbox" id="workOut" name="workOut">
-        <label for="workOut">운동</label>
-        <input type="checkbox" id="asmr" name="asmr">
-        <label for="asmr">ASMR</label>
-      </div>
-      <input type="text" id="starPostTitle" placeholder="제목을 입력해주세요">
-    </div>
+      <div class="container">
+        <div class="category my-4 bg-body-tertiary rounded">
+          <div class="site row py-2">
+            <div class="item col-2 ml-2">
+              <b>사이트</b>  
+            </div>
+
+            <div class="item col-8 d-flex justify-content-start column-gap-2">
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input " name="youtube" type="checkbox" value="" id="youtube">
+                <label class="form-check-label" for="youtube">
+                  유튜브
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" type="checkbox" value="" id="instargram">
+                <label class="form-check-label" for="instargram">
+                  인스타그램
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" type="checkbox" value="" id="afreeca">
+                <label class="form-check-label" for="afreeca">
+                  아프리카
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" type="checkbox" value="" id="chizizic">
+                <label class="form-check-label" for="chizizic">
+                  치지직
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="site row py-2">
+            <div class="item col-2 ml-2">
+              <b>분야</b>
+            </div>
+            <div class="item col-8 d-flex justify-content-start column-gap-2">
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" type="checkbox" value="" id="food">
+                <label class="form-check-label" for="food">
+                  음식
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" type="checkbox" value="" id="travel">
+                <label class="form-check-label" for="travel">
+                  여행
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input " type="checkbox" value="" id="game">
+                <label class="form-check-label" for="game">
+                  게임
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" type="checkbox" value="" id="music">
+                <label class="form-check-label" for="music">
+                  음악
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" type="checkbox" value="" id="animal">
+                <label class="form-check-label" for="animal">
+                  동물
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" type="checkbox" value="" id="workOut">
+                <label class="form-check-label" for="workOut">
+                  운동
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" type="checkbox" value="" id="asmr">
+                <label class="form-check-label" for="asmr">
+                  ASMR
+                </label>
+              </div>
+
+            </div>
+            
+            
+          </div>
+        </div>
+
+        <!-- <div class="row mb-3">
+          <label for="title" class="col-auto col-form-label">제목</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="title" placeholder="글 제목을 입력해주세요">
+          </div> -->
+        <!-- <input type="text" class="form-control" id="formGroupExampleInput" placeholder="글 제목을 입력해주세요"> -->
+        <!-- </div> -->
+        <!-- <div class="d-flex justify-content-center container">
+        <table class="justify-content-start border">
+          <tr>
+            <td>사이트</td>
+            <td>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="youtube">
+                <label class="form-check-label" for="youtube">
+                  유튜브
+                </label>
+              </div>
+            </td>
+            <td>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="instargram">
+                <label class="form-check-label" for="instargram">
+                  인스타그램
+                </label>
+              </div>
+            </td>
+            <td>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="afreeca">
+                <label class="form-check-label" for="afreeca">
+                  아프리카
+                </label>
+              </div>
+            </td>
+            <td>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="chizizic">
+                <label class="form-check-label" for="chizizic">
+                  치지직
+                </label>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>분야</td>
+            <td>여행 음식 어쩌고</td>
+          </tr>
+        </table> 
+      </div>    -->
+        <div class="input-group">
+          <span class="input-group-text" id="addon-wrapping">제목</span>
+          <input type="text" name="title" class="form-control" placeholder="글 제목을 입력해주세요" aria-label="tilte"
+            aria-describedby="addon-wrapping">
+        </div>
+        <!-- <input type="text" class="" id="starPostTitle" placeholder="제목을 입력해주세요"> -->
 
 
+        <div>
+          <textarea name="content" class="" id="summernote" value=""></textarea>
+        </div>
+        <div class="d-flex justify-content-end">
+          <input type="submit" class="btn btn-primary btn-submit btn-lg" value="등록">
+        </div>
+    </form>
 
-
-
-    <textarea name="content" id="summernote" value=""></textarea>
-
-
-
-    <script>
-      $(document).ready(function () {
-        $('#summernote').summernote({
-          height: 300,                 // set editor height
-          minHeight: null,             // set minimum height of editor
-          maxHeight: null,             // set maximum height of editor
-          focus: true,                  // set focus to editable area after initializing summernote
-          lang: "ko-KR",
-          placeholder: "홍보할 내용을 입력하세요."
-        });
-      });
-      $('#summernote').summernote({
-        toolbar: [
-            // [groupName, [list of button]]
-            ['fontname', ['fontname']],
-            ['fontsize', ['fontsize']],
-            ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-            ['color', ['forecolor','color']],
-            ['table', ['table']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']],
-            ['insert',['picture','link','video']],
-            ['view', ['fullscreen', 'help']]
-          ],
-          height: 300,                 // set editor height
-          minHeight: null,             // set minimum height of editor
-          maxHeight: null,
-        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-      });
-    </script>
   </div>
+  </div>
+
+  </div>
+
+
+
+  <script>
+
+    $('#summernote').summernote({
+      toolbar: [
+        // [groupName, [list of button]]
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+        ['color', ['forecolor', 'color']],
+        ['table', ['table']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['insert', ['picture', 'link', 'video']],
+        ['view', ['fullscreen', 'help']]
+      ],
+      height: 500,
+      minHeight: null,
+      maxHeight: null,
+      lang: 'ko-KR',
+      fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+      fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+      placeholder: '홍보할 내용을 입력하세요.'
+    });
+  </script>
+
 </th:block>
 
 </html>
