@@ -9,10 +9,12 @@
         .container {
           width: 90%;
           margin: 0 auto;
+          margin-top: 35px;
         }
        .title-container {
           width: 960px;
           margin: 0 auto 15px;
+          margin-top: 50px;
           padding: 30px 30px;
           border: 1px solid;
           border-radius: 10px;
@@ -30,11 +32,48 @@
           margin-top: 40px;
           margin-bottom: 10px;
         }
+        .button-container {
+            text-align: right;
+            padding: 10px 0;
+        }
+        .button-container button {
+            margin-left: 5px;
+            padding: 7px 12px;
+            background-color: rgba(37, 37, 37, 1);
+            border-radius: 3px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+        }
+        .button-container button:hover {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+            font-weight: bolder;
+            color: black;
+        }
+        .answer {
+          margin-left: 30px;
+          font-weight: bold;
+          font-size: 20px;
+        }
+        .answer-container {
+          width: 960px;
+          margin: 0 auto 15px;
+          padding: 30px 30px;
+          border: 1px solid;
+          border-radius: 10px;
+          background-color: rgb(240, 240, 240);
+        }
     </style>
 </head>
 <body>
 
     <th:block layout:fragment="content">
+
+  <div class="container">
 
     <center>
     <h1>Q&A</h1>
@@ -42,14 +81,42 @@
     </center>
 
     <div class="title-container">
-        <span>제목</span>
+        <span>제목 - 엉기조차 벙기조차</span>
         <hr>
     </div>
     <div class="content-container">
-        <span>내용</span>
+        <span>내용 - 
+          어쩌구 저쩌구 이러쿵 저러쿵 엉기조차 벙기조차 엉기벙기 버벙기
+          옛날에 한 부부가 살았습니다. 부부에게는 고민이 하나 있었습니다.
+          바로 아이가 생기지 않는다는 것이었습니다. 부부는 매일같이 물을 떠 놓고 빌었습니다.
+          머지않아 그들에게도 아이가 생겼고, 건강한 사내아이가 태어났습니다.
+          부부는 귀한 아이가 잘 살길 바라는 마음으로 용하다는 
+        </span>
     </div>
+    <div class="button-container">
+      <button type="button" onclick="moveList()">목록</button>
+      <button type="button" onclick="update()">수정</button>
+    </div>
+    <label class="answer">답변</label>
+    <div class="answer-container">
+      <span>답변</span>
+  </div>
+
+  </div>
 
     </th:block>
+
+    <script>
+
+      function moveList() {
+        location.href = '/page/board/qnaBoard/qnaList'
+      }
+
+      function update() {
+        location.href = ''
+      }
+
+    </script>
 
 </body>
 </html>
