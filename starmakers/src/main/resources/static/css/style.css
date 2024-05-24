@@ -8,3 +8,8 @@
     tab-size: 30px;
     
 }
+
+.nav-links a.active {
+    font-weight: bold;
+    color: #000;
+}
