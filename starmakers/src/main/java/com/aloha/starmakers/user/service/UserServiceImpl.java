@@ -81,5 +81,5 @@ public class UserServiceImpl implements UserService {
         int result = userMapper.insertAuth(userAuth);
         return result;
     }
-    
+
 }
