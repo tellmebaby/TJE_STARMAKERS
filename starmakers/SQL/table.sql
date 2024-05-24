@@ -1,14 +1,16 @@
 
+
+DROP TABLE IF EXISTS action ;
 CREATE TABLE action
 (
-  like_no  INT       NOT NULL DEFAULT AUTO_INCREMENT COMMENT '좋아요데이터번호',
+  like_no  INT       NOT NULL AUTO_INCREMENT COMMENT '좋아요데이터번호',
   reg_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일자',
   user_no  INT       NOT NULL COMMENT '유저데이터번호',
   star_no  INT       NOT NULL COMMENT '이벤트데이터번호',
   PRIMARY KEY (like_no)
 ) COMMENT '좋아요정보';
 
-DROP TABLE file ;
+DROP TABLE IF EXISTS file ;
 
 CREATE TABLE file
 (
@@ -22,6 +24,7 @@ CREATE TABLE file
   PRIMARY KEY (file_no)
 ) COMMENT '업로드파일';
 
+DROP TABLE IF EXISTS message ;
 CREATE TABLE message
 (
   message_no INT         NOT NULL AUTO_INCREMENT COMMENT '알림데이터번호',
@@ -34,6 +37,9 @@ CREATE TABLE message
   PRIMARY KEY (message_no)
 ) COMMENT '알림메세지';
 
+
+
+DROP TABLE IF EXISTS payment_info ;
 CREATE TABLE payment_info
 (
   pay_no     INT         NOT NULL AUTO_INCREMENT COMMENT '결제데이터번호',
@@ -44,7 +50,7 @@ CREATE TABLE payment_info
   PRIMARY KEY (pay_no)
 ) COMMENT '결제정보';
 
-DROP TABLE persistent_logins;
+DROP TABLE IF EXISTS persistent_logins;
 CREATE TABLE persistent_logins
 (
   series    VARCHAR(64)  NOT NULL COMMENT '시리즈', -- serise를 series로 수정하고 길이를 64로 설정했습니다.
@@ -54,6 +60,8 @@ CREATE TABLE persistent_logins
   PRIMARY KEY (series)
 ) COMMENT '자동로그인';
 
+
+DROP TABLE IF EXISTS product ;
 CREATE TABLE product
 (
   product_no INT         NOT NULL AUTO_INCREMENT COMMENT '상품데이터번호',
@@ -67,6 +75,8 @@ CREATE TABLE product
   PRIMARY KEY (product_no)
 ) COMMENT '상품데이터';
 
+
+DROP TABLE IF EXISTS qna_board ;
 CREATE TABLE qna_board
 (
   qna_no   INT         NOT NULL AUTO_INCREMENT COMMENT '질의응답데이터번호',
@@ -81,7 +91,7 @@ CREATE TABLE qna_board
   PRIMARY KEY (qna_no)
 ) COMMENT '질의응답게시판';
 
-DROP TABLE reply;
+DROP TABLE IF EXISTS reply;
 CREATE TABLE reply
 (
   reply_no  INT       NOT NULL AUTO_INCREMENT COMMENT '댓글데이터번호',
@@ -98,6 +108,8 @@ CREATE TABLE reply
 ) COMMENT '댓글';
 
 
+
+DROP TABLE IF EXISTS star_board ;
 CREATE TABLE star_board
 (
   star_no   INT         NOT NULL AUTO_INCREMENT COMMENT '이벤트데이터번호',
@@ -117,7 +129,7 @@ CREATE TABLE star_board
   PRIMARY KEY (star_no)
 ) COMMENT '통합게시판';
 
-DROP TABLE user;
+DROP TABLE IF EXISTS user;
 CREATE TABLE user
 (
   user_no  INT         NOT NULL AUTO_INCREMENT COMMENT '유저데이터번호',
@@ -135,6 +147,7 @@ CREATE TABLE user
 ) COMMENT '회원정보';
 
 
+DROP TABLE IF EXISTS user_auth;
 CREATE TABLE user_auth
 (
   auth_no INT          NOT NULL AUTO_INCREMENT,
@@ -143,72 +156,72 @@ CREATE TABLE user_auth
   PRIMARY KEY (auth_no)
 );
 
-ALTER TABLE star_board
-  ADD CONSTRAINT FK_user_TO_star_board
-    FOREIGN KEY (user_no)
-    REFERENCES user (user_no);
+-- ALTER TABLE star_board
+--   ADD CONSTRAINT FK_user_TO_star_board
+--     FOREIGN KEY (user_no)
+--     REFERENCES user (user_no);
 
-ALTER TABLE file
-  ADD CONSTRAINT FK_user_TO_file
-    FOREIGN KEY (user_no)
-    REFERENCES user (user_no);
+-- ALTER TABLE file
+--   ADD CONSTRAINT FK_user_TO_file
+--     FOREIGN KEY (user_no)
+--     REFERENCES user (user_no);
 
-ALTER TABLE file
-  ADD CONSTRAINT FK_star_board_TO_file
-    FOREIGN KEY (star_no)
-    REFERENCES star_board (star_no);
+-- ALTER TABLE file
+--   ADD CONSTRAINT FK_star_board_TO_file
+--     FOREIGN KEY (star_no)
+--     REFERENCES star_board (star_no);
 
-ALTER TABLE qna_board
-  ADD CONSTRAINT FK_user_TO_qna_board
-    FOREIGN KEY (user_no)
-    REFERENCES user (user_no);
+-- ALTER TABLE qna_board
+--   ADD CONSTRAINT FK_user_TO_qna_board
+--     FOREIGN KEY (user_no)
+--     REFERENCES user (user_no);
 
-ALTER TABLE payment_info
-  ADD CONSTRAINT FK_user_TO_payment_info
-    FOREIGN KEY (user_no)
-    REFERENCES user (user_no);
+-- ALTER TABLE payment_info
+--   ADD CONSTRAINT FK_user_TO_payment_info
+--     FOREIGN KEY (user_no)
+--     REFERENCES user (user_no);
 
-ALTER TABLE payment_info
-  ADD CONSTRAINT FK_product_TO_payment_info
-    FOREIGN KEY (product_no)
-    REFERENCES product (product_no);
+-- ALTER TABLE payment_info
+--   ADD CONSTRAINT FK_product_TO_payment_info
+--     FOREIGN KEY (product_no)
+--     REFERENCES product (product_no);
 
-ALTER TABLE reply
-  ADD CONSTRAINT FK_user_TO_reply
-    FOREIGN KEY (user_no)
-    REFERENCES user (user_no);
+-- ALTER TABLE reply
+--   ADD CONSTRAINT FK_user_TO_reply
+--     FOREIGN KEY (user_no)
+--     REFERENCES user (user_no);
 
-ALTER TABLE reply
-  ADD CONSTRAINT FK_star_board_TO_reply
-    FOREIGN KEY (star_no)
-    REFERENCES star_board (star_no);
+-- ALTER TABLE reply
+--   ADD CONSTRAINT FK_star_board_TO_reply
+--     FOREIGN KEY (star_no)
+--     REFERENCES star_board (star_no);
 
-ALTER TABLE star_board
-  ADD CONSTRAINT FK_payment_info_TO_star_board
-    FOREIGN KEY (pay_no)
-    REFERENCES payment_info (pay_no);
+-- ALTER TABLE star_board
+--   ADD CONSTRAINT FK_payment_info_TO_star_board
+--     FOREIGN KEY (pay_no)
+--     REFERENCES payment_info (pay_no);
 
-ALTER TABLE message
-  ADD CONSTRAINT FK_reply_TO_message
-    FOREIGN KEY (reply_no)
-    REFERENCES reply (reply_no);
+-- ALTER TABLE message
+--   ADD CONSTRAINT FK_reply_TO_message
+--     FOREIGN KEY (reply_no)
+--     REFERENCES reply (reply_no);
 
-ALTER TABLE message
-  ADD CONSTRAINT FK_payment_info_TO_message
-    FOREIGN KEY (pay_no)
-    REFERENCES payment_info (pay_no);
+-- ALTER TABLE message
+--   ADD CONSTRAINT FK_payment_info_TO_message
+--     FOREIGN KEY (pay_no)
+--     REFERENCES payment_info (pay_no);
 
-ALTER TABLE message
-  ADD CONSTRAINT FK_qna_board_TO_message
-    FOREIGN KEY (qna_no)
-    REFERENCES qna_board (qna_no);
+-- ALTER TABLE message
+--   ADD CONSTRAINT FK_qna_board_TO_message
+--     FOREIGN KEY (qna_no)
+--     REFERENCES qna_board (qna_no);
 
-ALTER TABLE action
-  ADD CONSTRAINT FK_user_TO_action
-    FOREIGN KEY (user_no)
-    REFERENCES user (user_no);
+-- ALTER TABLE action
+--   ADD CONSTRAINT FK_user_TO_action
+--     FOREIGN KEY (user_no)
+--     REFERENCES user (user_no);
 
-ALTER TABLE action
-  ADD CONSTRAINT FK_star_board_TO_action
-    FOREIGN KEY (star_no)
-    REFERENCES star_board (star_no);
+-- ALTER TABLE action
+--   ADD CONSTRAINT FK_star_board_TO_action
+--     FOREIGN KEY (star_no)
+--     REFERENCES star_board (star_no);
