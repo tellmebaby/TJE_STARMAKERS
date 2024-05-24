@@ -4,16 +4,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import lombok.extern.slf4j.Slf4j;
 
 
 
-@RequestMapping("/page")
+@Slf4j
 @Controller
-public class pageController {
-    @GetMapping("")
-    public String getMethodName() {
-        return "page/introduce";
+@RequestMapping("/page")
+public class PageController {
+    
+    @GetMapping("/{path}")
+    public String page(@PathVariable("path") String path) {
+        log.info("/page");
+        return "page/"+path;
     } 
 
     @GetMapping("/board/{path1}/{path2}")

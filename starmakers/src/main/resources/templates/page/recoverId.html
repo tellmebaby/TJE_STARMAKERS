@@ -19,6 +19,11 @@ layout:decorate="~{/layout/default_layout}">
             flex-direction: column;
             justify-content: center;
         }
+
+        .find-id-form button {
+            width: 100%;
+        }
+
         .recover-id-msg {
             text-align: center;
         }
@@ -30,7 +35,7 @@ layout:decorate="~{/layout/default_layout}">
     <div class="find-id-form">
         <form>
             <div class="recover-id-msg">
-                <h1 class="h3 mb-3 font-weight-normal text-center">아이디 찾기</h1>
+                <h1 class="h3 mb-3 font-weight-normal text-center">이메일 찾기</h1>
                 <span>이름과 이메일을 입력해주세요.</span>
             </div>
             <div class="form-group">
@@ -41,7 +46,7 @@ layout:decorate="~{/layout/default_layout}">
                 <label for="inputEmail">이메일 주소</label>
                 <input type="email" id="inputEmail" class="form-control" placeholder="이메일 주소" required autofocus>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">아이디 찾기</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">이메일 찾기</button>
         </form>
     </div>
 

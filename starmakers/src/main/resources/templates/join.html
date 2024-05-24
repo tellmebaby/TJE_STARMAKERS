@@ -14,6 +14,11 @@ layout:decorate="~{/layout/default_layout}">
             background-color: #fff;
             border-radius: 5px;
         }
+
+        #input-btn {
+            width: 100%;
+        }
+
         .join-check-gender {
             display: flex;
             justify-content: space-evenly;
@@ -32,7 +37,7 @@ layout:decorate="~{/layout/default_layout}">
                 <form>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="아이디">
-                            <button type="submit" class="btn btn-secondary">검색</button>
+                            <button type="submit" class="btn btn-secondary">중복확인</button>
                         </div>
                     </form>
                 </div>
@@ -81,7 +86,7 @@ layout:decorate="~{/layout/default_layout}">
                 <label for="inputEmail">주소</label>
                 <input type="text" id="inputAddress" class="form-control" placeholder="주소" required>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">가입하기</button>
+            <button id="input-btn" class="btn btn-lg btn-primary btn-block" type="submit">가입하기</button>
         </form>
     </div>
 

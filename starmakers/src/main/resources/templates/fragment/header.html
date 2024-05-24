@@ -26,7 +26,7 @@
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-lg navbar-light" aria-label="Fifth navbar example">
+            <nav class="navbar navbar-expand-lg" aria-label="Fifth navbar example" style="background-color: #ffffff;">
                 <div class="container">
                     <a class="navbar-brand" href="/">
                         <img src="/img/dsm_logo.png" alt="logo" width="88" height="auto">
@@ -62,12 +62,24 @@
                             </li>
                             </ul>
                             <ul class="navbar-nav mb-2 mb-lg-0">
-                                <li class="nav-item mx-2">
-                                    <a class="btn btn-outline-mute" href="/login">로그인</a>
-                                </li>
-                                <li class="nav-item mx-2">
-                                    <a class="btn btn-outline-mute" href="/join">회원가입</a>
-                                </li>
+                                <!-- 비 로그인 시 -->
+                                <th:block sec:authorize="isAnonymous()">
+                                    <li class="nav-item mx-2">
+                                        <a class="btn btn-outline-mute" href="/login">로그인</a>
+                                    </li>
+                                    <li class="nav-item mx-2">
+                                        <a class="btn btn-outline-mute" href="/join">회원가입</a>
+                                    </li>
+                                </th:block>
+                                <!-- 로그인 시 -->
+                                <th:block sec:authorize="isAuthenticated()">
+                                    <form action="/logout" method="post">
+                                        <!-- CSRF TOKEN -->
+                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                        <button type="submit" class="btn btn-outline-mute">로그아웃</button>
+                                    </form>
+                                    
+                                </th:block>
                             </ul>
                         </div>
                     </div>
@@ -109,8 +121,24 @@
                         </ul>
                         <!-- ⬇ -->
                         <div class="box p-4 d-grid gap-1">
-                            <a class="btn btn-outline-mute" href="/login">로그인</a>
-                            <a class="btn btn-outline-mute" href="/join">회원가입</a>
+                            <!-- 비 로그인 시 -->
+                            <th:block sec:authorize="isAnonymous()">
+                               
+                                    <a class="btn btn-outline-mute" href="/login">로그인</a>
+                                
+                                
+                                    <a class="btn btn-outline-mute" href="/join">회원가입</a>
+                                
+                            </th:block>
+                            <!-- 로그인 시 -->
+                            <th:block sec:authorize="isAuthenticated()">
+                                <form action="/logout" method="post">
+                                    <!-- CSRF TOKEN -->
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                    <button type="submit" class="btn btn-outline-mute">로그아웃</button>
+                                </form>
+                                
+                            </th:block>
                         </div>
                     </div>
                 </div>
