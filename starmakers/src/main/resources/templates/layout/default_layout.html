@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <th:block th:replace="fragment/link::link"></th:block>
-
+<th:block th:replace="fragment/script::script"></th:block>
 <body>
   <th:block th:replace="fragment/header::headerFragment"></th:block>
   <th:block layout:fragment="content"></th:block>
   <th:block th:replace="fragment/footer::footerFragment"></th:block>
 </body>
-<th:block th:replace="fragment/script::script"></th:block>
+
 
 </html>
 
