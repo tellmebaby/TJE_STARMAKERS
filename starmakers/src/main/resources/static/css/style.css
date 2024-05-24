@@ -1,10 +1,20 @@
-.starPost {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
+  .note-table .note-icon-caret {
+    display: none;
+  }
+  .note-fontsize .note-icon-caret {
+    display: none;
+  }
+  .note-fontname .note-icon-caret {
+    display: none;
+  }
 
-.title {
-    tab-size: 30px;
-    
-}
+  .note-height .note-icon-caret {
+    display: none;
+  }
+  .note-para .note-icon-caret {
+    display: none; 
+  }
+
+ .note-color-all .note-icon-caret {
+    /* display: none; */
+ }
