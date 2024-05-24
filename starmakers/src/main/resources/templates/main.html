@@ -1,44 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AfreecaTV Logo Example</title>
+    <title>피카츄 카드</title>
     <style>
-        .afreeca-logo {
+        .card-container {
             display: flex;
-            align-items: center;
-            font-family: Arial, sans-serif;
-        }
-
-        .afreeca-logo .icon {
-            width: 50px;
-            height: 50px;
-            background-color: #1c7ed6;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            margin-right: 10px;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
         }
 
-        .afreeca-logo .icon::before {
-            content: '📺'; /* TV 이모지 */
-            font-size: 24px;
-            color: white;
+        .card {
+            width: 200px;
+            height: 300px;
+            background: url('https://via.placeholder.com/200x300.png?text=Pikachu') no-repeat center/cover;
+            border-radius: 10px;
+            transition: transform 0.6s, box-shadow 0.6s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .afreeca-logo .text {
-            font-size: 24px;
-            color: #1c7ed6;
-            font-weight: bold;
+        .card:hover {
+            transform: rotateY(180deg);
+            box-shadow: 0 8px 16px rgba(255, 215, 0, 0.8); /* 반짝이 효과 */
         }
     </style>
 </head>
 <body>
-    <div class="afreeca-logo">
-        <div class="icon"></div>
-        <div class="text">afreecaTV</div>
+    <div class="card-container">
+        <div class="card"></div>
     </div>
 </body>
 </html>
