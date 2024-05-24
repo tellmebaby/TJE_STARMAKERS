@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-@RequestMapping("/admin")
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
     
     @GetMapping("")
     public String getMethodName() {
-        return "admin/index";
+        return "/admin/index";
     }
 
     @GetMapping("/pages/{path}")
