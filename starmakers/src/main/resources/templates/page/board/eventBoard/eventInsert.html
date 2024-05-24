@@ -3,97 +3,85 @@
   layout:decorate="~{/layout/default_layout}">
 
 <head>
-  <title>공지사항</title>
-  <!-- include libraries(jQuery, bootstrap) -->
-  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <title>main</title>
 
-    <script src="/lib/summernote-lite.js"></script>
-    <script src="/lib/summernote-ko-KR.js"></script>
-
-    <link rel="stylesheet" href="/lib/summernote-lite.css">  
   <!-- include summernote css/js-->
   <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet"> -->
   <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css"
+    integrity="sha256-IKhQVXDfwbVELwiR0ke6dX+pJt0RSmWky3WB2pNx9Hg=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"
+    integrity="sha256-5slxYrL5Ct3mhMAp/dgnb5JSnTYMtkr4dHby34N10qw=" crossorigin="anonymous"></script>
 
-  <style>
-    .content {
-        display: flex;
-        justify-content: center;
-        text-align: center;
+  <!-- language pack -->
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/lang/summernote-ko-KR.min.js"
+    integrity="sha256-y2bkXLA0VKwUx5hwbBKnaboRThcu7YOFyuYarJbCnoQ=" crossorigin="anonymous"></script>
 
-    }
-    .title {
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        font-size: 30px;
-        font-style: bold ;
 
-    }
-    #anInsert {
-        height: 1000px;
-        max-width: 1000px auto;
-        display: inline-block;
-        justify-content: center;
-        margin: 80px;
-    }
-    
-    #anInsert .button{
-        text-align: right;
-
-    #anTitle {
-      width:800px;
-      border : 1px gray;
-      border-radius: 15px;
-    }
-    }
-  </style>
 </head>
-<body>
-    <th:block layout:fragment="content" class="content">
-        <h1 class="title">공지사항</h1>
-        <form action="" method="post" id="anInsert">
-            <label for="anTitle">제목</label>
-            <input type="text" name="anTitle" id="anTitle" value="제목">
-            <textarea id="summernote" name="summernote"></textarea>
-            <input type="file" value="파일" multiple>
-            <button>목록</button>
-            <input class="button" type="button" value="등록">
-        </form>
 
-    </th:block>
-</body>
-</html>
-<script>
-    $(document).ready(function() {
-        //여기 아래 부분
-        $('#summernote').summernote({
-              height: 1200,                 // 에디터 높이
-              minHeight: null,             // 최소 높이
-              maxHeight: null,             // 최대 높이
-              focus: false,                  // 에디터 로딩후 포커스를 맞출지 여부
-              lang: "ko-KR",					// 한글 설정
-              // placeholder: '비방/욕설이 적힌 글은 예고 없이 수정 및 삭제될 수 있습니다.'	//placeholder 설정
-              
-        });
-    });
+
+<!-- layout:decorate 쓸 때 본문 내용은 <th:block layout:fragment="content"></th:block> 안에 적어야 화면에 뜸 -->
+<th:block layout:fragment="content" class="align-items-center ml-5">
+  <div class="body lg" style="max-width: 900 ;">
+    <h1 class="d-flex justify-content-center mb-3 mt-3">
+      이벤트 등록
+    </h1>
+        <form action="" method="post" id="reviewInsert">
+            <div class="container">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="addon-wrapping">제목</span>
+                <input type="text" name="title" class="form-control" placeholder="글 제목을 입력해주세요" aria-label="tilte"
+                    aria-describedby="addon-wrapping">
+            </div>
+            <!-- <input type="text" class="" id="starPostTitle" placeholder="제목을 입력해주세요"> -->
+
+
+            <div>
+            <textarea name="content" class="" id="summernote" value=""></textarea>
+            </div>
+            <div class="d-flex justify-content-end mt-2">
+            <button type="button" class="btn btn-primary btn-submit col-1 border-0 btn-list" style="background-color: #a5bdff;" onclick="eventList()">목록</button>
+            <input type="submit" class="btn btn-primary btn-submit col-1 border-0" value="등록">
+            </div>
+            </div>
+        </form>
+            
+    </div>
+
+
+
+
+  <script>
+
     $('#summernote').summernote({
-        toolbar: [
-            // [groupName, [list of button]]
-            ['fontname', ['fontname']],
-            ['fontsize', ['fontsize']],
-            ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-            ['color', ['forecolor','color']],
-            ['table', ['table']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']],
-            ['insert',['picture','link','video']],
-            ['view', ['fullscreen', 'help']]
-          ],
-        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-        placeholder: '비방/욕설이 적힌 글은 예고 없이 수정 및 삭제될 수 있습니다.'
-      });
-</script>
+      toolbar: [
+        // [groupName, [list of button]]
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+        ['color', ['forecolor', 'color']],
+        ['table', ['table']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['insert', ['picture', 'link', 'video']],
+        ['view', ['fullscreen', 'help']]
+      ],
+      height: 500,
+      minHeight: null,
+      maxHeight: null,
+      lang: 'ko-KR',
+      fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+      fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+      placeholder: '내용을 입력하세요.'
+    });
+
+    function eventList(){
+        location.href='/page/board/eventBoard/eventList'
+    }
+  </script>
+
+</th:block>
+
+</html>
