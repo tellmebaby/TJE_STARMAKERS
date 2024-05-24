@@ -26,7 +26,7 @@
 <th:block layout:fragment="content" class="align-items-center ml-5">
   <div class="body lg" style="max-width: 900 ;">
     <h1 class="d-flex justify-content-center mb-3 mt-3">
-      공지 등록
+      문의등록
     </h1>
         <form action="" method="post" id="reviewInsert">
             <div class="container">
@@ -42,7 +42,7 @@
             <textarea name="content" class="" id="summernote" value=""></textarea>
             </div>
             <div class="d-flex justify-content-end mt-2">
-            <button type="button" class="btn btn-primary btn-submit col-1 border-0 btn-list" style="background-color: #a5bdff;" onclick="eventList()">목록</button>
+            <button type="button" class="btn btn-primary btn-submit col-1 border-0 btn-list" style="background-color: #a5bdff;" onclick="reviewList()">목록</button>
             <input type="submit" class="btn btn-primary btn-submit col-1 border-0" value="등록">
             </div>
             </div>
@@ -77,8 +77,8 @@
       placeholder: '내용을 입력하세요.'
     });
 
-    function eventList(){
-        location.href='/page/board/eventBoard/eventList'
+    function reviewList(){
+        location.href='/page/board/reviewBoard/reviewList'
     }
   </script>
 

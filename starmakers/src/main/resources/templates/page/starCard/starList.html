@@ -1,26 +1,396 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{/layout/default_layout}">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default_layout}">
 
 <head>
-  <title>star</title>
-  <!-- include libraries(jQuery, bootstrap) -->
-  <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <link rel="stylesheet" href="/css/card.css" class="css">
 
 </head>
+
+
 <body>
-<th:block layout:fragment="content">
+    <div layout:fragment="content">
+        <div class="container">
+            <form>
+                <div class="search-title mt-3">상세검색</div>
+                <div class="detail-search mb-3">
+                    <div class="row d-flex align-items-center mb-3">
+                        <div class="col-md-12 d-flex align-items-center">
+                            <h5>상태</h5>
+                            <div class="form-check form-check-inline ms-4">
+                                <input class="form-check-input" type="checkbox" value="" id="eventOngoing">
+                                <label class="form-check-label" for="eventOngoing">
+                                    진행중인 이벤트
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" id="eventExpired">
+                                <label class="form-check-label" for="eventExpired">
+                                    만료된 이벤트
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row d-flex align-items-center mb-3">
+                        <div class="col-md-12 d-flex align-items-center">
+                            <h5>형태</h5>
+                            <div class="form-check form-check-inline ms-4">
+                                <input class="form-check-input" type="checkbox" value="" id="instagram">
+                                <label class="form-check-label" for="instagram">
+                                    인스타그램
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" id="youtube">
+                                <label class="form-check-label" for="youtube">
+                                    유튜브
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" id="chzzk">
+                                <label class="form-check-label" for="chzzk">
+                                    치지직
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" id="afreeca">
+                                <label class="form-check-label" for="afreeca">
+                                    아프리카
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row d-flex align-items-center">
+                        <div class="col-md-12 d-flex align-items-center">
+                            <h5>분야</h5>
+                            <div class="form-check form-check-inline ms-4">
+                                <input class="form-check-input" type="checkbox" value="" id="food">
+                                <label class="form-check-label" for="food">
+                                    음식
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" id="travel">
+                                <label class="form-check-label" for="travel">
+                                    여행
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" id="gaming">
+                                <label class="form-check-label" for="gaming">
+                                    게임
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" id="music">
+                                <label class="form-check-label" for="music">
+                                    음악
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" id="animals">
+                                <label class="form-check-label" for="animals">
+                                    동물
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" id="exercise">
+                                <label class="form-check-label" for="exercise">
+                                    운동
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" id="asmr">
+                                <label class="form-check-label" for="asmr">
+                                    ASMR
+                                </label>
+                            </div>
+                        </div>
+                    </div>
 
 
-    <h2>홍보카드 리스트</h2>
+                    <div class="row mt-3">
+                        <div class="col-md-12 d-flex align-items-center">
+                            <input type="text" class="form-control me-2" id="searchInput" placeholder="검색 키워드 입력">
+                            <button type="submit" class="btn btn-primary col-2">검색</button>
+                        </div>
+                    </div>
+                </div>
 
-    <a href="/page/starCard/starInsert">글쓰기</a>
 
-</th:block>
+            </form>
+
+
+            <div id="promotionCarousel" class="carousel">
+                <div class="row mx-0 mb-5">
+                    <!-- 한 줄 -->
+                    <div class="col-lg-3 p-0">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
+                                class="card-img-top" alt="홍보글 제목">
+                            <div class="icon-body">
+                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                <img src="/img/icon/instagram.svg" class="content-icon">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">어쩌다보니천생연분</h5>
+                                <p class="card-text">꿀타래</p>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
+                                class="card-img-top" alt="홍보글 제목">
+                            <div class="icon-body">
+                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                <img src="/img/icon/instagram.svg" class="content-icon">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">홍보글 제목</h5>
+                                <p class="card-text">작성자</p>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/originals/45/93/b5/4593b5e64b3be3b6208a230f1c20b606.gif"
+                                class="card-img-top" alt="홍보글 제목">
+                            <div class="icon-body">
+                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                <img src="/img/icon/instagram.svg" class="content-icon">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">홍보글 제목</h5>
+                                <p class="card-text">작성자</p>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
+                                class="card-img-top" alt="홍보글 제목">
+                            <div class="icon-body">
+                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                <img src="/img/icon/instagram.svg" class="content-icon">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">홍보글 제목</h5>
+                                <p class="card-text">작성자</p>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 한 줄 -->
+                    <div class="col-lg-3 p-0">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
+                                class="card-img-top" alt="홍보글 제목">
+                            <div class="icon-body">
+                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                <img src="/img/icon/instagram.svg" class="content-icon">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">어쩌다보니천생연분</h5>
+                                <p class="card-text">꿀타래</p>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
+                                class="card-img-top" alt="홍보글 제목">
+                            <div class="icon-body">
+                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                <img src="/img/icon/instagram.svg" class="content-icon">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">홍보글 제목</h5>
+                                <p class="card-text">작성자</p>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/originals/45/93/b5/4593b5e64b3be3b6208a230f1c20b606.gif"
+                                class="card-img-top" alt="홍보글 제목">
+                            <div class="icon-body">
+                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                <img src="/img/icon/instagram.svg" class="content-icon">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">홍보글 제목</h5>
+                                <p class="card-text">작성자</p>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
+                                class="card-img-top" alt="홍보글 제목">
+                            <div class="icon-body">
+                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                <img src="/img/icon/instagram.svg" class="content-icon">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">홍보글 제목</h5>
+                                <p class="card-text">작성자</p>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 한 줄 -->
+                    <div class="col-lg-3 p-0">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
+                                class="card-img-top" alt="홍보글 제목">
+                            <div class="icon-body">
+                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                <img src="/img/icon/instagram.svg" class="content-icon">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">어쩌다보니천생연분</h5>
+                                <p class="card-text">꿀타래</p>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
+                                class="card-img-top" alt="홍보글 제목">
+                            <div class="icon-body">
+                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                <img src="/img/icon/instagram.svg" class="content-icon">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">홍보글 제목</h5>
+                                <p class="card-text">작성자</p>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/originals/45/93/b5/4593b5e64b3be3b6208a230f1c20b606.gif"
+                                class="card-img-top" alt="홍보글 제목">
+                            <div class="icon-body">
+                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                <img src="/img/icon/instagram.svg" class="content-icon">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">홍보글 제목</h5>
+                                <p class="card-text">작성자</p>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
+                                class="card-img-top" alt="홍보글 제목">
+                            <div class="icon-body">
+                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                <img src="/img/icon/instagram.svg" class="content-icon">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">홍보글 제목</h5>
+                                <p class="card-text">작성자</p>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 행추가 -->
+
+            </div>
+        </div>
+
+
+        <script>
+            $(document).ready(function () {
+                $(window).on('scroll', function () {
+                    // 현재 스크롤 위치
+                    var scrollTop = $(this).scrollTop();
+                    // 문서의 총 높이
+                    var documentHeight = $(document).height();
+                    // 창의 높이
+                    var windowHeight = $(this).height();
+        
+                    // 사용자가 페이지 하단에 도달했는지 확인
+                    if (scrollTop + windowHeight >= documentHeight) {
+                        alert('페이지 하단에 도달했습니다!');
+                    }
+                });
+
+
+                var container = document.
+
+            });
+        
+        </script>
+
+
+    </div>
 </body>
-
-
-
+</html>
