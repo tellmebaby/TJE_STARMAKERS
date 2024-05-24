@@ -8,6 +8,14 @@
     display: none;
   }
 
+  .title {
+      tab-size: 30px;
+  }
+  .nav-links a.active {
+      font-weight: bold;
+      color: #000;
+  }
+
   .note-height .note-icon-caret {
     display: none;
   }
@@ -19,6 +27,7 @@
     /* display: none; */
  }
 
+
  .container #channel {
     border: 1px;
  }
@@ -27,3 +36,4 @@
   /* margin-top: 10px; */
   margin-right: 10px;
  }
+

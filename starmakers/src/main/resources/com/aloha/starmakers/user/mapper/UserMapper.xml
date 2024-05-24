@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aloha.starmakers.user.mapper.UserMapper">
+
+    <resultMap type="Users" id="userMap">
+        <id property="userNo" column="user_no" />
+        <result property="name" column="name" />
+        <result property="id" column="id" />
+        <result property="email" column="email" />
+        <result property="password" column="password" />
+        <result property="phone" column="phone" />
+        <result property="address" column="address" />
+        <result property="regDate" column="reg_date" />
+        <result property="updDate" column="upd_date" />
+        <result property="enabled" column="enabled" />
+        <result property="gender" column="gender" />
+        <result property="birth" column="birth" />
+        <collection property="authList" resultMap="authMap"></collection>
+    </resultMap>
+
+    <resultMap type="UserAuth" id="authMap">
+        <result property="authNo" column="auth_no" />
+        <result property="userId" column="user_id" />
+        <result property="auth" column="auth" />
+    </resultMap>
+
+    <!-- 로그인 - username -->
+    <select id="login" resultMap="userMap">
+        SELECT u.user_no
+              ,u.email
+              ,password
+              ,name
+              ,id
+              ,phone
+              ,address
+              ,gender
+              ,birth
+              ,reg_date
+              ,upd_date
+              ,1 enabled
+              ,auth
+        FROM user u LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id
+        WHERE u.email = #{email}
+    </select>
+
+
+    <!-- 회원 조회 - id -->
+    <select id="select" resultMap="userMap">
+        SELECT u.user_no
+              ,u.email
+              ,password
+              ,name
+              ,id
+              ,phone
+              ,address
+              ,gender
+              ,birth
+              ,reg_date
+              ,upd_date
+              ,1 enabled
+              ,auth
+        FROM user u LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id
+        WHERE u.email = #{email}
+    </select>
+
+    <!-- 회원 가입 -->
+    <insert id="join">
+        INSERT INTO user ( name, id, email, password, phone, address, gender, birth )
+        VALUES ( #{name}, #{id}, #{email}, #{password}, #{phone}, #{address}, #{gender}, #{birth} )
+    </insert>
+
+    <!-- 회원 정보 수정 -->
+    <update id="update">
+        UPDATE user
+           SET name = #{name}
+              ,password = #{password}
+              ,phone = #{phone}
+              ,address = #{address}
+              ,gender = #{gender}
+              ,birth = #{birth}
+              ,updated_at = now()
+        WHERE username = #{username}
+    </update>
+
+    <!-- 회원 권한 등록 -->
+    <insert id="insertAuth">
+        INSERT INTO user_auth( user_id, auth )
+        VALUES ( #{userId}, #{auth} )
+    </insert>
+
+</mapper>
