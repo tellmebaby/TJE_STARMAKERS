@@ -5,53 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-     <!-- include libraries(jQuery, bootstrap) -->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+    
     <style>
-         body {
+        body {
             font-family: Arial, sans-serif;
-        }
-        .container {
-            margin-top: 50px;
-            margin-bottom: 210px;
-            width: 100%;
-            height: 100%;
-        }
-
-        .profile-info {
-            font-size: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 178px;
-        }
-        .profile-info p {
-            margin-bottom: 28px;
-            font-weight: bold;
-
-        }
-        .profile-info1 {
-            font-size: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: left;
-            margin-top: 180px;
-        }
-        .profile-info1 p {
-            margin-bottom: 28px;
-            width: 600px;
-        }
-        .col-md-2 {
-            margin-right: 60px;
         }
 
         .nav-links {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-left: 100px;
+        }
+        .side-menu {
+            width: 200px;
+            margin-right: 30px;
         }
 
         .nav-links a {
@@ -65,68 +32,110 @@
             color: #000;
         }
 
-        h1 {
+        .nav-links h1 {
             font-size: 42px;
             margin-bottom: 100px;
+            font-weight: bolder;
         }
 
         .button {
             background-color: #B8C3FF;
             color: white;
-            margin-left: 628px;
             border: none;
             border-radius: 10px;
-            padding: 10px 10px;
+            padding: 10px 20px;
             font-size: 20px;
+            cursor: pointer;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        tbody {
+            width: 600px;
+            height: 350px;
         }
 
 
+        /* ----------------------- */
+        .table td {
+            height: 60px !important;
+        }
+        .table td:first-child {
+            width: 30%;
+        }
+        .table td:last-child {
+            width: 70%;
+        }
+        .table-margin {
+            margin-top: 140px;
+        }
     </style>
 </head>
 <body>
+    <th:block th:replace="~{fragment/header :: headerFragment}"></th:block>
     <th:block layout:fragment="content">
-        <form action="" method="get">
-            <div class="container">
-                <div class="row">
-                    <div class="side-menu col-md-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="side-menu">
                         <div class="nav-links">
                             <h1>김조은님,</h1>
-                            <a href="">회원 정보</a>
-                            <a href="">결제 내역</a>
-                            <a href="">내가 쓴 글</a>
-                            <a href="">1 : 1 문의</a>
-                            <a href="">회원 탈퇴</a>
+                            <a href="/page/mypage/profile">회원 정보</a>
+                            <a href="/page/mypage/payment">결제 내역</a>
+                            <a href="/page/mypage/promotion">내가 쓴 글</a>
+                            <a href="/page/mypage/inquiry">1 : 1 문의</a>
+                            <a href="/page/mypage/userDelete">회원 탈퇴</a>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="profile-info">
-                                    <p>아이디</p>
-                                    <p>이름</p>
-                                    <p>전화번호</p>
-                                    <p>이메일</p>
-                                    <p>생년월일</p>
-                                    <p>주소</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="profile-info1">
-                                    <p>joeun123</p>
-                                    <p>김조은</p>
-                                    <p>010-1234-5678</p>
-                                    <p>joeun123@gmail.com</p>
-                                    <p>2002-02-02</p>
-                                    <p>인천광역시 부평구 경원대로 1366</p>
-                                </div>
-                            </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="box">
+                        <div class="table-margin"></div>
+                        <table class="table">
+                            <tr>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">아이디</td>
+                                <td class="fs-5 align-middle border-0">joeun123</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">이름</td>
+                                <td class="fs-5 align-middle border-0">김조은</td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">전화번호</td>
+                                <td class="fs-5 align-middle border-0">
+                                    <span>010-1234-5678</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">이메일</td>
+                                <td class="fs-5 align-middle border-0">
+                                    <span>joeun123@gmail.com</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">생년월일</td>
+                                <td class="fs-5 align-middle border-0">
+                                    <span>2002-02-02</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">주소</td>
+                                <td class="fs-5 align-middle border-0">
+                                    <span>인천광역시 부평구 경원대로 1366</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="button-container">
+                            <a href="/page/mypage/profileUpdate"><button class="button">정보 수정</button></a>
                         </div>
-                        <input class="button" type="submit" value="정보 수정">
                     </div>
-                    
                 </div>
             </div>
-        </form>
+        </div>
     </th:block>
+    <th:block th:replace="~{fragment/footer :: footerFragment}"></th:block>
 </body>
 </html>

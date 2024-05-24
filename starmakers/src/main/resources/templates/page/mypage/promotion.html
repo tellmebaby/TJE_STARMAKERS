@@ -31,10 +31,6 @@
             margin-bottom: 100px;
             font-weight: bolder;
         }
-        .list {
-            margin-top: 50px;
-            color: #8D8D8D;
-        }
         .side-menu {
             width: 200px;
             margin-right: 30px;
@@ -70,20 +66,21 @@
         .table td .button-container {
             display: flex;
             justify-content: flex-end;
-            padding-top: 20px;
         }
         .table tr, th {
             text-align: center;
         }
-
+        .table.table td {
+            margin-top: 30px;
+        }
         .pagination {
             display: flex;
             justify-content: center;
-            margin-top: 20px; /* 화살표 위 아래 간격 조정 */
+            margin-top: 20px; 
         }
 
         .pagination a {
-            margin: 0 5px; /* 화살표 간격 조정 */
+            margin: 0 5px;
             text-decoration: none;
             color: #333;
             font-size: 18px;
@@ -97,7 +94,17 @@
         .page-number:hover,
         .prev:hover,
         .next:hover {
-            color: #000; /* 호버 효과 */
+            color: #000;
+        }
+
+        .list {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .list a {
+            text-decoration: none;
         }
     </style>
 </head>
@@ -119,65 +126,68 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <div class="list">
-                            <h2 style="color: #000;">결제 내역 조회</h2>
-                            <li>홍보글 승인 이전에만 전체 금액 환불이 가능합니다.</li>
-                            <li>홍보글이 승인된 경우, 관리자 확인 후 일부 금액만 환불 가능 또는 환불 불가할 수 있습니다.</li>
+                            <div class="list">
+                                <a href="/page/mypage/promotion"><h2 style="color: #000;">홍보글</h2></a>
+                                <a href="/page/mypage/event"><h2 style="color: #545454;">이벤트 후기</h2></a>
+                            </div>                            
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th colspan="4"></th>
+                                        <th> </th>
+                                        <th> </th>
+                                        <th> </th>
+                                        <th> </th>
                                     </tr>
                                     <tr>
-                                        <th>결제번호</th>
-                                        <th>결제상품</th>
+                                        <th style="width: 450px;">제목</th>
+                                        <th>채널</th>
                                         <th>결제금액</th>
-                                        <th>결제일자</th>
+                                        <th>작성일자</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <!-- 데이터 -->
                                     <tr> 
-                                        <td class="border-0 pt-4">1312312312312321</td>
-                                        <td class="border-0 pt-4">[스페셜 카드] 인스타 홍보합니다</td>
-                                        <td class="border-0 pt-4">54,000원</td>
+                                        <td class="border-0 pt-4">인스타 홍보입니다</td>
+                                        <td class="border-0 pt-4">인스타그램</td>
+                                        <td class="border-0 pt-4">50,000원</td>
                                         <td class="border-0 pt-4">2024.05.20</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3"></td>
                                         <td>
                                             <div class="button-container">
-                                                <button class="btn-review">검토중</button>
-                                                <button class="btn-refund">환불 요청</button>
+                                                <button class="btn-review status-pending">검토중</button>
                                             </div>
                                         </td>
                                     </tr> 
+                                    <!-- 데이터 -->
                                     <tr> 
-                                        <td class="border-0 pt-4">1312312312312321</td>
-                                        <td class="border-0 pt-4">[스페셜 카드] 유튜브 홍보합니다</td>
-                                        <td class="border-0 pt-4">54,000원</td>
+                                        <td class="border-0 pt-4">인스타 홍보입니다</td>
+                                        <td class="border-0 pt-4">인스타그램</td>
+                                        <td class="border-0 pt-4">50,000원</td>
                                         <td class="border-0 pt-4">2024.05.20</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3"></td>
                                         <td>
                                             <div class="button-container">
-                                                <button class="btn-review status-approved">승인 완료</button>
-                                                <button class="btn-refund">환불 요청</button>
+                                                <button class="btn-review status-pending">검토중</button>
                                             </div>
                                         </td>
                                     </tr> 
+                                    <!-- 데이터 -->
                                     <tr> 
-                                        <td class="border-0 pt-4">1312312312312321</td>
-                                        <td class="border-0 pt-4">[스페셜 카드] 유튜브 홍보합니다</td>
-                                        <td class="border-0 pt-4">54,000원</td>
+                                        <td class="border-0 pt-4">인스타 홍보입니다</td>
+                                        <td class="border-0 pt-4">인스타그램</td>
+                                        <td class="border-0 pt-4">50,000원</td>
                                         <td class="border-0 pt-4">2024.05.20</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3"></td>
                                         <td>
                                             <div class="button-container">
-                                                <button class="btn-review status-approved">승인 완료</button>
-                                                <button class="btn-refund">환불 요청</button>
+                                                <button class="btn-review status-pending">검토중</button>
                                             </div>
                                         </td>
                                     </tr> 
@@ -194,7 +204,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </form>
     </th:block>
 </body>
