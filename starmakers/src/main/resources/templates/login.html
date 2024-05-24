@@ -109,6 +109,40 @@ layout:decorate="~{/layout/default_layout}">
     <!-- 부트스트랩 JS 및 의존성 -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+
+    <!-- 아이디 저장 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        const rememberCheckbox = document.getElementById('remember-id');
+        const userIdInput = document.getElementById('inputEmail');
+
+        // 페이지 로드 시 저장된 아이디가 있으면 입력 필드에 채워줍니다.
+        const savedUserId = localStorage.getItem('savedUserId');
+        if (savedUserId) {
+            userIdInput.value = savedUserId;
+            rememberCheckbox.checked = true;
+        }
+
+        rememberCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+            // 체크박스가 체크된 경우 아이디를 저장합니다.
+            localStorage.setItem('savedUserId', userIdInput.value);
+            } else {
+            // 체크박스가 해제된 경우 저장된 아이디를 삭제합니다.
+            localStorage.removeItem('savedUserId');
+            }
+        });
+
+        userIdInput.addEventListener('input', function() {
+            if (rememberCheckbox.checked) {
+            // 입력 필드의 값이 변경될 때, 체크박스가 체크된 경우 아이디를 업데이트합니다.
+            localStorage.setItem('savedUserId', this.value);
+            }
+        });
+        });
+
+    </script>
+
 </th:block>
 </body>
 </html>
