@@ -3,80 +3,81 @@
   layout:decorate="~{/layout/default_layout}">
 
 <head>
-  <title>후기</title>
-  <!-- include libraries(jQuery, bootstrap) -->
-  <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> -->
+  <link rel="stylesheet" href="/css/style.css">
+  <title>main</title>
 
-  <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script> -->
-  <script src="/smarteditor/js/HuskyEZCreator.js"></script>
-  
-  <!-- <script type="text/javascript" src="/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script> -->
-
- 
   <!-- include summernote css/js-->
   <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet"> -->
   <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css"
+    integrity="sha256-IKhQVXDfwbVELwiR0ke6dX+pJt0RSmWky3WB2pNx9Hg=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"
+    integrity="sha256-5slxYrL5Ct3mhMAp/dgnb5JSnTYMtkr4dHby34N10qw=" crossorigin="anonymous"></script>
+
+  <!-- language pack -->
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/lang/summernote-ko-KR.min.js"
+    integrity="sha256-y2bkXLA0VKwUx5hwbBKnaboRThcu7YOFyuYarJbCnoQ=" crossorigin="anonymous"></script>
+
 
 </head>
-<body>
-<th:block layout:fragment="content">
-    <h1>후기 작성</h1>
 
 
-    <form action="" method="post">
-        <div id="smarteditor">
-            <textarea name="editorTxT" id="editorTxT"
-             rows="20" cols="10"
-             placeholder="내용을 입력하세요."
-             style="max-width: 800px"
-             ></textarea>
-        </div>
-        <input type="button" value="등록">
-    </form>
-      
+<!-- layout:decorate 쓸 때 본문 내용은 <th:block layout:fragment="content"></th:block> 안에 적어야 화면에 뜸 -->
+<th:block layout:fragment="content" class="align-items-center ml-5">
+  <div class="body lg" style="max-width: 900 ;">
+    <h1 class="d-flex justify-content-center mb-3">
+      후기작성
+    </h1>
+        <form action="" method="post" id="reviewInsert">
+            <div class="container">
+            <div class="input-group">
+            <span class="input-group-text" id="addon-wrapping">제목</span>
+            <input type="text" name="title" class="form-control" placeholder="글 제목을 입력해주세요" aria-label="tilte"
+                aria-describedby="addon-wrapping">
+            </div>
+            <!-- <input type="text" class="" id="starPostTitle" placeholder="제목을 입력해주세요"> -->
 
 
-    
-        </th:block>
-    </body>
+            <div>
+            <textarea name="content" class="" id="summernote" value=""></textarea>
+            </div>
+            <div class="d-flex justify-content-end">
+            <input type="submit" class="btn btn-primary btn-submit btn-lg" value="목록">
+            <input type="submit" class="btn btn-primary btn-submit btn-lg" value="등록">
+            </div>
+            </div>
+        </form>
+            
+    </div>
+
+
+
+
+  <script>
+
+    $('#summernote').summernote({
+      toolbar: [
+        // [groupName, [list of button]]
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+        ['color', ['forecolor', 'color']],
+        ['table', ['table']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['insert', ['picture', 'link', 'video']],
+        ['view', ['fullscreen', 'help']]
+      ],
+      height: 500,
+      minHeight: null,
+      maxHeight: null,
+      lang: 'ko-KR',
+      fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+      fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+      placeholder: '내용을 입력하세요.'
+    });
+  </script>
+
+</th:block>
+
 </html>
-    <script>
-
-        let oEditors = [];
-        
-        smartEditor = function() {
-                    nhn.husky.EZCreator.createInIFrame({
-                        oAppRef: oEditors,
-                        elPlaceHolder: "editorTxT", //textarea에 부여한 아이디와 동일해야한다.
-                        sSkinURI: "/smarteditor/SmartEditor2Skin.html", //자신의 프로젝트에 맞게 경로 수정
-                        fCreator: "createSEditor2"
-                    })
-                }
-         
-             $(document).ready(function() {
-                 //스마트에디터 적용
-                  smartEditor();                    
-             })
-
-            
-
-        // let oEditors = []
-        // smartEditor = function(){
-        //     nhn.husky.EZCreator.createInIFrame({
-        //         oAppRef : oEditors,
-        //         elPlaceHolder : "editorTxT",
-        //         sSkinURI : "/smarteditor/SmartEditor2Skin.html",
-        //         fCreator : "createSEditor2"
-        //     })
-        // }
-// 
-        // $(document).ready(function(){
-        //     smartEditor()
-        // })
-            </script>
-            
-
-
-
