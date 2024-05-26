@@ -1,4 +1,4 @@
--- Active: 1714701530602@@127.0.0.1@3306@joeun
+-- Active: 1716759486779@@127.0.0.1@3306@joeun
 
 
 DROP TABLE IF EXISTS action ;
@@ -61,7 +61,7 @@ CREATE TABLE persistent_logins
   PRIMARY KEY (series)
 ) COMMENT '자동로그인';
 
-
+DROP TABLE IF EXISTS product_io ;
 DROP TABLE IF EXISTS product ;
 CREATE TABLE product
 (
