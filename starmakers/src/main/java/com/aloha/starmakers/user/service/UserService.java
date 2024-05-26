@@ -1,12 +1,14 @@
 package com.aloha.starmakers.user.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.aloha.starmakers.user.dto.UserAuth;
 import com.aloha.starmakers.user.dto.Users;
 
 public interface UserService {
     
     // 로그인
-    public boolean login(Users user) throws Exception;
+    public boolean login(Users user, HttpServletRequest request) throws Exception;
 
     // 조회
     public Users select(String username) throws Exception;

@@ -52,11 +52,11 @@ public class HomeController {
     }
 
     @PostMapping("/join")
-    public String joinPro( Users user ) throws Exception{
+    public String joinPro( Users user, HttpServletRequest request ) throws Exception{
         
         int result = userService.join(user);
         if(result > 0){
-            userService.login(user);
+            userService.login(user, request);
             return "redirect:/";
         }
         
