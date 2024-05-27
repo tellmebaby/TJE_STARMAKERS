@@ -228,30 +228,7 @@
       location.href='/page/starCard/starList'
 
     }
-    function design(){
-      alert('디자인')
-      let $designBtn = document.getElementById('designBtn')
-      let $container = $designBtn.parentElement.parentElement
-      let $form = $designBtn.parentElement.nextElementSibling;
-      $form.style.display='none'
-      let $designBox = document.createElement('div') 
-      $designBox.className = 'container item-align-center text-start w-75'
-      let designBox = ``
-      designBox += `<b><h1 class='mt-5'>"디자인이 어려우시면,</h1>`
-      designBox += `<br>`
-      designBox += `<h1 class='text-primary ms-5'>저희에게 맡겨주세요!"</h1><br>`
-      designBox += `<ul><li>인스타그램 홍보 카드</li>`
-      designBox += `<li>치지직/유튜브 홍보 인트로 영상</li>`
-      designBox += `<li>배너 광고 이미지</li></ul>`
-      designBox += `<br>`
-      designBox += `<p>예비 스타님의 개성에 맞춘 홍보물을 만들어 드립니다.</p><b>`
-      designBox += `<img src='/img/star.jpg' class='w-100'>`
-      designBox += `<button type='button' id='chat' class='btn btn-lg btn-outline-secondary w-100 mt-5'>1:1 채팅 바로가기</button>`
-      
-
-      $designBox.innerHTML = designBox
-      $container.appendChild($designBox)
-    }
+    
     $(document).ready(function () {
             $('#payPromo').click(function () {
                 alert('유료홍보')
@@ -270,7 +247,17 @@
                 // let payBtn=``
                 payBtn.innerHTML = "결제"
                 payBtn.type = 'button'
+                payBtn.addEventListener('click',function(payment){
+                  alert(`${session.user.email}`);
+                })
                 // console.log($payBtn)
+                $inner.appendChild(payBtn)
+
+                let $payment = document.getElementById("payBtn")
+                console.log($payment)
+                if($payment){
+                  $payment.parentNode.removeChild($payment)
+                }
                 $inner.appendChild(payBtn)
             });
         });
@@ -280,14 +267,6 @@
                 location.reload();
             });
         });
-        $(document).ready(function () {
-            $('#payBtn').click(function () {
-                alert('결제')
-                // let sendBtn = document.getElementById('sendPost')
-                // console.log(sendBtn)
-                
-            });
-        });
         
         $('#datepicker').datepicker({
             uiLibrary: 'bootstrap5'
@@ -295,7 +274,30 @@
         $('#datepicker2').datepicker({
             uiLibrary: 'bootstrap5'
         });
+      function design(){
+        alert('디자인')
+        let $designBtn = document.getElementById('designBtn')
+        let $container = $designBtn.parentElement.parentElement
+        let $form = $designBtn.parentElement.nextElementSibling;
+        $form.style.display='none'
+        let $designBox = document.createElement('div') 
+        $designBox.className = 'container item-align-center text-start w-75'
+        let designBox = ``
+        designBox += `<b><h1 class='mt-5'>"디자인이 어려우시면,</h1>`
+        designBox += `<br>`
+        designBox += `<h1 class='text-primary ms-5'>저희에게 맡겨주세요!"</h1><br>`
+        designBox += `<ul><li>인스타그램 홍보 카드</li>`
+        designBox += `<li>치지직/유튜브 홍보 인트로 영상</li>`
+        designBox += `<li>배너 광고 이미지</li></ul>`
+        designBox += `<br>`
+        designBox += `<p>예비 스타님의 개성에 맞춘 홍보물을 만들어 드립니다.</p><b>`
+        designBox += `<img src='/img/star.jpg' class='w-100'>`
+        designBox += `<button type='button' id='chat' class='btn btn-lg btn-outline-secondary w-100 mt-5'>1:1 채팅 바로가기</button>`
+        
 
+        $designBox.innerHTML = designBox
+        $container.appendChild($designBox)
+    }
   </script>
 
 </th:block>

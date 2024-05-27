@@ -52,6 +52,11 @@ public class UserServiceImpl implements UserService {
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
 
+        // 세션의 정보 등록
+        user = userMapper.select(username);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
+
         return result;
     }
 
@@ -93,6 +98,23 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public int delete(Users user) throws Exception {
+
+        int result = userMapper.delete(user);
+        return result;
+    }
+
+    @Override
+    public Users read(String email) throws Exception {
+
+        Users user = userMapper.read(email);
+        return user;
+    }
+
+>>>>>>> main
     // 가입 여부 확인
     @Override
     public int selectEmail(Users user) throws Exception {

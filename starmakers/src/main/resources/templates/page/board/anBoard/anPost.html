@@ -282,7 +282,6 @@
             flex-grow: 1;
             display: flex;
             justify-content: space-between;
-            width: 720px;
             margin: 0 auto 15px;
             padding: 20px 20px;
             border: 1px solid rgba(192, 190, 183, 1);
@@ -387,7 +386,7 @@
 
     <th:block layout:fragment="content">
 
-    <div class="container">
+    <div class="top-container">
 
         <center>
         <h1>공지사항</h1>
@@ -522,7 +521,7 @@
                 <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
             </div>
 
-            <div class="rereply-container m-2 p-0">
+            <div class="rereply-container m-0 p-2">
                 <div class="rereply-box">
                     <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
                     <button type="button">등록</button>

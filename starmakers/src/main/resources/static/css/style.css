@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;            
+}
+  
   .note-table .note-icon-caret {
     display: none;
   }
@@ -11,6 +16,8 @@
   .title {
       tab-size: 30px;
   }
+
+  /* 메뉴 바 굵기 */
   .nav-links a.active {
       font-weight: bold;
       color: #000;
@@ -35,4 +42,13 @@
  .container .btn-list{
   /* margin-top: 10px; */
   margin-right: 10px;
+<<<<<<< HEAD
  }
+=======
+ }
+
+ html, body {
+  overflow: hidden;
+}
+
+>>>>>>> main
