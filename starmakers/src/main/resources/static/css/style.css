@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;            
+}
+  
   .note-table .note-icon-caret {
     display: none;
   }
@@ -36,4 +41,8 @@
   /* margin-top: 10px; */
   margin-right: 10px;
  }
+
+ html, body {
+  overflow: hidden;
+}
 
