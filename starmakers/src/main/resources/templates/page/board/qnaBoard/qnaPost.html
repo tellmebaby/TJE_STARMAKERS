@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Q&A</title>
     <style>
-        .container {
+        .top-container {
           width: 960px;
           margin: 0 auto;
-          margin-top: 35px;
         }
         .writer {
             display: flex;
@@ -116,7 +115,7 @@
         }
         .answer-container {
           width: 960px;
-          margin: 0 auto 15px;
+          margin: 0 auto 5px;
           padding: 30px 30px;
           border: 1px solid;
           border-radius: 10px;
@@ -128,7 +127,7 @@
 
   <th:block layout:fragment="content">
 
-  <div class="container">
+  <div class="top-container">
 
     <center>
     <h1>Q&A</h1>
@@ -231,6 +230,9 @@
         귀한 아들의 명만 단축하였다고
         통곡하였으나 이미 때는 늦으리 였다.</span>
   </div>
+    <div class="button-container1">
+      <button type="button" onclick="moveList()">답변 등록</button>
+    </div>
 
   </div>
 

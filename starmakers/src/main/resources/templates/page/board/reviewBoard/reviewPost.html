@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>후기</title>
     <style>
-        .container {
+        .top-container {
           width: 960px;
           margin: 0 auto;
-          margin-top: 35px;
         }
         .writer {
             display: flex;
@@ -46,6 +45,7 @@
           margin: 0 auto;
           padding: 30px 30px;
           border: 1px solid;
+          /* text-align: center; */
         }
         .title-container hr {
           margin-top: 10px;
@@ -110,7 +110,7 @@
             color: white;
         }
 
-        /* 댓글 */
+        /* 댓글!!!! 입력*/
         .reply-container {
             display: flex;
             align-items: center;
@@ -157,18 +157,229 @@
             height: 100px;
             border-radius: 3px;
         }
-
         .reply-container button:hover {
             background-color: black;
             color: white;
             font-weight: bolder;
         }
+        
+        /* 댓글 타이틀 */
         .reply-list {
-            border-bottom: 1px solid #000;
+            border-bottom: 1.7px solid #000;
             width: 960px;
         }
         .reply-list label {
             margin: 5px 10px;
+        }
+
+        /* 댓글!!!! 목록 */
+        #reply-list {
+            display: block;
+            border-bottom: 0.7px solid #000;
+            width: 960px;
+            display: block;
+            padding: 10px 5px;
+            box-sizing: border-box;
+        }
+        .reply-top {
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .reply-regDate {
+            color: rgba(192, 190, 183, 1);
+        }
+        .reply-regDate .icon {
+            color: #000;
+            margin: 0 20px;
+        }
+        .reply-middle {
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .reply-content {
+            flex-grow: 1;
+            margin-right: 20px;
+        }
+        .reply-button {
+            padding: 5px 0;
+           text-align: right;
+        }
+        .btn-reply-update {
+            padding: 5px 10px;
+            background-color: rgba(192, 190, 183, 1);
+            border-radius: 3px;
+            color: black;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-reply-delete {
+            margin-left: 5px;
+            padding: 5px 10px;
+            background-color: rgba(37, 37, 37, 1);
+            border-radius: 3px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+            cursor: pointer;
+        }
+        .reply-rereply {
+            align-items: left;
+            padding: 5px 0px;
+        }
+
+        /* 답글 버튼*/
+        .btn-rereply {
+            padding: 7px 15px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 3px;
+            background-color: transparent;
+            color: rgba(192, 190, 183, 1);
+        }
+/* ---------------------------------------------------------헷갈릴까봐 나눠놓기 
+    답글 입력과 답글 목록은 부모댓글 목록 안에!!!! 있음*/
+         /* 답글!!!! 입력*/
+         /* 답글 눌렀을 때 보이게 하기 */
+         .rereply-container {
+            /* display: none; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px 0;
+            /* padding-left: 20px; */
+            width: 100%;
+            /* border-bottom: 0.7px solid rgba(192, 190, 183, 1); */
+
+            visibility: hidden; /* 숨김 */
+            height: 0; /* 높이 0으로 설정 */
+            overflow: hidden; /* 콘텐츠 오버플로우 숨김 */
+        }
+        .rereply-container.visible {
+            visibility: visible; /* 보임 */
+            height: auto; /* 원래 높이로 설정 */
+            padding: 0;
+            padding-left: 70px;
+            transition: visibility 0.3s, height 0.3s;
+        }
+        .rereply {
+            /* margin-left: 30px;
+            font-weight: bold;
+            font-size: 20px; */
+            margin-left: 70px;
+        }
+        .rereply-box {
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            width: 720px;
+            margin: 0 auto 15px;
+            padding: 20px 20px;
+            border: 1px solid rgba(192, 190, 183, 1);
+            border-radius: 3px;
+        }
+        .rereply-box textarea {
+            /* flex-grow: 1;  */
+            margin-right: 5px;
+            display: block;
+            width: 90%;
+            height: 100px;
+            overflow-y: scroll;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .rereply-container button {
+            margin-left: 5px; 
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            cursor: pointer;
+            border: 1px solid rgba(192, 190, 183, 1);
+            height: 100px;
+            border-radius: 3px;
+        }
+        .rereply-container button:hover {
+            background-color: black;
+            color: white;
+            font-weight: bolder;
+        }
+
+        /* 답글!!!! 목록 */
+        #rereply-list {
+            display: block;
+            width: 100%;
+            display: block;
+            padding: 10px 5px;
+            box-sizing: border-box;
+            border-top: 0.7px solid rgba(192, 190, 183, 1);
+        }
+        .rereply-top {
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .rereply-regDate {
+            color: rgba(192, 190, 183, 1);
+        }
+        .rereply-regDate .icon {
+            color: #000;
+            margin: 0 20px;
+        }
+        .rereply-middle {
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .rereply-content {
+            flex-grow: 1;
+            margin-right: 20px;
+        }
+        .rereply-button {
+            padding: 5px 0;
+           text-align: right;
+        }
+        .btn-rereply-update {
+            padding: 5px 10px;
+            background-color: rgba(192, 190, 183, 1);
+            border-radius: 3px;
+            color: black;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-rereply-delete {
+            margin-left: 5px;
+            padding: 5px 10px;
+            background-color: rgba(37, 37, 37, 1);
+            border-radius: 3px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+            cursor: pointer;
+        }
+        .rereply-rereply {
+            align-items: left;
+            padding: 5px 0px;
         }
     </style>
 </head>
@@ -176,11 +387,10 @@
 
     <th:block layout:fragment="content">
 
-    <div class="container">
+    <div class="top-container">
 
         <center>
         <h1>후기</h1>
-        <label>운영원칙에 위배되는 글은 관리자에 의해 무통보 삭제될 수 있습니다.</label>
         </center>
     
         <div class="writer">
@@ -193,78 +403,78 @@
         </div>
         <div class="content-container">
             <span>내용 - 
-              아주 오랜 옛날에
-              자식이 없는 노부부가 외딴 산속에
-              다정하게 살고 있었으나 늘 마음 한구석에는
-              자식걱정만이 그득할 뿐이었다.<br>
-    
-              조석으로 산신령님께 치성을 다하여 소원을
-              빈 결과 지성이면 감천이라고나 할까?
-              아들을 점지받아 건강한 옥동자를 늘그막에
-              낳게 되어 기쁨이 이만저만이 아니었다.<br>
-    
-              귀한 옥동자의 이름을 지어야 하겠는데
-              용한 작명가를 찾아가 이름을 지어달라고 하니
-              귀한 아들은 이름을 길게 지어야
-              건강하게 오래살며, 만약 이름을 한자라도
-              빼먹고 부르면 제명대로 살지 못할 것이라고 하며
-              지어준 이름이 있었으니,
-              그 이름이 무엇인고 하니 보고는 놀라지 말지어다.<br>
-    
-              "엉기조차 벙기조차 벙기조차 엉기조차 엉기벙기 버벙기"<br>
-    
-              라고 지어 주었으니,
-              노인네가 그 긴 이름을 어떻게 한자도
-              빼먹지 않고 어떻게 외워 부르면서
-              키울까하고 걱정도 되면서도 귀한 아들이니
-              만지면 터질까 넘어지면 다칠까하며,
-              금지옥엽으로 키웠다.<br>
-    
-              어느해 7살이 되던해
-              어느 여름날 아들 친구들이 허겁지겁
-              숨이 막히게 뛰어와서는 한다는 말이
-              할아버지, 할머니 큰일났어요.<br>
-    
-              "지금 엉기조차 벙기조차 벙기조차 엉기조차
-              엉기벙기 버벙기가
-              우리들과 물놀이를 하다가 물에 빠져서
+                아주 오랜 옛날에
+                자식이 없는 노부부가 외딴 산속에
+                다정하게 살고 있었으나 늘 마음 한구석에는
+                자식걱정만이 그득할 뿐이었다.<br>
+      
+                조석으로 산신령님께 치성을 다하여 소원을
+                빈 결과 지성이면 감천이라고나 할까?
+                아들을 점지받아 건강한 옥동자를 늘그막에
+                낳게 되어 기쁨이 이만저만이 아니었다.<br>
+      
+                귀한 옥동자의 이름을 지어야 하겠는데
+                용한 작명가를 찾아가 이름을 지어달라고 하니
+                귀한 아들은 이름을 길게 지어야
+                건강하게 오래살며, 만약 이름을 한자라도
+                빼먹고 부르면 제명대로 살지 못할 것이라고 하며
+                지어준 이름이 있었으니,
+                그 이름이 무엇인고 하니 보고는 놀라지 말지어다.<br>
+      
+                "엉기조차 벙기조차 벙기조차 엉기조차 엉기벙기 버벙기"<br>
+      
+                라고 지어 주었으니,
+                노인네가 그 긴 이름을 어떻게 한자도
+                빼먹지 않고 어떻게 외워 부르면서
+                키울까하고 걱정도 되면서도 귀한 아들이니
+                만지면 터질까 넘어지면 다칠까하며,
+                금지옥엽으로 키웠다.<br>
+      
+                어느해 7살이 되던해
+                어느 여름날 아들 친구들이 허겁지겁
+                숨이 막히게 뛰어와서는 한다는 말이
+                할아버지, 할머니 큰일났어요.<br>
+      
+                "지금 엉기조차 벙기조차 벙기조차 엉기조차
+                엉기벙기 버벙기가
+                우리들과 물놀이를 하다가 물에 빠져서
+                엉기조차 벙기조차 벙기조차 엉기조차
+                엉기벙기 버벙기가 죽게 생겼어요.
+                빨리 동네 사람들을 불러모아 물에빠진
+                엉기조차 벙기조차 벙기조차 엉기조차
+                엉기벙기 버벙기를 구해야 하겠어요."
+                하였다.<br>
+      
+                이에 깜짝놀란 노부부가<br>
+      
+                "뭐라고 우리 귀한 아들
+                엉기조차 벙기조차 벙기조차 엉기조차
+                엉기벙기 버벙기가 물에 빠져 죽게 되었다고?
+                그럼 큰일 났구나?"<br>
+      
+                하면서 동네사람들에게 말하였다.<br>
+      
+                "동네사람들 큰일났어요.
+                우리 귀한 아들 엉기조차 벙기조차 벙기조차
+                엉기조차 엉기벙기 버벙기가 물에 빠져서
+                곧 죽게 되었답니다.
+                빨리가서 우리아들
+                엉기조차 벙기조차 벙기조차 엉기조차
+                엉기벙기 버벙기를 구해 주세요."<br>
+      
+                하였다.<br>
+      
+                그러는 동안에 시간은 많이 흘렀고
+              마을 사람들이 냇가에 도착하여 보니,
               엉기조차 벙기조차 벙기조차 엉기조차
-              엉기벙기 버벙기가 죽게 생겼어요.
-              빨리 동네 사람들을 불러모아 물에빠진
-              엉기조차 벙기조차 벙기조차 엉기조차
-              엉기벙기 버벙기를 구해야 하겠어요."
-              하였다.<br>
-    
-              이에 깜짝놀란 노부부가<br>
-    
-              "뭐라고 우리 귀한 아들
-              엉기조차 벙기조차 벙기조차 엉기조차
-              엉기벙기 버벙기가 물에 빠져 죽게 되었다고?
-              그럼 큰일 났구나?"<br>
-    
-              하면서 동네사람들에게 말하였다.<br>
-    
-              "동네사람들 큰일났어요.
-              우리 귀한 아들 엉기조차 벙기조차 벙기조차
-              엉기조차 엉기벙기 버벙기가 물에 빠져서
-              곧 죽게 되었답니다.
-              빨리가서 우리아들
-              엉기조차 벙기조차 벙기조차 엉기조차
-              엉기벙기 버벙기를 구해 주세요."<br>
-    
-              하였다.<br>
-    
-              그러는 동안에 시간은 많이 흘렀고
-            마을 사람들이 냇가에 도착하여 보니,
-            엉기조차 벙기조차 벙기조차 엉기조차
-            엉기벙기 버벙기는 이미
-            이세상 사람이 아니었다.
-            이에 할아버지가 울면서
-            얼마나 오래 살겠다고 부르기도 성가신
-            이름을 그렇게 길게 지어가지고
-            귀한 아들의 명만 단축하였다고
-            통곡하였으나 이미 때는 늦으리 였다.
-            </span>
+              엉기벙기 버벙기는 이미
+              이세상 사람이 아니었다.
+              이에 할아버지가 울면서
+              얼마나 오래 살겠다고 부르기도 성가신
+              이름을 그렇게 길게 지어가지고
+              귀한 아들의 명만 단축하였다고
+              통곡하였으나 이미 때는 늦으리 였다.
+              </span>
         </div>
     
         <div class="button-wrapper">
@@ -276,6 +486,7 @@
           </div>
         </div>
     
+        <!-- 댓글 등록 -->
         <div class="reply-container">
             <div class="reply-box">
             <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
@@ -287,23 +498,114 @@
             <label class="reply">댓글</label>
             <label class="reply-count">댓글 갯수</label>
         </div>
+        <!-- 댓글 목록 -->
         <div id="reply-list">
+            <!-- 댓글 -->
+            <div class="reply-top">
+                <span class="reply-writer">${writer}</span>
+                <span class="reply-regDate">${regDate}
+                    
+                    <i class="fa-regular fa-thumbs-up icon"></i>
 
+                </span>
+            </div>
+            <!-- 댓글 내용/ 수정 삭제 버튼 -->
+            <div class="reply-middle">
+                <p class="reply-content">${content}</p>
+                <div class="reply-button">
+                    <button class="btn-reply-update">수정</button>
+                    <button class="btn-reply-delete">삭제</button>
+                </div>
+            </div>
+            <!-- 답글 쓰기 -->
+            <div class="reply-rereply">
+                <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
+            </div>
+
+            <div class="rereply-container m-2 p-0">
+                <div class="rereply-box">
+                    <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
+                    <button type="button">등록</button>
+                </div>       
+            </div>
+            <!-- 답글!! 목록 -->
+            <div id="rereply-list">
+                <div class="rereply">
+                    <!-- 답글 -->
+                    <div class="rereply-top">
+                        <span class="rereply-writer">${writer}</span>
+                        <span class="rereply-regDate">${regDate}
+                            
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            
+                        </span>
+                    </div>
+                    <!-- 답글 내용/ 수정 삭제 버튼 -->
+                    <div class="rereply-middle">
+                        <p class="rereply-content">${content}</p>
+                        <div class="rereply-button">
+                            <button class="btn-rereply-update">수정</button>
+                            <button class="btn-rereply-delete">삭제</button>
+                        </div>
+                    </div>
+                    <!-- 답글에 답글 쓰기 -->
+                    <div class="rereply-rereply">
+                        <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
+                    </div>
+                    <div class="rereply-container m-0 p-0">
+                        <div class="rereply-box">
+                            <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
+                            <button type="button">등록</button>
+                        </div>       
+                    </div>
+                </div>
+            </div>
         </div>
+    
+        
+
+
+
+        <!-- 예시 자료 2 -->
+        <div id="reply-list">
+            <div class="reply-top">
+                <span class="reply-writer">${writer}</span>
+                <span class="reply-regDate">${regDate}
+                    <i class="fa-regular fa-thumbs-up icon"></i>
+                </span>
+            </div>
+            <div class="reply-middle">
+                <p class="reply-content">${content}</p>
+                <div class="reply-button">
+                    <button class="btn-reply-update">수정</button>
+                    <button class="btn-reply-delete">삭제</button>
+                </div>
+            </div>
+            <div class="reply-rereply">
+                <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
+            </div>
+        </div>
+        
      
     </div>
 
     <script>
     
-      function moveList() {
-        location.href = '/page/board/reviewBoard/reviewList'
-      }
+        function moveList() {
+          location.href = '/page/board/anBoard/anList'
+        }
+  
+        function update() {
+          location.href = ''
+        }
 
-      function update() {
-        location.href = ''
-      }
-
-    </script>
+        function toggleRereplyContainer(button) {
+            const rereplyContainer = button.parentElement.nextElementSibling;
+            console.log(rereplyContainer)
+            rereplyContainer.classList.toggle('visible');
+        }
+  
+      </script>
     
         </th:block>
     

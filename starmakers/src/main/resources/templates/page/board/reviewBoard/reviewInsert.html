@@ -25,15 +25,15 @@
 <!-- layout:decorate 쓸 때 본문 내용은 <th:block layout:fragment="content"></th:block> 안에 적어야 화면에 뜸 -->
 <th:block layout:fragment="content" class="align-items-center ml-5">
   <div class="body lg" style="max-width: 900 ;">
-    <h1 class="d-flex justify-content-center mb-3">
-      후기작성
+    <h1 class="d-flex justify-content-center mb-3 mt-3">
+      후기등록
     </h1>
         <form action="" method="post" id="reviewInsert">
             <div class="container">
-            <div class="input-group">
-            <span class="input-group-text" id="addon-wrapping">제목</span>
-            <input type="text" name="title" class="form-control" placeholder="글 제목을 입력해주세요" aria-label="tilte"
-                aria-describedby="addon-wrapping">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="addon-wrapping">제목</span>
+                <input type="text" name="title" class="form-control" placeholder="글 제목을 입력해주세요" aria-label="tilte"
+                    aria-describedby="addon-wrapping">
             </div>
             <!-- <input type="text" class="" id="starPostTitle" placeholder="제목을 입력해주세요"> -->
 
@@ -41,9 +41,9 @@
             <div>
             <textarea name="content" class="" id="summernote" value=""></textarea>
             </div>
-            <div class="d-flex justify-content-end">
-            <input type="submit" class="btn btn-primary btn-submit btn-lg" value="목록">
-            <input type="submit" class="btn btn-primary btn-submit btn-lg" value="등록">
+            <div class="d-flex justify-content-end mt-2">
+            <button type="button" class="btn btn-primary btn-submit col-1 border-0 btn-list" style="background-color: #a5bdff;" onclick="reviewList()">목록</button>
+            <input type="submit" class="btn btn-primary btn-submit col-1 border-0" value="등록">
             </div>
             </div>
         </form>
@@ -76,6 +76,10 @@
       fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
       placeholder: '내용을 입력하세요.'
     });
+
+    function reviewList(){
+        location.href='/page/board/reviewBoard/reviewList'
+    }
   </script>
 
 </th:block>

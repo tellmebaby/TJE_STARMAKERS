@@ -6,375 +6,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index Page</title>
+    <link rel="stylesheet" href="/css/card.css" class="css">
 </head>
+
+
 
 <body>
     <div layout:fragment="content">
+
         <style>
-            #promotionCarousel .card>img {
-                width: 100%;
-                height: 250px;
-            }
-
-            #bannerCarousel img {
-                width: -webkit-fill-available;
-                height: 200px;
-            }
-
-
-
-            .event-banner {
-                background: #f8f9fa;
-                text-align: center;
-                margin: 20px 0;
-            }
-
-            .bg-image {
-                position: relative;
-                background-image: url('https://plus.unsplash.com/premium_photo-1661963965541-adda6e4c6a1e?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-                background-size: cover;
-                background-position: center;
-            }
-
-            .overlay {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.3);
-                /* 반투명한 검은색 오버레이 */
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-
-                color: white;
-                /* 텍스트 색상을 흰색으로 변경 */
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-                /* 텍스트 그림자 추가 */
-                padding: 20px;
-                /* 텍스트 여백 조정 */
-            }
-
-            .jumbotron {
-                height: 400px;
-            }
-
-            .carousel-control-prev,
-            .carousel-control-next {
-                width: 40px;
-                color: black;
-                left: -5%;
-                right: auto;
-            }
-
-            .carousel-control-prev-icon,
-            .carousel-control-next-icon {
-                background-color: black;
-                border-radius: 50%;
-            }
-
-            .carousel-control-next {
-                left: auto;
-                right: -5%;
-            }
-
-
-            #promotionCarousel .row {
-                justify-content: space-between;
-            }
-
-            #promotionCarousel .col-lg-3 {
+            /*
+            #promotionCarousel .col-lg-3 p-0 {
                 padding-right: 0;
                 padding-left: 0;
-                flex: 0 0 24%;
             }
-
-            .board-h {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            .text-muted {
-                font-size: 0.8rem;
-            }
-
-            .search-input {
-                margin-right: 15px;
-            }
-
-            .list-group-item {
-                display: flex;
-                justify-content: space-between;
-            }
-
-            .badge-secondary {
-                margin-right: 10px;
-            }
-
-            #promotionCarousel .card {
-                border-radius: 1.25rem;
-                overflow: hidden;
-            }
-
-            .icon-container {
-                position: absolute;
-                bottom: 15px;
-                right: 15px;
-            }
-
-            .icon {
-                cursor: pointer;
-                /* margin-left: 5px; */
-                font-size: 30px;
-            }
-
-
-            .icon-body {
-                background-color: #b0d5ff;
-                /* 배경색 설정 */
-                padding: 10px;
-                /* 안쪽 여백 추가 */
-                /* border-radius: 10px; */
-                /* 모서리 둥글게 처리 */
-                display: flex;
-                /* 아이콘들을 가로로 나열 */
-                justify-content: center;
-                /* 아이콘들을 중앙 정렬 */
-                align-items: center;
-                /* 아이콘들을 수직 중앙 정렬 */
-                gap: 10px;
-                /* 아이콘들 사이의 간격 설정 */
-            }
-
-            .content-icon {
-                width: 40px;
-                /* 아이콘의 크기 */
-                height: 40px;
-                /* 아이콘의 크기 */
-                border-radius: 50%;
-                /* 아이콘을 원형으로 만듦 */
-                margin: 5px;
-                /* 아이콘 사이의 여백 */
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                /* 아이콘에 그림자 효과 추가 */
-            }
-
-            .youtube {
-                background-color: white;
-            }
-
-            .afreeca {
-                transform: scale(1.1);
-            }
+            */
         </style>
-
-        </style>
-
 
         <div class="jumbotron text-center bg-image">
             <div class="overlay d-flex flex-column align-items-center">
                 <h1 class="display-4">스타가 되는 첫걸음</h1>
                 <p class="lead">스타가 되고 싶은 당신을 위한 홍보 플랫폼</p>
                 <div class="d-flex">
-                    <a href="#" class="btn btn-primary btn-lg mr-3">무료로 참여하기</a>
+                    <a href="#" class="btn btn-primary btn-lg me-3">무료로 참여하기</a>
                     <a href="#" class="btn btn-secondary btn-lg">스타 보러가기</a>
                 </div>
             </div>
         </div>
 
         <div class="container">
-            <div class="input-group justify-content-center pt-4 pb-4">
-                <input type="text" class="form-control col-6 search-input" placeholder="검색 키워드 입력">
-                <button class="btn btn-primary col-2">검색</button>
+
+            <div class="row mb-3 mt-3">
+                <div class="col-md-12 d-flex align-items-center">
+                    <input type="text" class="form-control me-2" id="searchInput" placeholder="검색 키워드 입력">
+                    <button class="btn btn-primary col-2">검색</button>
+                </div>
             </div>
 
-            <div id="promotionCarousel" class="carousel slide" data-ride="carousel">
+
+            
+            <div id="promotionCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner" id="carousel-inner">
+                    <!-- Dynamically added carousel items will go here -->
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#promotionCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#promotionCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+
+
+                
+
+            </div>
+
+
+
+
+
+            <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="card">
-                                        <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
-                                            class="card-img-top" alt="홍보글 제목">
-
-                                        <div class="icon-body">
-                                            <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                            <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                                            <img src="/img/icon/youtube.png" class="content-icon youtube">
-                                            <img src="/img/icon/instagram.svg" class="content-icon">
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title">어쩌다보니천생연분</h5>
-                                            <p class="card-text">꿀타래</p>
-                                        </div>
-                                        <div class="icon-container">
-                                            <i class="fa-regular fa-thumbs-up icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="card">
-                                        <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
-                                            class="card-img-top" alt="홍보글 제목">
-                                        <div class="card-body">
-                                            <div class="icon-body">
-                                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                                <img src="/img/icon/instagram.svg" class="content-icon">
-                                            </div>
-                                            <h5 class="card-title">홍보글 제목</h5>
-                                            <p class="card-text">작성자</p>
-                                        </div>
-                                        <div class="icon-container">
-                                            <i class="fa-regular fa-thumbs-up icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="card">
-                                        <img src="https://i.pinimg.com/564x/7f/3e/f4/7f3ef45a988289588cf84dff469245a8.jpg"
-                                            class="card-img-top" alt="홍보글 제목">
-                                        <div class="card-body">
-                                            <h5 class="card-title">홍보글 제목</h5>
-                                            <p class="card-text">작성자</p>
-                                        </div>
-                                        <div class="icon-container">
-                                            <i class="fa-regular fa-thumbs-up icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="card">
-                                        <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
-                                            class="card-img-top" alt="홍보글 제목">
-                                        <div class="card-body">
-                                            <h5 class="card-title">홍보글 제목</h5>
-                                            <p class="card-text">작성자</p>
-                                        </div>
-                                        <div class="icon-container">
-                                            <i class="fa-regular fa-thumbs-up icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="event-banner">
+                            <img src="/img/sampleBanner.png" class="d-block w-100">
                         </div>
                     </div>
-                    <!-- Repeat this carousel-item structure for the next sets of cards -->
                     <div class="carousel-item">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="card">
-                                        <img src="https://i.pinimg.com/564x/c3/b2/bd/c3b2bdc709bc5ffd1070cb6f3b137230.jpg"
-                                            class="card-img-top" alt="홍보글 제목">
-                                        <div class="card-body">
-                                            <h5 class="card-title">홍보글 제목</h5>
-                                            <p class="card-text">작성자</p>
-                                        </div>
-                                        <div class="icon-container">
-                                            <i class="fa-regular fa-thumbs-up icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="card">
-                                        <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
-                                            class="card-img-top" alt="홍보글 제목">
-                                        <div class="card-body">
-                                            <h5 class="card-title">홍보글 제목</h5>
-                                            <p class="card-text">작성자</p>
-                                        </div>
-                                        <div class="icon-container">
-                                            <i class="fa-regular fa-thumbs-up icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="card">
-                                        <img src="https://i.pinimg.com/564x/c3/b2/bd/c3b2bdc709bc5ffd1070cb6f3b137230.jpg"
-                                            class="card-img-top" alt="홍보글 제목">
-                                        <div class="card-body">
-                                            <h5 class="card-title">홍보글 제목</h5>
-                                            <p class="card-text">작성자</p>
-                                        </div>
-                                        <div class="icon-container">
-                                            <i class="fa-regular fa-thumbs-up icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="card">
-                                        <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
-                                            class="card-img-top" alt="홍보글 제목">
-                                        <div class="card-body">
-                                            <h5 class="card-title">홍보글 제목</h5>
-                                            <p class="card-text">작성자</p>
-                                        </div>
-                                        <div class="icon-container">
-                                            <i class="fa-regular fa-thumbs-up icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="event-banner">
+                            <img src="/img/sampleBanner2.png" class="d-block w-100">
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="event-banner">
+                            <img src="/img/sampleBanner3.png" class="d-block w-100">
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="event-banner">
+                            <img src="/img/sampleBanner4.png" class="d-block w-100">
                         </div>
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#promotionCarousel" role="button" data-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#promotionCarousel" role="button" data-slide="next">
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-
-
-
-
-
-            <div id="bannerCarousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-
-                    <div class="carousel-item active">
-                        <div class="event-banner">
-                            <img src="/img/sampleBanner.png">
-                        </div>
-                    </div>
-
-                    <div class="carousel-item ">
-                        <div class="event-banner">
-                            <img src="/img/sampleBanner2.png">
-                        </div>
-                    </div>
-                    <div class="carousel-item ">
-                        <div class="event-banner">
-                            <img src="/img/sampleBanner3.png">
-                        </div>
-                    </div>
-                    <div class="carousel-item ">
-                        <div class="event-banner">
-                            <img src="/img/sampleBanner4.png">
-                        </div>
-                    </div>
-
-
-
-                </div>
-
-                <!-- 좌우 화살표와 인디케이터를 추가합니다. -->
-                <a class="carousel-control-prev" href="#bannerCarousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#bannerCarousel" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
 
 
@@ -397,7 +120,8 @@
                     <h3 class="board-h">공지사항 <span class="text-muted"><a href="#">더 보기></a></span></h3>
                     <ul class="list-group">
                         <li class="list-group-item">이건 공지입니다[2] <span class="badge text-bg-secondary">22</span></li>
-                        <li class="list-group-item">공지 어쩌고 저쩌고...[3] <span class="badge text-bg-secondary">40</span></li>
+                        <li class="list-group-item">공지 어쩌고 저쩌고...[3] <span class="badge text-bg-secondary">40</span>
+                        </li>
                         <li class="list-group-item">이게 진짜 안되네.. <span class="badge text-bg-secondary">12</span></li>
                         <li class="list-group-item">이게 진짜 되네..[7] <span class="badge text-bg-secondary">32</span></li>
                         <li class="list-group-item">이게 진짜 되네..[2] <span class="badge text-bg-secondary">34</span></li>
@@ -405,6 +129,82 @@
                 </div>
             </div>
         </div>
+
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const carouselInner = document.getElementById('carousel-inner');
+        
+                // 예시 데이터
+                const cards = [
+                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분', text: '꿀타래' },
+                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분1', text: '꿀타래1' },
+                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분2', text: '꿀타래2' },
+                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분3', text: '꿀타래3' },
+                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분4', text: '꿀타래4' },
+                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분5', text: '꿀타래5' },
+                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분6', text: '꿀타래6' },
+                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분7', text: '꿀타래7' },
+                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분8', text: '꿀타래8' },
+                ];
+        
+                function createCard(cardData) {
+                    return `
+                    <div class="col-lg-3 p-0">
+                        <div class="card">
+                            <img src="${cardData.img}" class="card-img-top" alt="${cardData.title}">
+                            <div class="icon-body">
+                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                <img src="/img/icon/instagram.svg" class="content-icon">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">${cardData.title}</h5>
+                                <p class="card-text">${cardData.text}</p>
+                            </div>
+                            <div class="icon-container">
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                }
+        
+                function createCarouselItem(cardsChunk, isActive = false) {
+                    const activeClass = isActive ? 'active' : '';
+                    return `
+                        <div class="carousel-item ${activeClass}">
+                            <div class="row">
+                                ${cardsChunk.map(createCard).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+        
+                function chunkArray(array, chunkSize) {
+                    const chunks = [];
+                    for (let i = 0; i < array.length; i += chunkSize) {
+                        chunks.push(array.slice(i, i + chunkSize));
+                    }
+                    return chunks;
+                }
+        
+                // 카드를 4개씩 묶음으로 나누기
+                const cardChunks = chunkArray(cards, 4);
+        
+                // 첫 번째 카드는 active 클래스를 추가하여 활성화
+                cardChunks.forEach((chunk, index) => {
+                    const carouselItem = createCarouselItem(chunk, index === 0);
+                    carouselInner.insertAdjacentHTML('beforeend', carouselItem);
+                });
+            });
+        </script>
+
+
+
+
     </div>
 </body>
 

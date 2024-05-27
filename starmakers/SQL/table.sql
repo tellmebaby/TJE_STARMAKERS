@@ -1,4 +1,6 @@
+
 -- Active: 1716511247384@@127.0.0.1@3306@joeun
+
 
 
 DROP TABLE IF EXISTS action ;
@@ -61,7 +63,7 @@ CREATE TABLE persistent_logins
   PRIMARY KEY (series)
 ) COMMENT '자동로그인';
 
-
+DROP TABLE IF EXISTS product_io ;
 DROP TABLE IF EXISTS product ;
 CREATE TABLE product
 (
@@ -146,6 +148,12 @@ CREATE TABLE user
   birth    VARCHAR(20) NOT NULL COMMENT '생년월일',
   PRIMARY KEY (user_no)
 ) COMMENT '회원정보';
+
+INSERT INTO user (name, id, email, password, phone, address, gender, birth)
+VALUES ('홍길동', 'user', 'user@example.com', '123456', '010-1234-5678', '서울시 강남구', '남성', '1990-01-01');
+
+INSERT INTO user (name, id, email, password, phone, address, gender, birth)
+VALUES ('관리자', 'admin', 'admin@example.com', '123456', '010-1234-5678', '본사', '남성', '1997-01-01');
 
 
 DROP TABLE IF EXISTS user_auth;

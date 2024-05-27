@@ -26,3 +26,14 @@
  .note-color-all .note-icon-caret {
     /* display: none; */
  }
+
+
+ .container #channel {
+    border: 1px;
+ }
+
+ .container .btn-list{
+  /* margin-top: 10px; */
+  margin-right: 10px;
+ }
+
