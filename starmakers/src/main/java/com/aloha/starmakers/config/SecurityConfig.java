@@ -12,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
+import com.aloha.starmakers.security.LoginSuccessHandler;
 import com.aloha.starmakers.user.service.UserDetailServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,9 @@ public class SecurityConfig {
 
     @Autowired
     private UserDetailServiceImpl userDetailServiceImpl;
+
+    @Autowired
+    private LoginSuccessHandler loginSuccessHandler;
 
     // 스프링 시큐리티 설정 메소드
     @Bean
@@ -43,6 +47,7 @@ public class SecurityConfig {
                                      .loginProcessingUrl("/login")
                                      .usernameParameter("email")
                                      .passwordParameter("password")
+                                     .successHandler(loginSuccessHandler)
                                      );
 
         // ✅ 사용자 정의 인증 설정

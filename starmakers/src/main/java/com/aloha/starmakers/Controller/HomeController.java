@@ -3,6 +3,7 @@ package com.aloha.starmakers.controller;
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,10 +35,12 @@ public class HomeController {
      * @return
      */
     @GetMapping({"", "/"})
-    public String home(Principal principal) {
+    public String home(Principal principal, HttpSession session) {
         log.info("메인 화면");
         log.info(":::::::::: principal ::::::::::");
         log.info("principal : " + principal);
+
+        log.info("user : " + session.getAttribute("user"));
         
         // if (principal != null) {
         //     if (principal instanceof UsernamePasswordAuthenticationToken) {
