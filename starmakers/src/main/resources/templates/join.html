@@ -25,15 +25,10 @@ layout:decorate="~{/layout/default_layout}">
         }
     </style>
 </head>
-<body>
-<th:block layout:fragment="content" class="join">
-
+<body layout:fragment="content" class="join">
     <div class="signup-form">
-        <form action="/join" id="joinForm" method="post">
-            <!-- CSRF TOKEN -->
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-            <h1 class="h3 mb-3 font-weight-normal text-center">회원가입</h1>
-            
+        <form action="/join" method="post">
+            <input type="hidden" id="inputCsrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
             <div class="form-group">
                 <label for="inputUserid">아이디</label>
                 <div class="input-group">
@@ -42,7 +37,6 @@ layout:decorate="~{/layout/default_layout}">
                 </div>
                 <small id="idCheckResult" class="form-text text-muted"></small>
             </div>
-                    
             <div class="form-group">
                 <label for="inputPassword">비밀번호</label>
                 <input type="password" id="inputPassword" name="password" class="form-control" placeholder="비밀번호" required>
@@ -92,73 +86,100 @@ layout:decorate="~{/layout/default_layout}">
     <!-- 부트스트랩 JS 및 의존성 -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <!-- <script>
-        document.getElementById('checkIdBtn').addEventListener('click', function() {
+
+    <!-- 아이디 중복 검사 -->
+    <script>
+        document.getElementById('checkIdBtn').addEventListener('click', async function() {
             const userId = document.getElementById('inputUserid').value;
-            if (!userId) {
-                alert('아이디를 입력해주세요.');
+            const idCheckResult = document.getElementById('idCheckResult');
+            const csrfToken = document.getElementById('inputCsrf').value;
+    
+            if (userId.trim() === "") {
+                idCheckResult.textContent = "아이디를 입력해주세요.";
+                idCheckResult.style.color = "red";
                 return;
             }
-
-            fetch('/check-id', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id: userId })
-            })
-            .then(response => response.json())
-            .then(data => {
-                const resultElement = document.getElementById('idCheckResult');
-                if (data.exists) {
-                    resultElement.textContent = '이미 사용 중인 아이디입니다.';
-                    resultElement.style.color = 'red';
-                } else {
-                    resultElement.textContent = '사용 가능한 아이디입니다.';
-                    resultElement.style.color = 'green';
+    
+            try {
+                const response = await fetch('/checkUserId', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify({ id: userId })
+                });
+    
+                if (!response.ok) {
+                    throw new Error("Server error");
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        });
-
-        document.getElementById('joinForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            fetch('/join', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    id: document.getElementById('inputUserid').value,
-                    password: document.getElementById('inputPassword').value,
-                    confirmPassword: document.getElementById('confirmPassword').value,
-                    name: document.getElementById('inputUsername').value,
-                    gender: document.querySelector('input[name="gender"]:checked').value,
-                    birth: document.getElementById('inputBirth').value,
-                    email: document.getElementById('inputEmail').value,
-                    phone: document.getElementById('inputPhone').value,
-                    address: document.getElementById('inputAddress').value
-                })
-            })
-            .then(response => {
-                if (response.ok) {
-                    window.location.href = '/';
+    
+                const isTaken = await response.json();
+    
+                if (isTaken) {
+                    idCheckResult.textContent = "사용 불가능한 아이디입니다.";
+                    idCheckResult.style.color = "red";
                 } else {
-                    window.location.href = '/join?error';
+                    idCheckResult.textContent = "사용 가능한 아이디입니다.";
+                    idCheckResult.style.color = "green";
                 }
-            })
-            .catch(error => {
+            } catch (error) {
+                idCheckResult.textContent = "아이디 중복 확인 중 오류가 발생했습니다.";
+                idCheckResult.style.color = "red";
                 console.error('Error:', error);
-                window.location.href = '/join?error';
-            });
+            }
         });
     
-    </script> -->
-
-
-</th:block>
+        document.getElementById('input-btn').addEventListener('click', async function(event) {
+            event.preventDefault(); // 기본 제출 이벤트 방지
+    
+            const password = document.getElementById('inputPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const username = document.getElementById('inputUsername').value;
+            const phone = document.getElementById('inputPhone').value;
+    
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
+            const usernameRegex = /^[가-힣]+$/;
+            const phoneRegex = /^[0-9]+$/;
+    
+            let valid = true;
+    
+            // 비밀번호 유효성 검사
+            if (!passwordRegex.test(password)) {
+                alert("비밀번호는 영문, 숫자, 특수문자를 포함하여 6글자 이상이어야 합니다.");
+                valid = false;
+            }
+    
+            // 비밀번호 확인 검사
+            if (password !== confirmPassword) {
+                alert("비밀번호가 일치하지 않습니다.");
+                valid = false;
+            }
+    
+            // 이름 유효성 검사
+            if (!usernameRegex.test(username)) {
+                alert("이름은 한글만 입력할 수 있습니다.");
+                valid = false;
+            }
+    
+            // 전화번호 유효성 검사
+            if (!phoneRegex.test(phone)) {
+                alert("전화번호는 숫자만 입력할 수 있습니다.");
+                valid = false;
+            }
+    
+            // 아이디 중복 확인 결과 검사
+            const idCheckResult = document.getElementById('idCheckResult').textContent;
+            if (idCheckResult === "사용 불가능한 아이디입니다." || idCheckResult === "아이디를 입력해주세요.") {
+                alert("아이디를 확인해주세요.");
+                valid = false;
+            }
+    
+            // 모든 검사가 통과되면 폼을 제출
+            if (valid) {
+                document.querySelector('form').submit();
+            }
+        });
+    </script>
 </body>
 </html>
