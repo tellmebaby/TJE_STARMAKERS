@@ -63,7 +63,7 @@
               ,1 enabled
               ,auth
         FROM user u LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id
-        WHERE u.email = #{email}
+        WHERE u.user_no = #{userNo}
     </select>
 
     <!-- 회원 가입 -->
@@ -72,6 +72,18 @@
         VALUES ( #{name}, #{id}, #{email}, #{password}, #{phone}, #{address}, #{gender}, #{birth} )
     </insert>
 
+    <!-- 마이페이지 조회 -->
+    <select id="read" resultType="Users">
+        SELECT id
+              ,name
+              ,phone
+              ,email
+              ,birth
+              ,address
+        FROM user
+        WHERE email = #{email}
+    </select>
+
     <!-- 회원 정보 수정 -->
     <update id="update">
         UPDATE user
@@ -79,7 +91,7 @@
               ,address = #{address}
               ,email = #{email}
               ,upd_date = now()
-        WHERE user_no = #{userNo}
+        WHERE email = #{email}
     </update>
 
     <!-- 회원 권한 등록 -->
@@ -87,5 +99,11 @@
         INSERT INTO user_auth( user_id, auth )
         VALUES ( #{userId}, #{auth} )
     </insert>
+
+    <!-- 회원 탈퇴 -->
+    <delete id="delete">
+        DELETE FROM user
+        WHERE user_no = #{userNo}
+    </delete>
 
 </mapper>
