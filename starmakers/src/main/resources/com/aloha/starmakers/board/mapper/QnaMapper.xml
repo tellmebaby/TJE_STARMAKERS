@@ -9,13 +9,13 @@
     <select id="list" resultType="QnaBoard">
         SELECT *
         FROM qna_board
-       
+        ORDER BY reg_date DESC
     </select>
 
     <!-- 글 등록 -->
     <insert id="insert">
         INSERT INTO qna_board(title, writer, content, status, user_no)
-        VALUES (#{qnaTitle}, #{qnaWriter}, #{qnaContent},#{qnaStatus},#{userNo})
+        VALUES (#{title}, #{writer}, #{content},#{status},#{userNo})
     </insert>
     
 </mapper>

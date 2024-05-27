@@ -116,57 +116,35 @@
                     </tr>
                 </thead>
                 
+                <th:block th:if="${qnaList.isEmpty()}">
+                    <tr>
+                        <td colspan="6" align="center" style="padding-top: 183.49px; padding-bottom: 183.49px;">
+                            조회된 게시글이 없습니다.
+                        </td>
+                    </tr>
+                </th:block>
+
+                <th:block th:each="qnaBoard : ${qnaList}">
+                <tr>
+                    <!-- <td align="center" th:text="${qnaBoard.qnaNo}"></td> -->
+                    <td align="center" th:text="Q"></td>
+                    <td align="center">
+                        <a th:href="|qnaPost?qnaNo=${qnaBoard.qnaNo}|" th:text="${qnaBoard.title}"></a>
+                    </td>
+                    <td align="center" th:text="${qnaBoard.writer}"></td>
+                    <td align="center">
+                        <span th:text="${#dates.format(qnaBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                    </td>
+                    <td align="center" th:text="${qnaBoard.status}"></td>
+                    
+                    <td align="center" th:text="${qnaBoard.views}"></td>
+                    
+                </tr>
+                </th:block>
+
+
+
                 
-
-
-
-                <th:if="${qnaList.isNotEmpty()}">
-                    <!-- 여기에 예시 데이터를 추가합니다. -->
-                    <!-- 첫 번째 예시 데이터 -->
-                    <tr>
-                        <td align="center">Q</td> <!-- 숫자는 게시글 번호일 수 있습니다. -->
-                        <td><a href="/page/board/qnaBoard/qnaPost">예시 제목 1</a></td>
-                        <td align="center">예시 작성자 1</td>
-                        <td align="center">2024-05-22 10:00:00</td> <!-- 예시 날짜 및 시간 -->
-                        <td align="center">답변 대기</td> <!-- 상태에 따라 변경할 수 있습니다. -->
-                        <td align="center">12</td> <!-- 예시 날짜 및 시간 -->
-                    </tr>
-                    <!-- 두 번째 예시 데이터 -->
-                    <tr>
-                        <td align="center">Q</td> <!-- 게시글 번호 -->
-                        <td>예시 제목 2</td>
-                        <td align="center">예시 작성자 2</td>
-                        <td align="center">2024-05-21 09:00:00</td> <!-- 예시 날짜 및 시간 -->
-                        <td align="center">답변 대기</td> <!-- 상태에 따라 변경할 수 있습니다. -->
-                        <td align="center">9</td> <!-- 예시 날짜 및 시간 -->
-                    </tr>
-                    <!-- 여기까지 예시 데이터입니다. -->
-                    <tr>
-                        <td align="center">Q</td> <!-- 게시글 번호 -->
-                        <td>예시 제목 3</td>
-                        <td align="center">예시 작성자 3</td>
-                        <td align="center">2024-05-20 18:00:00</td> <!-- 예시 날짜 및 시간 -->
-                        <td align="center">답변 완료</td> <!-- 상태에 따라 변경할 수 있습니다. -->
-                        <td align="center">36</td> <!-- 예시 날짜 및 시간 -->
-                    </tr>
-                    <tr>
-                        <td align="center">Q</td> <!-- 게시글 번호 -->
-                        <td>예시 제목 4</td>
-                        <td align="center">예시 작성자 4</td>
-                        <td align="center">2024-05-19 11:00:00</td> <!-- 예시 날짜 및 시간 -->
-                        <td align="center">답변 완료</td> <!-- 상태에 따라 변경할 수 있습니다. -->
-                        <td align="center">22</td> <!-- 예시 날짜 및 시간 -->
-                    </tr>
-                    <tr>
-                        <td align="center">Q</td> <!-- 게시글 번호 -->
-                        <td>예시 제목 5</td>
-                        <td align="center">예시 작성자 5</td>
-                        <td align="center">2024-05-18 13:00:00</td> <!-- 예시 날짜 및 시간 -->
-                        <td align="center">답변 완료</td> <!-- 상태에 따라 변경할 수 있습니다. -->
-                        <td align="center">54</td> <!-- 예시 날짜 및 시간 -->
-                    </tr>
-
-                </tbody>
                 
             </table>
             <div class="button-container">
