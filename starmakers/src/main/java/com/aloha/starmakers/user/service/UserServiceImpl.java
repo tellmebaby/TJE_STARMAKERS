@@ -88,4 +88,18 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+    @Override
+    public int delete(Users user) throws Exception {
+
+        int result = userMapper.delete(user);
+        return result;
+    }
+
+    @Override
+    public Users read(String email) throws Exception {
+
+        Users user = userMapper.read(email);
+        return user;
+    }
+
 }
