@@ -5,6 +5,7 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.aloha.starmakers.user.dto.CustomUser;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.service.UserService;
 
@@ -36,6 +38,18 @@ public class HomeController {
         log.info("메인 화면");
         log.info(":::::::::: principal ::::::::::");
         log.info("principal : " + principal);
+        
+        // if (principal != null) {
+        //     if (principal instanceof UsernamePasswordAuthenticationToken) {
+        //         Object principalObj = ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+        //         if (principalObj instanceof CustomUser) {
+        //             CustomUser customUser = (CustomUser) principalObj;
+        //             Long userNo = customUser.getUser().getUserNo();
+        //             log.info("User No: " + userNo);
+        //         }
+        //     }
+        // }
+
         // Principal : 현재 로그인 한 사용자 정보를 확인하는 인터페이스
         return "/index";
     }
