@@ -36,9 +36,6 @@ public interface UserMapper {
 
     // 아이디 중복 확인
     public int selectId( Users user ) throws Exception;
-<<<<<<< HEAD
-=======
 
 
->>>>>>> main
 }

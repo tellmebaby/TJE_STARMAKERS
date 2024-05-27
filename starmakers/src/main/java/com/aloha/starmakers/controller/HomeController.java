@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.aloha.starmakers.user.dto.CustomUser;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.service.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Slf4j
@@ -56,7 +59,8 @@ public class HomeController {
     public String login() {
         return "/login";
     }
-    
+ 
+
     /**
      * 회원가입 화면 이동
      * @return
@@ -114,20 +118,53 @@ public class HomeController {
     }
 
     
+    @GetMapping("/page/introduce")
+    public String introduce() {
+        return "page/introduce";
+    }
+    
+
 
     // @GetMapping("/{path}")
     // public String home(@PathVariable("path") String path) {        
     //     return path;
     // }
 
-    // @GetMapping("/page/{path}")
-    // public String user(@PathVariable("path") String path ) {        
-    //     return "page/" + path;
-    // } 
+    @GetMapping("/page/{path}")
+    public String user(@PathVariable("path") String path ) {        
+        return "page/" + path;
+    } 
 
-   
-   
+    @GetMapping("/page/starCard/{path}")
+    public String starcard(@PathVariable("path") String path) {
+        return "page/starCard/" + path;
+    }
     
-
+    @GetMapping("/page/mypage/{path}")
+    public String mypage(@PathVariable("path") String path) {
+        return "page/mypage/" + path;
+    }
+   
+    @GetMapping("/page/board/{path}")
+    public String board(@PathVariable("path") String path) {
+        return "page/board/" + path;
+    }
     
+    @GetMapping("/page/board/eventBoard/{path}")
+    public String eventBoard(@PathVariable("path") String path) {
+        return "page/board/eventBoard/" + path;
+    }
+    
+    @GetMapping("/page/board/anBoard/{path}")
+    public String anBoard(@PathVariable("path") String path) {
+        return "page/board/anBoard/" + path;
+    }
+    @GetMapping("/page/board/qnaBoard/{path}")
+    public String qnaBoard(@PathVariable("path") String path) {
+        return "page/board/qnaBoard/" + path;
+    }
+    @GetMapping("/page/board/reviewBoard/{path}")
+    public String reviewBoard(@PathVariable("path") String path) {
+        return "page/board/reviewBoard/" + path;
+    }
 }

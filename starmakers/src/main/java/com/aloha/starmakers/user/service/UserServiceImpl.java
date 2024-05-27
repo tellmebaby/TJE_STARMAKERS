@@ -47,11 +47,7 @@ public class UserServiceImpl implements UserService {
 
         // 시큐리티 컨텍스트에 등록
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        // 세션의 정보 등록
-        user = userMapper.select(username);
-        HttpSession session = request.getSession();
-        session.setAttribute("user", user);
-
+        
         // 세션의 정보 등록
         user = userMapper.select(username);
         HttpSession session = request.getSession();
@@ -98,8 +94,6 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
-<<<<<<< HEAD
-=======
     @Override
     public int delete(Users user) throws Exception {
 
@@ -114,7 +108,6 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
->>>>>>> main
     // 가입 여부 확인
     @Override
     public int selectEmail(Users user) throws Exception {

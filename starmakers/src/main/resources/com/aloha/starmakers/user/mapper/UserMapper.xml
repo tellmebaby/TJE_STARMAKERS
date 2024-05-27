@@ -100,9 +100,6 @@
         VALUES ( #{userId}, #{auth} )
     </insert>
 
-<<<<<<< HEAD
-    <!-- 가입여부확인 -->
-=======
     <!-- 회원 탈퇴 -->
     <delete id="delete">
         DELETE FROM user
@@ -110,7 +107,6 @@
     </delete>
 
      <!-- 가입여부확인 -->
->>>>>>> main
     <select id="selectEmail" resultType="int">
         SELECT COUNT(*)
         FROM user
@@ -123,8 +119,4 @@
         FROM user
         WHERE id = #{id}
     </select>
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 </mapper>
