@@ -30,12 +30,33 @@ public class QnaServiceImpl implements QnaService {
         return qnaList;
     }
 
+    @Override
+    public QnaBoard select(int qnaNo) throws Exception {
+        QnaBoard qnaBoard = qnaMapper.select(qnaNo);
+        return qnaBoard;
+    }
+
     // 글 등록
     @Override
     public int insert(QnaBoard qnaBoard, String username) throws Exception {
-        int result = qnaMapper.insert(qnaBoard);
+        // 작성자 정보 불러오기
         Users user = userMapper.select(username);
+        qnaBoard.setUserNo(user.getUserNo());
+        qnaBoard.setWriter(user.getName());
+
+        // 정보 등록
+        int result = qnaMapper.insert(qnaBoard);
+        
         return result;
     }
+
+    @Override
+    public int update(int qnaNo) throws Exception {
+        int result = qnaMapper.update(qnaNo);
+
+        return result;
+    }
+
+
     
 }
