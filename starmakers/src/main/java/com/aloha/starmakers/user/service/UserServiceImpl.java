@@ -1,6 +1,7 @@
 package com.aloha.starmakers.user.service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -46,6 +47,11 @@ public class UserServiceImpl implements UserService {
 
         // 시큐리티 컨텍스트에 등록
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // 세션의 정보 등록
+        user = userMapper.select(username);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
 
         return result;
     }
@@ -100,6 +106,21 @@ public class UserServiceImpl implements UserService {
 
         Users user = userMapper.read(email);
         return user;
+    }
+
+    // 가입 여부 확인
+    @Override
+    public int selectEmail(Users user) throws Exception {
+        int result = userMapper.selectEmail(user);
+        
+        return result;
+    }
+
+    // 아이디 중복 확인
+    @Override
+    public int selectId(Users user) throws Exception {
+        int result = userMapper.selectId(user);
+        return result;
     }
 
 }
