@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 @Controller
 @RequestMapping("/page")
-public class PageController {
+public class pageController {
     
     @Autowired
     private MypageService mypageService;
