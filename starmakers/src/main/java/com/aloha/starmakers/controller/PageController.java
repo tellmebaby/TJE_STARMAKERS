@@ -1,9 +1,8 @@
 package com.aloha.starmakers.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.aloha.starmakers.user.dto.CustomUser;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.service.UserService;
 
@@ -49,14 +49,34 @@ public class PageController {
         return "page/starCard/"+path;
     }
 
+    @GetMapping("/mypage/profile")
+    public String profile(Model model
+                        ,Principal principal) throws Exception {
+        log.info("principal : " + principal);
+
+        String email = principal.getName();
+        log.info("email : " + email);
+        Users user = userService.select(email);
+        log.info("::::::::::: user : " + user);
+        model.addAttribute("user", user);
+
+        return "/page/mypage/profile";
+    }
+
+
     @GetMapping("/mypage/profileUpdate")
-    public String update() {
+    public String update(Model model
+                        ,Principal principal) throws Exception {
+        
+        String email = principal.getName();
+        Users user = userService.select(email);
+        log.info("::::::::::: user : " + email);
+        model.addAttribute("user", user);
         return "/page/mypage/profileUpdate";
     }
 
     @PostMapping("/mypage/profileUpdate")
     public String updatePro( Users user ) throws Exception {
-        
         int result = userService.update(user);
         log.info("수정 : " + user);
         if(result > 0){

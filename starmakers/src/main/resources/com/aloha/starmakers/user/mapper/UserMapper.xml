@@ -75,14 +75,11 @@
     <!-- 회원 정보 수정 -->
     <update id="update">
         UPDATE user
-           SET name = #{name}
-              ,password = #{password}
-              ,phone = #{phone}
+           SET phone = #{phone}
               ,address = #{address}
-              ,gender = #{gender}
-              ,birth = #{birth}
-              ,updated_at = now()
-        WHERE username = #{username}
+              ,email = #{email}
+              ,upd_date = now()
+        WHERE user_no = #{userNo}
     </update>
 
     <!-- 회원 권한 등록 -->

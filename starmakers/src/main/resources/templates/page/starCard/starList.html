@@ -177,7 +177,14 @@
                             background-size: 150% 150%;
                             background-position: 100%;
                             pointer-events: none;
-                            transition: all 0.1s;
+                            /* transition: all 0.1s; */
+
+                            z-index: 100;
+                        }
+
+                        .icon-body,
+                        .icon-container {
+                            pointer-events: none;
                         }
                     </style>
 
@@ -204,6 +211,14 @@
 
                                 container.on('mouseenter', function () {
                                     overlay.css('filter', 'opacity(0.8)');
+                                });
+
+
+                                // 클릭 이벤트를 수동으로 처리
+                                $('.icon-body, .icon-container').on('click', function (e) {
+                                    e.stopPropagation(); // 이벤트 전파 중지
+                                    alert("qewr")
+                                    // 여기에 클릭 이벤트 처리 로직 추가
                                 });
                             });
                         });
@@ -450,9 +465,6 @@
                         alert('페이지 하단에 도달했습니다!');
                     }
                 });
-
-
-                var container = document.
 
             });
 
