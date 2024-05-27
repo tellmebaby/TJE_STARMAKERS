@@ -74,12 +74,10 @@
                                 </th:block>
                                 <!-- 로그인 시 -->
                                 <th:block sec:authorize="isAuthenticated()">
-                                    <a th:href="|/page/mypage/profile?email=${session.user.email}|">마이페이지</a>
                                     <form action="/logout" method="post">
                                         <!-- CSRF TOKEN -->
                                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-                                        <!-- <a th:href="|/page/mypage/profile?userNo=${principal.user.email}|" style="text-decoration: none; color: black;" th:value="${user.username}"><input type="button" class="btn btn-outline-mute"></a> -->
-                                        <h3>ID : <strong sec:authentication="principal.user.email">아이디</strong></h3> 
+                                        <a th:href="|/page/mypage/profile?email=${session.user.email}|" style="text-decoration: none; color: black;"><input type="button" class="btn btn-outline-mute" th:value="${session.user.name}"></a>
                                         <button type="submit" class="btn btn-outline-mute">로그아웃</button>
                                     </form>
                                 </th:block>

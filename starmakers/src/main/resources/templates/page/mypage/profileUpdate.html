@@ -100,41 +100,44 @@
                 <div class="col-8">
                     <div class="box">
                         <div class="table-margin"></div>
-                        <table class="table my-0 py-0">
-                            <tr>
-                                <td class="fw-bold fs-5 text-center align-middle border-0">아이디</td>
-                                <td class="fs-5 align-middle border-0">joeun123</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold fs-5 text-center align-middle border-0">이름</td>
-                                <td class="fs-5 align-middle border-0">김조은</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold fs-5 text-center align-middle border-0">전화번호</td>
-                                <td class="fs-5 align-middle border-0">
-                                     <input type="text" class="form-control fs-5" id="" placeholder="전화번호" value="010-1234-5678">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold fs-5 text-center align-middle border-0">이메일</td>
-                                <td class="fs-5 align-middle border-0">
-                                     <input type="text" class="form-control fs-5" id="" placeholder="이메일" value="joeun123@gmail.com">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold fs-5 text-center align-middle border-0">생년월일</td>
-                                <td class="fs-5 align-middle border-0">2002-02-02</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold fs-5 text-center align-middle border-0">주소</td>
-                                <td class="fs-5 align-middle border-0">
-                                     <input type="text" class="form-control fs-5" id="" placeholder="주소" value="인천광역시 부평구 경원대로 1366">
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="button-container">
-                        <a href="/page/mypage/profile"><button class="button">확인</button></a>
+                        <form action="/page/mypage/profileUpdate" method="post">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                            <table class="table my-0 py-0">
+                                <tr>
+                                    <td class="fw-bold fs-5 text-center align-middle border-0">아이디</td>
+                                    <td class="fs-5 align-middle border-0" th:text="${session.user.email}"></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold fs-5 text-center align-middle border-0">이름</td>
+                                    <td class="fs-5 align-middle border-0" th:text="${session.user.name}"></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold fs-5 text-center align-middle border-0">전화번호</td>
+                                    <td class="fs-5 align-middle border-0">
+                                         <input type="text" class="form-control fs-5" id="phone" placeholder="전화번호" th:value="${session.user.phone}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold fs-5 text-center align-middle border-0">이메일</td>
+                                    <td class="fs-5 align-middle border-0">
+                                         <input type="text" class="form-control fs-5" id="email" placeholder="이메일" th:value="${session.user.email}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold fs-5 text-center align-middle border-0">생년월일</td>
+                                    <td class="fs-5 align-middle border-0" th:text="${session.user.birth}"></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold fs-5 text-center align-middle border-0">주소</td>
+                                    <td class="fs-5 align-middle border-0">
+                                         <input type="text" class="form-control fs-5" id="" placeholder="주소"  th:value="${session.user.address}">
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="button-container">
+                                <input class="button" type="submit" value="확인"></input>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

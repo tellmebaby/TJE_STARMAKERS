@@ -1,17 +1,20 @@
 package com.aloha.starmakers.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.aloha.starmakers.user.dto.Users;
-import com.aloha.starmakers.user.service.MypageService;
+import com.aloha.starmakers.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -21,9 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/page")
 public class PageController {
-    
+
     @Autowired
-    private MypageService mypageService;
+    private UserService userService;
     
     @GetMapping("/{path}")
     public String page(@PathVariable("path") String path) {
@@ -45,14 +48,23 @@ public class PageController {
     public String starCard(@PathVariable("path") String path) {
         return "page/starCard/"+path;
     }
-    
-        @GetMapping("/mypage/profile")
-        public String read(@RequestParam("userNo") int userNo, Model model) throws Exception {
 
-            Users user = mypageService.select(userNo);
-            model.addAttribute("user", user);
-            return "page/mypage/profile";
+    @GetMapping("/mypage/profileUpdate")
+    public String update() {
+        return "/page/mypage/profileUpdate";
+    }
+
+    @PostMapping("/mypage/profileUpdate")
+    public String updatePro( Users user ) throws Exception {
+        
+        int result = userService.update(user);
+        log.info("수정 : " + user);
+        if(result > 0){
+            log.info("수정성공");
+            return "redirect:/page/mypage/profile";
         }
-    
+        log.info("수정 실패");
+        return "redirect:/page/mypage/profileUpdate?error";
+    }
 
 }
