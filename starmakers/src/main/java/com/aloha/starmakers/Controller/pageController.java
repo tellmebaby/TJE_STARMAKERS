@@ -46,13 +46,13 @@ public class PageController {
         return "page/starCard/"+path;
     }
     
-    // @GetMapping("/mypage/profile")
-    // public String read(@RequestParam("userNo") int userNo, Model model) throws Exception {
+        @GetMapping("/mypage/profile")
+        public String read(@RequestParam("userNo") int userNo, Model model) throws Exception {
 
-    //     Users user = mypageService.select(userNo);
-    //     model.addAttribute("user", user);
-    //     return "page/mypage/profile";
-    // }
+            Users user = mypageService.select(userNo);
+            model.addAttribute("user", user);
+            return "page/mypage/profile";
+        }
     
 
 }
