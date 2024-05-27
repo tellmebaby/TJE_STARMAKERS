@@ -76,46 +76,4 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         super.onAuthenticationSuccess(request, response, authentication);
     }
 
-    // @Override
-    // public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-    
-    //     log.info("로그인 인증 성공...");
-    
-    //     // 아이디 저장
-    //     String rememberId = request.getParameter("remember-id");    // 아이디 저장 여부
-    //     String username = request.getParameter("username");         // 아이디
-    //     log.info("rememberId : " + rememberId);
-    //     log.info("id : " + username);
-    
-    //     if (rememberId != null && rememberId.equals("on")) {
-    //         Cookie cookie = new Cookie("remember-id", username);
-    //         cookie.setMaxAge(60 * 60 * 24 * 7); // 유효기간 : 7일
-    //         cookie.setPath("/"); // 쿠키 적용 경로 지정
-    //         response.addCookie(cookie); // 응답에 쿠키 등록
-    //     } else {
-    //         Cookie cookie = new Cookie("remember-id", "");
-    //         cookie.setMaxAge(0); // 유효기간 : 만료
-    //         cookie.setPath("/"); // 쿠키 적용 경로 지정
-    //         response.addCookie(cookie); // 응답에 쿠키 등록
-    //     }
-    
-    //     // 인증된 사용자 정보 확인
-    //     Object principal = authentication.getPrincipal();
-    //     if (principal instanceof CustomUser) {
-    //         CustomUser user = (CustomUser) principal;
-    //         log.info("아이디 : " + user.getUsername());
-    //         log.info("패스워드 : " + user.getPassword()); // 보안상 노출❌
-    //         log.info("권한 : " + user.getAuthorities());
-    
-    //         // 세션의 정보 등록
-    //         HttpSession session = request.getSession();
-    //         if (session != null && session.getAttribute("user") == null) {
-    //             session.setAttribute("user", user.getUser());
-    //         }
-    //     }
-    
-    //     super.onAuthenticationSuccess(request, response, authentication);
-    // }
-    
-    
 }
