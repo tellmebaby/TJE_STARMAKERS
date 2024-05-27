@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
         // 시큐리티 컨텍스트에 등록
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
+        
         // 세션의 정보 등록
         user = userMapper.select(username);
         HttpSession session = request.getSession();
