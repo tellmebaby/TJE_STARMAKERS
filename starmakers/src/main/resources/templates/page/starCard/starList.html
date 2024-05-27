@@ -131,6 +131,7 @@
                     <!-- 한 줄 -->
                     <div class="col-lg-3 p-0">
                         <div class="card">
+                            <div class="card-overlay"></div>
                             <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
                                 class="card-img-top" alt="홍보글 제목">
                             <div class="icon-body">
@@ -148,8 +149,70 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <style>
+                        .card {
+                            transition: all 0.1s;
+                            position: relative;
+                            /* background-color: #333;
+                            color: white; */
+
+                        }
+
+                        .card-overlay {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background: linear-gradient(105deg,
+                                    transparent 40%,
+                                    rgba(255, 219, 112, 0.8) 45%,
+                                    rgba(132, 50, 255, 0.6) 50%,
+                                    transparent 54%);
+                            filter: brightness(1.1) opacity(0.8);
+                            mix-blend-mode: color-dodge;
+                            /* 필요에 따라 이 속성을 조정 */
+                            background-size: 150% 150%;
+                            background-position: 100%;
+                            pointer-events: none;
+                            transition: all 0.1s;
+                        }
+                    </style>
+
+                    <script>
+                        $(document).ready(function () {
+                            $('.card').each(function () {
+                                var container = $(this);
+                                var overlay = container.find('.card-overlay');
+
+                                container.on('mousemove', function (e) {
+                                    var x = e.offsetX;
+                                    var y = e.offsetY;
+                                    var rotateY = -1 / 5 * x + 20;
+                                    var rotateX = 4 / 30 * y - 20;
+
+                                    overlay.css('background-position', `${x / 5 + y / 5}%`);
+                                    container.css('transform', `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`);
+                                });
+
+                                container.on('mouseout', function () {
+                                    overlay.css('filter', 'opacity(0)');
+                                    container.css('transform', 'perspective(350px) rotateY(0deg) rotateX(0deg)');
+                                });
+
+                                container.on('mouseenter', function () {
+                                    overlay.css('filter', 'opacity(0.8)');
+                                });
+                            });
+                        });
+                    </script>
+
+
                     <div class="col-lg-3 p-0">
                         <div class="card">
+                            <div class="card-overlay"></div>
                             <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
                                 class="card-img-top" alt="홍보글 제목">
                             <div class="icon-body">
@@ -169,6 +232,7 @@
                     </div>
                     <div class="col-lg-3 p-0">
                         <div class="card">
+                            <div class="card-overlay"></div>
                             <img src="https://i.pinimg.com/originals/45/93/b5/4593b5e64b3be3b6208a230f1c20b606.gif"
                                 class="card-img-top" alt="홍보글 제목">
                             <div class="icon-body">
@@ -188,6 +252,7 @@
                     </div>
                     <div class="col-lg-3 p-0">
                         <div class="card">
+                            <div class="card-overlay"></div>
                             <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
                                 class="card-img-top" alt="홍보글 제목">
                             <div class="icon-body">
@@ -208,6 +273,7 @@
                     <!-- 한 줄 -->
                     <div class="col-lg-3 p-0">
                         <div class="card">
+                            <div class="card-overlay"></div>
                             <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
                                 class="card-img-top" alt="홍보글 제목">
                             <div class="icon-body">
@@ -227,6 +293,7 @@
                     </div>
                     <div class="col-lg-3 p-0">
                         <div class="card">
+                            <div class="card-overlay"></div>
                             <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
                                 class="card-img-top" alt="홍보글 제목">
                             <div class="icon-body">
@@ -246,6 +313,7 @@
                     </div>
                     <div class="col-lg-3 p-0">
                         <div class="card">
+                            <div class="card-overlay"></div>
                             <img src="https://i.pinimg.com/originals/45/93/b5/4593b5e64b3be3b6208a230f1c20b606.gif"
                                 class="card-img-top" alt="홍보글 제목">
                             <div class="icon-body">
@@ -376,7 +444,7 @@
                     var documentHeight = $(document).height();
                     // 창의 높이
                     var windowHeight = $(this).height();
-        
+
                     // 사용자가 페이지 하단에 도달했는지 확인
                     if (scrollTop + windowHeight >= documentHeight) {
                         alert('페이지 하단에 도달했습니다!');
@@ -387,10 +455,11 @@
                 var container = document.
 
             });
-        
+
         </script>
 
 
     </div>
 </body>
+
 </html>
