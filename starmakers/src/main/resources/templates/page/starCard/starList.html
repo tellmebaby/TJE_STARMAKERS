@@ -186,6 +186,51 @@
                         .icon-container {
                             pointer-events: none;
                         }
+
+
+                        .heart {
+                            position: absolute;
+                            width: 50px;
+                            height: 50px;
+                            background-color: red;
+                            transform: rotate(-45deg);
+                            left: 50%;
+                            top: 50%;
+                            margin: -25px 0 0 -25px;
+                            animation: fadeOut 1s forwards;
+                        }
+
+                        .heart:before,
+                        .heart:after {
+                            content: "";
+                            position: absolute;
+                            width: 50px;
+                            height: 50px;
+                            background-color: red;
+                            border-radius: 50%;
+                        }
+
+                        .heart:before {
+                            top: -25px;
+                            left: 0;
+                        }
+
+                        .heart:after {
+                            left: 25px;
+                            top: 0;
+                        }
+
+                        @keyframes fadeOut {
+                            0% {
+                                opacity: 1;
+                                transform: scale(1) rotate(-45deg);
+                            }
+
+                            100% {
+                                opacity: 0;
+                                transform: scale(2) rotate(-45deg);
+                            }
+                        }
                     </style>
 
                     <script>
@@ -214,13 +259,49 @@
                                 });
 
 
-                                // 클릭 이벤트를 수동으로 처리
-                                $('.icon-body, .icon-container').on('click', function (e) {
-                                    e.stopPropagation(); // 이벤트 전파 중지
-                                    alert("qewr")
-                                    // 여기에 클릭 이벤트 처리 로직 추가
-                                });
                             });
+
+
+
+                            let clickTimer;
+                            let isDoubleClick = false;
+
+                            $('.card').click(function () {
+                                if (isDoubleClick) {
+                                    isDoubleClick = false;
+                                    return;
+                                }
+
+                                clickTimer = setTimeout(() => {
+                                    if (!isDoubleClick) {
+                                        alert('Button was one-clicked!');
+                                    }
+                                }, 250);
+                            });
+
+
+                            $('.card').dblclick(function (e) {
+                                clearTimeout(clickTimer);
+                                isDoubleClick = true;
+
+                                // 하트 모양 이펙트 추가
+                                let heart = $('<div class="heart"></div>');
+                                $('body').append(heart);
+                                heart.css({
+                                    top: e.pageY - 25,
+                                    left: e.pageX - 25
+                                });
+
+                                setTimeout(() => {
+                                    heart.remove();
+                                }, 1000);
+
+                                // 좋아요 아이콘 클래스 토글
+                                $(this).find('.fa-thumbs-up').toggleClass('fa-regular fa-solid');
+                            });
+
+
+
                         });
                     </script>
 
@@ -237,7 +318,7 @@
                                 <img src="/img/icon/instagram.svg" class="content-icon">
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">홍보글 제목</h5>
+                                <h5 class="card-title">홍보글 제@!목</h5>
                                 <p class="card-text">작성자</p>
                             </div>
                             <div class="icon-container">
