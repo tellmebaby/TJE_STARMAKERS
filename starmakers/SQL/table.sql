@@ -91,6 +91,8 @@ CREATE TABLE qna_board
   upd_date TIMESTAMP   NULL     COMMENT '수정일자',
   views    INT         NULL     COMMENT '조회수',
   user_no  INT         NOT NULL COMMENT '유저데이터번호',
+  status    VARCHAR(20) NULL     COMMENT '상태', -- 상태의 길이 지정.
+  
   PRIMARY KEY (qna_no)
 ) COMMENT '질의응답게시판';
 

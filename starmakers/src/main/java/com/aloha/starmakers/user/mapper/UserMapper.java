@@ -31,4 +31,11 @@ public interface UserMapper {
     // 회원 권한 등록
     public int insertAuth(UserAuth userAuth) throws Exception;
 
+    // 가입 여부 확인
+    public int selectEmail( Users user ) throws Exception;
+
+    // 아이디 중복 확인
+    public int selectId( Users user ) throws Exception;
+
+
 }

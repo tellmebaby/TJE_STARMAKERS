@@ -39,8 +39,7 @@ layout:decorate="~{/layout/default_layout}">
         }
     </style>
 </head>
-<body>
-<th:block layout:fragment="content" class="login">
+<body layout:fragment="content" class="login">
 
     <div class="login-form text-center">
         <form action="/login" method="post">
@@ -88,7 +87,7 @@ layout:decorate="~{/layout/default_layout}">
                 </div>
                 <div>
                     <div>
-                        <a href="#">
+                        <a href="/oauth2/authorization/kakao">
                             <div class="other-login-img"><img src="/img/kakao_login_btn.png"></div>
                         </a>
                     </div>
@@ -104,7 +103,6 @@ layout:decorate="~{/layout/default_layout}">
         </form>
     </div>
     
-
     
     <!-- 부트스트랩 JS 및 의존성 -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -142,7 +140,5 @@ layout:decorate="~{/layout/default_layout}">
         });
 
     </script>
-
-</th:block>
 </body>
 </html>

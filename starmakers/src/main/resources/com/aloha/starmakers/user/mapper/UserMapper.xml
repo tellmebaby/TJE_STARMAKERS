@@ -101,4 +101,17 @@
         WHERE user_no = #{userNo}
     </delete>
 
+     <!-- 가입여부확인 -->
+    <select id="selectEmail" resultType="int">
+        SELECT COUNT(*)
+        FROM user
+        WHERE name = #{name} AND email = #{email}
+    </select>
+
+    <!-- 아이디중복확인 -->
+    <select id="selectId" resultType="int">
+        SELECT COUNT(*)
+        FROM user
+        WHERE id = #{id}
+    </select>
 </mapper>
