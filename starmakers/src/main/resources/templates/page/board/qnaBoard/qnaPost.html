@@ -170,11 +170,12 @@
     <form action="/page/board/qnaBoard/qnaPost" method="post" id="form">
       <input type="hidden" id="inputCsrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
       <div class="answer-container">
-        <span id="answer-span"></span>
-        <textarea id="answer-textarea" name="answer" style="display: none; width: 100%; height: 150px;" placeholder="답변을 입력하세요..."></textarea>
+          <span id="answer-span" th:text="${qnaBoard.answer}"></span>
+          <textarea id="answer-textarea" name="answer" style="display: none; width: 100%; height: 150px;" placeholder="답변을 입력하세요..."></textarea>
+          <input type="hidden" name="qnaNo" id="qnaNo" th:value="${qnaBoard.qnaNo}" />
       </div>
       <div class="button-container1">
-        <button type="button" onclick="toggleAnswer()">답변 등록</button>
+          <button type="button" id="toggle-button" th:if="${qnaBoard.answer} == null" onclick="toggleAnswer()">답변 등록</button>
       </div>
     </form>
 
@@ -199,38 +200,27 @@
       var form = document.getElementById("form");
       var answerContainer = document.querySelector(".answer-container");
 
-      // if(span.style.display === "none") {
-      //   span.style.display = "inline"
-      //   textarea.style.display = "none";
-      //   span.innerText = textarea.value;
-      // }
-      // else {
-      //   span.style.height = answerContainer.clientHeight + "px"; // answer-container 높이로 고정
-      //   span.style.display = "none"
-      //   textarea.style.display = "inline"
-      //   testarea.value = span.innerText;
-      // }
       if (textarea.style.display === "none") {
         span.style.display = "none";
         textarea.style.display = "block";
         textarea.value = span.innerText;
-        button.innerText = "답변 제출";
-        button.setAttribute("type", "submit");
+        button.innerText = "등록 완료";
 
-        form.addEventListener("submit", function(event) {
-                // alert 표시
+        button.onclick = function() {
+            if (textarea.value.trim() === "") {
+                alert("내용을 입력해주세요.");
+            } else {
                 alert("답변이 등록되었습니다!");
-            });
+                form.submit();
+            }
+        };
       } else {
         span.style.display = "block";
         textarea.style.display = "none";
         span.innerText = textarea.value;
         button.innerText = "답변 등록";
-        button.setAttribute("type", "button");
+        button.onclick = toggleAnswer;
 
-        form.removeEventListener("submit", function(event) {
-                // 아무 동작도 하지 않음
-            });
       }
     }
 
