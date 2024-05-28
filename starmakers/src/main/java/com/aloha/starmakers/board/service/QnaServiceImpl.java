@@ -51,8 +51,8 @@ public class QnaServiceImpl implements QnaService {
     }
 
     @Override
-    public int update(int qnaNo) throws Exception {
-        int result = qnaMapper.update(qnaNo);
+    public int update(QnaBoard qnaBoard) throws Exception {
+        int result = qnaMapper.update(qnaBoard);
 
         return result;
     }
@@ -60,6 +60,13 @@ public class QnaServiceImpl implements QnaService {
     @Override
     public int insertAnswer(QnaBoard qnaBoard) throws Exception {
         int result = qnaMapper.insertAnswer(qnaBoard);
+        return result;
+    }
+
+    @Override
+    public int delete(String qnaNoList) throws Exception {
+
+        int result = qnaMapper.delete(qnaNoList);
         return result;
     }
 

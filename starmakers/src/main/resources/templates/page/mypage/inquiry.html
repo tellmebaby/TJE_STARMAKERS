@@ -44,8 +44,8 @@
             border: none;
             color: white;
             margin-right: 5px;
-            width: 90px; 
-            text-align: center; 
+            width: 90px;
+            text-align: center;
         }
         .btn-review {
             background-color: #2972FE;
@@ -54,7 +54,7 @@
             background-color: #2972FE;
         }
         .status-approved {
-            background-color: #DDDDDD   ;
+            background-color: #DDDDDD;
         }
         .status-pending {
             background-color: #2972FE;
@@ -97,7 +97,7 @@
             font-size: 20px;
             margin: 6px;
         }
-        .button2     {
+        .button2 {
             background-color: #B8C3FF;
             color: white;
             border: none;
@@ -113,10 +113,17 @@
             margin-bottom: 270px;
         }
 
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
     </style>
+   
 </head>
 <body layout:fragment="content">
-    <form action="" method="get">
+    <form id="actionForm" method="post">
+        <input type="hidden" name="qnaNos" value="">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
@@ -138,40 +145,72 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th style="width: 10px;"> </th>
+                                <th style="width: 10px;"></th>
                                 <th style="width: 500px;">제목</th>
                                 <th style="width: 200px;">작성일자</th>
                                 <th style="width: 100px;">상태</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><input type="checkbox" name="" id=""></td>
-                                <td>인스타 홍보입니다</td>
-                                <td>2024.05.23</td>
-                                <td>답변대기</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" name="" id=""></td>
-                                <td>치지직 홍보입니다</td>
-                                <td>2024.05.23</td>
-                                <td>답변대기</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" name="" id=""></td>
-                                <td>유튜브 홍보입니다</td>
-                                <td>2024.05.23</td>
-                                <td>답변대기</td>
-                            </tr>
+                            <th:block th:each="qnaBoard : ${qnaList}">
+                                <tr>
+                                    <td><input type="checkbox" name="qnaNo" th:value="${qnaBoard.qnaNo}"></td>
+                                    <td align="center">
+                                        <a th:href="|/page/board/qnaBoard/qnaPost?qnaNo=${qnaBoard.qnaNo}|" th:text="${qnaBoard.title}"></a>
+                                    </td>
+                                    <td align="center">
+                                        <span th:text="${#dates.format(qnaBoard.regDate, 'yyyy-MM-dd')}"></span>
+                                    </td>
+                                    <td align="center" th:text="${qnaBoard.status}"></td>
+                                </tr>
+                            </th:block>
                         </tbody>
                     </table>
                     <div class="button-container">
-                        <input class="button1" type="submit" value="수정">
-                        <input class="button2" type="submit" value="삭제">
+                        <input class="button1" type="button" value="수정" onclick="qnaUpdate()">
+                        <input class="button2" type="button" value="삭제" onclick="qnaDelete()">
                     </div>
                 </div>
             </div>
         </div>
     </form>
+    <script>
+
+
+        function qnaDelete() {
+                const checkboxes = document.querySelectorAll('input[name="qnaNo"]:checked');
+            if (checkboxes.length === 0) {
+                alert('하나 이상의 게시물을 선택하십시오.');
+                return;
+            }
+            
+            const confirmDelete = confirm('선택한 게시물을 삭제하시겠습니까?');
+            if (!confirmDelete) {
+                return;
+            }
+                
+            const qnaNos = Array.from(checkboxes).map(checkbox => checkbox.value);
+            const form = document.getElementById('actionForm');
+            form.action = '/page/board/qnaBoard/qnaDelete';
+            form.qnaNos.value = qnaNos.join(',');
+            form.submit();
+        }
+
+            function qnaUpdate() {
+                const checkboxes = document.querySelectorAll('input[name="qnaNo"]:checked');
+                if (checkboxes.length === 0) {
+                    alert('하나의 게시물을 선택하십시오.');
+                    return;
+                }
+                
+                if (checkboxes.length > 1) {
+                    alert('수정할 게시물 하나만 선택하십시오.');
+                    return;
+                }
+                
+                const qnaNo = checkboxes[0].value;
+                window.location.href = `/page/board/qnaBoard/qnaUpdate?qnaNo=${qnaNo}`;
+             }
+    </script>
 </body>
 </html>
