@@ -132,6 +132,40 @@ public class PageController {
         return "/page/mypage/inquiry";
     }
 
-    
+    @GetMapping("/mypage/qnaPost")
+    public String read(@RequestParam("qnaNo") int qnaNo, Model model) throws Exception {
+        QnaBoard qnaBoard = qnaService.select(qnaNo);
+
+        // 조회수 증가
+
+        // 모델 등록
+        model.addAttribute("qnaBoard", qnaBoard);
+
+        // 뷰페이지 지정
+        return "/page/mypage/qnaPost";
+    }
+
+    @GetMapping("/mypage/qnaUpdate")
+    public String update(@RequestParam("qnaNo") int qnaNo, Model model) throws Exception {
+        QnaBoard qnaBoard = qnaService.select(qnaNo);
+
+        // 모델 등록
+        model.addAttribute("qnaBoard", qnaBoard);
+
+        // 뷰페이지 지정
+        return "/page/mypage/qnaUpdate";
+    }
+
+    @PostMapping("/mypage/qnaUpdate")
+    public String updatePro(QnaBoard qnaBoard) throws Exception {
+
+        int result = qnaService.update(qnaBoard);
+        if ( result > 0) {
+            return "redirect:/page/mypage/inquiry";
+        }
+        int qnaNo = qnaBoard.getQnaNo();
+        
+        return "redirect:/page/mypage/qnaUpdate?qnaNo=" + qnaNo + "$error";
+    }
 
 }

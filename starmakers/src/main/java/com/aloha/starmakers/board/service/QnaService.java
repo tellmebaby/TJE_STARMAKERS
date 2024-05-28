@@ -17,7 +17,7 @@ public interface QnaService {
     // 글 수정
     public int update(QnaBoard qnaBoard) throws Exception;
 
-    // 글 등록
+    // 글 삭제
     public int delete(String qnaNoList) throws Exception;
     
     // 답변 등록

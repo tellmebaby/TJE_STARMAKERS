@@ -167,7 +167,7 @@
     </div>
 
     <label class="answer">답변</label>
-    <form action="/page/board/qnaBoard/qnaPost" method="post" id="form">
+    <form action="/page/mypage/qnaPost" method="post" id="form">
       <input type="hidden" id="inputCsrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
       <div class="answer-container">
         <span id="answer-span"></span>
@@ -185,11 +185,11 @@
     let qnaNo = '[[${qnaBoard.qnaNo}]]'
 
     function moveList() {
-      location.href = '/page/board/qnaBoard/qnaList'
+      location.href = '/page/mypage/inquiry'
     }
   
     function update() {
-      location.href = '/page/board/qnaBoard/qnaUpdate?qnaNo=' + qnaNo
+      location.href = '/page/mypage/qnaUpdate?qnaNo=' + qnaNo
     }
     
     function toggleAnswer() {
