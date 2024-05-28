@@ -58,6 +58,12 @@ public class SecurityConfig {
                                 .tokenRepository(tokenRepository())
                                 .tokenValiditySeconds(60 * 60 * 24 * 7));
 
+        // OAuth 로그인 설정
+        http.oauth2Login(login -> login 
+                                .loginPage("/login")
+                        );
+
+
         return http.build();
     }
 
