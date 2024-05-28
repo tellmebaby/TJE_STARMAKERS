@@ -1,5 +1,7 @@
 package com.aloha.starmakers.message.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,37 +58,6 @@ public class MessageController {
         return ResponseEntity.status(500).body("Failed to save message");
     }
 
-
-
-    // @PostMapping("/insertToAdmin")
-    // public String insertPro( Message message, HttpSession session) {
-    //     Users user = (Users) session.getAttribute("user");
-    //     int userNo = user.getUserNo();
-    //     message.setPayNo(0);
-    //     message.setQnaNo(0);
-    //     message.setReplyNo(0);
-    //     message.setUserNo(userNo);
-    //     int result = messageService.insertMessage(message);
-    //     if(result > 0){
-    //         log.info("인설트 성공!!!!!!!!");
-    //         return "redirect:/";
-    //     }
-    //     return "redirect:/";
-    // }
-    
-
-
-
-    // @PostMapping("/")
-    // @ResponseBody
-    // public ResponseEntity<String> createMessage(@RequestBody Message message) {
-    //     System.out.println("Received message content: " + message.getContent()); // 콘솔에 수신된 메시지 출력
-    //     // 메시지 서비스를 통해 메시지를 저장
-    //     messageService.insertMessage(message);
-    //     System.out.println("Message saved successfully."); // 콘솔에 저장 완료 메시지 출력
-    //     return ResponseEntity.ok("Message saved successfully");
-    // }
-
     @GetMapping("/{messageNo}")
     public Message getMessage(@PathVariable int messageNo) {
         return messageService.getMessageById(messageNo);
@@ -101,4 +72,17 @@ public class MessageController {
     public void deleteMessage(@PathVariable int messageNo) {
         messageService.deleteMessage(messageNo);
     }
+
+    @GetMapping("/getMessagesByUser")
+    public ResponseEntity<List<Message>> getMessagesByUser(HttpSession session) {
+        Users user = (Users) session.getAttribute("user");
+        if (user == null) {
+            return ResponseEntity.status(401).build();
+        }
+
+        int userNo = user.getUserNo();
+        List<Message> messages = messageService.getMessageByUser(userNo);
+        return ResponseEntity.ok(messages);
+    }
+    
 }
