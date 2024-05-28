@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aloha.starmakers.board.dto.Option;
+import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.QnaBoard;
 import com.aloha.starmakers.board.mapper.QnaMapper;
 import com.aloha.starmakers.user.dto.Users;
@@ -25,8 +27,10 @@ public class QnaServiceImpl implements QnaService {
 
     // 목록 조회
     @Override
-    public List<QnaBoard> list() throws Exception {
-        List<QnaBoard> qnaList = qnaMapper.list();
+    public List<QnaBoard> list(Page page, Option option) throws Exception {
+        int total = qnaMapper.count(option);
+        page.setTotal(total);
+        List<QnaBoard> qnaList = qnaMapper.list(page, option);
         return qnaList;
     }
 
@@ -61,6 +65,13 @@ public class QnaServiceImpl implements QnaService {
     public int insertAnswer(QnaBoard qnaBoard) throws Exception {
         int result = qnaMapper.insertAnswer(qnaBoard);
         return result;
+    }
+
+    // 검색
+    @Override
+    public List<QnaBoard> search(Option option) throws Exception {
+        List<QnaBoard> qnaList = qnaMapper.search(option);
+        return qnaList;
     }
 
 

@@ -9,7 +9,71 @@
     <select id="list" resultType="QnaBoard">
         SELECT *
         FROM qna_board
+        WHERE
+            <if test="option.code == 0">
+                    title LIKE CONCAT('%', #{option.keyword}, '%')
+                OR content LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 1">
+                title LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 2">
+                content LIKE CONCAT('%', ${option.keyword}, '%')
+           </if>
+           <if test="option.code == 3">
+                writer LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
         ORDER BY reg_date DESC
+        LIMIT #{page.index}, #{page.rows}
+    </select>
+
+     <!-- 데이터 개수 조회 - [검색] -->
+    <select id="count" resultType="int">
+        SELECT COUNT(*)
+        FROM qna_board 
+        WHERE
+           <if test="option.code == 0">
+                    title LIKE CONCAT('%', #{option.keyword}, '%')
+                OR content LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 1">
+                title LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 2">
+                content LIKE CONCAT('%', ${option.keyword}, '%')
+           </if>
+           <if test="option.code == 3">
+                writer LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+        ORDER BY reg_date DESC 
+    </select>
+
+    <!-- 게시글 목록 검색 -->
+    <select id="search" resultType="QnaBoard">
+        SELECT *
+        FROM qna_board
+        WHERE
+           <if test="option.code == 0">
+                    title LIKE CONCAT('%', #{option.keyword}, '%')
+                OR content LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 1">
+                title LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 2">
+                content LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 3">
+                writer LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+        ORDER BY reg_date DESC
+        
+    </select>
+
+    <!-- 게시글 번호 최댓값 -->
+    <select id="maxPk" resultType="int">
+        SELECT MAX(no)
+        FROM qna_board
     </select>
 
     <!-- 게시글 조회 -->
@@ -38,9 +102,12 @@
     <!-- 답변 등록 -->
     <update id="insertAnswer">
         UPDATE qna_board
-        SET answer = #{answer}
+        SET answer = #{answer},
+            status = '답변 완료'
         WHERE qna_no = #{qnaNo}
     </update>
+
+    
 
 
 </mapper>
