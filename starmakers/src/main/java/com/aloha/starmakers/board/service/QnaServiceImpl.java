@@ -55,8 +55,8 @@ public class QnaServiceImpl implements QnaService {
     }
 
     @Override
-    public int update(int qnaNo) throws Exception {
-        int result = qnaMapper.update(qnaNo);
+    public int update(QnaBoard qnaBoard) throws Exception {
+        int result = qnaMapper.update(qnaBoard);
 
         return result;
     }
@@ -67,11 +67,12 @@ public class QnaServiceImpl implements QnaService {
         return result;
     }
 
-    // 검색
+
     @Override
-    public List<QnaBoard> search(Option option) throws Exception {
-        List<QnaBoard> qnaList = qnaMapper.search(option);
-        return qnaList;
+    public int delete(String qnaNoList) throws Exception {
+
+        int result = qnaMapper.delete(qnaNoList);
+        return result;
     }
 
 

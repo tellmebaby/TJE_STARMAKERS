@@ -1,6 +1,7 @@
 package com.aloha.starmakers.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,7 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.aloha.starmakers.board.dto.QnaBoard;
+import com.aloha.starmakers.board.service.QnaService;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.service.UserService;
 
@@ -29,6 +33,9 @@ public class PageController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private QnaService qnaService;
     
     @GetMapping("/mypage/profile")
     // public String read(@RequestParam("userNo") int userNo, Model model) throws Exception {
@@ -63,18 +70,6 @@ public class PageController {
         model.addAttribute("user", user);
         return "page/mypage/profileUpdate";
     }
-
-
-    // @GetMapping("/mypage/profileUpdate")
-    // public String update(Model model
-    //                     ,Principal principal) throws Exception {
-        
-    //     String email = principal.getName();
-    //     Users user = userService.read(email);
-    //     log.info("::::::::::: user : " + email);
-    //     model.addAttribute("user", user);
-    //     return "/page/mypage/profileUpdate";
-    // }
 
     @PostMapping("/mypage/profileUpdate")
     public String updatePro( Users user ) throws Exception {
@@ -118,6 +113,25 @@ public class PageController {
         }
         return "redirect:/page/mypage/userDelete?error";
     }
+
+    /* ----------------------------------------------------------------------------- */
+    /* 1:1 문의 */
+
+    /**
+     * 게시글 조회
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/mypage/inquiry")
+    public String list(Model model) throws Exception {
+        log.info("qna 목록");
+
+        List<QnaBoard> qnaList = qnaService.list();
+        model.addAttribute("qnaList", qnaList);
+        return "/page/mypage/inquiry";
+    }
+
     
 
 }
