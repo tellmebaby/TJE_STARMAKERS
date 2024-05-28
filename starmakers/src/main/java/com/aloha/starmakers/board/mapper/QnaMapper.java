@@ -21,4 +21,6 @@ public interface QnaMapper {
     // 글 등록
     public int update(int qnaNo) throws Exception;
 
+    public int insertAnswer(QnaBoard qnaBoard) throws Exception;
+
 }

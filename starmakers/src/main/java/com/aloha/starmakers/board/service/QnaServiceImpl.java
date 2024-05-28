@@ -57,6 +57,12 @@ public class QnaServiceImpl implements QnaService {
         return result;
     }
 
+    @Override
+    public int insertAnswer(QnaBoard qnaBoard) throws Exception {
+        int result = qnaMapper.insertAnswer(qnaBoard);
+        return result;
+    }
+
 
     
 }

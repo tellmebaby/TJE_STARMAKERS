@@ -35,5 +35,12 @@
         WHERE qna_no = #{qnaNo}
     </update>
 
+    <!-- 답변 등록 -->
+    <update id="insertAnswer">
+        UPDATE qna_board
+        SET answer = #{answer}
+        WHERE qna_no = #{qnaNo}
+    </update>
+
 
 </mapper>
