@@ -109,9 +109,7 @@
     </style>
 </head>
 
-<body>
-    <th:block th:replace="~{fragment/header :: headerFragment}"></th:block>
-    <th:block layout:fragment="content">
+<body layout:fragment="content">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
@@ -200,7 +198,6 @@
                 
             }
         </script>
-    </th:block>
 </body>
 
 </html>
