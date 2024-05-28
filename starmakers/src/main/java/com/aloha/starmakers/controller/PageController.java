@@ -114,19 +114,23 @@ public class PageController {
         return "redirect:/page/mypage/profileUpdate?error";
     }
 
+
     @GetMapping("/mypage/userDelete")
-    public String delete(Model model
-                        ,Principal principal) throws Exception {
-        log.info("principal : " + principal);
-
-        String email = principal.getName();
+    public String delete(Principal principal
+                      ,HttpSession session
+                      , Model model) throws Exception {
+        // Princiapl 로 유저 가져오기
+        // CustomUser loginUser = (CustomUser) principal;
+        // int userNo = loginUser.getUser().getUserNo();
+        // session 으로 가져오기
+        Users user = (Users) session.getAttribute("user");
+        String email = user.getEmail();
         log.info("email : " + email);
-        Users user = userService.select(email);
-        log.info("::::::::::: user : " + user);
+        user = userService.read(email);
+        log.info("user : " + user);
         model.addAttribute("user", user);
-        return "/page/mypage/userDelete";
+        return "page/mypage/userDelete";
     }
-
 
     @PostMapping("/mypage/userDelete")
     public String deletePro(Users user, HttpServletRequest request, HttpSession session) throws Exception {
@@ -134,12 +138,8 @@ public class PageController {
         int result = userService.delete(user);
         log.info("번호 : " + user);
         if ( result > 0) {
-            log.info("번호 : " + user);
-            // 세션 무효화
             session.invalidate();
-
-            // 로그아웃 처리
-            new SecurityContextLogoutHandler().logout(request, null, null);
+            log.info("번호 : " + user);
             return "redirect:/";
         }
         return "redirect:/page/mypage/userDelete?error";

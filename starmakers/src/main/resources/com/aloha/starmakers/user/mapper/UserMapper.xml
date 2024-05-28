@@ -74,12 +74,7 @@
 
     <!-- 마이페이지 조회 -->
     <select id="read" resultType="Users">
-        SELECT id
-              ,name
-              ,phone
-              ,email
-              ,birth
-              ,address
+        SELECT *
         FROM user
         WHERE email = #{email}
     </select>
@@ -89,7 +84,7 @@
         UPDATE user
            SET phone = #{phone}
               ,address = #{address}
-              ,email = #{email}
+              ,id = #{id}
               ,upd_date = now()
         WHERE email = #{email}
     </update>
