@@ -123,7 +123,8 @@
 </head>
 <body layout:fragment="content">
     <form id="actionForm" method="post">
-        <input type="hidden" name="qnaNos" value="">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <input type="hidden" name="qnaNos" id="qnaNos">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
@@ -156,7 +157,7 @@
                                 <tr>
                                     <td><input type="checkbox" name="qnaNo" th:value="${qnaBoard.qnaNo}"></td>
                                     <td align="center">
-                                        <a th:href="|/page/board/qnaBoard/qnaPost?qnaNo=${qnaBoard.qnaNo}|" th:text="${qnaBoard.title}"></a>
+                                        <a th:href="|/page/mypage/qnaPost?qnaNo=${qnaBoard.qnaNo}|" th:text="${qnaBoard.title}"></a>
                                     </td>
                                     <td align="center">
                                         <span th:text="${#dates.format(qnaBoard.regDate, 'yyyy-MM-dd')}"></span>
@@ -175,8 +176,6 @@
         </div>
     </form>
     <script>
-
-
         function qnaDelete() {
                 const checkboxes = document.querySelectorAll('input[name="qnaNo"]:checked');
             if (checkboxes.length === 0) {
@@ -209,7 +208,7 @@
                 }
                 
                 const qnaNo = checkboxes[0].value;
-                window.location.href = `/page/board/qnaBoard/qnaUpdate?qnaNo=${qnaNo}`;
+                window.location.href = `/page/mypage/qnaUpdate?qnaNo=${qnaNo}`;
              }
     </script>
 </body>

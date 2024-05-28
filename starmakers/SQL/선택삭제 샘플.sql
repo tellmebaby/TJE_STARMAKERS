@@ -1,3 +1,4 @@
+-- Active: 1716511247384@@127.0.0.1@3306@joeun
 
 INSERT INTO qna_board (title, writer, content, reg_date, user_no, status)
 VALUES
@@ -7,7 +8,7 @@ VALUES
 
 
 DELETE FROM qna_board
-WHERE qna_no IN (1,2,3)
+WHERE qna_no IN (17,18,19)
 ;
 
 SELECT *
