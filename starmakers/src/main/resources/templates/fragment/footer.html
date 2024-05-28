@@ -98,44 +98,32 @@
             </span>
         </p>
 
-         <!-- 플로팅 버튼 -->
-         <div class="floating" id="chatButton">
-            <a href="javascript:void(0);">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
-                    <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
-                </svg>
-            </a>
-            <div class="chat-container">
-                <h5>채팅</h5>
-                <div class="chat-messages" style="height: 80%; overflow-y: auto;">
-                    <p>안녕하세요! 무엇을 도와드릴까요?</p>
-                </div>
-                <div class="chat-input mt-2">
-                    <input type="text" class="form-control" placeholder="메시지를 입력하세요..." id="chatInput">
+        <!-- 로그인 시 -->
+        <th:block sec:authorize="isAuthenticated()">
+                <!-- 플로팅 버튼 -->
+            <div class="floating" id="chatButton">
+                <a href="javascript:void(0);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-headset" viewBox="0 0 16 16">
+                        <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+                    </svg>
+                </a>
+                <div class="chat-container">
+                    <h5>채팅</h5>
+                    <div class="chat-messages" style="height: 80%; overflow-y: auto;">
+                        <p>안녕하세요! 무엇을 도와드릴까요?</p>
+                    </div>
+                    <div class="chat-input mt-2">
+                        <form id="messageForm">
+                            <input type="hidden" id="inputCsrf" name="${_csrf.parameterName}" value="${_csrf.token}">
+                            <input type="text" class="form-control" name="content" placeholder="메세지를 입력하세요..." id="chatInput">
+                            <input type="hidden" name="code" value="toAdmin">
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-
-
-        <!-- 채팅 -->
-        <script>
-            document.getElementById('chatButton').addEventListener('click', function() {
-                this.classList.toggle('open');
-            });
-
-            document.getElementById('chatInput').addEventListener('click', function(event) {
-                event.stopPropagation();
-            });
-
-            document.addEventListener('click', function(event) {
-                const chatButton = document.getElementById('chatButton');
-                if (!chatButton.contains(event.target)) {
-                    chatButton.classList.remove('open');
-                }
-            });
-        </script>
-
-
+            <!-- 채팅 -->
+            <script src="/js/floatingChat.js"></script>
+        </th:block>
     </footer>
 </th:block>
 </html>
