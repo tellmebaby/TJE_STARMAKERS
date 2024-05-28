@@ -110,17 +110,58 @@
 </head>
 
 <body layout:fragment="content">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="side-menu">
-                    <div class="nav-links">
-                        <h1>김조은님,</h1>
-                        <a href="/page/mypage/profile" class="active">회원 정보</a>
-                        <a href="/page/mypage/payment">결제 내역</a>
-                        <a href="/page/mypage/promotion">내가 쓴 글</a>
-                        <a href="/page/mypage/inquiry">1 : 1 문의</a>
-                        <a href="/page/mypage/userDelete">회원 탈퇴</a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="side-menu">
+                        <div class="nav-links">
+                            <h1>김조은님,</h1>
+                            <a href="/page/mypage/profile" class="active">회원 정보</a>
+                            <a href="/page/mypage/payment">결제 내역</a>
+                            <a href="/page/mypage/promotion">내가 쓴 글</a>
+                            <a href="/page/mypage/inquiry">1 : 1 문의</a>
+                            <a href="/page/mypage/userDelete">회원 탈퇴</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="table-margin"></div>
+                        <form action="/page/mypage/profileUpdate" method="get">
+                            <table class="table">
+                                <tr>
+                                    <td class="fw-bold fs-5 text-center align-middle border-0">아이디</td>
+                                    <td class="fs-5 align-middle border-0" th:text="${user.id}"></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold fs-5 text-center align-middle border-0">이름</td>
+                                    <td class="fs-5 align-middle border-0" th:text="${user.name}"></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold fs-5 text-center align-middle border-0">전화번호</td>
+                                    <td class="fs-5 align-middle border-0" th:text="${user.phone}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold fs-5 text-center align-middle border-0">이메일</td>
+                                    <td class="fs-5 align-middle border-0" th:text="${user.email}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold fs-5 text-center align-middle border-0">생년월일</td>
+                                    <td class="fs-5 align-middle border-0" th:text="${user.birth}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold fs-5 text-center align-middle border-0">주소</td>
+                                    <td class="fs-5 align-middle border-0" th:text="${user.address}">
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="button-container">
+                                <input class="button" type="submit" value="정보 수정">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
