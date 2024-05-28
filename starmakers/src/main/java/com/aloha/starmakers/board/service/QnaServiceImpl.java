@@ -75,6 +75,12 @@ public class QnaServiceImpl implements QnaService {
         return result;
     }
 
+    @Override
+    public List<QnaBoard> search(Option option) throws Exception {
+
+        List<QnaBoard> qnaList = qnaMapper.search(option);
+        return qnaList;
+    }
 
     
 }
