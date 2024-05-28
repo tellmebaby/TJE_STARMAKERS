@@ -7,18 +7,19 @@ import lombok.Data;
 @Data
 public class StarBoard {
     private int starNo;
-    private String starTitle;
-    private String starWriter;
-    private String starContent;
-    private Date starRegDate;
-    private Date starUpdDate;
-    private int starViews;
+    private String title;
+    private String writer;
+    private String content;
+    private Date regDate;
+    private Date updDate;
+    private int views;
     private int userNo;
     private int payNo;
-    private int starLikes;
-    private String starStatus;  // 홍보요청 / 홍보중 / 홍보종료 / 반려
-    private String starCategory1; // 채널(인스타, 유튜브, 치지직 등)
-    private String starCategory2; // 분야(음식, 여행, 게임 등)
-    private String starType; // 유료 / 무료 / 디자인의뢰
-    
+    private int likes;
+    private String status;  // 홍보요청 / 홍보중 / 홍보종료 / 반려
+    private String category1; // 채널(인스타, 유튜브, 치지직 등)
+    private String category2; // 분야(음식, 여행, 게임 등)
+    private String type; // 유료 / 무료 / 디자인의뢰
+    private Date startDate;
+    private Date endDate;
 }
