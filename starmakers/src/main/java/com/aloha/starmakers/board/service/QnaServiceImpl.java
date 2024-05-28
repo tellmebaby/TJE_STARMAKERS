@@ -40,7 +40,7 @@ public class QnaServiceImpl implements QnaService {
     @Override
     public int insert(QnaBoard qnaBoard, String username) throws Exception {
         // 작성자 정보 불러오기
-        Users user = userMapper.select(username);
+        Users user = userMapper.login(username);
         qnaBoard.setUserNo(user.getUserNo());
         qnaBoard.setWriter(user.getName());
 
