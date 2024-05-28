@@ -1,5 +1,6 @@
 package com.aloha.starmakers.board.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.aloha.starmakers.board.dto.Option;
+import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.QnaBoard;
 import com.aloha.starmakers.board.service.QnaService;
 
@@ -18,7 +21,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -33,11 +35,26 @@ public class QnaController {
     private QnaService qnaService;
 
     @GetMapping("/qnaList")
-    public String list(Model model) throws Exception {
+    public String list(Model model, Page page, Option option) throws Exception {
         log.info("qna 목록");
 
-        List<QnaBoard> qnaList = qnaService.list();
+        List<QnaBoard> qnaList = qnaService.list(page, option);
+
+        // 페이징, 검색
+        log.info("page : " + page);
+        log.info("option : " + option);
+
+        // List<QnaBoard> qnaList = qnaService.list();
         model.addAttribute("qnaList", qnaList);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
+
+        List<Option> optionList = new ArrayList<Option>();
+        optionList.add(new Option("제목+내용", 0));
+        optionList.add(new Option("제목", 1));
+        optionList.add(new Option("내용", 2));
+        optionList.add(new Option("작성자", 3));
+        model.addAttribute("optionList", optionList);
         return "/page/board/qnaBoard/qnaList";
     }
 
@@ -135,14 +152,14 @@ public class QnaController {
     }
 
     @PostMapping("/qnaPost")
-    public String insertAnswerPro(QnaBoard qnaBoard) throws Exception {
+    public String insertAnswerPro(QnaBoard qnaBoard, Model model) throws Exception {
 
         int result = qnaService.insertAnswer(qnaBoard);
         if(result > 0) {
-        return "redirect:/board/list"; 
+        return "redirect:/page/board/qnaBoard/qnaList"; 
         }
         int qnaNo = qnaBoard.getQnaNo();
-        return "/page/board/qnaBoard/qnaPost?qnaNo=" + qnaNo + "&error";
+        return "redirect:/page/board/qnaBoard/qnaPost?qnaNo=" + qnaNo + "&error";
 
     }
 
