@@ -34,7 +34,7 @@
           <input type="hidden" name="writer" th:value="${qnaBoard.writer}">  
             <div class="input-group mb-3">
                 <span class="input-group-text" id="addon-wrapping">제목</span>
-                <input type="text" name="title" class="form-control" placeholder="${qnaBoard.title}" aria-label="tilte"
+                <input type="text" name="title" class="form-control" th:value="${qnaBoard.title}" aria-label="tilte"
                     aria-describedby="addon-wrapping">
             </div>
             <!-- <input type="hidden" name="qnaStatus" value="답변 대기" > -->
@@ -55,6 +55,8 @@
 
 
   <script>
+    let content = "[[${qnaBoard.content}]]"
+    console.log(content)
     $('#summernote').summernote({
       toolbar: [
         // [groupName, [list of button]]
@@ -74,7 +76,7 @@
       lang: 'ko-KR',
       fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
       fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
-      placeholder: "[[$qnaBoard.qnaContent]]"
+      placeholder: content
     });
     
 
