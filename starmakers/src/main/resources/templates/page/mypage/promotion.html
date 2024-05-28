@@ -110,103 +110,100 @@
 
     </style>
 </head>
-<body>
-    <th:block layout:fragment="content">
-        <form action="" method="get">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="side-menu">
-                            <div class="nav-links">
-                                <h1>김조은님,</h1>
-                                <a href="/page/mypage/profile">회원 정보</a>
-                                <a href="/page/mypage/payment">결제 내역</a>
-                                <a href="/page/mypage/promotion" class="active">내가 쓴 글</a>
-                                <a href="/page/mypage/inquiry">1 : 1 문의</a>
-                                <a href="/page/mypage/userDelete">회원 탈퇴</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                            <div class="list">
-                                <a href="/page/mypage/promotion"><h2 style="color: #000;">홍보글</h2></a>
-                                <a href="/page/mypage/event"><h2 style="color: #545454;">이벤트 후기</h2></a>
-                            </div>                            
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th> </th>
-                                        <th> </th>
-                                        <th> </th>
-                                        <th> </th>
-                                    </tr>
-                                    <tr>
-                                        <th style="width: 450px;">제목</th>
-                                        <th>채널</th>
-                                        <th>결제금액</th>
-                                        <th>작성일자</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- 데이터 -->
-                                    <tr> 
-                                        <td class="border-0 pt-4">인스타 홍보입니다</td>
-                                        <td class="border-0 pt-4">인스타그램</td>
-                                        <td class="border-0 pt-4">50,000원</td>
-                                        <td class="border-0 pt-4">2024.05.20</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3"></td>
-                                        <td>
-                                            <div class="button-container">
-                                                <button class="btn-review status-pending">검토중</button>
-                                            </div>
-                                        </td>
-                                    </tr> 
-                                    <!-- 데이터 -->
-                                    <tr> 
-                                        <td class="border-0 pt-4">인스타 홍보입니다</td>
-                                        <td class="border-0 pt-4">인스타그램</td>
-                                        <td class="border-0 pt-4">50,000원</td>
-                                        <td class="border-0 pt-4">2024.05.20</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3"></td>
-                                        <td>
-                                            <div class="button-container">
-                                                <button class="btn-review status-pending">검토중</button>
-                                            </div>
-                                        </td>
-                                    </tr> 
-                                    <!-- 데이터 -->
-                                    <tr> 
-                                        <td class="border-0 pt-4">인스타 홍보입니다</td>
-                                        <td class="border-0 pt-4">인스타그램</td>
-                                        <td class="border-0 pt-4">50,000원</td>
-                                        <td class="border-0 pt-4">2024.05.20</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3"></td>
-                                        <td>
-                                            <div class="button-container">
-                                                <button class="btn-review status-pending">검토중</button>
-                                            </div>
-                                        </td>
-                                    </tr> 
-                                    
-                                </tbody>
-                            </table>
-                            <div class="pagination">
-                                <a href="#" class="prev">&lt;</a>
-                                <a href="#" class="page-number">1</a>
-                                <a href="#" class="page-number">2</a>
-                                <a href="#" class="page-number">3</a>
-                                <a href="#" class="next">&gt;</a>
-                            </div>
+<body layout:fragment="content">
+    <form action="" method="get">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="side-menu">
+                        <div class="nav-links">
+                            <h1>김조은님,</h1>
+                            <a href="/page/mypage/profile">회원 정보</a>
+                            <a href="/page/mypage/payment">결제 내역</a>
+                            <a href="/page/mypage/promotion" class="active">내가 쓴 글</a>
+                            <a href="/page/mypage/inquiry">1 : 1 문의</a>
+                            <a href="/page/mypage/userDelete">회원 탈퇴</a>
                         </div>
                     </div>
                 </div>
-        </form>
-    </th:block>
+                <div class="col-md-9">
+                    <div class="list">
+                        <a href="/page/mypage/promotion"><h2 style="color: #000;">홍보글</h2></a>
+                        <a href="/page/mypage/event"><h2 style="color: #545454;">이벤트 후기</h2></a>
+                    </div>                            
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> </th>
+                                <th> </th>
+                                <th> </th>
+                                <th> </th>
+                            </tr>
+                            <tr>
+                                <th style="width: 450px;">제목</th>
+                                <th>채널</th>
+                                <th>결제금액</th>
+                                <th>작성일자</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 데이터 -->
+                            <tr> 
+                                <td class="border-0 pt-4">인스타 홍보입니다</td>
+                                <td class="border-0 pt-4">인스타그램</td>
+                                <td class="border-0 pt-4">50,000원</td>
+                                <td class="border-0 pt-4">2024.05.20</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td>
+                                    <div class="button-container">
+                                        <button class="btn-review status-pending">검토중</button>
+                                    </div>
+                                </td>
+                            </tr> 
+                            <!-- 데이터 -->
+                            <tr> 
+                                <td class="border-0 pt-4">인스타 홍보입니다</td>
+                                <td class="border-0 pt-4">인스타그램</td>
+                                <td class="border-0 pt-4">50,000원</td>
+                                <td class="border-0 pt-4">2024.05.20</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td>
+                                    <div class="button-container">
+                                        <button class="btn-review status-pending">검토중</button>
+                                    </div>
+                                </td>
+                            </tr> 
+                            <!-- 데이터 -->
+                            <tr> 
+                                <td class="border-0 pt-4">인스타 홍보입니다</td>
+                                <td class="border-0 pt-4">인스타그램</td>
+                                <td class="border-0 pt-4">50,000원</td>
+                                <td class="border-0 pt-4">2024.05.20</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td>
+                                    <div class="button-container">
+                                        <button class="btn-review status-pending">검토중</button>
+                                    </div>
+                                </td>
+                            </tr> 
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                        <a href="#" class="prev">&lt;</a>
+                        <a href="#" class="page-number">1</a>
+                        <a href="#" class="page-number">2</a>
+                        <a href="#" class="page-number">3</a>
+                        <a href="#" class="next">&gt;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </body>
 </html>

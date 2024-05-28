@@ -64,18 +64,6 @@ public class PageController {
         return "page/mypage/profileUpdate";
     }
 
-
-    // @GetMapping("/mypage/profileUpdate")
-    // public String update(Model model
-    //                     ,Principal principal) throws Exception {
-        
-    //     String email = principal.getName();
-    //     Users user = userService.read(email);
-    //     log.info("::::::::::: user : " + email);
-    //     model.addAttribute("user", user);
-    //     return "/page/mypage/profileUpdate";
-    // }
-
     @PostMapping("/mypage/profileUpdate")
     public String updatePro( Users user ) throws Exception {
         int result = userService.update(user);

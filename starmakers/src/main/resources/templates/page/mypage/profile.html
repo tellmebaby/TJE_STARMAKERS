@@ -109,98 +109,93 @@
     </style>
 </head>
 
-<body>
-    <th:block th:replace="~{fragment/header :: headerFragment}"></th:block>
-    <th:block layout:fragment="content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="side-menu">
-                        <div class="nav-links">
-                            <h1>김조은님,</h1>
-                            <a href="/page/mypage/profile" class="active">회원 정보</a>
-                            <a href="/page/mypage/payment">결제 내역</a>
-                            <a href="/page/mypage/promotion">내가 쓴 글</a>
-                            <a href="/page/mypage/inquiry">1 : 1 문의</a>
-                            <a href="/page/mypage/userDelete">회원 탈퇴</a>
+<body layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="side-menu">
+                    <div class="nav-links">
+                        <h1>김조은님,</h1>
+                        <a href="/page/mypage/profile" class="active">회원 정보</a>
+                        <a href="/page/mypage/payment">결제 내역</a>
+                        <a href="/page/mypage/promotion">내가 쓴 글</a>
+                        <a href="/page/mypage/inquiry">1 : 1 문의</a>
+                        <a href="/page/mypage/userDelete">회원 탈퇴</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box">
+                    <div class="table-margin"></div>
+                        <table class="table">
+                            <tr>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">아이디</td>
+                                <td class="fs-5 align-middle border-0" th:text="${user.id}"></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">이름</td>
+                                <td class="fs-5 align-middle border-0" th:text="${user.name}"></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">전화번호</td>
+                                <td class="fs-5 align-middle border-0" th:text="${user.phone}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">이메일</td>
+                                <td class="fs-5 align-middle border-0" th:text="${user.email}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">생년월일</td>
+                                <td class="fs-5 align-middle border-0" th:text="${user.birth}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">주소</td>
+                                <td class="fs-5 align-middle border-0" th:text="${user.address}">
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="button-container">
+                            <a href="/page/mypage/profileUpdate"><input class="button" type="button" value="정보 수정"></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="box">
-                        <div class="table-margin"></div>
-                        <form action="/page/mypage/profileUpdate" method="get">
-                            <table class="table">
-                                <tr>
-                                    <td class="fw-bold fs-5 text-center align-middle border-0">아이디</td>
-                                    <td class="fs-5 align-middle border-0" th:text="${user.id}"></td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold fs-5 text-center align-middle border-0">이름</td>
-                                    <td class="fs-5 align-middle border-0" th:text="${user.name}"></td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold fs-5 text-center align-middle border-0">전화번호</td>
-                                    <td class="fs-5 align-middle border-0" th:text="${user.phone}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold fs-5 text-center align-middle border-0">이메일</td>
-                                    <td class="fs-5 align-middle border-0" th:text="${user.email}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold fs-5 text-center align-middle border-0">생년월일</td>
-                                    <td class="fs-5 align-middle border-0" th:text="${user.birth}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold fs-5 text-center align-middle border-0">주소</td>
-                                    <td class="fs-5 align-middle border-0" th:text="${user.address}">
-                                    </td>
-                                </tr>
-                            </table>
-                            <div class="button-container">
-                                <input class="button" type="submit" value="정보 수정">
-                            </div>
-                        </form>
-                    </div>
+            <div class="col-md-3">
+                <div class="table-margin"></div>
+                <!-- 빈 이미지일 경우 -->
+                <div class="image-container" id="imageContainer">
+                    <img id="uploadedImage" src="" alt="이미지를 업로드하세요" style="width: 100%; display: none;">
                 </div>
-                <div class="col-md-3">
-                    <div class="table-margin"></div>
-                    <!-- 빈 이미지일 경우 -->
-                    <div class="image-container" id="imageContainer">
-                        <img id="uploadedImage" src="" alt="이미지를 업로드하세요" style="width: 100%; display: none;">
-                    </div>
-                    <input type="file" id="fileInput" style="display: none;">
-                    <button class="btn btn-primary w-100 mt-1" onclick="saveImage()">이미지 저장</button>
-                </div>
+                <input type="file" id="fileInput" style="display: none;">
+                <button class="btn btn-primary w-100 mt-1" onclick="saveImage()">이미지 저장</button>
             </div>
         </div>
+    </div>
 
 
-        <script>
-            document.getElementById('imageContainer').addEventListener('click', function () {
-                document.getElementById('fileInput').click();
-            });
+    <script>
+        document.getElementById('imageContainer').addEventListener('click', function () {
+            document.getElementById('fileInput').click();
+        });
 
-            document.getElementById('fileInput').addEventListener('change', function (event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        document.getElementById('uploadedImage').src = e.target.result;
-                        document.getElementById('uploadedImage').style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            function saveImage() {
-                
+        document.getElementById('fileInput').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('uploadedImage').src = e.target.result;
+                    document.getElementById('uploadedImage').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
             }
-        </script>
-    </th:block>
+        });
+
+        function saveImage() {
+            
+        }
+    </script>
 </body>
 
 </html>
