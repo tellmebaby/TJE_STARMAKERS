@@ -1,5 +1,5 @@
 
--- Active: 1716511247384@@127.0.0.1@3306@joeun
+-- Active: 1714701530602@@127.0.0.1@3306@joeun
 
 
 
@@ -37,6 +37,7 @@ CREATE TABLE message
   reply_no   INT         NOT NULL COMMENT '댓글데이터번호',
   pay_no     INT         NOT NULL COMMENT '결제데이터번호',
   qna_no     INT         NOT NULL COMMENT '질의응답데이터번호',
+  user_no    INT         NOT NULL COMMENT '유저데이터번호',
   PRIMARY KEY (message_no)
 ) COMMENT '알림메세지';
 
