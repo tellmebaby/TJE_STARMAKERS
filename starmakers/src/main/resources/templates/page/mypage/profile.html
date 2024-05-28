@@ -41,7 +41,7 @@
         }
 
         .button {
-            background-color: #B8C3FF;
+            background-color: #0d6efd;
             color: white;
             border: none;
             border-radius: 10px;
@@ -124,47 +124,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="box">
-                        <div class="table-margin"></div>
-                        <form action="/page/mypage/profileUpdate" method="get">
-                            <table class="table">
-                                <tr>
-                                    <td class="fw-bold fs-5 text-center align-middle border-0">아이디</td>
-                                    <td class="fs-5 align-middle border-0" th:text="${user.id}"></td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold fs-5 text-center align-middle border-0">이름</td>
-                                    <td class="fs-5 align-middle border-0" th:text="${user.name}"></td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold fs-5 text-center align-middle border-0">전화번호</td>
-                                    <td class="fs-5 align-middle border-0" th:text="${user.phone}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold fs-5 text-center align-middle border-0">이메일</td>
-                                    <td class="fs-5 align-middle border-0" th:text="${user.email}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold fs-5 text-center align-middle border-0">생년월일</td>
-                                    <td class="fs-5 align-middle border-0" th:text="${user.birth}">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold fs-5 text-center align-middle border-0">주소</td>
-                                    <td class="fs-5 align-middle border-0" th:text="${user.address}">
-                                    </td>
-                                </tr>
-                            </table>
-                            <div class="button-container">
-                                <input class="button" type="submit" value="정보 수정">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
             <div class="col-md-6">
                 <div class="box">
                     <div class="table-margin"></div>
