@@ -97,13 +97,13 @@ public class QnaController {
         return "/page/board/qnaBoard/qnaUpdate";
     }
 
-    @PostMapping("/qnaPost")
-    public String insertAnswer(@RequestParam("qnaNo") int qnaNo, Model model) throws Exception {
+    // @GetMapping("/qnaPost")
+    // public String insertAnswer(@RequestParam("qnaNo") int qnaNo, Model model) throws Exception {
 
-        QnaBoard qnaBoard = qnaService.select(qnaNo);
-        model.addAttribute("qnaBoard", qnaBoard);
-        return "page/board/qnaBoard/qnaPost";
-    }
+    //     QnaBoard qnaBoard = qnaService.select(qnaNo);
+    //     model.addAttribute("qnaBoard", qnaBoard);
+    //     return "page/board/qnaBoard/qnaPost";
+    // }
     
     @PostMapping("/qnaPost")
     public String insertAnswerPro(QnaBoard qnaBoard) throws Exception {
