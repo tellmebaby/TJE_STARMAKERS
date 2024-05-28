@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.aloha.starmakers.board.dto.Option;
+import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.QnaBoard;
 import com.aloha.starmakers.board.service.QnaService;
 import com.aloha.starmakers.user.dto.Users;
@@ -124,10 +126,10 @@ public class PageController {
      * @throws Exception
      */
     @GetMapping("/mypage/inquiry")
-    public String list(Model model) throws Exception {
+    public String list(Model model, Page page, Option option) throws Exception {
         log.info("qna 목록");
 
-        List<QnaBoard> qnaList = qnaService.list();
+        List<QnaBoard> qnaList = qnaService.list(page, option);
         model.addAttribute("qnaList", qnaList);
         return "/page/mypage/inquiry";
     }
