@@ -42,5 +42,10 @@
         WHERE qna_no = #{qnaNo}
     </update>
 
+    <!-- 게시글 삭제 -->
+    <delete id="delete">
+        DELETE FROM qna_board
+        WHERE qna_no IN (${qnaNos})
+    </delete>
 
 </mapper>

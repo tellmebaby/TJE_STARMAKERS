@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class QnaBoard {
     private int qnaNo;
+    private int qnaNos;
     private String title;
     private String writer;
     private String content;

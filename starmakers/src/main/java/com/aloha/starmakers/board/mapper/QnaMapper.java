@@ -18,8 +18,11 @@ public interface QnaMapper {
     // 글 등록
     public int insert(QnaBoard qnaBoard) throws Exception;
     
-    // 글 등록
-    public int update(int qnaNo) throws Exception;
+    // 글 수정
+    public int update(QnaBoard qnaBoard) throws Exception;
+    
+    // 글 삭제
+    public int delete(String qnaNoList) throws Exception;
 
     public int insertAnswer(QnaBoard qnaBoard) throws Exception;
 

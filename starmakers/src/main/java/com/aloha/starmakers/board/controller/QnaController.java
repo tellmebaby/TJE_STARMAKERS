@@ -3,6 +3,8 @@ package com.aloha.starmakers.board.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +14,12 @@ import com.aloha.starmakers.board.service.QnaService;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -97,14 +101,39 @@ public class QnaController {
         return "/page/board/qnaBoard/qnaUpdate";
     }
 
-    // @GetMapping("/qnaPost")
-    // public String insertAnswer(@RequestParam("qnaNo") int qnaNo, Model model) throws Exception {
+    @PostMapping("/qnaUpdate")
+    public String updatePro(QnaBoard qnaBoard) throws Exception {
 
-    //     QnaBoard qnaBoard = qnaService.select(qnaNo);
-    //     model.addAttribute("qnaBoard", qnaBoard);
-    //     return "page/board/qnaBoard/qnaPost";
-    // }
+        int result = qnaService.update(qnaBoard);
+        if ( result > 0) {
+            return "redirect:/page/mypage/inquiry";
+        }
+        int qnaNo = qnaBoard.getQnaNo();
+        
+        return "redirect:/page/qnaBoard/qnaUpdate?qnaNo=" + qnaNo + "$error";
+    }
     
+
+    @PostMapping("/qnaDelete")
+    public String delete(@RequestParam("qnaNos") String qnaNos) throws Exception {
+        // String[] qnaNoArray = qnaNos.split(",");
+        int result = 0;
+
+
+        result = qnaService.delete(qnaNos);
+
+        // for (String qnaNo : qnaNoArray) {
+        //     log.info("qnaNos : " + qnaNos);
+        //     result += qnaService.delete(qnaNo);
+        // }
+    
+        if (result > 0) {
+            return "redirect:/page/mypage/inquiry";
+        }
+        
+        return "redirect:/page/mypage/inquiry";  // 삭제 실패시에도 같은 페이지로 리디렉션
+    }
+
     @PostMapping("/qnaPost")
     public String insertAnswerPro(QnaBoard qnaBoard) throws Exception {
 
