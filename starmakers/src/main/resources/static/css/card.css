@@ -1,4 +1,4 @@
-#promotionCarousel .card>img {
+.card>img {
     width: 100%;
     height: 250px;
 }
@@ -193,4 +193,91 @@
 .search-title {
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+.card {
+    transition: all 0.1s;
+    position: relative;
+    /* background-color: #333;
+    color: white; */
+
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(105deg, transparent 40%, rgba(255, 219, 112, 0.8) 45%, rgba(132, 50, 255, 0.6) 50%, transparent 54%);
+    filter: brightness(1.1) opacity(0.8);
+    mix-blend-mode: color-dodge;
+    background-size: 150% 150%;
+    background-position: 100%;
+    pointer-events: none;
+    /* z-index: 5000; */
+    transition: opacity 0.3s ease;
+}
+
+
+.icon-body,
+.icon-container {
+    pointer-events: none;
+}
+
+
+.heart {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    transform: rotate(-45deg);
+    left: 50%;
+    top: 50%;
+    margin: -25px 0 0 -25px;
+    animation: fadeOut 1s forwards;
+}
+
+.heart:before,
+.heart:after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.heart:before {
+    top: -25px;
+    left: 0;
+}
+
+.heart:after {
+    left: 25px;
+    top: 0;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1) rotate(-45deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(2) rotate(-45deg);
+    }
+}
+
+#cardContainer {
+    margin-top: 65px;
+}
+
+.fc-col-header-cell-cushion,
+.fc-daygrid-day-number {
+    color: black !important;
+    /* 검정색으로 설정 */
+    text-decoration: none !important;
+    /* 밑줄 제거 */
 }
