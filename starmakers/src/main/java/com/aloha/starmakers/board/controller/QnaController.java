@@ -58,7 +58,7 @@ public class QnaController {
     public String insert() throws Exception {
 
         return "/page/board/qnaBoard/qnaInsert";
-    }
+    } 
 
     // @GetMapping("/qnaPost")
     // public String quaPost(Model model) throws Exception {
@@ -84,18 +84,16 @@ public class QnaController {
         return "redirect:/board/insert?no=" + no + "&error";
     }
 
-    // @GetMapping("/qnaUpdate")
-    // public String update(@RequestParam("qnaNo") int qnaNo, Model model) throws Exception {
-    //     QnaBoard qnaBoard = qnaService.select(qnaNo);
+    @GetMapping("/qnaUpdate")
+    public String update(@RequestParam("qnaNo") int qnaNo, Model model) throws Exception {
+        QnaBoard qnaBoard = qnaService.select(qnaNo);
 
-    //     // 조회수 증가
+        // 모델 등록
+        model.addAttribute("qnaBoard", qnaBoard);
 
-    //     // 모델 등록
-    //     model.addAttribute("qnaBoard", qnaBoard);
-
-    //     // 뷰페이지 지정
-    //     return "/page/board/qnaBoard/qnaUpdate";
-    // }
+        // 뷰페이지 지정
+        return "/page/board/qnaBoard/qnaUpdate";
+    }
 
 
 }
