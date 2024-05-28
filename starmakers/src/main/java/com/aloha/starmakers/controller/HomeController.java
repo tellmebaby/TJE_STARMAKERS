@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +51,13 @@ public class HomeController {
         return "index";
     }
     
+    @GetMapping("/exception")
+    public String exception(Authentication auth, Model model) {
+        log.info("인증 예외 처리...");
+        log.info("auth :" + auth.toString());
+        model.addAttribute("msg","인증 거부 : "+auth.toString());
+        return "/exception";
+    }
 
     /**
      * 로그인 화면 이동

@@ -9,9 +9,11 @@ import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
+import com.aloha.starmakers.security.CustomAccessDeniedHandler;
 import com.aloha.starmakers.security.LoginSuccessHandler;
 import com.aloha.starmakers.user.service.UserDetailServiceImpl;
 
@@ -58,6 +60,12 @@ public class SecurityConfig {
                                 .tokenRepository(tokenRepository())
                                 .tokenValiditySeconds(60 * 60 * 24 * 7));
 
+        // OAuth 로그인 설정
+        http.oauth2Login(login -> login 
+                                .loginPage("/login")
+                        );
+
+
         return http.build();
     }
 
@@ -98,6 +106,13 @@ public class SecurityConfig {
             log.error("자동 로그인 테이블 생성 중 , 예외 발생");
         }
         return repositoryImpl;
+    }
+    
+
+    // 🫛 접근 거부 에러 처리 빈 등록
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new CustomAccessDeniedHandler();
     }
     
 }
