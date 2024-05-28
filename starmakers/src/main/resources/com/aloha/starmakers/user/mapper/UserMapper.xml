@@ -63,7 +63,7 @@
               ,1 enabled
               ,auth
         FROM user u LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id
-        WHERE u.user_no = #{userNo}
+        WHERE u.email = #{email}
     </select>
 
     <!-- 회원 가입 -->
