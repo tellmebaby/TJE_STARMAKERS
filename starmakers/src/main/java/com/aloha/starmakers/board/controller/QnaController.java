@@ -15,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -95,6 +97,25 @@ public class QnaController {
         return "/page/board/qnaBoard/qnaUpdate";
     }
 
+    @PostMapping("/qnaPost")
+    public String insertAnswer(@RequestParam("qnaNo") int qnaNo, Model model) throws Exception {
+
+        QnaBoard qnaBoard = qnaService.select(qnaNo);
+        model.addAttribute("qnaBoard", qnaBoard);
+        return "page/board/qnaBoard/qnaPost";
+    }
+    
+    @PostMapping("/qnaPost")
+    public String insertAnswerPro(QnaBoard qnaBoard) throws Exception {
+
+        int result = qnaService.insertAnswer(qnaBoard);
+        if(result > 0) {
+        return "redirect:/board/list"; 
+        }
+        int qnaNo = qnaBoard.getQnaNo();
+        return "/page/board/qnaBoard/qnaPost?qnaNo=" + qnaNo + "&error";
+
+    }
 
 }
     

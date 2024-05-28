@@ -16,4 +16,7 @@ public interface QnaService {
         
     // 글 등록
     public int update(int qnaNo) throws Exception;
+
+    // 답변 등록
+    public int insertAnswer(QnaBoard qnaBoard) throws Exception;
 }

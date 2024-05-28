@@ -85,6 +85,25 @@
             text-decoration: none;
             color: black;
         }
+
+        .fa-star {
+            color: gold;
+            animation: twinkle 1s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        .notice-row {
+            background-color: #f0f0f0; /* 회색 배경색 */
+        }
     </style>
 </head>
 <body>
@@ -116,6 +135,19 @@
                     </tr>
                 </thead>
                 
+                <tr class="notice-row" th:each="notice : ${fixedNotices}">
+                    <td align="center"><i class="fas fa-star"></i></td>
+                    <td align="center">
+                        <a th:href="|qnaPost?qnaNo=${notice.qnaNo}|" th:text="${notice.title}"></a>
+                    </td>
+                    <td align="center" th:text="${notice.writer}"></td>
+                    <td align="center">
+                        <span th:text="${#dates.format(notice.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                    </td>
+                    <td align="center" th:text="${notice.status}"></td>
+                    <td align="center" th:text="${notice.views}"></td>
+                </tr>
+
                 <th:block th:if="${qnaList.isEmpty()}">
                     <tr>
                         <td colspan="6" align="center" style="padding-top: 183.49px; padding-bottom: 183.49px;">
