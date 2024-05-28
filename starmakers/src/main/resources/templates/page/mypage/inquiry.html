@@ -115,67 +115,63 @@
 
     </style>
 </head>
-<body>
-    <th:block layout:fragment="content">
-        <form action="" method="get">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="side-menu">
-                            <div class="nav-links">
-                                <h1>김조은님,</h1>
-                                <a href="/page/mypage/profile">회원 정보</a>
-                                <a href="/page/mypage/payment">결제 내역</a>
-                                <a href="/page/mypage/promotion">내가 쓴 글</a>
-                                <a href="/page/mypage/inquiry" class="active">1 : 1 문의</a>
-                                <a href="/page/mypage/userDelete">회원 탈퇴</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-9">
-                            <div class="list">
-                                <h2 style="color: #000;">1 : 1 문의</h2>
-                            </div>                            
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10px;"> </th>
-                                        <th style="width: 500px;">제목</th>
-                                        <th style="width: 200px;">작성일자</th>
-                                        <th style="width: 100px;">상태</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input type="checkbox" name="" id=""></td>
-                                        <td>인스타 홍보입니다</td>
-                                        <td>2024.05.23</td>
-                                        <td>답변대기</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" name="" id=""></td>
-                                        <td>치지직 홍보입니다</td>
-                                        <td>2024.05.23</td>
-                                        <td>답변대기</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" name="" id=""></td>
-                                        <td>유튜브 홍보입니다</td>
-                                        <td>2024.05.23</td>
-                                        <td>답변대기</td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
-                            <div class="button-container">
-                                <input class="button1" type="submit" value="수정">
-                                <input class="button2" type="submit" value="삭제">
-                            </div>
-                            
+<body layout:fragment="content">
+    <form action="" method="get">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="side-menu">
+                        <div class="nav-links">
+                            <h1>김조은님,</h1>
+                            <a href="/page/mypage/profile">회원 정보</a>
+                            <a href="/page/mypage/payment">결제 내역</a>
+                            <a href="/page/mypage/promotion">내가 쓴 글</a>
+                            <a href="/page/mypage/inquiry" class="active">1 : 1 문의</a>
+                            <a href="/page/mypage/userDelete">회원 탈퇴</a>
                         </div>
                     </div>
                 </div>
-        </form>
-    </th:block>
+                <div class="col-md-9">
+                    <div class="list">
+                        <h2 style="color: #000;">1 : 1 문의</h2>
+                    </div>                            
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px;"> </th>
+                                <th style="width: 500px;">제목</th>
+                                <th style="width: 200px;">작성일자</th>
+                                <th style="width: 100px;">상태</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" name="" id=""></td>
+                                <td>인스타 홍보입니다</td>
+                                <td>2024.05.23</td>
+                                <td>답변대기</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="" id=""></td>
+                                <td>치지직 홍보입니다</td>
+                                <td>2024.05.23</td>
+                                <td>답변대기</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="" id=""></td>
+                                <td>유튜브 홍보입니다</td>
+                                <td>2024.05.23</td>
+                                <td>답변대기</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="button-container">
+                        <input class="button1" type="submit" value="수정">
+                        <input class="button2" type="submit" value="삭제">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </body>
 </html>
