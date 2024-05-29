@@ -1,9 +1,9 @@
 spring:
   mail:
-    host: 
+    host: smtp.gmail.com
     port: 587
-    username: 
-    password: 
+    username: noreplystarmakers@gmail.com
+    password: fmzo iwdd rufu gatc
     properties:
       mail:
         smtp:
