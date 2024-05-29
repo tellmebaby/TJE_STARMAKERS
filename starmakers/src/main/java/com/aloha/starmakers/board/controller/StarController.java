@@ -1,5 +1,8 @@
 package com.aloha.starmakers.board.controller;
 
+
+import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+
+import com.aloha.starmakers.board.dto.Option;
+import com.aloha.starmakers.board.dto.Page;
 
 import com.aloha.starmakers.board.dto.StarBoard;
 import com.aloha.starmakers.board.service.StarService;
@@ -145,15 +152,46 @@ public class StarController {
 
 
     // review 게시판
+
+    @GetMapping("/board/reviewboard/reviewList")
+    public String list(Model model, Page page, Option option) throws Exception {
+
+        List<StarBoard> starList = starService.list(page, option);
+
+        // 페이징, 검색
+        log.info("page : " + page);
+        log.info("option : " + option);
+
+        
+        model.addAttribute("starList", starList);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
+
+        List<Option> optionList = new ArrayList<Option>();
+        optionList.add(new Option("제목+내용", 0));
+        optionList.add(new Option("제목", 1));
+        optionList.add(new Option("내용", 2));
+        optionList.add(new Option("작성자", 3));
+        model.addAttribute("optionList", optionList);
+        return "/page/board/reviewBoard/reviewList";
+    }
+
+    @GetMapping("/board/reviewBoard/reviewInsert")
+    public String reviewInsert() {
+
+        return "/page/board/reviewBoard/reviewInsert";
+    }
+    
+
+
     @PostMapping("/board/reviewBoard/reviewInsert")
     public String reviewInsertPro(StarBoard starBoard, String username) throws Exception{
         int result = starService.insert(starBoard, username);
         // 리다이렉트
         // 데이터 처리 성공
-        if(result>0){
+        if(result > 0){
             return "redirect:/page/board/reviewBoard/reviewList";
         }
-        
 
         // 데이터 처리 실패
         int no = starBoard.getStarNo();

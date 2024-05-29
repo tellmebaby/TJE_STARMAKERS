@@ -2,19 +2,27 @@ package com.aloha.starmakers.board.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.aloha.starmakers.board.dto.Option;
+import com.aloha.starmakers.board.dto.Page;
 
 import com.aloha.starmakers.board.dto.StarBoard;
 
 
-@Service
+
 public interface StarService {
 
-    // 글 목록
-    public List<StarBoard> list(String type) throws Exception;
+
+    // 목록 조회 - 페이징, 검색
+    public List<StarBoard> list(String type 
+                               ,Page page
+                               ,Option option) throws Exception;
 
     // 글 등록(무료)
     public int insert(StarBoard starBoard, String username) throws Exception;
+
     // 글 등록(유료)
     public int payInsert(StarBoard starBoard, String username) throws Exception;
 
