@@ -26,9 +26,9 @@ public class StarServiceImpl implements StarService {
         starBoard.setWriter(user.getName());
         // starBoard.setStatus("무료홍보");
         // 정보 등록
-        int result = starMapper.insert(starBoard);
+        starMapper.insert(starBoard);
         
-        return result;
+        return starBoard.getStarNo();
     }
 
     /**
