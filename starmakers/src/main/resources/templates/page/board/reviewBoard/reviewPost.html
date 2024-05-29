@@ -394,87 +394,15 @@
         </center>
     
         <div class="writer">
-          <label>${anBoard.writer}</label>
-          <label>${anBoard.regDate}</label>
+          <label th:text="${starBoard.writer}"></label>
+          <label th:text="${#dates.format(starBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></label>
         </div>
         <div class="title-container">
-            <span>제목 - 엉기조차 벙기조차</span>
+            <span th:text="${starBoard.title}"></span>
             <hr>
         </div>
         <div class="content-container">
-            <span>내용 - 
-                아주 오랜 옛날에
-                자식이 없는 노부부가 외딴 산속에
-                다정하게 살고 있었으나 늘 마음 한구석에는
-                자식걱정만이 그득할 뿐이었다.<br>
-      
-                조석으로 산신령님께 치성을 다하여 소원을
-                빈 결과 지성이면 감천이라고나 할까?
-                아들을 점지받아 건강한 옥동자를 늘그막에
-                낳게 되어 기쁨이 이만저만이 아니었다.<br>
-      
-                귀한 옥동자의 이름을 지어야 하겠는데
-                용한 작명가를 찾아가 이름을 지어달라고 하니
-                귀한 아들은 이름을 길게 지어야
-                건강하게 오래살며, 만약 이름을 한자라도
-                빼먹고 부르면 제명대로 살지 못할 것이라고 하며
-                지어준 이름이 있었으니,
-                그 이름이 무엇인고 하니 보고는 놀라지 말지어다.<br>
-      
-                "엉기조차 벙기조차 벙기조차 엉기조차 엉기벙기 버벙기"<br>
-      
-                라고 지어 주었으니,
-                노인네가 그 긴 이름을 어떻게 한자도
-                빼먹지 않고 어떻게 외워 부르면서
-                키울까하고 걱정도 되면서도 귀한 아들이니
-                만지면 터질까 넘어지면 다칠까하며,
-                금지옥엽으로 키웠다.<br>
-      
-                어느해 7살이 되던해
-                어느 여름날 아들 친구들이 허겁지겁
-                숨이 막히게 뛰어와서는 한다는 말이
-                할아버지, 할머니 큰일났어요.<br>
-      
-                "지금 엉기조차 벙기조차 벙기조차 엉기조차
-                엉기벙기 버벙기가
-                우리들과 물놀이를 하다가 물에 빠져서
-                엉기조차 벙기조차 벙기조차 엉기조차
-                엉기벙기 버벙기가 죽게 생겼어요.
-                빨리 동네 사람들을 불러모아 물에빠진
-                엉기조차 벙기조차 벙기조차 엉기조차
-                엉기벙기 버벙기를 구해야 하겠어요."
-                하였다.<br>
-      
-                이에 깜짝놀란 노부부가<br>
-      
-                "뭐라고 우리 귀한 아들
-                엉기조차 벙기조차 벙기조차 엉기조차
-                엉기벙기 버벙기가 물에 빠져 죽게 되었다고?
-                그럼 큰일 났구나?"<br>
-      
-                하면서 동네사람들에게 말하였다.<br>
-      
-                "동네사람들 큰일났어요.
-                우리 귀한 아들 엉기조차 벙기조차 벙기조차
-                엉기조차 엉기벙기 버벙기가 물에 빠져서
-                곧 죽게 되었답니다.
-                빨리가서 우리아들
-                엉기조차 벙기조차 벙기조차 엉기조차
-                엉기벙기 버벙기를 구해 주세요."<br>
-      
-                하였다.<br>
-      
-                그러는 동안에 시간은 많이 흘렀고
-              마을 사람들이 냇가에 도착하여 보니,
-              엉기조차 벙기조차 벙기조차 엉기조차
-              엉기벙기 버벙기는 이미
-              이세상 사람이 아니었다.
-              이에 할아버지가 울면서
-              얼마나 오래 살겠다고 부르기도 성가신
-              이름을 그렇게 길게 지어가지고
-              귀한 아들의 명만 단축하였다고
-              통곡하였으나 이미 때는 늦으리 였다.
-              </span>
+            <span th:utext="${starBoard.content}"></span>
         </div>
     
         <div class="button-wrapper">
@@ -577,7 +505,7 @@
             <div class="reply-middle">
                 <p class="reply-content">${content}</p>
                 <div class="reply-button">
-                    <button class="btn-reply-update">수정</button>
+                    <button class="btn-reply-update" onclick="update()">수정</button>
                     <button class="btn-reply-delete">삭제</button>
                 </div>
             </div>
@@ -591,12 +519,14 @@
 
     <script>
     
+        let starNo = '[[${starBoard.starNo}]]'
+
         function moveList() {
-          location.href = '/page/board/anBoard/anList'
+          location.href = '/page/board/reviewBoard/reviewList'
         }
   
         function update() {
-          location.href = ''
+          location.href = '/page/board/reviewBoard/reviewUpdate?starNo=' + starNo
         }
 
         function toggleRereplyContainer(button) {

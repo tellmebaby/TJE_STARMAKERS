@@ -5,6 +5,81 @@
 
 <mapper namespace="com.aloha.starmakers.board.mapper.StarMapper">
 
+    <!-- 게시판 목록 -->
+    <select id="list" resultType="StarBoard">
+        SELECT *
+        FROM star_board
+        WHERE type = #{type}
+        AND
+            <if test="option.code == 0">
+                title LIKE CONCAT('%', #{option.keyword}, '%')
+                OR content LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 1">
+                title LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 2">
+                content LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 3">
+                writer LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+        ORDER BY reg_date DESC
+        LIMIT #{page.index}, #{page.rows}
+    </select>
+
+      <!-- 데이터 개수 조회 - [검색] -->
+    <select id="count" resultType="int">
+        SELECT COUNT(*)
+        FROM star_board 
+        WHERE type = #{type}
+        AND
+           <if test="option.code == 0">
+                title LIKE CONCAT('%', #{option.keyword}, '%')
+                OR content LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 1">
+                title LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 2">
+                content LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 3">
+                writer LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+        ORDER BY reg_date DESC 
+    </select>
+
+    <!-- 게시글 목록 검색 -->
+    <select id="search" resultType="StarBoard">
+        SELECT *
+        FROM star_board
+        WHERE type = #{type}
+        AND
+           <if test="option.code == 0">
+                title LIKE CONCAT('%', #{option.keyword}, '%')
+                OR content LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 1">
+                title LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 2">
+                content LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 3">
+                writer LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+        ORDER BY reg_date DESC
+        
+    </select>
+
+    <!-- 게시글 번호 최댓값 -->
+    <select id="maxPk" resultType="int">
+        SELECT MAX(star_no)
+        FROM star_board
+        WHERE type = #{type}
+    </select>
+
     <!-- 게시판 조회 -->
     <!-- <select id="select" resultType="starCard">
         SELECT *
@@ -29,7 +104,7 @@
 
     </insert> -->
     <!-- 글 조회 -->
-    <select id="select" resultType="starBoard">
+    <select id="select" resultType="StarBoard">
         SELECT * FROM star_board
         WHERE star_no = #{starNo}
     </select>
@@ -43,4 +118,5 @@
             upd_date = now()
         WHERE star_no = #{starNo}
     </update>
+
 </mapper>

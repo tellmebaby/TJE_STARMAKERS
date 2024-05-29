@@ -11,7 +11,7 @@
         FROM qna_board
         WHERE
             <if test="option.code == 0">
-                    title LIKE CONCAT('%', #{option.keyword}, '%')
+                title LIKE CONCAT('%', #{option.keyword}, '%')
                 OR content LIKE CONCAT('%', #{option.keyword}, '%')
            </if>
            <if test="option.code == 1">
@@ -33,7 +33,7 @@
         FROM qna_board 
         WHERE
            <if test="option.code == 0">
-                    title LIKE CONCAT('%', #{option.keyword}, '%')
+                title LIKE CONCAT('%', #{option.keyword}, '%')
                 OR content LIKE CONCAT('%', #{option.keyword}, '%')
            </if>
            <if test="option.code == 1">

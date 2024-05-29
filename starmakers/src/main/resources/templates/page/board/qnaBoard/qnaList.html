@@ -154,15 +154,10 @@
 
         <div class="container">
         <h3>Q&A 게시판</h3>
-
             <div class="search-container">
                 <form action="/page/board/qnaBoard/qnaList" method="get">
                     <select name="code">
                         <option th:each="item : ${optionList}" th:value="${item.code}" th:text="${item.keyword}" th:selected="${item.code == option.code}"></option>
-                        <!-- <option value="제목내용">제목+내용</option>
-                        <option value="제목">제목</option>
-                        <option value="내용">내용</option>
-                        <option value="작성자">작성자</option> -->
                     </select>
                     <input type="text" name="keyword" placeholder="검색어를 입력하세요" 
                            th:value="${param.keyword}">
@@ -219,7 +214,6 @@
 
                 <th:block th:each="qnaBoard : ${qnaList}">
                 <tr>
-                    <!-- <td align="center" th:text="${qnaBoard.qnaNo}"></td> -->
                     <td align="center"><i class="fa-solid fa-q twinkle"></i></td>
                     <td>
                         <a th:href="|qnaPost?qnaNo=${qnaBoard.qnaNo}|" th:text="${qnaBoard.title}"></a>
@@ -231,7 +225,6 @@
                     <td align="center" th:text="${qnaBoard.status}" th:classappend="${qnaBoard.status == '답변 대기' ? 'status-waiting' : 'status-completed'}"></td>
                     
                     <td align="center" th:text="${qnaBoard.views}"></td>
-                    
                 </tr>
                 </th:block>
 
