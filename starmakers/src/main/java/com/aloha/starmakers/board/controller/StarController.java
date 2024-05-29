@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Slf4j
 @Controller
-@RequestMapping("/page/starCard")
+@RequestMapping("/page")
 public class StarController {
     
     @Autowired
@@ -30,7 +30,7 @@ public class StarController {
      * 글 등록 화면 요청
      * @return
      */
-    @GetMapping("/starInsert")
+    @GetMapping("/starCard/starInsert")
     public String insert() {
         return "/page/starCard/starInsert";
     }
@@ -43,7 +43,7 @@ public class StarController {
      * @return
      * @throws Exception
      */
-    @PostMapping("/starInsert")
+    @PostMapping("/starCard/starInsert")
     public String insertPro(StarBoard starBoard, String username) throws Exception{
         int result = starService.insert(starBoard, username);
         // 리다이렉트
@@ -65,7 +65,7 @@ public class StarController {
      * @return
      * @throws Exception
      */
-    @GetMapping("/starPayment")
+    @GetMapping("/starCard/starPayment")
     public String payment(@RequestParam("starNo") int starNo, Model model) throws Exception {
         StarBoard starBoard = starService.select(starNo);
         model.addAttribute("starBoard", starBoard);
@@ -87,7 +87,7 @@ public class StarController {
      * @return
      * @throws Exception
      */
-    @GetMapping("/starRead")
+    @GetMapping("/starCard/starRead")
     public String select(@RequestParam("starNo") int starNo, Model model) throws Exception {
         StarBoard starBoard = starService.select(starNo);
         model.addAttribute("starBoard", starBoard);
@@ -101,14 +101,14 @@ public class StarController {
      * @return
      * @throws Exception 
      */
-    @GetMapping("/starUpdate")
+    @GetMapping("/starCard/starUpdate")
     public String update(@RequestParam("starNo") int starNo, Model model) throws Exception {
         StarBoard starBoard = starService.select(starNo);
         model.addAttribute("starBoard", starBoard);
         return "/page/starCard/starUpdate";
     }
 
-    @PostMapping("/starUpdate")
+    @PostMapping("/starCard/starUpdate")
     public String updatePro(StarBoard starBoard) throws Exception {
 
         int result = starService.update(starBoard);
@@ -118,6 +118,38 @@ public class StarController {
         int no = starBoard.getStarNo();
         
         return "redirect:/page/board/qnaBoard/qnaUpdate?qnaNo=" + no + "$error";
+    }
+    
+    // 아래부터 event 게시판
+
+    @PostMapping("/board/eventBoard/eventInsert")
+    public String eventInsertPro(StarBoard starBoard, String username) throws Exception{
+        int result = starService.insert(starBoard, username);
+        // 리다이렉트
+        // 데이터 처리 성공
+        if(result>0){
+            return "redirect:/page/board/eventBoard/eventList";
+        }
+        
+
+        // 데이터 처리 실패
+        int no = starBoard.getStarNo();
+        return "redirect:/page/board/eventBoard/eventInsert?starNo=" + no + "&error";
+    }
+
+    @PostMapping("/board/reviewBoard/reviewInsert")
+    public String reviewInsertPro(StarBoard starBoard, String username) throws Exception{
+        int result = starService.insert(starBoard, username);
+        // 리다이렉트
+        // 데이터 처리 성공
+        if(result>0){
+            return "redirect:/page/board/reviewBoard/reviewList";
+        }
+        
+
+        // 데이터 처리 실패
+        int no = starBoard.getStarNo();
+        return "redirect:/page/board/reviewBoard/reviewInsert?starNo=" + no + "&error";
     }
     
     
