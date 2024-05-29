@@ -1,6 +1,5 @@
 package com.aloha.starmakers.user.dto;
 
-import javax.persistence.*;
 
 import lombok.Data;
 
@@ -11,8 +10,6 @@ import java.util.Date;
 @Data
 public class PasswordResetToken {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String token;
