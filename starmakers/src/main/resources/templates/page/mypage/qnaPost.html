@@ -6,131 +6,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Q&A</title>
     <style>
-        .top-container {
+      .top-container {
+        width: 960px;
+        margin: 0 auto;
+      }
+      .writer {
+          display: flex;
+          justify-content: space-around;
+          gap: 10px;
+          padding: 10px 0;
           width: 960px;
-          margin: 0 auto;
-        }
-        .writer {
-            display: flex;
-            justify-content: space-around;
-            gap: 10px;
-            padding: 10px 0;
-            width: 960px;
-            margin-top: 50px;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-        .writer label:first-child {
-            font-size: 15px;
-            font-weight: 500;
-        }
-        .writer label:last-child {
-            font-size: 15px;
-            color: rgba(192, 190, 183, 1);
-        }
-       .title-container {
+          margin-top: 50px;
+          margin-left: 10px;
+          margin-right: 10px;
+      }
+      .writer label:first-child {
+          font-size: 15px;
+          font-weight: 500;
+      }
+      .writer label:last-child {
+          font-size: 15px;
+          color: rgba(192, 190, 183, 1);
+      }
+     .title-container {
+        width: 960px;
+        margin: 0 auto 15px;
+
+        padding: 30px 30px;
+        border: 1px solid;
+        border-radius: 10px;
+      }
+      .title-container span {
+        font-weight: bold;
+        font-size: 20px;
+      }
+      .content-container {
+        width: 960px;
+        margin: 0 auto;
+        padding: 30px 30px;
+        border: 1px solid;
+      }
+      .title-container hr {
+        margin-top: 10px;
+      }
+      h1 {
+        margin-top: 40px;
+        margin-bottom: 10px;
+      }
+
+      /* 버튼 */
+      .button-wrapper {
+          display: flex;
+          justify-content: flex-end;
+          gap: 10px;
+          padding: 10px 0;
           width: 960px;
-          margin: 0 auto 15px;
-
-          padding: 30px 30px;
-          border: 1px solid;
-          border-radius: 10px;
-        }
-        .title-container span {
-          font-weight: bold;
-          font-size: 20px;
-        }
-        .content-container {
-          width: 960px;
-          margin: 0 auto;
-          padding: 30px 30px;
-          border: 1px solid;
-        }
-        .title-container hr {
-          margin-top: 10px;
-        }
-        h1 {
-          margin-top: 40px;
-          margin-bottom: 10px;
-        }
-
-        /* 버튼 */
-        .button-wrapper {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            padding: 10px 0;
-            width: 960px;
-        }
-        .button-container1 {
-            text-align: right;
-            padding: 10px 0;
-        }
-        .button-container1 button {
-            margin-left: 5px;
-            padding: 7px 20px;
-            background-color: rgba(37, 37, 37, 1);
-            border-radius: 3px;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-        }
-        .button-container1 button:hover {
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
-            font-weight: bolder;
-            color: black;
-        }
-        .button-container2 {
-            text-align: right;
-            padding: 10px 0;
-        }
-        .button-container2 button {
-            margin-left: 5px;
-            padding: 7px 20px;
-            background-color: rgba(192, 190, 183, 1);
-            border-radius: 3px;
-            color: black;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-        }
-        .button-container2 button:hover {
-            background-color: black;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
-            font-weight: bolder;
-            color: white;
-        }
-
-
-        .answer {
-          margin-left: 30px;
-          font-weight: bold;
-          font-size: 20px;
-        }
-        .answer-container {
-          width: 960px;
-          height: 217.73px;
-          margin: 0 auto 5px;
-          padding: 30px 30px;
-          border: 1px solid;
-          border-radius: 10px;
-          background-color: rgb(240, 240, 240);
-        }
-        #answer-span {
+      }
+      .button-container1 {
+          text-align: right;
+          padding: 10px 0;
+      }
+      .button-container1 button {
+          margin-left: 5px;
+          padding: 7px 20px;
+          background-color: rgba(37, 37, 37, 1);
+          border-radius: 3px;
+          color: white;
+          text-decoration: none;
           display: inline-block;
-          width: 100%;
-          height: 150px;
-          background-color: rgb(240, 240, 240);
-          /* padding: 30px 30px; */
-          box-sizing: border-box;
-        }
-    </style>
+          font-size: 14px;
+          font-weight: normal;
+          border: none;
+      }
+      .button-container1 button:hover {
+          background-color: white;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+          font-weight: bolder;
+          color: black;
+      }
+      .button-container2 {
+          text-align: right;
+          padding: 10px 0;
+      }
+      .button-container2 button {
+          margin-left: 5px;
+          padding: 7px 20px;
+          background-color: rgba(192, 190, 183, 1);
+          border-radius: 3px;
+          color: black;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 14px;
+          font-weight: normal;
+          border: none;
+      }
+      .button-container2 button:hover {
+          background-color: black;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+          font-weight: bolder;
+          color: white;
+      }
+      .answer {
+        margin-left: 30px;
+        font-weight: bold;
+        font-size: 20px;
+      }
+      .answer-container {
+        width: 960px;
+        height: 217.73px;
+        margin: 0 auto 5px;
+        padding: 30px 30px;
+        border: 1px solid;
+        border-radius: 10px;
+        background-color: rgb(240, 240, 240);
+      }
+      #answer-span {
+        display: inline-block;
+        width: 100%;
+        height: 150px;
+        background-color: rgb(240, 240, 240);
+        /* padding: 30px 30px; */
+        box-sizing: border-box;
+      }
+  </style>
 </head>
 <body>
 
@@ -167,16 +165,11 @@
     </div>
 
     <label class="answer">답변</label>
-    <form action="/page/mypage/qnaPost" method="post" id="form">
-      <input type="hidden" id="inputCsrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
       <div class="answer-container">
-        <span id="answer-span"></span>
-        <textarea id="answer-textarea" name="answer" style="display: none; width: 100%; height: 150px;" placeholder="답변을 입력하세요..."></textarea>
+          <span id="answer-span" th:text="${qnaBoard.answer}"></span>
+          <textarea id="answer-textarea" name="answer" style="display: none; width: 100%; height: 150px;" placeholder="답변을 입력하세요..."></textarea>
+          <input type="hidden" name="qnaNo" id="qnaNo" th:value="${qnaBoard.qnaNo}" />
       </div>
-      <div class="button-container1">
-        <button type="button" onclick="toggleAnswer()">답변 등록</button>
-      </div>
-    </form>
 
   </div>
 
@@ -199,38 +192,27 @@
       var form = document.getElementById("form");
       var answerContainer = document.querySelector(".answer-container");
 
-      // if(span.style.display === "none") {
-      //   span.style.display = "inline"
-      //   textarea.style.display = "none";
-      //   span.innerText = textarea.value;
-      // }
-      // else {
-      //   span.style.height = answerContainer.clientHeight + "px"; // answer-container 높이로 고정
-      //   span.style.display = "none"
-      //   textarea.style.display = "inline"
-      //   testarea.value = span.innerText;
-      // }
       if (textarea.style.display === "none") {
         span.style.display = "none";
         textarea.style.display = "block";
         textarea.value = span.innerText;
-        button.innerText = "답변 제출";
-        button.setAttribute("type", "submit");
+        button.innerText = "등록 완료";
 
-        form.addEventListener("submit", function(event) {
-                // alert 표시
+        button.onclick = function() {
+            if (textarea.value.trim() === "") {
+                alert("내용을 입력해주세요.");
+            } else {
                 alert("답변이 등록되었습니다!");
-            });
+                form.submit();
+            }
+        };
       } else {
         span.style.display = "block";
         textarea.style.display = "none";
         span.innerText = textarea.value;
         button.innerText = "답변 등록";
-        button.setAttribute("type", "button");
+        button.onclick = toggleAnswer;
 
-        form.removeEventListener("submit", function(event) {
-                // 아무 동작도 하지 않음
-            });
       }
     }
 

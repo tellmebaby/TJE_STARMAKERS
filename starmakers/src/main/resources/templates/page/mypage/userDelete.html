@@ -60,6 +60,12 @@
             font-size: 20px;
             margin-left: 24px;
         }
+        .no-select {
+            user-select: none; 
+            -webkit-user-select: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+        }
 
     </style>
 </head>
@@ -69,7 +75,7 @@
             <div class="col-md-3">
                 <div class="side-menu">
                     <div class="nav-links">
-                        <h1>김조은님,</h1>
+                        <h1 th:text="${user.name} + '님,'"></h1>
                         <a href="/page/mypage/profile">회원 정보</a>
                         <a href="/page/mypage/payment">결제 내역</a>
                         <a href="/page/mypage/promotion">내가 쓴 글</a>
@@ -89,7 +95,7 @@
                     <!-- Button trigger modal -->
                     <div class="update">
                         <input type="checkbox" name="checkbox" id="checkbox" class="checkbox">
-                        <label for="checkbox" style="font-size: 20px; margin-left: 8px;">위 내용을 확인합니다.</label>
+                        <label for="checkbox" class="no-select" style="font-size: 20px; margin-left: 8px;">위 내용을 확인합니다.</label>
 
                         
                         <button type="button" class="button" id="deleteButton">
