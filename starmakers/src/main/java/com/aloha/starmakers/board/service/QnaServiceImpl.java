@@ -15,7 +15,6 @@ import com.aloha.starmakers.user.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 
 
-@Slf4j
 @Service
 public class QnaServiceImpl implements QnaService {
 

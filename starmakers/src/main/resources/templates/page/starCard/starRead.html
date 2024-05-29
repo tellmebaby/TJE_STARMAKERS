@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{/layout/default_layout}">
+
+<head>
+  <title>홍보</title>
+
+  <!-- include summernote css/js-->
+  <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet"> -->
+  <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css"
+    integrity="sha256-IKhQVXDfwbVELwiR0ke6dX+pJt0RSmWky3WB2pNx9Hg=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"
+    integrity="sha256-5slxYrL5Ct3mhMAp/dgnb5JSnTYMtkr4dHby34N10qw=" crossorigin="anonymous"></script>
+
+  <!-- language pack -->
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/lang/summernote-ko-KR.min.js"
+    integrity="sha256-y2bkXLA0VKwUx5hwbBKnaboRThcu7YOFyuYarJbCnoQ=" crossorigin="anonymous"></script>
+
+  <!-- DatePicker  -->
+  <script src="/lib/datePicker.js" type="text/javascript"></script>
+  <!-- <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script> -->
+  <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+  <style>
+          .top-container {
+          width: 960px;
+          margin: 0 auto;
+        }
+        .writer {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+            padding: 10px 0;
+            width: 960px;
+            margin-top: 50px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        .writer label:first-child {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .writer label:last-child {
+            font-size: 15px;
+            color: rgba(192, 190, 183, 1);
+        }
+       .title-container {
+          width: 960px;
+          margin: 0 auto 15px;
+
+          padding: 30px 30px;
+          border: 1px solid;
+          border-radius: 10px;
+        }
+        .title-container span {
+          font-weight: bold;
+          font-size: 20px;
+        }
+        .content-container {
+          width: 960px;
+          margin: 0 auto;
+          padding: 30px 30px;
+          border: 1px solid;
+          /* text-align: center; */
+        }
+        .title-container hr {
+          margin-top: 10px;
+        }
+        h1 {
+          margin-top: 40px;
+          margin-bottom: 10px;
+        }
+
+        /* 버튼 */
+        .button-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 10px 0;
+            width: 960px;
+        }
+        .button-container1 {
+            text-align: right;
+            padding: 10px 0;
+        }
+        .button-container1 button {
+            margin-left: 5px;
+            padding: 7px 20px;
+            background-color: rgba(37, 37, 37, 1);
+            border-radius: 3px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+            cursor: pointer;
+        }
+        .button-container1 button:hover {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+            font-weight: bolder;
+            color: black;
+        }
+        .button-container2 {
+            text-align: right;
+            padding: 10px 0;
+        }
+        .button-container2 button {
+            margin-left: 5px;
+            padding: 7px 20px;
+            background-color: rgba(192, 190, 183, 1);
+            border-radius: 3px;
+            color: black;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+            cursor: pointer;
+        }
+        .button-container2 button:hover {
+            background-color: black;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+            font-weight: bolder;
+            color: white;
+        }
+
+        /* 댓글!!!! 입력*/
+        .reply-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px 0;
+            width: 960px;
+        }
+        .reply {
+            margin-left: 30px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .reply-box {
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            width: 720px;
+            margin: 0 auto 15px;
+            padding: 30px 30px;
+            border: 1px solid;
+            background-color: rgb(240, 240, 240);
+        }
+        .reply-box textarea {
+            /* flex-grow: 1;  */
+            margin-right: 5px;
+            display: block;
+            width: 90%;
+            height: 100px;
+            overflow-y: scroll;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .reply-container button {
+            margin-left: 5px; 
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            cursor: pointer;
+            border: 1px solid rgba(192, 190, 183, 1);
+            height: 100px;
+            border-radius: 3px;
+        }
+        .reply-container button:hover {
+            background-color: black;
+            color: white;
+            font-weight: bolder;
+        }
+        
+        /* 댓글 타이틀 */
+        .reply-list {
+            border-bottom: 1.7px solid #000;
+            width: 960px;
+        }
+        .reply-list label {
+            margin: 5px 10px;
+        }
+
+        /* 댓글!!!! 목록 */
+        #reply-list {
+            display: block;
+            border-bottom: 0.7px solid #000;
+            width: 960px;
+            display: block;
+            padding: 10px 5px;
+            box-sizing: border-box;
+        }
+        .reply-top {
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .reply-regDate {
+            color: rgba(192, 190, 183, 1);
+        }
+        .reply-regDate .icon {
+            color: #000;
+            margin: 0 20px;
+        }
+        .reply-middle {
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .reply-content {
+            flex-grow: 1;
+            margin-right: 20px;
+        }
+        .reply-button {
+            padding: 5px 0;
+           text-align: right;
+        }
+        .btn-reply-update {
+            padding: 5px 10px;
+            background-color: rgba(192, 190, 183, 1);
+            border-radius: 3px;
+            color: black;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-reply-delete {
+            margin-left: 5px;
+            padding: 5px 10px;
+            background-color: rgba(37, 37, 37, 1);
+            border-radius: 3px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+            cursor: pointer;
+        }
+        .reply-rereply {
+            align-items: left;
+            padding: 5px 0px;
+        }
+
+        /* 답글 버튼*/
+        .btn-rereply {
+            padding: 7px 15px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 3px;
+            background-color: transparent;
+            color: rgba(192, 190, 183, 1);
+        }
+/* ---------------------------------------------------------헷갈릴까봐 나눠놓기 
+    답글 입력과 답글 목록은 부모댓글 목록 안에!!!! 있음*/
+         /* 답글!!!! 입력*/
+         /* 답글 눌렀을 때 보이게 하기 */
+         .rereply-container {
+            /* display: none; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px 0;
+            /* padding-left: 20px; */
+            width: 100%;
+            /* border-bottom: 0.7px solid rgba(192, 190, 183, 1); */
+
+            visibility: hidden; /* 숨김 */
+            height: 0; /* 높이 0으로 설정 */
+            overflow: hidden; /* 콘텐츠 오버플로우 숨김 */
+        }
+        .rereply-container.visible {
+            visibility: visible; /* 보임 */
+            height: auto; /* 원래 높이로 설정 */
+            padding: 0;
+            padding-left: 70px;
+            transition: visibility 0.3s, height 0.3s;
+        }
+        .rereply {
+            /* margin-left: 30px;
+            font-weight: bold;
+            font-size: 20px; */
+            margin-left: 70px;
+        }
+        .rereply-box {
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            width: 720px;
+            margin: 0 auto 15px;
+            padding: 20px 20px;
+            border: 1px solid rgba(192, 190, 183, 1);
+            border-radius: 3px;
+        }
+        .rereply-box textarea {
+            /* flex-grow: 1;  */
+            margin-right: 5px;
+            display: block;
+            width: 90%;
+            height: 100px;
+            overflow-y: scroll;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .rereply-container button {
+            margin-left: 5px; 
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            cursor: pointer;
+            border: 1px solid rgba(192, 190, 183, 1);
+            height: 100px;
+            border-radius: 3px;
+        }
+        .rereply-container button:hover {
+            background-color: black;
+            color: white;
+            font-weight: bolder;
+        }
+
+        /* 답글!!!! 목록 */
+        #rereply-list {
+            display: block;
+            width: 100%;
+            display: block;
+            padding: 10px 5px;
+            box-sizing: border-box;
+            border-top: 0.7px solid rgba(192, 190, 183, 1);
+        }
+        .rereply-top {
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .rereply-regDate {
+            color: rgba(192, 190, 183, 1);
+        }
+        .rereply-regDate .icon {
+            color: #000;
+            margin: 0 20px;
+        }
+        .rereply-middle {
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .rereply-content {
+            flex-grow: 1;
+            margin-right: 20px;
+        }
+        .rereply-button {
+            padding: 5px 0;
+           text-align: right;
+        }
+        .btn-rereply-update {
+            padding: 5px 10px;
+            background-color: rgba(192, 190, 183, 1);
+            border-radius: 3px;
+            color: black;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-rereply-delete {
+            margin-left: 5px;
+            padding: 5px 10px;
+            background-color: rgba(37, 37, 37, 1);
+            border-radius: 3px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+            cursor: pointer;
+        }
+        .rereply-rereply {
+            align-items: left;
+            padding: 5px 0px;
+        }
+  </style>
+</head>
+
+
+<!-- layout:decorate 쓸 때 본문 내용은 <th:block layout:fragment="content"></th:block> 안에 적어야 화면에 뜸 -->
+<th:block layout:fragment="content" class="align-items-center ml-5">
+  <div class="body lg" style="max-width: 900 ;">
+    <h1 class="d-flex justify-content-center mt-3 mb-3">
+      홍보 상세
+    </h1>
+
+    <div class="container">
+      <div class="w-100 d-flex justify-content-center" >
+        <img src="/img/star.jpg" alt="홍보이미지">
+      </div>
+      <div class="d-flex justify-content-start">
+        <span id="content" th:utext="${starBoard.content}"></span>
+        <!-- <span id="content">홍보 내용입니다</span> -->
+      </div>
+
+      <div class="d-flex justify-content-end mt-2">
+        <button class="btn btn-primary btn-submit col-1 border-0" type="button" onclick="moveList()">목록</button>
+        <button class="btn btn-primary btn-submit col-1 border-0" type="button" onclick="update()">수정</button>
+      </div>
+
+
+
+    </div>
+
+
+
+  </div>
+
+  <div class="top-container">
+    <!-- 댓글 등록 -->
+    <div class="reply-container">
+      <div class="reply-box">
+        <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
+        <button type="button">등록</button>
+      </div>
+
+    </div>
+    <div class="reply-list">
+      <label class="reply">댓글</label>
+      <label class="reply-count">댓글 갯수</label>
+    </div>
+    <!-- 댓글 목록 -->
+    <div id="reply-list">
+      <!-- 댓글 -->
+      <div class="reply-top">
+        <span class="reply-writer">${writer}</span>
+        <span class="reply-regDate">${regDate}
+
+          <i class="fa-regular fa-thumbs-up icon"></i>
+
+        </span>
+      </div>
+      <!-- 댓글 내용/ 수정 삭제 버튼 -->
+      <div class="reply-middle">
+        <p class="reply-content">${content}</p>
+        <div class="reply-button">
+          <button class="btn-reply-update">수정</button>
+          <button class="btn-reply-delete">삭제</button>
+        </div>
+      </div>
+      <!-- 답글 쓰기 -->
+      <div class="reply-rereply">
+        <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
+      </div>
+
+      <div class="rereply-container m-2 p-0">
+        <div class="rereply-box">
+          <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
+          <button type="button">등록</button>
+        </div>
+      </div>
+      <!-- 답글!! 목록 -->
+      <div id="rereply-list">
+        <div class="rereply">
+          <!-- 답글 -->
+          <div class="rereply-top">
+            <span class="rereply-writer">${writer}</span>
+            <span class="rereply-regDate">${regDate}
+
+              <i class="fa-regular fa-thumbs-up icon"></i>
+
+            </span>
+          </div>
+          <!-- 답글 내용/ 수정 삭제 버튼 -->
+          <div class="rereply-middle">
+            <p class="rereply-content">${content}</p>
+            <div class="rereply-button">
+              <button class="btn-rereply-update">수정</button>
+              <button class="btn-rereply-delete">삭제</button>
+            </div>
+          </div>
+          <!-- 답글에 답글 쓰기 -->
+          <div class="rereply-rereply">
+            <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
+          </div>
+          <div class="rereply-container m-0 p-0">
+            <div class="rereply-box">
+              <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
+              <button type="button">등록</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <!-- 예시 자료 2 -->
+    <div id="reply-list">
+      <div class="reply-top">
+        <span class="reply-writer">${writer}</span>
+        <span class="reply-regDate">${regDate}
+          <i class="fa-regular fa-thumbs-up icon"></i>
+        </span>
+      </div>
+      <div class="reply-middle">
+        <p class="reply-content">${content}</p>
+        <div class="reply-button">
+          <button class="btn-reply-update">수정</button>
+          <button class="btn-reply-delete">삭제</button>
+        </div>
+      </div>
+      <div class="reply-rereply">
+        <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
+      </div>
+    </div>
+
+
+  </div>
+  <script>
+  </script>
+
+</th:block>
+
+</html>
