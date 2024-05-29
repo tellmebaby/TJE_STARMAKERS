@@ -219,7 +219,6 @@
 
                 <th:block th:each="qnaBoard : ${qnaList}">
                 <tr>
-                    <!-- <td align="center" th:text="${qnaBoard.qnaNo}"></td> -->
                     <td align="center"><i class="fa-solid fa-q twinkle"></i></td>
                     <td>
                         <a th:href="|qnaPost?qnaNo=${qnaBoard.qnaNo}|" th:text="${qnaBoard.title}"></a>
@@ -231,7 +230,6 @@
                     <td align="center" th:text="${qnaBoard.status}" th:classappend="${qnaBoard.status == '답변 대기' ? 'status-waiting' : 'status-completed'}"></td>
                     
                     <td align="center" th:text="${qnaBoard.views}"></td>
-                    
                 </tr>
                 </th:block>
 

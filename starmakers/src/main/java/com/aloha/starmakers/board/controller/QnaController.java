@@ -17,10 +17,6 @@ import com.aloha.starmakers.board.dto.QnaBoard;
 import com.aloha.starmakers.board.service.QnaService;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
