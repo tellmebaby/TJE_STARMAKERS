@@ -12,8 +12,10 @@ import com.aloha.starmakers.board.dto.StarBoard;
 @Mapper
 public interface StarMapper {
 
+
     // 목록 조회 - 페이징, 검색
-    public List<StarBoard> list(@Param("page") Page page
+    public List<StarBoard> list(@Param("type") String type
+                               ,@Param("page") Page page
                                ,@Param("option") Option option) throws Exception;
 
     // 글 등록

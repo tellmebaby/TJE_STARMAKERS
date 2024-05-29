@@ -23,10 +23,10 @@ public class StarServiceImpl implements StarService {
      * 게시글 목록
      */
     @Override
-    public List<StarBoard> list(Page page, Option option) throws Exception {
+    public List<StarBoard> list(String type, Page page, Option option) throws Exception {
         int total = starMapper.count(option);
         page.setTotal(total);
-        List<StarBoard> starList = starMapper.list(page, option);
+        List<StarBoard> starList = starMapper.list(type, page, option);
         return starList;
     }
 
@@ -78,4 +78,9 @@ public class StarServiceImpl implements StarService {
         return result;
     }
 
+
+
+
+    
+ 
 }
