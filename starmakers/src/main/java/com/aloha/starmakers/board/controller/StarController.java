@@ -1,8 +1,9 @@
 package com.aloha.starmakers.board.controller;
 
 
-import java.util.ArrayList;
 
+import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,29 +13,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-
-
-import com.aloha.starmakers.board.dto.Option;
-import com.aloha.starmakers.board.dto.Page;
 
 import com.aloha.starmakers.board.dto.StarBoard;
+import com.aloha.starmakers.user.dto.Users;
+import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.board.service.StarService;
-
+import com.aloha.starmakers.board.dto.Option;
+import com.aloha.starmakers.board.dto.Page;
 import lombok.extern.slf4j.Slf4j;
-
-
 
 @Slf4j
 @Controller
 @RequestMapping("/page")
 public class StarController {
-    
+
     @Autowired
     private StarService starService;
-    
+
+    @Autowired
+    private FileService fileService;
+
     /**
      * 글 등록 화면 요청
+     * 
      * @return
      */
     @GetMapping("/starCard/starInsert")
@@ -44,29 +47,41 @@ public class StarController {
 
     /**
      * 글 등록 요청
+     * 
      * @param model
      * @param starBoard
      * @param username
      * @return
      * @throws Exception
      */
+  
     @PostMapping("/starCard/starInsert")
-    public String insertPro(StarBoard starBoard, String username) throws Exception{
-        int result = starService.insert(starBoard, username);
+    public String insertPro(StarBoard starBoard, String username, @RequestParam("image") MultipartFile file ,HttpSession session)
+            throws Exception {
+        int starNo = starService.insert(starBoard, username);
+
+        Users user = (Users) session.getAttribute("user");
+        int userNo = user.getUserNo();
+
+
         // 리다이렉트
         // 데이터 처리 성공
-        if(result>0){
+        if (starNo > 0) {
+            // 파일 처리 로직
+            if (!file.isEmpty()) {
+                fileService.upload(file, starNo, userNo);
+            }
             return "redirect:/page/starCard/starList";
         }
-        
 
         // 데이터 처리 실패
         int no = starBoard.getStarNo();
         return "redirect:/page/starCard/starInsert?no=" + no + "&error";
     }
-    
+
     /**
      * 결제 화면 요청
+     * 
      * @param starNo
      * @param model
      * @return
@@ -79,16 +94,16 @@ public class StarController {
         return "/page/starCard/starPayment";
     }
     // @PostMapping("/starPayment")
-    // public String paymentPro(@RequestParam("starNo") int starNo, Model model) throws Exception {
-    //     StarBoard starBoard = starService.select(starNo);
-    //     model.addAttribute("starBoard", starBoard);
-    //     return "/page/starCard/starPayment";
+    // public String paymentPro(@RequestParam("starNo") int starNo, Model model)
+    // throws Exception {
+    // StarBoard starBoard = starService.select(starNo);
+    // model.addAttribute("starBoard", starBoard);
+    // return "/page/starCard/starPayment";
     // }
-    
-    
 
     /**
      * 글 1개 조회
+     * 
      * @param starNo
      * @param model
      * @return
@@ -100,13 +115,14 @@ public class StarController {
         model.addAttribute("starBoard", starBoard);
         return "/page/starCard/starRead";
     }
-    
+
     /**
      * 글 수정 페이지 요청
+     * 
      * @param starNo
      * @param model
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @GetMapping("/starCard/starUpdate")
     public String update(@RequestParam("starNo") int starNo, Model model) throws Exception {
@@ -119,13 +135,14 @@ public class StarController {
     public String updatePro(StarBoard starBoard) throws Exception {
 
         int result = starService.update(starBoard);
-        if ( result > 0) {
+        if (result > 0) {
             return "redirect:/page/starCard/starList";
         }
         int no = starBoard.getStarNo();
-        
+
         return "redirect:/page/board/qnaBoard/qnaUpdate?qnaNo=" + no + "$error";
     }
+
     
     // 아래부터 event 게시판
 
