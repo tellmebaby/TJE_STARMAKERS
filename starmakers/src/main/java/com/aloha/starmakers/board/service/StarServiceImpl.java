@@ -1,8 +1,12 @@
 package com.aloha.starmakers.board.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aloha.starmakers.board.dto.Option;
+import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.StarBoard;
 import com.aloha.starmakers.board.mapper.StarMapper;
 import com.aloha.starmakers.user.dto.Users;
@@ -15,6 +19,16 @@ public class StarServiceImpl implements StarService {
     @Autowired
     private StarMapper starMapper;
 
+    /**
+     * 게시글 목록
+     */
+    @Override
+    public List<StarBoard> list(String type, Page page, Option option) throws Exception {
+        int total = starMapper.count(option);
+        page.setTotal(total);
+        List<StarBoard> starList = starMapper.list(type, page, option);
+        return starList;
+    }
 
     /**
      * 글 등록(무료)
@@ -66,8 +80,7 @@ public class StarServiceImpl implements StarService {
 
 
 
-    
-    
 
     
+ 
 }
