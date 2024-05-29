@@ -6,19 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Q&A</title>
     <style>
-        .top-container {
-          width: 960px;
+        .container {
+          max-width: 960px;
           margin: 0 auto;
+          padding: 0 10px;
+          box-sizing: border-box;
         }
         .writer {
             display: flex;
             justify-content: space-around;
             gap: 10px;
-            padding: 10px 0;
-            width: 960px;
-            margin-top: 50px;
-            margin-left: 10px;
-            margin-right: 10px;
+            padding: 50px 15px 5px 5px;
+            width: 100%;
         }
         .writer label:first-child {
             font-size: 15px;
@@ -28,23 +27,25 @@
             font-size: 15px;
             color: rgba(192, 190, 183, 1);
         }
-       .title-container {
-          width: 960px;
-          margin: 0 auto 15px;
-
-          padding: 30px 30px;
+        .title-container {
+          width: 100%;
+          margin-bottom: 15px;
+          padding: 30px;
           border: 1px solid;
           border-radius: 10px;
+          box-sizing: border-box;
         }
         .title-container span {
           font-weight: bold;
           font-size: 20px;
         }
         .content-container {
-          width: 960px;
-          margin: 0 auto;
-          padding: 30px 30px;
+          width: 100%;
+          padding: 30px;
           border: 1px solid;
+          box-sizing: border-box;
+          overflow: hidden; /* 오버플로우 숨기기 */
+          word-wrap: break-word; /* 긴 단어를 줄 바꿈 */
         }
         .title-container hr {
           margin-top: 10px;
@@ -53,30 +54,33 @@
           margin-top: 40px;
           margin-bottom: 10px;
         }
-
         /* 버튼 */
         .button-wrapper {
             display: flex;
             justify-content: flex-end;
             gap: 10px;
             padding: 10px 0;
-            width: 960px;
+            width: 100%;
         }
-        .button-container1 {
+        .button-container1,
+        .button-container2 {
             text-align: right;
             padding: 10px 0;
         }
-        .button-container1 button {
+        .button-container1 button,
+        .button-container2 button {
             margin-left: 5px;
             padding: 7px 20px;
-            background-color: rgba(37, 37, 37, 1);
             border-radius: 3px;
-            color: white;
             text-decoration: none;
             display: inline-block;
             font-size: 14px;
             font-weight: normal;
             border: none;
+        }
+        .button-container1 button {
+            background-color: rgba(37, 37, 37, 1);
+            color: white;
         }
         .button-container1 button:hover {
             background-color: white;
@@ -84,21 +88,9 @@
             font-weight: bolder;
             color: black;
         }
-        .button-container2 {
-            text-align: right;
-            padding: 10px 0;
-        }
         .button-container2 button {
-            margin-left: 5px;
-            padding: 7px 20px;
             background-color: rgba(192, 190, 183, 1);
-            border-radius: 3px;
             color: black;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
         }
         .button-container2 button:hover {
             background-color: black;
@@ -106,57 +98,46 @@
             font-weight: bolder;
             color: white;
         }
-
-
         .answer {
-          margin-left: 30px;
+          margin-left: 10px;
           font-weight: bold;
           font-size: 20px;
         }
         .answer-container {
-          width: 960px;
-          height: 217.73px;
+          width: 100%;
           margin: 0 auto 5px;
-          padding: 30px 30px;
+          padding: 30px;
           border: 1px solid;
           border-radius: 10px;
           background-color: rgb(240, 240, 240);
+          box-sizing: border-box;
         }
         #answer-span {
           display: inline-block;
           width: 100%;
           height: 150px;
           background-color: rgb(240, 240, 240);
-          /* padding: 30px 30px; */
-          box-sizing: border-box;
         }
     </style>
 </head>
 <body>
-
   <th:block layout:fragment="content">
-
-  <div class="top-container">
-
+  <div class="container">
     <center>
-    <h1>Q&A</h1>
-    <label>운영원칙에 위배되는 글은 관리자에 의해 무통보 삭제될 수 있습니다.</label>
+      <h1>Q&A</h1>
+      <label>운영원칙에 위배되는 글은 관리자에 의해 무통보 삭제될 수 있습니다.</label>
     </center>
-
     <div class="writer">
       <label th:text="${qnaBoard.writer}"></label>
-      <!-- <label>${qnaBoard.writer}</label> -->
       <label th:text="${#dates.format(qnaBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></label>
     </div>
     <div class="title-container">
-        <span th:text="${qnaBoard.title}"></span>
-        <hr>
+      <span th:text="${qnaBoard.title}"></span>
+      <hr>
     </div>
     <div class="content-container">
-      <!-- 에디터의 HTML 은 th:utext 속성으로 가져온다-->
-      <span th:utext="${qnaBoard.content}"></span>
+      <div th:utext="${qnaBoard.content}"></div>
     </div>
-
     <div class="button-wrapper">
       <div class="button-container1">
         <button type="button" onclick="moveList()">목록</button>
@@ -165,27 +146,28 @@
         <button type="button" onclick="update()">수정</button>
       </div>
     </div>
-
     <label class="answer">답변</label>
     <form action="/page/board/qnaBoard/qnaPost" method="post" id="form">
+      <input type="hidden" id="inputCsrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
       <div class="answer-container">
-        <span id="answer-span"></span>
+        <span id="answer-span" th:text="${qnaBoard.answer}"></span>
         <textarea id="answer-textarea" name="answer" style="display: none; width: 100%; height: 150px;" placeholder="답변을 입력하세요..."></textarea>
+        <input type="hidden" name="qnaNo" id="qnaNo" th:value="${qnaBoard.qnaNo}" />
       </div>
       <div class="button-container1">
-        <button type="button" onclick="toggleAnswer()">답변 등록</button>
+        <button type="button" id="toggle-button" th:if="${qnaBoard.answer} == null" onclick="toggleAnswer()">답변 등록</button>
       </div>
     </form>
-
   </div>
-
   <script>
+    let qnaNo = '[[${qnaBoard.qnaNo}]]';
+
     function moveList() {
-      location.href = '/page/board/qnaBoard/qnaList'
+      location.href = '/page/board/qnaBoard/qnaList';
     }
   
     function update() {
-      location.href = '/page/board/qnaBoard/qnaList'
+      location.href = '/page/board/qnaBoard/qnaUpdate?qnaNo=' + qnaNo;
     }
     
     function toggleAnswer() {
@@ -193,48 +175,30 @@
       var textarea = document.getElementById("answer-textarea");
       var button = document.getElementById("toggle-button");
       var form = document.getElementById("form");
-      var answerContainer = document.querySelector(".answer-container");
 
-      // if(span.style.display === "none") {
-      //   span.style.display = "inline"
-      //   textarea.style.display = "none";
-      //   span.innerText = textarea.value;
-      // }
-      // else {
-      //   span.style.height = answerContainer.clientHeight + "px"; // answer-container 높이로 고정
-      //   span.style.display = "none"
-      //   textarea.style.display = "inline"
-      //   testarea.value = span.innerText;
-      // }
       if (textarea.style.display === "none") {
         span.style.display = "none";
         textarea.style.display = "block";
         textarea.value = span.innerText;
-        button.innerText = "답변 제출";
-        button.setAttribute("type", "submit");
+        button.innerText = "등록 완료";
 
-        form.addEventListener("submit", function(event) {
-                // alert 표시
+        button.onclick = function() {
+            if (textarea.value.trim() === "") {
+                alert("내용을 입력해주세요.");
+            } else {
                 alert("답변이 등록되었습니다!");
-            });
+                form.submit();
+            }
+        };
       } else {
         span.style.display = "block";
         textarea.style.display = "none";
         span.innerText = textarea.value;
         button.innerText = "답변 등록";
-        button.setAttribute("type", "button");
-
-        form.removeEventListener("submit", function(event) {
-                // 아무 동작도 하지 않음
-            });
+        button.onclick = toggleAnswer;
       }
     }
-
   </script>
-  
-</th:block>
-
-    
-
+  </th:block>
 </body>
 </html>

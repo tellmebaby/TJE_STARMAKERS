@@ -17,7 +17,10 @@
             <form>
                 <div class="search-title d-flex justify-content-between mt-3">
                     <span>상세검색</span>
-                    <a href="starInsert.html" class="btn btn-primary col-2 me-3">등록하기</a>
+                    <div class="col-4 d-flex justify-content-end">
+                        <a href="starCalendar.html" class="btn btn-primary col-4 me-1">캘린더보기</a>
+                        <a href="starInsert.html" class="btn btn-primary col-4 me-1">등록하기</a>
+                    </div>
                 </div>
                 <div class="detail-search mb-3">
                     <div class="row d-flex align-items-center mb-3">
@@ -153,154 +156,6 @@
                         </div>
                     </div>
 
-
-                    <style>
-                        .card {
-                            transition: all 0.1s;
-                            position: relative;
-                            /* background-color: #333;
-                            color: white; */
-
-                        }
-
-                        .card-overlay {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            background: linear-gradient(105deg, transparent 40%, rgba(255, 219, 112, 0.8) 45%, rgba(132, 50, 255, 0.6) 50%, transparent 54%);
-                            filter: brightness(1.1) opacity(0.8);
-                            mix-blend-mode: color-dodge;
-                            background-size: 150% 150%;
-                            background-position: 100%;
-                            pointer-events: none;
-                            /* z-index: 5000; */
-                            transition: opacity 0.3s ease;
-                        }
-
-
-                        .icon-body,
-                        .icon-container {
-                            pointer-events: none;
-                        }
-
-
-                        .heart {
-                            position: absolute;
-                            width: 50px;
-                            height: 50px;
-                            background-color: red;
-                            transform: rotate(-45deg);
-                            left: 50%;
-                            top: 50%;
-                            margin: -25px 0 0 -25px;
-                            animation: fadeOut 1s forwards;
-                        }
-
-                        .heart:before,
-                        .heart:after {
-                            content: "";
-                            position: absolute;
-                            width: 50px;
-                            height: 50px;
-                            background-color: red;
-                            border-radius: 50%;
-                        }
-
-                        .heart:before {
-                            top: -25px;
-                            left: 0;
-                        }
-
-                        .heart:after {
-                            left: 25px;
-                            top: 0;
-                        }
-
-                        @keyframes fadeOut {
-                            0% {
-                                opacity: 1;
-                                transform: scale(1) rotate(-45deg);
-                            }
-
-                            100% {
-                                opacity: 0;
-                                transform: scale(2) rotate(-45deg);
-                            }
-                        }
-                    </style>
-
-                    <script>
-                        $(document).ready(function () {
-                            $('.card').each(function () {
-                                var container = $(this);
-                                var overlay = container.find('.card-overlay');
-
-                                container.on('mousemove', function (e) {
-                                    var x = e.offsetX;
-                                    var y = e.offsetY;
-                                    var rotateY = -1 / 5 * x + 20;
-                                    var rotateX = 4 / 30 * y - 20;
-
-                                    overlay.css('background-position', `${x / 5 + y / 5}%`);
-                                    container.css('transform', `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`);
-                                });
-
-                                container.on('mouseout', function () {
-                                    overlay.css('filter', 'opacity(0)');
-                                    container.css('transform', 'perspective(350px) rotateY(0deg) rotateX(0deg)');
-                                });
-
-                                container.on('mouseenter', function () {
-                                    overlay.css('filter', 'opacity(0.8)');
-                                });
-
-                            });
-
-
-
-                            let clickTimer;
-                            let isDoubleClick = false;
-
-                            $('.card').click(function () {
-                                if (isDoubleClick) {
-                                    isDoubleClick = false;
-                                    return;
-                                }
-
-                                clickTimer = setTimeout(() => {
-                                    if (!isDoubleClick) {
-                                        alert('Button was one-clicked!');
-                                    }
-                                }, 250);
-                            });
-
-
-                            $('.card').dblclick(function (e) {
-                                clearTimeout(clickTimer);
-                                isDoubleClick = true;
-
-                                // 하트 모양 이펙트 추가
-                                let heart = $('<div class="heart"></div>');
-                                $('body').append(heart);
-                                heart.css({
-                                    top: e.pageY - 25,
-                                    left: e.pageX - 25
-                                });
-
-                                setTimeout(() => {
-                                    heart.remove();
-                                }, 1000);
-
-                                // 좋아요 아이콘 클래스 토글
-                                $(this).find('.fa-thumbs-up').toggleClass('fa-regular fa-solid');
-                            });
-
-
-
-                        });
-                    </script>
 
 
                     <div class="col-lg-3 p-0">
@@ -546,6 +401,74 @@
 
             });
 
+            $(document).ready(function () {
+                $('.card').each(function () {
+                    var container = $(this);
+                    var overlay = container.find('.card-overlay');
+
+                    container.on('mousemove', function (e) {
+                        var x = e.offsetX;
+                        var y = e.offsetY;
+                        var rotateY = -1 / 5 * x + 20;
+                        var rotateX = 4 / 30 * y - 20;
+
+                        overlay.css('background-position', `${x / 5 + y / 5}%`);
+                        container.css('transform', `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`);
+                    });
+
+                    container.on('mouseout', function () {
+                        overlay.css('filter', 'opacity(0)');
+                        container.css('transform', 'perspective(350px) rotateY(0deg) rotateX(0deg)');
+                    });
+
+                    container.on('mouseenter', function () {
+                        overlay.css('filter', 'opacity(0.8)');
+                    });
+
+                });
+
+
+
+                let clickTimer;
+                let isDoubleClick = false;
+
+                $('.card').click(function () {
+                    if (isDoubleClick) {
+                        isDoubleClick = false;
+                        return;
+                    }
+
+                    clickTimer = setTimeout(() => {
+                        if (!isDoubleClick) {
+                            alert('Button was one-clicked!');
+                        }
+                    }, 250);
+                });
+
+
+                $('.card').dblclick(function (e) {
+                    clearTimeout(clickTimer);
+                    isDoubleClick = true;
+
+                    // 하트 모양 이펙트 추가
+                    let heart = $('<div class="heart"></div>');
+                    $('body').append(heart);
+                    heart.css({
+                        top: e.pageY - 25,
+                        left: e.pageX - 25
+                    });
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 1000);
+
+                    // 좋아요 아이콘 클래스 토글
+                    $(this).find('.fa-thumbs-up').toggleClass('fa-regular fa-solid');
+                });
+
+
+
+            });
         </script>
 
 

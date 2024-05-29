@@ -1,5 +1,5 @@
 
--- Active: 1714701530602@@127.0.0.1@3306@joeun
+-- Active: 1716894496133@@127.0.0.1@3306@joeun
 
 
 
@@ -19,13 +19,14 @@ CREATE TABLE file
 (
   file_no   INT         NOT NULL AUTO_INCREMENT COMMENT '파일데이터번호',
   file_name VARCHAR(255) NOT NULL COMMENT '파일이름', -- 파일이름의 길이를 늘렸습니다.
+  origin_name VARCHAR(255) NOT NULL COMMENT '파일이름',
   size      BIGINT      NOT NULL COMMENT '파일용량', -- 파일 크기를 정수로 저장합니다.
-  ext_name  VARCHAR(10) NOT NULL COMMENT '확장자이름', -- 컬럼명을 last_name에서 ext_name으로 변경했습니다.
   reg_date  TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일자',
   user_no   INT         NULL     COMMENT '유저데이터번호',
   star_no   INT         NULL     COMMENT '이벤트데이터번호',
   PRIMARY KEY (file_no)
 ) COMMENT '업로드파일';
+
 
 DROP TABLE IF EXISTS message ;
 CREATE TABLE message

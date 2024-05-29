@@ -42,8 +42,9 @@
         <button type="button" class="btn btn-outline-dark btn-lg col-4 border-0 rounded-1" id="designBtn">디자인
           의뢰</button>
       </div>
-      <form action="/page/starCard/starInsert" method="post" id="starInsert">
+      <form action="/page/starCard/starInsert" method="post" id="starInsert" enctype="multipart/form-data">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <input type="hidden" name="username" th:value="${session.user.email}">
         <div class="category my-4 bg-body-tertiary rounded">
           <div class="site row py-2">
             <div class="item col-1"></div>
@@ -52,11 +53,12 @@
             </div>
 
 
-            <input type="hidden" name="username" th:value="${session.user.email}">
-            <input type="hidden" name="type" value="무료홍보">
-            <input type="hidden" name="status" value="홍보중">
+            <!-- <input type="hidden" name="type" value="무료홍보" id="free">
+            <input type="hidden" name="type" value="유료홍보" id="payment"> -->
 
+            <input type="hidden" name="status" value="홍보요청">
 
+            <input type="hidden" name="type" value="starCard">
             <div class="item col-8 d-flex justify-content-start column-gap-2">
               <div class="form-check form-check-inline d-flex align-items-center">
                 <input class="form-check-input " name="category1" type="checkbox" value="youtube" id="youtube">
@@ -133,6 +135,12 @@
                   ASMR
                 </label>
               </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" name="category2" type="checkbox" value="fashion" id="fashion">
+                <label class="form-check-label" for="fashion">
+                  패션
+                </label>
+              </div>
 
             </div>
 
@@ -149,6 +157,7 @@
           <input type='text' name="endDate" id='datepicker2' class='form-control' data-td-target='#datepicker2'
             width="41.7%" aria-describedby="addon-wrapping" placeholder="홍보 종료일" readonly />
         </div>
+
         <!-- </div> -->
         <div class="input-group mb-3">
           <span class="input-group-text" id="addon-wrapping">제목</span>
@@ -157,6 +166,10 @@
         </div>
         <!-- <input type="text" class="" id="starPostTitle" placeholder="제목을 입력해주세요"> -->
 
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="inputGroupFile01">썸네일</label>
+          <input type="file" name="image" class="form-control" id="inputGroupFile01">
+        </div>
 
         <div>
           <textarea name="content" class="" id="summernote" value=""></textarea>
@@ -167,25 +180,55 @@
           <button type="button" class="btn btn-light btn-sm col-1 btn-list" onclick="starList()" id="list">목록</button>
 
           <input type="submit" class="btn btn-dark btn-sm border col-1" id="sendPost" value="등록">
+
           <button class="btn btn-dark btn-sm col-1 " id="payBtn" type="button" style="display: none;">결제</button>
         </div>
 
       </form>
 
-      <div class="container item-align-center text-start w-75" style="display: none;" id="design"><b>
-          <h1 class="mt-5">"디자인이 어려우시면,</h1><br>
-          <h1 class="text-primary ms-5">저희에게 맡겨주세요!"</h1><br>
-          <ul>
-            <li>인스타그램 홍보 카드</li>
-            <li>치지직/유튜브 홍보 인트로 영상</li>
-            <li>배너 광고 이미지</li>
-          </ul><br>
-          <p>예비 스타님의 개성에 맞춘 홍보물을 만들어 드립니다.</p><b><img src="/img/star.jpg" class="w-100"><button type="button" id="chat"
-              class="btn btn-lg btn-outline-secondary w-100 mt-5">1:1 채팅 바로가기</button></b>
-        </b></div>
+      <div class="container item-align-center text-start" style="display: none;" id="design">
+        <h1 class="mt-5">"디자인이 어려우시면,</h1><br>
+        <h1 class="text-primary ms-5">저희에게 맡겨주세요!"</h1><br>
+        <ul>
+          <li>인스타그램 홍보 카드</li>
+          <li>치지직/유튜브 홍보 인트로 영상</li>
+          <li>배너 광고 이미지</li>
+        </ul><br>
+        <p>예비 스타님의 개성에 맞춘 홍보물을 만들어 드립니다!😆</p>
 
+        <!-- <img src="/img/star.jpg" class="w-100"> -->
+        <!-- <button type="button" id="chat"
+              class="btn btn-lg btn-outline-secondary w-100 mt-5">1:1 채팅 바로가기</button></b> -->
+
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed border-bottom" type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                ⭐<b>디자인 의뢰하기</b>🙋‍♀️
+              </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <form action="/page/starCard/starInsert" method="post" id="designReq">
+                <input type="hidden" name="type" value="starCard">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <input type="hidden" name="username" th:value="${session.user.email}">
+                <input type="hidden" name="title" th:value="|${session.user.email}님 디자인 의뢰|">
+                <input type="hidden" name="status" value="디자인의뢰">
+                <div>
+                  <textarea name="content" id="summernote2"></textarea>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <input type="submit" class="btn btn-dark btn-sm border col-2" id="designBtn" value="견적 요청">
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </div>
-  </div>
 
   </div>
 
@@ -211,7 +254,61 @@
       lang: 'ko-KR',
       fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
       fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
-      placeholder: '홍보할 내용을 입력하세요.'
+      placeholder: '홍보할 내용을 입력하세요.',
+      callbacks: {
+        onImageUpload: function (files) {
+          // 이미지 파일을 읽고 최적화하는 함수 호출
+          optimizeAndUploadImage(files[0]);
+        }
+      }
+    });
+
+    function optimizeAndUploadImage(file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = function () {
+          // 캔버스를 사용하여 이미지 리사이즈
+          const canvas = document.createElement('canvas');
+          const maxWidth = 800; // 최대 너비 설정
+          const scaleSize = maxWidth / img.width;
+          canvas.width = maxWidth;
+          canvas.height = img.height * scaleSize;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          // 리사이즈한 이미지를 base64 데이터 URL로 변환
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.8); // 품질 설정 (0.8은 80%)
+
+          // Summernote 에디터에 이미지를 삽입
+          const $summernote = $('#summernote');
+          $summernote.summernote('insertImage', dataUrl);
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+
+    $('#summernote2').summernote({
+      toolbar: [
+        // [groupName, [list of button]]
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+        ['color', ['forecolor', 'color']],
+        ['table', ['table']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['insert', ['picture', 'link', 'video']],
+        ['view', ['fullscreen', 'help']]
+      ],
+      height: 500,
+      minHeight: null,
+      maxHeight: null,
+      lang: 'ko-KR',
+      fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+      fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+      placeholder: '의뢰하고 싶은 디자인의 내용을 입력해주세요.<br> 자세히 작성해주실 수록 더욱 마음에 드시는 결과물을 얻으실 수 있을 거예요 :D <br> 디자인 가격은 의뢰주시는 내용에 따라 달라지며 관리자가 확인 후 3일 이내에 연락 드립니다!'
     });
 
     // $(document).ready(function () {
@@ -222,6 +319,11 @@
 
     //         });
     //     });
+
+    $('#payBtn').click(function(){
+      $("#starInsert").attr("action", "/page/starCard/starPayment").submit();
+    });
+
 
     function starList() {
       location.href = '/page/starCard/starList'
@@ -253,22 +355,22 @@
 
 
         // 무료홍보 버튼 클릭 시
-        $('#freePromo').click(function () {
-          $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
-          $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
-        });
+        // $('#freePromo').click(function () {
+        //   $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
+        //   $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
+        // });
 
-        // 유료홍보 버튼 클릭 시
-        $('#payPromo').click(function () {
-          $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
-          $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
-        });
+        // // 유료홍보 버튼 클릭 시
+        // $('#payPromo').click(function () {
+        //   $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
+        //   $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
+        // });
 
-        // 디자인 의뢰 버튼 클릭 시
-        $('#designBtn').click(function () {
-          $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
-          $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
-        });
+        // // 디자인 의뢰 버튼 클릭 시
+        // $('#designBtn').click(function () {
+        //   $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
+        //   $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
+        // });
 
       });
     });

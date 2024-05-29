@@ -26,14 +26,14 @@
         }
         .search-container button {
             margin-left: 5px;
-            padding: 0 15px;
+            padding: 6px 15px;
             background-color: rgba(51, 130, 246, 1);
             color: white;
             border-radius: 3px;
             border: none;
         }
         .search-container button:hover {
-            padding: 0 15px;
+            padding: 6px 15px;
             background-color: rgba(41, 75, 254, 1);
             box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
             font-weight: bolder;
@@ -88,14 +88,41 @@
 
         .fa-star {
             color: gold;
-            animation: twinkle 1s infinite alternate;
+            font-size: 17px; /* 아이콘 크기 조정 */
+            margin-right: 10px;
+            animation: twinkle2 1.5s infinite alternate;
+            transition: transform 0.3s ease-in-out; /* 크기 변화 애니메이션 */
         }
+
+        @keyframes twinkle2 {
+            0% {
+                opacity: 0.8;
+                color: gold;
+                transform: scale(1);
+                text-shadow: 0 0 5px rgba(255, 223, 0, 0.8), 0 0 10px rgba(255, 223, 0, 0.8);
+            }
+            50% {
+                color: lightgoldenrodyellow;
+                opacity: 1;
+                transform: scale(1.2);
+                text-shadow: 0 0 10px rgba(255, 223, 0, 0.9), 0 0 20px rgba(255, 223, 0, 0.9);
+            }
+            100% {
+                opacity: 0.8;
+                color: gold;
+                transform: scale(1);
+                text-shadow: 0 0 5px rgba(255, 223, 0, 0.8), 0 0 10px rgba(255, 223, 0, 0.8);
+            }
+        }
+
+
         @keyframes twinkle {
             0% {
                 opacity: 1;
             }
             50% {
-                opacity: 0.5;
+                color: orangered;
+                opacity: 1;
             }
             100% {
                 opacity: 1;
@@ -104,6 +131,22 @@
         .notice-row {
             background-color: #f0f0f0; /* 회색 배경색 */
         }
+
+        .twinkle {
+            color: orange;
+            animation: twinkle 1s infinite;
+        }
+        .status-waiting {
+            color: grey; /* 답변 대기일 때의 색상 */
+        }
+
+        .status-completed {
+            color: darkblue; /* 답변 완료일 때의 색상 */
+            font-weight: bold;
+        }
+        .fixed {
+            background-color: #f0f0f0;
+        }
     </style>
 </head>
 <body>
@@ -111,16 +154,15 @@
 
         <div class="container">
         <h3>Q&A 게시판</h3>
-
             <div class="search-container">
-                <select>
-                    <option value="제목내용">제목+내용</option>
-                    <option value="제목">제목</option>
-                    <option value="내용">내용</option>
-                    <option value="작성자">작성자</option>
-                </select>
-                <input type="text" placeholder="검색어를 입력하세요">
-                <button type="button">검색</button>
+                <form action="/page/board/qnaBoard/qnaList" method="get">
+                    <select name="code">
+                        <option th:each="item : ${optionList}" th:value="${item.code}" th:text="${item.keyword}" th:selected="${item.code == option.code}"></option>
+                    </select>
+                    <input type="text" name="keyword" placeholder="검색어를 입력하세요" 
+                           th:value="${param.keyword}">
+                    <button type="submit">검색</button>
+                </form>
             </div>
 
             <table>
@@ -135,17 +177,31 @@
                     </tr>
                 </thead>
                 
-                <tr class="notice-row" th:each="notice : ${fixedNotices}">
-                    <td align="center"><i class="fas fa-star"></i></td>
-                    <td align="center">
-                        <a th:href="|qnaPost?qnaNo=${notice.qnaNo}|" th:text="${notice.title}"></a>
+                <tr class="fixed">
+                    <td align="center"><i class="fa-solid fa-q twinkle"></i></td>
+                    <td>
+                        <i class="fas fa-star"></i><b>로그인 필수</b>
                     </td>
-                    <td align="center" th:text="${notice.writer}"></td>
+                    <td align="center">관리자</td>
                     <td align="center">
-                        <span th:text="${#dates.format(notice.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                        <span >2024-05-28 18:59:37</span>
                     </td>
-                    <td align="center" th:text="${notice.status}"></td>
-                    <td align="center" th:text="${notice.views}"></td>
+                    <td align="center" ></td>
+                    
+                    <td align="center" >678</td>
+                </tr>
+                <tr class="fixed">
+                    <td align="center"><i class="fa-solid fa-q twinkle"></i></td>
+                    <td>
+                        <i class="fas fa-star"></i><b>질문 답변 등록 됩니다</b>
+                    </td>
+                    <td align="center">관리자</td>
+                    <td align="center">
+                        <span >2024-05-28 18:59:37</span>
+                    </td>
+                    <td align="center" ></td>
+                    
+                    <td align="center" >439</td>
                 </tr>
 
                 <th:block th:if="${qnaList.isEmpty()}">
@@ -158,32 +214,70 @@
 
                 <th:block th:each="qnaBoard : ${qnaList}">
                 <tr>
-                    <!-- <td align="center" th:text="${qnaBoard.qnaNo}"></td> -->
-                    <td align="center" th:text="Q"></td>
-                    <td align="center">
+                    <td align="center"><i class="fa-solid fa-q twinkle"></i></td>
+                    <td>
                         <a th:href="|qnaPost?qnaNo=${qnaBoard.qnaNo}|" th:text="${qnaBoard.title}"></a>
                     </td>
                     <td align="center" th:text="${qnaBoard.writer}"></td>
                     <td align="center">
                         <span th:text="${#dates.format(qnaBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
                     </td>
-                    <td align="center" th:text="${qnaBoard.status}"></td>
+                    <td align="center" th:text="${qnaBoard.status}" th:classappend="${qnaBoard.status == '답변 대기' ? 'status-waiting' : 'status-completed'}"></td>
                     
                     <td align="center" th:text="${qnaBoard.views}"></td>
-                    
                 </tr>
                 </th:block>
 
-
-
-                
-                
             </table>
             <div class="button-container">
-            <a href="/page/board/qnaBoard/qnaInsert">질문 작성</a>
+            <!-- 비 로그인 시 -->
+                <th:block sec:authorize="isAnonymous()">
+                    <!-- 여기에는 아무것도 표시되지 않음 -->
+                </th:block>
+                <!-- 로그인 시 -->
+                <th:block sec:authorize="isAuthenticated()">
+                    <a href="/page/board/qnaBoard/qnaInsert" class="btn btn-primary">질문 등록</a>
+                </th:block>
             </div>
         </div>
 
+        <!-- 페이지네이션 -->
+        <center>
+        <div>
+            <!-- [ 처음으로 ]-->
+            <a th:href="|/page/board/qnaBoard/qnaList?page=${page.first}&code=${option.code}&keyword=${option.keyword}|">&laquo;</a>
+
+            <!-- [ 이전 ] -->
+            <th:block th:if="${page.page != page.first}">
+                <a th:href="|/page/board/qnaBoard/qnaList?page=${page.prev}&code=${option.code}&keyword=${option.keyword}|">&lt;</a>
+            </th:block>
+
+            <th:block th:each="no : ${#numbers.sequence(page.start, page.end)}">  <!--(1,10)모델에 담은 페이지가 아니라 그냥 1부터 10 --> 
+                <!-- 현재 페이지 -->
+                <!--
+                #numbers.sequence(시작번호, 끝번호)
+                : 시작번호부터 끝번호까지 번호 리스트를 생성
+                -->
+                <th:block th:if="${page.page == no}">
+                    <b>
+                        <span th:text="${no}"></span>
+                    </b>
+                </th:block>
+                <th:block th:if="${page.page != no}">
+                    <a th:href="|/page/board/qnaBoard/qnaList?page=${no}&code=${option.code}&keyword=${option.keyword}|" th:text="${no}"></a>
+                </th:block>
+            </th:block>
+
+            <!-- [ 다음 ] -->
+            <th:block th:if="${page.page != page.last}">
+                <a th:href="|/page/board/qnaBoard/qnaList?page=${page.next}&code=${option.code}&keyword=${option.keyword}|">&gt;</a>
+            </th:block>
+
+            <!-- [ 마지막 ]-->
+            <a th:href="|/page/board/qnaBoard/qnaList?page=${page.last}&code=${option.code}&keyword=${option.keyword}|">&raquo;</a>
+        </div>
+        </center>
+    
     </th:block>
 
 </body>

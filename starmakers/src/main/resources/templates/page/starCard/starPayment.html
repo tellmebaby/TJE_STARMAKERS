@@ -17,13 +17,13 @@
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/lang/summernote-ko-KR.min.js"
     integrity="sha256-y2bkXLA0VKwUx5hwbBKnaboRThcu7YOFyuYarJbCnoQ=" crossorigin="anonymous"></script>
 
-    <!-- DatePicker  -->
-    <script src="/lib/datePicker.js" type="text/javascript"></script>
-    <!-- <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script> -->
-    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    <style>
-       
-    </style>
+  <!-- DatePicker  -->
+  <script src="/lib/datePicker.js" type="text/javascript"></script>
+  <!-- <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script> -->
+  <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+  <style>
+
+  </style>
 </head>
 
 
@@ -34,33 +34,53 @@
       결제
     </h1>
     <p class="d-flex justify-content-center text-secondary mb-3">문의사항은 1:1 채팅 또는 Q&A 게시판을 이용해주세요.</p>
-    
+    <!-- 이름, 카드번호, 상품명, 금액(날짜x1000) 등 -->
     <div class="container">
-        <form action="" method="post" id="starPost" class="">
-            <div class="">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-                <!-- <th:block th:if="${session.user.email}">
+      <form action="" method="post" id="payment" class="">
+        <div class="">
+          <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"> -->
+          <!-- <th:block th:if="${session.user.email}">
                     <input type="text" name="name" th:value="${session.user.email}">
                 </th:block> -->
-                <!-- <input type="hidden" name="username" th:value="${session.user.email}">   -->
-                <label for="name">이름</label>
-                <input type="text" name="name" />
-            </div>
-            <div>
-                <label for="price">금액</label>
-                <input type="text" name="price" value="5000">
-            </div>
-            <input type="submit" value="결제">
-        </form>
+          <!-- <input type="hidden" name="username" th:value="${session.user.email}">   -->
+          <label for="name">이름</label>
+          <input type="text" name="name" />
+          <!-- <p th:text="${starBoard.}"></p> -->
+        </div>
+        <div>
+          <label for="price">금액</label>
+          <input type="text" name="price" value="5000" readonly></input>
+        </div>
+        <div>
+          <label for="price">카드번호</label>
+          <input type="text" name="cardNo"></input>
+        </div>
+        <!-- <input type="hidden" th:value="${starBoard.startDate}" name="strDate" id="strDate">
+            <input type="hidden" th:value="${starBoard.endDate}" name="endDate" id="endDate"> -->
+        <input type="submit" value="결제">
+      </form>
 
     </div>
-
   </div>
 
 
 
 
   <script>
+    // let strDate = document.getElementById('strDate').value
+    // let strDate = new Date(document.getElementById('strDate').value)
+    // const endDate = new Date(document.getElementById('endDate').value)
+    const strDate = new Date('[[${starBoard.startDate}]]')
+    const year = strDate.getFullYear();
+    const month = String(strDate.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1 필요
+    const day = String(strDate.getDate()).padStart(2, '0');
+    const strDate2= `${year}-${month}-${day}`;
+    console.log(strDate2)
+
+    const endDate = new Date('2024-05-30')
+    let diff = Math.abs(strDate.getTime() - endDate.getTime());
+    diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    console.log(diff);
   </script>
 
 </th:block>
