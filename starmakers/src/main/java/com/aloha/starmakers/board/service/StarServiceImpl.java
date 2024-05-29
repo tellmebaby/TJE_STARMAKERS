@@ -1,5 +1,7 @@
 package com.aloha.starmakers.board.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +64,15 @@ public class StarServiceImpl implements StarService {
     public int update(StarBoard starBoard) throws Exception {
         int result = starMapper.update(starBoard);
         return result;
+    }
+
+    /*
+     * 글 목록
+     */
+    @Override
+    public List<StarBoard> list(String type) throws Exception {
+        List<StarBoard> starList = starMapper.list(type);
+        return starList;
     }
 
 

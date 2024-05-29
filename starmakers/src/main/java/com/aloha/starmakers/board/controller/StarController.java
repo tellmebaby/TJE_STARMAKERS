@@ -1,20 +1,19 @@
 package com.aloha.starmakers.board.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.aloha.starmakers.board.dto.QnaBoard;
 import com.aloha.starmakers.board.dto.StarBoard;
 import com.aloha.starmakers.board.service.StarService;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import lombok.extern.slf4j.Slf4j;
 
 
 
@@ -122,6 +121,13 @@ public class StarController {
     
     // 아래부터 event 게시판
 
+    @GetMapping("/board/eventBoard/eventList")
+    public String list(@RequestParam(value = "type", defaultValue = "event") String type, Model model) throws Exception {
+        List<StarBoard> starList = starService.list(type);
+        model.addAttribute("starList", starList);
+        return "/page/board/eventBoard/eventList";
+    }
+    
     @PostMapping("/board/eventBoard/eventInsert")
     public String eventInsertPro(StarBoard starBoard, String username) throws Exception{
         int result = starService.insert(starBoard, username);
@@ -137,6 +143,8 @@ public class StarController {
         return "redirect:/page/board/eventBoard/eventInsert?starNo=" + no + "&error";
     }
 
+
+    // review 게시판
     @PostMapping("/board/reviewBoard/reviewInsert")
     public String reviewInsertPro(StarBoard starBoard, String username) throws Exception{
         int result = starService.insert(starBoard, username);

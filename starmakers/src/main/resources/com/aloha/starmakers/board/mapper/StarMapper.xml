@@ -43,4 +43,12 @@
             upd_date = now()
         WHERE star_no = #{starNo}
     </update>
+
+    <!-- 게시판 조회 -->
+    <select id="list" resultType="StarBoard">
+        SELECT *
+        FROM star_board
+        WHERE type = #{type}
+        ORDER BY reg_date DESC
+    </select>
 </mapper>
