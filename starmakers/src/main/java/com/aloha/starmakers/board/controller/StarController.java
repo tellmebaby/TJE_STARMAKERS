@@ -57,5 +57,35 @@ public class StarController {
         return "redirect:/page/starCard/starInsert?no=" + no + "&error";
     }
     
+    /**
+     * 결제 화면 요청
+     * @param starNo
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/starPayment")
+    public String payment(@RequestParam("starNo") int starNo, Model model) throws Exception {
+        StarBoard starBoard = starService.select(starNo);
+        model.addAttribute("starBoard", starBoard);
+        return "/page/starCard/starPayment";
+    }
+    // @PostMapping("/starPayment")
+    // public String paymentPro(@RequestParam("starNo") int starNo, Model model) throws Exception {
+    //     StarBoard starBoard = starService.select(starNo);
+    //     model.addAttribute("starBoard", starBoard);
+    //     return "/page/starCard/starPayment";
+    // }
+    
+    
+
+    @GetMapping("/starRead")
+    public String select(@RequestParam("starNo") int starNo, Model model) throws Exception {
+        StarBoard starBoard = starService.select(starNo);
+        model.addAttribute("starBoard", starBoard);
+        return "/page/starCard/starRead";
+    }
+    
+    
     
 }

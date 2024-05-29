@@ -44,6 +44,7 @@
       </div>
       <form action="/page/starCard/starInsert" method="post" id="starInsert">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <input type="hidden" name="username" th:value="${session.user.email}">
         <div class="category my-4 bg-body-tertiary rounded">
           <div class="site row py-2">
             <div class="item col-1"></div>
@@ -52,8 +53,9 @@
             </div>
 
 
-            <input type="hidden" name="username" th:value="${session.user.email}">
-            <input type="hidden" name="type" value="무료홍보">
+            <!-- <input type="hidden" name="type" value="무료홍보" id="free">
+            <input type="hidden" name="type" value="유료홍보" id="payment"> -->
+
             <input type="hidden" name="status" value="홍보중">
 
 
@@ -131,6 +133,12 @@
                 <input class="form-check-input" name="category2" type="checkbox" value="asmr" id="asmr">
                 <label class="form-check-label" for="asmr">
                   ASMR
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" name="category2" type="checkbox" value="fashion" id="fashion">
+                <label class="form-check-label" for="fashion">
+                  패션
                 </label>
               </div>
 
@@ -223,6 +231,12 @@
     //         });
     //     });
 
+    $('#payBtn').click(function(){
+      alert('결제')
+      location.href='page/starCard/starPayment'
+    });
+
+
     function starList() {
       location.href = '/page/starCard/starList'
 
@@ -253,22 +267,22 @@
 
 
         // 무료홍보 버튼 클릭 시
-        $('#freePromo').click(function () {
-          $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
-          $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
-        });
+        // $('#freePromo').click(function () {
+        //   $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
+        //   $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
+        // });
 
-        // 유료홍보 버튼 클릭 시
-        $('#payPromo').click(function () {
-          $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
-          $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
-        });
+        // // 유료홍보 버튼 클릭 시
+        // $('#payPromo').click(function () {
+        //   $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
+        //   $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
+        // });
 
-        // 디자인 의뢰 버튼 클릭 시
-        $('#designBtn').click(function () {
-          $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
-          $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
-        });
+        // // 디자인 의뢰 버튼 클릭 시
+        // $('#designBtn').click(function () {
+        //   $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
+        //   $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
+        // });
 
       });
     });

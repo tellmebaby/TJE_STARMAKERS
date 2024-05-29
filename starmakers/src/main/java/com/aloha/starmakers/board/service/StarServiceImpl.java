@@ -16,16 +16,51 @@ public class StarServiceImpl implements StarService {
     private StarMapper starMapper;
 
 
+    /**
+     * 글 등록(무료)
+     */
     @Override
     public int insert(StarBoard starBoard, String username) throws Exception {
         Users user = userMapper.login(username);
         starBoard.setUserNo(user.getUserNo());
         starBoard.setWriter(user.getName());
-
+        starBoard.setStatus("무료홍보");
         // 정보 등록
         int result = starMapper.insert(starBoard);
         
         return result;
     }
+
+    /**
+     * 글 등록(유료)
+     */
+    @Override
+    public int payInsert(StarBoard starBoard, String username) throws Exception {
+        Users user = userMapper.login(username);
+        starBoard.setUserNo(user.getUserNo());
+        starBoard.setWriter(user.getName());
+        starBoard.setStatus("유료홍보");
+        // 정보 등록
+        int result = starMapper.insert(starBoard);
+        
+        return result;
+    }
+
+
+    /**
+     * 글 조회
+     */
+    @Override
+    public StarBoard select(int starNo) throws Exception {
+        StarBoard starBoard = starMapper.select(starNo);
+      
+        return starBoard;
+    }
+
+
+
+    
+    
+
     
 }
