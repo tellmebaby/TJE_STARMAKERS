@@ -13,5 +13,6 @@ public interface StarService {
     // 글 조회
     public StarBoard select(int starNo) throws Exception;
 
-
+    // 글 수정
+    public int update(StarBoard starBoard) throws Exception;
 }

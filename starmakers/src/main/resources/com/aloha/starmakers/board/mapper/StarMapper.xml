@@ -34,4 +34,13 @@
         WHERE star_no = #{starNo}
     </select>
 
+    <!-- 글 수정 -->
+    <update id="update">
+        UPDATE star_board
+        SET title = #{title},
+            <!-- writer = #{writer}, -->
+            content = #{content},
+            upd_date = now()
+        WHERE star_no = #{starNo}
+    </update>
 </mapper>

@@ -108,6 +108,9 @@ public class QnaController {
         return "redirect:/board/insert?no=" + no + "&error";
     }
 
+    /** 글 수정
+     * 
+     */
     @GetMapping("/qnaUpdate")
     public String update(@RequestParam("qnaNo") int qnaNo, Model model) throws Exception {
         QnaBoard qnaBoard = qnaService.select(qnaNo);
