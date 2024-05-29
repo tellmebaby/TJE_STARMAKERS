@@ -5,6 +5,28 @@
 
 <mapper namespace="com.aloha.starmakers.board.mapper.StarMapper">
 
+    <!-- 게시판 목록 -->
+    <select id="list" resultType="starBoard">
+        SELECT *
+        FROM star_board
+        WHERE type = #{type}
+            <if test="option.code == 0">
+                title LIKE CONCAT('%', #{option.keyword}, '%')
+                OR content LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 1">
+                title LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 2">
+                content LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+           <if test="option.code == 3">
+                writer LIKE CONCAT('%', #{option.keyword}, '%')
+           </if>
+        ORDER BY reg_date DESC
+        LIMIT #{page.index}, #{page.rows}
+    </select>
+
     <!-- 게시판 조회 -->
     <!-- <select id="select" resultType="starCard">
         SELECT *
@@ -43,4 +65,12 @@
             upd_date = now()
         WHERE star_no = #{starNo}
     </update>
+
+    <!-- 게시판 조회 -->
+    <select id="list" resultType="StarBoard">
+        SELECT *
+        FROM star_board
+        WHERE type = #{type}
+        ORDER BY reg_date DESC
+    </select>
 </mapper>

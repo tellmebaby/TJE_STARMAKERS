@@ -397,8 +397,9 @@
             <label th:text="${starBoard.writer}"></label>
             <label th:text="${#dates.format(starBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}" ></label>
         </div>
+
         <div class="title-container">
-            <span>제목 - 엉기조차 벙기조차</span>
+            <span th:text="${starBoard.title}"></span>
             <hr>
         </div>
         <div class="title-container">
