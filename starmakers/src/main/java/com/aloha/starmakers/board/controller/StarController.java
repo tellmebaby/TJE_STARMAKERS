@@ -136,6 +136,16 @@ public class StarController {
 
         List<StarBoard> starList = starService.list(type, page, option);
         model.addAttribute("starList", starList);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
+        
+        List<Option> optionList = new ArrayList<Option>();
+        optionList.add(new Option("제목+내용", 0));
+        optionList.add(new Option("제목", 1));
+        optionList.add(new Option("내용", 2));
+        optionList.add(new Option("작성자", 3));
+        model.addAttribute("optionList", optionList);
+
         return "/page/board/eventBoard/eventList";
     }
     
@@ -199,16 +209,12 @@ public class StarController {
 
     // review 게시판
 
-    @GetMapping("/board/reviewboard/reviewList")
-    public String reviewList(@RequestParam(value = "type", defaultValue = "review") String type, Model model, Page page, Option option) throws Exception {
+    @GetMapping("/board/reviewBoard/reviewList")
+    public String reviewList(@RequestParam(value = "type", defaultValue = "review") String type
+                                    ,Model model, Page page
+                                    ,Option option) throws Exception {
 
         List<StarBoard> starList = starService.list(type, page, option);
-
-        // 페이징, 검색
-        log.info("page : " + page);
-        log.info("option : " + option);
-
-        
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);

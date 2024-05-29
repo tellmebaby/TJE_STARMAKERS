@@ -2,12 +2,8 @@ package com.aloha.starmakers.board.service;
 
 import java.util.List;
 
-
-import org.apache.ibatis.annotations.Param;
-
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
-
 import com.aloha.starmakers.board.dto.StarBoard;
 
 

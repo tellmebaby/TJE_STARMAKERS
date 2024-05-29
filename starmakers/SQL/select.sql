@@ -9,3 +9,8 @@ WHERE id = "joeun";
 
 SELECT *
 FROM star_board
+
+  SELECT COUNT(*)
+        FROM star_board 
+        WHERE type = "event"   
+        ORDER BY reg_date DESC 
