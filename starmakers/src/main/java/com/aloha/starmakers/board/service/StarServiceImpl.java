@@ -24,7 +24,7 @@ public class StarServiceImpl implements StarService {
      */
     @Override
     public List<StarBoard> list(String type, Page page, Option option) throws Exception {
-        int total = starMapper.count(option);
+        int total = starMapper.count(option, type);
         page.setTotal(total);
         List<StarBoard> starList = starMapper.list(type, page, option);
         return starList;
@@ -40,9 +40,9 @@ public class StarServiceImpl implements StarService {
         starBoard.setWriter(user.getName());
         // starBoard.setStatus("무료홍보");
         // 정보 등록
-        int result = starMapper.insert(starBoard);
+        starMapper.insert(starBoard);
         
-        return result;
+        return starBoard.getStarNo();
     }
 
     /**

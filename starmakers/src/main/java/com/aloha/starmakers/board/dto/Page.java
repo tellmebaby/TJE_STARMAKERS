@@ -15,6 +15,7 @@ public class Page {
     private int rows;   // 페이지당 게시글 수
     private int count;  // 노출 페이지 개수
     private int total;  // 전체 데이터 개수
+    private int typeTotal; // type별 데이터 개수
 
     // ⭐ 수식 정보
     private int start;  // 시작 번호
