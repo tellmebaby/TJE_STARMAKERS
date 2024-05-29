@@ -56,7 +56,7 @@
             <!-- <input type="hidden" name="type" value="무료홍보" id="free">
             <input type="hidden" name="type" value="유료홍보" id="payment"> -->
 
-            <input type="hidden" name="status" value="홍보중">
+            <input type="hidden" name="status" value="홍보요청">
 
 
             <div class="item col-8 d-flex justify-content-start column-gap-2">
@@ -185,7 +185,7 @@
 
       </form>
 
-      <div class="container item-align-center text-start w-75" style="display: none;" id="design"><b>
+      <div class="container item-align-center text-start" style="display: none;" id="design">
           <h1 class="mt-5">"디자인이 어려우시면,</h1><br>
           <h1 class="text-primary ms-5">저희에게 맡겨주세요!"</h1><br>
           <ul>
@@ -193,9 +193,36 @@
             <li>치지직/유튜브 홍보 인트로 영상</li>
             <li>배너 광고 이미지</li>
           </ul><br>
-          <p>예비 스타님의 개성에 맞춘 홍보물을 만들어 드립니다.</p><b><img src="/img/star.jpg" class="w-100"><button type="button" id="chat"
-              class="btn btn-lg btn-outline-secondary w-100 mt-5">1:1 채팅 바로가기</button></b>
-        </b></div>
+          <p>예비 스타님의 개성에 맞춘 홍보물을 만들어 드립니다!😆</p>
+
+            <!-- <img src="/img/star.jpg" class="w-100"> -->
+            <!-- <button type="button" id="chat"
+              class="btn btn-lg btn-outline-secondary w-100 mt-5">1:1 채팅 바로가기</button></b> -->
+        
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed border-bottom" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                ⭐<b>디자인 의뢰하기</b>🙋‍♀️
+              </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <form action="/page/starCard/starInsert" method="post" id="designReq">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <input type="hidden" name="username" th:value="${session.user.email}">
+                <input type="hidden" name="title" th:value="|${session.user.email}님 디자인 의뢰|">
+                <input type="hidden" name="status" value="디자인의뢰">
+                <div>
+                  <textarea name="content" id="summernote2"></textarea>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <input type="submit" class="btn btn-dark btn-sm border col-2" id="designBtn" value="견적 요청">
+                </div>
+              </form>
+            </div>
+          </div>
+        
+      </div>
 
     </div>
   </div>
@@ -225,6 +252,28 @@
       fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
       fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
       placeholder: '홍보할 내용을 입력하세요.'
+    });
+
+    $('#summernote2').summernote({
+      toolbar: [
+        // [groupName, [list of button]]
+        ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+        ['color', ['forecolor', 'color']],
+        ['table', ['table']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['insert', ['picture', 'link', 'video']],
+        ['view', ['fullscreen', 'help']]
+      ],
+      height: 500,
+      minHeight: null,
+      maxHeight: null,
+      lang: 'ko-KR',
+      fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
+      fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
+      placeholder: '의뢰하고 싶은 디자인의 내용을 입력해주세요.<br> 자세히 작성해주실 수록 더욱 마음에 드시는 결과물을 얻으실 수 있을 거예요 :D <br> 디자인 가격은 의뢰주시는 내용에 따라 달라지며 관리자가 확인 후 3일 이내에 연락 드립니다!'
     });
 
     // $(document).ready(function () {

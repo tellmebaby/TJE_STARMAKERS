@@ -24,7 +24,7 @@ public class StarServiceImpl implements StarService {
         Users user = userMapper.login(username);
         starBoard.setUserNo(user.getUserNo());
         starBoard.setWriter(user.getName());
-        starBoard.setStatus("무료홍보");
+        // starBoard.setStatus("무료홍보");
         // 정보 등록
         int result = starMapper.insert(starBoard);
         
@@ -33,6 +33,7 @@ public class StarServiceImpl implements StarService {
 
     /**
      * 글 등록(유료)
+     * 결제버튼 눌렀을 때 이거로 실행
      */
     @Override
     public int payInsert(StarBoard starBoard, String username) throws Exception {
@@ -55,6 +56,12 @@ public class StarServiceImpl implements StarService {
         StarBoard starBoard = starMapper.select(starNo);
       
         return starBoard;
+    }
+
+    @Override
+    public int update(StarBoard starBoard) throws Exception {
+        int result = starMapper.update(starBoard);
+        return result;
     }
 
 
