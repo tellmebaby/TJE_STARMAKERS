@@ -28,8 +28,7 @@
     <h1 class="d-flex justify-content-center mb-3 mt-3">
       후기 등록
     </h1>
-        <form action="/page/board/eventBoard/eventInsert" method="post" id="eventInsert">
-          
+        <form action="/page/board/reviewBoard/reviewInsert" method="post" id="reviewList">
           <div class="container">
           <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
           <input type="hidden" name="username" th:value="${session.user.email}">  
@@ -51,7 +50,6 @@
             </div>
             </div>
         </form>
-            
     </div>
 
 
