@@ -51,7 +51,6 @@ $(document).ready(function() {
     });
 });
 
-
 $(document).ready(function() {
     const token = $("meta[name='_csrf']").attr("content");
     const header = $("meta[name='_csrf_header']").attr("content");
@@ -76,11 +75,22 @@ $(document).ready(function() {
         chatMessages.empty(); // 기존 메시지 비우기
 
         messages.forEach(function(message) {
-            const messageElement = $('<p></p>').text(message.content);
+            const messageElement = $('<p></p>').text(message.content).css({
+                'border': '1px solid #ccc',
+                'padding': '10px',
+                'margin': '5px',
+                'border-radius': '5px'
+            });
             if (message.code === 'toAdmin') {
-                messageElement.css('text-align', 'right');
+                messageElement.css({
+                    'text-align': 'right',
+                    'background-color': '#fff8dc' // 노란색 배경
+                });
             } else if (message.code === 'toUser') {
-                messageElement.css('text-align', 'left');
+                messageElement.css({
+                    'text-align': 'left',
+                    'background-color': '#ffffff' // 흰색 배경
+                });
             }
             chatMessages.append(messageElement);
         });
@@ -121,8 +131,14 @@ $(document).ready(function() {
                 $('#chatInput').val(''); // 입력창 비우기
                 
                 // 새 메시지 바로 표시
-                var newMessage = $('<p></p>').text(formData.content);
-                newMessage.css('text-align', 'right'); // 보낸 메시지이므로 오른쪽 정렬
+                var newMessage = $('<p></p>').text(formData.content).css({
+                    'border': '1px solid #ccc',
+                    'padding': '10px',
+                    'margin': '5px',
+                    'border-radius': '5px',
+                    'text-align': 'right', // 보낸 메시지이므로 오른쪽 정렬
+                    'background-color': '#fff8dc' // 노란색 배경
+                });
                 $('#chatMessages').append(newMessage);
                 
                 // 스크롤을 가장 아래로 이동
