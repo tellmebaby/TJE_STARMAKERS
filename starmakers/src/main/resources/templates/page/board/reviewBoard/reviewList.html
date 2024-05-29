@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{/layout/default_layout}">
+    layout:decorate="~{/layout/default_layout}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,13 +18,16 @@
             border: none;
             padding-right: 10px;
         }
-        .search-container select, .search-container input[type="text"] {
+
+        .search-container select,
+        .search-container input[type="text"] {
             margin-left: 5px;
             padding: 5px;
             background-color: rgba(0, 0, 0, 0.1);
             border-radius: 3px;
             border: none;
         }
+
         .search-container button {
             margin-left: 5px;
             padding: 6px 15px;
@@ -32,6 +36,7 @@
             border-radius: 3px;
             border: none;
         }
+
         .search-container button:hover {
             padding: 6px 15px;
             background-color: rgba(41, 75, 254, 1);
@@ -39,31 +44,39 @@
             font-weight: bolder;
             color: white;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
         }
+
         th {
             padding: 14px;
             text-align: center;
         }
+
         td {
             padding: 7px;
             border-bottom: 0.7px solid #000;
         }
+
         thead {
             border-bottom: 2px solid #000;
         }
+
         tbody {
             padding-bottom: 400px;
         }
+
         .no-data {
             height: 400px;
         }
+
         .button-container {
             text-align: right;
             padding: 10px 0;
         }
+
         .button-container a {
             margin-left: 5px;
             padding: 7px 12px;
@@ -75,12 +88,14 @@
             font-size: 14px;
             font-weight: normal;
         }
+
         .button-container a:hover {
             background-color: rgba(41, 75, 254, 1);
             box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
             font-weight: bolder;
             color: white;
         }
+
         a {
             text-decoration: none;
             color: black;
@@ -88,10 +103,12 @@
 
         .fa-star {
             color: gold;
-            font-size: 17px; /* 아이콘 크기 조정 */
+            font-size: 17px;
+            /* 아이콘 크기 조정 */
             margin-right: 10px;
             animation: twinkle2 1.5s infinite alternate;
-            transition: transform 0.3s ease-in-out; /* 크기 변화 애니메이션 */
+            transition: transform 0.3s ease-in-out;
+            /* 크기 변화 애니메이션 */
         }
 
         @keyframes twinkle2 {
@@ -101,12 +118,14 @@
                 transform: scale(1);
                 text-shadow: 0 0 5px rgba(255, 223, 0, 0.8), 0 0 10px rgba(255, 223, 0, 0.8);
             }
+
             50% {
                 color: lightgoldenrodyellow;
                 opacity: 1;
                 transform: scale(1.2);
                 text-shadow: 0 0 10px rgba(255, 223, 0, 0.9), 0 0 20px rgba(255, 223, 0, 0.9);
             }
+
             100% {
                 opacity: 0.8;
                 color: gold;
@@ -120,48 +139,57 @@
             0% {
                 opacity: 1;
             }
+
             50% {
                 color: orangered;
                 opacity: 1;
             }
+
             100% {
                 opacity: 1;
             }
         }
+
         .notice-row {
-            background-color: #f0f0f0; /* 회색 배경색 */
+            background-color: #f0f0f0;
+            /* 회색 배경색 */
         }
 
         .twinkle {
             color: orange;
             animation: twinkle 1s infinite;
         }
+
         .status-waiting {
-            color: grey; /* 답변 대기일 때의 색상 */
+            color: grey;
+            /* 답변 대기일 때의 색상 */
         }
 
         .status-completed {
-            color: darkblue; /* 답변 완료일 때의 색상 */
+            color: darkblue;
+            /* 답변 완료일 때의 색상 */
             font-weight: bold;
         }
+
         .fixed {
             background-color: #f0f0f0;
         }
     </style>
 </head>
+
 <body>
     <th:block layout:fragment="content">
 
         <div class="container">
-        <h3>후기</h3>
+            <h3>후기</h3>
 
             <div class="search-container">
                 <form action="/page/board/reviewBoard/reviewList" method="get">
                     <select name="code">
-                        <option th:each="item : ${optionList}" th:value="${item.code}" th:text="${item.keyword}" th:selected="${item.code == option.code}"></option>
+                        <option th:each="item : ${optionList}" th:value="${item.code}" th:text="${item.keyword}"
+                            th:selected="${item.code == option.code}"></option>
                     </select>
-                    <input type="text" name="keyword" placeholder="검색어를 입력하세요" 
-                           th:value="${param.keyword}">
+                    <input type="text" name="keyword" placeholder="검색어를 입력하세요" th:value="${param.keyword}">
                     <button type="submit">검색</button>
                 </form>
             </div>
@@ -204,7 +232,8 @@
                         <a href="/page/board/reviewBoard/reviewInsert" class="btn btn-primary">후기 등록</a>
                     </th:block>
                 </div>
-                   <!-- 페이지네이션 -->
+                
+        <!-- 페이지네이션 -->
         <center>
             <div>
                 <!-- [ 처음으로 ]-->
