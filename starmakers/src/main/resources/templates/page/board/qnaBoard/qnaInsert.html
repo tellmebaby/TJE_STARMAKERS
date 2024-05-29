@@ -29,6 +29,7 @@
       문의등록
     </h1>
         <form action="/page/board/qnaBoard/qnaInsert" method="post" id="reviewInsert">
+          
           <div class="container">
           <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
           <input type="hidden" name="username" th:value="${session.user.email}">  
