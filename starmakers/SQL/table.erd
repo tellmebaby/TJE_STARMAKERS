@@ -4,8 +4,8 @@
   "settings": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": -322.8,
-    "scrollLeft": -147.6,
+    "scrollTop": -1325,
+    "scrollLeft": 0,
     "zoomLevel": 1,
     "show": 431,
     "database": 4,
@@ -41,7 +41,8 @@
       "IjC7qqQ7Kuc2VVEpxn6y3",
       "j28HNrlPh49mCLTdux6CG",
       "KD_J_VKlISw4nvlSKeYTn",
-      "8i0CvAgn0ZMQNlC0uPv63"
+      "8i0CvAgn0ZMQNlC0uPv63",
+      "neQ19AQSvb7-fABZe6C4P"
     ],
     "relationshipIds": [
       "4VDIBshn64AGCvvqMK_TB",
@@ -480,6 +481,35 @@
         "meta": {
           "updateAt": 1715933952325,
           "createAt": 1715932278695
+        }
+      },
+      "neQ19AQSvb7-fABZe6C4P": {
+        "id": "neQ19AQSvb7-fABZe6C4P",
+        "name": "password_reset_token",
+        "comment": "비밀번호 변경 인증이메일 토큰",
+        "columnIds": [
+          "NOr_ctijcUMR_EDMTuRpX",
+          "HVMqO-BNU4L22V75vQrId",
+          "FkCybeBE4gr9FqC3O1tC2",
+          "VecuX1w8dL878v6yRaDHF"
+        ],
+        "seqColumnIds": [
+          "NOr_ctijcUMR_EDMTuRpX",
+          "HVMqO-BNU4L22V75vQrId",
+          "FkCybeBE4gr9FqC3O1tC2",
+          "VecuX1w8dL878v6yRaDHF"
+        ],
+        "ui": {
+          "x": 250,
+          "y": 1663.2031,
+          "zIndex": 680,
+          "widthName": 130,
+          "widthComment": 147,
+          "color": ""
+        },
+        "meta": {
+          "updateAt": 1716955865730,
+          "createAt": 1716955467385
         }
       }
     },
@@ -2523,6 +2553,86 @@
           "updateAt": 1716866899977,
           "createAt": 1716866865364
         }
+      },
+      "NOr_ctijcUMR_EDMTuRpX": {
+        "id": "NOr_ctijcUMR_EDMTuRpX",
+        "tableId": "neQ19AQSvb7-fABZe6C4P",
+        "name": "id",
+        "comment": "",
+        "dataType": "int",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1716955859892,
+          "createAt": 1716955497169
+        }
+      },
+      "HVMqO-BNU4L22V75vQrId": {
+        "id": "HVMqO-BNU4L22V75vQrId",
+        "tableId": "neQ19AQSvb7-fABZe6C4P",
+        "name": "token",
+        "comment": "",
+        "dataType": "VARCHAR(100)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 89,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1716955809745,
+          "createAt": 1716955789677
+        }
+      },
+      "FkCybeBE4gr9FqC3O1tC2": {
+        "id": "FkCybeBE4gr9FqC3O1tC2",
+        "tableId": "neQ19AQSvb7-fABZe6C4P",
+        "name": "email",
+        "comment": "",
+        "dataType": "VARCHAR(100)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 89,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1716955826790,
+          "createAt": 1716955811425
+        }
+      },
+      "VecuX1w8dL878v6yRaDHF": {
+        "id": "VecuX1w8dL878v6yRaDHF",
+        "tableId": "neQ19AQSvb7-fABZe6C4P",
+        "name": "expiryDate",
+        "comment": "",
+        "dataType": "TIMESTAMP",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 63,
+          "widthComment": 60,
+          "widthDataType": 71,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1716955853280,
+          "createAt": 1716955828758
+        }
       }
     },
     "relationshipEntities": {
@@ -4282,6 +4392,55 @@
       1716866865361,
       -1,
       {}
+    ],
+    "neQ19AQSvb7-fABZe6C4P": [
+      "tableEntities",
+      1716955467383,
+      -1,
+      {
+        "name": 1716955472196,
+        "comment": 1716955487854
+      }
+    ],
+    "NOr_ctijcUMR_EDMTuRpX": [
+      "tableColumnEntities",
+      1716955497168,
+      -1,
+      {
+        "name": 1716955504085,
+        "dataType": 1716955517718,
+        "options(notNull)": 1716955784941,
+        "options(primaryKey)": 1716955859891
+      }
+    ],
+    "HVMqO-BNU4L22V75vQrId": [
+      "tableColumnEntities",
+      1716955789676,
+      -1,
+      {
+        "name": 1716955795303,
+        "dataType": 1716955806720,
+        "options(notNull)": 1716955809744
+      }
+    ],
+    "FkCybeBE4gr9FqC3O1tC2": [
+      "tableColumnEntities",
+      1716955811425,
+      -1,
+      {
+        "name": 1716955813118,
+        "dataType": 1716955825111,
+        "options(notNull)": 1716955826790
+      }
+    ],
+    "VecuX1w8dL878v6yRaDHF": [
+      "tableColumnEntities",
+      1716955828758,
+      -1,
+      {
+        "name": 1716955838463,
+        "dataType": 1716955853280
+      }
     ]
   }
 }

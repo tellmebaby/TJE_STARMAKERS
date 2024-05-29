@@ -12,8 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
 
+import com.aloha.starmakers.user.dto.PasswordResetToken;
 import com.aloha.starmakers.user.dto.UserAuth;
 import com.aloha.starmakers.user.dto.Users;
+import com.aloha.starmakers.user.mapper.PasswordResetTokenMapper;
 import com.aloha.starmakers.user.mapper.UserMapper;
 
 @Service
@@ -27,6 +29,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PasswordResetTokenMapper PasswordResetTokenMapper;
 
     @Override
     public boolean login(Users user, HttpServletRequest request) throws Exception {
@@ -121,6 +126,20 @@ public class UserServiceImpl implements UserService {
     public int selectId(Users user) throws Exception {
         int result = userMapper.selectId(user);
         return result;
+    }
+
+    public void createPasswordResetTokenForUser(String email, String token) {
+        PasswordResetToken myToken = new PasswordResetToken(token, email);
+        PasswordResetTokenMapper.save(myToken);
+    }
+
+    public PasswordResetToken getPasswordResetToken(String token) {
+        return PasswordResetTokenMapper.findByToken(token);
+    }
+
+    public void updatePassword(String email, String newPassword) {
+        // Logic to update user's password in the database
+        // For example, userRepository.updatePassword(email, newPassword);
     }
 
 }

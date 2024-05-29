@@ -3,6 +3,8 @@ package com.aloha.starmakers.user.controller;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.aloha.starmakers.user.service.EmailService;
 import com.aloha.starmakers.user.service.UserService;
 
 @Controller
@@ -23,7 +26,7 @@ public class PasswordRecoveryController {
     private UserService userService;
 
     @PostMapping("/recover")
-    public ResponseEntity<String> recoverPassword(@RequestBody Map<String, String> request) {
+    public ResponseEntity<String> recoverPassword(@RequestBody Map<String, String> request, HttpServletRequest httpServletRequest) {
         String email = request.get("email");
 
         // Generate a token
@@ -33,7 +36,7 @@ public class PasswordRecoveryController {
         userService.createPasswordResetTokenForUser(email, token);
 
         // Create password reset URL
-        String resetUrl = "http://localhost:8080/password/reset?token=" + token;
+        String resetUrl = httpServletRequest.getRequestURL().toString().replace("/recover", "/reset?token=") + token;
 
         // Send email
         emailService.sendPasswordResetEmail(email, resetUrl);
