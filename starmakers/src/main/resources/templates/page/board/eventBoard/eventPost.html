@@ -506,7 +506,7 @@
             <div class="reply-middle">
                 <p class="reply-content">${content}</p>
                 <div class="reply-button">
-                    <button class="btn-reply-update">수정</button>
+                    <button class="btn-reply-update" onclick="update()">수정</button>
                     <button class="btn-reply-delete">삭제</button>
                 </div>
             </div>
@@ -520,12 +520,14 @@
 
     <script>
     
+        let starNo = '[[${starBoard.starNo}]]'
+
         function moveList() {
           location.href = '/page/board/eventBoard/eventList'
         }
   
         function update() {
-          location.href = ''
+          location.href = '/page/board/eventBoard/eventUpdate?starNo=' + starNo
         }
 
         function toggleRereplyContainer(button) {

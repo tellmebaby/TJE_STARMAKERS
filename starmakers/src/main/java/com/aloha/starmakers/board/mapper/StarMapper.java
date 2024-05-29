@@ -31,10 +31,11 @@ public interface StarMapper {
     public int update(StarBoard starBoard) throws Exception;
 
     // 게시글 번호(기본키) 최댓값
-    public int maxPk() throws Exception;
+    public int maxPk(String type) throws Exception;
 
     // 게시글 데이터 개수 조회
-    public int count(@Param("option") Option option) throws Exception;
+    public int count(@Param("option") Option option
+                    ,@Param("type") String type) throws Exception;
 
     // 게시글 목록 - [검색]
     public List<StarBoard> search(@Param("option") Option option) throws Exception;
