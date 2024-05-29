@@ -130,8 +130,11 @@ public class StarController {
     // 아래부터 event 게시판
 
     @GetMapping("/board/eventBoard/eventList")
-    public String list(@RequestParam(value = "type", defaultValue = "event") String type, Model model) throws Exception {
-        List<StarBoard> starList = starService.list(type);
+    public String eventList(@RequestParam(value = "type", defaultValue = "event") String type
+                                    ,Model model, Page page
+                                    ,Option option) throws Exception {
+
+        List<StarBoard> starList = starService.list(type, page, option);
         model.addAttribute("starList", starList);
         return "/page/board/eventBoard/eventList";
     }
@@ -197,9 +200,9 @@ public class StarController {
     // review 게시판
 
     @GetMapping("/board/reviewboard/reviewList")
-    public String list(Model model, Page page, Option option) throws Exception {
+    public String reviewList(@RequestParam(value = "type", defaultValue = "review") String type, Model model, Page page, Option option) throws Exception {
 
-        List<StarBoard> starList = starService.list(page, option);
+        List<StarBoard> starList = starService.list(type, page, option);
 
         // 페이징, 검색
         log.info("page : " + page);
