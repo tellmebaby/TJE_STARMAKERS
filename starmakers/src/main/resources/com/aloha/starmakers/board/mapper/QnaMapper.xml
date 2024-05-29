@@ -18,7 +18,7 @@
                 title LIKE CONCAT('%', #{option.keyword}, '%')
            </if>
            <if test="option.code == 2">
-                content LIKE CONCAT('%', ${option.keyword}, '%')
+                content LIKE CONCAT('%', #{option.keyword}, '%')
            </if>
            <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
@@ -40,7 +40,7 @@
                 title LIKE CONCAT('%', #{option.keyword}, '%')
            </if>
            <if test="option.code == 2">
-                content LIKE CONCAT('%', ${option.keyword}, '%')
+                content LIKE CONCAT('%', #{option.keyword}, '%')
            </if>
            <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
@@ -72,7 +72,7 @@
 
     <!-- 게시글 번호 최댓값 -->
     <select id="maxPk" resultType="int">
-        SELECT MAX(no)
+        SELECT MAX(qna_no)
         FROM qna_board
     </select>
 
