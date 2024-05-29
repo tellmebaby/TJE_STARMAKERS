@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +39,13 @@ public class PageController {
 
     @Autowired
     private QnaService qnaService;
+
+    // @GetMapping("mypage/{path}")
+    // public String getMethodName2(@PathVariable("path") String path, HttpSession session, Model model) {    
+    //     Users user = (Users) session.getAttribute("user");   
+    //     model.addAttribute("user", user); 
+    //     return "page/mypage/"+path;
+    // } 
     
     @GetMapping("/mypage/profile")
     // public String read(@RequestParam("userNo") int userNo, Model model) throws Exception {
@@ -126,19 +134,19 @@ public class PageController {
      * @throws Exception
      */
     @GetMapping("/mypage/inquiry")
-    public String list(Model model, Page page, Option option) throws Exception {
+    public String list(Model model, Page page, Option option, HttpSession session) throws Exception {
         log.info("qna 목록");
 
         List<QnaBoard> qnaList = qnaService.list(page, option);
+        Users user = (Users) session.getAttribute("user");
         model.addAttribute("qnaList", qnaList);
+        model.addAttribute("user", user);
         return "/page/mypage/inquiry";
     }
 
     @GetMapping("/mypage/qnaPost")
     public String read(@RequestParam("qnaNo") int qnaNo, Model model) throws Exception {
         QnaBoard qnaBoard = qnaService.select(qnaNo);
-
-        // 조회수 증가
 
         // 모델 등록
         model.addAttribute("qnaBoard", qnaBoard);
@@ -168,6 +176,34 @@ public class PageController {
         int qnaNo = qnaBoard.getQnaNo();
         
         return "redirect:/page/mypage/qnaUpdate?qnaNo=" + qnaNo + "$error";
+    }
+
+    /* ------------------------------------------------------------- */
+    /* 결제내역 */
+    @GetMapping("/mypage/payment")
+    public String list(Model model, HttpSession session) throws Exception {
+
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+        return "/page/mypage/payment";
+    }
+
+    /* 내가 쓴 글 */
+    @GetMapping("/mypage/promotion")
+    public String as(Model model, HttpSession session) throws Exception {
+
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+        return "/page/mypage/promotion";
+    }
+    
+    /* 내가 쓴 글 */
+    @GetMapping("/mypage/event")
+    public String asd(Model model, HttpSession session) throws Exception {
+
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
+        return "/page/mypage/event";
     }
 
 }

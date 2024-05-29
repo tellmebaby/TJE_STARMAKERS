@@ -88,17 +88,8 @@
             margin-bottom: 20px;
         }
 
-        .button1 {
+        .button {
             background-color: #2972FE;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 7px 15px;
-            font-size: 20px;
-            margin: 6px;
-        }
-        .button2 {
-            background-color: #B8C3FF;
             color: white;
             border: none;
             border-radius: 10px;
@@ -110,12 +101,20 @@
         .button-container {
             display: flex;
             justify-content: flex-end;
-            margin-bottom: 270px;
         }
 
         a {
             text-decoration: none;
             color: black;
+        }
+
+        .status-waiting {
+            color: grey; /* 답변 대기일 때의 색상 */
+        }
+
+        .status-completed {
+            color: darkblue; /* 답변 완료일 때의 색상 */
+            font-weight: bold;
         }
 
     </style>
@@ -130,7 +129,7 @@
                 <div class="col-md-3">
                     <div class="side-menu">
                         <div class="nav-links">
-                            <h1>김조은님,</h1>
+                            <h1 th:text="${user.name} + '님,'"></h1>
                             <a href="/page/mypage/profile">회원 정보</a>
                             <a href="/page/mypage/payment">결제 내역</a>
                             <a href="/page/mypage/promotion">내가 쓴 글</a>
@@ -154,7 +153,7 @@
                         </thead>
                         <tbody>
                             <th:block th:each="qnaBoard : ${qnaList}">
-                                <tr>
+                                <tr th:if="${qnaBoard.userNo} == ${user.userNo}">
                                     <td><input type="checkbox" name="qnaNo" th:value="${qnaBoard.qnaNo}"></td>
                                     <td align="center">
                                         <a th:href="|/page/mypage/qnaPost?qnaNo=${qnaBoard.qnaNo}|" th:text="${qnaBoard.title}"></a>
@@ -162,19 +161,56 @@
                                     <td align="center">
                                         <span th:text="${#dates.format(qnaBoard.regDate, 'yyyy-MM-dd')}"></span>
                                     </td>
-                                    <td align="center" th:text="${qnaBoard.status}"></td>
+                                    <td align="center" th:text="${qnaBoard.status}" th:classappend="${qnaBoard.status == '답변 대기' ? 'status-waiting' : 'status-completed'}"></td>
                                 </tr>
                             </th:block>
                         </tbody>
                     </table>
                     <div class="button-container">
-                        <input class="button1" type="button" value="수정" onclick="qnaUpdate()">
-                        <input class="button2" type="button" value="삭제" onclick="qnaDelete()">
+                        <input class="button" type="button" value="수정" onclick="qnaUpdate()">
+                        <input class="button" type="button" value="삭제" onclick="qnaDelete()">
                     </div>
+        <!-- 페이지네이션 -->
+        <center>
+            <div>
+                <!-- [ 처음으로 ]-->
+                <a th:href="|/page/mypage/inquiry?=${page.first}&code=${option.code}&keyword=${option.keyword}|">&laquo;</a>
+    
+                <!-- [ 이전 ] -->
+                <th:block th:if="${page.page != page.first}">
+                    <a th:href="|/page/mypage/inquiry?page=${page.prev}&code=${option.code}&keyword=${option.keyword}|">&lt;</a>
+                </th:block>
+    
+                <th:block th:each="no : ${#numbers.sequence(page.start, page.end)}">  <!--(1,10)모델에 담은 페이지가 아니라 그냥 1부터 10 --> 
+                    <!-- 현재 페이지 -->
+                    <!--
+                    #numbers.sequence(시작번호, 끝번호)
+                    : 시작번호부터 끝번호까지 번호 리스트를 생성
+                    -->
+                    <th:block th:if="${page.page == no}">
+                        <b>
+                            <span th:text="${no}"></span>
+                        </b>
+                    </th:block>
+                    <th:block th:if="${page.page != no}">
+                        <a th:href="|/page/mypage/inquiry?page=${no}&code=${option.code}&keyword=${option.keyword}|" th:text="${no}"></a>
+                    </th:block>
+                </th:block>
+    
+                <!-- [ 다음 ] -->
+                <th:block th:if="${page.page != page.last}">
+                    <a th:href="|/page/mypage/inquiry?page=${page.next}&code=${option.code}&keyword=${option.keyword}|">&gt;</a>
+                </th:block>
+    
+                <!-- [ 마지막 ]-->
+                <a th:href="|/page/mypage/inquiry?page=${page.last}&code=${option.code}&keyword=${option.keyword}|">&raquo;</a>
+            </div>
+            </center>
                 </div>
             </div>
         </div>
     </form>
+      
     <script>
         function qnaDelete() {
                 const checkboxes = document.querySelectorAll('input[name="qnaNo"]:checked');
