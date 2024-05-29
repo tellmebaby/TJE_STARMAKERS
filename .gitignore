@@ -1,3 +1,5 @@
 .vscode/settings.json
 starmakers/build.gradle
 starmakers/build.gradle
+starmakers/src/main/resources/application.yml
+starmakers/src/main/resources/application.properties
