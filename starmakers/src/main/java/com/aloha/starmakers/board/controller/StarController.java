@@ -23,6 +23,8 @@ import com.aloha.starmakers.board.service.StarService;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Slf4j
 @Controller
@@ -35,6 +37,8 @@ public class StarController {
     @Autowired
     private FileService fileService;
 
+  
+    
     /**
      * 글 등록 화면 요청
      * 
@@ -115,6 +119,8 @@ public class StarController {
     @GetMapping("/starCard/starRead")
     public String select(@RequestParam("starNo") int starNo, Model model) throws Exception {
         StarBoard starBoard = starService.select(starNo);
+        // 조회수 증가
+        int views = starService.view(starNo);
         model.addAttribute("starBoard", starBoard);
         return "/page/starCard/starRead";
     }
@@ -228,6 +234,22 @@ public class StarController {
 
 
     // review 게시판
+     /**
+     * 글 삭제
+     * @return
+     * @throws Exception 
+     */
+    @PostMapping("/review/delete")
+    public String delete(@RequestParam("starNo") int starNo) throws Exception {
+        int result = starService.delete(starNo);
+        if(result>0){
+            log.info("삭제 완료");
+        }
+        else {
+            log.info("삭제 실패");
+        }
+        return "/page/board/reviewBoard/reviewList";
+    }
 
     @GetMapping("/board/reviewBoard/reviewList")
     public String reviewList(@RequestParam(value = "type", defaultValue = "review") String type
@@ -371,6 +393,7 @@ public class StarController {
         
         return "redirect:/page/board/anBoard/anUpdate?qnaNo=" + no + "$error";
     }
+
 
 
 }

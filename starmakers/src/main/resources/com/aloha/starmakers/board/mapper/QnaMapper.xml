@@ -120,4 +120,11 @@
         WHERE qna_no IN (${qnaNos})
     </delete>
 
+    <!-- 조회수 -->
+    <update id="view">
+        UPDATE qna_board
+           SET views = views + 1
+        WHERE qna_no = #{qnaNo}
+    </update>
+
 </mapper>

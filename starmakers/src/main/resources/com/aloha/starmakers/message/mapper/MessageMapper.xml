@@ -18,20 +18,20 @@
 
     <!-- LIST by reply_no -->
     <select id="getMessageByReply" resultType="Message">
-        SELECT * FROM message WHERE message_no = #{replyNo}
+        SELECT * FROM message WHERE reply_no = #{replyNo}
     </select>
 
     <!-- LIST by pay_no -->
     <select id="getMessageByPay" resultType="Message">
-        SELECT * FROM message WHERE message_no = #{payNo}
+        SELECT * FROM message WHERE pay_no = #{payNo}
     </select>
     <!-- LIST by qna_no -->
     <select id="getMessageByQna" resultType="Message">
-        SELECT * FROM message WHERE message_no = #{qnaNo}
+        SELECT * FROM message WHERE qna_no = #{qnaNo}
     </select>
     <!-- LIST by user_no -->
     <select id="getMessageByUser" resultType="Message">
-        SELECT * FROM message WHERE message_no = #{userNo}
+        SELECT * FROM message WHERE user_no = #{userNo}
     </select>
 
     <!-- UPDATE -->

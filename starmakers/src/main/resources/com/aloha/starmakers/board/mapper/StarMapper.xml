@@ -25,6 +25,7 @@
             <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
             </if>
+
         </if>
         ORDER BY reg_date DESC
         LIMIT #{page.index}, #{page.rows}
@@ -33,7 +34,7 @@
       <!-- 데이터 개수 조회 - [검색] -->
     <select id="count" resultType="int">
         SELECT COUNT(*)
-        FROM star_board 
+        FROM star_board
         WHERE type = #{type}
         <if test="option != null and option.keyword != null and option.keyword != ''">
             AND
@@ -73,6 +74,7 @@
             <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
             </if>
+
         </if>
         ORDER BY reg_date DESC
         
@@ -123,5 +125,19 @@
             upd_date = now()
         WHERE star_no = #{starNo}
     </update>
+
+
+    <!-- 조회수 -->
+    <update id="view">
+        UPDATE star_board
+           SET views = views + 1
+        WHERE star_no = #{starNo}
+    </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="delete">
+        DELETE FROM star_board
+        WHERE star_no IN (${starNo})
+    </delete>
 
 </mapper>
