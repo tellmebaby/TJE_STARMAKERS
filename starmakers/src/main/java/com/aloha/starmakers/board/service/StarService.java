@@ -11,7 +11,7 @@ import com.aloha.starmakers.board.dto.StarBoard;
 public interface StarService {
 
     // 글 삭제
-    public int delete(int starNo) throws Exception;
+    public int delete(String starNoList) throws Exception;
 
     // 목록 조회 - 페이징, 검색
     public List<StarBoard> list(String type 

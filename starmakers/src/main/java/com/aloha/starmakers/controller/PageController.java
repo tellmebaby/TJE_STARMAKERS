@@ -1,6 +1,7 @@
 package com.aloha.starmakers.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.QnaBoard;
+import com.aloha.starmakers.board.dto.StarBoard;
 import com.aloha.starmakers.board.service.QnaService;
+import com.aloha.starmakers.board.service.StarService;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.service.UserService;
 
@@ -38,6 +41,9 @@ public class PageController {
 
     @Autowired
     private QnaService qnaService;
+
+    @Autowired
+    private StarService starService;
 
     // @GetMapping("mypage/{path}")
     // public String getMethodName2(@PathVariable("path") String path, HttpSession session, Model model) {    
@@ -133,7 +139,7 @@ public class PageController {
      * @throws Exception
      */
     @GetMapping("/mypage/inquiry")
-    public String list(Model model, Page page, Option option, HttpSession session) throws Exception {
+    public String qnaList(Model model, Page page, Option option, HttpSession session) throws Exception {
         log.info("qna 목록");
 
         List<QnaBoard> qnaList = qnaService.list(page, option);
@@ -198,11 +204,68 @@ public class PageController {
     
     /* 내가 쓴 글 */
     @GetMapping("/mypage/event")
-    public String asd(Model model, HttpSession session) throws Exception {
+    public String reviewList(@RequestParam(value = "type", defaultValue = "review") String type
+                                    ,Model model, Page page
+                                    ,Option option
+                                    ,HttpSession session) throws Exception {
 
+        List<StarBoard> starList = starService.list(type, page, option);
+        model.addAttribute("starList", starList);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
+        
+
         return "/page/mypage/event";
     }
+
+    @PostMapping("/mypage/eventDelete")
+    public String reviewDelete(@RequestParam("starNos") String starNos) throws Exception {
+       
+        int result = 0;
+        result = starService.delete(starNos);
+
+        if (result > 0) {
+            return "redirect:/page/mypage/event";
+        }
+        
+        return "redirect:/page/mypage/event?error";  // 삭제 실패시에도 같은 페이지로 리디렉션
+    }
+
+    @GetMapping("/mypage/reviewPost")
+    public String reviewRead(@RequestParam("starNo") int starNo, Model model) throws Exception {
+        StarBoard starBoard = starService.select(starNo);
+
+        // 모델 등록
+        model.addAttribute("starBoard", starBoard);
+
+        // 뷰페이지 지정
+        return "/page/mypage/reviewPost";
+    }
+
+    @GetMapping("/mypage/reviewUpdate")
+    public String reviewUpdate(@RequestParam("starNo") int starNo, Model model) throws Exception {
+        StarBoard starBoard = starService.select(starNo);
+
+        // 모델 등록
+        model.addAttribute("starBoard", starBoard);
+
+        // 뷰페이지 지정
+        return "/page/mypage/reviewUpdate";
+    }
+
+    @PostMapping("/mypage/reviewUpdate")
+    public String reviewUpdatePro(StarBoard starBoard) throws Exception {
+
+        int result = starService.update(starBoard);
+        if ( result > 0) {
+            return "redirect:/page/mypage/event";
+        }
+        int starNo = starBoard.getStarNo();
+        
+        return "redirect:/page/mypage/reviewUpdate?qnaNo=" + starNo + "$error";
+    }
+
 
 }
