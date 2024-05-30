@@ -7,9 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>후기</title>
     <style>
-        .top-container {
-            width: 960px;
-            margin: 0 auto;
+        .container {
+          max-width: 960px;
+          margin: 0 auto;
+          padding: 0 10px;
+          box-sizing: border-box;
         }
 
         .writer {
@@ -17,7 +19,7 @@
             justify-content: space-around;
             gap: 10px;
             padding: 10px 0;
-            width: 960px;
+            width: 100%;
             margin-top: 50px;
             margin-left: 10px;
             margin-right: 10px;
@@ -34,7 +36,7 @@
         }
 
         .title-container {
-            width: 960px;
+            width: 100%;
             margin: 0 auto 15px;
 
             padding: 30px 30px;
@@ -48,7 +50,7 @@
         }
 
         .content-container {
-            width: 960px;
+            width: 100%;
             margin: 0 auto;
             padding: 30px 30px;
             border: 1px solid;
@@ -70,7 +72,7 @@
             justify-content: flex-end;
             gap: 10px;
             padding: 10px 0;
-            width: 960px;
+            width: 100%;
         }
 
         .button-container1 {
@@ -132,7 +134,7 @@
             justify-content: center;
             gap: 10px;
             padding: 20px 0;
-            width: 960px;
+            width: 100%;
         }
 
         .reply {
@@ -185,7 +187,7 @@
         /* 댓글 타이틀 */
         .reply-list {
             border-bottom: 1.7px solid #000;
-            width: 960px;
+            width: 100%;
         }
 
         .reply-list label {
@@ -196,7 +198,7 @@
         #reply-list {
             display: block;
             border-bottom: 0.7px solid #000;
-            width: 960px;
+            width: 100%;
             display: block;
             padding: 10px 5px;
             box-sizing: border-box;
@@ -437,7 +439,7 @@
 
     <th:block layout:fragment="content">
 
-        <div class="top-container">
+        <div class="container">
 
             <center>
                 <h1>후기</h1>

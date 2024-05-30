@@ -179,7 +179,7 @@
                 </thead>
                 
                 <th:block th:if="${starList.isEmpty()}">
-                    <tr th:if="${starBoard.type == 'event'}">
+                    <tr>
                         <td colspan="6" align="center" style="padding-top: 183.49px; padding-bottom: 183.49px;">
                             조회된 게시글이 없습니다.
                         </td>
@@ -205,15 +205,15 @@
             </table>
             <div class="button-container">
                 <!-- 비 로그인 시 -->
-                    <th:block sec:authorize="isAnonymous()">
-                        <!-- 여기에는 아무것도 표시되지 않음 -->
-                    </th:block>
-                    <!-- 로그인 시 -->
-                    <th:block sec:authorize="isAuthenticated()">
-                        <a href="/page/board/reviewBoard/reviewInsert" class="btn btn-primary">후기 등록</a>
-                    </th:block>
-                </div>
-                
+                <th:block sec:authorize="isAnonymous()">
+                    <!-- 여기에는 아무것도 표시되지 않음 -->
+                </th:block>
+                <!-- 로그인 시 -->
+                <th:block sec:authorize="isAuthenticated()">
+                    <a href="/page/board/eventBoard/eventInsert" class="btn btn-primary">이벤트 등록</a>
+                </th:block>
+            </div>
+            
         <!-- 페이지네이션 -->
         <center>
             <div>
