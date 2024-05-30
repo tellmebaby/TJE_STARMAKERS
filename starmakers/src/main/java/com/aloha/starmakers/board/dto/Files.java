@@ -15,6 +15,7 @@ public class Files {
     private Date regDate;
     private int userNo;
     private int StarNo;
+    private String filePath;
     
     private MultipartFile file;
 }

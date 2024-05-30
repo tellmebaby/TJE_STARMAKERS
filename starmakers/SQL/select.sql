@@ -7,6 +7,9 @@ SELECT COUNT(*)
 FROM user
 WHERE id = "joeun";
 
+SELECT * 
+FROM user;
+
 SELECT *
 FROM star_board
 

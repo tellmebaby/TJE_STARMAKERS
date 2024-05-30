@@ -37,9 +37,9 @@ layout:decorate="~{/layout/default_layout}">
     <div class="find-id-form">
         <form>
             <div class="recover-complete-msg">
-                <h1 class="h3 mb-3 font-weight-normal text-center">가입된 이메일는</h1><br>
                 <h1 class="h3 mb-3 font-weight-normal text-center" th:text="${user.email}"></h1><br>
-                <h1 class="h3 mb-3 font-weight-normal text-center">입니다.</h1>
+                <h1 class="h3 mb-3 font-weight-normal text-center">메일주소의 회원정보가</h1><br>
+                <h1 class="h3 mb-3 font-weight-normal text-center">존재합니다.</h1>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="button" onclick="moveLogin()">로그인 하기</button>
         </form>
