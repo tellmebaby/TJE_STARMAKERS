@@ -10,20 +10,19 @@
         SELECT *
         FROM star_board
         WHERE type = #{type}
-        AND
-            <if test="option.code == 0">
-                title LIKE CONCAT('%', #{option.keyword}, '%')
-                OR content LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 1">
-                title LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 2">
-                content LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 3">
-                writer LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
+        <if test="option.code == 0">
+            AND (title LIKE CONCAT('%', #{option.keyword}, '%')
+            OR content LIKE CONCAT('%', #{option.keyword}, '%'))
+        </if>
+        <if test="option.code == 1">
+            AND title LIKE CONCAT('%', #{option.keyword}, '%')
+        </if>
+        <if test="option.code == 2">
+            AND content LIKE CONCAT('%', #{option.keyword}, '%')
+        </if>
+        <if test="option.code == 3">
+            AND writer LIKE CONCAT('%', #{option.keyword}, '%')
+        </if>
         ORDER BY reg_date DESC
         LIMIT #{page.index}, #{page.rows}
     </select>
@@ -31,23 +30,21 @@
       <!-- 데이터 개수 조회 - [검색] -->
     <select id="count" resultType="int">
         SELECT COUNT(*)
-        FROM star_board 
+        FROM star_board
         WHERE type = #{type}
-        AND
-           <if test="option.code == 0">
-                title LIKE CONCAT('%', #{option.keyword}, '%')
-                OR content LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 1">
-                title LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 2">
-                content LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 3">
-                writer LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-        ORDER BY reg_date DESC 
+        <if test="option.code == 0">
+            AND (title LIKE CONCAT('%', #{option.keyword}, '%')
+            OR content LIKE CONCAT('%', #{option.keyword}, '%'))
+        </if>
+        <if test="option.code == 1">
+            AND title LIKE CONCAT('%', #{option.keyword}, '%')
+        </if>
+        <if test="option.code == 2">
+            AND content LIKE CONCAT('%', #{option.keyword}, '%')
+        </if>
+        <if test="option.code == 3">
+            AND writer LIKE CONCAT('%', #{option.keyword}, '%')
+        </if>
     </select>
 
     <!-- 게시글 목록 검색 -->
@@ -55,20 +52,19 @@
         SELECT *
         FROM star_board
         WHERE type = #{type}
-        AND
-           <if test="option.code == 0">
-                title LIKE CONCAT('%', #{option.keyword}, '%')
-                OR content LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 1">
-                title LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 2">
-                content LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 3">
-                writer LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
+        <if test="option.code == 0">
+            AND (title LIKE CONCAT('%', #{option.keyword}, '%')
+            OR content LIKE CONCAT('%', #{option.keyword}, '%'))
+        </if>
+        <if test="option.code == 1">
+            AND title LIKE CONCAT('%', #{option.keyword}, '%')
+        </if>
+        <if test="option.code == 2">
+            AND content LIKE CONCAT('%', #{option.keyword}, '%')
+        </if>
+        <if test="option.code == 3">
+            AND writer LIKE CONCAT('%', #{option.keyword}, '%')
+        </if>
         ORDER BY reg_date DESC
         
     </select>

@@ -1,5 +1,5 @@
 
--- Active: 1716511247384@@127.0.0.1@3306@joeun
+-- Active: 1714701530602@@127.0.0.1@3306@joeun
 
 
 
@@ -15,3 +15,17 @@ VALUES ( '김조은', 'joeun', 'joeun@naver.com', '$2a$12$TrN..KcVjciCiz.5Vj96YO
 INSERT INTO user_auth ( user_id,  auth )
 VALUES ( 'joeun@naver.com', 'ROLE_USER' );
 
+
+INSERT INTO star_board (title, writer, content, user_no, type)
+VALUES 
+('제목1', '작성자1', '내용1', 1, 'event'),
+('제목2', '작성자2', '내용2', 1, 'event'),
+('제목3', '작성자3', '내용3', 1, 'event'),
+('제목4', '작성자4', '내용4', 1, 'event'),
+('제목5', '작성자5', '내용5', 1, 'event'),
+('제목6', '작성자6', '내용6', 1, 'event'),
+('제목7', '작성자7', '내용7', 1, 'event'),
+('제목8', '작성자8', '내용8', 1, 'event'),
+('제목9', '작성자9', '내용9', 1, 'event'),
+('제목10', '작성자10', '내용10', 1, 'event'),
+('제목11', '작성자11', '내용11', 1, 'event');

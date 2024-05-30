@@ -33,4 +33,5 @@ public interface StarService {
 
     // 조회수 증가
     public int view(int starNo) throws Exception;
+
 }
