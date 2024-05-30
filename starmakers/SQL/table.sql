@@ -130,6 +130,7 @@ CREATE TABLE star_board
   pay_no    INT         NULL     COMMENT '결제데이터번호',
   likes     INT         NULL     COMMENT '좋아요수',
   status    VARCHAR(20) NULL     COMMENT '상태', -- 상태의 길이 지정.
+  card    VARCHAR(20) NULL     COMMENT '카드구분',
   category1 VARCHAR(30) NULL     COMMENT '종류1', -- 카테고리1 길이 지정.
   category2 VARCHAR(30) NULL     COMMENT '종류2', -- 카테고리2 길이 지정.
   type      VARCHAR(20) NULL     COMMENT '타입', -- 타입의 길이 지정.

@@ -38,6 +38,12 @@
                                     만료된 이벤트
                                 </label>
                             </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" id="eventExpired">
+                                <label class="form-check-label" for="eventExpired">
+                                    진행예정 이벤트
+                                </label>
+                            </div>
                         </div>
                     </div>
 
@@ -134,345 +140,142 @@
 
             <div id="promotionCarousel" class="carousel">
                 <div class="row mx-0 mb-5">
-                    <!-- 한 줄 -->
-                    <div class="col-lg-3 p-0">
+                    <div class="col-lg-3 p-0" th:each="star : ${starList}">
                         <div class="card">
                             <div class="card-overlay"></div>
-                            <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
-                                class="card-img-top" alt="홍보글 제목">
+                            <img th:src="|C://upload//${star.img}|" class="card-img-top" th:alt="${star.title}">
                             <div class="icon-body">
-                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                                <img src="/img/icon/youtube.png" class="content-icon youtube">
-                                <img src="/img/icon/instagram.svg" class="content-icon">
+                                <!-- 아이콘들을 출력하는 부분 -->
+                                <!-- <img th:each="icon : ${star.icons}" th:src="${icon.src}" class="content-icon" alt="icon"> -->
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">어쩌다보니천생연분</h5>
-                                <p class="card-text">꿀타래</p>
+                                <h5 class="card-title" th:text="${star.title}">제목 없음</h5>
+                                <p class="card-text" th:text="${star.writer}">내용 없음</p>
                             </div>
                             <div class="icon-container">
                                 <i class="fa-regular fa-thumbs-up icon"></i>
                             </div>
                         </div>
                     </div>
-
-
-
-                    <div class="col-lg-3 p-0">
-                        <div class="card">
-                            <div class="card-overlay"></div>
-                            <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
-                                class="card-img-top" alt="홍보글 제목">
-                            <div class="icon-body">
-                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                                <img src="/img/icon/youtube.png" class="content-icon youtube">
-                                <img src="/img/icon/instagram.svg" class="content-icon">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">홍보글 제@!목</h5>
-                                <p class="card-text">작성자</p>
-                            </div>
-                            <div class="icon-container">
-                                <i class="fa-regular fa-thumbs-up icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 p-0">
-                        <div class="card">
-                            <div class="card-overlay"></div>
-                            <img src="https://i.pinimg.com/originals/45/93/b5/4593b5e64b3be3b6208a230f1c20b606.gif"
-                                class="card-img-top" alt="홍보글 제목">
-                            <div class="icon-body">
-                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                                <img src="/img/icon/youtube.png" class="content-icon youtube">
-                                <img src="/img/icon/instagram.svg" class="content-icon">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">홍보글 제목</h5>
-                                <p class="card-text">작성자</p>
-                            </div>
-                            <div class="icon-container">
-                                <i class="fa-regular fa-thumbs-up icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 p-0">
-                        <div class="card">
-                            <div class="card-overlay"></div>
-                            <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
-                                class="card-img-top" alt="홍보글 제목">
-                            <div class="icon-body">
-                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                                <img src="/img/icon/youtube.png" class="content-icon youtube">
-                                <img src="/img/icon/instagram.svg" class="content-icon">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">홍보글 제목</h5>
-                                <p class="card-text">작성자</p>
-                            </div>
-                            <div class="icon-container">
-                                <i class="fa-regular fa-thumbs-up icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 한 줄 -->
-                    <div class="col-lg-3 p-0">
-                        <div class="card">
-                            <div class="card-overlay"></div>
-                            <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
-                                class="card-img-top" alt="홍보글 제목">
-                            <div class="icon-body">
-                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                                <img src="/img/icon/youtube.png" class="content-icon youtube">
-                                <img src="/img/icon/instagram.svg" class="content-icon">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">어쩌다보니천생연분</h5>
-                                <p class="card-text">꿀타래</p>
-                            </div>
-                            <div class="icon-container">
-                                <i class="fa-regular fa-thumbs-up icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 p-0">
-                        <div class="card">
-                            <div class="card-overlay"></div>
-                            <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
-                                class="card-img-top" alt="홍보글 제목">
-                            <div class="icon-body">
-                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                                <img src="/img/icon/youtube.png" class="content-icon youtube">
-                                <img src="/img/icon/instagram.svg" class="content-icon">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">홍보글 제목</h5>
-                                <p class="card-text">작성자</p>
-                            </div>
-                            <div class="icon-container">
-                                <i class="fa-regular fa-thumbs-up icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 p-0">
-                        <div class="card">
-                            <div class="card-overlay"></div>
-                            <img src="https://i.pinimg.com/originals/45/93/b5/4593b5e64b3be3b6208a230f1c20b606.gif"
-                                class="card-img-top" alt="홍보글 제목">
-                            <div class="icon-body">
-                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                                <img src="/img/icon/youtube.png" class="content-icon youtube">
-                                <img src="/img/icon/instagram.svg" class="content-icon">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">홍보글 제목</h5>
-                                <p class="card-text">작성자</p>
-                            </div>
-                            <div class="icon-container">
-                                <i class="fa-regular fa-thumbs-up icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 p-0">
-                        <div class="card">
-                            <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
-                                class="card-img-top" alt="홍보글 제목">
-                            <div class="icon-body">
-                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                                <img src="/img/icon/youtube.png" class="content-icon youtube">
-                                <img src="/img/icon/instagram.svg" class="content-icon">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">홍보글 제목</h5>
-                                <p class="card-text">작성자</p>
-                            </div>
-                            <div class="icon-container">
-                                <i class="fa-regular fa-thumbs-up icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 한 줄 -->
-                    <div class="col-lg-3 p-0">
-                        <div class="card">
-                            <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
-                                class="card-img-top" alt="홍보글 제목">
-                            <div class="icon-body">
-                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                                <img src="/img/icon/youtube.png" class="content-icon youtube">
-                                <img src="/img/icon/instagram.svg" class="content-icon">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">어쩌다보니천생연분</h5>
-                                <p class="card-text">꿀타래</p>
-                            </div>
-                            <div class="icon-container">
-                                <i class="fa-regular fa-thumbs-up icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 p-0">
-                        <div class="card">
-                            <img src="https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg"
-                                class="card-img-top" alt="홍보글 제목">
-                            <div class="icon-body">
-                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                                <img src="/img/icon/youtube.png" class="content-icon youtube">
-                                <img src="/img/icon/instagram.svg" class="content-icon">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">홍보글 제목</h5>
-                                <p class="card-text">작성자</p>
-                            </div>
-                            <div class="icon-container">
-                                <i class="fa-regular fa-thumbs-up icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 p-0">
-                        <div class="card">
-                            <img src="https://i.pinimg.com/originals/45/93/b5/4593b5e64b3be3b6208a230f1c20b606.gif"
-                                class="card-img-top" alt="홍보글 제목">
-                            <div class="icon-body">
-                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                                <img src="/img/icon/youtube.png" class="content-icon youtube">
-                                <img src="/img/icon/instagram.svg" class="content-icon">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">홍보글 제목</h5>
-                                <p class="card-text">작성자</p>
-                            </div>
-                            <div class="icon-container">
-                                <i class="fa-regular fa-thumbs-up icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 p-0">
-                        <div class="card">
-                            <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
-                                class="card-img-top" alt="홍보글 제목">
-                            <div class="icon-body">
-                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                                <img src="/img/icon/youtube.png" class="content-icon youtube">
-                                <img src="/img/icon/instagram.svg" class="content-icon">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">홍보글 제목</h5>
-                                <p class="card-text">작성자</p>
-                            </div>
-                            <div class="icon-container">
-                                <i class="fa-regular fa-thumbs-up icon"></i>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
-
-                <!-- 행추가 -->
-
             </div>
-        </div>
 
 
-        <script>
-            $(document).ready(function () {
-                $(window).on('scroll', function () {
-                    // 현재 스크롤 위치
-                    var scrollTop = $(this).scrollTop();
-                    // 문서의 총 높이
-                    var documentHeight = $(document).height();
-                    // 창의 높이
-                    var windowHeight = $(this).height();
 
-                    // 사용자가 페이지 하단에 도달했는지 확인
-                    if (scrollTop + windowHeight >= documentHeight) {
-                        alert('페이지 하단에 도달했습니다!');
-                    }
-                });
 
-            });
+                <!-- <div class="card">
+                    <div class="card-overlay"></div>
+                    <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
+                        class="card-img-top" alt="홍보글 제목">
+                    <div class="icon-body">
+                        <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                        <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                        <img src="/img/icon/youtube.png" class="content-icon youtube">
+                        <img src="/img/icon/instagram.svg" class="content-icon">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">어쩌다보니천생연분</h5>
+                        <p class="card-text">꿀타래</p>
+                    </div>
+                    <div class="icon-container">
+                        <i class="fa-regular fa-thumbs-up icon"></i>
+                    </div>
+                </div> -->
 
-            $(document).ready(function () {
-                $('.card').each(function () {
-                    var container = $(this);
-                    var overlay = container.find('.card-overlay');
+            <script>
+                $(document).ready(function () {
+                    $(window).on('scroll', function () {
+                        // 현재 스크롤 위치
+                        var scrollTop = $(this).scrollTop();
+                        // 문서의 총 높이
+                        var documentHeight = $(document).height();
+                        // 창의 높이
+                        var windowHeight = $(this).height();
 
-                    container.on('mousemove', function (e) {
-                        var x = e.offsetX;
-                        var y = e.offsetY;
-                        var rotateY = -1 / 5 * x + 20;
-                        var rotateX = 4 / 30 * y - 20;
-
-                        overlay.css('background-position', `${x / 5 + y / 5}%`);
-                        container.css('transform', `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`);
-                    });
-
-                    container.on('mouseout', function () {
-                        overlay.css('filter', 'opacity(0)');
-                        container.css('transform', 'perspective(350px) rotateY(0deg) rotateX(0deg)');
-                    });
-
-                    container.on('mouseenter', function () {
-                        overlay.css('filter', 'opacity(0.8)');
+                        // 사용자가 페이지 하단에 도달했는지 확인
+                        // if (scrollTop + windowHeight >= documentHeight) {
+                        //     alert('페이지 하단에 도달했습니다!');
+                        // }
                     });
 
                 });
 
+                $(document).ready(function () {
 
 
-                let clickTimer;
-                let isDoubleClick = false;
+                    // 카드이펙트
+                    $('.card').each(function () {
+                        var container = $(this);
+                        var overlay = container.find('.card-overlay');
 
-                $('.card').click(function () {
-                    if (isDoubleClick) {
-                        isDoubleClick = false;
-                        return;
-                    }
+                        container.on('mousemove', function (e) {
+                            var x = e.offsetX;
+                            var y = e.offsetY;
+                            var rotateY = -1 / 5 * x + 20;
+                            var rotateX = 4 / 30 * y - 20;
 
-                    clickTimer = setTimeout(() => {
-                        if (!isDoubleClick) {
-                            alert('Button was one-clicked!');
+                            overlay.css('background-position', `${x / 5 + y / 5}%`);
+                            container.css('transform', `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`);
+                        });
+
+                        container.on('mouseout', function () {
+                            overlay.css('filter', 'opacity(0)');
+                            container.css('transform', 'perspective(350px) rotateY(0deg) rotateX(0deg)');
+                        });
+
+                        container.on('mouseenter', function () {
+                            overlay.css('filter', 'opacity(0.8)');
+                        });
+
+                    });
+
+
+
+                    let clickTimer;
+                    let isDoubleClick = false;
+
+                    $('.card').click(function () {
+                        if (isDoubleClick) {
+                            isDoubleClick = false;
+                            return;
                         }
-                    }, 250);
-                });
 
-
-                $('.card').dblclick(function (e) {
-                    clearTimeout(clickTimer);
-                    isDoubleClick = true;
-
-                    // 하트 모양 이펙트 추가
-                    let heart = $('<div class="heart"></div>');
-                    $('body').append(heart);
-                    heart.css({
-                        top: e.pageY - 25,
-                        left: e.pageX - 25
+                        clickTimer = setTimeout(() => {
+                            if (!isDoubleClick) {
+                                alert('Button was one-clicked!');
+                            }
+                        }, 250);
                     });
 
-                    setTimeout(() => {
-                        heart.remove();
-                    }, 1000);
 
-                    // 좋아요 아이콘 클래스 토글
-                    $(this).find('.fa-thumbs-up').toggleClass('fa-regular fa-solid');
+                    $('.card').dblclick(function (e) {
+                        clearTimeout(clickTimer);
+                        isDoubleClick = true;
+
+                        // 하트 모양 이펙트 추가
+                        let heart = $('<div class="heart"></div>');
+                        $('body').append(heart);
+                        heart.css({
+                            top: e.pageY - 25,
+                            left: e.pageX - 25
+                        });
+
+                        setTimeout(() => {
+                            heart.remove();
+                        }, 1000);
+
+                        // 좋아요 아이콘 클래스 토글
+                        $(this).find('.fa-thumbs-up').toggleClass('fa-regular fa-solid');
+                    });
+
+
+
                 });
+            </script>
 
 
-
-            });
-        </script>
-
-
-    </div>
+        </div>
 </body>
 
 </html>
