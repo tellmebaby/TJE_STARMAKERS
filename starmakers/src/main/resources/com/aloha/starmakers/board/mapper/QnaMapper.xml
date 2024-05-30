@@ -9,21 +9,23 @@
     <select id="list" resultType="QnaBoard">
         SELECT *
         FROM qna_board
-        WHERE
+        WHERE (1)
+        <if test="option != null and option.keyword != null and option.keyword != ''">
+            AND
             <if test="option.code == 0">
+                (title LIKE CONCAT('%', #{option.keyword}, '%')
+                OR content LIKE CONCAT('%', #{option.keyword}, '%'))
+            </if>
+            <if test="option.code == 1">
                 title LIKE CONCAT('%', #{option.keyword}, '%')
-                OR content LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 1">
-                title LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 2">
+            </if>
+            <if test="option.code == 2">
                 content LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 3">
+            </if>
+            <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-        ORDER BY reg_date DESC
+            </if>
+        </if>
         LIMIT #{page.index}, #{page.rows}
     </select>
 
@@ -31,41 +33,46 @@
     <select id="count" resultType="int">
         SELECT COUNT(*)
         FROM qna_board 
-        WHERE
-           <if test="option.code == 0">
+        WHERE (1)
+        <if test="option != null and option.keyword != null and option.keyword != ''">
+            AND
+            <if test="option.code == 0">
+                (title LIKE CONCAT('%', #{option.keyword}, '%')
+                OR content LIKE CONCAT('%', #{option.keyword}, '%'))
+            </if>
+            <if test="option.code == 1">
                 title LIKE CONCAT('%', #{option.keyword}, '%')
-                OR content LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 1">
-                title LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 2">
+            </if>
+            <if test="option.code == 2">
                 content LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 3">
+            </if>
+            <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-        ORDER BY reg_date DESC 
+            </if>
+        </if>
     </select>
 
     <!-- 게시글 목록 검색 -->
     <select id="search" resultType="QnaBoard">
         SELECT *
         FROM qna_board
-        WHERE
-           <if test="option.code == 0">
-                    title LIKE CONCAT('%', #{option.keyword}, '%')
-                OR content LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 1">
+        WHERE (1)
+        <if test="option != null and option.keyword != null and option.keyword != ''">
+            AND
+            <if test="option.code == 0">
+                (title LIKE CONCAT('%', #{option.keyword}, '%')
+                OR content LIKE CONCAT('%', #{option.keyword}, '%'))
+            </if>
+            <if test="option.code == 1">
                 title LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 2">
+            </if>
+            <if test="option.code == 2">
                 content LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
-           <if test="option.code == 3">
+            </if>
+            <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
-           </if>
+            </if>
+        </if>
         ORDER BY reg_date DESC
         
     </select>
