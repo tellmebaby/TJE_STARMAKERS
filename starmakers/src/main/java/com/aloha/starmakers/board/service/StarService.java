@@ -10,6 +10,8 @@ import com.aloha.starmakers.board.dto.StarBoard;
 
 public interface StarService {
 
+    // 글 삭제
+    public int delete(int starNo) throws Exception;
 
     // 목록 조회 - 페이징, 검색
     public List<StarBoard> list(String type 
@@ -28,4 +30,8 @@ public interface StarService {
 
     // 글 수정
     public int update(StarBoard starBoard) throws Exception;
+
+    // 조회수 증가
+    public int view(int starNo) throws Exception;
+
 }

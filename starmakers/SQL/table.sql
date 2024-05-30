@@ -175,6 +175,17 @@ CREATE TABLE user_auth
   PRIMARY KEY (auth_no)
 );
 
+DROP TABLE IF EXISTS password_reset_token;
+-- email 인증 으로 비밀번호 변경 토큰 테이블 
+CREATE TABLE password_reset_token
+(
+  id         INT          NOT NULL AUTO_INCREMENT,
+  token      VARCHAR(100) NOT NULL,
+  email      VARCHAR(100) NOT NULL,
+  expiry_date DATETIME   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록일자',
+  PRIMARY KEY (id)
+) COMMENT '비밀번호 변경 인증이메일 토큰';
+
 -- ALTER TABLE star_board
 --   ADD CONSTRAINT FK_user_TO_star_board
 --     FOREIGN KEY (user_no)

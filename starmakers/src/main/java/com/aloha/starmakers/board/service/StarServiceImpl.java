@@ -12,6 +12,9 @@ import com.aloha.starmakers.board.mapper.StarMapper;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.mapper.UserMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class StarServiceImpl implements StarService {
     @Autowired
@@ -76,6 +79,22 @@ public class StarServiceImpl implements StarService {
     public int update(StarBoard starBoard) throws Exception {
         int result = starMapper.update(starBoard);
         return result;
+    }
+
+
+    @Override
+    public int view(int starNo) throws Exception {
+        return starMapper.view(starNo);
+    }
+
+    /**
+     * 글 삭제
+     */
+    @Override
+    public int delete(int starNo) throws Exception {
+        int result = starMapper.delete(starNo);
+        return result;
+
     }
 
 

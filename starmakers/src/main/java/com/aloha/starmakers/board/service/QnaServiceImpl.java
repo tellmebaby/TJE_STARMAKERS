@@ -78,5 +78,10 @@ public class QnaServiceImpl implements QnaService {
         return qnaList;
     }
 
+    @Override
+    public int view(int qnaNo) throws Exception {
+        return qnaMapper.view(qnaNo);
+    }
+
     
 }

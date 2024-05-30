@@ -2,6 +2,7 @@ package com.aloha.starmakers.user.service;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.aloha.starmakers.user.dto.PasswordResetToken;
 import com.aloha.starmakers.user.dto.UserAuth;
 import com.aloha.starmakers.user.dto.Users;
 
@@ -35,5 +36,14 @@ public interface UserService {
 
     // 아이디 중복 확인
     public int selectId( Users user ) throws Exception;
+
+    // 이메일 인증 관련
+    public void createPasswordResetTokenForUser( String email, String token );
+
+    public PasswordResetToken getPasswordResetToken(String token);
+
+    public void updatePassword(String email, String newPassword);
+
+
 
 }

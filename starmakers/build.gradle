@@ -43,6 +43,9 @@ dependencies {
 
     // spring live actuator
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // 이메일 인증구현 추가 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('test') {
