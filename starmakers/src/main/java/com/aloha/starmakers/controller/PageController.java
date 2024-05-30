@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.aloha.starmakers.board.dto.Files;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.QnaBoard;
 import com.aloha.starmakers.board.dto.StarBoard;
+import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.board.service.QnaService;
 import com.aloha.starmakers.board.service.StarService;
 import com.aloha.starmakers.user.dto.Users;
@@ -45,6 +47,9 @@ public class PageController {
     @Autowired
     private StarService starService;
 
+    @Autowired
+    private FileService fileService;
+
     // @GetMapping("mypage/{path}")
     // public String getMethodName2(@PathVariable("path") String path, HttpSession session, Model model) {    
     //     Users user = (Users) session.getAttribute("user");   
@@ -62,9 +67,25 @@ public class PageController {
         // int userNo = loginUser.getUser().getUserNo();
         // session 으로 가져오기
         Users user = (Users) session.getAttribute("user");
+        int userNo = user.getUserNo();
         String email = user.getEmail();
         log.info("email : " + email);
         user = userService.read(email);
+
+        
+       
+        Integer fileNo = fileService.profileSelect(userNo);
+        if( fileNo > 0 ){
+            Files file = fileService.select(fileNo);
+            model.addAttribute("file", file);
+            log.info("file : " + file);
+
+        } else {
+            Files file = new Files();
+            file.setFileNo(-1);
+            model.addAttribute("file", file);
+        }
+
         model.addAttribute("user", user);
         return "page/mypage/profile";
     }

@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -91,7 +93,7 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            border-radius: 15%;
+            border-radius: 17%;
             border: 5px solid black;
             overflow: hidden;
         }
@@ -166,10 +168,11 @@
                 <div class="table-margin"></div>
                 <!-- 빈 이미지일 경우 -->
                 <div class="image-container" id="imageContainer">
-                    <img id="uploadedImage" src="" alt="이미지를 업로드하세요" style="width: 100%; display: none;">
+                    <img id="uploadedImage" th:src="|/file/img/${file.fileNo}|" alt="" style="width: 100%; ">
                 </div>
                 <input type="file" id="fileInput" style="display: none;">
                 <button class="btn btn-primary w-100 mt-1" onclick="saveImage()">이미지 저장</button>
+                <button class="btn btn-primary w-100 mt-1" onclick="deleteImage()">기본 이미지로 변경</button>
             </div>
         </div>
     </div>
@@ -192,9 +195,68 @@
             }
         });
 
-        function saveImage() {
-            
+    function saveImage() {
+        const fileInput = document.getElementById('fileInput');
+        const file = fileInput.files[0];
+        if (!file) {
+            alert("파일을 선택해 주세요.");
+            return;
         }
+
+        var userNo = "[[${user.userNo}]]";
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("user_no", userNo);  // user_no 값을 추가 (실제 값으로 변경 필요)
+
+        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+        fetch('/file/upload', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                [csrfHeader]: csrfToken
+            }
+        })
+        .then(response => response.text())
+        .then(result => {
+            // alert(result);
+            alert("이미지가 저장되었습니다.");
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('이미지 업로드 실패');
+        });
+    }
+
+    function deleteImage() {
+        const defaultImageUrl = 'path/to/default-image.jpg';  // 기본 이미지 URL 설정
+
+        var userNo = "[[${user.userNo}]]";
+        const formData = new FormData();
+        formData.append("user_no", userNo);  // user_no 값을 추가 (실제 값으로 변경 필요)
+
+        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+        fetch('/file/delete', {
+            method: 'DELETE',
+            body: formData,
+            headers: {
+                [csrfHeader]: csrfToken
+            }
+        })
+        .then(response => response.text())
+        .then(result => {
+            document.getElementById('uploadedImage').src = defaultImageUrl;
+            alert("기본 이미지로 변경되었습니다.");
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('이미지 삭제 실패');
+        });
+    }
+    
     </script>
 </body>
 
