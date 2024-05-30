@@ -42,4 +42,7 @@ public interface StarMapper {
     // 게시글 목록 - [검색]
     public List<StarBoard> search(@Param("option") Option option) throws Exception;
 
+    // 조회수 증가
+    public int view(int no) throws Exception;
+
 }
