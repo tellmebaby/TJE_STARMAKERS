@@ -57,10 +57,6 @@ public class StarController {
      * @return
      * @throws Exception
      */
-  
-
-     
-
     @PostMapping("/starCard/starInsert")
     public String insertPro(StarBoard starBoard, String username, @RequestParam(value = "image", required = false) MultipartFile file ,HttpSession session)
             throws Exception {
@@ -84,6 +80,26 @@ public class StarController {
         int no = starBoard.getStarNo();
         return "redirect:/page/starCard/starInsert?no=" + no + "&error";
     }
+
+    @GetMapping("/starCard/starList")
+    public String cardList(@RequestParam(value = "type", defaultValue = "starCard") String type
+                                    ,Model model, Page page
+                                    ,Option option) throws Exception {
+
+        List<StarBoard> starList = starService.list(type, page, option);
+
+        // log.info("statList ="+starList.toString());
+
+        model.addAttribute("starList", starList);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
+        
+
+        return "/page/starCard/starList";
+    }
+
+
+
 
     /**
      * 결제 화면 요청

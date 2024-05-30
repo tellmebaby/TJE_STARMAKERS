@@ -7,8 +7,10 @@
 
     <!-- 게시판 목록 -->
     <select id="list" resultType="StarBoard">
-        SELECT *
-        FROM star_board
+        SELECT s.*, file_name as img
+        FROM star_board s 
+        left join file f
+        ON f.star_no=s.star_no 
         WHERE type = #{type}
         <if test="option != null and option.keyword != null and option.keyword != ''">
             AND
@@ -96,14 +98,14 @@
 
     <!-- 글 등록 -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="starNo">
-        INSERT INTO star_board(title, writer, content, user_no, pay_no, status, category1, category2, type, start_date, end_date)
-        VALUES (#{title}, #{writer}, #{content},#{userNo},#{payNo},#{status},#{category1},#{category2},#{type},#{startDate},#{endDate})
+        INSERT INTO star_board(title, writer, content, user_no, pay_no, card, category1, category2, type, start_date, end_date)
+        VALUES (#{title}, #{writer}, #{content},#{userNo},#{payNo},#{card},#{category1},#{category2},#{type},#{startDate},#{endDate})
     </insert>
 
     <!-- 글 등록 -->
     <insert id="payInsert" useGeneratedKeys="true" keyProperty="starNo">
-        INSERT INTO star_board(title, writer, content, user_no, pay_no, status, category1, category2, type, start_date, end_date)
-        VALUES (#{title}, #{writer}, #{content},#{userNo},#{payNo},#{status},#{category1},#{category2},#{type},#{startDate},#{endDate})
+        INSERT INTO star_board(title, writer, content, user_no, pay_no, card, category1, category2, type, start_date, end_date)
+        VALUES (#{title}, #{writer}, #{content},#{userNo},#{payNo},#{card},#{category1},#{category2},#{type},#{startDate},#{endDate})
     </insert>
 
     <!-- 결제 정보 등록 -->
