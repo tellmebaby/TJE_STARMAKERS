@@ -5,28 +5,28 @@ import lombok.Data;
 @Data
 public class Page {
     // 페이징 기본값
-    private static final int PAGE_NUM = 1;  // 현재 페이지 번호 기본값
-    private static final int ROWS = 10;      // 페이지당 게시글 수 기본값
-    private static final int COUNT = 10;     // 노출 페이지 개수 기본값
+    private static final int PAGE_NUM = 1; // 현재 페이지 번호 기본값
+    private static final int ROWS = 10; // 페이지당 게시글 수 기본값
+    private static final int COUNT = 10; // 노출 페이지 개수 기본값
     // total은 그때그때 달라짐 사용자들이 몇 개의 게시글을 작성했느냐에 따라서
 
     // ✅ 필수 정보
-    private int page;   // 페이지 번호
-    private int rows;   // 페이지당 게시글 수
-    private int count;  // 노출 페이지 개수
-    private int total;  // 전체 데이터 개수
+    private int page; // 페이지 번호
+    private int rows; // 페이지당 게시글 수
+    private int count; // 노출 페이지 개수
+    private int total; // 전체 데이터 개수
     private int typeTotal; // type별 데이터 개수
 
     // ⭐ 수식 정보
-    private int start;  // 시작 번호
-    private int end;    // 끝 번호
-    private int first;  // 첫 번호
-    private int last;   // 마지막 번호
+    private int start; // 시작 번호
+    private int end; // 끝 번호
+    private int first; // 첫 번호
+    private int last; // 마지막 번호
 
-    private int prev;   // 이전 번호
-    private int next;   // 다음 번호
+    private int prev; // 이전 번호
+    private int next; // 다음 번호
 
-    private int index;  // 데이터 순서 번호
+    private int index; // 데이터 순서 번호
 
     // 생성자
     public Page() {
@@ -37,6 +37,8 @@ public class Page {
     public Page(int total) {
         this(PAGE_NUM, total);
     }
+
+
 
     // 현재 번호, 데이터 개수
     public Page(int page, int total) {
@@ -65,10 +67,11 @@ public class Page {
         // 마지막 번호
         this.last = (this.total - 1) / rows + 1;
         // 시작 번호호구조
-        this.start = ((page-1) / count) * count + 1;
+        this.start = ((page - 1) / count) * count + 1;
         // 끝 번호
-        this.end = ((page-1) / count + 1) * count;
-        if(this.end > this.last) this.end = this.last;
+        this.end = ((page - 1) / count + 1) * count;
+        if (this.end > this.last)
+            this.end = this.last;
 
         // 이전 번호
         this.prev = this.page - 1;

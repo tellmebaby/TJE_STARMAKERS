@@ -78,10 +78,23 @@ public class StarServiceImpl implements StarService {
         return result;
     }
 
+
     @Override
     public int view(int starNo) throws Exception {
         return starMapper.view(starNo);
     }
+
+    /**
+     * 글 삭제
+     */
+    @Override
+    public int delete(int starNo) throws Exception {
+        int result = starMapper.delete(starNo);
+        return result;
+
+    }
+
+
 
 
     

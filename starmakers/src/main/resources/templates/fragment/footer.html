@@ -57,14 +57,14 @@
 
             .floating.open {
                 width: 300px;
-                height: 223px;
+                height: 300px;
                 border-radius: 10px;
             }
 
             .chat-container {
                 display: none;
                 width: 100%;
-                height: 40%;
+                height: 60%;
                 background-color: white;
                 border-radius: 10px;
                 padding: 20px;
@@ -109,13 +109,13 @@
                 </a>
                 <div class="chat-container">
                     <h5>채팅</h5>
-                    <div class="chat-messages" style="height: 80%; overflow-y: auto;">
+                    <div class="chat-messages" style="height: 80%; overflow-y: auto;" id="chatMessages">
                         <p>안녕하세요! 무엇을 도와드릴까요?</p>
                     </div>
                     <div class="chat-input mt-2">
                         <form id="messageForm">
                             <input type="hidden" id="inputCsrf" name="${_csrf.parameterName}" value="${_csrf.token}">
-                            <input type="text" class="form-control" name="content" placeholder="메세지를 입력하세요..." id="chatInput">
+                            <input type="text" class="form-control" name="content" placeholder="입력하세요..." id="chatInput">
                             <input type="hidden" name="code" value="toAdmin">
                         </form>
                     </div>

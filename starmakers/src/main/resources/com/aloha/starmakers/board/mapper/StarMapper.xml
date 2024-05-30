@@ -119,11 +119,18 @@
         WHERE star_no = #{starNo}
     </update>
 
+
     <!-- 조회수 -->
     <update id="view">
         UPDATE star_board
            SET views = views + 1
         WHERE star_no = #{starNo}
     </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="delete">
+        DELETE FROM star_board
+        WHERE star_no IN (${starNo})
+    </delete>
 
 </mapper>
