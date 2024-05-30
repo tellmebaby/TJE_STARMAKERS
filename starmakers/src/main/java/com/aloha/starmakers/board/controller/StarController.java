@@ -23,7 +23,6 @@ import com.aloha.starmakers.board.service.StarService;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Slf4j
@@ -229,6 +228,19 @@ public class StarController {
         return "redirect:/page/board/eventBoard/eventUpdate?qnaNo=" + no + "$error";
     }
 
+    @PostMapping("/board/eventBoard/eventDelete")
+    public String eventDelete(@RequestParam("starNos") String starNos) throws Exception {
+       
+        int result = 0;
+        result = starService.delete(starNos);
+
+        if (result > 0) {
+            return "redirect:/page/mypage/event";
+        }
+        
+        return "redirect:/page/mypage/event?error";  // 삭제 실패시에도 같은 페이지로 리디렉션
+    }
+
 
     // 아래부터 review 게시판
 
@@ -240,8 +252,8 @@ public class StarController {
      * @throws Exception 
      */
     @PostMapping("/review/delete")
-    public String delete(@RequestParam("starNo") int starNo) throws Exception {
-        int result = starService.delete(starNo);
+    public String reviewDelete(@RequestParam("starNos") String starNos) throws Exception {
+        int result = starService.delete(starNos);
         if(result>0){
             log.info("삭제 완료");
         }

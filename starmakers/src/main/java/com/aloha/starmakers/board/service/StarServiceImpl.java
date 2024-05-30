@@ -91,11 +91,13 @@ public class StarServiceImpl implements StarService {
      * 글 삭제
      */
     @Override
-    public int delete(int starNo) throws Exception {
-        int result = starMapper.delete(starNo);
+    public int delete(String starNoList) throws Exception {
+        int result = starMapper.delete(starNoList);
         return result;
 
     }
+
+    
 
 
 
