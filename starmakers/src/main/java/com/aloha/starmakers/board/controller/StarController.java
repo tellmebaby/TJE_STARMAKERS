@@ -55,8 +55,11 @@ public class StarController {
      * @throws Exception
      */
   
+
+     
+
     @PostMapping("/starCard/starInsert")
-    public String insertPro(StarBoard starBoard, String username, @RequestParam("image") MultipartFile file ,HttpSession session)
+    public String insertPro(StarBoard starBoard, String username, @RequestParam(value = "image", required = false) MultipartFile file ,HttpSession session)
             throws Exception {
         int starNo = starService.insert(starBoard, username);
 
@@ -68,7 +71,7 @@ public class StarController {
         // 데이터 처리 성공
         if (starNo > 0) {
             // 파일 처리 로직
-            if (!file.isEmpty()) {
+            if (file != null && !file.isEmpty()) {
                 fileService.upload(file, starNo, userNo);
             }
             return "redirect:/page/starCard/starList";
@@ -230,7 +233,7 @@ public class StarController {
     public String reviewList(@RequestParam(value = "type", defaultValue = "review") String type
                                     ,Model model, Page page
                                     ,Option option) throws Exception {
-
+                                        
         List<StarBoard> starList = starService.list(type, page, option);
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
