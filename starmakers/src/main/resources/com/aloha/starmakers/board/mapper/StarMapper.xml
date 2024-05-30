@@ -119,4 +119,11 @@
         WHERE star_no = #{starNo}
     </update>
 
+    <!-- 조회수 -->
+    <update id="view">
+        UPDATE star_board
+           SET views = views + 1
+        WHERE star_no = #{starNo}
+    </update>
+
 </mapper>

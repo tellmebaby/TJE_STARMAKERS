@@ -112,6 +112,8 @@ public class StarController {
     @GetMapping("/starCard/starRead")
     public String select(@RequestParam("starNo") int starNo, Model model) throws Exception {
         StarBoard starBoard = starService.select(starNo);
+        // 조회수 증가
+        int views = starService.view(starNo);
         model.addAttribute("starBoard", starBoard);
         return "/page/starCard/starRead";
     }
