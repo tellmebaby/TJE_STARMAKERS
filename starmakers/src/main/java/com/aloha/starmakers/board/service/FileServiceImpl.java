@@ -158,9 +158,6 @@ public class FileServiceImpl implements FileService {
 
         // file_name, origin_name, size, user_no, star_no
 
-        String filePath = uploadPath + "/" + fileName;
-        file.setFilePath(filePath);
-
         // 파일 정보 등록
         file.setFileName(fileName);
         file.setOriginName(originName);

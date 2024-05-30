@@ -24,7 +24,6 @@ CREATE TABLE file
   reg_date  TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일자',
   user_no   INT         NULL     COMMENT '유저데이터번호',
   star_no   INT         NULL     COMMENT '이벤트데이터번호',
-  file_path TEXT        NOT NULL,
   PRIMARY KEY (file_no)
 ) COMMENT '업로드파일';
 
