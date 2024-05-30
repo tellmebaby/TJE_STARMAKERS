@@ -20,6 +20,8 @@ import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -172,4 +174,12 @@ public class HomeController {
     public String reviewBoard(@PathVariable("path") String path) {
         return "page/board/reviewBoard/" + path;
     }
+
+    @GetMapping("/imgtest")
+    public String test( Model model ) {
+        int img = 2;
+        model.addAttribute("img", img);
+        return "/imgtest";
+    }
+    
 }

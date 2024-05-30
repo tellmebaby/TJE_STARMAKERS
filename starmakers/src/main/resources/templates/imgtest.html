@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 띄우기 테스트</title>
+</head>
+<body>
+    <h1>이미지 띄우기 테스트</h1>
+    <p th:text="${img}"></p>
+    <img th:src="|/file/img/${img}|" alt="썸네일" width="100">
+</body>
+</html>
