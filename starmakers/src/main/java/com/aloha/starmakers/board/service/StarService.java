@@ -28,4 +28,6 @@ public interface StarService {
 
     // 글 수정
     public int update(StarBoard starBoard) throws Exception;
+
+
 }

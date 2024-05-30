@@ -12,6 +12,9 @@ import com.aloha.starmakers.board.mapper.StarMapper;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.mapper.UserMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class StarServiceImpl implements StarService {
     @Autowired
