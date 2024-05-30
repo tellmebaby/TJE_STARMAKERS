@@ -346,6 +346,26 @@ public class StarController {
     }
     
     // 아래부터 공지게시판
+    @GetMapping("/board/anBoard/anList")
+    public String anList(@RequestParam(value = "type", defaultValue = "an") String type
+                                    ,Model model, Page page
+                                    ,Option option) throws Exception {
+                                        
+        List<StarBoard> starList = starService.list(type, page, option);
+        model.addAttribute("starList", starList);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
+
+        List<Option> optionList = new ArrayList<Option>();
+        optionList.add(new Option("제목+내용", 0));
+        optionList.add(new Option("제목", 1));
+        optionList.add(new Option("내용", 2));
+        optionList.add(new Option("작성자", 3));
+        model.addAttribute("optionList", optionList);
+        return "/page/board/anBoard/anList";
+    }
+
+
     @PostMapping("/board/anBoard/anInsert")
     public String anInsertPro(StarBoard starBoard, String username) throws Exception{
         int result = starService.insert(starBoard, username);

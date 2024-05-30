@@ -26,6 +26,7 @@
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
             </if>
         </if>
+        ORDER BY reg_date DESC
         LIMIT #{page.index}, #{page.rows}
     </select>
 
@@ -50,6 +51,7 @@
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
             </if>
         </if>
+        
     </select>
 
     <!-- 게시글 목록 검색 -->

@@ -105,14 +105,14 @@
         <h3>공지사항</h3>
 
             <div class="search-container">
-                <select>
-                    <option value="제목내용">제목+내용</option>
-                    <option value="제목">제목</option>
-                    <option value="내용">내용</option>
-                    <option value="작성자">작성자</option>
-                </select>
-                <input type="text" placeholder="검색어를 입력하세요">
-                <button type="button">검색</button>
+                <form action="/page/board/anBoard/anList" method="get">
+                    <select name="code">
+                        <option th:each="item : ${optionList}" th:value="${item.code}" th:text="${item.keyword}" th:selected="${item.code == option.code}"></option>
+                    </select>
+                    <input type="text" name="keyword" placeholder="검색어를 입력하세요" 
+                        th:value="${param.keyword}">
+                    <button type="submit">검색</button>
+                </form>
             </div>
                 
             <table>
@@ -128,57 +128,39 @@
                 </thead>
                 
 
-                <th:if="${qnaList.isNotEmpty()}">
-                    <!-- 여기에 예시 데이터를 추가합니다. -->
-                    <!-- 첫 번째 예시 데이터 -->
+                <th:block th:if="${starList.isEmpty()}">
                     <tr>
-                        <td align="center">1</td> <!-- 숫자는 게시글 번호일 수 있습니다. -->
-                        <td><a href="/page/board/anBoard/anPost">공지사항 1</a></td>
-                        <td align="center">관리자 1</td>
-                        <td align="center">2024-05-22 10:00:00</td> <!-- 예시 날짜 및 시간 -->
-                        <td align="center">3</td> <!-- 상태에 따라 변경할 수 있습니다. -->
-                        <td align="center">99</td> <!-- 예시 날짜 및 시간 -->
+                        <td colspan="6" align="center" style="padding-top: 183.49px; padding-bottom: 183.49px;">
+                            조회된 게시글이 없습니다.
+                        </td>
                     </tr>
-                    <!-- 두 번째 예시 데이터 -->
-                    <tr>
-                        <td align="center">2</td> <!-- 게시글 번호 -->
-                        <td>공지사항 2</td>
-                        <td align="center">관리자 2</td>
-                        <td align="center">2024-05-21 09:00:00</td> <!-- 예시 날짜 및 시간 -->
-                        <td align="center">24</td> <!-- 상태에 따라 변경할 수 있습니다. -->
-                        <td align="center">75</td> <!-- 예시 날짜 및 시간 -->
-                    </tr>
-                    <!-- 여기까지 예시 데이터입니다. -->
-                    <tr>
-                        <td align="center">3</td> <!-- 게시글 번호 -->
-                        <td>공지사항 3</td>
-                        <td align="center">관리자 3</td>
-                        <td align="center">2024-05-20 18:00:00</td> <!-- 예시 날짜 및 시간 -->
-                        <td align="center">299</td> <!-- 상태에 따라 변경할 수 있습니다. -->
-                        <td align="center">470</td> <!-- 예시 날짜 및 시간 -->
-                    </tr>
-                    <tr>
-                        <td align="center">4</td> <!-- 게시글 번호 -->
-                        <td>공지사항 4</td>
-                        <td align="center">관리자 4</td>
-                        <td align="center">2024-05-19 11:00:00</td> <!-- 예시 날짜 및 시간 -->
-                        <td align="center">162</td> <!-- 상태에 따라 변경할 수 있습니다. -->
-                        <td align="center">840</td> <!-- 예시 날짜 및 시간 -->
-                    </tr>
-                    <tr>
-                        <td align="center">5</td> <!-- 게시글 번호 -->
-                        <td>공지사항 5</td>
-                        <td align="center">관리자 5</td>
-                        <td align="center">2024-05-18 13:00:00</td> <!-- 예시 날짜 및 시간 -->
-                        <td align="center">188</td> <!-- 상태에 따라 변경할 수 있습니다. -->
-                        <td align="center">189</td> <!-- 예시 날짜 및 시간 -->
-                    </tr>
+                </th:block>
 
-                </tbody>
+                <th:block th:each="starBoard : ${starList}">
+                    <tr th:if="${starBoard.type == 'an'}">
+                        <td align="center" th:text="${starBoard.starNo}"></td>
+                        <td>
+                            <a th:href="|anPost?starNo=${starBoard.starNo}|" th:text="${starBoard.title}"></a>
+                        </td>
+                        <td align="center" th:text="${starBoard.writer}"></td>
+                        <td align="center">
+                            <span th:text="${#dates.format(starBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                        </td>
+                        <td align="center" th:text="${starBoard.likes}"></td>
+                        <td align="center" th:text="${starBoard.views}"></td>
+                    </tr>
+                </th:block>
                 
             </table>
             <div class="button-container">
-            <a href="/page/board/anBoard/anInsert">공지 등록</a>
+                <!-- 비 로그인 시 -->
+                <th:block sec:authorize="isAnonymous()">
+                    <!-- 여기에는 아무것도 표시되지 않음 -->
+                </th:block>
+                <!-- 로그인 시 -->
+                <th:block sec:authorize="isAuthenticated()">
+                    <a href="/page/board/anBoard/anInsert" class="btn btn-primary">공지 등록</a>
+                </th:block>
             </div>
         </div>
 

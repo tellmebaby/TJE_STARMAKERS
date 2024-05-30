@@ -43,6 +43,6 @@ public interface StarMapper {
     public List<StarBoard> search(@Param("option") Option option) throws Exception;
 
     // 조회수 증가
-    public int view(int no) throws Exception;
+    public int view(int starNo) throws Exception;
 
 }
