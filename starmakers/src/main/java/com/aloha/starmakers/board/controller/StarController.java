@@ -65,6 +65,7 @@ public class StarController {
             @RequestParam(value = "image", required = false) MultipartFile file, HttpSession session)
             throws Exception {
         int starNo = starService.insert(starBoard, username);
+        
 
         Users user = (Users) session.getAttribute("user");
         int userNo = user.getUserNo();
