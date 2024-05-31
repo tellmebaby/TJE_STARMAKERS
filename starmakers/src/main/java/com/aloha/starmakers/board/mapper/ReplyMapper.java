@@ -3,6 +3,7 @@ package com.aloha.starmakers.board.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.aloha.starmakers.board.dto.Reply;
 
@@ -30,5 +31,9 @@ public interface ReplyMapper {
 
     // ⭐답글 종속 삭제
     public int deleteByParentNo(int parentNo) throws Exception;
+
+    // 댓글 개수 조회 메서드 추가
+    int countByStarNo(@Param("starNo") int starNo) throws Exception;
+
 
 }

@@ -28,4 +28,7 @@ public interface ReplyService {
     // ⭐답글 종속 삭제
     public int deleteByParentNo(int parentNo) throws Exception;
 
+    // 댓글 개수 조회
+    int countByStarNo(int starNo) throws Exception;
+
 }
