@@ -1,19 +1,19 @@
 <th:block th:each="reply : ${replyList}">
-
 <div id="reply-list">
+<th:block th:if="${reply.replyNo == reply.parentNo}">
     <!-- 댓글 -->
     <div class="reply-top">
         <span class="reply-writer" th:text="${reply.writer}"></span>
-        <span class="reply-regDate" th:text="${reply.regDate}">
+        <span class="reply-regDate" th:text="${#dates.format(reply.regDate, 'yyyy-MM-dd HH:mm:ss')}">
             <i class="fa-regular fa-thumbs-up icon"></i>
         </span>
     </div>
     <!-- 댓글 내용/ 수정 삭제 버튼 -->
     <div class="reply-middle">
-        <p class="reply-content" th:text="${reply.content}"></p>
+        <p class="reply-content"  th:text="${reply.content}"></p>
         <div class="reply-button">
-            <button class="btn-reply-update">수정</button>
-            <button class="btn-reply-delete">삭제</button>
+            <button class="btn-reply-update" th:data="${reply.replyNo}">수정</button>
+            <button class="btn-reply-delete" th:onclick="|deleteReply(${reply.replyNo})|">삭제</button>
         </div>
     </div>
     <!-- 답글 쓰기 -->
@@ -27,7 +27,38 @@
             <button type="button">등록</button>
         </div>       
     </div>
-    
+</th:block>
+<th:block th:if="${reply.replyNo != reply.parentNo}">
+    <!-- 답글!! 목록 -->
+    <div id="rereply-list" >
+        <div class="rereply" th:each="reply : ${rereplyList}">
+            <!-- 답글 -->
+            <div class="rereply-top">
+                <span class="rereply-writer" th:text="${reply.writer}"></span>
+                <span class="rereply-regDate" th:text="${reply.regDate}">
+                    <i class="fa-regular fa-thumbs-up icon"></i>
+                </span>
+            </div>
+            <!-- 답글 내용/ 수정 삭제 버튼 -->
+            <div class="rereply-middle">
+                <p class="rereply-content" th:text="${reply.content}"></p>
+                <div class="rereply-button">
+                    <button class="btn-rereply-update">수정</button>
+                    <button class="btn-rereply-delete">삭제</button>
+                </div>
+            </div>
+            <!-- 답글에 답글 쓰기 -->
+            <div class="rereply-rereply">
+                <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
+            </div>
+            <div class="rereply-container m-0 p-0">
+                <div class="rereply-box">
+                    <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
+                    <button type="button" th:onclick="|insertAnswer(this, ${reply.replyNo})|">등록</button>
+                </div>       
+            </div>
+        </div>
+    </div>
+</th:block>
 </div>
-
 </th:block>
