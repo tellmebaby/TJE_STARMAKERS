@@ -107,7 +107,7 @@
             <div class="search-container">
                 <form action="/page/board/anBoard/anList" method="get">
                     <select name="code">
-                        <option th:each="item : ${optionList}" th:value="${item.code}" th:text="${item.keyword}" th:selected="${item.code == option.code}"></option>
+                        <option th:each="item : ${optionList}" th:value="${item.code}" th:text="${item.codeName}" th:selected="${item.code == option.code}"></option>
                     </select>
                     <input type="text" name="keyword" placeholder="검색어를 입력하세요" 
                         th:value="${param.keyword}">

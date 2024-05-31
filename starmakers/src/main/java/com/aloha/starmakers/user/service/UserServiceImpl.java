@@ -12,10 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
 
-
 import com.aloha.starmakers.board.dto.Files;
-import com.aloha.starmakers.board.mapper.FileMapper;
-
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.user.dto.PasswordResetToken;
 import com.aloha.starmakers.user.dto.UserAuth;
