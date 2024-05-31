@@ -2,6 +2,7 @@ package com.aloha.starmakers.board.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.security.Principal;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.aloha.starmakers.board.dto.Files;
 import com.aloha.starmakers.board.service.FileService;
+import com.aloha.starmakers.user.dto.CustomUser;
+import com.aloha.starmakers.user.dto.Users;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,8 +58,9 @@ public class FileController {
         }
 
         // 파일 경로, 파일명
-        String fileName = downloadFile.getFileName(); // 파일 이름
-        String filePath = downloadFile.getFilePath(); // 파일 경로
+        String fileName = downloadFile.getFileName();   // 파일 이름
+        String filePath = uploadPath +downloadFile.getFileName();
+
 
         // 다운로드를 위한 응답 헤더 세팅
         // - ContentType : application/octect-stream
@@ -128,8 +132,11 @@ public class FileController {
             return new ResponseEntity<>(noImageFileData, headers, HttpStatus.OK);
         }
 
+
+        
         // 파일 정보 중에서 파일 경로 가져오기
-        String filePath = uploadPath + file.getFileName();
+        String filePath = uploadPath +file.getFileName();
+
 
         // 파일 객체 생성
         File f = new File(filePath);

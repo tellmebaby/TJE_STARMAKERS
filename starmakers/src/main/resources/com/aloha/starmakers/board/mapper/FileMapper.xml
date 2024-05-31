@@ -75,6 +75,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
           AND parent_no = #{parentNo}
     </delete>
 
-
+    <!-- 유저 이미지 파일 가져오기 -->
+    <select id="selectByUserNoAndStarNo" resultType="Files">
+    SELECT * FROM file 
+    WHERE user_no = #{userNo} AND star_no = 0
+    </select>
 
 </mapper>

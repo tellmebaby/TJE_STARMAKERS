@@ -3,6 +3,8 @@ package com.aloha.starmakers.board.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import com.aloha.starmakers.board.dto.Files;
 
@@ -32,5 +34,9 @@ public interface FileMapper {
 
     // 파일 삭제 - 부모 기준
     public int deleteByParent(Files file) throws Exception;
+
+    // 유저 이미지 파일 검색
+    public Files selectByUserNoAndStarNo( int userNo ) throws Exception;
+
 
 }

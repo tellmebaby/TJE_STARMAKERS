@@ -1,6 +1,8 @@
 package com.aloha.starmakers.controller;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,6 +22,9 @@ import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 
 
@@ -38,12 +43,13 @@ public class HomeController {
      * @return
      */
     @GetMapping({"", "/"})
-    public String home(Principal principal, HttpSession session) {
+    public String home(Principal principal, HttpSession session, Model model) {
         log.info("메인 화면");
         log.info(":::::::::: principal ::::::::::");
         log.info("principal : " + principal);
         log.info("user : " + session.getAttribute("user"));
-
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
         // Principal : 현재 로그인 한 사용자 정보를 확인하는 인터페이스
         return "index";
     }
@@ -103,7 +109,7 @@ public class HomeController {
      * @throws Exception
      */
     @PostMapping("/page/recoverId")
-    public String postMethodName( Users user , Model model ) throws Exception{
+    public String recoverId( Users user , Model model ) throws Exception{
         
         int result = userService.selectEmail(user);
 
@@ -124,7 +130,7 @@ public class HomeController {
 
     
     @GetMapping("/page/introduce")
-    public String introduce() {
+    public String introduce( Model model) {
         return "page/introduce";
     }
     
@@ -172,4 +178,23 @@ public class HomeController {
     public String reviewBoard(@PathVariable("path") String path) {
         return "page/board/reviewBoard/" + path;
     }
+
+    /**
+     * 회원 프로필 이미지 불러오기
+     * @param session
+     * @return
+     */
+    @GetMapping("/get-user-img-id")
+    @ResponseBody
+    public Map<String, String> getUserImgId(HttpSession session) {
+        Map<String, String> response = new HashMap<>();
+        Users user = (Users) session.getAttribute("user");
+        if (user != null) {
+            response.put("userImgId", Integer.toString(user.getUserImgId()));
+        } else {
+            response.put("error", "No user image ID found in session");
+        }
+        return response;
+    }
+
 }
