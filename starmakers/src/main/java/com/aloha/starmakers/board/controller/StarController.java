@@ -62,7 +62,9 @@ public class StarController {
     @PostMapping("/starCard/starInsert")
     public String insertPro(StarBoard starBoard, String username, @RequestParam(value = "image", required = false) MultipartFile file ,HttpSession session)
             throws Exception {
+        // starBoard.setCard("무료홍보");
         int starNo = starService.insert(starBoard, username);
+
 
         Users user = (Users) session.getAttribute("user");
         int userNo = user.getUserNo();
@@ -128,13 +130,16 @@ public class StarController {
         // 등록한 정보에서 날짜 출력하여 홍보 일수 계산
         
         // StarBoard starBoard1 = starBoard;
-        starBoard.setCard("유료홍보요청");
-        int starNo = starService.insert(starBoard, username);
+        int starNo=0;
+        if (starNo <= 0){
+            starBoard.setCard("유료홍보");
+            starNo = starService.insert(starBoard, username);
+        }
 
         Date strDate = starBoard.getStartDate();
         Date endDate = starBoard.getEndDate();
         int dif = (int) ((endDate.getTime() - strDate.getTime())/ (24*60*60*1000));
-        int price = dif*1000;
+        int price = dif*1000; // 결제 금액
         model.addAttribute("dif", dif);
         model.addAttribute("price", price);
 

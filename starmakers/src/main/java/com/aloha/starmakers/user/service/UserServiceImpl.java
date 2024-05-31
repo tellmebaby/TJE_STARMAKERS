@@ -44,8 +44,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordResetTokenMapper PasswordResetTokenMapper;
 
-    @Autowired
-    private FileService fileService;
 
     @Override
     public boolean login(Users user, HttpServletRequest request) throws Exception {

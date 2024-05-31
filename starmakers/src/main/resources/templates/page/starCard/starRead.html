@@ -397,6 +397,25 @@
             align-items: left;
             padding: 5px 0px;
         }
+
+        #title {
+          margin: 0 auto 15px;
+
+
+          padding: 30px 30px;
+          border: 1px solid;
+          border-radius: 10px;
+
+        }
+        #content {
+            margin: 0 auto;
+            padding: 30px 30px;
+            border: 1px solid;
+            /* text-align: center; */
+        }
+        .container2 {
+          max-width: 960px;
+        }
   </style>
 </head>
 
@@ -407,20 +426,27 @@
     <h1 class="d-flex justify-content-center mt-3 mb-3">
       홍보 상세
     </h1>
+    <div class="container d-flex justify-content-center">
+      <div class="container2">
 
-    <div class="container">
-      <!-- <div class="w-100 d-flex justify-content-center" >
-        <img src="/img/star.jpg" alt="홍보이미지">
-      </div> -->
-      <div class="d-flex justify-content-start">
-        <span id="content" th:utext="${starBoard.content}"></span>
-        <!-- <span id="content">홍보 내용입니다</span> -->
+        <!-- 썸네일 이미지 가져와서 아이콘 띄우기 -->
+        
+        <div class="border border-dark rounded mt-3 mb-3" id="title">
+          <!-- <div class="border-bottom border-secondary w-100"> -->
+            <span class="fw-bold fs-3" th:text="${starBoard.title}"></span>
+            <hr>
+          <!-- </div> -->
+        </div>
+        <div class="border border-dark rounded w-100" id="content" >
+            <span th:utext="${starBoard.content}"></span>
+        </div>
+        <div class="d-flex justify-content-end mt-2">
+          <button class="btn btn-secondary btn-submit col-1 border-0 " type="button" onclick="moveList()">목록</button>
+          <button class="btn btn-dark btn-submit col-1 border-0 ms-2" type="button" onclick="update()">수정</button>
+        </div>
       </div>
+    </div>
 
-      <div class="d-flex justify-content-end mt-2">
-        <button class="btn btn-primary btn-submit col-1 border-0" type="button" onclick="moveList()">목록</button>
-        <button class="btn btn-primary btn-submit col-1 border-0" type="button" onclick="update()">수정</button>
-      </div>
 
 
 
