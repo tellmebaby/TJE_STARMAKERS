@@ -7,7 +7,7 @@
 
     <!-- 게시판 목록 -->
     <select id="list" resultType="StarBoard">
-        SELECT s.*, file_name as img
+        SELECT s.*, file_no as imgNo
         FROM star_board s 
         left join file f
         ON f.star_no=s.star_no 

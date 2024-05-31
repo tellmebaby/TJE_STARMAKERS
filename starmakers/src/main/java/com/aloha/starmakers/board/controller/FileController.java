@@ -109,7 +109,7 @@ public class FileController {
         
         // Null 체크
         if( file == null ) {
-            String filePath = uploadPath + "/no-image.png";
+            String filePath = uploadPath + "standard_card.png";
             File noImageFile = new File(filePath);
             byte[] noImageFileData = FileCopyUtils.copyToByteArray(noImageFile);
             HttpHeaders headers = new HttpHeaders();
@@ -118,8 +118,9 @@ public class FileController {
         }
 
         // 파일 정보 중에서 파일 경로 가져오기
-        String filePath = file.getFilePath();
-        
+        String filePath = uploadPath + file.getFileName();
+
+          
         // 파일 객체 생성
         File f = new File(filePath);
         
