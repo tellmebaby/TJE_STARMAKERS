@@ -53,3 +53,8 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+.rounded-circle-custom {
+  width: 80px;
+  height: 80px;
+  object-fit: cover; /* 이미지가 원 안에 잘 맞도록 합니다 */
+}

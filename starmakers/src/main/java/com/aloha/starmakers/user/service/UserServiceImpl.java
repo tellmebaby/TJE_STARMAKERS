@@ -12,6 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
 
+
+import com.aloha.starmakers.board.dto.Files;
+import com.aloha.starmakers.board.mapper.FileMapper;
+
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.user.dto.PasswordResetToken;
 import com.aloha.starmakers.user.dto.UserAuth;
@@ -19,11 +23,17 @@ import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.mapper.PasswordResetTokenMapper;
 import com.aloha.starmakers.user.mapper.UserMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private FileService fileService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -33,9 +43,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private PasswordResetTokenMapper PasswordResetTokenMapper;
-
-    @Autowired
-    private FileService fileService;
 
     @Override
     public boolean login(Users user, HttpServletRequest request) throws Exception {
@@ -59,6 +66,9 @@ public class UserServiceImpl implements UserService {
         
         // 세션의 정보 등록
         user = userMapper.select(username);
+        Files file = fileService.selectByUserNoAndStarNo(user.getUserNo());
+        log.info(":::::::::::::fileno : " + file.getFileNo() );
+        user.setUserImgId(file.getFileNo());
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
 

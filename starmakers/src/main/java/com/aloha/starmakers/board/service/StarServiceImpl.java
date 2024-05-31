@@ -1,5 +1,6 @@
 package com.aloha.starmakers.board.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class StarServiceImpl implements StarService {
         Users user = userMapper.login(username);
         starBoard.setUserNo(user.getUserNo());
         starBoard.setWriter(user.getName());
-        starBoard.setCard("무료홍보");
+        // starBoard.setCard("무료홍보");
         // 정보 등록
         starMapper.insert(starBoard);
         
@@ -62,7 +63,10 @@ public class StarServiceImpl implements StarService {
         Users user = userMapper.login(username);
         starBoard.setUserNo(user.getUserNo());
         starBoard.setWriter(user.getName());
-        starBoard.setCard("유료홍보");
+        starBoard.setCard("유료홍보요청");
+        // Date strDate = starBoard.getStartDate();
+        // Date endDate = starBoard.getEndDate();
+        
         // 정보 등록
         int result = starMapper.insert(starBoard);
         
