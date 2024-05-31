@@ -5,396 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이벤트</title>
-    <style>
-        .container2 {
-          max-width: 960px;
-          margin: 0 auto;
-          padding: 0 10px;
-          box-sizing: border-box;
-        }
-        .writer {
-            display: flex;
-            justify-content: space-around;
-            gap: 10px;
-            padding: 10px 0;
-            width: 100%;
-            margin-top: 50px;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-        .writer label:first-child {
-            font-size: 15px;
-            font-weight: 500;
-        }
-        .writer label:last-child {
-            font-size: 15px;
-            color: rgba(192, 190, 183, 1);
-        }
-       .title-container {
-          width: 100%;
-          margin: 0 auto 15px;
-
-          padding: 30px 30px;
-          border: 1px solid;
-          border-radius: 10px;
-        }
-        .title-container span {
-          font-weight: bold;
-          font-size: 20px;
-        }
-        .content-container {
-          width: 100%;
-          margin: 0 auto;
-          padding: 30px 30px;
-          border: 1px solid;
-          /* text-align: center; */
-        }
-        .title-container hr {
-          margin-top: 10px;
-        }
-        h1 {
-          margin-top: 40px;
-          margin-bottom: 10px;
-        }
-
-        /* 버튼 */
-        .button-wrapper {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            padding: 10px 0;
-            width: 100%;
-        }
-        .button-container1 {
-            text-align: right;
-            padding: 10px 0;
-        }
-        .button-container1 button {
-            margin-left: 5px;
-            padding: 7px 20px;
-            background-color: rgba(37, 37, 37, 1);
-            border-radius: 3px;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .button-container1 button:hover {
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
-            font-weight: bolder;
-            color: black;
-        }
-        .button-container2 {
-            text-align: right;
-            padding: 10px 0;
-        }
-        .button-container2 button {
-            margin-left: 5px;
-            padding: 7px 20px;
-            background-color: rgba(192, 190, 183, 1);
-            border-radius: 3px;
-            color: black;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .button-container2 button:hover {
-            background-color: black;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
-            font-weight: bolder;
-            color: white;
-        }
-
-        /* 댓글!!!! 입력*/
-        .reply-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 20px 0;
-            width: 100%;
-        }
-        .reply {
-            margin-left: 30px;
-            font-weight: bold;
-            font-size: 20px;
-        }
-        .reply-box {
-            flex-grow: 1;
-            display: flex;
-            justify-content: space-between;
-            width: 720px;
-            margin: 0 auto 15px;
-            padding: 30px 30px;
-            border: 1px solid;
-            background-color: rgb(240, 240, 240);
-        }
-        .reply-box textarea {
-            /* flex-grow: 1;  */
-            margin-right: 5px;
-            display: block;
-            width: 90%;
-            height: 100px;
-            overflow-y: scroll;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .reply-container button {
-            margin-left: 5px; 
-            padding: 10px 20px;
-            background-color: white;
-            color: black;
-            cursor: pointer;
-            border: 1px solid rgba(192, 190, 183, 1);
-            height: 100px;
-            border-radius: 3px;
-        }
-        .reply-container button:hover {
-            background-color: black;
-            color: white;
-            font-weight: bolder;
-        }
-        
-        /* 댓글 타이틀 */
-        .top-reply-list {
-            border-bottom: 1.7px solid #000;
-            width: 100%;
-        }
-        .top-reply-list label {
-            margin: 5px 10px;
-        }
-
-        /* 댓글!!!! 목록 */
-        #reply-list {
-            display: block;
-            /* border-bottom: 0.7px solid #000; */
-            border-bottom: 0.7px solid blue;
-            width: 100%;
-            display: block;
-            padding: 10px 5px;
-            box-sizing: border-box;
-        }
-        .reply-top {
-            padding: 5px 10px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .reply-regDate {
-            color: rgba(192, 190, 183, 1);
-        }
-        .reply-regDate .icon {
-            color: #000;
-            margin: 0 20px;
-        }
-        .reply-middle {
-            padding: 5px 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .reply-content {
-            flex-grow: 1;
-            margin-right: 20px;
-        }
-        .reply-button {
-            padding: 5px 0;
-           text-align: right;
-        }
-        .btn-reply-update {
-            padding: 5px 10px;
-            background-color: rgba(192, 190, 183, 1);
-            border-radius: 3px;
-            color: black;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-reply-delete {
-            margin-left: 5px;
-            padding: 5px 10px;
-            background-color: rgba(37, 37, 37, 1);
-            border-radius: 3px;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .reply-rereply {
-            align-items: left;
-            padding: 5px 0px;
-        }
-
-        /* 답글 버튼*/
-        .btn-rereply {
-            padding: 7px 15px;
-            margin-right: 5px;
-            border: none;
-            border-radius: 3px;
-            background-color: transparent;
-            color: rgba(192, 190, 183, 1);
-        }
-/* ---------------------------------------------------------헷갈릴까봐 나눠놓기 
-    답글 입력과 답글 목록은 부모댓글 목록 안에!!!! 있음*/
-         /* 답글!!!! 입력*/
-         /* 답글 눌렀을 때 보이게 하기 */
-         .rereply-container {
-            /* display: none; */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 20px 0;
-            /* padding-left: 20px; */
-            width: 100%;
-            /* border-bottom: 0.7px solid rgba(192, 190, 183, 1); */
-
-            visibility: hidden; /* 숨김 */
-            height: 0; /* 높이 0으로 설정 */
-            overflow: hidden; /* 콘텐츠 오버플로우 숨김 */
-        }
-        .rereply-container.visible {
-            visibility: visible; /* 보임 */
-            height: auto; /* 원래 높이로 설정 */
-            padding: 0;
-            padding-left: 70px;
-            transition: visibility 0.3s, height 0.3s;
-        }
-        .rereply {
-            /* margin-left: 30px;
-            font-weight: bold;
-            font-size: 20px; */
-            margin-left: 70px;
-        }
-        .rereply-box {
-            flex-grow: 1;
-            display: flex;
-            justify-content: space-between;
-            width: 720px;
-            margin: 0 auto 15px;
-            padding: 20px 20px;
-            border: 1px solid rgba(192, 190, 183, 1);
-            border-radius: 3px;
-            margin-right: 10px;
-        }
-        .rereply-box textarea {
-            /* flex-grow: 1;  */
-            margin-right: 5px;
-            display: block;
-            width: 90%;
-            height: 100px;
-            overflow-y: scroll;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .rereply-container button {
-            margin-left: 5px; 
-            padding: 10px 20px;
-            background-color: white;
-            color: black;
-            cursor: pointer;
-            border: 1px solid rgba(192, 190, 183, 1);
-            height: 100px;
-            border-radius: 3px;
-        }
-        .rereply-container button:hover {
-            background-color: black;
-            color: white;
-            font-weight: bolder;
-        }
-
-        /* 답글!!!! 목록 */
-        #rereply-list {
-            display: block;
-            width: 100%;
-            display: block;
-            padding: 10px 5px;
-            box-sizing: border-box;
-            /* border-top: 0.7px solid rgba(192, 190, 183, 1); */
-            border-top: 0.7px solid red;
-        }
-        .rereply-top {
-            padding: 5px 10px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .rereply-regDate {
-            color: rgba(192, 190, 183, 1);
-        }
-        .rereply-regDate .icon {
-            color: #000;
-            margin: 0 20px;
-        }
-        .rereply-middle {
-            padding: 5px 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .rereply-content {
-            flex-grow: 1;
-            margin-right: 20px;
-        }
-        .rereply-button {
-            padding: 5px 0;
-           text-align: right;
-        }
-        .btn-rereply-update {
-            padding: 5px 10px;
-            background-color: rgba(192, 190, 183, 1);
-            border-radius: 3px;
-            color: black;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-rereply-delete {
-            margin-left: 5px;
-            padding: 5px 10px;
-            background-color: rgba(37, 37, 37, 1);
-            border-radius: 3px;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .rereply-rereply {
-            align-items: left;
-            padding: 5px 0px;
-        }
-    </style>
+    
+<link rel="stylesheet" href="/css/post.css">
 </head>
 <body>
 
     <th:block layout:fragment="content">
 
-    <div class="container">
+    <div class="container2">
 
-        <div class="w-75 m-auto">
+        
 
             <center>
                 <h1>이벤트</h1>
@@ -440,21 +60,13 @@
                 <div id="reply-listbox">
                     
                 </div>
-            
-                
-        </div>
 
-
-
-
-        
-        
      
     </div>
 
     <script>
     
-        let starNo = '[[${starBoard.starNo}]]'
+        let starNo = '[[${starBoard.starNo}]]';
 
         function moveList() {
           location.href = '/page/board/eventBoard/eventList'
@@ -542,18 +154,19 @@
         }
 
          // 로그인 상태 체크
-         document.addEventListener('DOMContentLoaded', function() {
-            let isLoggedIn = '[[${session.user != null}]]'; // Thymeleaf로 로그인 상태 확인
-            if (!isLoggedIn) {
-                // 로그인하지 않은 경우 댓글 입력을 비활성화
+        document.addEventListener('DOMContentLoaded', function() {
+            let isLoggedIn = /*'[[${session.user}]]'*/ null
+    
+            if (isLoggedIn === null) {
                 document.getElementById('reply-content').disabled = true;
                 document.getElementById('btn-reply-insert').disabled = true;
                 document.getElementById('reply-content').placeholder = "로그인 후 댓글을 작성할 수 있습니다.";
-            }
+             }
         });
 
   
       </script>
+
     
     </th:block>
     
