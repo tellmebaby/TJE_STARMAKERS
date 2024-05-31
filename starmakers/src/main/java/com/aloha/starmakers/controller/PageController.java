@@ -176,6 +176,8 @@ public class PageController {
         // 모델 등록
         model.addAttribute("qnaBoard", qnaBoard);
 
+        starService.views(qnaNo);
+
         // 뷰페이지 지정
         return "/page/mypage/qnaPost";
     }
@@ -265,6 +267,8 @@ public class PageController {
 
         // 모델 등록
         model.addAttribute("starBoard", starBoard);
+
+        starService.views(starNo);
 
         // 뷰페이지 지정
         return "/page/mypage/reviewPost";

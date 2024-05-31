@@ -1,5 +1,5 @@
 
--- Active: 1716511247384@@127.0.0.1@3306@joeun
+-- Active: 1716894496133@@127.0.0.1@3306@joeun
 
 
 
@@ -91,7 +91,7 @@ CREATE TABLE qna_board
   answer   TEXT        NULL     COMMENT '답변',
   reg_date TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일자',
   upd_date TIMESTAMP   NULL     COMMENT '수정일자',
-  views    INT         NULL     COMMENT '조회수',
+  views    INT         NOT NULL DEFAULT '0'     COMMENT '조회수',
   user_no  INT         NOT NULL COMMENT '유저데이터번호',
   status    VARCHAR(20) NULL     COMMENT '상태', -- 상태의 길이 지정.
   
@@ -135,7 +135,7 @@ CREATE TABLE star_board
   views     INT         NOT NULL  DEFAULT '0'   COMMENT '조회수',
   user_no   INT         NOT NULL COMMENT '유저데이터번호',
   pay_no    INT         NULL     COMMENT '결제데이터번호',
-  likes     INT         NOT NULL DEFAULT 0 COMMENT '좋아요수',
+  likes     INT         NOT NULL DEFAULT '0' COMMENT '좋아요수',
   status    VARCHAR(20) NULL     COMMENT '상태', -- 상태의 길이 지정.
   card    VARCHAR(20) NULL     COMMENT '카드구분',
   category1 VARCHAR(100) NULL     COMMENT '종류1', -- 카테고리1 길이 지정.

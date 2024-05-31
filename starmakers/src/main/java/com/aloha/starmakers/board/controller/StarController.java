@@ -110,8 +110,10 @@ public class StarController {
     @PostMapping("/starCard/starInsert")
     public String insertPro(StarBoard starBoard, String username, @RequestParam(value = "image", required = false) MultipartFile file ,HttpSession session)
             throws Exception {
+        // starBoard.setCard("무료홍보");
         int starNo = starService.insert(starBoard, username);
         
+
 
         Users user = (Users) session.getAttribute("user");
         int userNo = user.getUserNo();
@@ -203,13 +205,16 @@ public class StarController {
         // 등록한 정보에서 날짜 출력하여 홍보 일수 계산
         
         // StarBoard starBoard1 = starBoard;
-        starBoard.setCard("유료홍보요청");
-        int starNo = starService.insert(starBoard, username);
+        int starNo=0;
+        if (starNo <= 0){
+            starBoard.setCard("유료홍보");
+            starNo = starService.insert(starBoard, username);
+        }
 
         Date strDate = starBoard.getStartDate();
         Date endDate = starBoard.getEndDate();
         int dif = (int) ((endDate.getTime() - strDate.getTime())/ (24*60*60*1000));
-        int price = dif*1000;
+        int price = dif*1000; // 결제 금액
         model.addAttribute("dif", dif);
         model.addAttribute("price", price);
 
@@ -252,7 +257,7 @@ public class StarController {
     public String select(@RequestParam("starNo") int starNo, Model model) throws Exception {
         StarBoard starBoard = starService.select(starNo);
         // 조회수 증가
-        int views = starService.view(starNo);
+        starService.views(starNo);
         model.addAttribute("starBoard", starBoard);
         return "/page/starCard/starRead";
     }
@@ -331,6 +336,7 @@ public class StarController {
     @GetMapping("/board/eventBoard/eventPost")
     public String eventSelect(@RequestParam("starNo") int starNo, Model model) throws Exception {
         StarBoard starBoard = starService.select(starNo);
+        starService.views(starNo);
         model.addAttribute("starBoard", starBoard);
         return "/page/board/eventBoard/eventPost";
     }
@@ -448,6 +454,8 @@ public class StarController {
     @GetMapping("/board/reviewBoard/reviewPost")
     public String reviewSelect(@RequestParam("starNo") int starNo, Model model) throws Exception {
         StarBoard starBoard = starService.select(starNo);
+        int views = starService.views(starNo);
+        log.info(views + " 증가");
         model.addAttribute("starBoard", starBoard);
         return "/page/board/reviewBoard/reviewPost";
     }
@@ -523,6 +531,7 @@ public class StarController {
     @GetMapping("/board/anBoard/anPost")
     public String anSelect(@RequestParam("starNo") int starNo, Model model) throws Exception {
         StarBoard starBoard = starService.select(starNo);
+        starService.views(starNo);
         model.addAttribute("starBoard", starBoard);
         return "/page/board/anBoard/anPost";
     }
