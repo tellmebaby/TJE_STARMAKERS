@@ -27,6 +27,7 @@ import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.board.service.LikeService;
 import com.aloha.starmakers.board.service.StarService;
 import com.aloha.starmakers.user.dto.Users;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -56,6 +57,46 @@ public class StarController {
     public String insert() {
         return "/page/starCard/starInsert";
     }
+
+
+    @GetMapping("/starCard/starCalendar")
+    public String starCalendarList(@RequestParam(value = "type", defaultValue = "starCard") String type
+                                    ,Model model, Page page, HttpSession session
+                                    ,Option option) throws Exception {
+                          
+
+        Users user = (Users) session.getAttribute("user");
+
+        List<StarBoard> starList = null;
+
+        page.setRows(5);
+
+        if (user != null) {
+            int userNo = user.getUserNo();
+            starList = starService.list(type, page, option, userNo);
+        } else {
+            starList = starService.list(type, page, option);
+        }
+
+
+        starList.forEach(star -> {
+            if (star.getCategory1() != null) {
+                List<String> icons = Arrays.stream(star.getCategory1().split(","))
+                        .collect(Collectors.toList());
+                star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
+            }
+        });
+
+        ObjectMapper mapper = new ObjectMapper();
+        String starListJson = mapper.writeValueAsString(starList);        
+        model.addAttribute("starList", starListJson);
+
+        return "/page/starCard/starCalendar";
+    }
+
+
+
+
 
     /**
      * 글 등록 요청
@@ -134,43 +175,7 @@ public class StarController {
     }
 
 
-    @GetMapping("/starCard/starCalendar")
-    public String starCalendarList(@RequestParam(value = "type", defaultValue = "starCard") String type
-                                    ,Model model, Page page, HttpSession session
-                                    ,Option option) throws Exception {
-
-        log.info("------------------11--------------------");                                
-
-        Users user = (Users) session.getAttribute("user");
-
-        List<StarBoard> starList = null;
-
-        page.setRows(999);
-
-        if (user != null) {
-            int userNo = user.getUserNo();
-            starList = starService.list(type, page, option, userNo);
-        } else {
-            starList = starService.list(type, page, option);
-        }
-
-        log.info("--------------------------------------");
-
-        starList.forEach(star -> {
-            if (star.getCategory1() != null) {
-                List<String> icons = Arrays.stream(star.getCategory1().split(","))
-                        .collect(Collectors.toList());
-                star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
-            }
-        });
-
-        log.info(starList.toString());
-
-        model.addAttribute("starList", starList);
-        
-
-        return "/page/starCard/starCalendar";
-    }
+    
 
 
 
