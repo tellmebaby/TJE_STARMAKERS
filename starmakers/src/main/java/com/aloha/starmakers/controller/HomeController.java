@@ -243,6 +243,11 @@ public class HomeController {
         return response;
     }
 
+    @GetMapping("/carddesign")
+    public String carddesign() {
+        return "carddesign";
+    }
+    
     /**
      * 이벤트 후기 게시판 조회
      */

@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 이제 userImgId를 사용하여 필요한 작업을 수행할 수 있습니다.
                 var imageUrl = '/file/img/' + userImgId;
                 document.getElementById('thumbnail').src = imageUrl;
+                var imgElement = document.getElementById('thumbnail');
+                imgElement.style.display = 'block'; // 이미지가 로드되면 보여줌
             } else {
                 console.error('Error:', data.error);
             }
@@ -24,9 +26,15 @@ function updateImage() {
             if (data.userImgId) {
                 let userImgId = data.userImgId;
                 console.log('User Image ID:', userImgId);
-                // 이제 userImgId를 사용하여 필요한 작업을 수행할 수 있습니다.
+                // 이미지 로드 완료 후에 보여주기 위한 이미지 객체 생성
                 var imageUrl = '/file/img/' + userImgId;
-                document.getElementById('thumbnail').src = imageUrl;
+                var imgElement = document.getElementById('thumbnail');
+                var tempImg = new Image();
+                tempImg.onload = function() {
+                    imgElement.src = imageUrl;
+                    imgElement.style.display = 'block'; // 이미지가 로드되면 보여줌
+                };
+                tempImg.src = imageUrl;
             } else {
                 console.error('Error:', data.error);
             }
