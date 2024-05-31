@@ -34,6 +34,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE file_no = #{fileNo}
     </select>
 
+    <!-- 프로필 파일 조회 -->
+    <select id="profileSelect" resultType="java.lang.Integer">
+        SELECT file_no
+        FROM file
+        WHERE user_no = #{userNo}
+        AND star_no = 0
+        ORDER BY file_no DESC
+        LIMIT 0, 1
+    </select>
+
     <!-- 파일 등록 -->
     <insert id="insert">
         INSERT INTO file( file_name, origin_name, size, user_no, star_no )

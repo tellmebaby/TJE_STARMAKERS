@@ -15,6 +15,9 @@ public interface FileMapper {
     // 파일 조회
     public Files select(int no) throws Exception;
 
+    // 회원 프로필 조회
+    public Integer profileSelect(int userNo) throws Exception;
+
     // 파일 등록
     public int insert(Files file) throws Exception;
 

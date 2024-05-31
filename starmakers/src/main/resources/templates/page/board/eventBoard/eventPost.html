@@ -289,6 +289,7 @@
             padding: 20px 20px;
             border: 1px solid rgba(192, 190, 183, 1);
             border-radius: 3px;
+            margin-right: 10px;
         }
         .rereply-box textarea {
             /* flex-grow: 1;  */
@@ -404,10 +405,6 @@
             <span th:text="${starBoard.title}"></span>
             <hr>
         </div>
-        <div class="title-container">
-            <span th:text="${starBoard.title}"></span>
-            <hr>
-        </div>
         <div class="content-container">
             <span th:utext="${starBoard.content}"></span>
         </div>
@@ -424,10 +421,12 @@
         <!-- 댓글 등록 -->
         <div class="reply-container">
             <div class="reply-box">
-            <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
-            <button type="button">등록</button>
-            </div>
-            
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                 <!-- 사용자 아이디(hidden) -->
+                 <input type="hidden" name="writer" id="reply-writer" th:value="${session.user.id}">
+                <textarea type="text" name="content" id="reply-content" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
+            <button type="button" id="btn-reply-insert" class="btn-reply" onclick="insertReply()">등록</button>
+            </div>            
         </div>
         <div class="reply-list">
             <label class="reply">댓글</label>
@@ -435,91 +434,14 @@
         </div>
         <!-- 댓글 목록 -->
         <div id="reply-list">
-            <!-- 댓글 -->
-            <div class="reply-top">
-                <span class="reply-writer">${writer}</span>
-                <span class="reply-regDate">${regDate}
-                    
-                    <i class="fa-regular fa-thumbs-up icon"></i>
-
-                </span>
-            </div>
-            <!-- 댓글 내용/ 수정 삭제 버튼 -->
-            <div class="reply-middle">
-                <p class="reply-content">${content}</p>
-                <div class="reply-button">
-                    <button class="btn-reply-update">수정</button>
-                    <button class="btn-reply-delete">삭제</button>
-                </div>
-            </div>
-            <!-- 답글 쓰기 -->
-            <div class="reply-rereply">
-                <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
-            </div>
-
-            <div class="rereply-container m-2 p-0">
-                <div class="rereply-box">
-                    <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
-                    <button type="button">등록</button>
-                </div>       
-            </div>
-            <!-- 답글!! 목록 -->
-            <div id="rereply-list">
-                <div class="rereply">
-                    <!-- 답글 -->
-                    <div class="rereply-top">
-                        <span class="rereply-writer">${writer}</span>
-                        <span class="rereply-regDate">${regDate}
-                            
-                                <i class="fa-regular fa-thumbs-up icon"></i>
-                            
-                        </span>
-                    </div>
-                    <!-- 답글 내용/ 수정 삭제 버튼 -->
-                    <div class="rereply-middle">
-                        <p class="rereply-content">${content}</p>
-                        <div class="rereply-button">
-                            <button class="btn-rereply-update">수정</button>
-                            <button class="btn-rereply-delete">삭제</button>
-                        </div>
-                    </div>
-                    <!-- 답글에 답글 쓰기 -->
-                    <div class="rereply-rereply">
-                        <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
-                    </div>
-                    <div class="rereply-container m-0 p-0">
-                        <div class="rereply-box">
-                            <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
-                            <button type="button">등록</button>
-                        </div>       
-                    </div>
-                </div>
-            </div>
+            
         </div>
     
         
 
 
 
-        <!-- 예시 자료 2 -->
-        <div id="reply-list">
-            <div class="reply-top">
-                <span class="reply-writer">${writer}</span>
-                <span class="reply-regDate">${regDate}
-                    <i class="fa-regular fa-thumbs-up icon"></i>
-                </span>
-            </div>
-            <div class="reply-middle">
-                <p class="reply-content">${content}</p>
-                <div class="reply-button">
-                    <button class="btn-reply-update" onclick="update()">수정</button>
-                    <button class="btn-reply-delete">삭제</button>
-                </div>
-            </div>
-            <div class="reply-rereply">
-                <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
-            </div>
-        </div>
+        
         
      
     </div>
@@ -540,6 +462,76 @@
             const rereplyContainer = button.parentElement.nextElementSibling;
             console.log(rereplyContainer)
             rereplyContainer.classList.toggle('visible');
+        }
+
+        // 댓글 목록 요청
+        replyList()
+
+        // 댓글 목록
+        function replyList() {
+            // AJAX 비동기 요청
+            // 💍 CRSF TOKEN
+            let csrfToken = document.querySelector('input[name="_csrf"]').value;
+            let request = new XMLHttpRequest()
+
+            // 요청 세팅
+            // request.open(요청메소드, URL)
+            request.open('GET', '/page/reply/' + starNo) // 글 번호
+
+            request.onreadystatechange = function() {
+
+                // 요청 성공 시,
+                if(request.readyState == request.DONE && request.status == 200) {
+                    // 댓글 목록 확인
+                    let response = request.responseText
+                    // 서버에서 렌더링한 HTML
+                    let date = response
+                    let replyList = document.getElementById('reply-list')
+                    replyList.innerHTML = data
+
+                    event()
+                }
+            }
+        }
+
+        // 댓글 등록
+        function insertReply() {
+            let $writer = document.getElementById('reply-writer')
+            let $content = document.getElementById('reply-content')
+
+            let writer = $writer.value
+            let content = $content.value
+
+            let data = {
+                'starNo'    : starNo,
+                'writer'    : writer,
+                'content'   : content
+            }
+
+            console.dir(data)
+            // 💍 CRSF TOKEN
+            let csrfToken = document.querySelector('input[name="_csrf"]').value;
+            let request = new XMLHttpRequest()
+
+            request.open('POST', '/page/reply')
+            request.setRequestHeader('Content-Type', 'application/json')
+            request.setRequestHeader('X-CSRF-TOKEN', csrfToken)
+            request.send(JSON.stringify(data))
+
+            request.onreadystatechange = function() {
+
+                // 요청 성공 시,
+                if(request.readyState == request.DONE && request.status == 201) {
+                    console.log('댓글 등록 성공!');
+                    let response = request.responseText
+                    if(response == 'SUCCESS') {
+                        replyList()
+                        // 댓글 목록 갱신 후 댓글 입력 창 비우기
+                        $writer.value = ''
+                        $content.value = ''
+                    }
+                }
+            }
         }
   
       </script>

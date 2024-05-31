@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
 
+import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.user.dto.PasswordResetToken;
 import com.aloha.starmakers.user.dto.UserAuth;
 import com.aloha.starmakers.user.dto.Users;
@@ -32,6 +33,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private PasswordResetTokenMapper PasswordResetTokenMapper;
+
+    @Autowired
+    private FileService fileService;
 
     @Override
     public boolean login(Users user, HttpServletRequest request) throws Exception {
@@ -103,6 +107,11 @@ public class UserServiceImpl implements UserService {
     public int delete(Users user) throws Exception {
 
         int result = userMapper.delete(user);
+        Integer fileNo = fileService.profileSelect(user.getUserNo());
+        if ( fileNo != null && fileNo > 0) {
+            // 파일 삭제
+            fileService.delete(fileNo);
+        }
         return result;
     }
 

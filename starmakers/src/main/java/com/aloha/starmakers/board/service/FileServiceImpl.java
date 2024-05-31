@@ -77,12 +77,12 @@ public class FileServiceImpl implements FileService {
         int result = fileMapper.delete(no);
 
         // 파일 시스템의 파일 삭제
-        if( result > 0 ) {
-            String filePath = file.getFileName();
+        if( result > 0 && file != null) {
+            String filePath = uploadPath + File.separator + file.getFileName();
             File deleteFile = new File(filePath);
             // 파일 존재 확인
             if( !deleteFile.exists() ) {
-                return result; 
+                log.info("삭제할 파일 경로: " + filePath); 
             }
             // 파일 삭제
             if( deleteFile.delete() ) {
@@ -92,9 +92,6 @@ public class FileServiceImpl implements FileService {
                 log.info("파일 삭제에 실패하였습니다.");
             }
         }
-
-
-
         return result;
     }
 
@@ -183,5 +180,58 @@ public class FileServiceImpl implements FileService {
         
         return file;
     }
-    
+
+    @Override
+    public boolean profileUpload(MultipartFile mf, int user_no) throws Exception {
+
+        // 파일 정보 : 원본파일명, 파일 용량, 파일 데이터
+        String originName = mf.getOriginalFilename();
+        long fileSize = mf.getSize();
+        byte[] fileData = mf.getBytes();
+        
+        log.info("원본 파일명 : " + originName);
+        log.info("파일 용량 : " + fileSize);
+        log.info("파일 데이터 : " + fileData);
+
+        // ⭐ 파일 업로드
+        // - 파일 시스템의 해당 파일을 복사
+        // - 파일의 정보를 DB에 등록
+        
+        // ✅ 업로드 경로 - application.properties ( upload.path )
+        // ✅ 파일명
+        // - 파일명 중복 방지를 위해 UID_파일명.xx 형식으로 지정
+        // - 업로드 파일명 : UID_원본파일명.xxx
+        String fileName = UUID.randomUUID().toString() + "_" + originName;
+        File uploadFile = new File(uploadPath, fileName);
+
+        // ↑ 파일 업로드
+        FileCopyUtils.copy(fileData, uploadFile);
+
+        Files file = new Files();
+
+        // file_name, origin_name, size, user_no, star_no
+
+        // 파일 정보 등록
+        file.setFileName(fileName);
+        file.setOriginName(originName);
+        file.setSize(fileSize);
+        file.setUserNo(user_no);
+
+        fileMapper.insert(file);
+
+        return true;
+    }
+
+    /**
+     * 파일 프로필 조회
+     */
+    @Override
+    public Integer profileSelect(int userNo) throws Exception {
+
+        Integer result = fileMapper.profileSelect(userNo);
+        if ( result == null ) {
+            return -1;
+        }
+        return result;
+    }
 }

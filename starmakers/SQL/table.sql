@@ -1,5 +1,5 @@
 
--- Active: 1714701530602@@127.0.0.1@3306@joeun
+-- Active: 1716894496133@@127.0.0.1@3306@joeun
 
 
 
@@ -113,6 +113,13 @@ CREATE TABLE reply
   parent_no INT       NULL     COMMENT '부모댓글번호',
   PRIMARY KEY (reply_no)
 ) COMMENT '댓글';
+
+ALTER TABLE reply
+ADD CONSTRAINT FK_REPLY_STAR_NO
+FOREIGN KEY (star_no)
+REFERENCES star_board(star_no)
+ON DELETE CASCADE;
+-- star_board의 star_no 값을 참조하여 reply 테이블의 star_no 을 외래키로 설정
 
 
 
