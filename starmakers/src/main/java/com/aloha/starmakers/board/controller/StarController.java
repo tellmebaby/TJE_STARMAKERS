@@ -3,12 +3,15 @@ package com.aloha.starmakers.board.controller;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
-import com.aloha.starmakers.board.dto.StarBoard;
-import com.aloha.starmakers.user.dto.Users;
-import com.aloha.starmakers.board.service.FileService;
-import com.aloha.starmakers.board.service.StarService;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
+import com.aloha.starmakers.board.dto.StarBoard;
+import com.aloha.starmakers.board.service.FileService;
+import com.aloha.starmakers.board.service.LikeService;
+import com.aloha.starmakers.board.service.StarService;
+import com.aloha.starmakers.user.dto.Users;
+
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -37,6 +41,9 @@ public class StarController {
 
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private LikeService likeService;
 
   
     
@@ -63,6 +70,7 @@ public class StarController {
     public String insertPro(StarBoard starBoard, String username, @RequestParam(value = "image", required = false) MultipartFile file ,HttpSession session)
             throws Exception {
         int starNo = starService.insert(starBoard, username);
+        
 
         Users user = (Users) session.getAttribute("user");
         int userNo = user.getUserNo();
@@ -86,7 +94,7 @@ public class StarController {
     // 초기화면 설정
     @GetMapping("/starCard/starList")
     public String cardList(@RequestParam(value = "type", defaultValue = "starCard") String type
-                                    ,Model model, Page page
+                                    ,Model model, Page page, HttpSession session
                                     ,Option option) throws Exception {
 
         Users user = (Users) session.getAttribute("user");
