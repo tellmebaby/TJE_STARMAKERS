@@ -213,15 +213,19 @@ public class PageController {
 
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
         return "/page/mypage/payment";
     }
 
     /* 내가 쓴 글 */
     @GetMapping("/mypage/promotion")
-    public String as(Model model, HttpSession session) throws Exception {
+    public String as(Model model, HttpSession session, Page page, Option option) throws Exception {
 
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
         return "/page/mypage/promotion";
     }
     
