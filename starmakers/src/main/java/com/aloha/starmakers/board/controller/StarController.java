@@ -84,11 +84,23 @@ public class StarController {
         return "redirect:/page/starCard/starInsert?no=" + no + "&error";
     }
 
+    // 초기화면 설정
     @GetMapping("/starCard/starList")
     public String cardList(@RequestParam(value = "type", defaultValue = "starCard") String type, Model model, Page page,
             HttpSession session, Option option) throws Exception {
 
-        List<StarBoard> starList = starService.list(type, page, option);
+        Users user = (Users) session.getAttribute("user");
+
+        List<StarBoard> starList = null;
+
+        page.setRows(12);
+
+        if (user != null) {
+            int userNo = user.getUserNo();
+            starList = starService.list(type, page, option, userNo);
+        } else {
+            starList = starService.list(type, page, option);
+        }
 
         starList.forEach(star -> {
             if (star.getCategory1() != null) {
@@ -98,13 +110,41 @@ public class StarController {
             }
         });
 
-        // log.info("statList ="+starList.toString());
-
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
 
         return "/page/starCard/starList";
+    }
+
+    // 추가 화면 설정
+    @GetMapping("/starCard/starList/api")
+    public ResponseEntity<List<StarBoard>> getMoreCards(
+            @RequestParam(value = "type", defaultValue = "starCard") String type,
+            Page page,
+            Option option,
+            HttpSession session) throws Exception {
+        Users user = (Users) session.getAttribute("user");
+        List<StarBoard> starList;
+
+        page.setRows(12); // 한 번에 불러올 행 수 설정
+
+        if (user != null) {
+            int userNo = user.getUserNo();
+            starList = starService.list(type, page, option, userNo);
+        } else {
+            starList = starService.list(type, page, option);
+        }
+
+        starList.forEach(star -> {
+            if (star.getCategory1() != null) {
+                List<String> icons = Arrays.stream(star.getCategory1().split(","))
+                        .collect(Collectors.toList());
+                star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
+            }
+        });
+
+        return ResponseEntity.ok(starList);
     }
 
     /**
@@ -446,14 +486,12 @@ public class StarController {
         return "redirect:/page/board/anBoard/anUpdate?qnaNo=" + no + "$error";
     }
 
-
     @PostMapping("/like")
     public ResponseEntity<String> like(@RequestParam("userNo") int userNo, @RequestParam("starNo") int starNo) {
 
+        log.info("userNo==" + userNo);
+        log.info("starNo==" + starNo);
 
-        log.info("userNo=="+userNo);
-        log.info("starNo=="+starNo);
-        
         try {
             boolean liked = likeService.toggleLike(userNo, starNo);
             return ResponseEntity.ok(liked ? "Liked" : "Unliked");

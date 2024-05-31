@@ -2,12 +2,14 @@ package com.aloha.starmakers.board.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -113,18 +115,24 @@ public class FileController {
             return new ResponseEntity<>(noImageFileData, headers, HttpStatus.OK);         
           
         }
-
+        
         // 파일번호로 파일 정보 조회
         Files file = fileService.select(no);
-
         // Null 체크
         if( file == null ) {
 
-            String filePath = uploadPath + "standard_card.png";
-            File noImageFile = new File(filePath);
-            byte[] noImageFileData = FileCopyUtils.copyToByteArray(noImageFile);
+            ClassPathResource imgFile = new ClassPathResource("static/img/standard_card.png");
+
+            byte[] noImageFileData;
+            try {
+                noImageFileData = FileCopyUtils.copyToByteArray(imgFile.getInputStream());
+            } catch (IOException e) {
+                throw new RuntimeException("기본 이미지 파일을 읽는 도중 에러가 발생했습니다.", e);
+            }
+
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_JPEG);
+            headers.setContentType(MediaType.IMAGE_PNG);
+            
             return new ResponseEntity<>(noImageFileData, headers, HttpStatus.OK);
         }
 

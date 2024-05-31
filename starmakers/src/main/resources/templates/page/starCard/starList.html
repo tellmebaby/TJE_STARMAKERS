@@ -139,7 +139,7 @@
 
 
             <div id="promotionCarousel" class="carousel">
-                <div class="row mx-0 mb-5">
+                <div class="row mx-0 mb-5" id="starList">
                     <div class="col-lg-3 p-0" th:each="star : ${starList}">
                         <div class="card" th:classappend="${star.card == '유료홍보'} ? ' effect'"
                             th:data-no="${star.starNo}">
@@ -154,7 +154,8 @@
                                 <p class="card-text" th:text="${star.writer}">내용 없음</p>
                             </div>
                             <div class="icon-container">
-                                <i class="fa-regular fa-thumbs-up icon"></i>
+                                <i class=" fa-thumbs-up icon"
+                                    th:classappend="${star.likes_chk} ? ' fa-solid':'fa-regular' "></i>
                             </div>
                         </div>
                     </div>
@@ -166,112 +167,59 @@
             <script>
                 $(document).ready(function () {
 
-                    $(window).on('scroll', function () {
-                        // 현재 스크롤 위치
-                        var scrollTop = $(this).scrollTop();
-                        // 문서의 총 높이
-                        var documentHeight = $(document).height();
-                        // 창의 높이
-                        var windowHeight = $(this).height();
 
-                        // 사용자가 페이지 하단에 도달했는지 확인
-                        // if (scrollTop + windowHeight >= documentHeight) {
-                        //     alert('페이지 하단에 도달했습니다!');
-                        // }
-                    });
+                    let page = 1;
+                    const type = 'starCard';
+                    let isLoading = false;
 
-
-
-                    // 카드이펙트
-                    $('.effect').each(function () {
-                        var container = $(this);
-                        var overlay = container.find('.card-overlay');
-
-                        container.on('mousemove', function (e) {
-                            var x = e.offsetX;
-                            var y = e.offsetY;
-                            var rotateY = -1 / 5 * x + 20;
-                            var rotateX = 4 / 30 * y - 20;
-
-                            overlay.css('background-position', `${x / 5 + y / 5}%`);
-                            container.css('transform', `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`);
-                        });
-
-                        container.on('mouseout', function () {
-                            overlay.css('filter', 'opacity(0)');
-                            container.css('transform', 'perspective(350px) rotateY(0deg) rotateX(0deg)');
-                        });
-
-                        container.on('mouseenter', function () {
-                            overlay.css('filter', 'opacity(0.8)');
-                        });
-                    });
-
-
-                    // 클릭이벤트 처리
-                    let clickTimer;
-                    let isDoubleClick = false;
-
-                    $('.card').click(function () {
-                        if (isDoubleClick) {
-                            isDoubleClick = false;
-                            return;
-                        }
-
-                        clickTimer = setTimeout(() => {
-                            if (!isDoubleClick) {
-                                alert('Button was one-clicked!');
-                            }
-                        }, 250);
-                    });
-
-
-                    // 더블클릭
-                    $('.card').dblclick(function (e) {
-                        clearTimeout(clickTimer);
-                        isDoubleClick = true;
-
-
-                        var userNo = "[[${session.user.userNo}]]";
-                        var starNo = $(this).attr("data-no");
-                        var csrfToken = "[[${_csrf.token}]]"
-
-                        if (userNo === 'null' || userNo === '') {
-                            alert("로그인을 하시오!");
-                            return;
-                        }
+                    function loadMoreCards() {
+                        if (isLoading) return;
+                        isLoading = true;
+                        page += 1;
 
                         $.ajax({
-                            url: '/page/like', // 서버의 좋아요 상태를 변경하는 API 엔드포인트
-                            method: 'POST',
+                            url: `/page/starCard/starList/api`,
+                            method: 'GET',
                             data: {
-                                userNo: userNo,
-                                starNo: starNo
+                                type: type,
+                                page: page
                             },
-                            beforeSend: function (xhr) {
-                                // 💍 CSRF 토큰을 요청 헤더에 추가
-                                xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
-                            },
-                            success: function (response) {
-                                // 하트 모양 이펙트 추가
-                                let heart = $('<div class="heart"></div>');
-                                $('body').append(heart);
-                                heart.css({
-                                    top: e.pageY - 25,
-                                    left: e.pageX - 25
+                            success: function (data) {
+                                data.forEach(star => {
+                                    const cardHtml = `
+                                        <div class="col-lg-3 p-0">
+                                            <div class="card ${star.card === '유료홍보' ? 'effect' : ''}" data-no="${star.starNo}">
+                                                ${star.card === '유료홍보' ? '<div class="card-overlay"></div>' : ''}
+                                                <img src="/file/img/${star.imgNo}" class="card-img-top" alt="${star.title}">
+                                                <div class="icon-body">
+                                                    ${star.icons.map(icon => `<img src="/img/icon/${icon}.png" class="content-icon ${icon}">`).join('')}
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${star.title}</h5>
+                                                    <p class="card-text">${star.writer}</p>
+                                                </div>
+                                                <div class="icon-container">
+                                                    <i class="fa-thumbs-up icon ${star.likes_chk ? 'fa-solid' : 'fa-regular'}"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        `;
+                                    $('#starList').append(cardHtml);
                                 });
-
-                                setTimeout(() => {
-                                    heart.remove();
-                                }, 1000);
-
-                                // 좋아요 아이콘 클래스 토글
-                                $(this).find('.fa-thumbs-up').toggleClass('fa-regular fa-solid');
-                            }.bind(this), // this 바인딩
-                            error: function (xhr, status, error) {
-                                console.error("좋아요 상태 변경 실패:", error);
+                                isLoading = false;
+                            }
+                            ,
+                            error: function () {
+                                console.error("Failed to load more cards.");
+                                isLoading = false;
                             }
                         });
+                    }
+
+                    $(window).scroll(function () {
+                        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                            loadMoreCards();
+                        }
                     });
 
 
