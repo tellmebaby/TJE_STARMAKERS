@@ -118,7 +118,8 @@ public class FileController {
         Files file = fileService.select(no);
 
         // Null 체크
-        if (file == null) {
+        if( file == null ) {
+
             String filePath = uploadPath + "standard_card.png";
             File noImageFile = new File(filePath);
             byte[] noImageFileData = FileCopyUtils.copyToByteArray(noImageFile);

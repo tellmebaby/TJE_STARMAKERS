@@ -141,12 +141,13 @@
             <div id="promotionCarousel" class="carousel">
                 <div class="row mx-0 mb-5">
                     <div class="col-lg-3 p-0" th:each="star : ${starList}">
-                        <div class="card">
-                            <div class="card-overlay"></div>
-                            <img th:src="|C://upload//${star.img}|" class="card-img-top" th:alt="${star.title}">
+                        <div class="card" th:classappend="${star.card == '유료홍보'} ? ' effect'"
+                            th:data-no="${star.starNo}">
+                            <div th:if="${star.card == '유료홍보'}" class="card-overlay"></div>
+                            <img th:src="|/file/img/${star.imgNo}|" class="card-img-top" th:alt="${star.title}">
                             <div class="icon-body">
-                                <!-- 아이콘들을 출력하는 부분 -->
-                                <!-- <img th:each="icon : ${star.icons}" th:src="${icon.src}" class="content-icon" alt="icon"> -->
+                                <img th:each="icon : ${star.icons}" th:src="|/img/icon/${icon}.png|"
+                                    th:class="|content-icon ${icon}|">
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title" th:text="${star.title}">제목 없음</h5>
@@ -157,34 +158,14 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
+
             </div>
 
 
-
-
-                <!-- <div class="card">
-                    <div class="card-overlay"></div>
-                    <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
-                        class="card-img-top" alt="홍보글 제목">
-                    <div class="icon-body">
-                        <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                        <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                        <img src="/img/icon/youtube.png" class="content-icon youtube">
-                        <img src="/img/icon/instagram.svg" class="content-icon">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">어쩌다보니천생연분</h5>
-                        <p class="card-text">꿀타래</p>
-                    </div>
-                    <div class="icon-container">
-                        <i class="fa-regular fa-thumbs-up icon"></i>
-                    </div>
-                </div> -->
-
             <script>
                 $(document).ready(function () {
+
                     $(window).on('scroll', function () {
                         // 현재 스크롤 위치
                         var scrollTop = $(this).scrollTop();
@@ -199,13 +180,10 @@
                         // }
                     });
 
-                });
-
-                $(document).ready(function () {
 
 
                     // 카드이펙트
-                    $('.card').each(function () {
+                    $('.effect').each(function () {
                         var container = $(this);
                         var overlay = container.find('.card-overlay');
 
@@ -227,11 +205,10 @@
                         container.on('mouseenter', function () {
                             overlay.css('filter', 'opacity(0.8)');
                         });
-
                     });
 
 
-
+                    // 클릭이벤트 처리
                     let clickTimer;
                     let isDoubleClick = false;
 
@@ -249,30 +226,61 @@
                     });
 
 
+                    // 더블클릭
                     $('.card').dblclick(function (e) {
                         clearTimeout(clickTimer);
                         isDoubleClick = true;
 
-                        // 하트 모양 이펙트 추가
-                        let heart = $('<div class="heart"></div>');
-                        $('body').append(heart);
-                        heart.css({
-                            top: e.pageY - 25,
-                            left: e.pageX - 25
+
+                        var userNo = "[[${session.user.userNo}]]";
+                        var starNo = $(this).attr("data-no");
+                        var csrfToken = "[[${_csrf.token}]]"
+
+                        if (userNo === 'null' || userNo === '') {
+                            alert("로그인을 하시오!");
+                            return;
+                        }
+
+                        $.ajax({
+                            url: '/page/like', // 서버의 좋아요 상태를 변경하는 API 엔드포인트
+                            method: 'POST',
+                            data: {
+                                userNo: userNo,
+                                starNo: starNo
+                            },
+                            beforeSend: function (xhr) {
+                                // 💍 CSRF 토큰을 요청 헤더에 추가
+                                xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+                            },
+                            success: function (response) {
+                                // 하트 모양 이펙트 추가
+                                let heart = $('<div class="heart"></div>');
+                                $('body').append(heart);
+                                heart.css({
+                                    top: e.pageY - 25,
+                                    left: e.pageX - 25
+                                });
+
+                                setTimeout(() => {
+                                    heart.remove();
+                                }, 1000);
+
+                                // 좋아요 아이콘 클래스 토글
+                                $(this).find('.fa-thumbs-up').toggleClass('fa-regular fa-solid');
+                            }.bind(this), // this 바인딩
+                            error: function (xhr, status, error) {
+                                console.error("좋아요 상태 변경 실패:", error);
+                            }
                         });
-
-                        setTimeout(() => {
-                            heart.remove();
-                        }, 1000);
-
-                        // 좋아요 아이콘 클래스 토글
-                        $(this).find('.fa-thumbs-up').toggleClass('fa-regular fa-solid');
                     });
 
 
 
                 });
             </script>
+
+
+
 
 
         </div>

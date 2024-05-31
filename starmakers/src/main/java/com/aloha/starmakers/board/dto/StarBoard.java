@@ -1,6 +1,7 @@
 package com.aloha.starmakers.board.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -23,5 +24,6 @@ public class StarBoard {
     private String type; // 유료 / 무료 / 디자인의뢰
     private Date startDate;
     private Date endDate;
-    private String img;
+    private int imgNo;
+    private List Icons;
 }

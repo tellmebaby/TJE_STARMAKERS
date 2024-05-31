@@ -1,0 +1,57 @@
+package com.aloha.starmakers.board.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.aloha.starmakers.board.dto.StarBoard;
+import com.aloha.starmakers.board.mapper.LikeMapper;
+import com.aloha.starmakers.board.mapper.StarMapper;
+
+import lombok.extern.slf4j.Slf4j;
+
+
+
+@Slf4j
+@Service
+public class LikeServiceImpl implements LikeService {
+
+    @Autowired
+    private LikeMapper likeMapper;
+
+    @Autowired
+    private StarMapper starMapper;
+
+    @Override
+    public boolean toggleLike(int userNo, int starNo) throws Exception {
+
+        Integer like = likeMapper.select(userNo, starNo);
+
+        log.info("qweqr"+like);
+
+        StarBoard starBoard = starMapper.select(starNo);
+        int likes = starBoard.getLikes();
+
+        int chk =0;
+        if (like == null) {
+            likeMapper.save(userNo, starNo);
+            likes++;
+            chk =1;
+        } else {
+            likeMapper.delete(userNo, starNo);
+            likes--;
+        }
+
+        log.info("qweqwe"+likes);
+        log.info(starBoard.toString());
+
+        starBoard.setLikes(likes);
+        int result = starMapper.update(starBoard);
+
+        if(chk>0){
+            return true;
+        }
+
+        return false;
+    }
+    
+}
