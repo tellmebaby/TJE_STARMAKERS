@@ -20,6 +20,13 @@ public interface StarMapper {
                                ,@Param("page") Page page
                                ,@Param("option") Option option) throws Exception;
 
+
+
+    // 목록 조회 - 페이징, 검색
+    public List<StarBoard> list(@Param("type") String type,
+                                @Param("page") Page page
+                               ,@Param("option") Option option, @Param("userNo") int userNo) throws Exception;
+
     // 글 등록
     public int insert(StarBoard starBoard) throws Exception;
 

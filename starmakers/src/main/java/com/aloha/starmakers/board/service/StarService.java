@@ -18,6 +18,11 @@ public interface StarService {
                                ,Page page
                                ,Option option) throws Exception;
 
+    public List<StarBoard> list(String type 
+                                ,Page page
+                                ,Option option,
+                                int userNo) throws Exception;
+
     // 글 등록(무료)
     public int insert(StarBoard starBoard, String username) throws Exception;
 

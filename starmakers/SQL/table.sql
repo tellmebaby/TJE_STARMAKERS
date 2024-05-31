@@ -132,7 +132,7 @@ CREATE TABLE star_board
   content   TEXT        NOT NULL COMMENT '내용',
   reg_date  TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일자',
   upd_date  TIMESTAMP   NULL     COMMENT '수정일자',
-  views     INT         NOT NULL DEFAULT '0'    COMMENT '조회수',
+  views     INT         NOT NULL  DEFAULT '0'   COMMENT '조회수',
   user_no   INT         NOT NULL COMMENT '유저데이터번호',
   pay_no    INT         NULL     COMMENT '결제데이터번호',
   likes     INT         NOT NULL DEFAULT 0 COMMENT '좋아요수',

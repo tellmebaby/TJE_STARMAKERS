@@ -1,4 +1,4 @@
--- Active: 1716511247384@@127.0.0.1@3306@joeun
+-- Active: 1714701530602@@127.0.0.1@3306@joeun
 SELECT COUNT(*)
 FROM user
 WHERE name = "김조은" AND email = "joeun@naver.com";
@@ -27,6 +27,11 @@ OR content LIKE CONCAT '%%';
 SELECT *
 FROM file;
 
+
+SELECT * FROM file
+    WHERE user_no = 1 AND star_no = 0
+    ORDER BY reg_date DESC
+    LIMIT 1;
 
 SELECT * FROM file 
     WHERE user_no = 1 AND star_no = 0 ;

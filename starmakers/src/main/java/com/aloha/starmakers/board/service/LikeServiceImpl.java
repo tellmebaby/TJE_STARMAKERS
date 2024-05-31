@@ -41,11 +41,9 @@ public class LikeServiceImpl implements LikeService {
             likes--;
         }
 
-        log.info("qweqwe"+likes);
-        log.info(starBoard.toString());
-
         starBoard.setLikes(likes);
         int result = starMapper.update(starBoard);
+
 
         if(chk>0){
             return true;

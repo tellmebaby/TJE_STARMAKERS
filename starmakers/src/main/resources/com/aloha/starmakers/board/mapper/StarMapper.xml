@@ -124,6 +124,8 @@
         SET title = #{title},
             <!-- writer = #{writer}, -->
             content = #{content},
+            likes=#{likes},
+            views=#{views},
             upd_date = now()
         WHERE star_no = #{starNo}
     </update>

@@ -1,37 +1,16 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{/layout/default_layout}">
 
-<head>
-  <title>홍보</title>
-
-  <!-- include summernote css/js-->
-  <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet"> -->
-  <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css"
-    integrity="sha256-IKhQVXDfwbVELwiR0ke6dX+pJt0RSmWky3WB2pNx9Hg=" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"
-    integrity="sha256-5slxYrL5Ct3mhMAp/dgnb5JSnTYMtkr4dHby34N10qw=" crossorigin="anonymous"></script>
-
-  <!-- language pack -->
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/lang/summernote-ko-KR.min.js"
-    integrity="sha256-y2bkXLA0VKwUx5hwbBKnaboRThcu7YOFyuYarJbCnoQ=" crossorigin="anonymous"></script>
-
-  <!-- DatePicker  -->
-  <script src="/lib/datePicker.js" type="text/javascript"></script>
-  <!-- <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script> -->
-  <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-  <style>
-          .top-container {
-          width: 960px;
+        .container2 {
+          max-width: 960px;
           margin: 0 auto;
+          padding: 0 10px;
+          box-sizing: border-box;
         }
         .writer {
             display: flex;
             justify-content: space-around;
             gap: 10px;
             padding: 10px 0;
-            width: 960px;
+            width: 100%;
             margin-top: 50px;
             margin-left: 10px;
             margin-right: 10px;
@@ -45,7 +24,7 @@
             color: rgba(192, 190, 183, 1);
         }
        .title-container {
-          width: 960px;
+          width: 100%;
           margin: 0 auto 15px;
 
           padding: 30px 30px;
@@ -57,7 +36,7 @@
           font-size: 20px;
         }
         .content-container {
-          width: 960px;
+          width: 100%;
           margin: 0 auto;
           padding: 30px 30px;
           border: 1px solid;
@@ -77,7 +56,7 @@
             justify-content: flex-end;
             gap: 10px;
             padding: 10px 0;
-            width: 960px;
+            width: 100%;
         }
         .button-container1 {
             text-align: right;
@@ -133,7 +112,7 @@
             justify-content: center;
             gap: 10px;
             padding: 20px 0;
-            width: 960px;
+            width: 100%;
         }
         .reply {
             margin-left: 30px;
@@ -180,11 +159,11 @@
         }
         
         /* 댓글 타이틀 */
-        .reply-list {
+        .top-reply-list {
             border-bottom: 1.7px solid #000;
-            width: 960px;
+            width: 100%;
         }
-        .reply-list label {
+        .top-reply-list label {
             margin: 5px 10px;
         }
 
@@ -192,7 +171,7 @@
         #reply-list {
             display: block;
             border-bottom: 0.7px solid #000;
-            width: 960px;
+            width: 100%;
             display: block;
             padding: 10px 5px;
             box-sizing: border-box;
@@ -303,6 +282,7 @@
             padding: 20px 20px;
             border: 1px solid rgba(192, 190, 183, 1);
             border-radius: 3px;
+            margin-right: 10px;
         }
         .rereply-box textarea {
             /* flex-grow: 1;  */
@@ -340,7 +320,8 @@
             display: block;
             padding: 10px 5px;
             box-sizing: border-box;
-            border-top: 0.7px solid rgba(192, 190, 183, 1);
+            /* border-top: 0.7px solid rgba(192, 190, 183, 1); */
+            border-top: 0.7px solid red;
         }
         .rereply-top {
             padding: 5px 10px;
@@ -397,178 +378,3 @@
             align-items: left;
             padding: 5px 0px;
         }
-
-        #title {
-          margin: 0 auto 15px;
-
-
-          padding: 30px 30px;
-          border: 1px solid;
-          border-radius: 10px;
-
-        }
-        #content {
-            margin: 0 auto;
-            padding: 30px 30px;
-            border: 1px solid;
-            /* text-align: center; */
-        }
-        .container2 {
-          max-width: 960px;
-        }
-  </style>
-</head>
-
-
-<!-- layout:decorate 쓸 때 본문 내용은 <th:block layout:fragment="content"></th:block> 안에 적어야 화면에 뜸 -->
-<th:block layout:fragment="content" class="align-items-center ml-5">
-  <div class="body lg" style="max-width: 900 ;">
-    <h1 class="d-flex justify-content-center mt-3 mb-3">
-      홍보 상세
-    </h1>
-    <div class="container d-flex justify-content-center">
-      <div class="container2">
-
-        <!-- 썸네일 이미지 가져와서 아이콘 띄우기 -->
-        
-        <div class="border border-dark rounded mt-3 mb-3" id="title">
-          <!-- <div class="border-bottom border-secondary w-100"> -->
-            <span class="fw-bold fs-3" th:text="${starBoard.title}"></span>
-            <hr>
-          <!-- </div> -->
-        </div>
-        <div class="border border-dark rounded w-100" id="content" >
-            <span th:utext="${starBoard.content}"></span>
-        </div>
-        <div class="d-flex justify-content-end mt-2">
-          <button class="btn btn-secondary btn-submit col-1 border-0 " type="button" onclick="moveList()">목록</button>
-          <button class="btn btn-dark btn-submit col-1 border-0 ms-2" type="button" onclick="update()">수정</button>
-        </div>
-      </div>
-    </div>
-
-
-
-
-    </div>
-
-
-
-  </div>
-
-  <div class="top-container">
-    <!-- 댓글 등록 -->
-    <div class="reply-container">
-      <div class="reply-box">
-        <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
-        <button type="button">등록</button>
-      </div>
-
-    </div>
-    <div class="reply-list">
-      <label class="reply">댓글</label>
-      <label class="reply-count">댓글 갯수</label>
-    </div>
-    <!-- 댓글 목록 -->
-    <div id="reply-list">
-      <!-- 댓글 -->
-      <div class="reply-top">
-        <span class="reply-writer">${writer}</span>
-        <span class="reply-regDate">${regDate}
-
-          <i class="fa-regular fa-thumbs-up icon"></i>
-
-        </span>
-      </div>
-      <!-- 댓글 내용/ 수정 삭제 버튼 -->
-      <div class="reply-middle">
-        <p class="reply-content">${content}</p>
-        <div class="reply-button">
-          <button class="btn-reply-update">수정</button>
-          <button class="btn-reply-delete">삭제</button>
-        </div>
-      </div>
-      <!-- 답글 쓰기 -->
-      <div class="reply-rereply">
-        <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
-      </div>
-
-      <div class="rereply-container m-2 p-0">
-        <div class="rereply-box">
-          <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
-          <button type="button">등록</button>
-        </div>
-      </div>
-      <!-- 답글!! 목록 -->
-      <div id="rereply-list">
-        <div class="rereply">
-          <!-- 답글 -->
-          <div class="rereply-top">
-            <span class="rereply-writer">${writer}</span>
-            <span class="rereply-regDate">${regDate}
-
-              <i class="fa-regular fa-thumbs-up icon"></i>
-
-            </span>
-          </div>
-          <!-- 답글 내용/ 수정 삭제 버튼 -->
-          <div class="rereply-middle">
-            <p class="rereply-content">${content}</p>
-            <div class="rereply-button">
-              <button class="btn-rereply-update">수정</button>
-              <button class="btn-rereply-delete">삭제</button>
-            </div>
-          </div>
-          <!-- 답글에 답글 쓰기 -->
-          <div class="rereply-rereply">
-            <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
-          </div>
-          <div class="rereply-container m-0 p-0">
-            <div class="rereply-box">
-              <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
-              <button type="button">등록</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-
-
-    <!-- 예시 자료 2 -->
-    <div id="reply-list">
-      <div class="reply-top">
-        <span class="reply-writer">${writer}</span>
-        <span class="reply-regDate">${regDate}
-          <i class="fa-regular fa-thumbs-up icon"></i>
-        </span>
-      </div>
-      <div class="reply-middle">
-        <p class="reply-content">${content}</p>
-        <div class="reply-button">
-          <button class="btn-reply-update">수정</button>
-          <button class="btn-reply-delete">삭제</button>
-        </div>
-      </div>
-      <div class="reply-rereply">
-        <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
-      </div>
-    </div>
-
-
-  </div>
-  <script>
-    const no = "[[${starBoard.starNo}]]"
-    function moveList(){
-      location.href='/page/starCard/starList'
-    }
-    function update(){
-      location.href='/page/starCard/starUpdate?starNo='+ no;
-    }
-  </script>
-
-</th:block>
-
-</html>

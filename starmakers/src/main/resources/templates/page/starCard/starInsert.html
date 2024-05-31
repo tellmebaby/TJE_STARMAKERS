@@ -44,6 +44,7 @@
       </div>
       <form action="/page/starCard/starInsert" method="post" id="starInsert" enctype="multipart/form-data">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <input type="hidden" name="card" value="무료홍보">
         <input type="hidden" name="username" th:value="${session.user.email}">
         <div class="category my-4 bg-body-tertiary rounded">
           <div class="site row py-2">
@@ -51,12 +52,12 @@
             <div class="item col-2">
               <b>사이트</b>
             </div>
-
+            
 
             <!-- <input type="hidden" name="type" value="무료홍보" id="free">
             <input type="hidden" name="type" value="유료홍보" id="payment"> -->
 
-            <input type="hidden" name="card" value="홍보요청" id="card">
+            <input type="hidden" name="status" value="홍보요청" id="card">
 
             <input type="hidden" name="type" value="starCard">
             <div class="item col-8 d-flex justify-content-start column-gap-2">
@@ -210,7 +211,7 @@
             </h2>
             <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
               <form action="/page/starCard/starInsert" method="post" id="designReq">
-                <input type="hidden" name="type" value="starCard">
+                <input type="hidden" name="type" value="design">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                 <input type="hidden" name="username" th:value="${session.user.email}">
                 <input type="hidden" name="title" th:value="|${session.user.email}님 디자인 의뢰|">

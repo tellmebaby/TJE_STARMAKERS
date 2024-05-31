@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.StarBoard;
+import com.aloha.starmakers.board.mapper.LikeMapper;
 import com.aloha.starmakers.board.mapper.StarMapper;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.mapper.UserMapper;
@@ -23,6 +24,9 @@ public class StarServiceImpl implements StarService {
     @Autowired
     private StarMapper starMapper;
 
+    @Autowired
+    private LikeMapper likeMapper;
+
     /**
      * 게시글 목록
      */
@@ -31,6 +35,7 @@ public class StarServiceImpl implements StarService {
         int total = starMapper.count(option, type);
         page.setTotal(total);
         List<StarBoard> starList = starMapper.list(type, page, option);
+
         return starList;
     }
 
@@ -103,6 +108,27 @@ public class StarServiceImpl implements StarService {
         int result = starMapper.delete(starNoList);
         return result;
 
+    }
+
+    @Override
+    public List<StarBoard> list(String type, Page page, Option option, int userNo) throws Exception {
+        int total = starMapper.count(option, type);
+        page.setTotal(total);
+        List<StarBoard> starList = starMapper.list(type, page, option);
+
+        if ("starCard".equals(type)) {
+            starList.forEach(star -> {
+                try {
+                    int statNo = star.getStarNo();
+                    if (likeMapper.select(userNo, statNo) != null) {
+                        star.setLikes_chk(1);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace(); // 예외 처리
+                }
+            });
+        }
+        return starList;
     }
 
     

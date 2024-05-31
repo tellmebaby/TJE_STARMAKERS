@@ -2,13 +2,15 @@ package com.aloha.starmakers.board.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.security.Principal;
+import java.io.IOException;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.aloha.starmakers.board.dto.Files;
 import com.aloha.starmakers.board.service.FileService;
-import com.aloha.starmakers.user.dto.CustomUser;
 import com.aloha.starmakers.user.dto.Users;
 
 import lombok.extern.slf4j.Slf4j;
@@ -117,18 +118,24 @@ public class FileController {
             return new ResponseEntity<>(noImageFileData, headers, HttpStatus.OK);         
           
         }
-
+        
         // 파일번호로 파일 정보 조회
         Files file = fileService.select(no);
-
         // Null 체크
         if( file == null ) {
 
-            String filePath = uploadPath + "standard_card.png";
-            File noImageFile = new File(filePath);
-            byte[] noImageFileData = FileCopyUtils.copyToByteArray(noImageFile);
+            ClassPathResource imgFile = new ClassPathResource("static/img/standard_card.png");
+
+            byte[] noImageFileData;
+            try {
+                noImageFileData = FileCopyUtils.copyToByteArray(imgFile.getInputStream());
+            } catch (IOException e) {
+                throw new RuntimeException("기본 이미지 파일을 읽는 도중 에러가 발생했습니다.", e);
+            }
+
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_JPEG);
+            headers.setContentType(MediaType.IMAGE_PNG);
+            
             return new ResponseEntity<>(noImageFileData, headers, HttpStatus.OK);
         }
 
@@ -157,9 +164,15 @@ public class FileController {
 
     @PostMapping("/upload")
     public ResponseEntity<String> profileUpload(@RequestParam("file") MultipartFile multipartFile,
-            @RequestParam("user_no") int userNo) throws Exception {
+            @RequestParam("user_no") int userNo , HttpSession session) throws Exception {
         boolean isUploaded = fileService.profileUpload(multipartFile, userNo);
         if (isUploaded) {
+            // 저장된 마지막 파일정보 가져와서 세션에 파일 번호 저장
+            Files file = fileService.selectByUserNoAndStarNo(userNo);
+            Users user = (Users) session.getAttribute("user");
+            user.setUserImgId(file.getFileNo());
+            session.setAttribute("user", user);
+            log.info("::::::::::: 저장된 user : " + user);
             return new ResponseEntity<>("파일 업로드 성공", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("파일 업로드 실패", HttpStatus.INTERNAL_SERVER_ERROR);
