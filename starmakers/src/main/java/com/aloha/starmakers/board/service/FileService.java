@@ -12,6 +12,8 @@ public interface FileService {
     public List<Files> list() throws Exception;
     // 파일 조회
     public Files select(int no) throws Exception;
+    // 회원 프로필 조회
+    public Integer profileSelect(int userNo) throws Exception;
     // 파일 등록
     public int insert(Files file) throws Exception;
     // 파일 수정
@@ -26,6 +28,11 @@ public interface FileService {
     
     // 파일 업로드
     public boolean upload(MultipartFile multipartFile, int star_no, int user_no) throws Exception;
+
+    // 프로필 업로드
+    public boolean profileUpload(MultipartFile multipartFile, int user_no) throws Exception;
+
+
     // 파일 다운로드
     public Files download(int no) throws Exception;
 

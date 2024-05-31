@@ -1,5 +1,5 @@
 
--- Active: 1714701530602@@127.0.0.1@3306@joeun
+-- Active: 1716894496133@@127.0.0.1@3306@joeun
 
 
 
@@ -114,6 +114,13 @@ CREATE TABLE reply
   PRIMARY KEY (reply_no)
 ) COMMENT '댓글';
 
+ALTER TABLE reply
+ADD CONSTRAINT FK_REPLY_STAR_NO
+FOREIGN KEY (star_no)
+REFERENCES star_board(star_no)
+ON DELETE CASCADE;
+-- star_board의 star_no 값을 참조하여 reply 테이블의 star_no 을 외래키로 설정
+
 
 
 DROP TABLE IF EXISTS star_board ;
@@ -128,10 +135,11 @@ CREATE TABLE star_board
   views     INT         NULL     COMMENT '조회수',
   user_no   INT         NOT NULL COMMENT '유저데이터번호',
   pay_no    INT         NULL     COMMENT '결제데이터번호',
-  likes     INT         NULL     COMMENT '좋아요수',
+  likes     INT         NOT NULL     COMMENT '좋아요수',
   status    VARCHAR(20) NULL     COMMENT '상태', -- 상태의 길이 지정.
-  category1 VARCHAR(30) NULL     COMMENT '종류1', -- 카테고리1 길이 지정.
-  category2 VARCHAR(30) NULL     COMMENT '종류2', -- 카테고리2 길이 지정.
+  card    VARCHAR(20) NULL     COMMENT '카드구분',
+  category1 VARCHAR(100) NULL     COMMENT '종류1', -- 카테고리1 길이 지정.
+  category2 VARCHAR(100) NULL     COMMENT '종류2', -- 카테고리2 길이 지정.
   type      VARCHAR(20) NULL     COMMENT '타입', -- 타입의 길이 지정.
   start_date TIMESTAMP NULL COMMENT '홍보시작일',
   end_date TIMESTAMP NULL COMMENT '홍보종료일',

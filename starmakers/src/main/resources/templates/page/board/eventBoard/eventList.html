@@ -179,7 +179,7 @@
                 </thead>
                 
                 <th:block th:if="${starList.isEmpty()}">
-                    <tr th:if="${starBoard.type == 'event'}">
+                    <tr>
                         <td colspan="6" align="center" style="padding-top: 183.49px; padding-bottom: 183.49px;">
                             조회된 게시글이 없습니다.
                         </td>
@@ -210,19 +210,20 @@
                     </th:block>
                     <!-- 로그인 시 -->
                     <th:block sec:authorize="isAuthenticated()">
-                        <a href="/page/board/reviewBoard/reviewInsert" class="btn btn-primary">후기 등록</a>
+                        <a href="/page/board/eventBoard/eventInsert" class="btn btn-primary">이벤트 등록</a>
                     </th:block>
                 </div>
                 
+
         <!-- 페이지네이션 -->
         <center>
             <div>
                 <!-- [ 처음으로 ]-->
-                <a th:href="|/page/board/reviewBoard/reviewList?page=${page.first}&code=${option.code}&keyword=${option.keyword}|">&laquo;</a>
+                <a th:href="|/page/board/eventBoard/eventList?page=${page.first}&code=${option.code}&keyword=${option.keyword}|">&laquo;</a>
     
                 <!-- [ 이전 ] -->
                 <th:block th:if="${page.page != page.first}">
-                    <a th:href="|/page/board/reviewBoard/reviewList?page=${page.prev}&code=${option.code}&keyword=${option.keyword}|">&lt;</a>
+                    <a th:href="|/page/board/eventBoard/eventList?page=${page.prev}&code=${option.code}&keyword=${option.keyword}|">&lt;</a>
                 </th:block>
     
                 <th:block th:each="no : ${#numbers.sequence(page.start, page.end)}">  <!--(1,10)모델에 담은 페이지가 아니라 그냥 1부터 10 --> 
@@ -237,17 +238,17 @@
                         </b>
                     </th:block>
                     <th:block th:if="${page.page != no}">
-                        <a th:href="|/page/board/reviewBoard/reviewList?page=${no}&code=${option.code}&keyword=${option.keyword}|" th:text="${no}"></a>
+                        <a th:href="|/page/board/eventBoard/eventList?page=${no}&code=${option.code}&keyword=${option.keyword}|" th:text="${no}"></a>
                     </th:block>
                 </th:block>
     
                 <!-- [ 다음 ] -->
                 <th:block th:if="${page.page != page.last}">
-                    <a th:href="|/page/board/reviewBoard/reviewList?page=${page.next}&code=${option.code}&keyword=${option.keyword}|">&gt;</a>
+                    <a th:href="|/page/board/eventBoard/eventList?page=${page.next}&code=${option.code}&keyword=${option.keyword}|">&gt;</a>
                 </th:block>
     
                 <!-- [ 마지막 ]-->
-                <a th:href="|/page/board/reviewBoard/reviewList?page=${page.last}&code=${option.code}&keyword=${option.keyword}|">&raquo;</a>
+                <a th:href="|/page/board/eventBoard/eventList?page=${page.last}&code=${option.code}&keyword=${option.keyword}|">&raquo;</a>
             </div>
             </center>
             </div>

@@ -1,60 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{/layout/default_layout}">
+    layout:decorate="~{/layout/default_layout}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이벤트</title>
+    <title>후기</title>
     <style>
-        .container2 {
-          max-width: 960px;
-          margin: 0 auto;
-          padding: 0 10px;
-          box-sizing: border-box;
+        .top-container {
+            width: 960px;
+            margin: 0 auto;
         }
+
         .writer {
             display: flex;
             justify-content: space-around;
             gap: 10px;
             padding: 10px 0;
-            width: 100%;
+            width: 960px;
             margin-top: 50px;
             margin-left: 10px;
             margin-right: 10px;
         }
+
         .writer label:first-child {
             font-size: 15px;
             font-weight: 500;
         }
+
         .writer label:last-child {
             font-size: 15px;
             color: rgba(192, 190, 183, 1);
         }
-       .title-container {
-          width: 100%;
-          margin: 0 auto 15px;
 
-          padding: 30px 30px;
-          border: 1px solid;
-          border-radius: 10px;
+        .title-container {
+            width: 960px;
+            margin: 0 auto 15px;
+
+            padding: 30px 30px;
+            border: 1px solid;
+            border-radius: 10px;
         }
+
         .title-container span {
-          font-weight: bold;
-          font-size: 20px;
+            font-weight: bold;
+            font-size: 20px;
         }
+
         .content-container {
-          width: 100%;
-          margin: 0 auto;
-          padding: 30px 30px;
-          border: 1px solid;
-          /* text-align: center; */
+            width: 960px;
+            margin: 0 auto;
+            padding: 30px 30px;
+            border: 1px solid;
+            /* text-align: center; */
         }
+
         .title-container hr {
-          margin-top: 10px;
+            margin-top: 10px;
         }
+
         h1 {
-          margin-top: 40px;
-          margin-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 10px;
         }
 
         /* 버튼 */
@@ -63,12 +70,14 @@
             justify-content: flex-end;
             gap: 10px;
             padding: 10px 0;
-            width: 100%;
+            width: 960px;
         }
+
         .button-container1 {
             text-align: right;
             padding: 10px 0;
         }
+
         .button-container1 button {
             margin-left: 5px;
             padding: 7px 20px;
@@ -82,16 +91,19 @@
             border: none;
             cursor: pointer;
         }
+
         .button-container1 button:hover {
             background-color: white;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
             font-weight: bolder;
             color: black;
         }
+
         .button-container2 {
             text-align: right;
             padding: 10px 0;
         }
+
         .button-container2 button {
             margin-left: 5px;
             padding: 7px 20px;
@@ -105,6 +117,7 @@
             border: none;
             cursor: pointer;
         }
+
         .button-container2 button:hover {
             background-color: black;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
@@ -119,13 +132,15 @@
             justify-content: center;
             gap: 10px;
             padding: 20px 0;
-            width: 100%;
+            width: 960px;
         }
+
         .reply {
             margin-left: 30px;
             font-weight: bold;
             font-size: 20px;
         }
+
         .reply-box {
             flex-grow: 1;
             display: flex;
@@ -136,6 +151,7 @@
             border: 1px solid;
             background-color: rgb(240, 240, 240);
         }
+
         .reply-box textarea {
             /* flex-grow: 1;  */
             margin-right: 5px;
@@ -150,7 +166,7 @@
         }
 
         .reply-container button {
-            margin-left: 5px; 
+            margin-left: 5px;
             padding: 10px 20px;
             background-color: white;
             color: black;
@@ -159,17 +175,19 @@
             height: 100px;
             border-radius: 3px;
         }
+
         .reply-container button:hover {
             background-color: black;
             color: white;
             font-weight: bolder;
         }
-        
+
         /* 댓글 타이틀 */
         .reply-list {
             border-bottom: 1.7px solid #000;
-            width: 100%;
+            width: 960px;
         }
+
         .reply-list label {
             margin: 5px 10px;
         }
@@ -177,39 +195,45 @@
         /* 댓글!!!! 목록 */
         #reply-list {
             display: block;
-            /* border-bottom: 0.7px solid #000; */
-            border-bottom: 0.7px solid blue;
-            width: 100%;
+            border-bottom: 0.7px solid #000;
+            width: 960px;
             display: block;
             padding: 10px 5px;
             box-sizing: border-box;
         }
+
         .reply-top {
             padding: 5px 10px;
             display: flex;
             justify-content: space-between;
         }
+
         .reply-regDate {
             color: rgba(192, 190, 183, 1);
         }
+
         .reply-regDate .icon {
             color: #000;
             margin: 0 20px;
         }
+
         .reply-middle {
             padding: 5px 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .reply-content {
             flex-grow: 1;
             margin-right: 20px;
         }
+
         .reply-button {
             padding: 5px 0;
-           text-align: right;
+            text-align: right;
         }
+
         .btn-reply-update {
             padding: 5px 10px;
             background-color: rgba(192, 190, 183, 1);
@@ -222,6 +246,7 @@
             border: none;
             cursor: pointer;
         }
+
         .btn-reply-delete {
             margin-left: 5px;
             padding: 5px 10px;
@@ -235,6 +260,7 @@
             border: none;
             cursor: pointer;
         }
+
         .reply-rereply {
             align-items: left;
             padding: 5px 0px;
@@ -249,11 +275,12 @@
             background-color: transparent;
             color: rgba(192, 190, 183, 1);
         }
-/* ---------------------------------------------------------헷갈릴까봐 나눠놓기 
+
+        /* ---------------------------------------------------------헷갈릴까봐 나눠놓기 
     답글 입력과 답글 목록은 부모댓글 목록 안에!!!! 있음*/
-         /* 답글!!!! 입력*/
-         /* 답글 눌렀을 때 보이게 하기 */
-         .rereply-container {
+        /* 답글!!!! 입력*/
+        /* 답글 눌렀을 때 보이게 하기 */
+        .rereply-container {
             /* display: none; */
             display: flex;
             align-items: center;
@@ -264,23 +291,31 @@
             width: 100%;
             /* border-bottom: 0.7px solid rgba(192, 190, 183, 1); */
 
-            visibility: hidden; /* 숨김 */
-            height: 0; /* 높이 0으로 설정 */
-            overflow: hidden; /* 콘텐츠 오버플로우 숨김 */
+            visibility: hidden;
+            /* 숨김 */
+            height: 0;
+            /* 높이 0으로 설정 */
+            overflow: hidden;
+            /* 콘텐츠 오버플로우 숨김 */
         }
+
         .rereply-container.visible {
-            visibility: visible; /* 보임 */
-            height: auto; /* 원래 높이로 설정 */
+            visibility: visible;
+            /* 보임 */
+            height: auto;
+            /* 원래 높이로 설정 */
             padding: 0;
             padding-left: 70px;
             transition: visibility 0.3s, height 0.3s;
         }
+
         .rereply {
             /* margin-left: 30px;
             font-weight: bold;
             font-size: 20px; */
             margin-left: 70px;
         }
+
         .rereply-box {
             flex-grow: 1;
             display: flex;
@@ -290,8 +325,8 @@
             padding: 20px 20px;
             border: 1px solid rgba(192, 190, 183, 1);
             border-radius: 3px;
-            margin-right: 10px;
         }
+
         .rereply-box textarea {
             /* flex-grow: 1;  */
             margin-right: 5px;
@@ -306,7 +341,7 @@
         }
 
         .rereply-container button {
-            margin-left: 5px; 
+            margin-left: 5px;
             padding: 10px 20px;
             background-color: white;
             color: black;
@@ -315,6 +350,7 @@
             height: 100px;
             border-radius: 3px;
         }
+
         .rereply-container button:hover {
             background-color: black;
             color: white;
@@ -328,35 +364,41 @@
             display: block;
             padding: 10px 5px;
             box-sizing: border-box;
-            /* border-top: 0.7px solid rgba(192, 190, 183, 1); */
-            border-top: 0.7px solid red;
+            border-top: 0.7px solid rgba(192, 190, 183, 1);
         }
+
         .rereply-top {
             padding: 5px 10px;
             display: flex;
             justify-content: space-between;
         }
+
         .rereply-regDate {
             color: rgba(192, 190, 183, 1);
         }
+
         .rereply-regDate .icon {
             color: #000;
             margin: 0 20px;
         }
+
         .rereply-middle {
             padding: 5px 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .rereply-content {
             flex-grow: 1;
             margin-right: 20px;
         }
+
         .rereply-button {
             padding: 5px 0;
-           text-align: right;
+            text-align: right;
         }
+
         .btn-rereply-update {
             padding: 5px 10px;
             background-color: rgba(192, 190, 183, 1);
@@ -369,6 +411,7 @@
             border: none;
             cursor: pointer;
         }
+
         .btn-rereply-delete {
             margin-left: 5px;
             padding: 5px 10px;
@@ -382,27 +425,28 @@
             border: none;
             cursor: pointer;
         }
+
         .rereply-rereply {
             align-items: left;
             padding: 5px 0px;
         }
     </style>
 </head>
+
 <body>
 
     <th:block layout:fragment="content">
 
-    <div class="container2">
+        <div class="top-container">
 
-        <center>
-        <h1>이벤트</h1>
-        </center>
-    
-        <div class="writer">
-            <label th:text="${starBoard.writer}"></label>
-            <label th:text="${#dates.format(starBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}" ></label>
+            <center>
+                <h1>후기</h1>
+            </center>
+
+            <div class="writer">
+                <label th:text="${starBoard.writer}"></label>
+                <label th:text="${#dates.format(starBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></label>
         </div>
-
         <div class="title-container">
             <span th:text="${starBoard.title}"></span>
             <hr>
@@ -418,32 +462,110 @@
           <div class="button-container2">
             <button type="button" onclick="update()">수정</button>
           </div>
+          <div class="button-container3">
+            <button type="button" onclick="actionDelete()">삭제</button>
+          </div>
         </div>
     
         <!-- 댓글 등록 -->
         <div class="reply-container">
             <div class="reply-box">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-                 <!-- 사용자 아이디(hidden) -->
-                 <input type="hidden" name="writer" id="reply-writer" th:value="${session.user != null ? session.user.id : ''}">
-                <textarea type="text" name="content" id="reply-content" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
-            <button type="button" id="btn-reply-insert" class="btn-reply" onclick="insertReply()">등록</button>
-            </div>            
+            <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
+            <button type="button">등록</button>
+            </div>
+            
         </div>
         <div class="reply-list">
             <label class="reply">댓글</label>
             <label class="reply-count">댓글 갯수</label>
         </div>
         <!-- 댓글 목록 -->
-        <div id="reply-listbox">
-            
+        <div id="reply-list">
+            <!-- 댓글 -->
+            <div class="reply-top">
+                <span class="reply-writer">${writer}</span>
+                <span class="reply-regDate">${regDate}
+                    
+                    <i class="fa-regular fa-thumbs-up icon"></i>
+
+                </span>
+            </div>
+            <!-- 댓글 내용/ 수정 삭제 버튼 -->
+            <div class="reply-middle">
+                <p class="reply-content">${content}</p>
+                <div class="reply-button">
+                    <button class="btn-reply-update">수정</button>
+                    <button class="btn-reply-delete">삭제</button>
+                </div>
+            </div>
+            <!-- 답글 쓰기 -->
+            <div class="reply-rereply">
+                <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
+            </div>
+
+            <div class="rereply-container m-2 p-0">
+                <div class="rereply-box">
+                    <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
+                    <button type="button">등록</button>
+                </div>       
+            </div>
+            <!-- 답글!! 목록 -->
+            <div id="rereply-list">
+                <div class="rereply">
+                    <!-- 답글 -->
+                    <div class="rereply-top">
+                        <span class="rereply-writer">${writer}</span>
+                        <span class="rereply-regDate">${regDate}
+                            
+                                <i class="fa-regular fa-thumbs-up icon"></i>
+                            
+                        </span>
+                    </div>
+                    <!-- 답글 내용/ 수정 삭제 버튼 -->
+                    <div class="rereply-middle">
+                        <p class="rereply-content">${content}</p>
+                        <div class="rereply-button">
+                            <button class="btn-rereply-update">수정</button>
+                            <button class="btn-rereply-delete">삭제</button>
+                        </div>
+                    </div>
+                    <!-- 답글에 답글 쓰기 -->
+                    <div class="rereply-rereply">
+                        <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
+                    </div>
+                    <div class="rereply-container m-0 p-0">
+                        <div class="rereply-box">
+                            <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
+                            <button type="button">등록</button>
+                        </div>       
+                    </div>
+                </div>
+            </div>
         </div>
     
         
 
 
 
-        
+        <!-- 예시 자료 2 -->
+        <div id="reply-list">
+            <div class="reply-top">
+                <span class="reply-writer">${writer}</span>
+                <span class="reply-regDate">${regDate}
+                    <i class="fa-regular fa-thumbs-up icon"></i>
+                </span>
+            </div>
+            <div class="reply-middle">
+                <p class="reply-content">${content}</p>
+                <div class="reply-button">
+                    <button class="btn-reply-update" onclick="update()">수정</button>
+                    <button class="btn-reply-delete">삭제</button>
+                </div>
+            </div>
+            <div class="reply-rereply">
+                <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
+            </div>
+        </div>
         
      
     </div>
@@ -453,92 +575,32 @@
         let starNo = '[[${starBoard.starNo}]]'
 
         function moveList() {
-          location.href = '/page/board/eventBoard/eventList'
+          location.href = '/page/mypage/event'
         }
   
         function update() {
-          location.href = '/page/board/eventBoard/eventUpdate?starNo=' + starNo
+          location.href = '/page/mypage/reviewUpdate?starNo=' + starNo
         }
-
+ 
+        // 삭제 요청
+        // function actionDelete() {
+        //     let check = confirm('정말로 삭제하시겠습니까?')
+        //     if( check ) {
+        //         var goform = $("<form>", {
+	    //         method: "post",
+        //         action: '/page/review/delete',
+                
+        //         html: insdoc
+        //         }).appendTo("body");
+    
+	    //         goform.submit();
+        //     }
+        // }
         function toggleRereplyContainer(button) {
             const rereplyContainer = button.parentElement.nextElementSibling;
             console.log(rereplyContainer)
             rereplyContainer.classList.toggle('visible');
         }
-
-        // 댓글 목록 요청
-        replyList()
-
-        // 댓글 목록
-        function replyList() {
-            // AJAX 비동기 요청
-            // 💍 CRSF TOKEN
-            let csrfToken = document.querySelector('input[name="_csrf"]').value;
-            let request = new XMLHttpRequest()
-
-            // 요청 세팅
-            // request.open(요청메소드, URL)
-            request.open('GET', '/page/reply/' + starNo) // 글 번호
-
-            request.onreadystatechange = function() {
-
-                // 요청 성공 시,
-                if(request.readyState == request.DONE && request.status == 200) {
-                    // 댓글 목록 확인
-                    let response = request.responseText
-                    // 서버에서 렌더링한 HTML
-                    let data = response
-                    let replyList = document.getElementById('reply-listbox')
-                    replyList.innerHTML = data
-
-                    event()
-                }
-            }
-            
-        }
-
-        // 댓글 등록
-        function insertReply() {
-            let $writer = document.getElementById('reply-writer')
-            let $content = document.getElementById('reply-content')
-
-            let writer = $writer.value
-            let content = $content.value
-
-            let data = {
-                'starNo'    : starNo,
-                'writer'    : writer,
-                'content'   : content
-            }
-
-            console.dir(data)
-            // 💍 CRSF TOKEN
-            let csrfToken = document.querySelector('input[name="_csrf"]').value;
-            let request = new XMLHttpRequest()
-
-            request.open('POST', '/page/reply')
-            request.setRequestHeader('Content-Type', 'application/json')
-            request.setRequestHeader('X-CSRF-TOKEN', csrfToken)
-            request.send(JSON.stringify(data))
-
-            request.onreadystatechange = function() {
-
-                // 요청 성공 시,
-                if(request.readyState == request.DONE && request.status == 201) {
-                    console.log('댓글 등록 성공!');
-                    let response = request.responseText
-                    if(response == 'SUCCESS') {
-                        replyList()
-                        // 댓글 목록 갱신 후 댓글 입력 창 비우기
-                        $writer.value = ''
-                        $content.value = ''
-                    }
-                }
-            }
-        }
-
-         
-
   
       </script>
     

@@ -20,7 +20,11 @@ public class Users {
     private int enabled;
     private String gender;
     private String birth;
+
     private int userImgId;
+
+    private int imgNo;
+
     // 권한 목록
     private List<UserAuth> authList;
 }

@@ -41,7 +41,7 @@ public class StarServiceImpl implements StarService {
         Users user = userMapper.login(username);
         starBoard.setUserNo(user.getUserNo());
         starBoard.setWriter(user.getName());
-        // starBoard.setStatus("무료홍보");
+        starBoard.setCard("무료홍보");
         // 정보 등록
         starMapper.insert(starBoard);
         
@@ -57,7 +57,7 @@ public class StarServiceImpl implements StarService {
         Users user = userMapper.login(username);
         starBoard.setUserNo(user.getUserNo());
         starBoard.setWriter(user.getName());
-        starBoard.setStatus("유료홍보");
+        starBoard.setCard("유료홍보");
         // 정보 등록
         int result = starMapper.insert(starBoard);
         
@@ -91,11 +91,13 @@ public class StarServiceImpl implements StarService {
      * 글 삭제
      */
     @Override
-    public int delete(int starNo) throws Exception {
-        int result = starMapper.delete(starNo);
+    public int delete(String starNoList) throws Exception {
+        int result = starMapper.delete(starNoList);
         return result;
 
     }
+
+    
 
 
 

@@ -13,8 +13,8 @@ import com.aloha.starmakers.board.dto.StarBoard;
 public interface StarMapper {
 
     // 글 삭제
-    public int delete(int starNo) throws Exception;
-    
+    public int delete(String starNoList) throws Exception;
+
     // 목록 조회 - 페이징, 검색
     public List<StarBoard> list(@Param("type") String type
                                ,@Param("page") Page page
@@ -43,6 +43,6 @@ public interface StarMapper {
     public List<StarBoard> search(@Param("option") Option option) throws Exception;
 
     // 조회수 증가
-    public int view(int no) throws Exception;
+    public int view(int starNo) throws Exception;
 
 }
