@@ -70,4 +70,12 @@
      WHERE parent_no = #{parentNo}
 </delete>
 
+<!-- 댓글 개수 조회 -->
+<select id="countByStarNo" resultType="int">
+     SELECT COUNT(*)
+     FROM reply
+     WHERE star_no = #{starNo}
+</select>
+
+
 </mapper>

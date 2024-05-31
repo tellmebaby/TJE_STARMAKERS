@@ -86,9 +86,13 @@ public class StarServiceImpl implements StarService {
     }
 
 
+    /**
+     * 조회수 증가
+     */
     @Override
-    public int view(int starNo) throws Exception {
-        return starMapper.view(starNo);
+    public int views(int starNo) throws Exception {
+        log.info(starNo + "번 게시글 조회수 증가");
+        return starMapper.views(starNo);
     }
 
     /**

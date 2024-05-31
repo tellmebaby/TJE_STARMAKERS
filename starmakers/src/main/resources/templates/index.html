@@ -24,6 +24,12 @@
                 padding-left: 0;
             }
             */
+
+            a {
+                text-decoration: none;
+                color: black;
+            }
+         
         </style>
 
         <div class="jumbotron text-center bg-image">
@@ -31,8 +37,8 @@
                 <h1 class="display-4">스타가 되는 첫걸음</h1>
                 <p class="lead">스타가 되고 싶은 당신을 위한 홍보 플랫폼</p>
                 <div class="d-flex">
-                    <a href="#" class="btn btn-primary btn-lg me-3">무료로 참여하기</a>
-                    <a href="#" class="btn btn-secondary btn-lg">스타 보러가기</a>
+                    <a href="page/starCard/starInsert" class="btn btn-primary btn-lg me-3">무료로 참여하기</a>
+                    <a href="page/starCard/starList" class="btn btn-secondary btn-lg">스타 보러가기</a>
                 </div>
             </div>
         </div>
@@ -107,27 +113,27 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <h3 class="board-h">이벤트 후기 <span class="text-muted"><a href="#">더 보기></a></span></h3>
-
-
+                    <h3 class="board-h">이벤트 후기 <span class="text-muted"><a href="page/board/reviewBoard/reviewList">더 보기></a></span></h3>
                     <ul class="list-group">
-                        <li class="list-group-item">이게 진짜 되네..[2] <span class="badge text-bg-secondary">22</span></li>
-                        <li class="list-group-item">이게 진짜 되네..[3] <span class="badge text-bg-secondary">22</span></li>
-                        <li class="list-group-item">이게 진짜 안되네.. <span class="badge text-bg-secondary">12</span></li>
-                        <li class="list-group-item">이게 진짜 되네..[7] <span class="badge text-bg-secondary">32</span></li>
-                        <li class="list-group-item">이게 진짜 되네..[2] <span class="badge text-bg-secondary">34</span></li>
+                        <li class="list-group-item" th:if="${starListReview.empty}">
+                            조회된 게시물이 없습니다.
+                        </li>
+                        <li class="list-group-item" th:each="starBoard, iterStat : ${starListReview}">
+                            <a th:href="|/page/board/reviewBoard/reviewPost?starNo=${starBoard.starNo}|" th:text="${starBoard.title} + ' [' + ${starBoard.commentCount} + ']'"></a>
+                            <span class="badge text-bg-secondary" th:text="${starBoard.views}"></span>
+                        </li>
                     </ul>
-
                 </div>
                 <div class="col-md-6">
-                    <h3 class="board-h">공지사항 <span class="text-muted"><a href="#">더 보기></a></span></h3>
+                    <h3 class="board-h">공지사항 <span class="text-muted"><a href="page/board/anBoard/anList">더 보기></a></span></h3>
                     <ul class="list-group">
-                        <li class="list-group-item">이건 공지입니다[2] <span class="badge text-bg-secondary">22</span></li>
-                        <li class="list-group-item">공지 어쩌고 저쩌고...[3] <span class="badge text-bg-secondary">40</span>
+                        <li class="list-group-item" th:if="${starListAnn.empty}">
+                            조회된 게시물이 없습니다.
                         </li>
-                        <li class="list-group-item">이게 진짜 안되네.. <span class="badge text-bg-secondary">12</span></li>
-                        <li class="list-group-item">이게 진짜 되네..[7] <span class="badge text-bg-secondary">32</span></li>
-                        <li class="list-group-item">이게 진짜 되네..[2] <span class="badge text-bg-secondary">34</span></li>
+                        <li class="list-group-item" th:each="starBoard, iterStat : ${starListAnn}">
+                            <a th:href="|/page/board/anBoard/anPost?starNo=${starBoard.starNo}|" th:text="${starBoard.title} + ' [' + ${starBoard.commentCount} + ']'"></a>
+                            <span class="badge text-bg-secondary" th:text="${starBoard.views}"></span>
+                        </li>
                     </ul>
                 </div>
             </div>

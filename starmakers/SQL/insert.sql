@@ -1,5 +1,5 @@
 
--- Active: 1714701530602@@127.0.0.1@3306@joeun
+-- Active: 1716511247384@@127.0.0.1@3306@joeun
 
 
 
@@ -29,3 +29,9 @@ VALUES
 ('제목9', '작성자9', '내용9', 1, 'event'),
 ('제목10', '작성자10', '내용10', 1, 'event'),
 ('제목11', '작성자11', '내용11', 1, 'event');
+
+INSERT INTO reply (writer, content, reg_date, upd_date, user_no, star_no, review_no, pre_no, parent_no)
+VALUES ('joeun', 'This is a comment for star_no 10.', NOW(), NOW(), NULL, 10, NULL, NULL, NULL);
+
+SELECT *
+FROM reply

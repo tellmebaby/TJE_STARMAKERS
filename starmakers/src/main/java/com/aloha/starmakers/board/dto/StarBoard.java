@@ -26,4 +26,5 @@ public class StarBoard {
     private Date endDate;
     private int imgNo;
     private List Icons;
+    private int commentCount;
 }

@@ -130,7 +130,7 @@
 
 
     <!-- 조회수 -->
-    <update id="view">
+    <update id="views">
         UPDATE star_board
            SET views = views + 1
         WHERE star_no = #{starNo}

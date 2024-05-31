@@ -213,13 +213,6 @@
                     </tr>
                 </th:block>
                 <tbody>
-                    <th:block th:if="${starList.isEmpty()}">
-                        <tr>
-                            <td colspan="6" align="center" style="padding-top: 183.49px; padding-bottom: 183.49px;">
-                                조회된 게시글이 없습니다.
-                            </td>
-                        </tr>
-                    </th:block>
                     <th:block th:each="starBoard : ${starList}">
                         <tr th:if="${starBoard.type == 'review'}">
                             <td align="center" th:text="${starBoard.starNo}"></td>

@@ -1,8 +1,11 @@
 package com.aloha.starmakers.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,6 +21,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.aloha.starmakers.board.dto.Option;
+import com.aloha.starmakers.board.dto.Page;
+import com.aloha.starmakers.board.dto.StarBoard;
+import com.aloha.starmakers.board.service.ReplyService;
+import com.aloha.starmakers.board.service.StarService;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.service.UserService;
 
@@ -35,6 +43,12 @@ public class HomeController {
 
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private StarService starService;
+
+    @Autowired
+    private ReplyService replyService;
 
    /**
      * 메인 화면
@@ -42,17 +56,49 @@ public class HomeController {
      * @param Principal
      * @return
      */
+    // @GetMapping({"", "/"})
+    // public String home(Principal principal, HttpSession session, Model model) {
+    //     log.info("메인 화면");
+    //     log.info(":::::::::: principal ::::::::::");
+    //     log.info("principal : " + principal);
+    //     log.info("user : " + session.getAttribute("user"));
+    //     Users user = (Users) session.getAttribute("user");
+    //     model.addAttribute("user", user);
+    //     // Principal : 현재 로그인 한 사용자 정보를 확인하는 인터페이스
+    //     return "index";
+    // }
     @GetMapping({"", "/"})
-    public String home(Principal principal, HttpSession session, Model model) {
+    public String home(Principal principal
+                      ,HttpSession session
+                      ,Model model
+                        ,Page page, Option option) throws Exception {
+        // 로그인을 한 사용자 정보를 로깅합니다.
         log.info("메인 화면");
         log.info(":::::::::: principal ::::::::::");
         log.info("principal : " + principal);
         log.info("user : " + session.getAttribute("user"));
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
-        // Principal : 현재 로그인 한 사용자 정보를 확인하는 인터페이스
+
+        // starList를 가져와서 모델에 추가합니다.
+        List<StarBoard> starListReview = starService.list("review", page, option);
+        for (StarBoard starBoard : starListReview) {
+            int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+            starBoard.setCommentCount(commentCount);
+        }
+        
+        List<StarBoard> starListAnn = starService.list("an", page, option);
+        for (StarBoard starBoard : starListAnn) {
+            int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+            starBoard.setCommentCount(commentCount);
+        }
+        
+        model.addAttribute("starListReview", starListReview.stream().limit(5).collect(Collectors.toList()));
+        model.addAttribute("starListAnn", starListAnn.stream().limit(5).collect(Collectors.toList()));
+        // index 페이지를 반환합니다.
         return "index";
     }
+
     
     @GetMapping("/exception")
     public String exception(Authentication auth, Model model) {
@@ -195,6 +241,16 @@ public class HomeController {
             response.put("error", "No user image ID found in session");
         }
         return response;
+    }
+
+    /**
+     * 이벤트 후기 게시판 조회
+     */
+    @GetMapping("/board/reviewBoard/reviewPost")
+    public String reviewSelect(@RequestParam("starNo") int starNo, Model model) throws Exception {
+        StarBoard starBoard = starService.select(starNo);
+        model.addAttribute("starBoard", starBoard);
+        return "/page/board/reviewBoard/reviewPost";
     }
 
 }
