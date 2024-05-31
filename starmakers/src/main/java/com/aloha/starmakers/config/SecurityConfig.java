@@ -58,11 +58,13 @@ public class SecurityConfig {
         // 🔄 자동 로그인 설정
         http.rememberMe(me -> me.key("aloha")
                                 .tokenRepository(tokenRepository())
-                                .tokenValiditySeconds(60 * 60 * 24 * 7));
+                                .tokenValiditySeconds(60 * 60 * 24 * 7)
+                                .authenticationSuccessHandler(loginSuccessHandler));
 
         // OAuth 로그인 설정
         http.oauth2Login(login -> login 
                                 .loginPage("/login")
+                                .successHandler(loginSuccessHandler)
                         );
 
         // CSRF 토큰을 쿠키에 저장하고, /message/** 경로에 대한 요청이 인증된 사용자만 접근할 수 있도록 설정
