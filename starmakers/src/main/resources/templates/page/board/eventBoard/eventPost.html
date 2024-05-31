@@ -6,12 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이벤트</title>
     <style>
-        .container2 {
-          max-width: 960px;
-          margin: 0 auto;
-          padding: 0 10px;
-          box-sizing: border-box;
-        }
+        
         .writer {
             display: flex;
             justify-content: space-around;
@@ -166,11 +161,11 @@
         }
         
         /* 댓글 타이틀 */
-        .reply-list {
+        .top-reply-list {
             border-bottom: 1.7px solid #000;
             width: 100%;
         }
-        .reply-list label {
+        .top-reply-list label {
             margin: 5px 10px;
         }
 
@@ -392,54 +387,57 @@
 
     <th:block layout:fragment="content">
 
-    <div class="container2">
+    <div class="container ">
+        <div class="w-75 m-auto">
 
-        <center>
-        <h1>이벤트</h1>
-        </center>
-    
-        <div class="writer">
-            <label th:text="${starBoard.writer}"></label>
-            <label th:text="${#dates.format(starBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}" ></label>
-        </div>
-
-        <div class="title-container">
-            <span th:text="${starBoard.title}"></span>
-            <hr>
-        </div>
-        <div class="content-container">
-            <span th:utext="${starBoard.content}"></span>
-        </div>
-    
-        <div class="button-wrapper">
-          <div class="button-container1">
-            <button type="button" onclick="moveList()">목록</button>
-          </div>
-          <div class="button-container2">
-            <button type="button" onclick="update()">수정</button>
-          </div>
-        </div>
-    
-        <!-- 댓글 등록 -->
-        <div class="reply-container">
-            <div class="reply-box">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-                 <!-- 사용자 아이디(hidden) -->
-                 <input type="hidden" name="writer" id="reply-writer" th:value="${session.user != null ? session.user.id : ''}">
-                <textarea type="text" name="content" id="reply-content" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
-            <button type="button" id="btn-reply-insert" class="btn-reply" onclick="insertReply()">등록</button>
-            </div>            
-        </div>
-        <div class="reply-list">
-            <label class="reply">댓글</label>
-            <label class="reply-count">댓글 갯수</label>
-        </div>
-        <!-- 댓글 목록 -->
-        <div id="reply-listbox">
+            <center>
+                <h1>이벤트</h1>
+                </center>
             
-        </div>
-    
+                <div class="writer">
+                    <label th:text="${starBoard.writer}"></label>
+                    <label th:text="${#dates.format(starBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}" ></label>
+                </div>
         
+                <div class="title-container">
+                    <span th:text="${starBoard.title}"></span>
+                    <hr>
+                </div>
+                <div class="content-container">
+                    <span th:utext="${starBoard.content}"></span>
+                </div>
+            
+                <div class="button-wrapper">
+                  <div class="button-container1">
+                    <button type="button" onclick="moveList()">목록</button>
+                  </div>
+                  <div class="button-container2">
+                    <button type="button" onclick="update()">수정</button>
+                  </div>
+                </div>
+            
+                <!-- 댓글 등록 -->
+                <div class="reply-container">
+                    <div class="reply-box">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                         <!-- 사용자 아이디(hidden) -->
+                         <input type="hidden" name="writer" id="reply-writer" th:value="${session.user != null ? session.user.id : ''}">
+                        <textarea type="text" name="content" id="reply-content" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
+                    <button type="button" id="btn-reply-insert" class="btn-reply" onclick="insertReply()">등록</button>
+                    </div>            
+                </div>
+                <div class="top-reply-list">
+                    <label class="reply">댓글</label>
+                    <label class="reply-count">댓글 갯수</label>
+                </div>
+                <!-- 댓글 목록 -->
+                <div id="reply-listbox">
+                    
+                </div>
+            
+                
+        </div>
+
 
 
 
@@ -494,7 +492,7 @@
                     event()
                 }
             }
-            
+            request.send()
         }
 
         // 댓글 등록
@@ -537,12 +535,21 @@
             }
         }
 
-         
+         // 로그인 상태 체크
+         document.addEventListener('DOMContentLoaded', function() {
+            let isLoggedIn = '[[${session.user != null}]]'; // Thymeleaf로 로그인 상태 확인
+            if (!isLoggedIn) {
+                // 로그인하지 않은 경우 댓글 입력을 비활성화
+                document.getElementById('reply-content').disabled = true;
+                document.getElementById('btn-reply-insert').disabled = true;
+                document.getElementById('reply-content').placeholder = "로그인 후 댓글을 작성할 수 있습니다.";
+            }
+        });
 
   
       </script>
     
-        </th:block>
+    </th:block>
     
         
 

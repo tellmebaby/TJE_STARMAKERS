@@ -3,12 +3,15 @@ package com.aloha.starmakers.board.controller;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-
-import com.aloha.starmakers.board.dto.StarBoard;
-import com.aloha.starmakers.user.dto.Users;
-import com.aloha.starmakers.board.service.FileService;
-import com.aloha.starmakers.board.service.StarService;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
+import com.aloha.starmakers.board.dto.StarBoard;
+import com.aloha.starmakers.board.service.FileService;
+import com.aloha.starmakers.board.service.LikeService;
+import com.aloha.starmakers.board.service.StarService;
+import com.aloha.starmakers.user.dto.Users;
+
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -37,6 +41,9 @@ public class StarController {
 
     @Autowired
     private FileService fileService;
+
+    @Autowired
+    private LikeService likeService;
 
   
     
@@ -64,6 +71,7 @@ public class StarController {
             throws Exception {
         // starBoard.setCard("무료홍보");
         int starNo = starService.insert(starBoard, username);
+        
 
 
         Users user = (Users) session.getAttribute("user");
@@ -85,14 +93,32 @@ public class StarController {
         return "redirect:/page/starCard/starInsert?no=" + no + "&error";
     }
 
+    // 초기화면 설정
     @GetMapping("/starCard/starList")
     public String cardList(@RequestParam(value = "type", defaultValue = "starCard") String type
-                                    ,Model model, Page page
+                                    ,Model model, Page page, HttpSession session
                                     ,Option option) throws Exception {
 
-        List<StarBoard> starList = starService.list(type, page, option);
+        Users user = (Users) session.getAttribute("user");
 
-        // log.info("statList ="+starList.toString());
+        List<StarBoard> starList = null;
+
+        page.setRows(12);
+
+        if (user != null) {
+            int userNo = user.getUserNo();
+            starList = starService.list(type, page, option, userNo);
+        } else {
+            starList = starService.list(type, page, option);
+        }
+
+        starList.forEach(star -> {
+            if (star.getCategory1() != null) {
+                List<String> icons = Arrays.stream(star.getCategory1().split(","))
+                        .collect(Collectors.toList());
+                star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
+            }
+        });
 
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
@@ -102,8 +128,35 @@ public class StarController {
         return "/page/starCard/starList";
     }
 
+    // 추가 화면 설정
+    @GetMapping("/starCard/starList/api")
+    public ResponseEntity<List<StarBoard>> getMoreCards(
+            @RequestParam(value = "type", defaultValue = "starCard") String type,
+            Page page,
+            Option option,
+            HttpSession session) throws Exception {
+        Users user = (Users) session.getAttribute("user");
+        List<StarBoard> starList;
 
+        page.setRows(12); // 한 번에 불러올 행 수 설정
 
+        if (user != null) {
+            int userNo = user.getUserNo();
+            starList = starService.list(type, page, option, userNo);
+        } else {
+            starList = starService.list(type, page, option);
+        }
+
+        starList.forEach(star -> {
+            if (star.getCategory1() != null) {
+                List<String> icons = Arrays.stream(star.getCategory1().split(","))
+                        .collect(Collectors.toList());
+                star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
+            }
+        });
+
+        return ResponseEntity.ok(starList);
+    }
 
     /**
      * 결제 버튼 클릭 시
@@ -489,6 +542,14 @@ public class StarController {
         return "redirect:/page/board/anBoard/anUpdate?qnaNo=" + no + "$error";
     }
 
-
+    @PostMapping("/like")
+    public ResponseEntity<String> like(@RequestParam("userNo") int userNo, @RequestParam("starNo") int starNo) {
+        try {
+            boolean liked = likeService.toggleLike(userNo, starNo);
+            return ResponseEntity.ok(liked ? "Liked" : "Unliked");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
+        }
+    }
 
 }
