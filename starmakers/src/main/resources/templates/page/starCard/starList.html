@@ -14,7 +14,7 @@
 <body>
     <div layout:fragment="content">
         <div class="container">
-            <form>
+            <form id="searchForm">
                 <div class="search-title d-flex justify-content-between mt-3">
                     <span>상세검색</span>
                     <div class="col-4 d-flex justify-content-end">
@@ -27,7 +27,7 @@
                         <div class="col-md-12 d-flex align-items-center">
                             <h5>상태</h5>
                             <div class="form-check form-check-inline ms-4">
-                                <input class="form-check-input" type="checkbox" value="" id="eventOngoing">
+                                <input class="form-check-input" type="checkbox" value="" id="eventOngoing" checked>
                                 <label class="form-check-label" for="eventOngoing">
                                     진행중인 이벤트
                                 </label>
@@ -39,8 +39,8 @@
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="eventExpired">
-                                <label class="form-check-label" for="eventExpired">
+                                <input class="form-check-input" type="checkbox" value="" id="eventUpcoming">
+                                <label class="form-check-label" for="eventUpcoming">
                                     진행예정 이벤트
                                 </label>
                             </div>
@@ -93,8 +93,8 @@
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="gaming">
-                                <label class="form-check-label" for="gaming">
+                                <input class="form-check-input" type="checkbox" value="" id="game">
+                                <label class="form-check-label" for="game">
                                     게임
                                 </label>
                             </div>
@@ -105,14 +105,14 @@
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="animals">
-                                <label class="form-check-label" for="animals">
+                                <input class="form-check-input" type="checkbox" value="" id="animal">
+                                <label class="form-check-label" for="animal">
                                     동물
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="exercise">
-                                <label class="form-check-label" for="exercise">
+                                <input class="form-check-input" type="checkbox" value="" id="workOut">
+                                <label class="form-check-label" for="workOut">
                                     운동
                                 </label>
                             </div>
@@ -122,43 +122,29 @@
                                     ASMR
                                 </label>
                             </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="" id="fashion">
+                                <label class="form-check-label" for="fashion">
+                                    패션
+                                </label>
+                            </div>
                         </div>
                     </div>
 
 
                     <div class="row mt-3">
                         <div class="col-md-12 d-flex align-items-center">
-                            <input type="text" class="form-control me-2" id="searchInput" placeholder="검색 키워드 입력">
+                            <input type="text" class="form-control me-2" id="searchInput" placeholder="검색 키워드 입력" th:value="${param.txt}">
                             <button type="submit" class="btn btn-primary col-2">검색</button>
                         </div>
                     </div>
                 </div>
-
-
             </form>
 
 
             <div id="promotionCarousel" class="carousel">
                 <div class="row mx-0 mb-5" id="starList">
-                    <div class="col-lg-3 p-0" th:each="star : ${starList}">
-                        <div class="card" th:classappend="${star.card == '유료홍보'} ? ' effect'"
-                            th:data-no="${star.starNo}">
-                            <div th:if="${star.card == '유료홍보'}" class="card-overlay"></div>
-                            <img th:src="|/file/img/${star.imgNo}|" class="card-img-top" th:alt="${star.title}">
-                            <div class="icon-body">
-                                <img th:each="icon : ${star.icons}" th:src="|/img/icon/${icon}.png|"
-                                    th:class="|content-icon ${icon}|">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title" th:text="${star.title}">제목 없음</h5>
-                                <p class="card-text" th:text="${star.writer}">내용 없음</p>
-                            </div>
-                            <div class="icon-container">
-                                <i class=" fa-thumbs-up icon"
-                                    th:classappend="${star.likes_chk} ? ' fa-solid':'fa-regular' "></i>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
 
             </div>
@@ -166,15 +152,15 @@
 
             <script>
                 $(document).ready(function () {
-
-
-                    let page = 1;
+                    let page = 0;
                     const type = 'starCard';
                     let isLoading = false;
 
-                    function loadMoreCards() {
+                    function loadMoreCards(resetPage = false) {
                         if (isLoading) return;
                         isLoading = true;
+
+                        if (resetPage) page = 0;
                         page += 1;
 
                         $.ajax({
@@ -182,9 +168,27 @@
                             method: 'GET',
                             data: {
                                 type: type,
-                                page: page
+                                page: page,
+                                eventOngoing: $('#eventOngoing').is(':checked'),
+                                eventExpired: $('#eventExpired').is(':checked'),
+                                eventUpcoming: $('#eventUpcoming').is(':checked'),
+                                instagram: $('#instagram').is(':checked'),
+                                youtube: $('#youtube').is(':checked'),
+                                chzzk: $('#chzzk').is(':checked'),
+                                afreeca: $('#afreeca').is(':checked'),
+                                food: $('#food').is(':checked'),
+                                travel: $('#travel').is(':checked'),
+                                game: $('#game').is(':checked'),
+                                music: $('#music').is(':checked'),
+                                animal: $('#animal').is(':checked'),
+                                workOut: $('#workOut').is(':checked'),
+                                asmr: $('#asmr').is(':checked'),
+                                fashion: $('#fashion').is(':checked'),
+                                keyword: $('#searchInput').val()
                             },
                             success: function (data) {
+                                if (resetPage) $('#starList').empty();
+
                                 data.forEach(star => {
                                     const cardHtml = `
                                         <div class="col-lg-3 p-0">
@@ -203,12 +207,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        `;
+                                    `;
                                     $('#starList').append(cardHtml);
                                 });
                                 isLoading = false;
-                            }
-                            ,
+                            },
                             error: function () {
                                 console.error("Failed to load more cards.");
                                 isLoading = false;
@@ -216,15 +219,31 @@
                         });
                     }
 
+
+                    // 초기 카드 로드
+                    loadMoreCards();
+
+                    // 스크롤 이벤트
                     $(window).scroll(function () {
                         if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
                             loadMoreCards();
                         }
                     });
 
+                    // 검색 폼 제출 이벤트
+                    $('#searchForm').submit(function (event) {
+                        event.preventDefault();
+                        loadMoreCards(true);
+                    });
+
+                    // 체크박스 변경 이벤트
+                    $('input[type="checkbox"]').change(function () {
+                        loadMoreCards(true);
+                    });
 
 
                 });
+
             </script>
 
 

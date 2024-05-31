@@ -93,38 +93,12 @@ public class StarController {
 
     // 초기화면 설정
     @GetMapping("/starCard/starList")
-    public String cardList(@RequestParam(value = "type", defaultValue = "starCard") String type
-                                    ,Model model, Page page, HttpSession session
-                                    ,Option option) throws Exception {
-
-        Users user = (Users) session.getAttribute("user");
-
-        List<StarBoard> starList = null;
-
-        page.setRows(12);
-
-        if (user != null) {
-            int userNo = user.getUserNo();
-            starList = starService.list(type, page, option, userNo);
-        } else {
-            starList = starService.list(type, page, option);
-        }
-
-        starList.forEach(star -> {
-            if (star.getCategory1() != null) {
-                List<String> icons = Arrays.stream(star.getCategory1().split(","))
-                        .collect(Collectors.toList());
-                star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
-            }
-        });
-
-        model.addAttribute("starList", starList);
-        model.addAttribute("page", page);
-        model.addAttribute("option", option);
-        
-
+    public String cardList() throws Exception {
         return "/page/starCard/starList";
     }
+
+
+    
 
     // 추가 화면 설정
     @GetMapping("/starCard/starList/api")
@@ -137,6 +111,7 @@ public class StarController {
         List<StarBoard> starList;
 
         page.setRows(12); // 한 번에 불러올 행 수 설정
+
 
         if (user != null) {
             int userNo = user.getUserNo();
@@ -155,6 +130,48 @@ public class StarController {
 
         return ResponseEntity.ok(starList);
     }
+
+
+    @GetMapping("/starCard/starCalendar")
+    public String starCalendarList(@RequestParam(value = "type", defaultValue = "starCard") String type
+                                    ,Model model, Page page, HttpSession session
+                                    ,Option option) throws Exception {
+
+        log.info("------------------11--------------------");                                
+
+        Users user = (Users) session.getAttribute("user");
+
+        List<StarBoard> starList = null;
+
+        page.setRows(999);
+
+        if (user != null) {
+            int userNo = user.getUserNo();
+            starList = starService.list(type, page, option, userNo);
+        } else {
+            starList = starService.list(type, page, option);
+        }
+
+        log.info("--------------------------------------");
+
+        starList.forEach(star -> {
+            if (star.getCategory1() != null) {
+                List<String> icons = Arrays.stream(star.getCategory1().split(","))
+                        .collect(Collectors.toList());
+                star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
+            }
+        });
+
+        log.info(starList.toString());
+
+        model.addAttribute("starList", starList);
+        
+
+        return "/page/starCard/starCalendar";
+    }
+
+
+
 
     /**
      * 결제 버튼 클릭 시

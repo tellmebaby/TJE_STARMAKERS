@@ -12,7 +12,7 @@
         left join file f
         ON f.star_no=s.star_no 
         WHERE type = #{type}
-        <if test="option != null and option.keyword != null and option.keyword != ''">
+        <if test="option.keyword != null and option.keyword != ''">
             AND
             <if test="option.code == 0">
                 (title LIKE CONCAT('%', #{option.keyword}, '%')
@@ -27,9 +27,78 @@
             <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
             </if>
-
         </if>
-        ORDER BY reg_date DESC
+
+         <!-- 플랫폼 필터 -->
+        <if test="option.instagram or option.youtube or option.chzzk or option.afreeca">
+            AND (
+                1 = 0
+                <if test="option.instagram">
+                    OR s.category1 LIKE '%instagram%'
+                </if>
+                <if test="option.youtube">
+                    OR s.category1 LIKE '%youtube%'
+                </if>
+                <if test="option.chzzk">
+                    OR s.category1 LIKE '%chzzk%'
+                </if>
+                <if test="option.afreeca">
+                    OR s.category1 LIKE '%afreeca%'
+                </if>
+            )
+        </if>
+
+        <!-- 분야 필터 -->
+        <if test="option.food or option.travel or option.game or option.music or option.animal or option.workOut or option.asmr or option.fashion">
+            AND (
+                1 = 0
+                <if test="option.food">
+                    OR s.category2 LIKE '%food%'
+                </if>
+                <if test="option.travel">
+                    OR s.category2 LIKE '%travel%'
+                </if>
+                <if test="option.game">
+                    OR s.category2 LIKE '%game%'
+                </if>
+                <if test="option.music">
+                    OR s.category2 LIKE '%music%'
+                </if>
+                <if test="option.animal">
+                    OR s.category2 LIKE '%animal%'
+                </if>
+                <if test="option.workOut">
+                    OR s.category2 LIKE '%workOut%'
+                </if>
+                <if test="option.asmr">
+                    OR s.category2 LIKE '%asmr%'
+                </if>
+                <if test="option.fashion">
+                    OR s.category2 LIKE '%fashion%'
+                </if>
+            )
+        </if>
+
+         <!-- 상태 -->
+         <if test="option.eventOngoing or option.eventExpired or option.eventUpcoming ">
+            AND (
+                1 = 0
+                <!-- 진행중 -->
+                <if test="option.eventOngoing">
+                    OR NOW() BETWEEN s.start_date AND DATE_ADD(s.end_date, INTERVAL 1 DAY)
+                </if>
+                <!-- 만료 -->
+                <if test="option.eventExpired">
+                    OR s.end_date &lt; NOW()
+                </if>
+                <!-- 진행예정 -->
+                <if test="option.eventUpcoming">
+                    OR s.start_date &gt; NOW()
+                </if>
+            )
+        </if>
+
+        ORDER BY star_no DESC
         LIMIT #{page.index}, #{page.rows}
     </select>
 

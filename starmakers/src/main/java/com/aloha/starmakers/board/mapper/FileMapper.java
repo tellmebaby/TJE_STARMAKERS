@@ -3,8 +3,6 @@ package com.aloha.starmakers.board.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 import com.aloha.starmakers.board.dto.Files;
 

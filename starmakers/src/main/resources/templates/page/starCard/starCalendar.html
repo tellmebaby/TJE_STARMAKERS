@@ -28,29 +28,12 @@
             </div>
 
 
+            
             <div class="d-flex justify-content-between">
                 <div id="calendar" class="col-8"></div>
-                <div id="cardContainer" class="col-lg-3" style="display: none;">
-                    <div class="card">
-                        <div class="card-overlay"></div>
-                        <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg"
-                            class="card-img-top" alt="홍보글 제목">
-                        <div class="icon-body">
-                            <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                            <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                            <img src="/img/icon/youtube.png" class="content-icon youtube">
-                            <img src="/img/icon/instagram.svg" class="content-icon">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">제목</h5>
-                            <p class="card-text">내용</p>
-                        </div>
-                        <div class="icon-container">
-                            <i class="fa-regular fa-thumbs-up icon"></i>
-                        </div>
-                    </div>
+                <div id="cardContainer" class="col-lg-3" >
+                    
                 </div>
-
             </div>
         </div>
 
@@ -61,7 +44,13 @@
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/ko.js"></script>
 
         <script>
+
             document.addEventListener('DOMContentLoaded', function () {
+
+                var starList = "[[${starList}]]";
+                console.log(starList);
+
+
                 var colorIndex = 0; // 색상 인덱스 변수 추가
                 var colors = [
                     '#008000', // 진한 녹색 (Dark Green)
@@ -73,81 +62,35 @@
                     '#FF8C00', // 진한 주황색 (Dark Orange)
                     '#1E90FF', // 진한 하늘색 (Dodger Blue)
                     '#A52A2A', // 진한 갈색 (Brown)
-                    '#4B0082'  // 진한 인디고 (Indigo)
+                    '#4B0082', // 진한 인디고 (Indigo)
+                    '#556B2F', // 다크 올리브 그린 (Dark Olive Green)
+                    '#FF4500', // 오렌지 레드 (Orange Red)
+                    '#2E8B57', // 시 서 그린 (Sea Green)
+                    '#DAA520', // 골든 로드 (Goldenrod)
+                    '#9932CC', // 다크 오키드 (Dark Orchid)
+                    '#8B0000', // 다크 레드 (Dark Red)
+                    '#9400D3', // 다크 바이올렛 (Dark Violet)
+                    '#4682B4', // 스틸 블루 (Steel Blue)
+                    '#008B8B', // 다크 사이언 (Dark Cyan)
+                    '#B8860B', // 다크 골든로드 (Dark Goldenrod)
+                    '#B22222', // 파이어브릭 (Firebrick)
+                    '#5F9EA0', // 케이던 블루 (Cadet Blue)
+                    '#A52A2A', // 브라운 (Brown)
+                    '#7FFF00', // 차트리즈 (Chartreuse)
+                    '#D2691E', // 초콜릿 (Chocolate)
+                    '#FF6347', // 토마토 (Tomato)
+                    '#8B4513', // 새들 브라운 (Saddle Brown)
+                    '#6A5ACD', // 슬레이트 블루 (Slate Blue)
+                    '#D2B48C', // 탠 (Tan)
+                    '#FF69B4', // 핫핑크 (Hot Pink)
                 ];
 
                 var calendarEl = document.getElementById('calendar');
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     locale: 'ko',
                     initialView: 'dayGridMonth',
-                    events: [
-                        {
-                            title: '으아아아아아',
-                            start: '2024-05-19',
-                            end: '2024-05-31',
-                            description: '홍보 이벤트 설명',
-                            imageUrl: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg',
-                            icons: [
-                                '/img/icon/afreeca.png',
-                                '/img/icon/chzzk.png',
-                                '/img/icon/youtube.png',
-                                '/img/icon/instagram.svg'
-                            ],
-                            color: getNextColor() // getNextColor 함수 호출
-                        },
-                        {
-                            title: '차은우 팬사인회',
-                            start: '2024-05-24',
-                            end: '2024-05-28',
-                            description: '홍보 이벤트 설명',
-                            imageUrl: 'https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202203/30/sportskhan/20220330171600461ppis.jpg',
-                            icons: [
-                                '/img/icon/afreeca.png',
-                                '/img/icon/chzzk.png',
-                                '/img/icon/youtube.png',
-                                '/img/icon/instagram.svg'
-                            ],
-                            color: getNextColor() // getNextColor 함수 호출
-                        },
-                        {
-                            title: '화산귀환',
-                            start: '2024-05-29',
-                            description: '다른 이벤트 설명',
-                            imageUrl: 'https://i.pinimg.com/564x/14/ca/82/14ca82cef84122793e07a83a57876243.jpg',
-                            icons: [
-                                '/img/icon/afreeca.png',
-                                '/img/icon/chzzk.png',
-                                '/img/icon/youtube.png',
-                                '/img/icon/instagram.svg'
-                            ],
-                            color: getNextColor() // getNextColor 함수 호출
-                        }
-                    ],
+                    events: "[[${starList}]]",
                     eventClick: function (info) {
-                        var event = info.event;
-                        var cardContainer = document.getElementById('cardContainer');
-
-                        // 카드 내용 업데이트
-                        var cardImage = cardContainer.querySelector('.card-img-top');
-                        var cardTitle = cardContainer.querySelector('.card-title');
-                        var cardText = cardContainer.querySelector('.card-text');
-                        var iconBody = cardContainer.querySelector('.icon-body');
-
-                        cardImage.src = event.extendedProps.imageUrl;
-                        cardTitle.textContent = event.title;
-                        cardText.textContent = event.extendedProps.description;
-
-                        // 아이콘 업데이트
-                        iconBody.innerHTML = '';
-                        event.extendedProps.icons.forEach(function (iconUrl) {
-                            var iconImg = document.createElement('img');
-                            iconImg.src = iconUrl;
-                            iconImg.classList.add('content-icon');
-                            iconBody.appendChild(iconImg);
-                        });
-
-                        // 카드 보여주기
-                        $("#cardContainer").show();
                     }
                 });
                 calendar.render();
@@ -162,81 +105,7 @@
 
 
 
-            $(document).ready(function () {
-                
-                var container = $('.card');
-                var overlay = container.find('.card-overlay');
-
-                container.on('mousemove', function (e) {
-                    var x = e.offsetX;
-                    var y = e.offsetY;
-                    var rotateY = -1 / 5 * x + 20;
-                    var rotateX = 4 / 30 * y - 20;
-
-                    overlay.css('background-position', `${x / 5 + y / 5}%`);
-                    container.css('transform', `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`);
-                });
-
-                container.on('mouseout', function () {
-                    overlay.css('filter', 'opacity(0)');
-                    container.css('transform', 'perspective(350px) rotateY(0deg) rotateX(0deg)');
-                });
-
-                container.on('mouseenter', function () {
-                    overlay.css('filter', 'opacity(0.8)');
-                });
-
-
-
-                let clickTimer;
-                let isDoubleClick = false;
-
-                $('.card').click(function () {
-                    if (isDoubleClick) {
-                        isDoubleClick = false;
-                        return;
-                    }
-
-                    clickTimer = setTimeout(() => {
-                        if (!isDoubleClick) {
-                            alert('Button was one-clicked!');
-                        }
-                    }, 250);
-                });
-
-
-                $('.card').dblclick(function (e) {
-                    clearTimeout(clickTimer);
-                    isDoubleClick = true;
-
-                    // 하트 모양 이펙트 추가
-                    let heart = $('<div class="heart"></div>');
-                    $('body').append(heart);
-                    heart.css({
-                        top: e.pageY - 25,
-                        left: e.pageX - 25
-                    });
-
-                    setTimeout(() => {
-                        heart.remove();
-                    }, 1000);
-
-                    // 좋아요 아이콘 클래스 토글
-                    $(this).find('.fa-thumbs-up').toggleClass('fa-regular fa-solid');
-                });
-
-
-
-            });
         </script>
-
-
-
-
-
-
-
-
 
 
     </div>
