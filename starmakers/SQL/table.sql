@@ -91,7 +91,7 @@ CREATE TABLE qna_board
   answer   TEXT        NULL     COMMENT '답변',
   reg_date TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일자',
   upd_date TIMESTAMP   NULL     COMMENT '수정일자',
-  views    INT         NULL     COMMENT '조회수',
+  views    INT         NOT NULL DEFAULT '0'     COMMENT '조회수',
   user_no  INT         NOT NULL COMMENT '유저데이터번호',
   status    VARCHAR(20) NULL     COMMENT '상태', -- 상태의 길이 지정.
   

@@ -9,7 +9,7 @@ import com.aloha.starmakers.board.dto.Reply;
 import com.aloha.starmakers.board.mapper.ReplyMapper;
 
 @Service
-public class ReplyServiceImple implements ReplyService {
+public class ReplyServiceImpl implements ReplyService {
 
     @Autowired
     private ReplyMapper replyMapper;
@@ -80,6 +80,13 @@ public class ReplyServiceImple implements ReplyService {
     @Override
     public int deleteByParentNo(int parentNo) throws Exception {
         int result = replyMapper.deleteByParentNo(parentNo);
+        return result;
+    }
+
+    @Override
+    public int countByStarNo(int starNo) throws Exception {
+
+        int result = replyMapper.countByStarNo(starNo);
         return result;
     }
     
