@@ -145,10 +145,10 @@ public class HomeController {
         return "page/" + path;
     } 
 
-    @GetMapping("/page/starCard/{path}")
-    public String starcard(@PathVariable("path") String path) {
-        return "page/starCard/" + path;
-    }
+    // @GetMapping("/page/starCard/{path}")
+    // public String starcard(@PathVariable("path") String path) {
+    //     return "page/starCard/" + path;
+    // }
     
     @GetMapping("/page/mypage/{path}")
     public String mypage(@PathVariable("path") String path) {

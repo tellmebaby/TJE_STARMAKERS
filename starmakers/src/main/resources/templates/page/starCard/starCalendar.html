@@ -22,17 +22,17 @@
             <div class="fs-4 fw-bold d-flex justify-content-between mt-3">
                 <span>캘린더</span>
                 <div class="col-4 d-flex justify-content-end">
-                    <a href="starList.html" class="btn btn-primary col-4 me-1">리스트보기</a>
-                    <a href="starInsert.html" class="btn btn-primary col-4 me-1">등록하기</a>
+                    <a href="starList" class="btn btn-primary col-4 me-1">리스트보기</a>
+                    <a href="starInsert" class="btn btn-primary col-4 me-1">등록하기</a>
                 </div>
             </div>
 
 
-            
+
             <div class="d-flex justify-content-between">
                 <div id="calendar" class="col-8"></div>
-                <div id="cardContainer" class="col-lg-3" >
-                    
+                <div id="cardContainer" >
+
                 </div>
             </div>
         </div>
@@ -47,8 +47,6 @@
 
             document.addEventListener('DOMContentLoaded', function () {
 
-                var starList = "[[${starList}]]";
-                console.log(starList);
 
 
                 var colorIndex = 0; // 색상 인덱스 변수 추가
@@ -85,12 +83,68 @@
                     '#FF69B4', // 핫핑크 (Hot Pink)
                 ];
 
+                // HTML 엔티티 디코딩 함수
+                function decodeHtml(html) {
+                    var txt = document.createElement("textarea");
+                    txt.innerHTML = html;
+                    return txt.value;
+                }
+
+                // 서버에서 넘겨받은 데이터를 디코딩하여 JSON 객체로 파싱합니다.
+                var rawData = `[[${starList}]]`;
+                var decodedData = decodeHtml(rawData);
+                var starList = JSON.parse(decodedData);
+
+                // FullCalendar 이벤트 형식에 맞게 데이터를 변환합니다.
+                var events = starList.map(function (star) {
+                    return {
+                        title: star.title,
+                        start: new Date(star.startDate),
+                        end: new Date(star.endDate),
+                        description: star.content,
+                        starNo: star.starNo,
+                        card :star.card,
+                        imgNo : star.imgNo,
+                        titles : star.title,
+                        writer : star.writer,
+                        likes_chk : star.likes_chk,
+                        icons : star.icons,
+
+                        color: getNextColor()
+                    };
+                });
+
+
+
                 var calendarEl = document.getElementById('calendar');
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     locale: 'ko',
                     initialView: 'dayGridMonth',
-                    events: "[[${starList}]]",
+                    events: events,
                     eventClick: function (info) {
+                        const event = info.event;
+                        const star = event.extendedProps;
+                        console.log(star);
+
+                        const cardHtml = `
+                                        <div class=" p-0">
+                                            <div class="card ${star.card === '유료홍보' ? 'effect' : ''}" data-no="${star.starNo}">
+                                                ${star.card === '유료홍보' ? '<div class="card-overlay"></div>' : ''}
+                                                <img src="/file/img/${star.imgNo}" class="card-img-top" alt="${star.title}">
+                                                <div class="icon-body">
+                                                    ${star.icons.map(icon => `<img src="/img/icon/${icon}.png" class="content-icon ${icon}">`).join('')}
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${star.titles}</h5>
+                                                    <p class="card-text">${star.writer}</p>
+                                                </div>
+                                                <div class="icon-container">
+                                                    <i class="fa-thumbs-up icon ${star.likes_chk ? 'fa-solid' : 'fa-regular'}"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+                        $('#cardContainer').html(cardHtml);
                     }
                 });
                 calendar.render();
