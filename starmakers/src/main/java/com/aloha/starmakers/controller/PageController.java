@@ -207,7 +207,9 @@ public class PageController {
     /* ------------------------------------------------------------- */
     /* 결제내역 */
     @GetMapping("/mypage/payment")
-    public String list(Model model, HttpSession session) throws Exception {
+    public String list(Model model, HttpSession session, Page page, Option option) throws Exception {
+
+        
 
         Users user = (Users) session.getAttribute("user");
         model.addAttribute("user", user);
