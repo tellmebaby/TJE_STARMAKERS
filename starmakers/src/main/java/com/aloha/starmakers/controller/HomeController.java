@@ -1,6 +1,8 @@
 package com.aloha.starmakers.controller;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,6 +23,7 @@ import com.aloha.starmakers.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
@@ -64,9 +67,7 @@ public class HomeController {
      * @return
      */
     @GetMapping("/login")
-    public String login( HttpSession session, Model model ) {
-        Users user = (Users) session.getAttribute("user");
-        model.addAttribute("user", user);
+    public String login() {
         return "/login";
     }
  
@@ -76,9 +77,7 @@ public class HomeController {
      * @return
      */
     @GetMapping("/join")
-    public String join( HttpSession session, Model model ) {
-        Users user = (Users) session.getAttribute("user");
-        model.addAttribute("user", user);
+    public String join() {
         return "/join";
     }
 
@@ -110,7 +109,7 @@ public class HomeController {
      * @throws Exception
      */
     @PostMapping("/page/recoverId")
-    public String recoverId( Users user , HttpSession session, Model model ) throws Exception{
+    public String recoverId( Users user , Model model ) throws Exception{
         
         int result = userService.selectEmail(user);
 
@@ -131,9 +130,7 @@ public class HomeController {
 
     
     @GetMapping("/page/introduce")
-    public String introduce( HttpSession session, Model model) {
-        Users user = (Users) session.getAttribute("user");
-        model.addAttribute("user", user);
+    public String introduce( Model model) {
         return "page/introduce";
     }
     
@@ -181,5 +178,23 @@ public class HomeController {
     public String reviewBoard(@PathVariable("path") String path) {
         return "page/board/reviewBoard/" + path;
     }
-    
+
+    /**
+     * 회원 프로필 이미지 불러오기
+     * @param session
+     * @return
+     */
+    @GetMapping("/get-user-img-id")
+    @ResponseBody
+    public Map<String, String> getUserImgId(HttpSession session) {
+        Map<String, String> response = new HashMap<>();
+        Users user = (Users) session.getAttribute("user");
+        if (user != null) {
+            response.put("userImgId", Integer.toString(user.getUserImgId()));
+        } else {
+            response.put("error", "No user image ID found in session");
+        }
+        return response;
+    }
+
 }
