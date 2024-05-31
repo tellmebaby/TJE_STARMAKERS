@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이벤트</title>
     <style>
-        .container2 {
+        .container {
           max-width: 960px;
           margin: 0 auto;
           padding: 0 10px;
@@ -177,8 +177,7 @@
         /* 댓글!!!! 목록 */
         #reply-list {
             display: block;
-            /* border-bottom: 0.7px solid #000; */
-            border-bottom: 0.7px solid blue;
+            border-bottom: 0.7px solid #000;
             width: 100%;
             display: block;
             padding: 10px 5px;
@@ -328,8 +327,7 @@
             display: block;
             padding: 10px 5px;
             box-sizing: border-box;
-            /* border-top: 0.7px solid rgba(192, 190, 183, 1); */
-            border-top: 0.7px solid red;
+            border-top: 0.7px solid rgba(192, 190, 183, 1);
         }
         .rereply-top {
             padding: 5px 10px;
@@ -392,7 +390,7 @@
 
     <th:block layout:fragment="content">
 
-    <div class="container2">
+    <div class="container">
 
         <center>
         <h1>이벤트</h1>
@@ -425,7 +423,7 @@
             <div class="reply-box">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                  <!-- 사용자 아이디(hidden) -->
-                 <input type="hidden" name="writer" id="reply-writer" th:value="${session.user != null ? session.user.id : ''}">
+                 <input type="hidden" name="writer" id="reply-writer" th:value="${session.user.id}">
                 <textarea type="text" name="content" id="reply-content" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
             <button type="button" id="btn-reply-insert" class="btn-reply" onclick="insertReply()">등록</button>
             </div>            
@@ -435,7 +433,7 @@
             <label class="reply-count">댓글 갯수</label>
         </div>
         <!-- 댓글 목록 -->
-        <div id="reply-listbox">
+        <div id="reply-list">
             
         </div>
     
@@ -487,14 +485,13 @@
                     // 댓글 목록 확인
                     let response = request.responseText
                     // 서버에서 렌더링한 HTML
-                    let data = response
-                    let replyList = document.getElementById('reply-listbox')
+                    let date = response
+                    let replyList = document.getElementById('reply-list')
                     replyList.innerHTML = data
 
                     event()
                 }
             }
-            
         }
 
         // 댓글 등록
@@ -536,9 +533,6 @@
                 }
             }
         }
-
-         
-
   
       </script>
     
