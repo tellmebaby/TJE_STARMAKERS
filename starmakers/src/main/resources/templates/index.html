@@ -201,7 +201,11 @@
                 });
             });
         </script>
-
+    <script>
+        let userImgId = "[[${user.userImgId}]]"
+        var imageUrl = '/file/img/' + userImgId;
+        document.getElementById('thumbnail').src = imageUrl;
+    </script>
 
 
 

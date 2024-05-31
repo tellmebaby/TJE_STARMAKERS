@@ -28,5 +28,7 @@ public interface FileService {
     public boolean upload(MultipartFile multipartFile, int star_no, int user_no) throws Exception;
     // 파일 다운로드
     public Files download(int no) throws Exception;
+
+    public Files selectByUserNoAndStarNo(int userNo ) throws Exception;
     
 }

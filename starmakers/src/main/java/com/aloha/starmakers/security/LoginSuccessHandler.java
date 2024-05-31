@@ -8,11 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import com.aloha.starmakers.board.dto.Files;
+import com.aloha.starmakers.board.mapper.FileMapper;
+import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.user.dto.CustomUser;
+import com.aloha.starmakers.user.dto.Users;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,6 +28,10 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
     
+    @Autowired
+    private FileService fileService;
+    
+
     
     /**
      * 인증 성공 시 실행되는 메소드
@@ -69,6 +78,16 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         log.info("패스워드 : " + user.getPassword());       // 보안상 노출❌
         log.info("권한 : " + user.getAuthorities());    
 
+        // 사용자 이미지 관련 수정
+        Files file;
+        try {
+            file = fileService.selectByUserNoAndStarNo(user.getUser().getUserNo());
+            log.info(":::::::::::::fileno : " + file.getFileNo() );
+            user.getUser().setUserImgId(file.getFileNo());
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         // 세션의 정보 등록
         HttpSession session = request.getSession();
         session.setAttribute("user", user.getUser());

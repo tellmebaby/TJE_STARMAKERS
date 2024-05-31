@@ -26,3 +26,6 @@ OR content LIKE CONCAT '%%';
 
 SELECT *
 FROM file;
+
+SELECT * FROM file 
+    WHERE user_no = 1 AND star_no = 0 ;

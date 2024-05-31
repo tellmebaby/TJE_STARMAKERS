@@ -2,6 +2,7 @@ package com.aloha.starmakers.board.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.security.Principal;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.aloha.starmakers.board.dto.Files;
 import com.aloha.starmakers.board.service.FileService;
+import com.aloha.starmakers.user.dto.CustomUser;
+import com.aloha.starmakers.user.dto.Users;
 
 import lombok.extern.slf4j.Slf4j;
 

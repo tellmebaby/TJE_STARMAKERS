@@ -40,12 +40,13 @@ public class HomeController {
      * @return
      */
     @GetMapping({"", "/"})
-    public String home(Principal principal, HttpSession session) {
+    public String home(Principal principal, HttpSession session, Model model) {
         log.info("메인 화면");
         log.info(":::::::::: principal ::::::::::");
         log.info("principal : " + principal);
         log.info("user : " + session.getAttribute("user"));
-
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
         // Principal : 현재 로그인 한 사용자 정보를 확인하는 인터페이스
         return "index";
     }
@@ -63,7 +64,9 @@ public class HomeController {
      * @return
      */
     @GetMapping("/login")
-    public String login() {
+    public String login( HttpSession session, Model model ) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
         return "/login";
     }
  
@@ -73,7 +76,9 @@ public class HomeController {
      * @return
      */
     @GetMapping("/join")
-    public String join() {
+    public String join( HttpSession session, Model model ) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
         return "/join";
     }
 
@@ -105,7 +110,7 @@ public class HomeController {
      * @throws Exception
      */
     @PostMapping("/page/recoverId")
-    public String postMethodName( Users user , Model model ) throws Exception{
+    public String recoverId( Users user , HttpSession session, Model model ) throws Exception{
         
         int result = userService.selectEmail(user);
 
@@ -126,7 +131,9 @@ public class HomeController {
 
     
     @GetMapping("/page/introduce")
-    public String introduce() {
+    public String introduce( HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        model.addAttribute("user", user);
         return "page/introduce";
     }
     
@@ -173,13 +180,6 @@ public class HomeController {
     @GetMapping("/page/board/reviewBoard/{path}")
     public String reviewBoard(@PathVariable("path") String path) {
         return "page/board/reviewBoard/" + path;
-    }
-
-    @GetMapping("/imgtest")
-    public String test( Model model ) {
-        int img = 2;
-        model.addAttribute("img", img);
-        return "/imgtest";
     }
     
 }
