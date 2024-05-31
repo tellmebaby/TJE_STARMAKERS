@@ -197,4 +197,10 @@ public class HomeController {
         return response;
     }
 
+    @GetMapping("/carddesign")
+    public String carddesign() {
+        return "carddesign";
+    }
+    
+
 }
