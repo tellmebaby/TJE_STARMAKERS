@@ -13,10 +13,23 @@ FROM user;
 SELECT *
 FROM star_board
 
-  SELECT COUNT(*)
-        FROM star_board 
-        WHERE type = "event"   
-        ORDER BY reg_date DESC 
+SELECT COUNT(*)
+FROM star_board 
+WHERE type = "event"   
+ORDER BY reg_date DESC 
+
+SELECT COUNT(*)
+FROM star_board 
+WHERE type = "event";
+and title LIKE CONCAT '%%'
+OR content LIKE CONCAT '%%';
+
+SELECT *
+FROM file;
+
+
+SELECT * FROM file 
+    WHERE user_no = 1 AND star_no = 0 ;
 
   SELECT COUNT(*)
         FROM star_board 
@@ -34,3 +47,4 @@ SELECT *
         FROM file
         WHERE user_no = 3
         AND star_no = 0
+

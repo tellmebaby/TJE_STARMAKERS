@@ -35,5 +35,7 @@ public interface FileService {
 
     // 파일 다운로드
     public Files download(int no) throws Exception;
+
+    public Files selectByUserNoAndStarNo(int userNo ) throws Exception;
     
 }

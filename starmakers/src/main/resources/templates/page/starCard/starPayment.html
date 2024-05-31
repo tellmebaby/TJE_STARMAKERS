@@ -31,33 +31,49 @@
 <th:block layout:fragment="content" class="align-items-center ml-5">
   <div class="body lg" style="max-width: 900 ;">
     <h1 class="d-flex justify-content-center mt-3 mb-3">
-      결제
+      결제 정보
     </h1>
     <p class="d-flex justify-content-center text-secondary mb-3">문의사항은 1:1 채팅 또는 Q&A 게시판을 이용해주세요.</p>
     <!-- 이름, 카드번호, 상품명, 금액(날짜x1000) 등 -->
     <div class="container">
-      <form action="" method="post" id="payment" class="">
-        <div class="">
-          <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"> -->
-          <!-- <th:block th:if="${session.user.email}">
-                    <input type="text" name="name" th:value="${session.user.email}">
-                </th:block> -->
-          <!-- <input type="hidden" name="username" th:value="${session.user.email}">   -->
-          <label for="name">이름</label>
-          <input type="text" name="name" />
-          <!-- <p th:text="${starBoard.}"></p> -->
+      <form action="" method="get" id="payment" class="">
+        <div class="container">
+          <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">이름</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value="${userName}">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">결제 금액</label>
+            <div class="col-sm-10">
+              <input type="text" readonly class="form-control-plaintext" id="staticEmail" th:value="|${price} 원|">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">카드번호</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="staticEmail" placeholder="카드 번호를 입력하세요.">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">상품 번호</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="staticEmail" placeholder="starNo">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">결제 번호</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="staticEmail" placeholder="payNo">
+            </div>
+          </div>
+          <!-- <div>
+            <label for="date">홍보 기간</label>
+            <p th:text="${dif}"></p>
+          </div> -->
+          <input type="submit" value="결제">
         </div>
-        <div>
-          <label for="price">금액</label>
-          <input type="text" name="price" value="5000" readonly></input>
-        </div>
-        <div>
-          <label for="price">카드번호</label>
-          <input type="text" name="cardNo"></input>
-        </div>
-        <!-- <input type="hidden" th:value="${starBoard.startDate}" name="strDate" id="strDate">
-            <input type="hidden" th:value="${starBoard.endDate}" name="endDate" id="endDate"> -->
-        <input type="submit" value="결제">
       </form>
 
     </div>

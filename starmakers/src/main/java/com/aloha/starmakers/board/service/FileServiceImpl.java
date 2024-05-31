@@ -181,6 +181,17 @@ public class FileServiceImpl implements FileService {
         return file;
     }
 
+
+    /**
+     * 
+     * 사용자 이미지 파일 정보 가져오기
+     */
+    @Override
+    public Files selectByUserNoAndStarNo(int userNo) throws Exception{
+        return fileMapper.selectByUserNoAndStarNo(userNo);
+    }
+    
+
     @Override
     public boolean profileUpload(MultipartFile mf, int user_no) throws Exception {
 
@@ -234,4 +245,5 @@ public class FileServiceImpl implements FileService {
         }
         return result;
     }
+
 }
