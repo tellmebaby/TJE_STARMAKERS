@@ -1,5 +1,6 @@
 <th:block th:each="reply : ${replyList}">
 
+<div id="reply-list">
     <!-- 댓글 -->
     <div class="reply-top">
         <span class="reply-writer" th:text="${reply.writer}"></span>
@@ -56,5 +57,6 @@
             </div>
         </div>
     </div>
+</div>
 
 </th:block>
