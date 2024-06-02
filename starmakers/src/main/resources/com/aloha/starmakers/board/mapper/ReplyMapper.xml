@@ -36,8 +36,8 @@
 <!-- 댓글 수정 -->
 <update id="update">
      UPDATE reply                       <!-- 댓글 수정할 때 parentNo 수정할 필요 X-->
-        SET writer = #{writer}
-           ,content = #{content}
+        SET writer = #{writer},
+        content = #{content}
            <if test="parentNo != 0">
                ,parent_no = #{parentNo} <!-- 답글 수정할 때는 수정 -->
           </if>
