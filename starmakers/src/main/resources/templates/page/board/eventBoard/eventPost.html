@@ -46,7 +46,7 @@
                     <div class="reply-box">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                          <!-- 사용자 아이디(hidden) -->
-                         <input type="hidden" name="writer" id="reply-writer" th:value="${session.user != null ? session.user.id : '비회원'}">
+                         <input type="hidden" name="writer" id="reply-writer" th:value="${session.user != null ? session.user.id : ''}">
                         <textarea type="text" name="content" id="reply-content" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
                     <button type="button" id="btn-reply-insert" class="btn-reply" onclick="insertReply()">등록</button>
                     </div>            
@@ -175,7 +175,7 @@
             for(let i = 0; i < $btnUpdate.length; i++) {
                 $btnUpdate[i].addEventListener('click', function() {
                     let $top = $btnUpdate[i].parentNode
-                    // let writer = $top.childNodes[1].textContent
+                    let writer = $top.childNodes[1].textContent
                     let $inner = $top.parentNode
                     let content = $inner.childNodes[1].textContent
                     let $replyBox = $inner.parentNode
@@ -188,11 +188,11 @@
                     $inner.style.display = 'none';
                     // 2. 수정 UI 출력
                     let $editor = document.createElement('div')
-                    $editor.classList.add('reply-middle');
+                    $editor.classList.add('inner');
                     $editor.id = 'editor'
                     let editor = `
-                        
-                            <textarea  class="reply-content" >${content}</textarea>
+                            <input type="hidden" id="update-writer" value="${writer}">
+                            <textarea id="update-reply" >${content}</textarea>
                             <div class="reply-button">
                                 <button class="btn-reply-update" onclick="updateReply(${replyNo})">수정</button>
                                 <button class="btn-reply-delete" onclick="cancelReply(${replyNo})">취소</button>
@@ -209,12 +209,12 @@
         // 댓글 수정 요청
         function updateReply(replyNo) {
             // alert('댓글 수정')
-            let writer = document.getElementById('reply-writer').value
-            // let content = document.getElementsByClassName('reply-content').value
-            let content = "되라좀";
+            let writer = document.getElementById('update-writer').value
+            let content = document.getElementById('update-reply').value
+            // let content = "되라좀";
 
             console.log(`수정한 작성자 : ${writer}`)
-            console.log(`수정한 내용 : ` + content)
+            console.log(`수정한 내용 :  ${content}`)
 
 
             let data = {
@@ -255,7 +255,7 @@
             let $editor = document.getElementById('editor')
             $editor.remove()
 
-            let $inner = document.getElementsByClassName('reply-middle')
+            let $inner = document.getElementsByClassName('inner')
             for (let i = 0; i < $inner.length; i++) {
                 $inner[i].style.display = 'block'
                 

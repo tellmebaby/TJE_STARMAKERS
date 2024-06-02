@@ -378,3 +378,11 @@
             align-items: left;
             padding: 5px 0px;
         }
+
+        /* 댓글 수정 */
+        .inner {
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
