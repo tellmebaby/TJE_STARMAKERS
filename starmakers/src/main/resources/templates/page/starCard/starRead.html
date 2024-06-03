@@ -22,439 +22,490 @@
   <!-- <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script> -->
   <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
   <style>
-          .top-container {
-          width: 960px;
-          margin: 0 auto;
-        }
-        .writer {
-            display: flex;
-            justify-content: space-around;
-            gap: 10px;
-            padding: 10px 0;
-            width: 960px;
-            margin-top: 50px;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-        .writer label:first-child {
-            font-size: 15px;
-            font-weight: 500;
-        }
-        .writer label:last-child {
-            font-size: 15px;
-            color: rgba(192, 190, 183, 1);
-        }
-       .title-container {
-          width: 960px;
-          margin: 0 auto 15px;
+    .top-container {
+      width: 960px;
+      margin: 0 auto;
+    }
 
-          padding: 30px 30px;
-          border: 1px solid;
-          border-radius: 10px;
-        }
-        .title-container span {
-          font-weight: bold;
-          font-size: 20px;
-        }
-        .content-container {
-          width: 960px;
-          margin: 0 auto;
-          padding: 30px 30px;
-          border: 1px solid;
-          /* text-align: center; */
-        }
-        .title-container hr {
-          margin-top: 10px;
-        }
-        h1 {
-          margin-top: 40px;
-          margin-bottom: 10px;
-        }
+    .writer {
+      display: flex;
+      justify-content: space-around;
+      gap: 10px;
+      padding: 10px 0;
+      width: 960px;
+      margin-top: 50px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
 
-        /* 버튼 */
-        .button-wrapper {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            padding: 10px 0;
-            width: 960px;
-        }
-        .button-container1 {
-            text-align: right;
-            padding: 10px 0;
-        }
-        .button-container1 button {
-            margin-left: 5px;
-            padding: 7px 20px;
-            background-color: rgba(37, 37, 37, 1);
-            border-radius: 3px;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .button-container1 button:hover {
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
-            font-weight: bolder;
-            color: black;
-        }
-        .button-container2 {
-            text-align: right;
-            padding: 10px 0;
-        }
-        .button-container2 button {
-            margin-left: 5px;
-            padding: 7px 20px;
-            background-color: rgba(192, 190, 183, 1);
-            border-radius: 3px;
-            color: black;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .button-container2 button:hover {
-            background-color: black;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
-            font-weight: bolder;
-            color: white;
-        }
+    .writer label:first-child {
+      font-size: 15px;
+      font-weight: 500;
+    }
 
-        /* 댓글!!!! 입력*/
-        .reply-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 20px 0;
-            width: 960px;
-        }
-        .reply {
-            margin-left: 30px;
-            font-weight: bold;
-            font-size: 20px;
-        }
-        .reply-box {
-            flex-grow: 1;
-            display: flex;
-            justify-content: space-between;
-            width: 720px;
-            margin: 0 auto 15px;
-            padding: 30px 30px;
-            border: 1px solid;
-            background-color: rgb(240, 240, 240);
-        }
-        .reply-box textarea {
-            /* flex-grow: 1;  */
-            margin-right: 5px;
-            display: block;
-            width: 90%;
-            height: 100px;
-            overflow-y: scroll;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+    .writer label:last-child {
+      font-size: 15px;
+      color: rgba(192, 190, 183, 1);
+    }
 
-        .reply-container button {
-            margin-left: 5px; 
-            padding: 10px 20px;
-            background-color: white;
-            color: black;
-            cursor: pointer;
-            border: 1px solid rgba(192, 190, 183, 1);
-            height: 100px;
-            border-radius: 3px;
-        }
-        .reply-container button:hover {
-            background-color: black;
-            color: white;
-            font-weight: bolder;
-        }
-        
-        /* 댓글 타이틀 */
-        .reply-list {
-            border-bottom: 1.7px solid #000;
-            width: 960px;
-        }
-        .reply-list label {
-            margin: 5px 10px;
-        }
+    .title-container {
+      width: 960px;
+      margin: 0 auto 15px;
 
-        /* 댓글!!!! 목록 */
-        #reply-list {
-            display: block;
-            border-bottom: 0.7px solid #000;
-            width: 960px;
-            display: block;
-            padding: 10px 5px;
-            box-sizing: border-box;
-        }
-        .reply-top {
-            padding: 5px 10px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .reply-regDate {
-            color: rgba(192, 190, 183, 1);
-        }
-        .reply-regDate .icon {
-            color: #000;
-            margin: 0 20px;
-        }
-        .reply-middle {
-            padding: 5px 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .reply-content {
-            flex-grow: 1;
-            margin-right: 20px;
-        }
-        .reply-button {
-            padding: 5px 0;
-           text-align: right;
-        }
-        .btn-reply-update {
-            padding: 5px 10px;
-            background-color: rgba(192, 190, 183, 1);
-            border-radius: 3px;
-            color: black;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-reply-delete {
-            margin-left: 5px;
-            padding: 5px 10px;
-            background-color: rgba(37, 37, 37, 1);
-            border-radius: 3px;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .reply-rereply {
-            align-items: left;
-            padding: 5px 0px;
-        }
+      padding: 30px 30px;
+      border: 1px solid;
+      border-radius: 10px;
+    }
 
-        /* 답글 버튼*/
-        .btn-rereply {
-            padding: 7px 15px;
-            margin-right: 5px;
-            border: none;
-            border-radius: 3px;
-            background-color: transparent;
-            color: rgba(192, 190, 183, 1);
-        }
-/* ---------------------------------------------------------헷갈릴까봐 나눠놓기 
+    .title-container span {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .content-container {
+      width: 960px;
+      margin: 0 auto;
+      padding: 30px 30px;
+      border: 1px solid;
+      /* text-align: center; */
+    }
+
+    .title-container hr {
+      margin-top: 10px;
+    }
+
+    h1 {
+      margin-top: 40px;
+      margin-bottom: 10px;
+    }
+
+    /* 버튼 */
+    .button-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding: 10px 0;
+      width: 960px;
+    }
+
+    .button-container1 {
+      text-align: right;
+      padding: 10px 0;
+    }
+
+    .button-container1 button {
+      margin-left: 5px;
+      padding: 7px 20px;
+      background-color: rgba(37, 37, 37, 1);
+      border-radius: 3px;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: normal;
+      border: none;
+      cursor: pointer;
+    }
+
+    .button-container1 button:hover {
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+      font-weight: bolder;
+      color: black;
+    }
+
+    .button-container2 {
+      text-align: right;
+      padding: 10px 0;
+    }
+
+    .button-container2 button {
+      margin-left: 5px;
+      padding: 7px 20px;
+      background-color: rgba(192, 190, 183, 1);
+      border-radius: 3px;
+      color: black;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: normal;
+      border: none;
+      cursor: pointer;
+    }
+
+    .button-container2 button:hover {
+      background-color: black;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+      font-weight: bolder;
+      color: white;
+    }
+
+    /* 댓글!!!! 입력*/
+    .reply-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px 0;
+      width: 960px;
+    }
+
+    .reply {
+      margin-left: 30px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .reply-box {
+      flex-grow: 1;
+      display: flex;
+      justify-content: space-between;
+      width: 720px;
+      margin: 0 auto 15px;
+      padding: 30px 30px;
+      border: 1px solid;
+      background-color: rgb(240, 240, 240);
+    }
+
+    .reply-box textarea {
+      /* flex-grow: 1;  */
+      margin-right: 5px;
+      display: block;
+      width: 90%;
+      height: 100px;
+      overflow-y: scroll;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .reply-container button {
+      margin-left: 5px;
+      padding: 10px 20px;
+      background-color: white;
+      color: black;
+      cursor: pointer;
+      border: 1px solid rgba(192, 190, 183, 1);
+      height: 100px;
+      border-radius: 3px;
+    }
+
+    .reply-container button:hover {
+      background-color: black;
+      color: white;
+      font-weight: bolder;
+    }
+
+    /* 댓글 타이틀 */
+    .reply-list {
+      border-bottom: 1.7px solid #000;
+      width: 960px;
+    }
+
+    .reply-list label {
+      margin: 5px 10px;
+    }
+
+    /* 댓글!!!! 목록 */
+    #reply-list {
+      display: block;
+      border-bottom: 0.7px solid #000;
+      width: 960px;
+      display: block;
+      padding: 10px 5px;
+      box-sizing: border-box;
+    }
+
+    .reply-top {
+      padding: 5px 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .reply-regDate {
+      color: rgba(192, 190, 183, 1);
+    }
+
+    .reply-regDate .icon {
+      color: #000;
+      margin: 0 20px;
+    }
+
+    .reply-middle {
+      padding: 5px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .reply-content {
+      flex-grow: 1;
+      margin-right: 20px;
+    }
+
+    .reply-button {
+      padding: 5px 0;
+      text-align: right;
+    }
+
+    .btn-reply-update {
+      padding: 5px 10px;
+      background-color: rgba(192, 190, 183, 1);
+      border-radius: 3px;
+      color: black;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: normal;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-reply-delete {
+      margin-left: 5px;
+      padding: 5px 10px;
+      background-color: rgba(37, 37, 37, 1);
+      border-radius: 3px;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: normal;
+      border: none;
+      cursor: pointer;
+    }
+
+    .reply-rereply {
+      align-items: left;
+      padding: 5px 0px;
+    }
+
+    /* 답글 버튼*/
+    .btn-rereply {
+      padding: 7px 15px;
+      margin-right: 5px;
+      border: none;
+      border-radius: 3px;
+      background-color: transparent;
+      color: rgba(192, 190, 183, 1);
+    }
+
+    /* ---------------------------------------------------------헷갈릴까봐 나눠놓기 
     답글 입력과 답글 목록은 부모댓글 목록 안에!!!! 있음*/
-         /* 답글!!!! 입력*/
-         /* 답글 눌렀을 때 보이게 하기 */
-         .rereply-container {
-            /* display: none; */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 20px 0;
-            /* padding-left: 20px; */
-            width: 100%;
-            /* border-bottom: 0.7px solid rgba(192, 190, 183, 1); */
+    /* 답글!!!! 입력*/
+    /* 답글 눌렀을 때 보이게 하기 */
+    .rereply-container {
+      /* display: none; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px 0;
+      /* padding-left: 20px; */
+      width: 100%;
+      /* border-bottom: 0.7px solid rgba(192, 190, 183, 1); */
 
-            visibility: hidden; /* 숨김 */
-            height: 0; /* 높이 0으로 설정 */
-            overflow: hidden; /* 콘텐츠 오버플로우 숨김 */
-        }
-        .rereply-container.visible {
-            visibility: visible; /* 보임 */
-            height: auto; /* 원래 높이로 설정 */
-            padding: 0;
-            padding-left: 70px;
-            transition: visibility 0.3s, height 0.3s;
-        }
-        .rereply {
-            /* margin-left: 30px;
+      visibility: hidden;
+      /* 숨김 */
+      height: 0;
+      /* 높이 0으로 설정 */
+      overflow: hidden;
+      /* 콘텐츠 오버플로우 숨김 */
+    }
+
+    .rereply-container.visible {
+      visibility: visible;
+      /* 보임 */
+      height: auto;
+      /* 원래 높이로 설정 */
+      padding: 0;
+      padding-left: 70px;
+      transition: visibility 0.3s, height 0.3s;
+    }
+
+    .rereply {
+      /* margin-left: 30px;
             font-weight: bold;
             font-size: 20px; */
-            margin-left: 70px;
-        }
-        .rereply-box {
-            flex-grow: 1;
-            display: flex;
-            justify-content: space-between;
-            width: 720px;
-            margin: 0 auto 15px;
-            padding: 20px 20px;
-            border: 1px solid rgba(192, 190, 183, 1);
-            border-radius: 3px;
-        }
-        .rereply-box textarea {
-            /* flex-grow: 1;  */
-            margin-right: 5px;
-            display: block;
-            width: 90%;
-            height: 100px;
-            overflow-y: scroll;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+      margin-left: 70px;
+    }
 
-        .rereply-container button {
-            margin-left: 5px; 
-            padding: 10px 20px;
-            background-color: white;
-            color: black;
-            cursor: pointer;
-            border: 1px solid rgba(192, 190, 183, 1);
-            height: 100px;
-            border-radius: 3px;
-        }
-        .rereply-container button:hover {
-            background-color: black;
-            color: white;
-            font-weight: bolder;
-        }
+    .rereply-box {
+      flex-grow: 1;
+      display: flex;
+      justify-content: space-between;
+      width: 720px;
+      margin: 0 auto 15px;
+      padding: 20px 20px;
+      border: 1px solid rgba(192, 190, 183, 1);
+      border-radius: 3px;
+    }
 
-        /* 답글!!!! 목록 */
-        #rereply-list {
-            display: block;
-            width: 100%;
-            display: block;
-            padding: 10px 5px;
-            box-sizing: border-box;
-            border-top: 0.7px solid rgba(192, 190, 183, 1);
-        }
-        .rereply-top {
-            padding: 5px 10px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .rereply-regDate {
-            color: rgba(192, 190, 183, 1);
-        }
-        .rereply-regDate .icon {
-            color: #000;
-            margin: 0 20px;
-        }
-        .rereply-middle {
-            padding: 5px 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .rereply-content {
-            flex-grow: 1;
-            margin-right: 20px;
-        }
-        .rereply-button {
-            padding: 5px 0;
-           text-align: right;
-        }
-        .btn-rereply-update {
-            padding: 5px 10px;
-            background-color: rgba(192, 190, 183, 1);
-            border-radius: 3px;
-            color: black;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-rereply-delete {
-            margin-left: 5px;
-            padding: 5px 10px;
-            background-color: rgba(37, 37, 37, 1);
-            border-radius: 3px;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .rereply-rereply {
-            align-items: left;
-            padding: 5px 0px;
-        }
+    .rereply-box textarea {
+      /* flex-grow: 1;  */
+      margin-right: 5px;
+      display: block;
+      width: 90%;
+      height: 100px;
+      overflow-y: scroll;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
 
-        #title {
-          margin: 0 auto 15px;
+    .rereply-container button {
+      margin-left: 5px;
+      padding: 10px 20px;
+      background-color: white;
+      color: black;
+      cursor: pointer;
+      border: 1px solid rgba(192, 190, 183, 1);
+      height: 100px;
+      border-radius: 3px;
+    }
+
+    .rereply-container button:hover {
+      background-color: black;
+      color: white;
+      font-weight: bolder;
+    }
+
+    /* 답글!!!! 목록 */
+    #rereply-list {
+      display: block;
+      width: 100%;
+      display: block;
+      padding: 10px 5px;
+      box-sizing: border-box;
+      border-top: 0.7px solid rgba(192, 190, 183, 1);
+    }
+
+    .rereply-top {
+      padding: 5px 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .rereply-regDate {
+      color: rgba(192, 190, 183, 1);
+    }
+
+    .rereply-regDate .icon {
+      color: #000;
+      margin: 0 20px;
+    }
+
+    .rereply-middle {
+      padding: 5px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .rereply-content {
+      flex-grow: 1;
+      margin-right: 20px;
+    }
+
+    .rereply-button {
+      padding: 5px 0;
+      text-align: right;
+    }
+
+    .btn-rereply-update {
+      padding: 5px 10px;
+      background-color: rgba(192, 190, 183, 1);
+      border-radius: 3px;
+      color: black;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: normal;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-rereply-delete {
+      margin-left: 5px;
+      padding: 5px 10px;
+      background-color: rgba(37, 37, 37, 1);
+      border-radius: 3px;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: normal;
+      border: none;
+      cursor: pointer;
+    }
+
+    .rereply-rereply {
+      align-items: left;
+      padding: 5px 0px;
+    }
+
+    #title {
+      margin: 0 auto 15px;
 
 
-          padding: 30px 30px;
-          border: 1px solid;
-          border-radius: 10px;
+      padding: 30px 30px;
+      border: 1px solid;
+      border-radius: 10px;
 
-        }
-        #content {
-            margin: 0 auto;
-            padding: 30px 30px;
-            border: 1px solid;
-            /* text-align: center; */
-        }
-        .container2 {
-          max-width: 960px;
-          align-items: center;
-        }
+    }
 
-        .main-image {
-          position: relative;
-          display: inline-block;
-          align-items: center;
-          /* text-align: center; */
-        }
-        
-        .main-image img {
-          display: block;
-          /* display: inline-block; */
-          margin: 0 auto;
-          
-          /* vertical-align: middle; */
-          max-width: 960px;
-          width: 960px;
-          max-height: 450px;
-        }
+    #content {
+      margin: 0 auto;
+      padding: 30px 30px;
+      border: 1px solid;
+      /* text-align: center; */
+    }
 
-        .main-image .text {
-          position:absolute;
-          /* top: 80%; */
-          bottom: 10px;
-          left: 10px;
-          background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
-          /* width: 100%; */
-          /* transform: translate(-50%, -50%); */
-          padding : 10px;
-          
-          width: 92%;
-          color: #FFF;
-        }
+    .container2 {
+      max-width: 960px;
+      align-items: center;
+    }
 
-        .main-image .icon {
-          top:10px;
-          right: 10px;
-        }
-</style>
+    .main-image {
+      position: relative;
+      display: inline-block;
+      align-items: center;
+      /* text-align: center; */
+    }
+
+    .main-image img {
+      display: block;
+      /* display: inline-block; */
+      margin: 0 auto;
+
+      /* vertical-align: middle; */
+      /* max-width: 960px; */
+      width: 960px;
+      max-height: 450px;
+      object-fit: cover;
+    }
+
+    .main-image .text {
+      position: absolute;
+      /* top: 80%; */
+      bottom: 10px;
+      left: 10px;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+      /* width: 100%; */
+      /* transform: translate(-50%, -50%); */
+      padding: 10px;
+
+      width: 92%;
+      color: #FFF;
+    }
+
+    .main-image .icon {
+      top: 10px;
+      right: 10px;
+    }
+  </style>
 </head>
 
 
@@ -471,13 +522,14 @@
           <div>
             <img th:src="|/file/img/${starBoard.imgNo}|" class="image rounded mt-auto" alt="썸네일">
           </div>
-          <div class="text"> 
+          <div class="text">
             <span class="fw-bold fs-1 m-0 p-0" th:text="${starBoard.title}"></span>
             <br>
             <span class="fw-bold fs-10" th:text="${starBoard.writer}"></span>
             <br>
-            <span th:text="|${starBoard.category1}|" class="fs-10" id="category1"></span>
-            <br>
+            <div th:text="|${starBoard.category1}|" class="fs-10" id="category1" style="display: flex;">
+            </div>
+            <!-- <img src="/img/icon/instagram.png" class="content-icon instagram" style="max-width: 20px;"> -->
             <span th:text="|${starBoard.category2}|" class="fs-10" id="category2"></span>
           </div>
           <!-- <div class="icon">
@@ -485,20 +537,22 @@
           </div> -->
         </div>
 
-        <div class="border border-dark rounded w-100" id="content" >
-            <span th:utext="${starBoard.content}"></span>
+        <div class="border border-dark rounded w-100" id="content">
+          <span th:utext="${starBoard.content}"></span>
         </div>
-        <div class="d-flex justify-content-end mt-2">
-          <button class="btn btn-secondary btn-submit col-1 border-0 " type="button" onclick="moveList()">목록</button>
-          <button class="btn btn-dark btn-submit col-1 border-0 ms-2" type="button" onclick="update()">수정</button>
-        </div>
+        <!-- <th:block sec:authorize="isAnonymous()"> -->
+          <div class="d-flex justify-content-end mt-2">
+            <button class="btn btn-secondary btn-submit col-1 border-0 " type="button" onclick="moveList()">목록</button>
+            <button class="btn btn-dark btn-submit col-1 border-0 ms-2" type="button" onclick="update()">수정</button>
+          </div>
+        <!-- </th:block> -->
       </div>
     </div>
 
 
 
 
-    </div>
+  </div>
 
 
 
@@ -609,22 +663,32 @@
   </div>
   <script>
     const no = "[[${starBoard.starNo}]]"
-    function moveList(){
-      location.href='/page/starCard/starList'
-    }
-    function update(){
-      location.href='/page/starCard/starUpdate?starNo='+ no;
+
+    function moveList() {
+      location.href = '/page/starCard/starList'
     }
 
-    const category2 = document.getElementById('category2')
-    const category2Text = category2.textContent
-    const newText = category2Text.split(',').map(word => `#${word.trim()}`).join(' ')
-    category2.textContent = newText
+    function update() {
+      location.href = '/page/starCard/starUpdate?starNo=' + no;
+    }
+
+
     // console.log(newText)
     const category1 = document.getElementById('category1')
     const category1Text = category1.textContent
-    const newText2 = category1Text.split(',').map(word => `${word.trim()}`).join(' ')
-    category1.textContent = newText2
+    // category1.style.display=inline-block;
+    console.log(category1)
+    const newText1 = category1Text.split(',').map(icon => `<img src="/img/icon/${icon}.png" class="content-icon ${icon}" style="max-width:20px; margin: 0; margin-right:5px; max-height:20px;">`).join(' ')
+    category1.innerHTML = newText1
+    
+
+    const category2 = document.getElementById('category2')
+    const category2Text = category2.textContent
+
+    var arr = [category2Text.split(',')]
+    console.log(arr)
+    const category2Text2 = category2Text.split(',').map(word => `#${word.trim()}`).join(' ')
+    category2.textContent = category2Text2
   </script>
 
 </th:block>
