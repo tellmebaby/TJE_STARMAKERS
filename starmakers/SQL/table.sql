@@ -1,5 +1,5 @@
 
--- Active: 1716894496133@@127.0.0.1@3306@joeun
+-- Active: 1716511247384@@127.0.0.1@3306@joeun
 
 
 
@@ -51,8 +51,9 @@ CREATE TABLE payment_info
   code       INT         NOT NULL COMMENT '상품코드',
   price      VARCHAR(30) NOT NULL COMMENT '결제가격',
   user_no    INT         NOT NULL COMMENT '유저데이터번호',
-  product_no INT         NOT NULL COMMENT '상품데이터번호',
-  reg_date   TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '결제일자'
+  product_title VARCHAR(255) NOT NULL COMMENT '결제상품', 
+  reg_date   TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '결제일자',
+  status     VARCHAR(20) NULL COMMENT '상태', 
   PRIMARY KEY (pay_no)
 ) COMMENT '결제정보';
 

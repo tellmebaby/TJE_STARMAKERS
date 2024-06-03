@@ -35,3 +35,11 @@ VALUES ('joeun', 'This is a comment for star_no 10.', NOW(), NOW(), NULL, 10, NU
 
 SELECT *
 FROM reply
+
+INSERT INTO payment_info (code, price, user_no, product_title, status) VALUES
+(101, '54000', 1, '인스타 홍보합니다', '검토중'),
+(102, '54000', 2, '유튜브 홍보합니다', '검토중'),
+(103, '54000', 3, '블로그 홍보합니다', '검토중');
+
+SELECT *
+FROM payment_info
