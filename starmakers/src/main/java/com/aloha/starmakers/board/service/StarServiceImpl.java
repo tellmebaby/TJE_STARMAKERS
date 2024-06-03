@@ -131,11 +131,14 @@ public class StarServiceImpl implements StarService {
         return starList;
     }
 
-    
+    /**
+     * 새 메인 카드리스트 요청
+     */
+    @Override
+    public List<StarBoard> mainCardList(String type) throws Exception {
+        List<StarBoard> starList = starMapper.mainCardList(type);
+        return starList;
+    }
 
-
-
-
-    
  
 }

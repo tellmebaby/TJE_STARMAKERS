@@ -52,4 +52,7 @@ public interface StarMapper {
     // 조회수 증가
     public int views(int starNo) throws Exception;
 
+    // 새 메인 페이지 카드리스트 요청
+    public List<StarBoard> mainCardList ( String type ) throws Exception;
+
 }

@@ -33,6 +33,28 @@
         LIMIT #{page.index}, #{page.rows}
     </select>
 
+    <!-- 새 메인 카드 리스트 요청 -->
+    <select id="mainCardList" resultType="StarBoard">
+    SELECT 
+    s.*,
+    f.file_no AS imgNo,
+    (
+        SELECT file_no 
+        FROM file f2 
+        WHERE f2.user_no = s.user_no AND f2.star_no = 0 
+        ORDER BY f2.reg_date DESC 
+        LIMIT 1
+    ) AS userImgId
+    FROM 
+        star_board s
+    LEFT JOIN 
+        file f ON f.star_no = s.star_no
+    WHERE 
+        s.type = #{type}
+    ORDER BY 
+        s.reg_date DESC;
+    </select>
+
       <!-- 데이터 개수 조회 - [검색] -->
     <select id="count" resultType="int">
         SELECT COUNT(*)

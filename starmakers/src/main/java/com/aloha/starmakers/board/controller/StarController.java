@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.aloha.starmakers.board.dto.Option;
@@ -554,6 +555,14 @@ public class StarController {
         } catch (Exception e) {
             return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
         }
+    }
+
+    
+    @GetMapping("/mainlist")
+    @ResponseBody
+    public List<StarBoard> getMainStarList() throws Exception  {
+            String type = "starCard";
+        return starService.mainCardList(type);
     }
 
 }

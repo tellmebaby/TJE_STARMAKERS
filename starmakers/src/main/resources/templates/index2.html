@@ -224,24 +224,14 @@
 </div>
 
 
-        <script>
+        <!-- <script>
+
             document.addEventListener('DOMContentLoaded', function() {
                 const carouselInner = document.getElementById('carousel-inner');
         
                 // 예시 데이터 6의 배수로 가져올 것 나머지는 버리고
                 const cards = [
-                    { img: '19', title: '뉴진스 사인CD+폴라 도착', content: '“안녕, 버니즈?”🐰버블검에 이어 새롭게 등장한 더블 싱글 [How Sweet]✨1️⃣ 멜론 독점! 강렬한 변신의 소장각 포토 2️⃣  고민 릴레이, 멜런스 게임 3️⃣ 토깽이들이 추천하는 최애곡! 멜론에서 모두 확인하고 한정판 친필 사인 CD+폴라(5명)받아 가세요💟' , card: 'card prime', userImgId: '1', category1: 'youtube, afreeca, chzzk, instagram', category2: '음악, 음식, 여행, 게임, 동물, 운동, ASMR'},
-                    { img: '18', title: '어쩌다보니천생연분1', content: '꿀타래1' , card: 'card standard' , userImgId: '7', category1: 'youtube, chzzk', category2: '음악, 음식, 여행, ASMR'},
-                    { img: '17', title: '어쩌다보니천생연분2', content: '꿀타래2' , card: 'card gold' , userImgId: '5' , category1: 'youtube, chzzk', category2: '음악, 음식, 여행, 게임, 동물, 운동, ASMR'},
-                    { img: '16', title: '어쩌다보니천생연분3', content: '꿀타래3' , card: 'card standard' , userImgId: '8', category1: 'youtube, afreeca', category2: '음악, 음식,  ASMR'},
-                    { img: '15', title: '어쩌다보니천생연분4', content: '꿀타래4' , card: 'card gold', userImgId: '9', category1: 'chzzk, afreeca, instagram', category2: '음악, ASMR'},
-                    { img: '14', title: '어쩌다보니천생연분5', content: '꿀타래5' , card: 'card standard', userImgId: '10', category1: 'youtube, afreeca', category2: '음악, 음식, 여행, '},
-                    { img: '13', title: '어쩌다보니천생연분6', content: '꿀타래6' , card: 'card prime', userImgId: '1', category1: 'youtube, chzzk', category2: '음악, 음식, 운동, ASMR'},
-                    { img: '12', title: '어쩌다보니천생연분7', content: '꿀타래7' , card: 'card standard', userImgId: '1', category1: 'youtube, afreeca', category2: '음악, 음식, 동물, 운동, ASMR'},
-                    { img: '11', title: '어쩌다보니천생연분8', content: '꿀타래8' , card: 'card gold', userImgId: '1', category1: 'youtube, afreeca, instagram', category2: '음악, 음식, 여행, 게임, 동물, 운동, ASMR'},
-                    { img: '10', title: '어쩌다보니천생연분8', content: '꿀타래8' , card: 'card gold', userImgId: '1', category1: 'youtube, afreeca, instagram', category2: '음악, 음식, 여행'},
-                    { img: '9', title: '어쩌다보니천생연분8', content: '꿀타래8' , card: 'card gold', userImgId: '1', category1: 'youtube, afreeca, instagram', category2: '음악, 음식, 여행, 게임, 동물'},
-                    { img: '8', title: '어쩌다보니천생연분8', content: '꿀타래8' , card: 'card gold', userImgId: '1', category1: 'youtube, afreeca, instagram', category2: '음악, 동물, 운동, ASMR'},
+                    {starNo: '6', title: '선배마라탕사주세요', writer: '김조은', content: '그럼탕후루는요?', regDate: '2024-06-04 06:40:02', updDate: '', views: '0', userNo: '1', payNo: '0', likes: '1', status: '', card: '무료홍보', category1: 'youtube,instagram,afreeca,chzzk', category2: 'food,travel,game,music,animal,workOut,asmr,fashion', type: 'starCard', startDate: '2024-06-04 00:00:00', endDate: '2024-06-08 00:00:00', imgNo: '20', userImgId: '18'}
                 ];
         
                 
@@ -254,20 +244,21 @@
                     const icon4 = categories.includes('instagram') ? '<img src="/img/icon/instagram.png" alt="아이콘4" class="content-icon">' : '';
 
                     const categories2 = cardData.category2.split(', ');
-                    const musicBtn = categories2.includes('음악') ? '<a href="#" class="btn btn-custom">#음악</a>' : '';
-                    const travelBtn = categories2.includes('여행') ? '<a href="#" class="btn btn-custom">#여행</a>' : '';
-                    const foodBtn = categories2.includes('음식') ? '<a href="#" class="btn btn-custom">#음식</a>' : '';
-                    const gameBtn = categories2.includes('게임') ? '<a href="#" class="btn btn-custom">#게임</a>' : '';
-                    const animalBtn = categories2.includes('동물') ? '<a href="#" class="btn btn-custom">#동물</a>' : '';
-                    const exerciseBtn = categories2.includes('운동') ? '<a href="#" class="btn btn-custom">#운동</a>' : '';
-                    const asmrBtn = categories2.includes('ASMR') ? '<a href="#" id="asmr-link" class="btn btn-custom">#ASMR</a>' : '';
+                    const musicBtn = categories2.includes('music') ? '<a href="#" class="btn btn-custom">#음악</a>' : '';
+                    const travelBtn = categories2.includes('travel') ? '<a href="#" class="btn btn-custom">#여행</a>' : '';
+                    const foodBtn = categories2.includes('food') ? '<a href="#" class="btn btn-custom">#음식</a>' : '';
+                    const gameBtn = categories2.includes('game') ? '<a href="#" class="btn btn-custom">#게임</a>' : '';
+                    const animalBtn = categories2.includes('animal') ? '<a href="#" class="btn btn-custom">#동물</a>' : '';
+                    const exerciseBtn = categories2.includes('workOut') ? '<a href="#" class="btn btn-custom">#운동</a>' : '';
+                    const fashionBtn = categories2.includes('fashion') ? '<a href="#" class="btn btn-custom">#패션</a>' : '';
+                    const asmrBtn = categories2.includes('asmr') ? '<a href="#" id="asmr-link" class="btn btn-custom">#ASMR</a>' : '';
 
 
                     return `
                     <div class="col-md-2 mb-4">
                         <div class="${cardData.card}" ondblclick="animateCard(this)">
                             <div class="card custom-card" style="background-image: url('/file/img/${cardData.img}');">
-                                <span class="star">&#9733;</span> <!-- 노란색 별 이모티콘 -->
+                                <span class="star">&#9733;</span> 
                                 <div class="top-container">
                                     <div class="left-content">
                                         ${icon1}
@@ -296,6 +287,7 @@
                                             ${gameBtn}
                                             ${animalBtn}
                                             ${exerciseBtn}
+                                            ${fashionBtn}
                                             ${asmrBtn}
                                         </div>
                                         <div class="star-links">
@@ -338,6 +330,124 @@
                 cardChunks.forEach((chunk, index) => {
                     const carouselItem = createCarouselItem(chunk, index === 0);
                     carouselInner.insertAdjacentHTML('beforeend', carouselItem);
+                });
+            });
+        </script> -->
+
+        <script>
+            $(document).ready(function() {
+                // 페이지 로드 시 실행될 내용
+                $.ajax({
+                    url: "/page/mainlist", // 데이터를 가져올 URL
+                    type: "GET",
+                    dataType: "json", // 반환되는 데이터 형식
+                    success: function(response) {
+                        // 성공적으로 데이터를 가져왔을 때 실행되는 함수
+                        const cards = response; // 서버로부터 받은 데이터
+
+                        // 이후의 처리를 여기에 구현
+                        // 예: 카드 생성, 캐러셀 업데이트 등
+                        const carouselInner = $('#carousel-inner');
+
+                        function createCard(cardData) {
+                            const categories = cardData.category1.split(', ');
+                            const icon1 = categories.includes('afreeca') ? '<img src="/img/icon/afreeca.png" alt="아이콘1" class="content-icon">' : '';
+                            const icon2 = categories.includes('chzzk') ? '<img src="/img/icon/chzzk.png" alt="아이콘2" class="content-icon">' : '';
+                            const icon3 = categories.includes('youtube') ? '<img src="/img/icon/youtube.png" alt="아이콘3" class="content-icon">' : '';
+                            const icon4 = categories.includes('instagram') ? '<img src="/img/icon/instagram.png" alt="아이콘4" class="content-icon">' : '';
+
+                            const categories2 = cardData.category2.split(', ');
+                            const musicBtn = categories2.includes('music') ? '<a href="#" class="btn btn-custom">#음악</a>' : '';
+                            const travelBtn = categories2.includes('travel') ? '<a href="#" class="btn btn-custom">#여행</a>' : '';
+                            const foodBtn = categories2.includes('food') ? '<a href="#" class="btn btn-custom">#음식</a>' : '';
+                            const gameBtn = categories2.includes('game') ? '<a href="#" class="btn btn-custom">#게임</a>' : '';
+                            const animalBtn = categories2.includes('animal') ? '<a href="#" class="btn btn-custom">#동물</a>' : '';
+                            const exerciseBtn = categories2.includes('workOut') ? '<a href="#" class="btn btn-custom">#운동</a>' : '';
+                            const fashionBtn = categories2.includes('fashion') ? '<a href="#" class="btn btn-custom">#패션</a>' : '';
+                            const asmrBtn = categories2.includes('asmr') ? '<a href="#" id="asmr-link" class="btn btn-custom">#ASMR</a>' : '';
+
+
+                            return `
+                            <div class="col-md-2 mb-4">
+                                <div class="card standard" ondblclick="animateCard(this)">
+                                    <div class="card custom-card" style="background-image: url('/file/img/${cardData.imgNo}');">
+                                        <span class="star">&#9733;</span> 
+                                        <div class="top-container">
+                                            <div class="left-content">
+                                                ${icon1}
+                                                ${icon2}
+                                                ${icon3}
+                                                ${icon4}
+                                            </div>
+                                            <div class="right-content">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots shadow-icon" viewBox="0 0 16 16">
+                                                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="overlay" style="background-image: url('/file/img/${cardData.imgNo}');"></div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <img src="/file/img/${cardData.userImgId}" alt="작성자 아이콘" class="author-icon">
+                                                ${cardData.title}
+                                            </h5>
+                                            <p class="card-text">${cardData.content}</p>
+                                            <div class="bottom-container">
+                                                <div class="field-links">
+                                                    ${musicBtn}
+                                                    ${travelBtn}
+                                                    ${foodBtn}
+                                                    ${gameBtn}
+                                                    ${animalBtn}
+                                                    ${exerciseBtn}
+                                                    ${fashionBtn}
+                                                    ${asmrBtn}
+                                                </div>
+                                                <div class="star-links">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                                                        <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
+                                                    </svg>
+                                                    <span class="count">${cardData.views}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                        }
+
+                        function createCarouselItem(cardsChunk, isActive = false) {
+                            const activeClass = isActive ? 'active' : '';
+                            return `
+                                <div class="carousel-item ${activeClass}">
+                                    <div class="row mx-0">
+                                        ${cardsChunk.map(createCard).join('')}
+                                    </div>
+                                </div>
+                            `;
+                        }
+
+                        function chunkArray(array, chunkSize) {
+                            // 배열을 지정한 크기로 분할하는 로직
+                            const chunks = [];
+                            for (let i = 0; i < array.length; i += chunkSize) {
+                                chunks.push(array.slice(i, i + chunkSize));
+                            }
+                            return chunks;
+                        }
+
+                        // 서버에서 가져온 데이터로 카드 생성
+                        const cardChunks = chunkArray(cards, 6);
+                        cardChunks.forEach((chunk, index) => {
+                            const carouselItem = createCarouselItem(chunk, index === 0);
+                            carouselInner.append(carouselItem);
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        // 에러 발생 시 실행되는 함수
+                        console.error("Error:", error);
+                    }
                 });
             });
         </script>

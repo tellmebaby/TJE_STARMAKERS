@@ -53,3 +53,24 @@ SELECT *
         WHERE user_no = 3
         AND star_no = 0
 
+
+-- 새 메인 스타카드 불러오기
+SELECT 
+    s.*,
+    f.file_no AS imgNo,
+    (
+        SELECT file_no 
+        FROM file f2 
+        WHERE f2.user_no = s.user_no AND f2.star_no = 0 
+        ORDER BY f2.reg_date DESC 
+        LIMIT 1
+    ) AS userImgId
+FROM 
+    star_board s
+LEFT JOIN 
+    file f ON f.star_no = s.star_no
+WHERE 
+    s.type = 'starCard'
+ORDER BY 
+    s.reg_date DESC;
+
