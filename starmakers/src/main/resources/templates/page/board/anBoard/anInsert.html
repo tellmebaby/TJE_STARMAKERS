@@ -28,10 +28,14 @@
   <!-- 월요일에 테스트해보고 되면 다른 insert화면에도 똑같이 적용하기 -->
   <!-- 비 로그인 -->
   <th:block sec:authorize="isAnonymous()">
-    <div>
-      <p>로그인이 필요한 페이지입니다.</p>
-      <a href="/login" class="btn btn-primary">로그인 하러 가기</a>
-      <a href="/join" class="btn btn-primary">회원가입 하러 가기</a>
+    <div class="container content-box mt-3 mb-3">
+      <div class="d-flex justify-content-center mb-5" style="padding-top:200px">
+        <p>로그인이 필요한 페이지입니다.</p>
+      </div>
+      <div class="d-flex justify-content-center">
+        <a href="/login" class="btn btn-info m-1 " style="color:white">로그인 하러 가기</a>
+        <a href="/join" class="btn btn-primary m-1">회원가입 하러 가기</a>
+      </div>
     </div>
   </th:block>
   <!-- 로그인 -->

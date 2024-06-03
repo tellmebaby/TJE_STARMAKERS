@@ -131,7 +131,7 @@ CREATE TABLE star_board
   star_no   INT         NOT NULL AUTO_INCREMENT COMMENT '이벤트데이터번호',
   title     VARCHAR(100) NOT NULL COMMENT '제목', -- 제목의 길이를 더 늘렸습니다.
   writer    VARCHAR(50)  NOT NULL COMMENT '작성자', -- 작성자 길이 조정.
-  content   TEXT        NOT NULL COMMENT '내용',
+  content   long        NOT NULL COMMENT '내용',
   reg_date  TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일자',
   upd_date  TIMESTAMP   NULL     COMMENT '수정일자',
   views     INT         NOT NULL  DEFAULT '0'   COMMENT '조회수',
