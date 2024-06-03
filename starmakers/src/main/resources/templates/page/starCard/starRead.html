@@ -415,8 +415,46 @@
         }
         .container2 {
           max-width: 960px;
+          align-items: center;
         }
-  </style>
+
+        .main-image {
+          position: relative;
+          display: inline-block;
+          align-items: center;
+          /* text-align: center; */
+        }
+        
+        .main-image img {
+          display: block;
+          /* display: inline-block; */
+          margin: 0 auto;
+          
+          /* vertical-align: middle; */
+          max-width: 960px;
+          width: 960px;
+          max-height: 450px;
+        }
+
+        .main-image .text {
+          position:absolute;
+          /* top: 80%; */
+          bottom: 10px;
+          left: 10px;
+          background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+          /* width: 100%; */
+          /* transform: translate(-50%, -50%); */
+          padding : 10px;
+          
+          width: 92%;
+          color: #FFF;
+        }
+
+        .main-image .icon {
+          top:10px;
+          right: 10px;
+        }
+</style>
 </head>
 
 
@@ -429,19 +467,24 @@
     <div class="container d-flex justify-content-center">
       <div class="container2">
 
-        <!-- 썸네일 이미지 가져와서 아이콘 띄우기 -->
-        <!-- file 컨트롤러에 이미지 썸네일 매핑방법 확인해보고 월요일에 다시 시도하기.. -->
-        <div>
-          <img src="" alt="">
-
-
+        <div class="main-image">
+          <div>
+            <img th:src="|/file/img/${starBoard.imgNo}|" class="image rounded mt-auto" alt="썸네일">
+          </div>
+          <div class="text"> 
+            <span class="fw-bold fs-1 m-0 p-0" th:text="${starBoard.title}"></span>
+            <br>
+            <span class="fw-bold fs-10" th:text="${starBoard.writer}"></span>
+            <br>
+            <span th:text="|${starBoard.category1}|" class="fs-10" id="category1"></span>
+            <br>
+            <span th:text="|${starBoard.category2}|" class="fs-10" id="category2"></span>
+          </div>
+          <!-- <div class="icon">
+            <i class="fa-regular fa-star"></i>
+          </div> -->
         </div>
-        <div class="border border-dark rounded mt-3 mb-3" id="title">
-          <!-- <div class="border-bottom border-secondary w-100"> -->
-            <span class="fw-bold fs-3" th:text="${starBoard.title}"></span>
-            <hr>
-          <!-- </div> -->
-        </div>
+
         <div class="border border-dark rounded w-100" id="content" >
             <span th:utext="${starBoard.content}"></span>
         </div>
@@ -572,6 +615,16 @@
     function update(){
       location.href='/page/starCard/starUpdate?starNo='+ no;
     }
+
+    const category2 = document.getElementById('category2')
+    const category2Text = category2.textContent
+    const newText = category2Text.split(',').map(word => `#${word.trim()}`).join(' ')
+    category2.textContent = newText
+    // console.log(newText)
+    const category1 = document.getElementById('category1')
+    const category1Text = category1.textContent
+    const newText2 = category1Text.split(',').map(word => `${word.trim()}`).join(' ')
+    category1.textContent = newText2
   </script>
 
 </th:block>

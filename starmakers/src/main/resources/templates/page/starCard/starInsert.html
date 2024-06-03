@@ -22,13 +22,32 @@
   <!-- <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script> -->
   <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
   <style>
-
+    .content-box {
+      width: 960px;
+      height: 600px;
+      display: block;
+      align-items: center;
+      top: 40%;
+    }
   </style>
 </head>
 
 
 <!-- layout:decorate 쓸 때 본문 내용은 <th:block layout:fragment="content"></th:block> 안에 적어야 화면에 뜸 -->
 <th:block layout:fragment="content" class="align-items-center ml-5">
+  <th:block sec:authorize="isAnonymous()">
+    <div class="container content-box mt-3 mb-3">
+      <div class="d-flex justify-content-center mb-5" style="padding-top:200px">
+        <p>로그인이 필요한 페이지입니다.</p>
+      </div>
+      <div class="d-flex justify-content-center">
+        <a href="/login" class="btn btn-info m-1 " style="color:white">로그인 하러 가기</a>
+        <a href="/join" class="btn btn-primary m-1">회원가입 하러 가기</a>
+      </div>
+    </div>
+  </th:block>
+  <!-- 로그인 -->
+  <th:block sec:authorize="isAuthenticated()">
   <div class="body lg" style="max-width: 900 ;">
     <h1 class="d-flex justify-content-center mt-3 mb-3">
       홍보요청
@@ -234,7 +253,7 @@
   </div>
 
 
-
+</th:block>
   <script>
     $('#summernote').summernote({
       toolbar: [
