@@ -52,6 +52,7 @@ CREATE TABLE payment_info
   price      VARCHAR(30) NOT NULL COMMENT '결제가격',
   user_no    INT         NOT NULL COMMENT '유저데이터번호',
   product_no INT         NOT NULL COMMENT '상품데이터번호',
+  reg_date   TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '결제일자'
   PRIMARY KEY (pay_no)
 ) COMMENT '결제정보';
 
