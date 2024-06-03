@@ -14,7 +14,6 @@ $(function () {
         speed: 900,                        // 슬라이드가 넘어가는 시간 (ms)
         slidesPerView: 1,                   // 보여지는 슬라이드 개수
         spaceBetween: 0,                    // 슬라이드 간 여백
-        slidesPerGroup: 3,                  // 한 번에 넘겨지는 슬라이드 개수
 
         grabCursor: false,                   // 마우스커서를 잡는 손가락 모양
         centeredSlides: false,              // 센터모드
@@ -42,18 +41,23 @@ $(function () {
             640: {
                 slidesPerView: 1,
                 spaceBetween: 10,
+                slidesPerGroup: 1
             },
             768: {
                 slidesPerView: 2,
                 spaceBetween: 10,
+                slidesPerGroup: 2
             },
             1024: {
                 slidesPerView: 2,
                 spaceBetween: 10,
+                slidesPerGroup: 2
             },
             1280: {
                 slidesPerView: 3,
                 spaceBetween: 10,
+                slidesPerGroup: 3
+                
             },
         },
     });

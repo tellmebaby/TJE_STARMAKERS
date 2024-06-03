@@ -246,4 +246,12 @@ public class FileServiceImpl implements FileService {
         return result;
     }
 
+    @Override
+    public int allDelete(int userNo) throws Exception {
+    
+        int result = fileMapper.allDelete(userNo);
+        return result;
+
+    }
+
 }
