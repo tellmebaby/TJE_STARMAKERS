@@ -64,9 +64,13 @@ public class UserServiceImpl implements UserService {
         
         // 세션의 정보 등록
         user = userMapper.select(username);
-        Files file = fileService.selectByUserNoAndStarNo(user.getUserNo());
-        log.info(":::::::::::::fileno : " + file.getFileNo() );
-        user.setUserImgId(file.getFileNo());
+        if( user != null){
+            Files file = fileService.selectByUserNoAndStarNo(user.getUserNo());
+            log.info(":::::::::::::fileno : " + file.getFileNo() );
+            user.setUserImgId(file.getFileNo());
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+        }
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
 
