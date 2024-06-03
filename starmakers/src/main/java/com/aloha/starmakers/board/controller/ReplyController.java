@@ -2,12 +2,15 @@ package com.aloha.starmakers.board.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.aloha.starmakers.board.dto.Reply;
 import com.aloha.starmakers.board.service.ReplyService;
@@ -41,7 +44,9 @@ public class ReplyController {
      */
     @GetMapping("/{starNo}")
     public String list(@PathVariable("starNo") int starNo, Model model) throws Exception {
+
         List<Reply> replyList = replyService.listByStarNo(starNo);
+        
         model.addAttribute("replyList", replyList);
         return "page/reply/list";
     }
@@ -54,12 +59,20 @@ public class ReplyController {
      */
     @PostMapping("")
     public ResponseEntity<String> insert(@RequestBody Reply reply) throws Exception {
-        int result = replyService.insert(reply);
-        if(result > 0) {
+        log.info(reply.toString());
+        String userId = reply.getUsername();
+        // 댓글 등록 서비스 호출
+        int result = replyService.insert(reply, userId);
+        
+        // 결과에 따른 응답 반환
+        if (result > 0) {
             return new ResponseEntity<>("SUCCESS", HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>("FAIL", HttpStatus.OK);
         }
-        return new ResponseEntity<>("FAIL", HttpStatus.OK);
     }
+
+
 
     /**
      * 댓글 수정

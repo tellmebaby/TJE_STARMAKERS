@@ -121,6 +121,11 @@ REFERENCES star_board(star_no)
 ON DELETE CASCADE;
 -- star_board의 star_no 값을 참조하여 reply 테이블의 star_no 을 외래키로 설정
 
+ALTER TABLE reply
+ADD CONSTRAINT fk_reply_user FOREIGN KEY (user_no) REFERENCES user(user_no);
+-- user 테이블의 user_no 값을 참조하여 reply 테이블의 user_no을 외래키로 지정
+ALTER TABLE reply DROP FOREIGN KEY fk_reply_user;
+
 
 
 DROP TABLE IF EXISTS star_board ;
