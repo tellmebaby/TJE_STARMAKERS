@@ -45,7 +45,7 @@ public class StarServiceImpl implements StarService {
     public int insert(StarBoard starBoard, String username) throws Exception {
         Users user = userMapper.login(username);
         starBoard.setUserNo(user.getUserNo());
-        starBoard.setWriter(user.getName());
+        starBoard.setWriter(user.getId());
         // starBoard.setCard("무료홍보");
         // 정보 등록
         starMapper.insert(starBoard);
@@ -61,7 +61,7 @@ public class StarServiceImpl implements StarService {
     public int payInsert(StarBoard starBoard, String username) throws Exception {
         Users user = userMapper.login(username);
         starBoard.setUserNo(user.getUserNo());
-        starBoard.setWriter(user.getName());
+        starBoard.setWriter(user.getId());
         starBoard.setCard("유료홍보요청");
         // Date strDate = starBoard.getStartDate();
         // Date endDate = starBoard.getEndDate();

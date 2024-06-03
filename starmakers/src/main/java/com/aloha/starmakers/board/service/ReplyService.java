@@ -14,7 +14,7 @@ public interface ReplyService {
     // 댓글 조회
     public Reply select(int replyNo) throws Exception;
     // 댓글 등록
-    public int insert(Reply reply) throws Exception;
+    public int insert(Reply reply, String userId) throws Exception;
     // 댓글 수정
     public int update(Reply reply) throws Exception;
     // 댓글 삭제

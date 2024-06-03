@@ -18,6 +18,7 @@
      WHERE star_no = #{starNo}
      ORDER BY parent_no DESC
              ,reg_date ASC
+
 </select>
 
 <!-- 댓글 조회 -->
@@ -29,8 +30,8 @@
 
 <!-- 댓글 등록 -->
 <insert id="insert">
-     INSERT INTO reply (star_no, parent_no, writer, content)
-     VALUES (#{starNo}, #{parentNo}, #{writer}, #{content})
+     INSERT INTO reply (user_no, star_no, parent_no, writer, content)
+     VALUES (#{userNo}, #{starNo}, #{parentNo}, #{writer}, #{content})
 </insert>
 
 <!-- 댓글 수정 -->
