@@ -8,6 +8,9 @@
     <title>Index Page</title>
     <!-- <link rel="stylesheet" href="/css/card.css" class="css"> -->
     <link class="css" href="/css/starCard.css" rel="stylesheet">
+<!-- 부트스트랩 아이콘 CSS 파일 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
         /*
         #promotionCarousel .col-lg-3 p-0 {
@@ -50,13 +53,6 @@
 
 <div class="container">
 
-    <!-- <div class="row mb-3 mt-3">
-        <div class="col-md-12 d-flex align-items-center">
-            <input type="text" class="form-control me-2" id="searchInput" placeholder="검색 키워드 입력">
-            <button class="btn btn-primary col-2">검색</button>
-        </div>
-    </div> -->
-
     <div id="promotionCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
         <div class="carousel-inner" id="carousel-inner">
             <!-- Dynamically added carousel items will go here -->
@@ -71,38 +67,131 @@
         </button>
     </div>
 
-    <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="event-banner">
-                    <img src="/img/sampleBanner.png" class="d-block w-100">
-                </div>
+
+    <!-- 새추가영역 -->
+    <div class="row justify-content-center">
+        <div class="col-6">
+          <div class="content-wrapper" style="height: 150px;">
+                <div class="banner-slider">
+                    <div id="bannerCarousel" class="carousel slide align-items-start" data-bs-ride="carousel" data-bs-interval="5000">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="event-banner align-items-start">
+                                    <img src="/img/sampleBanner.png" class="d-block w-100">
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="event-banner align-items-start">
+                                    <img src="/img/sampleBanner2.png" class="d-block w-100">
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="event-banner align-items-start">
+                                    <img src="/img/sampleBanner3.png" class="d-block w-100">
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="event-banner align-items-start">
+                                    <img src="/img/sampleBanner4.png" class="d-block w-100">
+                                </div>
+                            </div>
+                        </div>
+                  </div>
             </div>
-            <div class="carousel-item">
-                <div class="event-banner">
-                    <img src="/img/sampleBanner2.png" class="d-block w-100">
+          </div>
+          <div class="content-wrapper" style="height: 150px;">
+            <div class="contentIcon-container">
+                <div class="contentIcon">
+                  <i class="bi bi-music-note"></i>
+                  <p>음악</p>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <div class="event-banner">
-                    <img src="/img/sampleBanner3.png" class="d-block w-100">
+                <div class="contentIcon">
+                  <i class="bi bi-controller"></i>
+                  <p>게임</p>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <div class="event-banner">
-                    <img src="/img/sampleBanner4.png" class="d-block w-100">
+                <div class="contentIcon">
+                  <i class="bi bi-backpack2"></i>
+                  <p>여행</p>
                 </div>
-            </div>
+                <div class="contentIcon">
+                  <i class="bi bi-cake"></i>
+                  <p>음식</p>
+                </div>
+                <div class="contentIcon">
+                  <i class="bi bi-feather"></i>
+                  <p>동물</p>
+                </div>
+                <div class="contentIcon">
+                  <i class="bi bi-mic"></i>
+                  <p>ASMR</p>
+                </div>
+                <div class="contentIcon">
+                  <i class="bi bi-bicycle"></i>
+                  <p>운동</p>
+                </div>
+                <div class="contentIcon">
+                  <i class="bi bi-person-arms-up"></i>
+                  <p>패션</p>
+                </div>
+              </div>
+          </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
+        <div class="col-6">
+          <div class="content-wrapper" style="height: 300px;">
+            <div class="starmember-wrapper">
+                <div class="starmember-list">
+                    <div class="starmember-detail">
+                        <div class="starmember">
+                            <img class="starmember-img" src="/file/img/5" alt="스타 멤버 1">
+                            <span>스타 멤버 1</span>
+                          </div>
+                          <div class="starmember">
+                            <img class="starmember-img" src="/file/img/5" alt="스타 멤버 2">
+                            <span>스타 멤버 2</span>
+                          </div>
+                          <div class="starmember">
+                            <img class="starmember-img" src="/file/img/5" alt="스타 멤버 3">
+                            <span>스타 멤버 3</span>
+                          </div>
+                          <div class="starmember">
+                            <img class="starmember-img" src="/file/img/5" alt="스타 멤버 4">
+                            <span>스타 멤버 4</span>
+                          </div>
+                          <div class="starmember">
+                            <img class="starmember-img" src="/file/img/5" alt="스타 멤버 5">
+                            <span>스타 멤버 5</span>
+                          </div>
+                    </div>
+                    <div class="starmember-detail">
+                        <div class="starmember">
+                            <img class="starmember-img" src="/file/img/5" alt="스타 멤버 1">
+                            <span>스타 멤버 1</span>
+                          </div>
+                          <div class="starmember">
+                            <img class="starmember-img" src="/file/img/5" alt="스타 멤버 2">
+                            <span>스타 멤버 2</span>
+                          </div>
+                          <div class="starmember">
+                            <img class="starmember-img" src="/file/img/5" alt="스타 멤버 3">
+                            <span>스타 멤버 3</span>
+                          </div>
+                          <div class="starmember">
+                            <img class="starmember-img" src="/file/img/5" alt="스타 멤버 4">
+                            <span>스타 멤버 4</span>
+                          </div>
+                          <div class="starmember">
+                            <img class="starmember-img" src="/file/img/5" alt="스타 멤버 5">
+                            <span>스타 멤버 5</span>
+                          </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- 새추가영역 -->
+
+
 
     <div class="row">
         <div class="col-md-6">
@@ -277,6 +366,7 @@
                 bgImage.style.backgroundPositionY = -(scrolled * parallaxSpeed) + 'px';
             });
         </script>
+
 </body>
 
 

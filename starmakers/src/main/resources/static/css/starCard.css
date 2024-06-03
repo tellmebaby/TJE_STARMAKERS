@@ -1,13 +1,13 @@
 /* 기존 스타일 */
 #bannerCarousel img {
     width: -webkit-fill-available;
-    height: 200px;
+    height: 150px;
 }
 
 .event-banner {
     background: #f8f9fa;
     text-align: center;
-    margin: 20px 0;
+    /* margin: 20px 0; */
 }
 
 .bg-image {
@@ -431,3 +431,71 @@
     background-color: white; /* 마우스 오버시 배경색 흰색으로 변경 */
     color: black; /* 텍스트 색상을 검은색으로 변경 */
 }
+
+.content-wrapper {
+    /* border: 1px solid black; */
+  }
+  .contentIcon-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 100%;
+    flex-direction: row;
+  }
+  .contentIcon {
+    display: flex;
+    text-align: center;
+    border-radius: 10px;
+    background-color: transparent; /* 아이콘 배경 투명하게 설정 */
+    border: 1px solid black; /* 원하는 색으로 변경 가능 */
+    flex-direction: column;
+    align-items: center;
+    width: 70px;
+  }
+  .contentIcon i {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 5px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    
+    
+  }
+  .contentIcon p {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .starmember-wrapper {
+    display: flex;
+    height: 100%;
+  }
+  .starmember-list, .starmember-detail {
+    flex: 1;
+    border: 1px solid black;
+    padding: 10px;
+  }
+  .starmember-list {
+    display: flex;
+    flex-direction: row; /* 수평 정렬 */
+    justify-content: space-around; /* 공간을 고르게 분배 */
+    align-items: center; /* 수직 중앙 정렬 */
+  }
+  .starmember {
+      display: flex; /* 수평 정렬을 위한 플렉스 박스 */
+      align-items: center; /* 수직 중앙 정렬 */
+      border: 1px solid black;
+      padding: 10px;
+      text-align: left;
+      flex: 1; /* 각 항목이 동일한 너비를 차지하도록 설정 */
+      margin: 0 5px; /* 항목 사이의 간격 조정 */
+  }
+    .starmember img {
+    width: 30px;
+    height: 30px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    object-fit: cover; /* 이미지가 원형 안에 맞게 조절 */
+    margin-right: 10px; /* 이미지와 텍스트 사이 간격 */
+    }
