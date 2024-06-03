@@ -1,27 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{/layout/default_layout}">
-
+      layout:decorate="~{/layout/default_layout}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/archive.css" class="css">
     <title>마이페이지</title>
-    <meta name="_csrf" th:content="${_csrf.token}"/>
-    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <style>
 
+        /* .containers {
+            width: 100%;
+        } */
 
         .nav-links {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
-        .side-menu {
-            width: 200px;
-            margin-right: 30px;
-        }
-
         .nav-links a {
             display: block;
             color: #6c757d;
@@ -29,236 +24,416 @@
             text-decoration: none;
             font-size: 30px;
         }
-
         .nav-links a:hover {
             color: #000;
         }
-
         .nav-links h1 {
             font-size: 42px;
             margin-bottom: 100px;
             font-weight: bolder;
         }
-
-        .button {
-            background-color: #0d6efd;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
-            font-size: 20px;
-            cursor: pointer;
-            margin-bottom: 46px;
+        .list {
+            margin-top: 160px;
+            color: #8D8D8D;
         }
-
-        .button-container {
+        .side-menu {
+            width: 200px;
+            margin-right: 30px;
+        }
+        .table {
+            font-size: 15px;
+            border-color:black;
+            margin-top: 130px;
+        }
+        .btn-review, .btn-refund {
+            border-radius: 10px;
+            padding: 5px 15px;
+            font-size: 13px;
+            border: none;
+            color: white;
+            margin-right: 5px;
+            width: 90px; 
+            text-align: center; 
+        }
+        .btn-review {
+            background-color: #2972FE;
+        }
+        .btn-refund {
+            background-color: #2972FE;
+        }
+        .status-approved {
+            background-color: #DDDDDD   ;
+        }
+        .status-pending {
+            background-color: #2972FE;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .table td .button-container {
             display: flex;
             justify-content: flex-end;
-            margin-top: 20px;
+            padding-top: 20px;
+        }
+        .table tr, th {
+            text-align: center;
         }
 
-        tbody {
-            width: 600px;
-            height: 350px;
-        }
-
-
-        /* ----------------------- */
-        .table td {
-            height: 60px !important;
-        }
-
-        .table td:first-child {
-            width: 30%;
-        }
-
-        .table td:last-child {
-            width: 70%;
-        }
-
-        .table-margin {
-            margin-top: 170px;
-        }
-
-        .image-container {
-            position: relative;
-            width: 100%;
-            height: 360px;
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf85dv87L-QUBgTu6c8_OrOjHGFkldiqpx31GaI65ut4X0BbqtUvSPJWxyyuiD9bvKqzA&usqp=CAU');
-            background-size: cover;
-            background-position: center;
+        .pagination {
             display: flex;
             justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            border-radius: 17%;
-            border: 5px solid black;
-            overflow: hidden;
+            margin-top: 20px; /* 화살표 위 아래 간격 조정 */
+            margin-bottom: 4px;
         }
 
-        .placeholder {
-            font-size: 2em;
-            color: #888;
+        .pagination a {
+            margin: 0 5px; /* 화살표 간격 조정 */
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
         }
 
-        #uploadedImage {
-            width: 100%;
-            height: 360px;
-            object-fit: cover;
+        .prev,
+        .next {
+            font-size: 24px;
         }
+
+        .page-number:hover,
+        .prev:hover,
+        .next:hover {
+            color: #000; /* 호버 효과 */
+        }
+
+        span, a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .col-md-2 {
+            margin-right: 110px;
+        }
+
     </style>
 </head>
-
 <body layout:fragment="content">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="side-menu">
                         <div class="nav-links">
-                            <h1 th:text="${user.name} + '님,'"></h1>
-                            <a href="/page/mypage/profile" class="active">회원 정보</a>
+                            <h1>김조은님,</h1>
+                            <a href="/page/mypage/profile">회원 정보</a>
                             <a href="/page/mypage/payment">결제 내역</a>
                             <a href="/page/mypage/promotion">내가 쓴 글</a>
-                            <a href="/page/mypage/archive">내 보관함</a>
+                            <a href="/page/mypage/archive" class="active">내 보관함</a>
                             <a href="/page/mypage/inquiry">1 : 1 문의</a>
                             <a href="/page/mypage/userDelete">회원 탈퇴</a>
                         </div>
                     </div>
+                </div> 
+                <div class="col-md-8">
+                    <!--  -->
+                    <div class="position-relative p-5" style="margin-top: 110px;">
+                        <!-- Slider main container -->
+                        <div class="position-absolute custom-button-prev" style="top: 50%; transform: translate(-50%,-50%); left: -30px;">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#promotionCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                        </div>
+                        <div class="swiper">
+                            <!-- Additional required wrapper -->
+                            <div class="swiper-wrapper">
+                                <!-- Slides -->
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg" class="card-img-top" alt="상품 이미지">
+                                        <div class="icon-body">
+                                            <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                            <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                            <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                            <img src="/img/icon/instagram.svg" class="content-icon">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">제목</h5>
+                                            <p class="card-text">내용</p>
+                                        </div>
+                                        <div class="icon-container">
+                                            <i class="fa-regular fa-thumbs-up icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg" class="card-img-top" alt="상품 이미지">
+                                        <div class="icon-body">
+                                            <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                            <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                            <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                            <img src="/img/icon/instagram.svg" class="content-icon">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">제목</h5>
+                                            <p class="card-text">내용</p>
+                                        </div>
+                                        <div class="icon-container">
+                                            <i class="fa-regular fa-thumbs-up icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg" class="card-img-top" alt="상품 이미지">
+                                        <div class="icon-body">
+                                            <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                            <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                            <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                            <img src="/img/icon/instagram.svg" class="content-icon">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">제목</h5>
+                                            <p class="card-text">내용</p>
+                                        </div>
+                                        <div class="icon-container">
+                                            <i class="fa-regular fa-thumbs-up icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg" class="card-img-top" alt="상품 이미지">
+                                        <div class="icon-body">
+                                            <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                            <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                            <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                            <img src="/img/icon/instagram.svg" class="content-icon">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">제목</h5>
+                                            <p class="card-text">내용</p>
+                                        </div>
+                                        <div class="icon-container">
+                                            <i class="fa-regular fa-thumbs-up icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg" class="card-img-top" alt="상품 이미지">
+                                        <div class="icon-body">
+                                            <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                            <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                            <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                            <img src="/img/icon/instagram.svg" class="content-icon">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">제목</h5>
+                                            <p class="card-text">내용</p>
+                                        </div>
+                                        <div class="icon-container">
+                                            <i class="fa-regular fa-thumbs-up icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg" class="card-img-top" alt="상품 이미지">
+                                        <div class="icon-body">
+                                            <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                            <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                            <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                            <img src="/img/icon/instagram.svg" class="content-icon">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">제목</h5>
+                                            <p class="card-text">내용</p>
+                                        </div>
+                                        <div class="icon-container">
+                                            <i class="fa-regular fa-thumbs-up icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg" class="card-img-top" alt="상품 이미지">
+                                        <div class="icon-body">
+                                            <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                            <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                            <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                            <img src="/img/icon/instagram.svg" class="content-icon">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">제목</h5>
+                                            <p class="card-text">내용</p>
+                                        </div>
+                                        <div class="icon-container">
+                                            <i class="fa-regular fa-thumbs-up icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg" class="card-img-top" alt="상품 이미지">
+                                        <div class="icon-body">
+                                            <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                            <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                            <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                            <img src="/img/icon/instagram.svg" class="content-icon">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">제목</h5>
+                                            <p class="card-text">내용</p>
+                                        </div>
+                                        <div class="icon-container">
+                                            <i class="fa-regular fa-thumbs-up icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg" class="card-img-top" alt="상품 이미지">
+                                        <div class="icon-body">
+                                            <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                            <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                            <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                            <img src="/img/icon/instagram.svg" class="content-icon">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">제목</h5>
+                                            <p class="card-text">내용</p>
+                                        </div>
+                                        <div class="icon-container">
+                                            <i class="fa-regular fa-thumbs-up icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg" class="card-img-top" alt="상품 이미지">
+                                        <div class="icon-body">
+                                            <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                            <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                            <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                            <img src="/img/icon/instagram.svg" class="content-icon">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">제목</h5>
+                                            <p class="card-text">내용</p>
+                                        </div>
+                                        <div class="icon-container">
+                                            <i class="fa-regular fa-thumbs-up icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img src="https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg" class="card-img-top" alt="상품 이미지">
+                                        <div class="icon-body">
+                                            <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                                            <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                                            <img src="/img/icon/youtube.png" class="content-icon youtube">
+                                            <img src="/img/icon/instagram.svg" class="content-icon">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">제목</h5>
+                                            <p class="card-text">내용</p>
+                                        </div>
+                                        <div class="icon-container">
+                                            <i class="fa-regular fa-thumbs-up icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- If we need pagination -->
+                            <div class="swiper-pagination"></div>
+                        
+                            
+                            
+                        
+                        </div>
+                        <div class="position-absolute custom-button-next" style="top: 50%; transform: translate(-50%,-50%); right: -30px;">
+                            <button class="carousel-control-next" type="button" data-bs-target="#promotionCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    
                 </div>
-            <div class="col-md-6">
-                <div class="box">
-                    <div class="table-margin"></div>
-                        <table class="table">
-                            <tr>
-                                <td class="fw-bold fs-5 text-center align-middle border-0">닉네임</td>
-                                <td class="fs-5 align-middle border-0" th:text="${user.id}"></td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold fs-5 text-center align-middle border-0">이름</td>
-                                <td class="fs-5 align-middle border-0" th:text="${user.name}"></td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold fs-5 text-center align-middle border-0">전화번호</td>
-                                <td class="fs-5 align-middle border-0" th:text="${user.phone}">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold fs-5 text-center align-middle border-0">이메일</td>
-                                <td class="fs-5 align-middle border-0" th:text="${user.email}">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold fs-5 text-center align-middle border-0">생년월일</td>
-                                <td class="fs-5 align-middle border-0" th:text="${user.birth}">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bold fs-5 text-center align-middle border-0">주소</td>
-                                <td class="fs-5 align-middle border-0" th:text="${user.address}">
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="button-container">
-                            <a href="/page/mypage/profileUpdate"><input class="button" type="button" value="정보 수정"></a>
+            </div>
+        </div>
+        
+        <script src="/js/cardSlide.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselInner = document.getElementById('carousel-inner');
+    
+            // 예시 데이터
+            const cards = [
+                { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분', text: '꿀타래' },
+                { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분1', text: '꿀타래1' },
+                { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분2', text: '꿀타래2' },
+                { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분3', text: '꿀타래3' },
+                { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분4', text: '꿀타래4' },
+                { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분5', text: '꿀타래5' },
+                { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분6', text: '꿀타래6' },
+                { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분7', text: '꿀타래7' },
+                { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분8', text: '꿀타래8' },
+            ];
+    
+            function createCard(cardData) {
+                return `
+                <div class="cards">
+                    <div class="card">
+                        <img src="${cardData.img}" class="card-img-top" alt="${cardData.title}">
+                        <div class="icon-body">
+                            <img src="/img/icon/afreeca.png" class="content-icon afreeca">
+                            <img src="/img/icon/chzzk.png" class="content-icon chzzk">
+                            <img src="/img/icon/youtube.png" class="content-icon youtube">
+                            <img src="/img/icon/instagram.svg" class="content-icon">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">${cardData.title}</h5>
+                            <p class="card-text">${cardData.text}</p>
+                        </div>
+                        <div class="icon-container">
+                            <i class="fa-regular fa-thumbs-up icon"></i>
                         </div>
                     </div>
                 </div>
-            <div class="col-md-3">
-                <div class="table-margin"></div>
-                <!-- 빈 이미지일 경우 -->
-                <div class="image-container" id="imageContainer">
-                    <img id="uploadedImage" th:src="|/file/img/${file.fileNo}|" alt="" style="width: 100%; ">
-                </div>
-                <input type="file" id="fileInput" style="display: none;">
-                <button class="btn btn-primary w-100 mt-1" onclick="saveImage()">이미지 저장</button>
-                <button class="btn btn-primary w-100 mt-1" onclick="deleteImage()">기본 이미지로 변경</button>
-            </div>
-        </div>
-    </div>
-
-
-    <script>
-        document.getElementById('imageContainer').addEventListener('click', function () {
-            document.getElementById('fileInput').click();
-        });
-
-        document.getElementById('fileInput').addEventListener('change', function (event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('uploadedImage').src = e.target.result;
-                    document.getElementById('uploadedImage').style.display = 'block';
-                };
-                reader.readAsDataURL(file);
+                `;
             }
-        });
-
-    function saveImage() {
-        const fileInput = document.getElementById('fileInput');
-        const file = fileInput.files[0];
-        if (!file) {
-            alert("파일을 선택해 주세요.");
-            return;
-        }
-
-        var userNo = "[[${user.userNo}]]";
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("user_no", userNo);  // user_no 값을 추가 (실제 값으로 변경 필요)
-
-        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
-
-        fetch('/file/upload', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                [csrfHeader]: csrfToken
-            }
-        })
-        .then(response => response.text())
-        .then(result => {
-            // alert(result);
-            // 이미지가 저장된 후에 이미지 업데이트 코드를 직접 호출
-            updateImage(); // 이미지 업데이트 함수 호출
-            alert("이미지가 저장되었습니다.");
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('이미지 업로드 실패');
-        });
-    }
-
-    function deleteImage() {
-        const defaultImageUrl = 'path/to/default-image.jpg';  // 기본 이미지 URL 설정
-
-        var userNo = "[[${user.userNo}]]";
-        const formData = new FormData();
-        formData.append("user_no", userNo);  // user_no 값을 추가 (실제 값으로 변경 필요)
-
-        const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-        const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
-
-        fetch('/file/delete', {
-            method: 'DELETE',
-            body: formData,
-            headers: {
-                [csrfHeader]: csrfToken
-            }
-        })
-        .then(response => response.text())
-        .then(result => {
-            document.getElementById('uploadedImage').src = defaultImageUrl;
-            alert("기본 이미지로 변경되었습니다.");
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('이미지 삭제 실패');
-        });
-    }
     
+            function createCarouselItem(cardsChunk, isActive = false) {
+                const activeClass = isActive ? 'active' : '';
+                return `
+                    <div class="carousel-item ${activeClass}">
+                        <div class="row mx-0">
+                            ${cardsChunk.map(createCard).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+    
+            function chunkArray(array, chunkSize) {
+                const chunks = [];
+                for (let i = 0; i < array.length; i += chunkSize) {
+                    chunks.push(array.slice(i, i + chunkSize));
+                }
+                return chunks;
+            }
+    
+            // 카드를 4개씩 묶음으로 나누기
+            const cardChunks = chunkArray(cards, 3);
+    
+            // 첫 번째 카드는 active 클래스를 추가하여 활성화
+            cardChunks.forEach((chunk, index) => {
+                const carouselItem = createCarouselItem(chunk, index === 0);
+                carouselInner.insertAdjacentHTML('beforeend', carouselItem);
+            });
+        });
     </script>
-</body>
 
+</body>
 </html>

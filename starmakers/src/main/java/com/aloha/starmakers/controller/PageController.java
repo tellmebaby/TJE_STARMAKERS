@@ -22,7 +22,9 @@ import com.aloha.starmakers.board.dto.StarBoard;
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.board.service.QnaService;
 import com.aloha.starmakers.board.service.StarService;
+import com.aloha.starmakers.user.dto.Payment;
 import com.aloha.starmakers.user.dto.Users;
+import com.aloha.starmakers.user.service.PaymentService;
 import com.aloha.starmakers.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -49,6 +51,9 @@ public class PageController {
     @Autowired
     private FileService fileService;
 
+    @Autowired
+    private PaymentService paymentService;
+
     // @GetMapping("mypage/{path}")
     // public String getMethodName2(@PathVariable("path") String path, HttpSession session, Model model) {    
     //     Users user = (Users) session.getAttribute("user");   
@@ -60,7 +65,7 @@ public class PageController {
     // public String read(@RequestParam("userNo") int userNo, Model model) throws Exception {
     public String read(Principal principal
                       ,HttpSession session
-                      , Model model) throws Exception {
+                      ,Model model) throws Exception {
         // Princiapl 로 유저 가져오기
         // CustomUser loginUser = (CustomUser) principal;
         // int userNo = loginUser.getUser().getUserNo();
@@ -208,14 +213,13 @@ public class PageController {
     /* ------------------------------------------------------------- */
     /* 결제내역 */
     @GetMapping("/mypage/payment")
-    public String list(Model model, HttpSession session, Page page, Option option) throws Exception {
+    public String paymentList(Model model, HttpSession session) throws Exception {
 
-        
+        List<Payment> paymentList = paymentService.paymentList();
 
         Users user = (Users) session.getAttribute("user");
+        model.addAttribute("paymentList", paymentList);
         model.addAttribute("user", user);
-        model.addAttribute("page", page);
-        model.addAttribute("option", option);
         return "/page/mypage/payment";
     }
 
@@ -296,6 +300,12 @@ public class PageController {
         
         return "redirect:/page/mypage/reviewUpdate?qnaNo=" + starNo + "$error";
     }
+
+    @GetMapping("/mypage/archive")
+    public String archive(StarBoard starBoard) throws Exception {
+        return "/page/mypage/archive";
+    }
+    
 
 
 }
