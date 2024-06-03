@@ -247,6 +247,40 @@ public class HomeController {
     public String carddesign() {
         return "carddesign";
     }
+
+    // 메인 리뉴얼
+    @GetMapping("/index2")
+    public String home2(Principal principal
+    ,HttpSession session
+    ,Model model
+      ,Page page, Option option) throws Exception {
+    // 로그인을 한 사용자 정보를 로깅합니다.
+    log.info("메인 화면");
+    log.info(":::::::::: principal ::::::::::");
+    log.info("principal : " + principal);
+    log.info("user : " + session.getAttribute("user"));
+    Users user = (Users) session.getAttribute("user");
+    model.addAttribute("user", user);
+
+    // starList를 가져와서 모델에 추가합니다.
+    List<StarBoard> starListReview = starService.list("review", page, option);
+    for (StarBoard starBoard : starListReview) {
+    int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+    starBoard.setCommentCount(commentCount);
+    }
+
+    List<StarBoard> starListAnn = starService.list("an", page, option);
+    for (StarBoard starBoard : starListAnn) {
+    int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+    starBoard.setCommentCount(commentCount);
+    }
+
+    model.addAttribute("starListReview", starListReview.stream().limit(5).collect(Collectors.toList()));
+    model.addAttribute("starListAnn", starListAnn.stream().limit(5).collect(Collectors.toList()));
+    // index 페이지를 반환합니다.
+    return "index2";
+    }
+    
     
     /**
      * 이벤트 후기 게시판 조회

@@ -1,0 +1,433 @@
+/* 기존 스타일 */
+#bannerCarousel img {
+    width: -webkit-fill-available;
+    height: 200px;
+}
+
+.event-banner {
+    background: #f8f9fa;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.bg-image {
+    position: relative;
+    background-image: url('/img/indexTopBackImg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 60vh; /* 이미지가 화면 높이만큼 차지하도록 설정 */
+    overflow: hidden; /* 오버플로우 숨기기 */
+}
+
+.bg-image .topOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* .bg-image의 높이에 맞춤 */
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+
+.jumbotron {
+    height: 60vh; /* 화면 높이와 동일하게 설정 */
+}
+
+.jumbotron .topOverlay {
+    padding: 0 30px;
+    text-align: left;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 40px;
+    color: black;
+    left: -5%;
+    right: auto;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: black;
+    border-radius: 50%;
+}
+
+.carousel-control-next {
+    left: auto;
+    right: -5%;
+}
+
+#promotionCarousel .row {
+    justify-content: start;
+    /* gap: 17px; */
+}
+
+#promotionCarousel .col-lg-3 {
+    flex: 0 0 24%;
+}
+
+.board-h {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-muted {
+    font-size: 0.8rem;
+}
+
+.search-input {
+    margin-right: 15px;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.badge-secondary {
+    margin-right: 10px;
+}
+
+#promotionCarousel .card {
+    border-radius: 1.25rem;
+    overflow: hidden;
+}
+
+.icon-container {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+.icon {
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.icon-body {
+    background-color: #b0d5ff;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.detail-search {
+    padding: 20px;
+    background-color: #E7ECF6;
+    border-radius: 10px;
+}
+
+.form-check-inline {
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.form-check-input {
+    margin-right: 5px;
+}
+
+.form-check-label {
+    margin-right: 15px;
+    color: #495057;
+}
+
+.row {
+    margin-top: 70px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-md-4 {
+    flex: 1 1 33%;
+    padding: 10px;
+}
+
+.search-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#cardContainer {
+    margin-top: 65px;
+}
+
+.fc-col-header-cell-cushion,
+.fc-daygrid-day-number {
+    color: black !important;
+    text-decoration: none !important;
+}
+
+/* 카드 스타일 */
+.card {
+    position: relative;
+    overflow: hidden;
+    transition: opacity 0.5s, transform 0.5s;
+    border-radius: 25px;
+    padding: 3px;
+    background-clip: padding-box;
+}
+
+.card.standard {
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, #4e5d6c, #6c7a89, #bfc9d1, #6c7a89, #4e5d6c);
+    background-clip: padding-box;
+}
+
+.card.prime {
+    border: 1px solid transparent;
+    background: linear-gradient(to right, pink, purple, lightblue, cyan, lime, yellow, orange);
+}
+
+.card.gold {
+    border: 1px solid transparent;
+    background: linear-gradient(to right, gold, goldenrod, yellow, lightyellow, palegoldenrod);
+}
+
+.card.clicked {
+    opacity: 0.5;
+    transform: scale(1.2);
+    animation: revertAnimation 0.5s 0.5s forwards;
+}
+
+@keyframes revertAnimation {
+    from {
+        opacity: 0.5;
+        transform: scale(3);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.custom-card {
+    height: 330px;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    overflow: hidden;
+    border-radius: 25px;
+}
+
+.overlay,
+.card-body {
+    position: absolute;
+    bottom: -55%;
+    width: 100%;
+    transition: bottom 1s;
+}
+
+.overlay {
+    height: 45%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center 60%;
+    filter: blur(10px);
+    z-index: 1;
+}
+
+.card-body {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
+    height: 45%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    text-align: left;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.card:hover .overlay,
+.card:hover .card-body {
+    bottom: 0;
+}
+
+.card:hover .overlay {
+    background-position: center bottom;
+}
+
+.card-body h5,
+.card-body p {
+    margin: 0;
+}
+
+.card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 80%;
+}
+
+.card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-size: 70%;
+}
+
+.star {
+    color: yellow;
+    font-size: 24px;
+    position: absolute;
+    display: none;
+    pointer-events: none;
+}
+
+@keyframes burst {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(5);
+        opacity: 0;
+    }
+}
+
+.btn-custom {
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 0.25em 0.25em;
+    text-align: center;
+    font-size: 0.5em;
+    margin-top: 10px;
+    width: 28px;
+}
+
+#asmr-link {
+    width: 40px;
+}
+
+/* .btn-primary {
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 3px 3px;
+    text-align: center;
+    font-size: 0.7em;
+    margin-top: 10px;
+    width: 48px;
+} */
+
+
+
+.author-icon {
+    width: 1em;
+    height: 1em;
+    margin-right: 5px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.left-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.content-icon {
+    width: 1.2em;
+    height: 1.2em;
+    margin-bottom: 5px;
+    border-radius: 50%;
+}
+
+.right-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.right-content i {
+    font-size: 1em;
+}
+
+.bottom-container {
+    display: flex;
+}
+
+.field-links {
+    flex: 4;
+}
+
+.star-links {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.star-links > svg {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.count {
+    margin-top: 10px;
+    font-size: 70%;
+}
+
+.shadow-icon {
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));
+}
+
+#main-search {
+    background-color: transparent; /* 배경색 없음 */
+    border: 1px solid white; /* 테두리 하얀색 */
+    color: white; /* 텍스트 색상을 흰색으로 설정 */
+    margin-left: -1px; /* 왼쪽에 인풋과 겹치지 않도록 마진 설정 */
+    border-top-right-radius: 0; /* 버튼 왼쪽 상단 모서리를 둥글게 하지 않음 */
+    border-bottom-right-radius: 0; /* 버튼 왼쪽 하단 모서리를 둥글게 하지 않음 */
+    height: calc(100% - 2px); /* 버튼 높이를 인풋과 동일하게 설정 */
+    margin-right: -1px; /* 버튼과의 간격을 없애기 위해 추가 */
+}
+
+#btn-mainSearch {
+    background-color: transparent; /* 배경색 없음 */
+    border: 1px solid white; /* 테두리 하얀색 */
+    color: white; /* 텍스트 색상을 흰색으로 설정 */
+    margin-left: -1px; /* 왼쪽에 인풋과 겹치지 않도록 마진 설정 */
+    border-top-left-radius: 0; /* 버튼 왼쪽 상단 모서리를 둥글게 하지 않음 */
+    border-bottom-left-radius: 0; /* 버튼 왼쪽 하단 모서리를 둥글게 하지 않음 */
+    height: calc(100% - 2px); /* 버튼 높이를 인풋과 동일하게 설정 */
+    width: 150px;
+    margin-right: -1px; /* 버튼과의 간격을 없애기 위해 추가 */
+}
+
+#main-search::placeholder {
+    color: white; /* 플레이스홀더 텍스트 색상을 흰색으로 설정 */
+}
+
+#btn-mainSearch:hover {
+    background-color: white; /* 마우스 오버시 배경색 흰색으로 변경 */
+    color: black; /* 텍스트 색상을 검은색으로 변경 */
+}

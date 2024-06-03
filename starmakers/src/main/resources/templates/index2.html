@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default_layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <!-- <link rel="stylesheet" href="/css/card.css" class="css"> -->
+    <link class="css" href="/css/starCard.css" rel="stylesheet">
+    <style>
+        /*
+        #promotionCarousel .col-lg-3 p-0 {
+            padding-right: 0;
+            padding-left: 0;
+        }
+        */
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+    </style>
+    
+
+</head>
+
+
+
+<body layout:fragment="content">
+
+<div class="jumbotron text-center bg-image">
+    <div class="topOverlay d-flex flex-column align-items-center">
+        <h1 class="display-4">스타가 되는 첫걸음</h1>
+        <p class="lead">스타가 되고 싶은 당신을 위한 홍보 플랫폼</p>
+        <div class="d-flex">
+            <a href="page/starCard/starInsert" class="btn btn-primary btn-lg me-3">무료로 참여하기</a>
+            <a href="page/starCard/starList" class="btn btn-secondary btn-lg">스타 보러가기</a>
+            
+        </div>
+        <div class="row mb-3 mt-3">
+            <div class="col-md-12 d-flex align-items-center">
+                <input type="text" class="form-control me-2" id="main-search" placeholder="검색 키워드 입력">
+                <button class="btn btn-primary" id="btn-mainSearch">검색</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- <div class="row mb-3 mt-3">
+        <div class="col-md-12 d-flex align-items-center">
+            <input type="text" class="form-control me-2" id="searchInput" placeholder="검색 키워드 입력">
+            <button class="btn btn-primary col-2">검색</button>
+        </div>
+    </div> -->
+
+    <div id="promotionCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner" id="carousel-inner">
+            <!-- Dynamically added carousel items will go here -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#promotionCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#promotionCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="event-banner">
+                    <img src="/img/sampleBanner.png" class="d-block w-100">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="event-banner">
+                    <img src="/img/sampleBanner2.png" class="d-block w-100">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="event-banner">
+                    <img src="/img/sampleBanner3.png" class="d-block w-100">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="event-banner">
+                    <img src="/img/sampleBanner4.png" class="d-block w-100">
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="board-h">이벤트 후기 <span class="text-muted"><a href="page/board/reviewBoard/reviewList">더 보기></a></span></h3>
+            <ul class="list-group">
+                <li class="list-group-item" th:if="${starListReview.empty}">
+                    조회된 게시물이 없습니다.
+                </li>
+                <li class="list-group-item" th:each="starBoard, iterStat : ${starListReview}">
+                    <a th:href="|/page/board/reviewBoard/reviewPost?starNo=${starBoard.starNo}|" th:text="${starBoard.title} + ' [' + ${starBoard.commentCount} + ']'"></a>
+                    <span class="badge text-bg-secondary" th:text="${starBoard.views}"></span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h3 class="board-h">공지사항 <span class="text-muted"><a href="page/board/anBoard/anList">더 보기></a></span></h3>
+            <ul class="list-group">
+                <li class="list-group-item" th:if="${starListAnn.empty}">
+                    조회된 게시물이 없습니다.
+                </li>
+                <li class="list-group-item" th:each="starBoard, iterStat : ${starListAnn}">
+                    <a th:href="|/page/board/anBoard/anPost?starNo=${starBoard.starNo}|" th:text="${starBoard.title} + ' [' + ${starBoard.commentCount} + ']'"></a>
+                    <span class="badge text-bg-secondary" th:text="${starBoard.views}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const carouselInner = document.getElementById('carousel-inner');
+        
+                // 예시 데이터 6의 배수로 가져올 것 나머지는 버리고
+                const cards = [
+                    { img: '19', title: '뉴진스 사인CD+폴라 도착', content: '“안녕, 버니즈?”🐰버블검에 이어 새롭게 등장한 더블 싱글 [How Sweet]✨1️⃣ 멜론 독점! 강렬한 변신의 소장각 포토 2️⃣  고민 릴레이, 멜런스 게임 3️⃣ 토깽이들이 추천하는 최애곡! 멜론에서 모두 확인하고 한정판 친필 사인 CD+폴라(5명)받아 가세요💟' , card: 'card prime', userImgId: '1', category1: 'youtube, afreeca, chzzk, instagram', category2: '음악, 음식, 여행, 게임, 동물, 운동, ASMR'},
+                    { img: '18', title: '어쩌다보니천생연분1', content: '꿀타래1' , card: 'card standard' , userImgId: '7', category1: 'youtube, chzzk', category2: '음악, 음식, 여행, ASMR'},
+                    { img: '17', title: '어쩌다보니천생연분2', content: '꿀타래2' , card: 'card gold' , userImgId: '5' , category1: 'youtube, chzzk', category2: '음악, 음식, 여행, 게임, 동물, 운동, ASMR'},
+                    { img: '16', title: '어쩌다보니천생연분3', content: '꿀타래3' , card: 'card standard' , userImgId: '8', category1: 'youtube, afreeca', category2: '음악, 음식,  ASMR'},
+                    { img: '15', title: '어쩌다보니천생연분4', content: '꿀타래4' , card: 'card gold', userImgId: '9', category1: 'chzzk, afreeca, instagram', category2: '음악, ASMR'},
+                    { img: '14', title: '어쩌다보니천생연분5', content: '꿀타래5' , card: 'card standard', userImgId: '10', category1: 'youtube, afreeca', category2: '음악, 음식, 여행, '},
+                    { img: '13', title: '어쩌다보니천생연분6', content: '꿀타래6' , card: 'card prime', userImgId: '1', category1: 'youtube, chzzk', category2: '음악, 음식, 운동, ASMR'},
+                    { img: '12', title: '어쩌다보니천생연분7', content: '꿀타래7' , card: 'card standard', userImgId: '1', category1: 'youtube, afreeca', category2: '음악, 음식, 동물, 운동, ASMR'},
+                    { img: '11', title: '어쩌다보니천생연분8', content: '꿀타래8' , card: 'card gold', userImgId: '1', category1: 'youtube, afreeca, instagram', category2: '음악, 음식, 여행, 게임, 동물, 운동, ASMR'},
+                    { img: '10', title: '어쩌다보니천생연분8', content: '꿀타래8' , card: 'card gold', userImgId: '1', category1: 'youtube, afreeca, instagram', category2: '음악, 음식, 여행'},
+                    { img: '9', title: '어쩌다보니천생연분8', content: '꿀타래8' , card: 'card gold', userImgId: '1', category1: 'youtube, afreeca, instagram', category2: '음악, 음식, 여행, 게임, 동물'},
+                    { img: '8', title: '어쩌다보니천생연분8', content: '꿀타래8' , card: 'card gold', userImgId: '1', category1: 'youtube, afreeca, instagram', category2: '음악, 동물, 운동, ASMR'},
+                ];
+        
+                
+
+                function createCard(cardData) {
+                    const categories = cardData.category1.split(', ');
+                    const icon1 = categories.includes('afreeca') ? '<img src="/img/icon/afreeca.png" alt="아이콘1" class="content-icon">' : '';
+                    const icon2 = categories.includes('chzzk') ? '<img src="/img/icon/chzzk.png" alt="아이콘2" class="content-icon">' : '';
+                    const icon3 = categories.includes('youtube') ? '<img src="/img/icon/youtube.png" alt="아이콘3" class="content-icon">' : '';
+                    const icon4 = categories.includes('instagram') ? '<img src="/img/icon/instagram.png" alt="아이콘4" class="content-icon">' : '';
+
+                    const categories2 = cardData.category2.split(', ');
+                    const musicBtn = categories2.includes('음악') ? '<a href="#" class="btn btn-custom">#음악</a>' : '';
+                    const travelBtn = categories2.includes('여행') ? '<a href="#" class="btn btn-custom">#여행</a>' : '';
+                    const foodBtn = categories2.includes('음식') ? '<a href="#" class="btn btn-custom">#음식</a>' : '';
+                    const gameBtn = categories2.includes('게임') ? '<a href="#" class="btn btn-custom">#게임</a>' : '';
+                    const animalBtn = categories2.includes('동물') ? '<a href="#" class="btn btn-custom">#동물</a>' : '';
+                    const exerciseBtn = categories2.includes('운동') ? '<a href="#" class="btn btn-custom">#운동</a>' : '';
+                    const asmrBtn = categories2.includes('ASMR') ? '<a href="#" id="asmr-link" class="btn btn-custom">#ASMR</a>' : '';
+
+
+                    return `
+                    <div class="col-md-2 mb-4">
+                        <div class="${cardData.card}" ondblclick="animateCard(this)">
+                            <div class="card custom-card" style="background-image: url('/file/img/${cardData.img}');">
+                                <span class="star">&#9733;</span> <!-- 노란색 별 이모티콘 -->
+                                <div class="top-container">
+                                    <div class="left-content">
+                                        ${icon1}
+                                        ${icon2}
+                                        ${icon3}
+                                        ${icon4}
+                                    </div>
+                                    <div class="right-content">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots shadow-icon" viewBox="0 0 16 16">
+                                            <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="overlay" style="background-image: url('/file/img/${cardData.img}');"></div>
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <img src="/file/img/${cardData.userImgId}" alt="작성자 아이콘" class="author-icon">
+                                        ${cardData.title}
+                                    </h5>
+                                    <p class="card-text">${cardData.content}</p>
+                                    <div class="bottom-container">
+                                        <div class="field-links">
+                                            ${musicBtn}
+                                            ${travelBtn}
+                                            ${foodBtn}
+                                            ${gameBtn}
+                                            ${animalBtn}
+                                            ${exerciseBtn}
+                                            ${asmrBtn}
+                                        </div>
+                                        <div class="star-links">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                                                <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/>
+                                            </svg>
+                                            <span class="count">1.5k</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                }
+        
+                function createCarouselItem(cardsChunk, isActive = false) {
+                    const activeClass = isActive ? 'active' : '';
+                    return `
+                        <div class="carousel-item ${activeClass}">
+                            <div class="row mx-0">
+                                ${cardsChunk.map(createCard).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+        
+                function chunkArray(array, chunkSize) {
+                    const chunks = [];
+                    for (let i = 0; i < array.length; i += chunkSize) {
+                        chunks.push(array.slice(i, i + chunkSize));
+                    }
+                    return chunks;
+                }
+        
+                // 카드를 6개씩 묶음으로 나누기
+                const cardChunks = chunkArray(cards, 6);
+        
+                // 첫 번째 카드는 active 클래스를 추가하여 활성화
+                cardChunks.forEach((chunk, index) => {
+                    const carouselItem = createCarouselItem(chunk, index === 0);
+                    carouselInner.insertAdjacentHTML('beforeend', carouselItem);
+                });
+            });
+        </script>
+
+        <script>
+            function animateCard(card) {
+                const star = card.querySelector('.star');
+                star.style.display = 'inline'; // 이모티콘 표시
+
+                const x = event.clientX - card.offsetLeft;
+                const y = event.clientY - card.offsetTop;
+                star.style.left = `${x}px`;
+                star.style.top = `${y}px`;
+
+                setTimeout(function() {
+                    star.style.display = 'none'; // 이모티콘 숨김
+                }, 500); // 0.5초 (애니메이션의 총 시간)
+
+                star.style.animation = 'burst 0.5s forwards'; // 애니메이션 시작
+            }
+        </script>
+
+        <script>
+            document.addEventListener('scroll', function() {
+                const bgImage = document.querySelector('.bg-image');
+                const scrolled = window.pageYOffset;
+                const parallaxSpeed = 0.7;
+                bgImage.style.backgroundPositionY = -(scrolled * parallaxSpeed) + 'px';
+            });
+        </script>
+</body>
+
+
+
+
+</html>
