@@ -22,7 +22,6 @@ import com.aloha.starmakers.board.dto.StarBoard;
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.board.service.QnaService;
 import com.aloha.starmakers.board.service.StarService;
-import com.aloha.starmakers.user.dto.Payment;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.service.UserService;
 
