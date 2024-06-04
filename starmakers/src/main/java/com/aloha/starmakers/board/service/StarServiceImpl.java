@@ -46,7 +46,7 @@ public class StarServiceImpl implements StarService {
         Users user = userMapper.login(username);
         starBoard.setUserNo(user.getUserNo());
         starBoard.setWriter(user.getId());
-        // starBoard.setCard("무료홍보");
+        
         // 정보 등록
         starMapper.insert(starBoard);
         
@@ -128,6 +128,14 @@ public class StarServiceImpl implements StarService {
             });
         }
         return starList;
+    }
+
+    @Override
+    public List<StarBoard> promotionList(int userNo) throws Exception {
+
+        List<StarBoard> promotionList = starMapper.promotionList(userNo);
+        log.info("userNo : " + userNo);
+        return promotionList;
     }
 
     

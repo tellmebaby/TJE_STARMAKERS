@@ -167,8 +167,8 @@
 
     <!-- 글 등록 -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="starNo">
-        INSERT INTO star_board(title, writer, content, user_no, pay_no, card, category1, category2, type, start_date, end_date)
-        VALUES (#{title}, #{writer}, #{content},#{userNo},#{payNo},#{card},#{category1},#{category2},#{type},#{startDate},#{endDate})
+        INSERT INTO star_board(title, writer, content, user_no, pay_no, card, category1, category2, type, start_date, end_date, status)
+        VALUES (#{title}, #{writer}, #{content},#{userNo},#{payNo},#{card},#{category1},#{category2},#{type},#{startDate},#{endDate},#{status})
     </insert>
 
     <!-- 글 등록 -->
@@ -217,5 +217,22 @@
         DELETE FROM star_board
         WHERE star_no IN (${starNo})
     </delete>
+
+    <!-- 마이페이지 쓴 글 조회 -->
+    <select id="promotionList" resultType="StarBoard">
+        SELECT 
+            sb.user_no,
+            sb.title, 
+            sb.category1, 
+            sb.reg_date, 
+            sb.status, 
+            pi.price as star_price
+        FROM star_board sb
+        JOIN payment_info pi
+        ON  pi.user_no = sb.user_no
+        AND pi.star_no = sb.star_no
+        WHERE 
+            sb.user_no = #{userNo}
+    </select>
 
 </mapper>

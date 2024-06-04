@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.aloha.starmakers.board.dto.Files;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.StarBoard;
@@ -30,6 +31,8 @@ import com.aloha.starmakers.user.dto.Users;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Slf4j
 @Controller
@@ -105,7 +108,6 @@ public class StarController {
     public String insertPro(StarBoard starBoard, String username,
             @RequestParam(value = "image", required = false) MultipartFile file, HttpSession session)
             throws Exception {
-        // starBoard.setCard("무료홍보");
         int starNo = starService.insert(starBoard, username);
 
         Users user = (Users) session.getAttribute("user");
@@ -285,6 +287,31 @@ public class StarController {
         return "redirect:/page/board/qnaBoard/qnaUpdate?qnaNo=" + no + "$error";
     }
 
+    /**
+     * 글 1개 삭제
+     * @param starNo
+     * @return
+     * @throws Exception 
+     */
+    @PostMapping("/starBoard/delete")
+    public String starDelete(@RequestParam("starNo") int starNo) throws Exception {
+        String starNos = starNo+"";
+        int result = starService.delete(starNos);
+        if(result>0){
+            // 첨부파일 삭제
+            Files file = new Files();
+            file.setStarNo(starNo);
+            fileService.deleteByParent(file);
+            return "redirect:/page/starCard/starList";
+        }
+        else {
+            log.info("삭제 실패");
+        }
+        return "redirect:/page/starCard/starList";
+        
+    }
+
+
     // 아래부터 event 게시판
 
     @GetMapping("/board/eventBoard/eventList")
@@ -375,8 +402,7 @@ public class StarController {
         if (result > 0) {
             return "redirect:/page/mypage/event";
         }
-
-        return "redirect:/page/mypage/event?error"; // 삭제 실패시에도 같은 페이지로 리디렉션
+        return "redirect:/page/mypage/event?error";  // 삭제 실패시에도 같은 페이지로 리디렉션
     }
 
     // 아래부터 review 게시판
@@ -399,6 +425,18 @@ public class StarController {
         return "/page/board/reviewBoard/reviewList";
     }
 
+    @PostMapping("/board/reviewBoard/delete")
+    public String reviewDeletePost(@RequestParam("starNo") int starNo) throws Exception {
+        String starNos = starNo+"";
+        int result = starService.delete(starNos);
+        if(result>0){
+            log.info("삭제 완료");
+        }
+        else {
+            log.info("삭제 실패");
+        }
+        return "redirect:/page/board/reviewBoard/reviewList";
+    }
     @GetMapping("/board/reviewBoard/reviewList")
     public String reviewList(@RequestParam(value = "type", defaultValue = "review") String type, Model model, Page page,
             Option option) throws Exception {
@@ -578,5 +616,6 @@ public class StarController {
             return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
         }
     }
+    
 
 }

@@ -48,16 +48,13 @@
             width: 90px; 
             text-align: center; 
         }
-        .btn-review {
+        .btn-review.pending {
             background-color: #2972FE;
+        }
+        .btn-review.approved {
+            background-color: #28a745; /* 예: 초록색 */
         }
         .btn-refund {
-            background-color: #2972FE;
-        }
-        .status-approved {
-            background-color: #DDDDDD   ;
-        }
-        .status-pending {
             background-color: #2972FE;
         }
         .table th, .table td {
@@ -140,7 +137,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <th:block th:each="payment : ${paymentList}">
+                                <th:block th:each="payment : ${payList}">
                                     <tr th:if="${user.userNo} == ${payment.userNo}"> 
                                         <td class="border-0 pt-4" th:text="${payment.code}"></td>
                                         <td class="border-0 pt-4" th:text="${payment.productTitle}"></td>
@@ -151,8 +148,12 @@
                                         <td colspan="3"></td>
                                         <td>
                                             <div class="button-container">
-                                                <input type="button" class="btn-review" th:value="${payment.status}" disabled></input>
-                                                <button class="btn-refund" disabled>환불 요청</button>
+                                                <input type="button" 
+                                                   class="btn-review" 
+                                                   th:value="${payment.starStatus}" 
+                                                   disabled 
+                                                   th:classappend="${payment.starStatus == '승인 완료' ? 'approved' : 'pending'}">
+                                                <button class="btn-refund">환불 요청</button>
                                             </div>
                                         </td>
                                     </tr> 

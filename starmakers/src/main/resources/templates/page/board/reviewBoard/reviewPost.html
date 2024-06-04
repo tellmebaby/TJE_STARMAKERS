@@ -64,6 +64,7 @@
         <div id="reply-listbox">
             <div id="reply-list">
 
+
             </div>
         </div>
      
@@ -79,6 +80,15 @@
   
         function update() {
           location.href = '/page/board/reviewBoard/reviewUpdate?starNo=' + starNo
+        }
+ 
+
+        // 삭제 요청
+        function actionDelete() {
+            let check = confirm('정말로 삭제하시겠습니까?')
+            if( check ) {
+                form.submit;
+            }
         }
 
         function toggleRereplyContainer(button) {
