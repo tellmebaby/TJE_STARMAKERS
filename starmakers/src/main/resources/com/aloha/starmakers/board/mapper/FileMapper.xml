@@ -71,8 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- 파일 목록 삭제 - 부모 테이블 기준 파일 목록 삭제 -->
     <delete id="deleteByParent">
         DELETE FROM file
-        WHERE parent_table = #{parentTable}
-          AND parent_no = #{parentNo}
+        WHERE star_no = #{starNo}
     </delete>
 
     <!-- 유저 이미지 파일 가져오기 -->

@@ -104,6 +104,21 @@
             font-weight: bolder;
             color: white;
         }
+        .button-container3 {
+            text-align: right;
+            padding: 10px 0;
+        }
+        .button-container3 input {
+            margin-left: 5px;
+            padding: 7px 20px;
+            border-radius: 3px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+            cursor: pointer;
+        }
 
         /* 댓글!!!! 입력*/
         .reply-container {

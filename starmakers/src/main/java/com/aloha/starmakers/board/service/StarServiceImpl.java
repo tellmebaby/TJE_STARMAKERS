@@ -46,7 +46,7 @@ public class StarServiceImpl implements StarService {
         Users user = userMapper.login(username);
         starBoard.setUserNo(user.getUserNo());
         starBoard.setWriter(user.getId());
-        // starBoard.setCard("무료홍보");
+        
         // 정보 등록
         starMapper.insert(starBoard);
         

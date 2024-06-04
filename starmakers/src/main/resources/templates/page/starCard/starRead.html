@@ -515,39 +515,43 @@
     <h1 class="d-flex justify-content-center mt-3 mb-3">
       홍보 상세
     </h1>
-    <div class="container d-flex justify-content-center">
-      <div class="container2">
-
-        <div class="main-image">
-          <div>
-            <img th:src="|/file/img/${starBoard.imgNo}|" class="image rounded mt-auto" alt="썸네일">
-          </div>
-          <div class="text">
-            <span class="fw-bold fs-1 m-0 p-0" th:text="${starBoard.title}"></span>
-            <br>
-            <span class="fw-bold fs-10" th:text="${starBoard.writer}"></span>
-            <br>
-            <div th:text="|${starBoard.category1}|" class="fs-10" id="category1" style="display: flex;">
+    <form action="/page/starBoard/delete" method="post">
+      <input type="hidden" name="starNo" th:value="${starBoard.starNo}">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      <div class="container d-flex justify-content-center">
+        <div class="container2">
+  
+          <div class="main-image">
+            <div>
+              <img th:src="|/file/img/${starBoard.imgNo}|" class="image rounded mt-auto" alt="썸네일">
             </div>
-            <!-- <img src="/img/icon/instagram.png" class="content-icon instagram" style="max-width: 20px;"> -->
-            <span th:text="|${starBoard.category2}|" class="fs-10" id="category2"></span>
+            <div class="text">
+              <span class="fw-bold fs-1 m-0 p-0" th:text="${starBoard.title}"></span>
+              <br>
+              <span class="fw-bold fs-10" th:text="${starBoard.writer}"></span>
+              <br>
+              <div th:text="|${starBoard.category1}|" class="fs-10" id="category1" style="display: flex;">
+              </div>
+              <!-- <img src="/img/icon/instagram.png" class="content-icon instagram" style="max-width: 20px;"> -->
+              <span th:text="|${starBoard.category2}|" class="fs-10" id="category2"></span>
+            </div>
+            <!-- <div class="icon">
+              <i class="fa-regular fa-star"></i>
+            </div> -->
           </div>
-          <!-- <div class="icon">
-            <i class="fa-regular fa-star"></i>
-          </div> -->
-        </div>
-
-        <div class="border border-dark rounded w-100" id="content">
-          <span th:utext="${starBoard.content}"></span>
-        </div>
-        <!-- <th:block sec:authorize="isAnonymous()"> -->
+  
+          <div class="border border-dark rounded w-100" id="content">
+            <span th:utext="${starBoard.content}"></span>
+          </div>
           <div class="d-flex justify-content-end mt-2">
             <button class="btn btn-secondary btn-submit col-1 border-0 " type="button" onclick="moveList()">목록</button>
-            <button class="btn btn-dark btn-submit col-1 border-0 ms-2" type="button" onclick="update()">수정</button>
+            <button th:if="${session.user} and ${session.user.userNo}==${starBoard.userNo}" class="btn btn-light btn-submit col-1 border-0 ms-2" type="button" onclick="update()">수정</button>
+            <input th:if="${session.user} and ${session.user.userNo}==${starBoard.userNo}" class="btn btn-dark btn-submit col-1 border-0 ms-2" type="submit" onclick="actionDelete()" value="삭제"></input>
           </div>
-        <!-- </th:block> -->
+        </div>
       </div>
-    </div>
+    </form>
+    
 
 
 
@@ -672,15 +676,22 @@
       location.href = '/page/starCard/starUpdate?starNo=' + no;
     }
 
-
+    //  th:if="${session.user.userNo}==${starBoard.userNo}"삭제 요청
+    function actionDelete() {
+      let check = confirm('정말로 삭제하시겠습니까?')
+        form.submit;
+      }
+    
     // console.log(newText)
     const category1 = document.getElementById('category1')
     const category1Text = category1.textContent
     // category1.style.display=inline-block;
     console.log(category1)
-    const newText1 = category1Text.split(',').map(icon => `<img src="/img/icon/${icon}.png" class="content-icon ${icon}" style="max-width:20px; margin: 0; margin-right:5px; max-height:20px;">`).join(' ')
+    const newText1 = category1Text.split(',').map(icon =>
+      `<img src="/img/icon/${icon}.png" class="content-icon ${icon}" style="max-width:20px; margin: 0; margin-right:5px; max-height:20px;">`
+      ).join(' ')
     category1.innerHTML = newText1
-    
+
 
     const category2 = document.getElementById('category2')
     const category2Text = category2.textContent

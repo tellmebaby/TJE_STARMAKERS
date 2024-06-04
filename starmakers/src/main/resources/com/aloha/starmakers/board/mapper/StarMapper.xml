@@ -167,8 +167,8 @@
 
     <!-- 글 등록 -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="starNo">
-        INSERT INTO star_board(title, writer, content, user_no, pay_no, card, category1, category2, type, start_date, end_date)
-        VALUES (#{title}, #{writer}, #{content},#{userNo},#{payNo},#{card},#{category1},#{category2},#{type},#{startDate},#{endDate})
+        INSERT INTO star_board(title, writer, content, user_no, pay_no, card, category1, category2, type, start_date, end_date, status)
+        VALUES (#{title}, #{writer}, #{content},#{userNo},#{payNo},#{card},#{category1},#{category2},#{type},#{startDate},#{endDate},#{status})
     </insert>
 
     <!-- 글 등록 -->
