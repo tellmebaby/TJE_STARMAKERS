@@ -71,22 +71,23 @@
 
     <script>
     
-        let starNo = '[[${starBoard.starNo}]]'
+        let starNo = '[[${starBoard.starNo}]]';
 
         function moveList() {
-          location.href = '/page/board/reviewBoard/reviewList'
+          location.href = '/page/board/eventBoard/eventList'
         }
   
         function update() {
-          location.href = '/page/board/reviewBoard/reviewUpdate?starNo=' + starNo
+          location.href = '/page/board/eventBoard/eventUpdate?starNo=' + starNo
         }
- 
+
         function toggleRereplyContainer(button) {
             const rereplyContainer = button.parentElement.nextElementSibling;
             console.log(rereplyContainer)
             rereplyContainer.classList.toggle('visible');
         }
-  
+        
+
         // 댓글 목록 요청
         replyList()
 
@@ -112,6 +113,7 @@
                     let replyList = document.getElementById('reply-listbox')
                     replyList.innerHTML = data
 
+                    updateEvent()
                     event()
                 }
             }
@@ -135,8 +137,8 @@
 
             console.dir(data)
             // 💍 CRSF TOKEN
-            // let csrfToken = document.querySelector('input[name="_csrf"]').value;
-            var csrfToken = "[[${_csrf.token}]]"
+            let csrfToken = document.querySelector('input[name="_csrf"]').value;
+            // var csrfToken = "[[${_csrf.token}]]"
 
             let request = new XMLHttpRequest()
 
@@ -160,14 +162,18 @@
                 }
             }
         }
+
+  
       </script>
       <script>
         // 이벤트 등록
-        function event() {
+        
+        function updateEvent() {
             // 댓글 수정 버튼
             let $btnUpdate = document.getElementsByClassName('btn-reply-update')
         
             // 댓글 수정 클릭 이벤트
+            
             for(let i = 0; i < $btnUpdate.length; i++) {
                 $btnUpdate[i].addEventListener('click', function() {
                     let $top = $btnUpdate[i].parentNode
@@ -198,10 +204,13 @@
         
                     $editor.innerHTML = editor
                     $replyBox.appendChild($editor)
-
                 })
+                
             }
+            
         }
+            
+    
 
         // 댓글 수정 요청
         function updateReply(replyNo) {
@@ -477,7 +486,6 @@
             }
 
         }
-
 
       </script>
     
