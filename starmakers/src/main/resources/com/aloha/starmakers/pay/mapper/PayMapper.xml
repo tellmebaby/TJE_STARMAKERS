@@ -11,7 +11,7 @@
     </insert>
 
     <select id="select" resultType="Pay">
-        SELECT * FROM payment_info WHERE star_no = #{StarNo}
+        SELECT * FROM payment_info WHERE star_no = #{StarNo} LIMIT 0,1
     </select>
 
 
