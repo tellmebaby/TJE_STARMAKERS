@@ -25,6 +25,7 @@ import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.StarBoard;
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.board.service.LikeService;
+import com.aloha.starmakers.board.service.ReplyService;
 import com.aloha.starmakers.board.service.StarService;
 import com.aloha.starmakers.user.dto.Users;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,6 +46,9 @@ public class StarController {
 
     @Autowired
     private LikeService likeService;
+
+    @Autowired
+    private ReplyService replyService;
 
   
     
@@ -297,6 +301,7 @@ public class StarController {
                                     ,Model model, Page page
                                     ,Option option) throws Exception {
 
+
         List<StarBoard> starList = starService.list(type, page, option);
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
@@ -336,6 +341,8 @@ public class StarController {
     @GetMapping("/board/eventBoard/eventPost")
     public String eventSelect(@RequestParam("starNo") int starNo, Model model) throws Exception {
         StarBoard starBoard = starService.select(starNo);
+        int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+        starBoard.setCommentCount(commentCount);
         starService.views(starNo);
         model.addAttribute("starBoard", starBoard);
         return "/page/board/eventBoard/eventPost";
@@ -454,6 +461,8 @@ public class StarController {
     @GetMapping("/board/reviewBoard/reviewPost")
     public String reviewSelect(@RequestParam("starNo") int starNo, Model model) throws Exception {
         StarBoard starBoard = starService.select(starNo);
+        int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+        starBoard.setCommentCount(commentCount);
         int views = starService.views(starNo);
         log.info(views + " 증가");
         model.addAttribute("starBoard", starBoard);
@@ -531,6 +540,8 @@ public class StarController {
     @GetMapping("/board/anBoard/anPost")
     public String anSelect(@RequestParam("starNo") int starNo, Model model) throws Exception {
         StarBoard starBoard = starService.select(starNo);
+        int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+        starBoard.setCommentCount(commentCount);
         starService.views(starNo);
         model.addAttribute("starBoard", starBoard);
         return "/page/board/anBoard/anPost";

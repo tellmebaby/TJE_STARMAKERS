@@ -60,7 +60,7 @@ public class QnaController {
         QnaBoard qnaBoard = qnaService.select(qnaNo);
 
         // 조회수 증가
-       qnaService.view(qnaNo);
+       qnaService.views(qnaNo);
 
         // 모델 등록
         model.addAttribute("qnaBoard", qnaBoard);
