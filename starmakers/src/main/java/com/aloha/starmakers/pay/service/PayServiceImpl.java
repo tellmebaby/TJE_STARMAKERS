@@ -2,12 +2,17 @@ package com.aloha.starmakers.pay.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aloha.starmakers.pay.dto.Pay;
+import com.aloha.starmakers.pay.mapper.PayMapper;
 
 @Service
 public class PayServiceImpl implements PayService {
+
+    @Autowired
+    private PayMapper payMapper;
 
     @Override
     public int insert(Pay pay) {
@@ -21,7 +26,10 @@ public class PayServiceImpl implements PayService {
 
     @Override
     public List<Pay> userList(int userNo) {
-        return userList(userNo);
+
+        List<Pay> payList = payMapper.userList(userNo);
+        return payList;
+
     }
 
     @Override

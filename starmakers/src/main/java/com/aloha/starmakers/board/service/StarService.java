@@ -39,4 +39,7 @@ public interface StarService {
     // 조회수 증가
     public int views(int starNo) throws Exception;
 
+    // 마이페이지 쓴 글 조회
+    public List<StarBoard> promotionList(int userNo) throws Exception;
+
 }
