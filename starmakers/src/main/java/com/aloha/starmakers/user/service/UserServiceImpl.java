@@ -1,5 +1,7 @@
 package com.aloha.starmakers.user.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +20,7 @@ import com.aloha.starmakers.board.mapper.FileMapper;
 
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.user.dto.PasswordResetToken;
+import com.aloha.starmakers.user.dto.StarUser;
 import com.aloha.starmakers.user.dto.UserAuth;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.mapper.PasswordResetTokenMapper;
@@ -160,6 +163,16 @@ public class UserServiceImpl implements UserService {
     public void updatePassword(String email, String newPassword) {
         // Logic to update user's password in the database
         // For example, userRepository.updatePassword(email, newPassword);
+    }
+
+    @Override
+    public List<StarUser> starMemberList() throws Exception {
+        return userMapper.starMemberList();
+    }
+
+    @Override
+    public List<StarUser> newMemberList() throws Exception {
+        return userMapper.newMemberList();
     }
 
 }

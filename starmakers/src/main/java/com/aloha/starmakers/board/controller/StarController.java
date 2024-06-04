@@ -27,7 +27,9 @@ import com.aloha.starmakers.board.dto.StarBoard;
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.board.service.LikeService;
 import com.aloha.starmakers.board.service.StarService;
+import com.aloha.starmakers.user.dto.StarUser;
 import com.aloha.starmakers.user.dto.Users;
+import com.aloha.starmakers.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,6 +47,9 @@ public class StarController {
 
     @Autowired
     private LikeService likeService;
+
+    @Autowired
+    private UserService userService;
 
   
     
@@ -565,4 +570,51 @@ public class StarController {
         return starService.mainCardList(type);
     }
 
+    @GetMapping("/starMember")
+    @ResponseBody
+    public List<StarUser> starMember() throws Exception{
+        return userService.starMemberList();
+    }
+    
+    @GetMapping("/newStarMember")
+    @ResponseBody
+    public List<StarUser> newStarMember() throws Exception{
+        return userService.newMemberList();
+    }
+
+     // 초기화면 설정
+     @GetMapping("/starCard/starList2")
+     public String cardList2(@RequestParam(value = "type", defaultValue = "starCard") String type
+                                     ,Model model, Page page, HttpSession session
+                                     ,Option option) throws Exception {
+ 
+         Users user = (Users) session.getAttribute("user");
+ 
+         List<StarBoard> starList = null;
+ 
+         page.setRows(12);
+ 
+         if (user != null) {
+             int userNo = user.getUserNo();
+             starList = starService.list(type, page, option, userNo);
+         } else {
+             starList = starService.list(type, page, option);
+         }
+ 
+         starList.forEach(star -> {
+             if (star.getCategory1() != null) {
+                 List<String> icons = Arrays.stream(star.getCategory1().split(","))
+                         .collect(Collectors.toList());
+                 star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
+             }
+         });
+ 
+         model.addAttribute("starList", starList);
+         model.addAttribute("page", page);
+         model.addAttribute("option", option);
+         
+ 
+         return "/page/starCard/starList2";
+     }
+    
 }

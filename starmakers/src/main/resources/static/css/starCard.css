@@ -1,12 +1,14 @@
 /* 기존 스타일 */
 #bannerCarousel img {
     width: -webkit-fill-available;
-    height: 150px;
+    height: 120px;
+    border-radius: 15px;
+    border: 1px solid rgb(211, 212, 215);
 }
 
 .event-banner {
-    background: #f8f9fa;
     text-align: center;
+    overflow: hidden;
     /* margin: 20px 0; */
 }
 
@@ -230,7 +232,7 @@
 }
 
 .overlay {
-    height: 45%;
+    height: 40%;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center 60%;
@@ -241,11 +243,11 @@
 .card-body {
     background: rgba(0, 0, 0, 0.5);
     border-radius: 25px;
-    height: 45%;
+    height: 40%;
     z-index: 2;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: left;
     text-align: left;
     padding: 10px;
@@ -267,23 +269,28 @@
 }
 
 .card-title {
-    white-space: nowrap;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
     margin-bottom: 5px;
     font-size: 80%;
+    line-height: 1.2em;
+    max-height: 2.4em;
 }
 
 .card-text {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 4; /* 최대 표시 줄 */
     -webkit-box-orient: vertical;
     overflow: hidden;
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    font-size: 70%;
+    text-overflow: ellipsis;
+    font-size: 80%;
+    line-height: 1.2em;
+    max-height: 4.8em; /* 4줄의 최대 높이 */
+    min-height: 4.8em; /* 4줄의 최소 높이 */
 }
 
 .star {
@@ -309,11 +316,12 @@
     color: white;
     background-color: transparent;
     border: 1px solid white;
-    padding: 0.25em 0.25em;
+    /* padding: 0.25em 0.25em; */
+    padding: 0;
     text-align: center;
-    font-size: 0.5em;
-    margin-top: 10px;
-    width: 28px;
+    font-size: 0.7em;
+    /* margin-top: 10px; */
+    width: 30px;
 }
 
 #asmr-link {
@@ -334,11 +342,10 @@
 
 
 .author-icon {
-    width: 1em;
-    height: 1em;
-    margin-right: 5px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    overflow: hidden;
+    margin-right: 5px;
 }
 
 .top-container {
@@ -366,16 +373,32 @@
     align-items: flex-start;
 }
 
-.right-content i {
-    font-size: 1em;
+.right-content > svg {
+    width: 16px; /* 아이콘의 너비 설정 */
+    height: 16px; /* 아이콘의 높이 설정 */
+    fill: white; /* 아이콘의 색상을 흰색으로 설정 */
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)); /* 그림자 설정 */
 }
 
 .bottom-container {
     display: flex;
+    flex-direction: row; /* 수평 정렬 */
+    justify-content: space-between; /* 요소들 사이에 균등한 간격 */
+    align-items: end;
+    padding: 0; /* 패딩 설정 */
+    height: 20%;
 }
 
 .field-links {
-    flex: 4;
+    flex: 3;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* 최대 2줄까지 표시 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* font-size: 70%; */
+    /* max-height: 2.4em; */
+    /* margin: 2px 0; */
 }
 
 .star-links {
@@ -383,16 +406,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
-.star-links > svg {
+.star-links > i {
     width: 1.5em;
     height: 1.5em;
 }
 
 .count {
-    margin-top: 10px;
+    /* margin-top: 10px; */
     font-size: 70%;
 }
 
@@ -441,18 +464,95 @@
     align-items: flex-end;
     height: 100%;
     flex-direction: row;
+    
   }
-  .contentIcon {
+
+  .contentIcon1:hover,
+  .contentIcon2:hover,
+  .contentIcon3:hover,
+  .contentIcon4:hover,
+  .contentIcon5:hover,
+  .contentIcon6:hover,
+  .contentIcon7:hover,
+  .contentIcon8:hover{
+    background-color: beige;
+  }
+
+  .contentIcon1,
+  .contentIcon2,
+  .contentIcon3,
+  .contentIcon4,
+  .contentIcon5,
+  .contentIcon6,
+  .contentIcon7,
+  .contentIcon8{
     display: flex;
     text-align: center;
     border-radius: 10px;
     background-color: transparent; /* 아이콘 배경 투명하게 설정 */
-    border: 1px solid black; /* 원하는 색으로 변경 가능 */
+    border: 1px solid rgb(214, 215, 220); /* 원하는 색으로 변경 가능 */
     flex-direction: column;
     align-items: center;
     width: 70px;
+    background-color: #fff;
+    z-index: 2;
   }
-  .contentIcon i {
+
+  .contentIcon-backMusic,
+  .contentIcon-backGame,
+  .contentIcon-backTravel,
+  .contentIcon-backFood,
+  .contentIcon-backAnimal,
+  .contentIcon-backAsmr,
+  .contentIcon-backWork,
+  .contentIcon-backFashion{
+    position: absolute;
+    height: 175px;
+    width: 637px;
+    border-radius: 15px;
+    background-repeat: no-repeat;
+    background-position: 0 45%;
+    z-index: 1;
+    background-size: cover;
+  }
+
+  /* .contentIcon:hover {
+      background-color: #f9ebbf;
+    } */
+    
+    .contentIcon1:hover ~ .contentIcon-backMusic{
+    background-image: url("/img/categoryMusic.gif");
+  }
+
+  .contentIcon2:hover ~ .contentIcon-backGame{
+    background-image: url("/img/categoryGame.gif");
+  }
+
+  .contentIcon3:hover ~ .contentIcon-backTravel{
+    background-image: url("/img/categoryTravle.gif");
+  }
+
+  .contentIcon4:hover ~ .contentIcon-backFood{
+    background-image: url("/img/categoryFood2.gif");
+  }
+
+  .contentIcon5:hover ~ .contentIcon-backAnimal{
+    background-image: url("/img/categoryAnimal.gif");
+  }
+
+  .contentIcon6:hover ~ .contentIcon-backAsmr{
+    background-image: url("/img/categoryAsmr.gif");
+  }
+
+  .contentIcon7:hover ~ .contentIcon-backWork{
+    background-image: url("/img/categoryGym.gif");
+  }
+
+  .contentIcon8:hover ~ .contentIcon-backFashion{
+    background-image: url("/img/categoryFashion.gif");
+  }
+
+  .contentIcon-container i {
     font-size: 24px;
     display: block;
     margin-bottom: 5px;
@@ -462,7 +562,7 @@
     
     
   }
-  .contentIcon p {
+  .contentIcon-container p {
     margin: 0;
     font-size: 14px;
   }
@@ -470,6 +570,9 @@
   .starmember-wrapper {
     display: flex;
     height: 100%;
+    background-color: #fff;
+    border: 1px solid rgb(214, 215, 220);
+    border-radius: 15px;
   }
   .starmember-list, .starmember-detail {
     flex: 1;
@@ -502,4 +605,140 @@
 
     .starmember-detail > span{
         margin-left: 30px;
+    }
+
+    .starmember > a{
+        color: #4e5d6c;
+        font-size: 70%;
+        gap: 3px;
+    }
+
+    .starList-detail {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin-top: 20px;
+    }
+
+    .items-eventType,
+    .items-category1,
+    .items-category2 {
+        display: flex;
+    }
+
+    .hide-check {
+        display: none;
+    }
+
+    .type-sub {
+        align-content: center;
+        width: 65px;
+        border: 1px solid rgb(220, 223, 225);
+        border-radius: 23px;
+        font-size: 0.9em;
+        text-align: center;
+        margin: 0px 4px;
+        height: 55px;
+        background-color: rgb(158, 160, 164);
+        color: #fff;
+    }
+
+    .type-sub:hover {
+        background-color: #fff;
+        color: rgb(105, 108, 115);
+    }
+
+    #starList {
+        margin-top: 30px;
+    }
+
+    #card-effect {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    .type-sub img{
+        width: 50px;
+    }
+
+    .type-sub i{
+        height: 2em;
+        font-size: 2em;
+    }
+
+    .container-starSearch {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: center;
+        height: 30px;
+        margin-top: 41px;
+    }
+
+    .sub-searchInput {
+        display: flex;
+        align-content: center;
+        background-color: transparent;
+        border: 1px solid gray;
+        border-radius: 17px;
+        color: gray;
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .sub-searchInput input{
+        background-color: transparent;
+        border-color: transparent;
+
+    }
+
+    .sub-searchInput input:focus {
+        outline: none;
+    }
+
+    #icon-inSearchBar {
+        align-content: center;
+        width: 22px;
+        margin-left: 10px;
+    }
+
+    .sub-btn-calendar,
+    .sub-btn-insertCard{
+        align-content: center;
+        width: 65px;
+        border: 1px solid rgb(220, 223, 225);
+        border-radius: 17px;
+        font-size: 0.9em;
+        text-align: center;
+        margin: 0px 4px;
+        height: 40px;
+        background-color: rgb(158, 160, 164);
+        color: #fff;
+    }
+
+    .sub-btn-calendar:hover{
+        background-color: #fff;
+    }
+
+    .sub-btn-calendar:hover i{
+        color: rgb(105, 108, 115);
+    }
+
+    .sub-btn-insertCard:hover{
+        background-color: #fff;
+    }
+
+    .sub-btn-insertCard:hover i{
+        color: rgb(105, 108, 115);
+    }
+
+    .sub-btn-calendar i{
+        color: #fff;
+        font-size: 1.5em;
+    }
+
+    .sub-btn-insertCard i{
+        color: #fff;
+        font-size: 1.5em;
     }

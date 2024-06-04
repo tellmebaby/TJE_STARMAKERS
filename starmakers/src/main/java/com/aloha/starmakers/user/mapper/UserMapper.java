@@ -1,7 +1,10 @@
 package com.aloha.starmakers.user.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
+import com.aloha.starmakers.user.dto.StarUser;
 import com.aloha.starmakers.user.dto.UserAuth;
 import com.aloha.starmakers.user.dto.Users;
 
@@ -37,5 +40,9 @@ public interface UserMapper {
     // 아이디 중복 확인
     public int selectId( Users user ) throws Exception;
 
+    // 인기 회원 조회
+    public List<StarUser> starMemberList() throws Exception;
 
+    // 최근 회원 조회
+    public List<StarUser> newMemberList() throws Exception;
 }

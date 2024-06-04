@@ -74,3 +74,59 @@ WHERE
 ORDER BY 
     s.reg_date DESC;
 
+
+
+
+SELECT 
+    sb.writer,
+    sb.views,
+    sb.user_no,
+    sb.likes,
+    sb.category2,
+    f.file_no AS userImgId
+FROM (
+    SELECT 
+        s.user_no,
+        MAX(s.writer) AS writer,
+        MAX(s.views) AS views,
+        MAX(s.likes) AS likes,
+        MAX(s.category2) AS category2,
+        COALESCE(MAX(s.views), 0) + COALESCE(MAX(s.likes), 0) AS total_score  -- total_score 계산
+    FROM 
+        star_board s
+    WHERE 
+        s.card IS NOT NULL
+    GROUP BY 
+        s.user_no
+    ORDER BY 
+        total_score DESC
+    LIMIT 5
+) AS sb
+LEFT JOIN file AS f ON sb.user_no = f.user_no AND f.star_no = 0;
+
+
+-- 최근에 글올린 유저
+SELECT 
+    sb.writer,
+    sb.views,
+    sb.user_no,
+    sb.likes,
+    sb.category2,
+    f.file_no AS userImgId
+FROM (
+    SELECT 
+        s.*,
+        ROW_NUMBER() OVER (PARTITION BY s.user_no ORDER BY s.reg_date DESC) AS row_num
+    FROM 
+        star_board s
+    WHERE 
+        s.card IS NOT NULL  
+    ORDER BY 
+        s.reg_date DESC
+) sb
+LEFT JOIN file f ON sb.user_no = f.user_no AND f.star_no = 0
+WHERE 
+    sb.row_num = 1
+ORDER BY 
+    sb.reg_date DESC
+LIMIT 5;

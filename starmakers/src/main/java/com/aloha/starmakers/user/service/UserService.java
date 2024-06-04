@@ -1,8 +1,11 @@
 package com.aloha.starmakers.user.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.aloha.starmakers.user.dto.PasswordResetToken;
+import com.aloha.starmakers.user.dto.StarUser;
 import com.aloha.starmakers.user.dto.UserAuth;
 import com.aloha.starmakers.user.dto.Users;
 
@@ -43,6 +46,12 @@ public interface UserService {
     public PasswordResetToken getPasswordResetToken(String token);
 
     public void updatePassword(String email, String newPassword);
+
+    // 인기 회원 조회
+    public List<StarUser> starMemberList() throws Exception;
+
+    // 최근 회원 조회
+    public List<StarUser> newMemberList() throws Exception;
 
 
 
