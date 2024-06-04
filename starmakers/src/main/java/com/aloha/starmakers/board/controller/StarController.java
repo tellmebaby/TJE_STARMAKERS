@@ -232,7 +232,7 @@ public class StarController {
             if (file != null && !file.isEmpty()) {
                 fileService.upload(file, starNo, userNo);
             }
-            return "/page/starCard/starPayment";
+            return "redirect:/page/starCard/starPayment?starNo=" + starNo;
         }
 
         // 데이터 처리 실패

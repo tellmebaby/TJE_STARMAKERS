@@ -52,7 +52,7 @@ CREATE TABLE `payment_info` (
    `price` INT(10) NOT NULL DEFAULT '0' COMMENT '결제가격',
    `user_no` INT(10) NOT NULL COMMENT '유저데이터번호',
    `star_no` INT(10) NOT NULL COMMENT '상품데이터번호',
-   `reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   `reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '결제일',
    `status` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
    PRIMARY KEY (`pay_no`) USING BTREE
 )
