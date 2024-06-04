@@ -49,7 +49,7 @@ public class PageController {
     @Autowired
     private FileService fileService;
 
-    @Autowired
+    // @Autowired
     // private PaymentService paymentService;
 
     // @GetMapping("mypage/{path}")
@@ -209,15 +209,13 @@ public class PageController {
     }
 
     /* ------------------------------------------------------------- */
-    /* 결제내역 */
+    // /* 결제내역 */
     // @GetMapping("/mypage/payment")
     // public String paymentList(Model model, HttpSession session) throws Exception {
-        
+
+    //     List<Payment> paymentList = paymentService.paymentList();
+
     //     Users user = (Users) session.getAttribute("user");
-
-    //     int userNo = user.getUserNo();
-    //     List<Payment> paymentList = paymentService.paymentList(userNo);
-
     //     model.addAttribute("paymentList", paymentList);
     //     model.addAttribute("user", user);
     //     return "/page/mypage/payment";

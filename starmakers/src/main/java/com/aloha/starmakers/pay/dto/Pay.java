@@ -9,8 +9,10 @@ public class Pay {
     private int payNo;
     private String code;
     private int price;
-    private int user_no;
-    private int star_no;
-    private Date reg_date;
+    private int userNo;
+    private String productTitle;
+    private int starNo;
+    private Date regDate;
     private String status;
+    private String starStatus;
 }
