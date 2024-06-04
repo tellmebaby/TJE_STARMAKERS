@@ -1,4 +1,4 @@
--- Active: 1714701530602@@127.0.0.1@3306@joeun
+-- Active: 1716511247384@@127.0.0.1@3306@joeun
 SELECT COUNT(*)
 FROM user
 WHERE name = "김조은" AND email = "joeun@naver.com";
@@ -53,3 +53,9 @@ SELECT *
         WHERE user_no = 3
         AND star_no = 0
 
+delete  
+FROM file
+WHERE user_no = 6 AND star_no = 0
+
+SELECT *
+FROM file

@@ -1,5 +1,5 @@
 
--- Active: 1716894496133@@127.0.0.1@3306@joeun
+-- Active: 1716511247384@@127.0.0.1@3306@joeun
 
 
 
@@ -51,7 +51,9 @@ CREATE TABLE payment_info
   code       INT         NOT NULL COMMENT '상품코드',
   price      VARCHAR(30) NOT NULL COMMENT '결제가격',
   user_no    INT         NOT NULL COMMENT '유저데이터번호',
-  product_no INT         NOT NULL COMMENT '상품데이터번호',
+  product_title VARCHAR(255) NOT NULL COMMENT '결제상품', 
+  reg_date   TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '결제일자',
+  status     VARCHAR(20) NULL COMMENT '상태', 
   PRIMARY KEY (pay_no)
 ) COMMENT '결제정보';
 
@@ -134,7 +136,7 @@ CREATE TABLE star_board
   star_no   INT         NOT NULL AUTO_INCREMENT COMMENT '이벤트데이터번호',
   title     VARCHAR(100) NOT NULL COMMENT '제목', -- 제목의 길이를 더 늘렸습니다.
   writer    VARCHAR(50)  NOT NULL COMMENT '작성자', -- 작성자 길이 조정.
-  content   TEXT        NOT NULL COMMENT '내용',
+  content   long        NOT NULL COMMENT '내용',
   reg_date  TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일자',
   upd_date  TIMESTAMP   NULL     COMMENT '수정일자',
   views     INT         NOT NULL  DEFAULT '0'   COMMENT '조회수',

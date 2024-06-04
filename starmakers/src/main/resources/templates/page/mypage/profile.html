@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>마이페이지</title>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <style>
@@ -77,7 +77,7 @@
         }
 
         .table-margin {
-            margin-top: 140px;
+            margin-top: 170px;
         }
 
         .image-container {
@@ -119,6 +119,7 @@
                             <a href="/page/mypage/profile" class="active">회원 정보</a>
                             <a href="/page/mypage/payment">결제 내역</a>
                             <a href="/page/mypage/promotion">내가 쓴 글</a>
+                            <a href="/page/mypage/archive">내 보관함</a>
                             <a href="/page/mypage/inquiry">1 : 1 문의</a>
                             <a href="/page/mypage/userDelete">회원 탈퇴</a>
                         </div>
@@ -129,7 +130,7 @@
                     <div class="table-margin"></div>
                         <table class="table">
                             <tr>
-                                <td class="fw-bold fs-5 text-center align-middle border-0">아이디</td>
+                                <td class="fw-bold fs-5 text-center align-middle border-0">닉네임</td>
                                 <td class="fs-5 align-middle border-0" th:text="${user.id}"></td>
                             </tr>
                             <tr>
@@ -229,6 +230,35 @@
         });
     }
 
+//     function deleteImage() {
+//     const defaultImageFile = 'path/to/default-image.jpg';  // 기본 이미지 파일 경로 설정
+
+//     var userNo = "[[${user.userNo}]]";
+//     const formData = new FormData();
+//     formData.append("file", defaultImageFile);  // 기본 이미지 파일을 추가
+//     formData.append("user_no", userNo);  // user_no 값을 추가 (실제 값으로 변경 필요)
+
+//     const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+//     const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+//     fetch('/file/upload', {
+//         method: 'POST',
+//         body: formData,
+//         headers: {
+//             [csrfHeader]: csrfToken
+//         }
+//     })
+//     .then(response => response.text())
+//     .then(result => {
+//         updateImage(); // 이미지 업데이트 함수 호출
+//         alert("기본 이미지가 업로드되었습니다.");
+//     })
+//     .catch(error => {
+//         console.error('Error:', error);
+//         alert('기본 이미지 업로드 실패');
+//     });
+// }
+
     function deleteImage() {
         const defaultImageUrl = 'path/to/default-image.jpg';  // 기본 이미지 URL 설정
 
@@ -239,7 +269,8 @@
         const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
         const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
 
-        fetch('/file/delete', {
+
+        fetch('/file/allDelete', {
             method: 'DELETE',
             body: formData,
             headers: {

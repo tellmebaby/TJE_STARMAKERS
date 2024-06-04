@@ -83,4 +83,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     LIMIT 1
     </select>
 
+     <!-- 게시글 삭제 -->
+    <delete id="allDelete">
+        DELETE FROM file
+        WHERE user_no = #{userNo} AND star_no = 0
+    </delete>
+
 </mapper>
