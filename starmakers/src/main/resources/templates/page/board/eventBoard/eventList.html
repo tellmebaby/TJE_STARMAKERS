@@ -55,7 +55,10 @@
                     <tr th:if="${starBoard.type == 'event'}">
                         <td align="center" th:text="${starBoard.starNo}"></td>
                         <td>
-                            <a th:href="|eventPost?starNo=${starBoard.starNo}|" th:text="${starBoard.title}"></a>
+                            <a th:href="|eventPost?starNo=${starBoard.starNo}|" th:text="${starBoard.title} + ' [' + ${starBoard.commentCount} + ']'"></a>
+                            <th:block th:if="${starBoard.regDate.after(#dates.createToday())}">
+                                <img th:src="@{/img/new.png}" style="width:15px; height:15px;">
+                            </th:block>
                         </td>
                         <td align="center" th:text="${starBoard.writer}"></td>
                         <td align="center">
