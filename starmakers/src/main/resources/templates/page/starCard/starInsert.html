@@ -22,13 +22,32 @@
   <!-- <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script> -->
   <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
   <style>
-
+    .content-box {
+      width: 960px;
+      height: 600px;
+      display: block;
+      align-items: center;
+      top: 40%;
+    }
   </style>
 </head>
 
 
 <!-- layout:decorate 쓸 때 본문 내용은 <th:block layout:fragment="content"></th:block> 안에 적어야 화면에 뜸 -->
 <th:block layout:fragment="content" class="align-items-center ml-5">
+  <th:block sec:authorize="isAnonymous()">
+    <div class="container content-box mt-3 mb-3">
+      <div class="d-flex justify-content-center mb-5" style="padding-top:200px">
+        <p>로그인이 필요한 페이지입니다.</p>
+      </div>
+      <div class="d-flex justify-content-center">
+        <a href="/login" class="btn btn-info m-1 " style="color:white">로그인 하러 가기</a>
+        <a href="/join" class="btn btn-primary m-1">회원가입 하러 가기</a>
+      </div>
+    </div>
+  </th:block>
+  <!-- 로그인 -->
+  <th:block sec:authorize="isAuthenticated()">
   <div class="body lg" style="max-width: 900 ;">
     <h1 class="d-flex justify-content-center mt-3 mb-3">
       홍보요청
@@ -95,49 +114,49 @@
             </div>
             <div class="item col-9 d-flex justify-content-start column-gap-2">
               <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category2" type="checkbox" value="food" id="food">
+                <input class="form-check-input" name="category2" type="checkbox" value="음식" id="food">
                 <label class="form-check-label" for="food">
                   음식
                 </label>
               </div>
               <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category2" type="checkbox" value="travel" id="travel">
+                <input class="form-check-input" name="category2" type="checkbox" value="여행" id="travel">
                 <label class="form-check-label" for="travel">
                   여행
                 </label>
               </div>
               <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input " name="category2" type="checkbox" value="game" id="game">
+                <input class="form-check-input " name="category2" type="checkbox" value="게임" id="game">
                 <label class="form-check-label" for="game">
                   게임
                 </label>
               </div>
               <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category2" type="checkbox" value="music" id="music">
+                <input class="form-check-input" name="category2" type="checkbox" value="음악" id="music">
                 <label class="form-check-label" for="music">
                   음악
                 </label>
               </div>
               <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category2" type="checkbox" value="animal" id="animal">
+                <input class="form-check-input" name="category2" type="checkbox" value="동물" id="animal">
                 <label class="form-check-label" for="animal">
                   동물
                 </label>
               </div>
               <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category2" type="checkbox" value="workOut" id="workOut">
+                <input class="form-check-input" name="category2" type="checkbox" value="운동" id="workOut">
                 <label class="form-check-label" for="workOut">
                   운동
                 </label>
               </div>
               <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category2" type="checkbox" value="asmr" id="asmr">
+                <input class="form-check-input" name="category2" type="checkbox" value="ASMR" id="asmr">
                 <label class="form-check-label" for="asmr">
                   ASMR
                 </label>
               </div>
               <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category2" type="checkbox" value="fashion" id="fashion">
+                <input class="form-check-input" name="category2" type="checkbox" value="패션" id="fashion">
                 <label class="form-check-label" for="fashion">
                   패션
                 </label>
@@ -234,7 +253,7 @@
   </div>
 
 
-
+</th:block>
   <script>
     $('#summernote').summernote({
       toolbar: [
@@ -358,22 +377,22 @@
 
 
         // 무료홍보 버튼 클릭 시
-        // $('#freePromo').click(function () {
-        //   $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
-        //   $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
-        // });
+        $('#freePromo').click(function () {
+          $('.rounded-1').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
+          $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
+        });
 
-        // // 유료홍보 버튼 클릭 시
-        // $('#payPromo').click(function () {
-        //   $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
-        //   $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
-        // });
+        // 유료홍보 버튼 클릭 시
+        $('#payPromo').click(function () {
+          $('.rounded-1').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
+          $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
+        });
 
-        // // 디자인 의뢰 버튼 클릭 시
-        // $('#designBtn').click(function () {
-        //   $('.btn').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
-        //   $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
-        // });
+        // 디자인 의뢰 버튼 클릭 시
+        $('#designBtn').click(function () {
+          $('.rounded-1').removeClass('btn-dark').addClass('btn-outline-dark'); // 모든 버튼에서 스타일 제거
+          $(this).removeClass('btn-outline-dark').addClass('btn-dark'); // 클릭된 버튼에 스타일 적용
+        });
 
       });
     });

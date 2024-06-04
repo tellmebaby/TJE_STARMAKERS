@@ -124,6 +124,11 @@ REFERENCES star_board(star_no)
 ON DELETE CASCADE;
 -- star_board의 star_no 값을 참조하여 reply 테이블의 star_no 을 외래키로 설정
 
+ALTER TABLE reply
+ADD CONSTRAINT fk_reply_user FOREIGN KEY (user_no) REFERENCES user(user_no);
+-- user 테이블의 user_no 값을 참조하여 reply 테이블의 user_no을 외래키로 지정
+ALTER TABLE reply DROP FOREIGN KEY fk_reply_user;
+
 
 
 DROP TABLE IF EXISTS star_board ;
@@ -132,7 +137,7 @@ CREATE TABLE star_board
   star_no   INT         NOT NULL AUTO_INCREMENT COMMENT '이벤트데이터번호',
   title     VARCHAR(100) NOT NULL COMMENT '제목', -- 제목의 길이를 더 늘렸습니다.
   writer    VARCHAR(50)  NOT NULL COMMENT '작성자', -- 작성자 길이 조정.
-  content   TEXT        NOT NULL COMMENT '내용',
+  content   long        NOT NULL COMMENT '내용',
   reg_date  TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일자',
   upd_date  TIMESTAMP   NULL     COMMENT '수정일자',
   views     INT         NOT NULL  DEFAULT '0'   COMMENT '조회수',

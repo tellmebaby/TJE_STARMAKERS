@@ -42,7 +42,7 @@ public class QnaServiceImpl implements QnaService {
         // 작성자 정보 불러오기
         Users user = userMapper.login(username);
         qnaBoard.setUserNo(user.getUserNo());
-        qnaBoard.setWriter(user.getName());
+        qnaBoard.setWriter(user.getId());
 
         // 정보 등록
         int result = qnaMapper.insert(qnaBoard);

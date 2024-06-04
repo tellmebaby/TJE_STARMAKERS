@@ -46,9 +46,11 @@
                     <div class="reply-box">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                          <!-- 사용자 아이디(hidden) -->
-                         <input type="hidden" name="writer" id="reply-writer" th:value="${session.user != null ? session.user.id : ''}">
-                        <textarea type="text" name="content" id="reply-content" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
-                    <button type="button" id="btn-reply-insert" class="btn-reply" onclick="insertReply()">등록</button>
+                         <input type="hidden" name="username" id="username" th:value="${session.user != null ? session.user.email : '비회원'}">
+                         <input type="hidden" name="writer" id="reply-writer" th:value="${session.user != null ? session.user.id : '비회원'}">
+                        <textarea type="text" name="content" id="reply-content" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."
+                        th:disabled="${session.user == null}"></textarea>
+                    <button type="button" id="btn-reply-insert" class="btn-reply" onclick="insertReply()" th:disabled="${session.user == null}">등록</button>
                     </div>            
                 </div>
                 <div class="top-reply-list">
@@ -59,6 +61,7 @@
                 <div id="reply-listbox">
                     
                 </div>
+                
 
      
     </div>
@@ -80,6 +83,7 @@
             console.log(rereplyContainer)
             rereplyContainer.classList.toggle('visible');
         }
+        
 
         // 댓글 목록 요청
         replyList()
@@ -113,22 +117,25 @@
         }
 
         // 댓글 등록
+        let $writer = document.getElementById('reply-writer')
+        let writer = $writer.value
         function insertReply() {
-            let $writer = document.getElementById('reply-writer')
             let $content = document.getElementById('reply-content')
-
-            let writer = $writer.value
             let content = $content.value
-
+            let username = document.getElementById('username').value
+            console.log(username)
             let data = {
                 'starNo'    : starNo,
                 'writer'    : writer,
-                'content'   : content
+                'content'   : content,
+                'username'  : username
             }
 
             console.dir(data)
             // 💍 CRSF TOKEN
-            let csrfToken = document.querySelector('input[name="_csrf"]').value;
+            // let csrfToken = document.querySelector('input[name="_csrf"]').value;
+            var csrfToken = "[[${_csrf.token}]]"
+
             let request = new XMLHttpRequest()
 
             request.open('POST', '/page/reply')
@@ -145,23 +152,14 @@
                     if(response == 'SUCCESS') {
                         replyList()
                         // 댓글 목록 갱신 후 댓글 입력 창 비우기
-                        $writer.value = ''
+                        // $writer.value = ''
                         $content.value = ''
                     }
                 }
             }
         }
 
-         // 로그인 상태 체크
-        document.addEventListener('DOMContentLoaded', function() {
-            let isLoggedIn = '[[${session.user}]]'
-    
-            if (isLoggedIn === null) {
-                document.getElementById('reply-content').disabled = true;
-                document.getElementById('btn-reply-insert').disabled = true;
-                document.getElementById('reply-content').placeholder = "로그인 후 댓글을 작성할 수 있습니다.";
-             }
-        });
+         
 
   
       </script>
@@ -175,11 +173,12 @@
             for(let i = 0; i < $btnUpdate.length; i++) {
                 $btnUpdate[i].addEventListener('click', function() {
                     let $top = $btnUpdate[i].parentNode
-                    let writer = $top.childNodes[1].textContent
+                    // let writer = $top.childNodes[1].textContent
                     let $inner = $top.parentNode
                     let content = $inner.childNodes[1].textContent
                     let $replyBox = $inner.parentNode
-
+                    let $toptop = $replyBox.parentElement
+                    console.log($replyBox)
 
                     let replyNo = $btnUpdate[i].getAttribute('data') // 댓글 번호
 
@@ -192,7 +191,7 @@
                     $editor.id = 'editor'
                     let editor = `
                             <input type="hidden" id="update-writer" value="${writer}">
-                            <textarea id="update-reply" >${content}</textarea>
+                            <textarea id="update-reply" cols="100">${content}</textarea>
                             <div class="reply-button">
                                 <button class="btn-reply-update" onclick="updateReply(${replyNo})">수정</button>
                                 <button class="btn-reply-delete" onclick="cancelReply(${replyNo})">취소</button>
@@ -211,7 +210,6 @@
             // alert('댓글 수정')
             let writer = document.getElementById('update-writer').value
             let content = document.getElementById('update-reply').value
-            // let content = "되라좀";
 
             console.log(`수정한 작성자 : ${writer}`)
             console.log(`수정한 내용 :  ${content}`)
@@ -255,11 +253,16 @@
             let $editor = document.getElementById('editor')
             $editor.remove()
 
-            let $inner = document.getElementsByClassName('inner')
+            // 원래 있던 inner 다시 가져오기
+            let $inner = document.getElementsByClassName('reply-middle')
+            console.log("취소했을 때 : " + $inner)
             for (let i = 0; i < $inner.length; i++) {
-                $inner[i].style.display = 'block'
+                $inner[i].style.display = 'flex'
                 
             }
+
+
+
         }
 
         // 댓글 삭제
@@ -288,45 +291,29 @@
 
         // 답글 등록
         function insertAnswer(element, replyNo) {
-            let $replyBox = element.parentNode.parentNode
+            let $rereplyBox = element.parentNode
             console.log(`부모 번호 : ${replyNo}`);
-            console.log($replyBox);
+            console.log($rereplyBox);
+            console.log(username.value, writer)
 
             // 답글 작성 UI
             let $editor = document.createElement('div')
-            $editor.classList.add('rereply-list')
+            $editor.classList.add('rereply-container')
+            // $editor.classList.add('rereply-box')
             $editor.id = 'answer'
-            // <div id="answer" class="reply-box">
+
             let editor = ``
-            editor += `<div id="rereply-list">
-                <div class="rereply" th:each="reply : ${rereplyList}">
-                    <!-- 답글 -->
-                    <div class="rereply-top">
-                        <span class="rereply-writer" th:text="${reply.writer}"></span>
-                        <span class="rereply-regDate" th:text="${reply.regDate}">
-                            <i class="fa-regular fa-thumbs-up icon"></i>
-                        </span>
-                    </div>
-                    <!-- 답글 내용/ 수정 삭제 버튼 -->
-                    <div class="rereply-middle">
-                        <p class="rereply-content" th:text="${reply.content}"></p>
-                        <div class="rereply-button">
-                            <button class="btn-rereply-update">수정</button>
-                            <button class="btn-rereply-delete">삭제</button>
-                        </div>
-                    </div>
-                    <!-- 답글에 답글 쓰기 -->
-                    <div class="rereply-rereply">
-                        <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
-                    </div>
-                    <div class="rereply-container m-0 p-0">
-                        <div class="rereply-box">
-                            <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
-                            <button type="button" >등록</button>
-                        </div>       
-                    </div>
+            editor += `
+
+                <div class="rereply-box">
+                        
+                    <input type="hidden" name="writer" id="rereply-writer" value="${writer}">
+                    <textarea name="rereply-content" id="rereply-content" type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
+                    <button type="button" onclick="answer(${replyNo})">등록</button>
+                         
                 </div>
-            </div>`
+
+            `
             $editor.innerHTML = editor
 
             // 기존 답글 UI 가 있으면 초기화
@@ -336,9 +323,18 @@
             }
 
             // 요소.after(추가 요소)
-            // - 요소 바로 뒤에 새 요소를 추가한다.
-            $replyBox.after($editor)
-        }
+            if ($rereplyBox) {
+                $rereplyBox.after($editor);
+
+                $editor.style.visibility = 'visible';
+                $editor.style.height = 'auto';
+                $editor.style.overflow = 'visible';
+            } else {
+                console.error('$rereplyBox 다시 살펴보기');
+            }
+            
+        } 
+
 
         // 답글 등록 요청
         function answer(parentNo) {
@@ -352,12 +348,17 @@
             let writer = $writer.value
             let content = $content.value
 
+            let username = document.getElementById('username').value
+
+            console.log(username, content)
+
 
             let data = {
-                'replyNo'   : replyNo,       // 글 번호
+                'starNo'    : starNo,       // 글 번호
                 'parentNo'  : parentNo, // 부모 댓글 번호
                 'writer'    : writer,
-                'content'   : content
+                'content'   : content,
+                'username'  : username
             }
 
             console.dir(data)

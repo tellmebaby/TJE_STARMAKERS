@@ -8,6 +8,7 @@ import lombok.Data;
 public class Reply {
     private int replyNo;
     private String writer;
+    private String username;
     private String content;
     private Date regDate;
     private Date updDate;

@@ -10,6 +10,8 @@ public class QnaBoard {
     private int qnaNos;
     private String title;
     private String writer;
+    private String username;
+
     private String content;
     private String answer;
     private Date regDate;
