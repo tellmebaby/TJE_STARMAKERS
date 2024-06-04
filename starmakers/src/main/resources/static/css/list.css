@@ -9,29 +9,31 @@
     margin-bottom: 10px;
     border: none;
     padding-right: 10px;
+    font-size: 13px;
 }
 .search-container select, .search-container input[type="text"] {
-    margin-left: 5px;
-    padding: 5px;
-    background-color: rgba(0, 0, 0, 0.1);
+    margin-left: 6px;
+    padding: 6px;
+    background-color: rgba(163, 184, 231, 0.1);
     border-radius: 3px;
-    border: none;
+    border: 1px solid #91ACCF;
 }
 .search-container button {
     margin-left: 5px;
-    padding: 0 15px;
-    background-color: rgba(51, 130, 246, 1);
+    padding: 6px 15px;
+    background-color: #91ACCF;
     color: white;
     border-radius: 3px;
     border: none;
 }
 .search-container button:hover {
-    padding: 0 15px;
-    background-color: rgba(41, 75, 254, 1);
+    padding: 6px 15px;
+    background-color: #91ACCF;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
     font-weight: bolder;
     color: white;
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -93,6 +95,28 @@ a {
     animation: twinkle2 1.5s infinite alternate;
     transition: transform 0.3s ease-in-out; /* 크기 변화 애니메이션 */
 }
+.black-han-sans-regular {
+    font-family: "Black Han Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;padding: 0;
+    text-align: center;
+}
+.black-han-sans-regular p {
+    color:#91ACCF;
+    font-size: 50px;
+    margin: 0;padding: 0;
+    /* border-bottom: 1px solid black; */
+}
+.noto-sans-kr {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    margin: 0;padding: 0;
+    margin-bottom: 40px;
+  }
 
 @keyframes twinkle2 {
     0% {

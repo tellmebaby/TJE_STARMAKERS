@@ -400,9 +400,10 @@ public class StarController {
         result = starService.delete(starNos);
 
         if (result > 0) {
-            return "redirect:/page/mypage/event";
+            return "redirect:/page/mypage/event" ; 
         }
-
+        return "redirect:/page/mypage/event?error";
+    }
 
     // 아래부터 review 게시판
 
