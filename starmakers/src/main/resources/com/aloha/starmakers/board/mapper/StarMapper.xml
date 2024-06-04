@@ -218,4 +218,21 @@
         WHERE star_no IN (${starNo})
     </delete>
 
+    <!-- 마이페이지 쓴 글 조회 -->
+    <select id="promotionList" resultType="StarBoard">
+        SELECT 
+            sb.user_no,
+            sb.title, 
+            sb.category1, 
+            sb.reg_date, 
+            sb.status, 
+            pi.price as star_price
+        FROM star_board sb
+        JOIN payment_info pi
+        ON  pi.user_no = sb.user_no
+        AND pi.star_no = sb.star_no
+        WHERE 
+            sb.user_no = #{userNo}
+    </select>
+
 </mapper>

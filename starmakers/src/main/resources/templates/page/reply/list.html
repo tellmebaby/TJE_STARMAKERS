@@ -4,9 +4,6 @@
             <div id="reply-line">
                 <!-- 댓글 -->
                 <div class="reply-top">
-                    <th:block sec:authorize="isAuthenticated()">
-                        <img id="thumbnail" class="rounded-circle rounded-circle-custom" alt="Thumbnail Image">
-                    </th:block>
                     <span class="reply-writer" th:text="${reply.writer}"></span>
                     <span class="reply-regDate" th:text="${#dates.format(reply.regDate, 'yyyy-MM-dd HH:mm:ss')}">
                         <i class="fa-regular fa-thumbs-up icon"></i>
