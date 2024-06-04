@@ -10,7 +10,7 @@ public interface PayService {
     public int insert(Pay pay);
 
     // 결제내역 상세조회
-    public Pay select(int payNo);
+    public Pay select(int statNo);
 
     //마이페이지 결제내역 리스트
     public List<Pay> userList(int userNo);

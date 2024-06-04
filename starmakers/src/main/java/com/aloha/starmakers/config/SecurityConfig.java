@@ -75,7 +75,7 @@ public class SecurityConfig {
         //                 .anyRequest().permitAll());
 
         // CSRF 토큰을 쿠키에 저장하고, /payments/** 경로에 대한 요청이 인증된 사용자만 접근할 수 있도록 설정
-        http.csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
+        // http.csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
 
         return http.build();
     }

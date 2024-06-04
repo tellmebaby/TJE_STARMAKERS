@@ -200,6 +200,7 @@
             content = #{content},
             likes=#{likes},
             views=#{views},
+            status=#{status}
             upd_date = now()
         WHERE star_no = #{starNo}
     </update>

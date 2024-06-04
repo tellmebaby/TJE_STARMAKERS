@@ -5,13 +5,13 @@
 
 <mapper namespace="com.aloha.starmakers.pay.mapper.PayMapper">
 
-    <insert id="insert">
-        INSERT INTO payment_info ( code, price, user_no, star_no, status )
-        VALUES ( #{code}, #{price}, #{user_no}, #{star_no}, #{status} )
+    <insert id="insert" useGeneratedKeys="true" keyProperty="payNo">
+        INSERT INTO payment_info ( code, price, user_no, star_no, status, product_title )
+        VALUES ( #{code}, #{price}, #{userNo}, #{starNo}, #{status}, #{productTitle} )
     </insert>
 
     <select id="select" resultType="Pay">
-        SELECT * FROM payment_info WHERE pay_no = #{payNo}
+        SELECT * FROM payment_info WHERE star_no = #{StarNo}
     </select>
 
 
@@ -25,7 +25,7 @@
         ON 
             pi.status = sb.status
         AND pi.user_no = sb.user_no
-        WHERE pi.user_no = #{user_no}
+        WHERE pi.user_no = #{userNo}
     </select>
 
     <select id="totalList" resultType="Pay">
@@ -39,7 +39,7 @@
         UPDATE payment_info
            SET price = #{price}
               ,status = #{status}
-        WHERE pay_no = #{pay_no}
+        WHERE pay_no = #{payNo}
     </update>
 
 

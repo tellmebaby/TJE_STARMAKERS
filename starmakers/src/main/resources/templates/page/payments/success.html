@@ -9,8 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>토스페이먼츠 샘플 프로젝트</title>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <meta name="_csrf" th:content="${_csrf.token}"/>
-  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+  <meta name="_csrf" th:content="${_csrf.token}" />
+  <meta name="_csrf_header" th:content="${_csrf.headerName}" />
 </head>
 
 <body>
@@ -52,10 +52,10 @@
 
       // paymentKey 필수
       var requestData = {
-        paymentKey: urlParams.get("paymentKey"), 
+        paymentKey: urlParams.get("paymentKey"),
         code: urlParams.get("orderId"),
         price: urlParams.get("amount"),
-        boardNo: urlParams.get("boardNo"),
+        starNo: urlParams.get("starNo"),
         userNo: urlParams.get("userNo")
       };
 
@@ -69,8 +69,11 @@
           headers: headers,
           data: requestData,
           success: function (result) {
-            console.log("Payment confirmed successfully:", result);
-            resolve(result); // 성공 시 Promise를 이행하고 결과 전달
+            if (result.status == "success") {
+              window.location.href = "/payments/paySuccess?starNo=" + result.starNo;
+            } else {
+              window.location.href = "/payments/failSuccess?starNo=" + result.starNo;
+            }
           },
           error: function (xhr, status, error) {
             console.error("Error confirming payment:", error);
