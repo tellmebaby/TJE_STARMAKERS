@@ -232,14 +232,16 @@ public class PageController {
 
     /* 내가 쓴 글 */
     @GetMapping("/mypage/promotion")
-    public String promotionList(Model model, HttpSession session) throws Exception {
+    public String promotionList(Model model, HttpSession session, Page page, Option option) throws Exception {
 
         Users user = (Users) session.getAttribute("user");
         int userNo = user.getUserNo();
-        List<StarBoard> promotionList = starService.promotionList(userNo);
+        List<StarBoard> promotionList = starService.promotionList(userNo, page, option);
 
         model.addAttribute("user", user);
         model.addAttribute("promotionList", promotionList);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
         log.info("userNo : " + userNo);
         return "/page/mypage/promotion";
     }

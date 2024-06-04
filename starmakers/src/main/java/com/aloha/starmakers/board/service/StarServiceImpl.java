@@ -131,9 +131,9 @@ public class StarServiceImpl implements StarService {
     }
 
     @Override
-    public List<StarBoard> promotionList(int userNo) throws Exception {
+    public List<StarBoard> promotionList(int userNo, Page page, Option option) throws Exception {
 
-        List<StarBoard> promotionList = starMapper.promotionList(userNo);
+        List<StarBoard> promotionList = starMapper.promotionList(userNo, page, option);
         log.info("userNo : " + userNo);
         return promotionList;
     }

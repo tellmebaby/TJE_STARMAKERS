@@ -53,6 +53,8 @@ public interface StarMapper {
     public int views(int starNo) throws Exception;
 
     // 마이페이지 쓴 글 조회
-    public List<StarBoard> promotionList(int userNo) throws Exception;
+    public List<StarBoard> promotionList(@Param("userNo") int userNo
+                                        ,@Param("page") Page page
+                                        ,@Param("option") Option option) throws Exception;
 
 }

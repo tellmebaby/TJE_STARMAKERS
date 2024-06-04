@@ -63,7 +63,6 @@
         .table td .button-container {
             display: flex;
             justify-content: flex-end;
-            padding-top: 20px;
         }
         .table tr, th {
             text-align: center;
@@ -141,8 +140,11 @@
                                     <tr th:if="${user.userNo} == ${payment.userNo}"> 
                                         <td class="border-0 pt-4" th:text="${payment.code}"></td>
                                         <td class="border-0 pt-4" th:text="${payment.productTitle}"></td>
-                                        <td class="border-0 pt-4" th:text="${payment.price}"></td>
-                                        <td class="border-0 pt-4" th:text="${#dates.format(payment.regDate, 'yyyy-MM-dd')}"></td>
+                                        <td class="border-0 pt-4">
+                                            <!-- ✨ 타임리프 - 천단위 구분기호 -->
+                                            <span th:text="${#numbers.formatInteger(payment.price, 0, 'COMMA')}"></span>
+                                        </td>
+                                        <td class="border-0 pt-4" th:text="${#dates.format(payment.regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                     </tr>
                                     <tr th:if="${user.userNo} == ${payment.userNo}">
                                         <td colspan="3"></td>
