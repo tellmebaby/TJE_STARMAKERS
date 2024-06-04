@@ -183,8 +183,11 @@
     </insert>
     <!-- 글 조회 -->
     <select id="select" resultType="StarBoard">
-        SELECT * FROM star_board
-        WHERE star_no = #{starNo}
+        SELECT s.*, file_no as imgNo
+        FROM star_board s 
+        left join file f
+        ON f.star_no=s.star_no
+        WHERE s.star_no = #{starNo}
     </select>
 
     <!-- 글 수정 -->
