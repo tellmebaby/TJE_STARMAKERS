@@ -185,16 +185,25 @@
         /* 댓글!!!! 목록 */
         #reply-list {
             display: block;
-            border-bottom: 0.7px solid #000;
+            /* border-bottom: 0.7px solid #000; */
             width: 100%;
             display: block;
             padding: 10px 5px;
             box-sizing: border-box;
         }
+        #reply-line {
+            border-top: 0.7px solid #000;
+        }
+        #reply-listbox {
+            border-bottom: 0.7px solid #000;
+        }
         .reply-top {
             padding: 5px 10px;
             display: flex;
             justify-content: space-between;
+        }
+        .reply-writer {
+            font-weight: bold;
         }
         .reply-regDate {
             color: rgba(192, 190, 183, 1);
@@ -333,15 +342,19 @@
             display: block;
             width: 100%;
             display: block;
-            padding: 10px 5px;
+            padding: 0 10px 5px;
             box-sizing: border-box;
-            /* border-top: 0.7px solid rgba(192, 190, 183, 1); */
-            border-top: 0.7px solid red;
+            border-top: 0.7px solid rgba(192, 190, 183, 1);
+            /* border-top: 0.7px solid red; */
         }
         .rereply-top {
             padding: 5px 10px;
             display: flex;
             justify-content: space-between;
+
+        }
+        .rereply-writer {
+            font-weight: bold;
         }
         .rereply-regDate {
             color: rgba(192, 190, 183, 1);

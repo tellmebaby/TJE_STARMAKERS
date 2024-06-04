@@ -41,7 +41,7 @@ public interface QnaMapper {
     public List<QnaBoard> search(@Param("option") Option option) throws Exception;
 
     // 조회수 증가
-    public int view(int qnaNo) throws Exception;
+    public int views(int qnaNo) throws Exception;
 
 
 }

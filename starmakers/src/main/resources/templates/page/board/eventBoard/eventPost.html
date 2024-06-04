@@ -48,22 +48,23 @@
                          <!-- 사용자 아이디(hidden) -->
                          <input type="hidden" name="username" id="username" th:value="${session.user != null ? session.user.email : '비회원'}">
                          <input type="hidden" name="writer" id="reply-writer" th:value="${session.user != null ? session.user.id : '비회원'}">
-                        <textarea type="text" name="content" id="reply-content" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."
+                        <textarea type="text" name="content" id="reply-content" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다.
+                                로그인 하신 분만 댓글을 작성할 수 있습니다."
                         th:disabled="${session.user == null}"></textarea>
                     <button type="button" id="btn-reply-insert" class="btn-reply" onclick="insertReply()" th:disabled="${session.user == null}">등록</button>
                     </div>            
                 </div>
                 <div class="top-reply-list">
                     <label class="reply">댓글</label>
-                    <label class="reply-count">댓글 갯수</label>
+                    <label class="reply-count" th:text="${starBoard.commentCount} + ' 개'"></label>
                 </div>
                 <!-- 댓글 목록 -->
                 <div id="reply-listbox">
-                    
-                </div>
-                
+                    <div id="reply-list">
 
-     
+                    </div>
+                </div>
+
     </div>
 
     <script>
@@ -159,8 +160,6 @@
             }
         }
 
-         
-
   
       </script>
       <script>
@@ -191,7 +190,7 @@
                     $editor.id = 'editor'
                     let editor = `
                             <input type="hidden" id="update-writer" value="${writer}">
-                            <textarea id="update-reply" cols="100">${content}</textarea>
+                            <textarea id="update-reply" cols="100" >${content}</textarea>
                             <div class="reply-button">
                                 <button class="btn-reply-update" onclick="updateReply(${replyNo})">수정</button>
                                 <button class="btn-reply-delete" onclick="cancelReply(${replyNo})">취소</button>
@@ -261,8 +260,6 @@
                 
             }
 
-
-
         }
 
         // 댓글 삭제
@@ -308,7 +305,8 @@
                 <div class="rereply-box">
                         
                     <input type="hidden" name="writer" id="rereply-writer" value="${writer}">
-                    <textarea name="rereply-content" id="rereply-content" type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
+                    <textarea name="rereply-content" id="rereply-content" type="text" placeholder="
+                    로그인하지 않았을 경우, 답글을 등록할 수 없습니다."></textarea>
                     <button type="button" onclick="answer(${replyNo})">등록</button>
                          
                 </div>
@@ -381,6 +379,104 @@
                     }
                 }
             }
+        }
+
+        function event() {
+            // 답글 수정 버튼
+            let $btnUpdate = document.getElementsByClassName('btn-rereply-update')
+        
+            // 답글 수정 클릭 이벤트
+            for(let i = 0; i < $btnUpdate.length; i++) {
+                $btnUpdate[i].addEventListener('click', function() {
+                    let $top = $btnUpdate[i].parentNode
+                    // let writer = $top.childNodes[1].textContent
+                    let $inner = $top.parentNode
+                    let content = $inner.childNodes[1].textContent
+                    let $replyBox = $inner.parentNode
+                    let $toptop = $replyBox.parentElement
+                    console.log($replyBox)
+
+                    let replyNo = $btnUpdate[i].getAttribute('data') // 답글 번호
+
+                    // 답글 수정 모드
+                    // 1. 기존 답글 내용창 숨기기
+                    $inner.style.display = 'none';
+                    // 2. 수정 UI 출력
+                    let $editor = document.createElement('div')
+                    $editor.classList.add('inner');
+                    $editor.id = 'editor'
+                    let editor = `
+                            <input type="hidden" id="update-writer" value="${writer}">
+                            <textarea id="update-reply" cols="80" >${content}</textarea>
+                            <div class="reply-button">
+                                <button class="btn-reply-update" onclick="updateRereply(${replyNo})">수정</button>
+                                <button class="btn-reply-delete" onclick="cancelRereply(${replyNo})">취소</button>
+                            </div>
+                        `;
+        
+                    $editor.innerHTML = editor
+                    $replyBox.appendChild($editor)
+
+                })
+            }
+        }
+
+        // 답글 수정 요청
+        function updateRereply(replyNo) {
+            // alert('답글 수정')
+            let writer = document.getElementById('update-writer').value
+            let content = document.getElementById('update-reply').value
+
+            console.log(`수정한 작성자 : ${writer}`)
+            console.log(`수정한 내용 :  ${content}`)
+
+
+            let data = {
+                'replyNo'   : replyNo,
+                'writer'    : writer,
+                'content'   : content
+            }
+
+            console.dir(data)
+
+            // 수정 요청
+            let csrfToken = document.querySelector('input[name="_csrf"]').value;
+            let request = new XMLHttpRequest()
+            request.open('PUT', '/page/reply')
+            request.setRequestHeader('Content-Type', 'application/json')
+            request.setRequestHeader('X-CSRF-TOKEN', csrfToken)
+            request.send(JSON.stringify(data))
+
+            request.onreadystatechange = function() {
+                // 요청 성공 시,
+                if(request.readyState == request.DONE && request.status == 200) {
+                    console.log('댓글 수정 성공!');
+                    let response = request.responseText
+                    alert(response)
+                    if(response == 'SUCCESS') {
+                        replyList() // 댓글 목록 갱신
+                    }
+                }
+            }
+        }
+
+        // 답글 수정 취소
+        function cancelRereply() {
+            const check = confirm("작성중인 내용이 사라집니다.")
+            if(!check)
+                return
+
+            let $editor = document.getElementById('editor')
+            $editor.remove()
+
+            // 원래 있던 inner 다시 가져오기
+            let $inner = document.getElementsByClassName('rereply-middle')
+            console.log("취소했을 때 : " + $inner)
+            for (let i = 0; i < $inner.length; i++) {
+                $inner[i].style.display = 'flex'
+                
+            }
+
         }
 
       </script>

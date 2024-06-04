@@ -29,5 +29,5 @@ public interface QnaService {
     public List<QnaBoard> search(Option option) throws Exception;
 
     // 조회수 증가
-    public int view(int qnaNo) throws Exception;
+    public int views(int qnaNo) throws Exception;
 }
