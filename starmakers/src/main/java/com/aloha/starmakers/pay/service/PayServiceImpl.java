@@ -13,7 +13,7 @@ public class PayServiceImpl implements PayService {
 
 
     @Autowired
-    PayMapper payMapper;
+    private PayMapper payMapper;
 
     @Override
     public int insert(Pay pay) {
@@ -28,7 +28,9 @@ public class PayServiceImpl implements PayService {
 
     @Override
     public List<Pay> userList(int userNo) {
-        return payMapper.userList(userNo);
+
+        List<Pay> payList = payMapper.userList(userNo);
+        return payList;
     }
 
     @Override

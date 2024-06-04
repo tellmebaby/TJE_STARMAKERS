@@ -25,7 +25,7 @@
             font-size: 42px;
             margin-bottom: 100px;
             font-weight: bolder;
-        }
+        } 
         .side-menu {
             width: 200px;
             margin-right: 30px;
@@ -107,133 +107,65 @@
             color: black;
         }
 
-
     </style>
 </head>
 <body layout:fragment="content">
-    <form action="" method="get">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="side-menu">
-                        <div class="nav-links">
-                            <h1 th:text="${user.name} + '님,'"></h1>
-                            <a href="/page/mypage/profile">회원 정보</a>
-                            <a href="/page/mypage/payment">결제 내역</a>
-                            <a href="/page/mypage/promotion" class="active">내가 쓴 글</a>
-                            <a href="/page/mypage/archive">내 보관함</a>
-                            <a href="/page/mypage/inquiry">1 : 1 문의</a>
-                            <a href="/page/mypage/userDelete">회원 탈퇴</a>
-                        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="side-menu">
+                    <div class="nav-links">
+                        <h1 th:text="${user.name} + '님,'"></h1>
+                        <a href="/page/mypage/profile">회원 정보</a>
+                        <a href="/page/mypage/payment">결제 내역</a>
+                        <a href="/page/mypage/promotion" class="active">내가 쓴 글</a>
+                        <a href="/page/mypage/archive">내 보관함</a>
+                        <a href="/page/mypage/inquiry">1 : 1 문의</a>
+                        <a href="/page/mypage/userDelete">회원 탈퇴</a>
                     </div>
                 </div>
-                <div class="col-md-9">
-                    <div class="list">
-                        <a href="/page/mypage/promotion"><h2 style="color: #000;">홍보글</h2></a>
-                        <a href="/page/mypage/event"><h2 style="color: #545454;">이벤트 후기</h2></a>
-                    </div>                            
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th> </th>
-                                <th> </th>
-                                <th> </th>
-                                <th> </th>
-                            </tr>
-                            <tr>
-                                <th style="width: 450px;">제목</th>
-                                <th>채널</th>
-                                <th>결제금액</th>
-                                <th>작성일자</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- 데이터 -->
-                            <tr> 
-                                <td class="border-0 pt-4">인스타 홍보입니다</td>
-                                <td class="border-0 pt-4">인스타그램</td>
-                                <td class="border-0 pt-4">50,000원</td>
-                                <td class="border-0 pt-4">2024.05.20</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3"></td>
-                                <td>
-                                    <div class="button-container">
-                                        <button class="btn-review status-pending">검토중</button>
-                                    </div>
-                                </td>
-                            </tr> 
-                            <!-- 데이터 -->
-                            <tr> 
-                                <td class="border-0 pt-4">인스타 홍보입니다</td>
-                                <td class="border-0 pt-4">인스타그램</td>
-                                <td class="border-0 pt-4">50,000원</td>
-                                <td class="border-0 pt-4">2024.05.20</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3"></td>
-                                <td>
-                                    <div class="button-container">
-                                        <button class="btn-review status-pending">검토중</button>
-                                    </div>
-                                </td>
-                            </tr> 
-                            <!-- 데이터 -->
-                            <tr> 
-                                <td class="border-0 pt-4">인스타 홍보입니다</td>
-                                <td class="border-0 pt-4">인스타그램</td>
-                                <td class="border-0 pt-4">50,000원</td>
-                                <td class="border-0 pt-4">2024.05.20</td>
-                            </tr>
-                            <tr>
-                                <td colspan="3"></td>
-                                <td>
-                                    <div class="button-container">
-                                        <button class="btn-review status-pending">검토중</button>
-                                    </div>
-                                </td>
-                            </tr> 
-                        </tbody>
-                    </table>
-                    <!-- 페이지네이션 -->
-                    <center>
-                        <div>
-                            <!-- [ 처음으로 ]-->
-                            <a th:href="|/page/mypage/promotion?page=${page.first}&code=${option.code}&keyword=${option.keyword}|">&laquo;</a>
-                
-                            <!-- [ 이전 ] -->
-                            <th:block th:if="${page.page != page.first}">
-                                <a th:href="|/page/mypage/promotion?page=${page.prev}&code=${option.code}&keyword=${option.keyword}|">&lt;</a>
-                            </th:block>
-                
-                            <th:block th:each="no : ${#numbers.sequence(page.start, page.end)}">  <!--(1,10)모델에 담은 페이지가 아니라 그냥 1부터 10 --> 
-                                <!-- 현재 페이지 -->
-                                <!--
-                                #numbers.sequence(시작번호, 끝번호)
-                                : 시작번호부터 끝번호까지 번호 리스트를 생성
-                                -->
-                                <th:block th:if="${page.page == no}">
-                                    <b>
-                                        <span th:text="${no}"></span>
-                                    </b>
-                                </th:block>
-                                <th:block th:if="${page.page != no}">
-                                    <a th:href="|/page/mypage/promotion?page=${no}&code=${option.code}&keyword=${option.keyword}|" th:text="${no}"></a>
-                                </th:block>
-                            </th:block>
-                
-                            <!-- [ 다음 ] -->
-                            <th:block th:if="${page.page != page.last}">
-                                <a th:href="|/page/mypage/promotion?page=${page.next}&code=${option.code}&keyword=${option.keyword}|">&gt;</a>
-                            </th:block>
-                
-                            <!-- [ 마지막 ]-->
-                            <a th:href="|/page/mypage/promotion?page=${page.last}&code=${option.code}&keyword=${option.keyword}|">&raquo;</a>
-                        </div>
-                    </center>
-                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="list">
+                    <a href="/page/mypage/promotion"><h2 style="color: #000;">홍보글</h2></a>
+                    <a href="/page/mypage/event"><h2 style="color: #545454;">이벤트 후기</h2></a>
+                </div>                            
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> </th>
+                            <th> </th>
+                            <th> </th>
+                            <th> </th>
+                        </tr>
+                        <tr>
+                            <th style="width: 450px;">제목</th>
+                            <th>채널</th>
+                            <th>결제금액</th>
+                            <th>작성일자</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <th:block th:each="promotion : ${promotionList}">
+                                <tr th:if="${user.userNo} == ${promotion.userNo}"> 
+                                    <td class="border-0 pt-4" th:text="${promotion.title}"></td>
+                                    <td class="border-0 pt-4" th:text="${promotion.category1}"></td>
+                                    <td class="border-0 pt-4" th:text="${promotion.starPrice}"></td>
+                                    <td class="border-0 pt-4" th:text="${#dates.format(promotion.regDate, 'yyyy-MM-dd')}"></td>
+                                </tr>
+                                <tr th:if="${user.userNo} == ${promotion.userNo}">
+                                    <td colspan="3"></td>
+                                    <td>
+                                        <div class="button-container">
+                                            <button class="btn-review status-pending">검토중</button>
+                                        </div>
+                                    </td>
+                                </tr> 
+                        </th:block>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </form>
+    </div>
 </body>
 </html>

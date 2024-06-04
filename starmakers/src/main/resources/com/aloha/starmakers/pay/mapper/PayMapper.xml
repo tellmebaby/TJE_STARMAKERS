@@ -23,9 +23,9 @@
         JOIN 
             star_board sb
         ON 
-            pi.status = sb.status
-        AND pi.user_no = sb.user_no
+            pi.user_no = sb.user_no
         WHERE pi.user_no = #{userNo}
+        AND pi.star_no = sb.star_no
     </select>
 
     <select id="totalList" resultType="Pay">
