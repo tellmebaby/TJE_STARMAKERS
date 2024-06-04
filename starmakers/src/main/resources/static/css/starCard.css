@@ -626,8 +626,16 @@
         display: flex;
     }
 
-    .hide-check {
+    .type-sub .hide-check {
         display: none;
+    }
+
+    .type-sub.checked {
+        background-color: #e5c9e7;
+    }
+
+    .type-sub.checked label {
+        color: black;
     }
 
     .type-sub {
@@ -641,6 +649,8 @@
         height: 55px;
         background-color: rgb(158, 160, 164);
         color: #fff;
+        cursor: pointer;
+        display: inline-block;
     }
 
     .type-sub:hover {
@@ -741,4 +751,11 @@
     .sub-btn-insertCard i{
         color: #fff;
         font-size: 1.5em;
+    }
+
+    .type-sub.checked label,
+    .type-sub.checked i,
+    .type-sub.checked img {
+        color: black;
+        z-index: 3;
     }

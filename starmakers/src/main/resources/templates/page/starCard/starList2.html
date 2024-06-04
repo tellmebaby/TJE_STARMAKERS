@@ -23,82 +23,83 @@
 
 <body layout:fragment="content">
         <div class="container">
-            <div class="starList-detail">
+
+            <!-- <div class="starList-detail">
                 <div class="items-eventType">
                     <div class="type-sub">
                         <input class="hide-check" type="checkbox" value="" id="eventOngoing">
-                        <label>진행</label>
+                        <label for="eventOngoing">진행</label>
                     </div>
                     <div class="type-sub">
-                        <input class="hide-check" type="checkbox" value="" id="eventOngoing">
-                        <label>종료</label>
+                        <input class="hide-check" type="checkbox" value="" id="eventExpired">
+                        <label for="eventExpired">종료</label>
                     </div>
                     <div class="type-sub">
-                        <input class="hide-check" type="checkbox" value="" id="eventOngoing">
-                        <label>예정</label>
+                        <input class="hide-check" type="checkbox" value="" id="eventExpired">
+                        <label for="eventUpcoming">예정</label>
                     </div>
                 </div>
                 <div class="items-category1">
                     <div class="type-sub">
-                        <input class="hide-check" type="checkbox" value="" id="eventOngoing">
+                        <input class="hide-check" type="checkbox" value="" id="instagram">
                         <i class="bi bi-instagram"></i>
-                        <!-- <label>instagram</label> -->
+                        <label>instagram</label>
                     </div>
                     <div class="type-sub">
-                        <input class="hide-check" type="checkbox" value="" id="eventOngoing">
+                        <input class="hide-check" type="checkbox" value="" id="youtube">
                         <i class="bi bi-youtube"></i>
-                        <!-- <label>youtube</label> -->
+                        <label>youtube</label>
                     </div>
                     <div class="type-sub">
-                        <input class="hide-check" type="checkbox" value="" id="eventOngoing">
+                        <input class="hide-check" type="checkbox" value="" id="chzzk">
                         <img src="/img/icon/chzzkLight_logo.gif" alt="치지지로고">
-                        <!-- <label>chzzk</label> -->
+                        <label>chzzk</label>
                     </div>
                     <div class="type-sub">
-                        <input class="hide-check" type="checkbox" value="" id="eventOngoing">
+                        <input class="hide-check" type="checkbox" value="" id="afreeca">
                         <img src="/img/icon/afreeca_logo.svg" alt="아프리카로고">
-                        <!-- <label>afreeca</label> -->
+                        <label>afreeca</label>
                     </div>
                 </div>
                 <div class="items-category2">
                     <div class="type-sub">
-                        <input class="hide-check" type="checkbox" value="" id="eventOngoing">
-                        <label>음식</label>
+                        <input class="hide-check" type="checkbox" value="" id="food">
+                        <label for="food">음식</label>
                     </div>
                     <div class="type-sub">
-                        <input class="hide-check" type="checkbox" value="" id="eventOngoing">
-                        <label>여행</label>
+                        <input class="hide-check" type="checkbox" value="" id="travel">
+                        <label for="travel">여행</label>
                     </div>
                     <div class="type-sub">
-                        <input class="hide-check" type="checkbox" value="" id="eventOngoing">
-                        <label>게임</label>
+                        <input class="hide-check" type="checkbox" value="" id="gaming">
+                        <label for="game">게임</label>
                     </div>
                     <div class="type-sub">
-                        <input class="hide-check" type="checkbox" value="" id="eventOngoing">
-                        <label>음악</label>
+                        <input class="hide-check" type="checkbox" value="" id="music">
+                        <label for="music">음악</label>
                     </div>
                     <div class="type-sub">
-                        <input class="hide-check" type="checkbox" value="" id="eventOngoing">
-                        <label>동물</label>
+                        <input class="hide-check" type="checkbox" value="" id="animal">
+                        <label for="animal">동물</label>
                     </div>
                     <div class="type-sub">
-                        <input class="hide-check" type="checkbox" value="" id="eventOngoing">
-                        <label>운동</label>
+                        <input class="hide-check" type="checkbox" value="" id="workOut">
+                        <label for="workOut">운동</label>
                     </div>
                     <div class="type-sub">
-                        <input class="hide-check" type="checkbox" value="" id="eventOngoing">
-                        <label>ASMR</label>
+                        <input class="hide-check" type="checkbox" value="" id="asmr">
+                        <label for="asmr">ASMR</label>
                     </div>
                     <div class="type-sub">
-                        <input class="hide-check" type="checkbox" value="" id="eventOngoing">
-                        <label>패션</label>
+                        <input class="hide-check" type="checkbox" value="" id="fashion">
+                        <label for="fashion">패션</label>
                     </div>
                 </div>
             </div>
             <div class="container-starSearch">
                 <div class="sub-searchInput">
                     <i id="icon-inSearchBar" class="bi bi-search"></i>
-                    <input type="search" class="search-bar_input" id="star-search-input" placeholder="검색">
+                    <input type="text" class="search-bar_input" id="searchInput" placeholder="검색" th:value="${param.txt}">
                 </div>
                 <div class="sub-btn-calendar">
                     <a href="starCalendar.html" class="btn-starCalendar"><i class="bi bi-calendar-week"></i></a>
@@ -106,7 +107,7 @@
                 <div class="sub-btn-insertCard">
                     <a href="starInsert.html" class="btn-starInsert"><i class="bi bi-pen"></i></a>
                 </div>
-            </div>
+            </div> -->
             <!-- <form>
                 <div class="search-title d-flex justify-content-between mt-3">
                     <span>상세검색</span>
@@ -198,8 +199,8 @@
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="animals">
-                                <label class="form-check-label" for="animals">
+                                <input class="form-check-input" type="checkbox" value="" id="animal">
+                                <label class="form-check-label" for="animal">
                                     동물
                                 </label>
                             </div>
@@ -256,12 +257,254 @@
                     </div>
                 </div> -->
 
+                <div class="starList-detail">
+                    <div class="items-eventType">
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="eventOngoing">
+                            <label for="eventOngoing">진행</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="eventExpired">
+                            <label for="eventExpired">종료</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="eventUpcoming">
+                            <label for="eventUpcoming">예정</label>
+                        </div>
+                    </div>
+                    <div class="items-category1">
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="instagram">
+                            <i class="bi bi-instagram"></i>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="youtube">
+                            <i class="bi bi-youtube"></i>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="chzzk">
+                            <img src="/img/icon/chzzkLight_logo.gif" alt="치지지로고">
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="afreeca">
+                            <img src="/img/icon/afreeca_logo.svg" alt="아프리카로고">
+                        </div>
+                    </div>
+                    <div class="items-category2">
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="food">
+                            <label for="food">음식</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="travel">
+                            <label for="travel">여행</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="gaming">
+                            <label for="game">게임</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="music">
+                            <label for="music">음악</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="animal">
+                            <label for="animal">동물</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="workOut">
+                            <label for="workOut">운동</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="asmr">
+                            <label for="asmr">ASMR</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="fashion">
+                            <label for="fashion">패션</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-starSearch">
+                    <div class="sub-searchInput">
+                        <i id="icon-inSearchBar" class="bi bi-search"></i>
+                        <input type="text" class="search-bar_input" id="searchInput" placeholder="검색" th:value="${param.txt}">
+                    </div>
+                    <div class="sub-btn-calendar">
+                        <a href="starCalendar.html" class="btn-starCalendar"><i class="bi bi-calendar-week"></i></a>
+                    </div>
+                    <!-- 비로그인시 -->
+                    <th:block sec:authorize="isAnonymous()"></th:block>
+                    <!-- 로그인시 -->
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="sub-btn-insertCard">
+                            <a href="starInsert.html" class="btn-starInsert"><i class="bi bi-pen"></i></a>
+                        </div>
+                    </th:block>
+                </div>
+
                 <div id="promotionCarousel" class="carousel">
                     <div class="row row-cols-2 row-cols-lg-6" id="starList"></div>
                 </div>
+        </div>
             
 
-                <script>
+<script>
+    $(document).ready(function () {
+    let page = 1;
+    let isLoading = false;
+
+    function createCard(cardData, categories, categories2) {
+        return `
+        <div class="col-md-2 mb-4">
+            <div id="card-effect" class="card ${cardData.card === '유료홍보' ? 'effect' : ''}" data-no="${cardData.starNo}">
+                <div class="card standard">
+                    ${cardData.card === '유료홍보' ? '<div class="card-overlay"></div>' : ''}
+                    <div class="card custom-card" style="background-image: url('/file/img/${cardData.imgNo}');">
+                        <span class="star">&#9733;</span>
+                        <div class="top-container">
+                            <div class="left-content">
+                                ${categories.includes('afreeca') ? '<img src="/img/icon/afreeca.png" alt="아이콘1" class="content-icon">' : ''}
+                                ${categories.includes('chzzk') ? '<img src="/img/icon/chzzk.png" alt="아이콘2" class="content-icon">' : ''}
+                                ${categories.includes('youtube') ? '<img src="/img/icon/youtube.png" alt="아이콘3" class="content-icon">' : ''}
+                                ${categories.includes('instagram') ? '<img src="/img/icon/instagram.png" alt="아이콘4" class="content-icon">' : ''}
+                            </div>
+                            <div class="right-content">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                                </svg>
+                            </div>
+                        </div> 
+                        <div class="overlay" style="background-image: url('/file/img/${cardData.imgNo}');"></div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <img src="/file/img/${cardData.userImgId}" alt="작성자 아이콘" class="author-icon">
+                                ${cardData.title}
+                            </h5>
+                            <div class="card-text">${cardData.content}</div>
+                            <div class="bottom-container">
+                                <div class="field-links">
+                                    ${categories2.includes('music') ? '<a href="#" class="btn btn-custom">#음악</a>' : ''}
+                                    ${categories2.includes('travel') ? '<a href="#" class="btn btn-custom">#여행</a>' : ''}
+                                    ${categories2.includes('food') ? '<a href="#" class="btn btn-custom">#음식</a>' : ''}
+                                    ${categories2.includes('game') ? '<a href="#" class="btn btn-custom">#게임</a>' : ''}
+                                    ${categories2.includes('animal') ? '<a href="#" class="btn btn-custom">#동물</a>' : ''}
+                                    ${categories2.includes('workOut') ? '<a href="#" class="btn btn-custom">#운동</a>' : ''}
+                                    ${categories2.includes('fashion') ? '<a href="#" class="btn btn-custom">#패션</a>' : ''}
+                                    ${categories2.includes('asmr') ? '<a href="#" id="asmr-link" class="btn btn-custom">#ASMR</a>' : ''}
+                                </div>
+                                <div class="star-links">
+                                    <i class="bi bi-star"></i>
+                                    <span class="count">${cardData.views}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+    }
+
+    function loadCards(resetPage = false) {
+        if (isLoading) return;
+        isLoading = true;
+
+        if (resetPage) {
+            page = 1;
+            $('#starList').empty();
+        }
+
+        const filters = {
+            type: 'starCard',
+            page: page,
+            eventOngoing: $('#eventOngoing').is(':checked'),
+            eventExpired: $('#eventExpired').is(':checked'),
+            eventUpcoming: $('#eventUpcoming').is(':checked'),
+            instagram: $('#instagram').is(':checked'),
+            youtube: $('#youtube').is(':checked'),
+            chzzk: $('#chzzk').is(':checked'),
+            afreeca: $('#afreeca').is(':checked'),
+            food: $('#food').is(':checked'),
+            travel: $('#travel').is(':checked'),
+            game: $('#gaming').is(':checked'),
+            music: $('#music').is(':checked'),
+            animal: $('#animal').is(':checked'),
+            workOut: $('#workOut').is(':checked'),
+            asmr: $('#asmr').is(':checked'),
+            fashion: $('#fashion').is(':checked'),
+            keyword: $('#searchInput').val()
+        };
+
+        $.ajax({
+            url: '/page/starCard/starList/api',
+            method: 'GET',
+            data: filters,
+            success: function (data) {
+                const categories = ['afreeca', 'chzzk', 'youtube', 'instagram'].filter(category => filters[category]);
+                const categories2 = ['music', 'travel', 'food', 'game', 'animal', 'workOut', 'fashion', 'asmr'].filter(category => filters[category]);
+
+                data.forEach(cardData => {
+                    $('#starList').append(createCard(cardData, categories, categories2));
+                });
+                isLoading = false;
+                page++;
+            },
+            error: function () {
+                console.error("Failed to load cards.");
+                isLoading = false;
+            }
+        });
+    }
+
+    // Load initial cards
+    loadCards();
+
+    // Scroll event to load more cards
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            loadCards();
+        }
+    });
+
+    // Checkbox change event
+    $('input[type="checkbox"]').change(function () {
+        $(this).closest('.type-sub').toggleClass('checked', $(this).is(':checked'));
+        loadCards(true);
+    });
+
+    // Search form submission
+    $('#searchInput').on('input', function () {
+        loadCards(true);
+    });
+
+    // Initialize checkbox color change
+    $('input[type="checkbox"]').each(function () {
+        if ($(this).is(':checked')) {
+            $(this).closest('.type-sub').addClass('checked');
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('.type-sub').on('click', function () {
+        const checkbox = $(this).find('.hide-check');
+        checkbox.prop('checked', !checkbox.prop('checked'));
+        $(this).toggleClass('checked', checkbox.prop('checked'));
+        
+        // Trigger the change event to ensure the filtering works correctly
+        checkbox.trigger('change');
+    });
+});
+
+
+</script>
+
+                
+
+
+
+                <!-- <script>
                     $(document).ready(function() {
                         let page = 1;
                         const type = 'starCard';
@@ -362,12 +605,17 @@
                             });
                         }
                     
+                        // 초기 카드 로드
+                        loadMoreCards();
+
                         $(window).scroll(function() {
                             console.log("Scroll position:", $(window).scrollTop(), "Window height:", $(window).height(), "Document height:", $(document).height()); // 디버그: 스크롤 위치 확인
                             if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
                                 loadMoreCards();
                             }
                         });
+
+                        
 
                         // 페이지 로드 시 기존 카드 데이터 로드
                         $.ajax({
@@ -384,8 +632,21 @@
                                 console.error("Error:", error);
                             }
                         });
+
+                        // 검색 폼 제출 이벤트
+                        $('#searchForm').submit(function (event) {
+                            event.preventDefault();
+                            loadMoreCards(true);
+                        });
+
+                        // 체크박스 변경 이벤트
+                        $('input[type="checkbox"]').change(function () {
+                            loadMoreCards(true);
+                        });
                     });
-                </script>
+
+
+                </script> -->
 
             <!-- <script>
                 $(document).ready(function () {
@@ -474,11 +735,6 @@
                 });
             </script> -->
 
-
-
-
-
-        </div>
 </body>
 
 </html>
