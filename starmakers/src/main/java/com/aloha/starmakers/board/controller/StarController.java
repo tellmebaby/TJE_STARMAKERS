@@ -1,7 +1,6 @@
 package com.aloha.starmakers.board.controller;
 
-
-
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -32,7 +31,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
-
 @Slf4j
 @Controller
 @RequestMapping("/page")
@@ -51,7 +49,7 @@ public class StarController {
     private ReplyService replyService;
 
   
-    
+
     /**
      * 글 등록 화면 요청
      * 
@@ -62,12 +60,9 @@ public class StarController {
         return "/page/starCard/starInsert";
     }
 
-
     @GetMapping("/starCard/starCalendar")
-    public String starCalendarList(@RequestParam(value = "type", defaultValue = "starCard") String type
-                                    ,Model model, Page page, HttpSession session
-                                    ,Option option) throws Exception {
-                          
+    public String starCalendarList(@RequestParam(value = "type", defaultValue = "starCard") String type, Model model,
+            Page page, HttpSession session, Option option) throws Exception {
 
         Users user = (Users) session.getAttribute("user");
 
@@ -82,7 +77,6 @@ public class StarController {
             starList = starService.list(type, page, option);
         }
 
-
         starList.forEach(star -> {
             if (star.getCategory1() != null) {
                 List<String> icons = Arrays.stream(star.getCategory1().split(","))
@@ -92,15 +86,11 @@ public class StarController {
         });
 
         ObjectMapper mapper = new ObjectMapper();
-        String starListJson = mapper.writeValueAsString(starList);        
+        String starListJson = mapper.writeValueAsString(starList);
         model.addAttribute("starList", starListJson);
 
         return "/page/starCard/starCalendar";
     }
-
-
-
-
 
     /**
      * 글 등록 요청
@@ -112,16 +102,14 @@ public class StarController {
      * @throws Exception
      */
     @PostMapping("/starCard/starInsert")
-    public String insertPro(StarBoard starBoard, String username, @RequestParam(value = "image", required = false) MultipartFile file ,HttpSession session)
+    public String insertPro(StarBoard starBoard, String username,
+            @RequestParam(value = "image", required = false) MultipartFile file, HttpSession session)
             throws Exception {
         // starBoard.setCard("무료홍보");
         int starNo = starService.insert(starBoard, username);
-        
-
 
         Users user = (Users) session.getAttribute("user");
         int userNo = user.getUserNo();
-
 
         // 리다이렉트
         // 데이터 처리 성공
@@ -144,9 +132,6 @@ public class StarController {
         return "/page/starCard/starList";
     }
 
-
-    
-
     // 추가 화면 설정
     @GetMapping("/starCard/starList/api")
     public ResponseEntity<List<StarBoard>> getMoreCards(
@@ -158,7 +143,6 @@ public class StarController {
         List<StarBoard> starList;
 
         page.setRows(12); // 한 번에 불러올 행 수 설정
-
 
         if (user != null) {
             int userNo = user.getUserNo();
@@ -178,12 +162,6 @@ public class StarController {
         return ResponseEntity.ok(starList);
     }
 
-
-    
-
-
-
-
     /**
      * 결제 버튼 클릭 시
      * 
@@ -192,33 +170,51 @@ public class StarController {
      * @return
      * @throws Exception
      */
-    @GetMapping("/starCard/starPayment") 
-    public String payment(@RequestParam("starNo") int starNo, Model model) throws Exception {
-        
+    @GetMapping("/starCard/starPayment")
+    public String payment(@RequestParam("starNo") int starNo, Model model, HttpSession session) throws Exception {
+
+        Users user = (Users) session.getAttribute("user");
+
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
         StarBoard starBoard = starService.select(starNo);
-        
+
+        Date strDate = starBoard.getStartDate();
+        Date endDate = starBoard.getEndDate();
+        int dif = (int) ((endDate.getTime() - strDate.getTime()) / (24 * 60 * 60 * 1000));
+        int price = dif * 1000; // 결제 금액
+        model.addAttribute("dif", dif);
+        model.addAttribute("price", price);
+
+        price = (int) (dif * 1000); // 결제 금액
+        NumberFormat format = NumberFormat.getInstance();
+        String formattedPrice = format.format(price);
+        model.addAttribute("formattedPrice", formattedPrice);
+
         model.addAttribute("starBoard", starBoard);
         return "/page/starCard/starPayment";
     }
+
     @PostMapping("/starCard/starPayment")
     public String paymentPro(StarBoard starBoard, String username, Model model,
-                            @RequestParam(value = "image", required = false) MultipartFile file, 
-                            HttpSession session) throws Exception {
+            @RequestParam(value = "image", required = false) MultipartFile file,
+            HttpSession session) throws Exception {
         // 결제 버튼 클릭 시,
         // 홍보글 정보 insert로 db등록
         // 등록한 정보에서 날짜 출력하여 홍보 일수 계산
-        
+
         // StarBoard starBoard1 = starBoard;
-        int starNo=0;
-        if (starNo <= 0){
+        int starNo = 0;
+        if (starNo <= 0) {
             starBoard.setCard("유료홍보");
             starNo = starService.insert(starBoard, username);
         }
 
         Date strDate = starBoard.getStartDate();
         Date endDate = starBoard.getEndDate();
-        int dif = (int) ((endDate.getTime() - strDate.getTime())/ (24*60*60*1000));
-        int price = dif*1000; // 결제 금액
+        int dif = (int) ((endDate.getTime() - strDate.getTime()) / (24 * 60 * 60 * 1000));
+        int price = dif * 1000; // 결제 금액
         model.addAttribute("dif", dif);
         model.addAttribute("price", price);
 
@@ -226,7 +222,6 @@ public class StarController {
         int userNo = user.getUserNo();
         String userName = user.getName();
         model.addAttribute("userName", userName);
-
 
         // 리다이렉트
         // 데이터 처리 성공
@@ -242,11 +237,8 @@ public class StarController {
         // int no = starBoard.getStarNo();
         return "redirect:/page/starCard/starInsert?starNo=" + starNo + "&error";
 
-
         // model.addAttribute("starBoard1", starBoard1);
-        
 
-        
     }
 
     /**
@@ -293,20 +285,18 @@ public class StarController {
         return "redirect:/page/board/qnaBoard/qnaUpdate?qnaNo=" + no + "$error";
     }
 
-    
     // 아래부터 event 게시판
 
     @GetMapping("/board/eventBoard/eventList")
-    public String eventList(@RequestParam(value = "type", defaultValue = "event") String type
-                                    ,Model model, Page page
-                                    ,Option option) throws Exception {
+    public String eventList(@RequestParam(value = "type", defaultValue = "event") String type, Model model, Page page,
+            Option option) throws Exception {
 
 
         List<StarBoard> starList = starService.list(type, page, option);
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
-        
+
         List<Option> optionList = new ArrayList<Option>();
         optionList.add(new Option("제목+내용", 0));
         optionList.add(new Option("제목", 1));
@@ -316,23 +306,24 @@ public class StarController {
 
         return "/page/board/eventBoard/eventList";
     }
-    
+
     @PostMapping("/board/eventBoard/eventInsert")
-    public String eventInsertPro(StarBoard starBoard, String username) throws Exception{
+    public String eventInsertPro(StarBoard starBoard, String username) throws Exception {
         int result = starService.insert(starBoard, username);
         // 리다이렉트
         // 데이터 처리 성공
-        if(result>0){
+        if (result > 0) {
             return "redirect:/page/board/eventBoard/eventList";
         }
-        
 
         // 데이터 처리 실패
         int no = starBoard.getStarNo();
         return "redirect:/page/board/eventBoard/eventInsert?starNo=" + no + "&error";
     }
-     /**
+
+    /**
      * 글 1개 조회
+     * 
      * @param starNo
      * @param model
      * @return
@@ -347,13 +338,14 @@ public class StarController {
         model.addAttribute("starBoard", starBoard);
         return "/page/board/eventBoard/eventPost";
     }
-    
+
     /**
      * 글 수정 페이지 요청
+     * 
      * @param starNo
      * @param model
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @GetMapping("/board/eventBoard/eventUpdate")
     public String eventUpdate(@RequestParam("starNo") int starNo, Model model) throws Exception {
@@ -366,54 +358,51 @@ public class StarController {
     public String eventUpdatePro(StarBoard starBoard) throws Exception {
 
         int result = starService.update(starBoard);
-        if ( result > 0) {
+        if (result > 0) {
             return "redirect:/page/board/eventBoard/eventList";
         }
         int no = starBoard.getStarNo();
-        
+
         return "redirect:/page/board/eventBoard/eventUpdate?qnaNo=" + no + "$error";
     }
 
     @PostMapping("/board/eventBoard/eventDelete")
     public String eventDelete(@RequestParam("starNos") String starNos) throws Exception {
-       
+
         int result = 0;
         result = starService.delete(starNos);
 
         if (result > 0) {
             return "redirect:/page/mypage/event";
         }
-        
-        return "redirect:/page/mypage/event?error";  // 삭제 실패시에도 같은 페이지로 리디렉션
-    }
 
+        return "redirect:/page/mypage/event?error"; // 삭제 실패시에도 같은 페이지로 리디렉션
+    }
 
     // 아래부터 review 게시판
 
-
     // review 게시판
-     /**
+    /**
      * 글 삭제
+     * 
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @PostMapping("/review/delete")
     public String reviewDelete(@RequestParam("starNos") String starNos) throws Exception {
         int result = starService.delete(starNos);
-        if(result>0){
+        if (result > 0) {
             log.info("삭제 완료");
-        }
-        else {
+        } else {
             log.info("삭제 실패");
         }
         return "/page/board/reviewBoard/reviewList";
     }
 
     @GetMapping("/board/reviewBoard/reviewList")
-    public String reviewList(@RequestParam(value = "type", defaultValue = "review") String type
-                                    ,Model model, Page page
-                                    ,Option option) throws Exception {
-                                        
+    public String reviewList(@RequestParam(value = "type", defaultValue = "review") String type, Model model, Page page,
+            Option option) throws Exception {
+
         List<StarBoard> starList = starService.list(type, page, option);
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
@@ -433,16 +422,14 @@ public class StarController {
 
         return "/page/board/reviewBoard/reviewInsert";
     }
-    
-
 
     @PostMapping("/board/reviewBoard/reviewInsert")
-    public String reviewInsertPro(StarBoard starBoard, String username) throws Exception{
+    public String reviewInsertPro(StarBoard starBoard, String username) throws Exception {
         int result = starService.insert(starBoard, username);
         // 리다이렉트
         // 데이터 처리 성공
         int no = starBoard.getStarNo();
-        if(result>0){
+        if (result > 0) {
 
             return "redirect:/page/board/reviewBoard/reviewList";
         }
@@ -453,6 +440,7 @@ public class StarController {
 
     /**
      * 글 1개 조회
+     * 
      * @param starNo
      * @param model
      * @return
@@ -468,13 +456,14 @@ public class StarController {
         model.addAttribute("starBoard", starBoard);
         return "/page/board/reviewBoard/reviewPost";
     }
-    
+
     /**
      * 글 수정 페이지 요청
+     * 
      * @param starNo
      * @param model
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @GetMapping("/board/reviewBoard/reviewUpdate")
     public String reviewUpdate(@RequestParam("starNo") int starNo, Model model) throws Exception {
@@ -487,20 +476,19 @@ public class StarController {
     public String reviewUpdatePro(StarBoard starBoard) throws Exception {
 
         int result = starService.update(starBoard);
-        if ( result > 0) {
+        if (result > 0) {
             return "redirect:/page/board/reviewBoard/reviewList";
         }
         int no = starBoard.getStarNo();
-        
+
         return "redirect:/page/board/reviewBoard/reviewUpdate?qnaNo=" + no + "$error";
     }
-    
+
     // 아래부터 공지게시판
     @GetMapping("/board/anBoard/anList")
-    public String anList(@RequestParam(value = "type", defaultValue = "an") String type
-                                    ,Model model, Page page
-                                    ,Option option) throws Exception {
-                                        
+    public String anList(@RequestParam(value = "type", defaultValue = "an") String type, Model model, Page page,
+            Option option) throws Exception {
+
         List<StarBoard> starList = starService.list(type, page, option);
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
@@ -515,23 +503,23 @@ public class StarController {
         return "/page/board/anBoard/anList";
     }
 
-
     @PostMapping("/board/anBoard/anInsert")
-    public String anInsertPro(StarBoard starBoard, String username) throws Exception{
+    public String anInsertPro(StarBoard starBoard, String username) throws Exception {
         int result = starService.insert(starBoard, username);
         // 리다이렉트
         // 데이터 처리 성공
-        if(result>0){
+        if (result > 0) {
             return "redirect:/page/board/anBoard/anList";
         }
-        
 
         // 데이터 처리 실패
         int no = starBoard.getStarNo();
         return "redirect:/page/board/anBoard/anInsert?starNo=" + no + "&error";
     }
- /**
+
+    /**
      * 글 1개 조회
+     * 
      * @param starNo
      * @param model
      * @return
@@ -546,13 +534,14 @@ public class StarController {
         model.addAttribute("starBoard", starBoard);
         return "/page/board/anBoard/anPost";
     }
-    
+
     /**
      * 글 수정 페이지 요청
+     * 
      * @param starNo
      * @param model
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     @GetMapping("/board/anBoard/anUpdate")
     public String anUpdate(@RequestParam("starNo") int starNo, Model model) throws Exception {
@@ -563,6 +552,7 @@ public class StarController {
 
     /**
      * 글 수정
+     * 
      * @param starBoard
      * @return
      * @throws Exception
@@ -571,11 +561,11 @@ public class StarController {
     public String anUpdatePro(StarBoard starBoard) throws Exception {
 
         int result = starService.update(starBoard);
-        if ( result > 0) {
+        if (result > 0) {
             return "redirect:/page/board/anBoard/anList";
         }
         int no = starBoard.getStarNo();
-        
+
         return "redirect:/page/board/anBoard/anUpdate?qnaNo=" + no + "$error";
     }
 
