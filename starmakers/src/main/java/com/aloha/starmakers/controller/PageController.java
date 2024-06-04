@@ -22,6 +22,8 @@ import com.aloha.starmakers.board.dto.StarBoard;
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.board.service.QnaService;
 import com.aloha.starmakers.board.service.StarService;
+import com.aloha.starmakers.pay.dto.Pay;
+import com.aloha.starmakers.pay.service.PayService;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.service.UserService;
 
@@ -49,8 +51,8 @@ public class PageController {
     @Autowired
     private FileService fileService;
 
-    // @Autowired
-    // private PaymentService paymentService;
+    @Autowired
+    private PayService payService;
 
     // @GetMapping("mypage/{path}")
     // public String getMethodName2(@PathVariable("path") String path, HttpSession session, Model model) {    
@@ -209,26 +211,32 @@ public class PageController {
     }
 
     /* ------------------------------------------------------------- */
-    // /* 결제내역 */
-    // @GetMapping("/mypage/payment")
-    // public String paymentList(Model model, HttpSession session) throws Exception {
+    /* 결제내역 */
+    @GetMapping("/mypage/payment")
+    public String payList(Model model, HttpSession session) throws Exception {
 
-    //     List<Payment> paymentList = paymentService.paymentList();
+        Users user = (Users) session.getAttribute("user");
 
-    //     Users user = (Users) session.getAttribute("user");
-    //     model.addAttribute("paymentList", paymentList);
-    //     model.addAttribute("user", user);
-    //     return "/page/mypage/payment";
-    // }
+        int userNo = user.getUserNo();
+        List<Pay> payList = payService.userList(userNo);
+
+        model.addAttribute("user", user);
+        model.addAttribute("payList", payList);
+        log.info("userNo : " + userNo);
+        return "/page/mypage/payment";
+    }
 
     /* 내가 쓴 글 */
     @GetMapping("/mypage/promotion")
-    public String as(Model model, HttpSession session, Page page, Option option) throws Exception {
+    public String promotionList(Model model, HttpSession session) throws Exception {
 
         Users user = (Users) session.getAttribute("user");
+        int userNo = user.getUserNo();
+        List<StarBoard> promotionList = starService.promotionList(userNo);
+
         model.addAttribute("user", user);
-        model.addAttribute("page", page);
-        model.addAttribute("option", option);
+        model.addAttribute("promotionList", promotionList);
+        log.info("userNo : " + userNo);
         return "/page/mypage/promotion";
     }
     

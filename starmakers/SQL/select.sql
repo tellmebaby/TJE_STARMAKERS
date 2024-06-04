@@ -60,28 +60,54 @@ WHERE user_no = 6 AND star_no = 0
 SELECT *
 FROM file
 
-SELECT 
-    pi.pay_no,
-    pi.code,
-    pi.price,
-    pi.user_no,
-    pi.product_title,
-    pi.reg_date, 
-    sb.status  
-FROM 
-    payment_info pi
-JOIN 
-    star_board sb
-ON 
-    pi.user_no = sb.user_no AND
-    pi.status = sb.status
-WHERE
-    pi.user_no = 6
+INSERT INTO payment_info (code, price, user_no, star_no, product_title, status) VALUES
+(102, '54000', 1, 9, '유튜브 홍보합니다', '환불대기')
 
-INSERT INTO payment_info (code, price, user_no, product_title, status) VALUES
-(101, '54000', 6, '인스타 홍보합니다', '검토중'),
-(102, '54000', 6, '유튜브 홍보합니다', '검토중'),
-(103, '54000', 6, '블로그 홍보합니다', '검토중');
+TRUNCATE payment_info
 
 SELECT *
 FROM payment_info
+
+select * 
+FROM star_board
+
+SELECT pi.*
+      ,sb.status as star_status
+        FROM 
+            payment_info pi
+        JOIN 
+            star_board sb
+        ON 
+            pi.user_no = sb.user_no
+        WHERE pi.user_no = 1
+        AND pi.star_no = sb.star_no
+
+
+SELECT sb.title, sb.category1, sb.reg_date, sb.status
+      ,pi.price
+        FROM 
+            star_board sb
+        JOIN 
+            payment_info pi
+        ON 
+            pi.user_no = sb.user_no
+        WHERE pi.user_no = 1
+        AND pi.star_no = sb.star_no
+;
+SELECT 
+    sb.user_no,
+    sb.title, 
+    sb.category1, 
+    sb.reg_date, 
+    sb.status, 
+    pi.price as star_price
+FROM 
+    star_board sb
+JOIN 
+    payment_info pi
+ON 
+    pi.user_no = sb.user_no
+AND 
+    pi.star_no = sb.star_no
+WHERE 
+    sb.user_no = 1
