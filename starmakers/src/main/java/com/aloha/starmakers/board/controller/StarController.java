@@ -318,8 +318,11 @@ public class StarController {
     public String eventList(@RequestParam(value = "type", defaultValue = "event") String type, Model model, Page page,
             Option option) throws Exception {
 
-
         List<StarBoard> starList = starService.list(type, page, option);
+        for (StarBoard starBoard : starList) {
+            int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+            starBoard.setCommentCount(commentCount);
+        }
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
@@ -444,6 +447,10 @@ public class StarController {
             Option option) throws Exception {
 
         List<StarBoard> starList = starService.list(type, page, option);
+        for (StarBoard starBoard : starList) {
+            int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+            starBoard.setCommentCount(commentCount);
+        }
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
@@ -530,6 +537,10 @@ public class StarController {
             Option option) throws Exception {
 
         List<StarBoard> starList = starService.list(type, page, option);
+        for (StarBoard starBoard : starList) {
+            int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+            starBoard.setCommentCount(commentCount);
+        }
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);

@@ -18,25 +18,17 @@
     overflow: hidden;
 }
 .event::before {
-    content: ''; /* 가상 요소 생성 */
+    content: '';
     position: absolute;
-    top: -50%; /* 텍스트 위에 겹치도록 설정 */
+    top: -50%; 
     left: -50%;
-    width: 150%; /* 텍스트의 너비를 벗어나는 크기로 설정 */
-    height: 150%; /* 텍스트의 높이를 벗어나는 크기로 설정 */
-    background: linear-gradient(13deg, rgba(255, 255, 255, 0.3) 0%, transparent 80%); /* 원형 그라디언트를 사용하여 유리에 반사된 빛 효과를 줍니다. */
+    width: 150%; 
+    height: 150%;
+    background: linear-gradient(13deg, rgba(255, 255, 255, 0.3) 0%, transparent 80%);
     z-index: 1;
-    animation: shine 2s infinite alternate; /* 텍스트가 유리 위를 떠다니는 듯한 효과를 주는 애니메이션 */
-    opacity: 0; /* 초기에 투명하게 설정하여 반짝이는 효과를 줌 */
-    animation-delay: 0.5s; /* 반짝이는 효과의 시작을 약간 지연시킴 */
+    animation: shine 2s infinite alternate;
 }
 @keyframes shine {
-    0%, 100% {
-        opacity: 0; /* 시작과 끝에서 투명도를 0으로 설정하여 반짝이는 효과를 줌 */
-    }
-    50% {
-        opacity: 1; /* 중간에서 투명도를 1로 설정하여 반짝이는 효과를 줌 */
-    }
     from {
         transform: translateY(-50%) rotate(-45deg);
     }
@@ -106,7 +98,10 @@ td {
     padding: 7px;
     border-bottom: 0.7px solid #000;
 }
-
+td img {
+    animation: twinkle3 1.5s infinite alternate;
+    margin-bottom: 4px;
+}
 thead {
     border-bottom: 2px solid #000;
 }
@@ -199,6 +194,18 @@ a {
     }
 }
 
+@keyframes fix-twinkle {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        color: crimson;
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 
 @keyframes twinkle {
     0% {
@@ -207,6 +214,18 @@ a {
     50% {
         color: orangered;
         opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes twinkle3 {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        color: salmon;
+        opacity: 0.7;
     }
     100% {
         opacity: 1;
