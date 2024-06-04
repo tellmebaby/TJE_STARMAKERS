@@ -232,7 +232,7 @@ public class StarController {
             if (file != null && !file.isEmpty()) {
                 fileService.upload(file, starNo, userNo);
             }
-            return "/page/starCard/starPayment";
+            return "redirect:/page/starCard/starPayment?starNo=" + starNo;
         }
 
         // 데이터 처리 실패
@@ -400,9 +400,11 @@ public class StarController {
         result = starService.delete(starNos);
 
         if (result > 0) {
-            return "redirect:/page/mypage/event";
+            return "redirect:/page/mypage/event" ; 
         }
+
         return "redirect:/page/mypage/event?error";  // 삭제 실패시에도 같은 페이지로 리디렉션
+
     }
 
     // 아래부터 review 게시판

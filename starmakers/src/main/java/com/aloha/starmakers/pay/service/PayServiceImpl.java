@@ -11,17 +11,19 @@ import com.aloha.starmakers.pay.mapper.PayMapper;
 @Service
 public class PayServiceImpl implements PayService {
 
+
     @Autowired
     private PayMapper payMapper;
 
     @Override
     public int insert(Pay pay) {
-        return insert(pay);
+        payMapper.insert(pay);
+        return pay.getPayNo();
     }
 
     @Override
-    public Pay select(int payNo) {
-        return select(payNo);
+    public Pay select(int starNo) {
+        return payMapper.select(starNo);
     }
 
     @Override
@@ -29,17 +31,16 @@ public class PayServiceImpl implements PayService {
 
         List<Pay> payList = payMapper.userList(userNo);
         return payList;
-
     }
 
     @Override
     public List<Pay> totalList() {
-        return totalList();
+        return payMapper.totalList();
     }
 
     @Override
     public int update(Pay pay) {
-        return update(pay);
+        return payMapper.update(pay);
     }
     
 }
