@@ -59,3 +59,29 @@ WHERE user_no = 6 AND star_no = 0
 
 SELECT *
 FROM file
+
+SELECT 
+    pi.pay_no,
+    pi.code,
+    pi.price,
+    pi.user_no,
+    pi.product_title,
+    pi.reg_date, 
+    sb.status  
+FROM 
+    payment_info pi
+JOIN 
+    star_board sb
+ON 
+    pi.user_no = sb.user_no AND
+    pi.status = sb.status
+WHERE
+    pi.user_no = 6
+
+INSERT INTO payment_info (code, price, user_no, product_title, status) VALUES
+(101, '54000', 6, '인스타 홍보합니다', '검토중'),
+(102, '54000', 6, '유튜브 홍보합니다', '검토중'),
+(103, '54000', 6, '블로그 홍보합니다', '검토중');
+
+SELECT *
+FROM payment_info

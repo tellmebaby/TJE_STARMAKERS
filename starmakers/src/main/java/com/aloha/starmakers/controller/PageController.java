@@ -22,9 +22,7 @@ import com.aloha.starmakers.board.dto.StarBoard;
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.board.service.QnaService;
 import com.aloha.starmakers.board.service.StarService;
-import com.aloha.starmakers.user.dto.Payment;
 import com.aloha.starmakers.user.dto.Users;
-import com.aloha.starmakers.user.service.PaymentService;
 import com.aloha.starmakers.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -52,7 +50,7 @@ public class PageController {
     private FileService fileService;
 
     @Autowired
-    private PaymentService paymentService;
+    // private PaymentService paymentService;
 
     // @GetMapping("mypage/{path}")
     // public String getMethodName2(@PathVariable("path") String path, HttpSession session, Model model) {    
@@ -212,16 +210,18 @@ public class PageController {
 
     /* ------------------------------------------------------------- */
     /* 결제내역 */
-    @GetMapping("/mypage/payment")
-    public String paymentList(Model model, HttpSession session) throws Exception {
+    // @GetMapping("/mypage/payment")
+    // public String paymentList(Model model, HttpSession session) throws Exception {
+        
+    //     Users user = (Users) session.getAttribute("user");
 
-        List<Payment> paymentList = paymentService.paymentList();
+    //     int userNo = user.getUserNo();
+    //     List<Payment> paymentList = paymentService.paymentList(userNo);
 
-        Users user = (Users) session.getAttribute("user");
-        model.addAttribute("paymentList", paymentList);
-        model.addAttribute("user", user);
-        return "/page/mypage/payment";
-    }
+    //     model.addAttribute("paymentList", paymentList);
+    //     model.addAttribute("user", user);
+    //     return "/page/mypage/payment";
+    // }
 
     /* 내가 쓴 글 */
     @GetMapping("/mypage/promotion")
