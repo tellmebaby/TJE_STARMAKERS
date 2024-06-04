@@ -10,16 +10,22 @@
         VALUES ( #{code}, #{price}, #{user_no}, #{star_no}, #{status} )
     </insert>
 
-    <select id="select" resultMap="Pay">
+    <select id="select" resultType="Pay">
         SELECT * FROM payment_info WHERE pay_no = #{payNo}
     </select>
 
 
     <select id="userList" resultType="Pay">
-        SELECT *
-        FROM payment_info
-        WHERE user_no = #{user_no}
-        order by pay_no desc
+    SELECT pi.*,
+            sb.status as star_status
+        FROM 
+            payment_info pi
+        JOIN 
+            star_board sb
+        ON 
+            pi.status = sb.status
+        AND pi.user_no = sb.user_no
+        WHERE pi.user_no = #{user_no}
     </select>
 
     <select id="totalList" resultType="Pay">
