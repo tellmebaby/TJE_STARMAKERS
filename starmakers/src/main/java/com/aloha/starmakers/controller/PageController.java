@@ -21,6 +21,7 @@ import com.aloha.starmakers.board.dto.QnaBoard;
 import com.aloha.starmakers.board.dto.StarBoard;
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.board.service.QnaService;
+import com.aloha.starmakers.board.service.ReplyService;
 import com.aloha.starmakers.board.service.StarService;
 import com.aloha.starmakers.pay.dto.Pay;
 import com.aloha.starmakers.pay.service.PayService;
@@ -53,6 +54,9 @@ public class PageController {
 
     @Autowired
     private PayService payService;
+
+    @Autowired
+    private ReplyService replyService;
 
     // @GetMapping("mypage/{path}")
     // public String getMethodName2(@PathVariable("path") String path, HttpSession session, Model model) {    
@@ -273,11 +277,12 @@ public class PageController {
 
     @GetMapping("/mypage/reviewPost")
     public String reviewRead(@RequestParam("starNo") int starNo, Model model) throws Exception {
-        StarBoard starBoard = starService.select(starNo);
 
+        StarBoard starBoard = starService.select(starNo);
+        int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+        starBoard.setCommentCount(commentCount);
         // 모델 등록
         model.addAttribute("starBoard", starBoard);
-
         starService.views(starNo);
 
         // 뷰페이지 지정
