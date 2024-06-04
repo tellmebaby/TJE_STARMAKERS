@@ -12,6 +12,9 @@ import com.aloha.starmakers.board.mapper.QnaMapper;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.mapper.UserMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class QnaServiceImpl implements QnaService {
 
@@ -79,8 +82,9 @@ public class QnaServiceImpl implements QnaService {
     }
 
     @Override
-    public int view(int qnaNo) throws Exception {
-        return qnaMapper.view(qnaNo);
+    public int views(int qnaNo) throws Exception {
+        log.info(qnaNo + "번 게시글 조회수 증가");
+        return qnaMapper.views(qnaNo);
     }
 
     
