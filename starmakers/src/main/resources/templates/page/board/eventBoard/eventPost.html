@@ -111,6 +111,7 @@
                     let replyList = document.getElementById('reply-listbox')
                     replyList.innerHTML = data
 
+                    updateEvent()
                     event()
                 }
             }
@@ -134,8 +135,8 @@
 
             console.dir(data)
             // 💍 CRSF TOKEN
-            // let csrfToken = document.querySelector('input[name="_csrf"]').value;
-            var csrfToken = "[[${_csrf.token}]]"
+            let csrfToken = document.querySelector('input[name="_csrf"]').value;
+            // var csrfToken = "[[${_csrf.token}]]"
 
             let request = new XMLHttpRequest()
 
@@ -164,11 +165,13 @@
       </script>
       <script>
         // 이벤트 등록
-        function event() {
+        
+        function updateEvent() {
             // 댓글 수정 버튼
             let $btnUpdate = document.getElementsByClassName('btn-reply-update')
         
             // 댓글 수정 클릭 이벤트
+            
             for(let i = 0; i < $btnUpdate.length; i++) {
                 $btnUpdate[i].addEventListener('click', function() {
                     let $top = $btnUpdate[i].parentNode
@@ -199,10 +202,13 @@
         
                     $editor.innerHTML = editor
                     $replyBox.appendChild($editor)
-
                 })
+                
             }
+            
         }
+            
+    
 
         // 댓글 수정 요청
         function updateReply(replyNo) {
