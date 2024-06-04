@@ -6,13 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이벤트</title>
     <link rel="stylesheet" href="/css/list.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Honk&family=Noto+Sans+KR:wght@100..900&family=Rubik+Scribble&display=swap" rel="stylesheet">
 </head>
 <body>
     <th:block layout:fragment="content">
 
         <div class="container">
-        <h3>이벤트</h3>
-
+        <h3 class="event">EVENT</h3>
+        <div class="eventtext">
+        <label >다양한 이벤트에 참여하시고 상품도 받아가세요!</label>
+        </div>
             <div class="search-container">
                 <form action="/page/board/eventBoard/eventList" method="get">
                     <select name="code">
@@ -109,8 +115,8 @@
                 <!-- [ 마지막 ]-->
                 <a th:href="|/page/board/eventBoard/eventList?page=${page.last}&code=${option.code}&keyword=${option.keyword}|">&raquo;</a>
             </div>
-            </center>
-            </div>
+        </center>
+        </div>
     </th:block>
 
 </body>

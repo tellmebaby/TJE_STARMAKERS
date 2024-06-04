@@ -3,6 +3,64 @@
     margin: 0 auto;
     
 } */
+.event {
+    font-family: "Honk", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "MORF" 15,
+    "SHLN" 50;
+    text-align: center;
+    padding-top: 50px;
+    font-size: 50px;
+    position: relative;
+    overflow: hidden;
+}
+.event::before {
+    content: ''; /* 가상 요소 생성 */
+    position: absolute;
+    top: -50%; /* 텍스트 위에 겹치도록 설정 */
+    left: -50%;
+    width: 150%; /* 텍스트의 너비를 벗어나는 크기로 설정 */
+    height: 150%; /* 텍스트의 높이를 벗어나는 크기로 설정 */
+    background: linear-gradient(13deg, rgba(255, 255, 255, 0.3) 0%, transparent 80%); /* 원형 그라디언트를 사용하여 유리에 반사된 빛 효과를 줍니다. */
+    z-index: 1;
+    animation: shine 2s infinite alternate; /* 텍스트가 유리 위를 떠다니는 듯한 효과를 주는 애니메이션 */
+    opacity: 0; /* 초기에 투명하게 설정하여 반짝이는 효과를 줌 */
+    animation-delay: 0.5s; /* 반짝이는 효과의 시작을 약간 지연시킴 */
+}
+@keyframes shine {
+    0%, 100% {
+        opacity: 0; /* 시작과 끝에서 투명도를 0으로 설정하여 반짝이는 효과를 줌 */
+    }
+    50% {
+        opacity: 1; /* 중간에서 투명도를 1로 설정하여 반짝이는 효과를 줌 */
+    }
+    from {
+        transform: translateY(-50%) rotate(-45deg);
+    }
+    to {
+        transform: translateY(50%) rotate(45deg);
+    }
+}
+
+.event span {
+    position: relative;
+    z-index: 2; /* 텍스트가 가장 위에 오도록 설정 */
+    color: #FFF; /* 텍스트의 색상을 밝은 색으로 설정 */
+    display: inline-block; /* 텍스트의 너비만큼 요소를 설정 */
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7); /* 텍스트에 반사되는 빛 효과를 줍니다. */
+}
+.eventtext {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    padding-top: 10px;
+    padding-bottom: 50px;
+    text-align: center;
+}
 .search-container {
     display: flex;
     justify-content: flex-end;
