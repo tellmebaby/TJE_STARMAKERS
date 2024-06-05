@@ -88,13 +88,17 @@
                 
         <!-- 페이지네이션 -->
         <center>
-            <div>
+            <div class="pagination">
                 <!-- [ 처음으로 ]-->
-                <a th:href="|/page/board/reviewBoard/reviewList?page=${page.first}&code=${option.code}&keyword=${option.keyword}|">&laquo;</a>
+                <a th:href="|/page/board/reviewBoard/reviewList?page=${page.first}&code=${option.code}&keyword=${option.keyword}|"><span class="material-symbols-outlined">
+                    first_page
+                    </span></a>
     
                 <!-- [ 이전 ] -->
                 <th:block th:if="${page.page != page.first}">
-                    <a th:href="|/page/board/reviewBoard/reviewList?page=${page.prev}&code=${option.code}&keyword=${option.keyword}|">&lt;</a>
+                    <a th:href="|/page/board/reviewBoard/reviewList?page=${page.prev}&code=${option.code}&keyword=${option.keyword}|"><span class="material-symbols-outlined">
+                        chevron_backward
+                        </span></a>
                 </th:block>
     
                 <th:block th:each="no : ${#numbers.sequence(page.start, page.end)}">  <!--(1,10)모델에 담은 페이지가 아니라 그냥 1부터 10 --> 
@@ -109,19 +113,23 @@
                         </b>
                     </th:block>
                     <th:block th:if="${page.page != no}">
-                        <a th:href="|/page/board/reviewBoard/reviewList?page=${no}&code=${option.code}&keyword=${option.keyword}|" th:text="${no}"></a>
+                        <a th:href="|/page/board/reviewBoard/reviewList?page=${no}&code=${option.code}&keyword=${option.keyword}|" th:text="${no}" style="padding: 0 7px;"></a>
                     </th:block>
                 </th:block>
     
                 <!-- [ 다음 ] -->
                 <th:block th:if="${page.page != page.last}">
-                    <a th:href="|/page/board/reviewBoard/reviewList?page=${page.next}&code=${option.code}&keyword=${option.keyword}|">&gt;</a>
+                    <a th:href="|/page/board/reviewBoard/reviewList?page=${page.next}&code=${option.code}&keyword=${option.keyword}|" class="material-symbols-outlined">
+                        chevron_forward
+                        </a>
                 </th:block>
     
                 <!-- [ 마지막 ]-->
-                <a th:href="|/page/board/reviewBoard/reviewList?page=${page.last}&code=${option.code}&keyword=${option.keyword}|">&raquo;</a>
+                <a th:href="|/page/board/reviewBoard/reviewList?page=${page.last}&code=${option.code}&keyword=${option.keyword}|"><span class="material-symbols-outlined">
+                    last_page
+                    </span></a>
             </div>
-            </center>
+        </center>
             </div>
 
     </th:block>
