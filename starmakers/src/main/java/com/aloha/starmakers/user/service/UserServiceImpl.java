@@ -1,5 +1,7 @@
 package com.aloha.starmakers.user.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -162,6 +164,13 @@ public class UserServiceImpl implements UserService {
     public void updatePassword(String email, String newPassword) {
         // Logic to update user's password in the database
         // For example, userRepository.updatePassword(email, newPassword);
+    }
+
+    @Override
+    public List<Users> list() throws Exception {
+        
+        List<Users> userList = userMapper.list();
+        return userList;
     }
 
 }

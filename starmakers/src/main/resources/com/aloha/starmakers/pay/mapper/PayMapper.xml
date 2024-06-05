@@ -15,6 +15,7 @@
     </select>
 
 
+    <!-- 마이페이지 결제 내역 -->
     <select id="userList" resultType="Pay">
     SELECT pi.*,
             sb.status as star_status
@@ -26,6 +27,7 @@
             pi.user_no = sb.user_no
         WHERE pi.user_no = #{userNo}
         AND pi.star_no = sb.star_no
+        ORDER BY sb.reg_date DESC
     </select>
 
     <select id="totalList" resultType="Pay">
@@ -42,5 +44,11 @@
         WHERE pay_no = #{payNo}
     </update>
 
+    <!-- 관리자 회원별 결제 조회 -->
+    <select id="totalPrice" resultType="int">
+        SELECT sum(price) as total_price
+        FROM payment_info
+        WHERE user_no = #{userNo}
+    </select>
 
 </mapper>

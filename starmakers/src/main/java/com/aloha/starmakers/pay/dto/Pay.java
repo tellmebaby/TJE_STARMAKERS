@@ -15,4 +15,5 @@ public class Pay {
     private Date regDate;
     private String status;
     private String starStatus;
+    private int totalPrice;
 }
