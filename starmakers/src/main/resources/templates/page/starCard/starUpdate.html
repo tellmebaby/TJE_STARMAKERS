@@ -191,25 +191,84 @@
         const img = new Image();
         img.src = event.target.result;
         img.onload = function () {
-          // 캔버스를 사용하여 이미지 리사이즈
-          const canvas = document.createElement('canvas');
           const maxWidth = 800; // 최대 너비 설정
-          const scaleSize = maxWidth / img.width;
-          canvas.width = maxWidth;
-          canvas.height = img.height * scaleSize;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-          // 리사이즈한 이미지를 base64 데이터 URL로 변환
-          const dataUrl = canvas.toDataURL('image/jpeg', 0.8); // 품질 설정 (0.8은 80%)
+          // 이미지의 원래 크기가 maxWidth보다 큰 경우에만 리사이즈
+          if (img.width > maxWidth) {
+            // 캔버스를 사용하여 이미지 리사이즈
+            const canvas = document.createElement('canvas');
+            const scaleSize = maxWidth / img.width;
+            canvas.width = maxWidth;
+            canvas.height = img.height * scaleSize;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-          // Summernote 에디터에 이미지를 삽입
-          const $summernote = $('#summernote');
-          $summernote.summernote('insertImage', dataUrl);
+            // 리사이즈한 이미지를 base64 데이터 URL로 변환
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.8); // 품질 설정 (0.8은 80%)
+
+            // Summernote 에디터에 이미지를 삽입
+            const $summernote = $('#summernote');
+            $summernote.summernote('insertImage', dataUrl);
+          } else {
+            // 이미지가 maxWidth보다 작으면 원본 이미지를 삽입
+            const dataUrl = event.target.result;
+
+            // Summernote 에디터에 이미지를 삽입
+            const $summernote = $('#summernote');
+            $summernote.summernote('insertImage', dataUrl);
+          }
         };
       };
       reader.readAsDataURL(file);
     }
+
+// 유효성 검사
+$('#starUpdate').submit(function(event) {
+      var siteChecked = document.querySelectorAll('input[name="category1"]:checked').length > 0;
+      var fieldChecked = document.querySelectorAll('input[name="category2"]:checked').length > 0;
+      var startDate = document.querySelector('input[name="startDate"]').value;
+      var endDate = document.querySelector('input[name="endDate"]').value;
+      var title = document.querySelector('input[name="title"]').value.trim();
+      var image = document.querySelector('input[name="image"]').value;
+      var content = document.querySelector('textarea[name="content"]').value.trim();
+
+      if (!siteChecked) {
+        alert('사이트를 최소 1개 선택하세요.');
+        event.preventDefault();
+        return;
+      }
+
+      if (!fieldChecked) {
+        alert('분야를 최소 1개 선택하세요.');
+        event.preventDefault();
+        return;
+      }
+
+      if (!startDate || !endDate) {
+        alert('홍보기간을 입력하세요.');
+        event.preventDefault();
+        return;
+      }
+
+      if (!title) {
+        alert('제목을 입력하세요.');
+        event.preventDefault();
+        return;
+      }
+
+      if (!image) {
+        alert('썸네일을 업로드하세요.');
+        event.preventDefault();
+        return;
+      }
+
+      if (!content) {
+        alert('내용을 입력하세요.');
+        event.preventDefault();
+        return;
+      }
+    });
+
 
     // category checked
     var category1 = "[[${starBoard.category1}]]"
@@ -236,15 +295,17 @@
           $('input[id='+cat1List[i]+']').prop('checked', true);
         }
       }
-    })
 
-    $(function(){
       for(var i = 0 ; i < cat2L ; i++){
         if(category2.includes(cat2List[i])){
           $('input[value='+cat2List[i]+']').prop('checked', true);
         }
       }
+
+
+
     })
+
     
   </script>
 

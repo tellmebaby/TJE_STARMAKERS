@@ -258,5 +258,10 @@ public class HomeController {
         return "/page/board/reviewBoard/reviewPost";
     }
 
+    @GetMapping("/test")
+    public String test() {
+        return "/test";
+    }
+
 
 }
