@@ -292,7 +292,7 @@ public class StarController {
         if (result > 0) {
             // 파일 처리 로직
 
-            log.info(file.toString()+"sadfasdfdsf");
+            // log.info(file.toString()+"sadfasdfdsf");
 
             if (file != null && !file.isEmpty()) { // file이 있을 경우 실행
                 // 기존에 올라간 파일 삭제
