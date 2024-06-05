@@ -298,16 +298,6 @@
     background-color: transparent !important;;
 }
 
-.card-text p {
-    background-color: transparent !important;
-    font-size: 80% !important;
-}
-
-.card-text > p > span {
-    background-color: transparent !important;
-    font-size: 80% !important;
-}
-
 .star {
     color: yellow;
     font-size: 24px;
@@ -386,7 +376,10 @@
 .right-content {
     display: flex;
     align-items: flex-start;
+    position: relative;
+    z-index: 5;
 }
+
 
 .right-content > svg {
     width: 16px; /* 아이콘의 너비 설정 */
