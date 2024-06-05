@@ -88,6 +88,10 @@
     margin-right: 15px;
 }
 
+#searchForm{
+    align-content: center;
+}
+
 .list-group-item {
     display: flex;
     justify-content: space-between;
@@ -291,6 +295,17 @@
     line-height: 1.2em;
     max-height: 4.8em; /* 4줄의 최대 높이 */
     min-height: 4.8em; /* 4줄의 최소 높이 */
+    background-color: transparent !important;;
+}
+
+.card-text p {
+    background-color: transparent !important;
+    font-size: 80% !important;
+}
+
+.card-text > p > span {
+    background-color: transparent !important;
+    font-size: 80% !important;
 }
 
 .star {
