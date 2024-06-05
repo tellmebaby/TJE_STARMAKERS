@@ -29,7 +29,6 @@ public interface StarService {
     // 글 등록(유료)
     public int payInsert(StarBoard starBoard, String username) throws Exception;
 
-
     // 글 조회
     public StarBoard select(int starNo) throws Exception;
 
@@ -41,5 +40,4 @@ public interface StarService {
 
     // 마이페이지 쓴 글 조회
     public List<StarBoard> promotionList(int userNo, Page page, Option option) throws Exception;
-
 }

@@ -65,10 +65,10 @@ public class AdminController {
     }
 
    @GetMapping("/pages/mailbox")
-    public String reviewList(@RequestParam(value = "type", defaultValue = "review") String type, Model model, Page page,
+    public String allList(String type, Model model, Page page,
             Option option) throws Exception {
 
-        log.info("type");
+        log.info(type);
         List<StarBoard> starList = starService.list(type, page, option);
         
         model.addAttribute("starList", starList);
@@ -84,6 +84,72 @@ public class AdminController {
 
         log.info("starList : " + starList);
         return "/admin/pages/mailbox";
+    }
+    
+   @GetMapping("/pages/mailboxStar")
+    public String StarList(@RequestParam(value = "type", defaultValue = "starCard") String type, Model model, Page page,
+            Option option) throws Exception {
+
+        log.info(type);
+        List<StarBoard> starList = starService.list(type, page, option);
+        
+        model.addAttribute("starList", starList);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
+
+        List<Option> optionList = new ArrayList<Option>();
+        optionList.add(new Option("제목+내용", 0));
+        optionList.add(new Option("제목", 1));
+        optionList.add(new Option("내용", 2));
+        optionList.add(new Option("작성자", 3));
+        model.addAttribute("optionList", optionList);
+
+        log.info("starList : " + starList);
+        return "/admin/pages/mailboxStar";
+    }
+
+   @GetMapping("/pages/mailboxEvent")
+    public String eventList(@RequestParam(value = "type", defaultValue = "event") String type, Model model, Page page,
+            Option option) throws Exception {
+
+        log.info(type);
+        List<StarBoard> starList = starService.list(type, page, option);
+        
+        model.addAttribute("starList", starList);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
+
+        List<Option> optionList = new ArrayList<Option>();
+        optionList.add(new Option("제목+내용", 0));
+        optionList.add(new Option("제목", 1));
+        optionList.add(new Option("내용", 2));
+        optionList.add(new Option("작성자", 3));
+        model.addAttribute("optionList", optionList);
+
+        log.info("starList : " + starList);
+        return "/admin/pages/mailboxEvent";
+    }
+
+   @GetMapping("/pages/mailboxReview")
+    public String reviewList(@RequestParam(value = "type", defaultValue = "review") String type, Model model, Page page,
+            Option option) throws Exception {
+
+        log.info(type);
+        List<StarBoard> starList = starService.list(type, page, option);
+        
+        model.addAttribute("starList", starList);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
+
+        List<Option> optionList = new ArrayList<Option>();
+        optionList.add(new Option("제목+내용", 0));
+        optionList.add(new Option("제목", 1));
+        optionList.add(new Option("내용", 2));
+        optionList.add(new Option("작성자", 3));
+        model.addAttribute("optionList", optionList);
+
+        log.info("starList : " + starList);
+        return "/admin/pages/mailboxEvent";
     }
     
     
