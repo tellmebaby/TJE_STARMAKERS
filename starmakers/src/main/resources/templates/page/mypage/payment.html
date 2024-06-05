@@ -98,7 +98,29 @@
             text-decoration: none;
         }
 
+        .load-more-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin: 20px 0;
+        }
 
+        .load-more-btn button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #2972FE;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .load-more-btn button:hover {
+            background-color: #1d5bc6;
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body layout:fragment="content">
@@ -135,9 +157,9 @@
                                     <th>결제일자</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <th:block th:each="payment : ${payList}">
-                                    <tr th:if="${user.userNo} == ${payment.userNo}"> 
+                            <tbody id="payment-list">
+                                <th:block th:each="payment, iterStat : ${payList}">
+                                    <tr th:if="${user.userNo} == ${payment.userNo}" th:classappend="${iterStat.index >= 4 ? 'hidden' : ''}"> 
                                         <td class="border-0 pt-4" th:text="${payment.code}"></td>
                                         <td class="border-0 pt-4" th:text="${payment.productTitle}"></td>
                                         <td class="border-0 pt-4">
@@ -146,7 +168,7 @@
                                         </td>
                                         <td class="border-0 pt-4" th:text="${#dates.format(payment.regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                     </tr>
-                                    <tr th:if="${user.userNo} == ${payment.userNo}">
+                                    <tr th:if="${user.userNo} == ${payment.userNo}" th:classappend="${iterStat.index >= 4 ? 'hidden' : ''}">
                                         <td colspan="3"></td>
                                         <td>
                                             <div class="button-container">
@@ -154,18 +176,42 @@
                                                    class="btn-review" 
                                                    th:value="${payment.starStatus}" 
                                                    disabled 
-                                                   th:classappend="${payment.starStatus == '승인 완료' ? 'approved' : 'pending'}">
-                                                <button class="btn-refund">환불 요청</button>
+                                                  th:classappend="${payment.starStatus == '결제완료' ? 'approved' : 'pending'}">
+                                                <button class="btn-refund">환불요청</button>
                                             </div>
                                         </td>
                                     </tr> 
                                 </th:block>
                             </tbody>
                         </table>
+                        <div class="load-more-btn" th:if="${payList.size()} > 4">
+                            <button type="button" id="load-more-btn">더보기</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let loadMoreBtn = document.getElementById("load-more-btn");
+            let hiddenElements = document.querySelectorAll(".hidden");
+
+            loadMoreBtn.addEventListener("click", function() {
+                let hiddenCount = hiddenElements.length;
+                let elementsToShow = 8; // 한 번에 표시할 요소 수
+
+                for (let i = 0; i < elementsToShow && hiddenCount > 0; i++) {
+                    hiddenElements[0].classList.remove("hidden");
+                    hiddenElements = document.querySelectorAll(".hidden");
+                    hiddenCount = hiddenElements.length;
+                }
+
+                if (hiddenCount === 0) {
+                    loadMoreBtn.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
 </html>
