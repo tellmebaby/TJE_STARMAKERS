@@ -96,6 +96,7 @@ th {
 }
 td {
     padding: 7px;
+    height: 30px;
     border-bottom: 0.7px solid #000;
 }
 td img {
@@ -232,7 +233,8 @@ a {
     }
 }
 .notice-row {
-    background-color: #f0f0f0; /* 회색 배경색 */
+    background-color: #ffe1e1; 
+ /* 회색 배경색 */
 }
 
 .twinkle {
@@ -248,5 +250,67 @@ a {
     font-weight: bold;
 }
 .fixed {
-    background-color: #f0f0f0;
+    background-color: #f8f4f2;
+}
+
+
+/* 페이지네이션--------------------- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    align-items: center;
+}
+.pagination a {
+    margin: 0 5px;
+    /* padding: 4px 8px; */
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.pagination b {
+    margin: 0 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight:bolder;
+}
+.pagination a:hover {
+    background-color: rgba(145, 172, 207, 1);
+    color: #fff;
+}
+
+.pagination a.disabled {
+    pointer-events: none;
+    color: #ccc;
+    border-color: #ccc;
+}
+.important {
+    /* background-color: #ffe1e1; */
+    color: rgb(248, 57, 57); 
+    padding: 5px 11px;
+    font-weight: bold; 
+    
+    text-align: center; 
+    font-size: small;
+}
+.important .important-text {
+    margin: 0; padding: 0;
+    background-color: white;
+    border: 2px solid rgb(248, 57, 57);
+    border-radius: 5px;
+}
+.material-symbols-outlined{
+    margin: 0; padding: 0;
+    font-size: 20px;
+}
+
+.btnn{
+    padding: 5px 10px !important;
+    margin: 0 !important;
 }
