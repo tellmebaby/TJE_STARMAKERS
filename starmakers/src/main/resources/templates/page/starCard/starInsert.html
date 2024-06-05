@@ -48,212 +48,208 @@
   </th:block>
   <!-- 로그인 -->
   <th:block sec:authorize="isAuthenticated()">
-  <div class="body lg" style="max-width: 900 ;">
-    <h1 class="d-flex justify-content-center mt-3 mb-3">
-      홍보요청
-    </h1>
-    <p class="d-flex justify-content-center text-secondary mb-3">문의사항은 1:1 채팅 또는 Q&A 게시판을 이용해주세요.</p>
+    <div class="body lg" style="max-width: 900 ;">
+      <h1 class="d-flex justify-content-center mt-3 mb-3">
+        홍보요청
+      </h1>
+      <p class="d-flex justify-content-center text-secondary mb-3">문의사항은 1:1 채팅 또는 Q&A 게시판을 이용해주세요.</p>
 
-    <div class="container">
-      <div class="d-flex align-items-center border-bottom border-dark" id="channel">
-        <button type="button" class="btn btn-dark btn-lg col-4 border-0 rounded-1" id="freePromo">무료홍보</button>
-        <button type="button" class="btn btn-outline-dark btn-lg col-4 border-0 rounded-1" id="payPromo">유료홍보</button>
-        <button type="button" class="btn btn-outline-dark btn-lg col-4 border-0 rounded-1" id="designBtn">디자인
-          의뢰</button>
-      </div>
-      <form action="/page/starCard/starInsert" method="post" id="starInsert" enctype="multipart/form-data">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-        <input type="hidden" name="card" value="무료홍보">
-        <input type="hidden" name="username" th:value="${session.user.email}">
-        <div class="category my-4 bg-body-tertiary rounded">
-          <div class="site row py-2">
-            <div class="item col-1"></div>
-            <div class="item col-2">
-              <b>사이트</b>
-            </div>
-            
-
-            <!-- <input type="hidden" name="type" value="무료홍보" id="free">
-            <input type="hidden" name="type" value="유료홍보" id="payment"> -->
-
-            <input type="hidden" name="status" value="홍보요청" id="status">
-
-            <input type="hidden" name="type" value="starCard">
-            <div class="item col-8 d-flex justify-content-start column-gap-2">
-              <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input " name="category1" type="checkbox" value="youtube" id="youtube">
-                <label class="form-check-label" for="youtube">
-                  유튜브
-                </label>
+      <div class="container">
+        <div class="d-flex align-items-center border-bottom border-dark" id="channel">
+          <button type="button" class="btn btn-dark btn-lg col-4 border-0 rounded-1" id="freePromo">무료홍보</button>
+          <button type="button" class="btn btn-outline-dark btn-lg col-4 border-0 rounded-1" id="payPromo">유료홍보</button>
+          <button type="button" class="btn btn-outline-dark btn-lg col-4 border-0 rounded-1"
+            id="designBtn">디자인의뢰</button>
+        </div>
+        <form action="/page/starCard/starInsert" method="post" id="starInsert" enctype="multipart/form-data">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+          <input type="hidden" name="card" value="무료홍보">
+          <input type="hidden" name="username" th:value="${session.user.email}">
+          <div class="category my-4 bg-body-tertiary rounded">
+            <div class="site row py-2">
+              <div class="item col-1"></div>
+              <div class="item col-2">
+                <b>채널</b>
               </div>
-              <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category1" type="checkbox" value="instagram" id="instagram">
-                <label class="form-check-label" for="instagram">
-                  인스타그램
-                </label>
-              </div>
-              <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category1" type="checkbox" value="afreeca" id="afreeca">
-                <label class="form-check-label" for="afreeca">
-                  아프리카
-                </label>
-              </div>
-              <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category1" type="checkbox" value="chzzk" id="chzzk">
-                <label class="form-check-label" for="chzzk">
-                  치지직
-                </label>
+              <input type="hidden" name="status" value="홍보요청" id="status">
+
+              <input type="hidden" name="type" value="starCard">
+              <div class="item col-8 d-flex justify-content-start column-gap-2">
+                <div class="form-check form-check-inline d-flex align-items-center">
+                  <input class="form-check-input " name="category1" type="checkbox" value="youtube" id="youtube">
+                  <label class="form-check-label" for="youtube">
+                    유튜브
+                  </label>
+                </div>
+                <div class="form-check form-check-inline d-flex align-items-center">
+                  <input class="form-check-input" name="category1" type="checkbox" value="instagram" id="instagram">
+                  <label class="form-check-label" for="instagram">
+                    인스타그램
+                  </label>
+                </div>
+                <div class="form-check form-check-inline d-flex align-items-center">
+                  <input class="form-check-input" name="category1" type="checkbox" value="afreeca" id="afreeca">
+                  <label class="form-check-label" for="afreeca">
+                    아프리카
+                  </label>
+                </div>
+                <div class="form-check form-check-inline d-flex align-items-center">
+                  <input class="form-check-input" name="category1" type="checkbox" value="chzzk" id="chzzk">
+                  <label class="form-check-label" for="chzzk">
+                    치지직
+                  </label>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="site row py-2">
-            <div class="item col-1"></div>
-            <div class="item col-2">
-              <b>분야</b>
-            </div>
-            <div class="item col-9 d-flex justify-content-start column-gap-2">
-              <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category2" type="checkbox" value="음식" id="food">
-                <label class="form-check-label" for="food">
-                  음식
-                </label>
+            <div class="site row py-2">
+              <div class="item col-1"></div>
+              <div class="item col-2">
+                <b>분야</b>
               </div>
-              <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category2" type="checkbox" value="여행" id="travel">
-                <label class="form-check-label" for="travel">
-                  여행
-                </label>
-              </div>
-              <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input " name="category2" type="checkbox" value="게임" id="game">
-                <label class="form-check-label" for="game">
-                  게임
-                </label>
-              </div>
-              <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category2" type="checkbox" value="음악" id="music">
-                <label class="form-check-label" for="music">
-                  음악
-                </label>
-              </div>
-              <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category2" type="checkbox" value="동물" id="animal">
-                <label class="form-check-label" for="animal">
-                  동물
-                </label>
-              </div>
-              <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category2" type="checkbox" value="운동" id="workOut">
-                <label class="form-check-label" for="workOut">
-                  운동
-                </label>
-              </div>
-              <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category2" type="checkbox" value="ASMR" id="asmr">
-                <label class="form-check-label" for="asmr">
-                  ASMR
-                </label>
-              </div>
-              <div class="form-check form-check-inline d-flex align-items-center">
-                <input class="form-check-input" name="category2" type="checkbox" value="패션" id="fashion">
-                <label class="form-check-label" for="fashion">
-                  패션
-                </label>
+              <div class="item col-9 d-flex justify-content-start column-gap-2">
+                <div class="form-check form-check-inline d-flex align-items-center">
+                  <input class="form-check-input" name="category2" type="checkbox" value="음식" id="food">
+                  <label class="form-check-label" for="food">
+                    음식
+                  </label>
+                </div>
+                <div class="form-check form-check-inline d-flex align-items-center">
+                  <input class="form-check-input" name="category2" type="checkbox" value="여행" id="travel">
+                  <label class="form-check-label" for="travel">
+                    여행
+                  </label>
+                </div>
+                <div class="form-check form-check-inline d-flex align-items-center">
+                  <input class="form-check-input " name="category2" type="checkbox" value="게임" id="game">
+                  <label class="form-check-label" for="game">
+                    게임
+                  </label>
+                </div>
+                <div class="form-check form-check-inline d-flex align-items-center">
+                  <input class="form-check-input" name="category2" type="checkbox" value="음악" id="music">
+                  <label class="form-check-label" for="music">
+                    음악
+                  </label>
+                </div>
+                <div class="form-check form-check-inline d-flex align-items-center">
+                  <input class="form-check-input" name="category2" type="checkbox" value="동물" id="animal">
+                  <label class="form-check-label" for="animal">
+                    동물
+                  </label>
+                </div>
+                <div class="form-check form-check-inline d-flex align-items-center">
+                  <input class="form-check-input" name="category2" type="checkbox" value="운동" id="workOut">
+                  <label class="form-check-label" for="workOut">
+                    운동
+                  </label>
+                </div>
+                <div class="form-check form-check-inline d-flex align-items-center">
+                  <input class="form-check-input" name="category2" type="checkbox" value="ASMR" id="asmr">
+                  <label class="form-check-label" for="asmr">
+                    ASMR
+                  </label>
+                </div>
+                <div class="form-check form-check-inline d-flex align-items-center">
+                  <input class="form-check-input" name="category2" type="checkbox" value="패션" id="fashion">
+                  <label class="form-check-label" for="fashion">
+                    패션
+                  </label>
+                </div>
               </div>
 
             </div>
 
 
           </div>
-        </div>
 
-        <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-          <span class="input-group-text mb-3 col-2">
-            홍보 기간
-          </span>
-          <input type='text' name="startDate" id='datepicker' class='form-control' data-td-target='#datepicker'
-            width="41.7%" aria-describedby="addon-wrapping" placeholder="홍보 시작일" readonly />
-          <input type='text' name="endDate" id='datepicker2' class='form-control' data-td-target='#datepicker2'
-            width="41.7%" aria-describedby="addon-wrapping" placeholder="홍보 종료일" readonly />
-        </div>
+          <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
+            <span class="input-group-text mb-3 col-2">
+              홍보 기간
+            </span>
+            <input type='text' name="startDate" id='datepicker' class='form-control' data-td-target='#datepicker'
+              width="41.7%" aria-describedby="addon-wrapping" placeholder="홍보 시작일" readonly />
+            <input type='text' name="endDate" id='datepicker2' class='form-control' data-td-target='#datepicker2'
+              width="41.7%" aria-describedby="addon-wrapping" placeholder="홍보 종료일" readonly />
+          </div>
 
-        <!-- </div> -->
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="addon-wrapping">제목</span>
-          <input type="text" name="title" class="form-control" placeholder="글 제목을 입력해주세요" aria-label="tilte"
-            aria-describedby="addon-wrapping">
-        </div>
-        <!-- <input type="text" class="" id="starPostTitle" placeholder="제목을 입력해주세요"> -->
+          <!-- </div> -->
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="addon-wrapping">제목</span>
+            <input type="text" name="title" class="form-control" placeholder="글 제목을 입력해주세요" aria-label="tilte"
+              aria-describedby="addon-wrapping">
+          </div>
+          <!-- <input type="text" class="" id="starPostTitle" placeholder="제목을 입력해주세요"> -->
 
-        <div class="input-group mb-3">
-          <label class="input-group-text" for="inputGroupFile01">썸네일</label>
-          <input type="file" name="image" class="form-control" id="inputGroupFile01">
-        </div>
+          <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupFile01">썸네일</label>
+            <input type="file" name="image" class="form-control" id="inputGroupFile01">
+          </div>
 
-        <div>
-          <textarea name="content" class="" id="summernote" value=""></textarea>
-        </div>
+          <div>
+            <textarea name="content" class="" id="summernote" value=""></textarea>
+          </div>
 
-        <!-- B8C3FF -->
-        <div class="d-flex justify-content-end mt-2">
-          <button type="button" class="btn btn-light btn-sm col-1 btn-list" onclick="starList()" id="list">목록</button>
+          <!-- B8C3FF -->
+          <div class="d-flex justify-content-end mt-2">
+            <button type="button" class="btn btn-light btn-sm col-1 btn-list" onclick="starList()" id="list">목록</button>
 
-          <input type="submit" class="btn btn-dark btn-sm border col-1" id="sendPost" value="등록">
+            <input type="submit" class="btn btn-dark btn-sm border col-1" id="sendPost" value="등록">
 
-          <button class="btn btn-dark btn-sm col-1 " id="payBtn" type="button" style="display: none;">결제</button>
-        </div>
+            <button class="btn btn-dark btn-sm col-1 " id="payBtn" type="button" style="display: none;">결제</button>
+          </div>
 
-      </form>
+        </form>
 
-      <div class="container item-align-center text-start" style="display: none;" id="design">
-        <h1 class="mt-5">"디자인이 어려우시면,</h1><br>
-        <h1 class="text-primary ms-5">저희에게 맡겨주세요!"</h1><br>
-        <ul>
-          <li>인스타그램 홍보 카드</li>
-          <li>치지직/유튜브 홍보 인트로 영상</li>
-          <li>배너 광고 이미지</li>
-        </ul><br>
-        <p>예비 스타님의 개성에 맞춘 홍보물을 만들어 드립니다!😆</p>
+        <div class="container item-align-center text-start" style="display: none;" id="design">
+          <h1 class="mt-5">"디자인이 어려우시면,</h1><br>
+          <h1 class="text-primary ms-5">저희에게 맡겨주세요!"</h1><br>
+          <ul>
+            <li>인스타그램 홍보 카드</li>
+            <li>치지직/유튜브 홍보 인트로 영상</li>
+            <li>배너 광고 이미지</li>
+          </ul><br>
+          <p>예비 스타님의 개성에 맞춘 홍보물을 만들어 드립니다!😆</p>
 
-        <!-- <img src="/img/star.jpg" class="w-100"> -->
-        <!-- <button type="button" id="chat"
+          <!-- <img src="/img/star.jpg" class="w-100"> -->
+          <!-- <button type="button" id="chat"
               class="btn btn-lg btn-outline-secondary w-100 mt-5">1:1 채팅 바로가기</button></b> -->
 
-        <div class="accordion accordion-flush" id="accordionFlushExample">
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed border-bottom" type="button" data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                ⭐<b>디자인 의뢰하기</b>🙋‍♀️
-              </button>
-            </h2>
-            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-              <form action="/page/starCard/starInsert" method="post" id="designReq">
-                <input type="hidden" name="type" value="design">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-                <input type="hidden" name="username" th:value="${session.user.email}">
-                <input type="hidden" name="title" th:value="|${session.user.email}님 디자인 의뢰|">
-                <input type="hidden" name="card" value="디자인의뢰">
-                <div>
-                  <textarea name="content" id="summernote2"></textarea>
-                </div>
-                <div class="d-flex justify-content-end">
-                  <input type="submit" class="btn btn-dark btn-sm border col-2" id="designBtn" value="견적 요청">
-                </div>
-              </form>
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed border-bottom" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne"
+                  style="background-color: bisque">
+                  ⭐<b>디자인 의뢰하기</b>🙋‍♀️
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <form action="/page/starCard/starInsert" method="post" id="designReq">
+                  <input type="hidden" name="type" value="design">
+                  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                  <input type="hidden" name="username" th:value="${session.user.email}">
+                  <input type="hidden" name="title" th:value="|${session.user.email}님 디자인 의뢰|">
+                  <input type="hidden" name="card" value="디자인의뢰">
+                  <div>
+                    <textarea name="content" id="summernote2"></textarea>
+                  </div>
+                  <div class="d-flex justify-content-end">
+                    <input type="submit" class="btn btn-dark btn-sm border col-2" id="designBtn" value="견적 요청">
+                  </div>
+                </form>
+              </div>
             </div>
+
           </div>
 
         </div>
-
       </div>
+
     </div>
 
-  </div>
 
-
-</th:block>
+  </th:block>
   <script>
     $('#summernote').summernote({
       toolbar: [
@@ -289,25 +285,37 @@
         const img = new Image();
         img.src = event.target.result;
         img.onload = function () {
-          // 캔버스를 사용하여 이미지 리사이즈
-          const canvas = document.createElement('canvas');
           const maxWidth = 800; // 최대 너비 설정
-          const scaleSize = maxWidth / img.width;
-          canvas.width = maxWidth;
-          canvas.height = img.height * scaleSize;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-          // 리사이즈한 이미지를 base64 데이터 URL로 변환
-          const dataUrl = canvas.toDataURL('image/jpeg', 0.8); // 품질 설정 (0.8은 80%)
+          // 이미지의 원래 크기가 maxWidth보다 큰 경우에만 리사이즈
+          if (img.width > maxWidth) {
+            // 캔버스를 사용하여 이미지 리사이즈
+            const canvas = document.createElement('canvas');
+            const scaleSize = maxWidth / img.width;
+            canvas.width = maxWidth;
+            canvas.height = img.height * scaleSize;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-          // Summernote 에디터에 이미지를 삽입
-          const $summernote = $('#summernote');
-          $summernote.summernote('insertImage', dataUrl);
+            // 리사이즈한 이미지를 base64 데이터 URL로 변환
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.8); // 품질 설정 (0.8은 80%)
+
+            // Summernote 에디터에 이미지를 삽입
+            const $summernote = $('#summernote');
+            $summernote.summernote('insertImage', dataUrl);
+          } else {
+            // 이미지가 maxWidth보다 작으면 원본 이미지를 삽입
+            const dataUrl = event.target.result;
+
+            // Summernote 에디터에 이미지를 삽입
+            const $summernote = $('#summernote');
+            $summernote.summernote('insertImage', dataUrl);
+          }
         };
       };
       reader.readAsDataURL(file);
     }
+
 
     $('#summernote2').summernote({
       toolbar: [
@@ -340,9 +348,9 @@
     //         });
     //     });
 
-    $('#payBtn').click(function(){
+    $('#payBtn').click(function () {
       // alert('결제')
-      $("#starInsert").attr("action", "/page/starCard/starPayment").submit();
+      $("#starInsert").attr("action", "/page/starCard/starPayment").submit();
     });
 
 
@@ -397,13 +405,76 @@
       });
     });
 
+    var today = new Date();
     $('#datepicker').datepicker({
+      minDate: today,
       uiLibrary: 'bootstrap5'
     });
+
     $('#datepicker2').datepicker({
+      minDate: today,
       uiLibrary: 'bootstrap5'
     });
+
+    // $('#datepicker').on('change', function () {
+    //   var selectedDate = $(this).datepicker('getDate');
+    //   $('#datepicker2').datepicker('setStartDate', selectedDate);
+    // });
+
+    // 유효성 검사
+    $('#starInsert').submit(function (event) {
+      var siteChecked = document.querySelectorAll('input[name="category1"]:checked').length > 0;
+      var fieldChecked = document.querySelectorAll('input[name="category2"]:checked').length > 0;
+      var startDate = document.querySelector('input[name="startDate"]').value;
+      var endDate = document.querySelector('input[name="endDate"]').value;
+      var title = document.querySelector('input[name="title"]').value.trim();
+      var image = document.querySelector('input[name="image"]').value;
+      var content = document.querySelector('textarea[name="content"]').value.trim();
+
+      if (!siteChecked) {
+        alert('사이트를 최소 1개 선택하세요.');
+        event.preventDefault();
+        return;
+      }
+
+      if (!fieldChecked) {
+        alert('분야를 최소 1개 선택하세요.');
+        event.preventDefault();
+        return;
+      }
+
+      if (!startDate || !endDate) {
+        alert('홍보기간을 입력하세요.');
+        event.preventDefault();
+        return;
+      }
+
+      if (!title) {
+        alert('제목을 입력하세요.');
+        event.preventDefault();
+        return;
+      }
+
+      if (!image) {
+        alert('썸네일을 업로드하세요.');
+        event.preventDefault();
+        return;
+      }
+
+      if (!content) {
+        alert('내용을 입력하세요.');
+        event.preventDefault();
+        return;
+      }
+    });
+
+
+
+
+
   </script>
+
+
 
 </th:block>
 
