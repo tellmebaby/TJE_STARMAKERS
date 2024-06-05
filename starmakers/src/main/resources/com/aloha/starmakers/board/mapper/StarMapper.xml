@@ -11,7 +11,13 @@
         FROM star_board s 
         left join file f
         ON f.star_no=s.star_no 
-        WHERE type = #{type}
+        WHERE 
+        <if test="type != null">
+            type = #{type}
+        </if>
+        <if test="type == null">
+            1 = 1
+        </if>
         <if test="option.keyword != null and option.keyword != ''">
             AND
             <if test="option.code == 0">
