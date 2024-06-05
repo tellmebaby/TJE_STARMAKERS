@@ -28,10 +28,107 @@
     <h1 class="d-flex justify-content-center mb-3 mt-3">
       홍보 수정
     </h1>
+    <p class="d-flex justify-content-center text-secondary mb-3" style="text-align: center;">
+      수정 시, 관리자 확인 후 글이 재등록됩니다.<br>자세한 문의사항은 1:1 채팅 또는 Q&A 게시판을 이용해주세요:D
+    </p>
     <form action="/page/starCard/starUpdate" method="post" id="starUpdate">
       <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-
+      <input type="hidden" name="status" value="수정요청">
+      <input type="hidden" name="username" th:value="${session.user.email}">
       <div class="container">
+        <div class="category my-4 bg-body-tertiary rounded">
+          <div class="site row py-2">
+            <div class="item col-1"></div>
+            <div class="item col-2">
+              <b>채널</b>
+            </div>
+
+            <input type="hidden" name="type" value="starCard">
+            <div class="item col-8 d-flex justify-content-start column-gap-2">
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" name="category1" type="checkbox" value="youtube" id="youtube">
+                <label class="form-check-label" for="youtube">
+                  유튜브
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" name="category1" type="checkbox" value="instagram" id="instagram">
+                <label class="form-check-label" for="instagram">
+                  인스타그램
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" name="category1" type="checkbox" value="afreeca" id="afreeca">
+                <label class="form-check-label" for="afreeca">
+                  아프리카
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" name="category1" type="checkbox" value="chzzk" id="chzzk">
+                <label class="form-check-label" for="chzzk">
+                  치지직
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="site row py-2">
+            <div class="item col-1"></div>
+            <div class="item col-2">
+              <b>분야</b>
+            </div>
+            <div class="item col-9 d-flex justify-content-start column-gap-2">
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" name="category2" type="checkbox" value="음식" id="food">
+                <label class="form-check-label" for="food">
+                  음식
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" name="category2" type="checkbox" value="여행" id="travel">
+                <label class="form-check-label" for="travel">
+                  여행
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input " name="category2" type="checkbox" value="게임" id="game">
+                <label class="form-check-label" for="game">
+                  게임
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" name="category2" type="checkbox" value="음악" id="music">
+                <label class="form-check-label" for="music">
+                  음악
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" name="category2" type="checkbox" value="동물" id="animal">
+                <label class="form-check-label" for="animal">
+                  동물
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" name="category2" type="checkbox" value="운동" id="workOut">
+                <label class="form-check-label" for="workOut">
+                  운동
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" name="category2" type="checkbox" value="ASMR" id="asmr">
+                <label class="form-check-label" for="asmr">
+                  ASMR
+                </label>
+              </div>
+              <div class="form-check form-check-inline d-flex align-items-center">
+                <input class="form-check-input" name="category2" type="checkbox" value="패션" id="fashion">
+                <label class="form-check-label" for="fashion">
+                  패션
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
         <input type="hidden" name="starNo" th:value="${starBoard.starNo}">
         <input type="hidden" name="writer" th:value="${starBoard.writer}">
         <div class="input-group mb-3">
@@ -113,9 +210,44 @@
       };
       reader.readAsDataURL(file);
     }
+
+    // category checked
+    var category1 = "[[${starBoard.category1}]]"
+    var category2 = "[[${starBoard.category2}]]"
+    // 1. 배열 길이 지정
+    var cat1L = $("input[name=category1]").length;
+    // 2. 배열 생성
+    var cat1List = new Array(cat1L);
+    // 3. 배열에 값 주입
+    for(var i = 0 ; i < cat1L ; i++){
+      cat1List[i] = $("input[name=category1]").eq(i).val();
+    } 
+
+    var cat2L = $("input[name=category2]").length;
+    var cat2List = new Array(cat2L);
+    for(var i = 0 ; i < cat2L ; i++){
+      cat2List[i] = $("input[name=category2]").eq(i).val();
+    }
+    
+    // category와 catList에 동일 값이 있을 경우 해당 cat1List를 checked로 변경
+    $(function(){
+      for(var i = 0 ; i < cat1L ; i++){
+        if(category1.includes(cat1List[i])){
+          $('input[id='+cat1List[i]+']').prop('checked', true);
+        }
+      }
+    })
+
+    $(function(){
+      for(var i = 0 ; i < cat2L ; i++){
+        if(category2.includes(cat2List[i])){
+          $('input[value='+cat2List[i]+']').prop('checked', true);
+        }
+      }
+    })
+    
   </script>
 
 </th:block>
-<!-- // "[[$qnaBoard.qnaContent]]" -->
 
 </html>
