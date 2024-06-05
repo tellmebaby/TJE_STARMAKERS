@@ -258,6 +258,8 @@ public class StarController {
         StarBoard starBoard = starService.select(starNo);
         // 조회수 증가
         starService.views(starNo);
+        int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+        starBoard.setCommentCount(commentCount);
         model.addAttribute("starBoard", starBoard);
         return "/page/starCard/starRead";
     }
