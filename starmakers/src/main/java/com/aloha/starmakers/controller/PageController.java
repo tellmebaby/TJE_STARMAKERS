@@ -236,6 +236,7 @@ public class PageController {
 
         Users user = (Users) session.getAttribute("user");
         int userNo = user.getUserNo();
+
         List<StarBoard> promotionList = starService.promotionList(userNo, page, option);
 
         model.addAttribute("user", user);

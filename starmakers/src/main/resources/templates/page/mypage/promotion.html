@@ -88,31 +88,6 @@
             margin-top: 30px;
         }
 
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            margin-bottom: 93px;
-        }
-
-        .pagination a {
-            margin: 0 5px;
-            text-decoration: none;
-            color: #333;
-            font-size: 18px;
-        }
-
-        .prev,
-        .next {
-            font-size: 24px;
-        }
-
-        .page-number:hover,
-        .prev:hover,
-        .next:hover {
-            color: #000;
-        }
-
         .list {
             margin-top: 50px;
             display: flex;
@@ -136,6 +111,29 @@
             padding: 5px 10px;
             margin-right: 5px;
             display: inline-block;
+        }
+        .load-more-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .load-more-btn button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #2972FE;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .load-more-btn button:hover {
+            background-color: #1d5bc6;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -181,88 +179,76 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <th:block th:each="promotion : ${promotionList}">
-                            <tr th:if="${user.userNo} == ${promotion.userNo}">
+                        <th:block th:each="promotion, iterStat : ${promotionList}">
+                            <tr th:if="${user.userNo} == ${promotion.userNo}" th:classappend="${iterStat.index >= 4 ? 'hidden' : ''}">
                                 <td class="border-0 pt-4" th:text="${promotion.title}"></td>
-                                <td id="category-container" class="border-0 pt-4" th:text="${promotion.category1}"></td>
+                                <td class="border-0 pt-4">
+                                    <span class="category-container" th:text="${promotion.category1}"></span>
+                                </td>
                                 <td class="border-0 pt-4">
                                     <!-- ✨ 타임리프 - 천단위 구분기호 -->
                                     <span th:text="${#numbers.formatInteger(promotion.starPrice, 0, 'COMMA')}"></span>
-                                    </td>
-                                    <td class="border-0 pt-4" th:text="${#dates.format(promotion.regDate, 'yyyy-MM-dd')}"></td>
-                                </tr>
-                                <tr th:if="${user.userNo} == ${promotion.userNo}">
-                                    <td colspan="3"></td>
-                                    <td>
-                                        <div class="button-container">
-                                            <button class="btn-review status-pending">검토중</button>
-                                        </div>
-                                    </td>
-                                </tr> 
+                                </td>
+                                <td class="border-0 pt-4" th:text="${#dates.format(promotion.regDate, 'yyyy-MM-dd')}"></td>
+                            </tr>
+                            <tr th:if="${user.userNo} == ${promotion.userNo}" th:classappend="${iterStat.index >= 4 ? 'hidden' : ''}">
+                                <td colspan="3"></td>
+                                <td>
+                                    <div class="button-container">
+                                        <button class="btn-review status-pending">검토중</button>
+                                    </div>
+                                </td>
+                            </tr>
                         </th:block>
                     </tbody>
                 </table>
-                  <!-- 페이지네이션 -->
-                <center>
-                    <div>
-                        <!-- [ 처음으로 ]-->
-                        <a th:href="|/page/mypage/promotion?page=${page.first}&code=${option.code}&keyword=${option.keyword}|">&laquo;</a>
-            
-                        <!-- [ 이전 ] -->
-                        <th:block th:if="${page.page != page.first}">
-                            <a th:href="|/page/mypage/promotion?page=${page.prev}&code=${option.code}&keyword=${option.keyword}|">&lt;</a>
-                        </th:block>
-            
-                        <th:block th:each="no : ${#numbers.sequence(page.start, page.end)}">  <!--(1,10)모델에 담은 페이지가 아니라 그냥 1부터 10 --> 
-                            <!-- 현재 페이지 -->
-                            <!--
-                            #numbers.sequence(시작번호, 끝번호)
-                            : 시작번호부터 끝번호까지 번호 리스트를 생성
-                            -->
-                            <th:block th:if="${page.page == no}">
-                                <b>
-                                    <span th:text="${no}"></span>
-                                </b>
-                            </th:block>
-                            <th:block th:if="${page.page != no}">
-                                <a th:href="|/page/mypage/promotion?page=${no}&code=${option.code}&keyword=${option.keyword}|" th:text="${no}"></a>
-                            </th:block>
-                        </th:block>
-            
-                        <!-- [ 다음 ] -->
-                        <th:block th:if="${page.page != page.last}">
-                            <a th:href="|/page/mypage/promotion?page=${page.next}&code=${option.code}&keyword=${option.keyword}|">&gt;</a>
-                        </th:block>
-            
-                        <!-- [ 마지막 ]-->
-                        <a th:href="|/page/mypage/promotion?page=${page.last}&code=${option.code}&keyword=${option.keyword}|">&raquo;</a>
-                    </div>
-                    </center>
+                <div class="load-more-btn" th:if="${promotionList.size()} > 4">
+                    <button type="button" id="load-more-btn">더보기</button>
+                </div>
             </div>
         </div>
     </div>
     <script>
+        // 모든 카테고리 컨테이너에 대해 span 처리
+        document.querySelectorAll('.category-container').forEach(function(container) {
+            var categories = container.textContent.split(',');
+            container.innerHTML = '';
 
-      //카테고리 span 처리
-      var container = document.getElementById('category-container');
-      var categories = container.textContent.split(',');
-      container.innerHTML = '';
+            var translationMap = {
+                'youtube': '유튜브',
+                'instagram': '인스타그램',
+                'afreeca': '아프리카',
+                'chzzk': '치지직'
+            };
 
-      var translationMap = {
-        'youtube': '유튜브',
-        'instagram': '인스타그램',
-        'afreeca': '아프리카',
-        'chzzk': '치지직'
-      };
+            categories.forEach(function(category) {
+                var span = document.createElement('span');
+                span.className = 'category-label';
+                var translatedCategory = translationMap[category.trim().toLowerCase()] || category.trim();
+                span.textContent = translatedCategory;
+                container.appendChild(span);
+            });
+        });
 
-      categories.forEach(function (category) {
-        var span = document.createElement('span');
-        span.className = 'category-label';
-        var translatedCategory = translationMap[category.trim().toLowerCase()] || category.trim();
-        span.textContent = translatedCategory;
-        container.appendChild(span);
-      });
+        document.addEventListener("DOMContentLoaded", function() {
+            let loadMoreBtn = document.getElementById("load-more-btn");
+            let hiddenElements = document.querySelectorAll(".hidden");
+
+            loadMoreBtn.addEventListener("click", function() {
+                let hiddenCount = hiddenElements.length;
+                let elementsToShow = 8; // 한 번에 표시할 요소 수
+
+                for (let i = 0; i < elementsToShow && hiddenCount > 0; i++) {
+                    hiddenElements[0].classList.remove("hidden");
+                    hiddenElements = document.querySelectorAll(".hidden");
+                    hiddenCount = hiddenElements.length;
+                }
+
+                if (hiddenCount === 0) {
+                    loadMoreBtn.style.display = "none";
+                }
+            });
+        });
     </script>
-    
 </body>
 </html>
