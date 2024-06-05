@@ -431,24 +431,20 @@
 
         .main-image {
             position: relative;
-            display: inline-block;
-            align-items: center;
-            /* text-align: center; */
-          }
-      
-          .main-image img {
             display: block;
-            /* display: inline-block; */
+            width: 100%;
+            max-width: 960px; /* 컨테이너 안으로 */
             margin: 0 auto;
-      
-            /* vertical-align: middle; */
-            /* max-width: 960px; */
-            width: 960px;
+        }
+        
+        .main-image img {
+            width: 100%;
+            height: auto;
             max-height: 450px;
             object-fit: cover;
-          }
-      
-          .main-image .text {
+        }
+        
+        .main-image .text {
             position: absolute;
             /* top: 80%; */
             bottom: 10px;
@@ -460,9 +456,11 @@
       
             width: 92%;
             color: #FFF;
-          }
-      
-          .main-image .icon {
+          
+        }
+        
+        .main-image .icon {
+            position: absolute;
             top: 10px;
             right: 10px;
-          }
+        }
