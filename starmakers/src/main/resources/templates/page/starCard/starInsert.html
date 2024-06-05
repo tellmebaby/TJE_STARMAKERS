@@ -224,7 +224,7 @@
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed border-bottom" type="button" data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" style="background-color: bisque">
                 ⭐<b>디자인 의뢰하기</b>🙋‍♀️
               </button>
             </h2>
@@ -403,6 +403,57 @@
     $('#datepicker2').datepicker({
       uiLibrary: 'bootstrap5'
     });
+
+
+    // 유효성 검사
+    document.getElementById('starInsert').addEventListener('submit', function(event) {
+        var isValid = true;
+        var siteChecked = document.querySelectorAll('input[name="category1"]:checked').length > 0;
+        var fieldChecked = document.querySelectorAll('input[name="category2"]:checked').length > 0;
+        var startDate = document.querySelector('input[name="startDate"]').value;
+        var endDate = document.querySelector('input[name="endDate"]').value;
+        var title = document.querySelector('input[name="title"]').value.trim();
+        var image = document.querySelector('input[name="image"]').value;
+        var content = document.querySelector('textarea[name="content"]').value.trim();
+
+        if (!siteChecked) {
+            alert('사이트를 최소 1개 선택하세요.');
+            isValid = false;
+        }
+
+        if (!fieldChecked) {
+            alert('분야를 최소 1개 선택하세요.');
+            isValid = false;
+        }
+
+        if (!startDate || !endDate) {
+            alert('홍보기간을 입력하세요.');
+            isValid = false;
+        }
+
+        if (!title) {
+            alert('제목을 입력하세요.');
+            isValid = false;
+        }
+
+        if (!image) {
+            alert('썸네일을 업로드하세요.');
+            isValid = false;
+        }
+
+        if (!content) {
+            alert('내용을 입력하세요.');
+            isValid = false;
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+
+
+
+
   </script>
 
 </th:block>
