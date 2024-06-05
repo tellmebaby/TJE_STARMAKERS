@@ -58,8 +58,7 @@
       <div class="d-flex align-items-center border-bottom border-dark" id="channel">
         <button type="button" class="btn btn-dark btn-lg col-4 border-0 rounded-1" id="freePromo">무료홍보</button>
         <button type="button" class="btn btn-outline-dark btn-lg col-4 border-0 rounded-1" id="payPromo">유료홍보</button>
-        <button type="button" class="btn btn-outline-dark btn-lg col-4 border-0 rounded-1" id="designBtn">디자인
-          의뢰</button>
+        <button type="button" class="btn btn-outline-dark btn-lg col-4 border-0 rounded-1" id="designBtn">디자인의뢰</button>
       </div>
       <form action="/page/starCard/starInsert" method="post" id="starInsert" enctype="multipart/form-data">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
@@ -69,13 +68,8 @@
           <div class="site row py-2">
             <div class="item col-1"></div>
             <div class="item col-2">
-              <b>사이트</b>
+              <b>채널</b>
             </div>
-            
-
-            <!-- <input type="hidden" name="type" value="무료홍보" id="free">
-            <input type="hidden" name="type" value="유료홍보" id="payment"> -->
-
             <input type="hidden" name="status" value="홍보요청" id="status">
 
             <input type="hidden" name="type" value="starCard">
@@ -161,10 +155,7 @@
                   패션
                 </label>
               </div>
-
             </div>
-
-
           </div>
         </div>
 
