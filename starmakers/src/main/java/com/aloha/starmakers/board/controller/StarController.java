@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
@@ -99,22 +100,33 @@ public class StarController {
         return "redirect:/page/starCard/starInsert?no=" + no + "&error";
     }
 
-    // 초기화면 설정
+    // 초기화면 설정 검색어도 가능 
     // @GetMapping("/starCard/starList")
-    // public String cardList(@RequestParam(value = "type", defaultValue = "starCard") String type
-    //                                 ,Model model, Page page, HttpSession session
-    //                                 ,Option option) throws Exception {
+    // public String cardList(@RequestParam(value = "type", defaultValue = "starCard") String type,
+    //                         @RequestParam(value = "keyword", required = false) String keyword,
+    //                         Model model, Page page, HttpSession session,
+    //                         Option option) throws Exception {
 
     //     Users user = (Users) session.getAttribute("user");
-
     //     List<StarBoard> starList = null;
-
     //     page.setRows(12);
 
     //     if (user != null) {
     //         int userNo = user.getUserNo();
+    //         // 키워드가 있을 경우 검색 조건에 추가
+    //         if (keyword != null && !keyword.isEmpty()) {
+    //             log.info("::::::::::검색어 들어왔다 " + keyword);
+    //             option.setKeyword(keyword);
+    //         }
     //         starList = starService.list(type, page, option, userNo);
     //     } else {
+    //         // 키워드가 있을 경우 검색 조건에 추가
+    //         if (keyword != null && !keyword.isEmpty()) {
+    //             log.info("::::::::::검색어 들어왔다 " + keyword);
+    //             option.setKeyword(keyword);
+    //         }
+    //         log.info(":::::::이제 옵션값을 볼까? " + option.getKeyword());
+    //         log.info("::::::::::::::::범인추적 여기는 starcontroller");
     //         starList = starService.list(type, page, option);
     //     }
 
@@ -130,50 +142,60 @@ public class StarController {
     //     model.addAttribute("page", page);
     //     model.addAttribute("option", option);
         
-
     //     return "/page/starCard/starList";
     // }
 
-    // 초기화면 설정 검색어도 가능 
     @GetMapping("/starCard/starList")
-    public String cardList(@RequestParam(value = "type", defaultValue = "starCard") String type,
-                            @RequestParam(value = "keyword", required = false) String keyword,
-                            Model model, Page page, HttpSession session,
-                            Option option) throws Exception {
+public String cardList(
+    @RequestParam(value = "type", defaultValue = "starCard") String type,
+    @RequestParam(value = "keyword", required = false) String keyword,
+    @RequestParam Map<String, String> params, // 모든 요청 파라미터를 받아오기 위한 Map
+    Model model, 
+    Page page, 
+    HttpSession session,
+    Option option
+) throws Exception {
 
-        Users user = (Users) session.getAttribute("user");
-        List<StarBoard> starList = null;
-        page.setRows(12);
+    Users user = (Users) session.getAttribute("user");
+    List<StarBoard> starList = null;
+    page.setRows(12);
 
-        if (user != null) {
-            int userNo = user.getUserNo();
-            // 키워드가 있을 경우 검색 조건에 추가
-            if (keyword != null && !keyword.isEmpty()) {
-                option.setKeyword(keyword);
-            }
-            starList = starService.list(type, page, option, userNo);
-        } else {
-            // 키워드가 있을 경우 검색 조건에 추가
-            if (keyword != null && !keyword.isEmpty()) {
-                option.setKeyword(keyword);
-            }
-            starList = starService.list(type, page, option);
+    // URL 파라미터로 받은 옵션 값 설정
+    params.forEach((key, value) -> {
+        if (value.equals("true")) {
+            option.setCategory(key, true);
         }
+    });
 
-        starList.forEach(star -> {
-            if (star.getCategory1() != null) {
-                List<String> icons = Arrays.stream(star.getCategory1().split(","))
-                        .collect(Collectors.toList());
-                star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
-            }
-        });
-
-        model.addAttribute("starList", starList);
-        model.addAttribute("page", page);
-        model.addAttribute("option", option);
-        
-        return "/page/starCard/starList";
+    // 키워드가 있을 경우 검색 조건에 추가
+    if (keyword != null && !keyword.isEmpty()) {
+        log.info("::::::::::검색어 들어왔다 " + keyword);
+        option.setKeyword(keyword);
     }
+
+    if (user != null) {
+        int userNo = user.getUserNo();
+        starList = starService.list(type, page, option, userNo);
+    } else {
+        starList = starService.list(type, page, option);
+    }
+
+    starList.forEach(star -> {
+        if (star.getCategory1() != null) {
+            List<String> icons = Arrays.stream(star.getCategory1().split(","))
+                    .collect(Collectors.toList());
+            star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
+        }
+    });
+
+    model.addAttribute("starList", starList);
+    model.addAttribute("page", page);
+    model.addAttribute("option", option);
+
+    return "/page/starCard/starList";
+}
+
+
 
 
     // 추가 화면 설정
@@ -192,6 +214,7 @@ public class StarController {
             int userNo = user.getUserNo();
             starList = starService.list(type, page, option, userNo);
         } else {
+            log.info("::::::::::찾았다 요놈!");
             starList = starService.list(type, page, option);
         }
 
@@ -624,39 +647,5 @@ public class StarController {
         return userService.newMemberList();
     }
 
-     // 초기화면 설정
-     @GetMapping("/starCard/starList2")
-     public String cardList2(@RequestParam(value = "type", defaultValue = "starCard") String type
-                                     ,Model model, Page page, HttpSession session
-                                     ,Option option) throws Exception {
- 
-         Users user = (Users) session.getAttribute("user");
- 
-         List<StarBoard> starList = null;
- 
-         page.setRows(12);
- 
-         if (user != null) {
-             int userNo = user.getUserNo();
-             starList = starService.list(type, page, option, userNo);
-         } else {
-             starList = starService.list(type, page, option);
-         }
- 
-         starList.forEach(star -> {
-             if (star.getCategory1() != null) {
-                 List<String> icons = Arrays.stream(star.getCategory1().split(","))
-                         .collect(Collectors.toList());
-                 star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
-             }
-         });
- 
-         model.addAttribute("starList", starList);
-         model.addAttribute("page", page);
-         model.addAttribute("option", option);
-         
- 
-         return "/page/starCard/starList2";
-     }
     
 }
