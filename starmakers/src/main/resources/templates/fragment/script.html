@@ -53,6 +53,9 @@
             let isDoubleClick = false;
 
             $(document).on('click', '.card', function () {
+
+                var no = $(this).attr("data-no");
+
                 if (isDoubleClick) {
                     isDoubleClick = false;
                     return;
@@ -60,7 +63,7 @@
 
                 clickTimer = setTimeout(() => {
                     if (!isDoubleClick) {
-                        alert('Button was one-clicked!');
+                        window.location="/page/starCard/starRead?starNo="+no;
                     }
                 }, 250);
             });
