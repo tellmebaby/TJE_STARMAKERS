@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpSession;
 
@@ -256,6 +258,8 @@ public class StarController {
         StarBoard starBoard = starService.select(starNo);
         // 조회수 증가
         starService.views(starNo);
+        int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+        starBoard.setCommentCount(commentCount);
         model.addAttribute("starBoard", starBoard);
         return "/page/starCard/starRead";
     }
@@ -292,7 +296,7 @@ public class StarController {
         if (result > 0) {
             // 파일 처리 로직
 
-            log.info(file.toString()+"sadfasdfdsf");
+            // log.info(file.toString()+"sadfasdfdsf");
 
             if (file != null && !file.isEmpty()) { // file이 있을 경우 실행
                 // 기존에 올라간 파일 삭제
@@ -352,6 +356,7 @@ public class StarController {
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
+        model.addAttribute("currentTime", LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 
         List<Option> optionList = new ArrayList<Option>();
         optionList.add(new Option("제목+내용", 0));

@@ -118,3 +118,7 @@ WHERE
 ('홍보카드 기간제 상품', 'MC4yNjYyODIxNjc2MTMw', 11000, 1, 21, '2024-06-05 09:40:20', '결제완료'),
 ('홍보카드 기간제 상품', 'MC43ODY1Nzg3NTg3MTc', 7000, 1, 23, '2024-06-05 10:01:32', '결제완료'),
 ('홍보카드 기간제 상품', 'MC4zMDYyOTIyMjMzMzcy', 11000, 1, 29, '2024-06-05 10:39:31', '결제완료');
+
+ SELECT SUM(price) as price
+    FROM payment_info
+    WHERE user_no = 1

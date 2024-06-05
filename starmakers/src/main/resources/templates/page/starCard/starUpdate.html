@@ -31,7 +31,7 @@
     <p class="d-flex justify-content-center text-secondary mb-3" style="text-align: center;">
       수정 시, 관리자 확인 후 글이 재등록됩니다.<br>자세한 문의사항은 1:1 채팅 또는 Q&A 게시판을 이용해주세요:D
     </p>
-    <form action="/page/starCard/starUpdate" method="post" id="starUpdate">
+    <form action="/page/starCard/starUpdate" method="post" id="starUpdate" enctype="multipart/form-data">
       <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
       <input type="hidden" name="status" value="수정요청">
       <input type="hidden" name="username" th:value="${session.user.email}">
@@ -173,8 +173,13 @@
       lang: 'ko-KR',
       fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', '맑은 고딕', '궁서', '굴림체', '굴림', '돋움체', '바탕체'],
       fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '28', '30', '36', '50', '72'],
-
-      // placeholder: content
+      placeholder: '홍보할 내용을 입력하세요.',
+      callbacks: {
+        onImageUpload: function (files) {
+          // 이미지 파일을 읽고 최적화하는 함수 호출
+          optimizeAndUploadImage(files[0]);
+        }
+      }
     });
 
 
@@ -186,6 +191,7 @@
     }
 
     function optimizeAndUploadImage(file) {
+      console.log("파일 리사이징")
       const reader = new FileReader();
       reader.onload = function (event) {
         const img = new Image();
