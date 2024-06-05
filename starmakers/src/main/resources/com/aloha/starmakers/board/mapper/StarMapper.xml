@@ -231,27 +231,12 @@
             sb.status, 
             pi.price as star_price
         FROM star_board sb
-        JOIN payment_info pi
+        LEFT JOIN payment_info pi
         ON  pi.user_no = sb.user_no
         AND pi.star_no = sb.star_no
         WHERE 
             sb.user_no = #{userNo}
-            <if test="option.keyword != null and option.keyword != ''">
-            AND
-            <if test="option.code == 0">
-                (title LIKE CONCAT('%', #{option.keyword}, '%')
-                OR content LIKE CONCAT('%', #{option.keyword}, '%'))
-            </if>
-            <if test="option.code == 1">
-                title LIKE CONCAT('%', #{option.keyword}, '%')
-            </if>
-            <if test="option.code == 2">
-                content LIKE CONCAT('%', #{option.keyword}, '%')
-            </if>
-            <if test="option.code == 3">
-                writer LIKE CONCAT('%', #{option.keyword}, '%')
-            </if>
-        </if>
+        ORDER BY sb.reg_date DESC
     </select>
 
 </mapper>

@@ -54,7 +54,7 @@ public class PayController {
 
         // 스타보드 상태 결제완료로 바꿔주기
         StarBoard starBoard = starService.select(pay.getStarNo());
-        starBoard.setStatus("결제완료");
+        starBoard.setStatus("홍보요청");
         int update = starService.update(starBoard);
 
         Map<String, Object> response = new HashMap<>();

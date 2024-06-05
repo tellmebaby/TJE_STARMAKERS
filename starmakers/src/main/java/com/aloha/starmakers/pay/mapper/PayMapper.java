@@ -26,6 +26,9 @@ public interface PayMapper {
     //결제취소때 사용
     public int update(Pay pay);
 
+    // 관리자 회원별 결제조회
+    public int totalPrice(int userNo) throws Exception;
+
 
     
 }
