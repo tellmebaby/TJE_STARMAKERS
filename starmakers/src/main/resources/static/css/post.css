@@ -42,6 +42,14 @@
           border: 1px solid;
           /* text-align: center; */
         }
+        .content-container2 {
+            width: 100%;
+            margin: 0 auto;
+            padding: 30px 30px;
+            border: 1px solid;
+            border-radius: 5px;
+            /* text-align: center; */
+          }
         .title-container hr {
           margin-top: 10px;
         }
@@ -217,14 +225,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 10px;
         }
         .reply-content {
             flex-grow: 1;
             margin-right: 20px;
         }
         .reply-button {
+            flex-shrink: 0;
             padding: 5px 0;
-           text-align: right;
+            text-align: right;
+            display: flex;
         }
         .btn-reply-update {
             padding: 5px 10px;
@@ -368,14 +379,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 10px;
         }
         .rereply-content {
             flex-grow: 1;
             margin-right: 20px;
         }
         .rereply-button {
+            flex-shrink: 0;
             padding: 5px 0;
-           text-align: right;
+            text-align: right;
+            display: flex;
         }
         .btn-rereply-update {
             padding: 5px 10px;
@@ -414,3 +428,41 @@
             justify-content: space-between;
             align-items: center;
         }
+
+        .main-image {
+            position: relative;
+            display: inline-block;
+            align-items: center;
+            /* text-align: center; */
+          }
+      
+          .main-image img {
+            display: block;
+            /* display: inline-block; */
+            margin: 0 auto;
+      
+            /* vertical-align: middle; */
+            /* max-width: 960px; */
+            width: 960px;
+            max-height: 450px;
+            object-fit: cover;
+          }
+      
+          .main-image .text {
+            position: absolute;
+            /* top: 80%; */
+            bottom: 10px;
+            left: 10px;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+            /* width: 100%; */
+            /* transform: translate(-50%, -50%); */
+            padding: 10px;
+      
+            width: 92%;
+            color: #FFF;
+          }
+      
+          .main-image .icon {
+            top: 10px;
+            right: 10px;
+          }

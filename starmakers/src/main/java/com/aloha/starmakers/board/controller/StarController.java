@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpSession;
 
@@ -108,7 +110,7 @@ public class StarController {
     public String insertPro(StarBoard starBoard, String username,
             @RequestParam(value = "image", required = false) MultipartFile file, HttpSession session)
             throws Exception {
-        int starNo = starService.insert(starBoard, username);
+        int starNo = starService.insert(starBoard, username); // starBoard 등록
 
         Users user = (Users) session.getAttribute("user");
         int userNo = user.getUserNo();
@@ -118,7 +120,7 @@ public class StarController {
         if (starNo > 0) {
             // 파일 처리 로직
             if (file != null && !file.isEmpty()) {
-                fileService.upload(file, starNo, userNo);
+                fileService.upload(file, starNo, userNo); // file 등록
             }
             return "redirect:/page/starCard/starList";
         }
@@ -276,15 +278,42 @@ public class StarController {
     }
 
     @PostMapping("/starCard/starUpdate")
-    public String updatePro(StarBoard starBoard) throws Exception {
+    public String updatePro(StarBoard starBoard, String username,
+                            @RequestParam(value = "image", required = false) MultipartFile file,
+                            HttpSession session) throws Exception {
 
         int result = starService.update(starBoard);
-        if (result > 0) {
-            return "redirect:/page/starCard/starList";
-        }
-        int no = starBoard.getStarNo();
+        int starNo = starBoard.getStarNo();
 
-        return "redirect:/page/board/qnaBoard/qnaUpdate?qnaNo=" + no + "$error";
+        Users user = (Users) session.getAttribute("user");
+        int userNo = user.getUserNo();
+        
+        // 파일 로직 추가
+        
+        // 데이터 처리 성공
+        if (result > 0) {
+            // 파일 처리 로직
+
+            // log.info(file.toString()+"sadfasdfdsf");
+
+            if (file != null && !file.isEmpty()) { // file이 있을 경우 실행
+                // 기존에 올라간 파일 삭제
+                // 1. starNo로 기존에 올라가있는 파일 있는지 확인하고 있으면 파일 값 가져오기
+                // 2. starNo로 등록 된 파일 삭제
+                // 3. starNo로 새로운 파일 등록
+                log.info("새로 등록된 파일 있음");
+                Files file2 = new Files();
+                file2.setStarNo(starNo);
+                fileService.deleteByParent(file2); // 기존 파일 삭제
+
+                fileService.upload(file, starNo, userNo); // file 등록
+            }
+            log.info("파일 확인 안 됨");
+            return "redirect:/page/starCard/starRead?starNo="+starNo;
+        }
+        
+        
+        return "redirect:/page/starCard/starRead?starNo=" + starNo + "$error";
     }
 
     /**
@@ -312,8 +341,7 @@ public class StarController {
     }
 
 
-    // 아래부터 event 게시판
-
+    // 아래부터 event 게시판 ---------------------------------------------------------
     @GetMapping("/board/eventBoard/eventList")
     public String eventList(@RequestParam(value = "type", defaultValue = "event") String type, Model model, Page page,
             Option option) throws Exception {
@@ -326,6 +354,7 @@ public class StarController {
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
+        model.addAttribute("currentTime", LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 
         List<Option> optionList = new ArrayList<Option>();
         optionList.add(new Option("제목+내용", 0));

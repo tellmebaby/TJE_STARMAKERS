@@ -192,7 +192,7 @@
         WHERE s.star_no = #{starNo}
     </select>
 
-    <!-- 글 수정 -->
+        <!-- 글 수정 -->
     <update id="update">
         UPDATE star_board
         SET title = #{title},
@@ -201,6 +201,8 @@
             likes=#{likes},
             views=#{views},
             status=#{status},
+            category1=#{category1},
+            category2=#{category2},
             upd_date = now()
         WHERE star_no = #{starNo}
     </update>
