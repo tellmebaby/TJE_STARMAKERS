@@ -1,5 +1,6 @@
 package com.aloha.starmakers.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,6 +151,13 @@ public class AdminController {
 
         log.info("starList : " + starList);
         return "/admin/pages/mailboxEvent";
+    }
+    @GetMapping("/pages/profile")
+    public String userProfile(@RequestParam("userNo") int userNo,
+                               Model model) throws Exception {
+        Users user = userService.selectUserNo(userNo);
+        model.addAttribute("user", user);
+        return "/admin/pages/profile";
     }
     
     

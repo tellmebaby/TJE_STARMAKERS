@@ -15,6 +15,9 @@ public interface UserService {
 
     // 조회
     public Users select(String username) throws Exception;
+    
+    // 회원 조회 - userNo
+    public Users selectUserNo(int userNo) throws Exception;
 
     // 회원 가입
     public int join(Users user) throws Exception;

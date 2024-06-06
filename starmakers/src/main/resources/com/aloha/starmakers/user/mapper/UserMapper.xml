@@ -65,6 +65,13 @@
         FROM user u LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id
         WHERE u.email = #{email}
     </select>
+    
+    <!-- 회원 조회 - userNo -->
+    <select id="selectUserNo" resultType="Users">
+        SELECT *
+        FROM user
+        WHERE user_no = #{userNo}
+    </select>
 
     <!-- 회원 가입 -->
     <insert id="join">
