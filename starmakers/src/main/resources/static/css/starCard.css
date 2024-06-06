@@ -627,12 +627,7 @@
         display: inline-block;    /* 너비를 지정할 수 있도록 블록 레벨 요소로 설정 */
     }
 
-    .starList-detail {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        margin-top: 20px;
-    }
+    
 
     .items-eventType,
     .items-category1,
@@ -656,22 +651,7 @@
         background-color: #f6fcf3 !important;
     } */
 
-    /* 타입 버튼 스타일 */
-    .type-sub {
-        align-content: center;
-        width: 65px;
-        border: 1px solid rgb(220, 223, 225);
-        border-radius: 23px;
-        font-size: 0.9em;
-        text-align: center;
-        margin: 0px 4px;
-        height: 55px;
-        background-color: #fff;
-        color: rgb(105, 108, 115);
-        cursor: pointer;
-        display: inline-block;
-        box-shadow: -3px 0 1px rgba(0, 0, 0, 0.08), 0 3px 1px rgba(0, 0, 0, 0.08);
-    }
+    
 
     /* 타입 버튼 마우스 올릴시 스타일 */
     .type-sub:hover {
@@ -843,19 +823,38 @@
         position: relative;
     }
 
-    .container-typeTitle span {
-        position: absolute;
-        width: 35%;
-        top: -60px;
-        color: #555;
-        font-size: 1.3em;
-        letter-spacing: -1px; /* 폰트의 간격을 조절합니다. 음수 값은 글자를 겹치게 합니다. */
-    }
+  
 
     @media (max-width: 768px) {
         .col-md-2 {
             flex: 0 0 48%; /* 한 줄에 2개의 카드를 표시하도록 설정 */
             max-width: 48%; /* 한 줄에 2개의 카드를 표시하도록 설정 */
+        }
+        .starList-detail {
+            margin-top: 20px;
+        }
+        .container-typeTitle span {
+            position: absolute;
+            width: 100%;
+            top: -70px;
+            color: #555;
+            font-size: 0.7em;
+            letter-spacing: -1px; /* 폰트의 간격을 조절합니다. 음수 값은 글자를 겹치게 합니다. */
+        }
+        .type-sub {
+            align-content: center;
+            width: 60px;
+            border: 1px solid rgb(220, 223, 225);
+            border-radius: 23px;
+            font-size: 0.7em;
+            text-align: center;
+            margin: 2px 4px;
+            height: 36px;
+            background-color: #fff;
+            color: rgb(105, 108, 115);
+            cursor: pointer;
+            display: inline-block;
+            box-shadow: -3px 0 1px rgba(0, 0, 0, 0.08), 0 3px 1px rgba(0, 0, 0, 0.08);
         }
     }
     
@@ -869,6 +868,32 @@
             max-width: 100%;
             margin-top: 4%;
         }
+        .starList-detail {
+            margin-top: 20px;
+        }
+        .container-typeTitle span {
+            position: absolute;
+            width: 100%;
+            top: -70px;
+            color: #555;
+            font-size: 1em;
+            letter-spacing: -1px; /* 폰트의 간격을 조절합니다. 음수 값은 글자를 겹치게 합니다. */
+        }
+        .type-sub {
+            align-content: center;
+            width: 65px;
+            border: 1px solid rgb(220, 223, 225);
+            border-radius: 23px;
+            font-size: 0.9em;
+            text-align: center;
+            margin: 2px 4px;
+            height: 55px;
+            background-color: #fff;
+            color: rgb(105, 108, 115);
+            cursor: pointer;
+            display: inline-block;
+            box-shadow: -3px 0 1px rgba(0, 0, 0, 0.08), 0 3px 1px rgba(0, 0, 0, 0.08);
+        }
     }
     
     @media (min-width: 993px) {
@@ -879,6 +904,37 @@
         .col-md-6 {
             flex: 0 0 50%;
             max-width: 50%;
+        }
+        .starList-detail {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            margin-top: 20px;
+        }
+        .container-typeTitle span {
+            position: absolute;
+            width: 35%;
+            top: -60px;
+            color: #555;
+            font-size: 1.3em;
+            letter-spacing: -1px; /* 폰트의 간격을 조절합니다. 음수 값은 글자를 겹치게 합니다. */
+        }
+
+        /* 타입 버튼 스타일 */
+        .type-sub {
+            align-content: center;
+            width: 65px;
+            border: 1px solid rgb(220, 223, 225);
+            border-radius: 23px;
+            font-size: 0.9em;
+            text-align: center;
+            margin: 0px 4px;
+            height: 55px;
+            background-color: #fff;
+            color: rgb(105, 108, 115);
+            cursor: pointer;
+            display: inline-block;
+            box-shadow: -3px 0 1px rgba(0, 0, 0, 0.08), 0 3px 1px rgba(0, 0, 0, 0.08);
         }
     }
 
