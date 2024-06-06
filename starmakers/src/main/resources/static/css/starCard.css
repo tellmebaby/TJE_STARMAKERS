@@ -39,15 +39,12 @@
 
 .jumbotron {
     height: 60vh; /* 화면 높이와 동일하게 설정 */
+    margin-bottom: 3%;
 }
 
 .jumbotron .topOverlay {
     padding: 0 30px;
     text-align: left;
-}
-
-.carousel-inner{
-    margin-top: 4%;
 }
 
 .carousel-control-prev,
@@ -474,7 +471,7 @@
     height: 100%;
     flex-direction: row;
     position: relative; /* 자식 요소의 absolute positioning을 위해 추가 */
-    
+    margin-top: 23%;
   }
 
   .contentIcon1:hover,
@@ -859,7 +856,6 @@
         .col-md-2 {
             flex: 0 0 48%; /* 한 줄에 2개의 카드를 표시하도록 설정 */
             max-width: 48%; /* 한 줄에 2개의 카드를 표시하도록 설정 */
-            overflow: hidden;
         }
     }
     
@@ -867,7 +863,11 @@
         .col-md-2 {
             flex: 0 0 33%; /* 한 줄에 3개의 카드를 표시하도록 설정 */
             max-width: 33%; /* 한 줄에 3개의 카드를 표시하도록 설정 */
-            overflow: hidden;
+        }
+        .col-md-6 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            margin-top: 4%;
         }
     }
     
@@ -875,7 +875,10 @@
         .col-md-2 {
             flex: 0 0 16%; /* 한 줄에 4개의 카드를 표시하도록 설정 */
             max-width: 16%; /* 한 줄에 4개의 카드를 표시하도록 설정 */
-            overflow: hidden;
+        }
+        .col-md-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
         }
     }
 
