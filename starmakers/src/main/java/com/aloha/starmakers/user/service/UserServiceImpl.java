@@ -173,4 +173,10 @@ public class UserServiceImpl implements UserService {
         return userList;
     }
 
+    @Override
+    public Users selectUserNo(int userNo) throws Exception {
+        Users user = userMapper.selectUserNo(userNo);
+        return user;
+    }
+
 }

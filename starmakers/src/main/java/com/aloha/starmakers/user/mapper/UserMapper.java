@@ -24,6 +24,9 @@ public interface UserMapper {
     // 회원 조회
     public Users read(String email) throws Exception; 
 
+    // 회원 조회 - userNo
+    public Users selectUserNo(int userNo) throws Exception;
+
     // 회원 수정
     public int update(Users user) throws Exception;
 
