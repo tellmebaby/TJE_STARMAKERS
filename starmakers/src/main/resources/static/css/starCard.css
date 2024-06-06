@@ -46,6 +46,10 @@
     text-align: left;
 }
 
+.carousel-inner{
+    margin-top: 4%;
+}
+
 .carousel-control-prev,
 .carousel-control-next {
     width: 40px;
@@ -66,7 +70,7 @@
 }
 
 #promotionCarousel .row {
-    justify-content: start;
+    display: flex;
     /* gap: 17px; */
 }
 
@@ -104,6 +108,7 @@
 #promotionCarousel .card {
     border-radius: 1.25rem;
     overflow: hidden;
+    cursor: pointer; /* 마우스 호버시 포인터 모양으로 변경 */
 }
 
 .icon-container {
@@ -149,7 +154,6 @@
 }
 
 .row {
-    margin-top: 70px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -463,15 +467,13 @@
     color: black; /* 텍스트 색상을 검은색으로 변경 */
 }
 
-.content-wrapper {
-    /* border: 1px solid black; */
-  }
   .contentIcon-container {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     height: 100%;
     flex-direction: row;
+    position: relative; /* 자식 요소의 absolute positioning을 위해 추가 */
     
   }
 
@@ -516,7 +518,7 @@
   .contentIcon-backFashion{
     position: absolute;
     height: 175px;
-    width: 637px;
+    width: 100%; /* 부모 요소의 너비에 맞추기 위해 100%로 설정 */
     border-radius: 15px;
     background-repeat: no-repeat;
     background-position: 0 45%;
@@ -576,13 +578,15 @@
   }
 
   .starmember-wrapper {
+    position: relative;
     display: flex;
     height: 100%;
     background-color: #fff;
     border: 1px solid rgb(214, 215, 220);
     border-radius: 15px;
   }
-  .starmember-list, .starmember-detail {
+  .starmember-list .starmember-detail {
+    position:inherit;
     flex: 1;
     /* border: 1px solid black; */
     padding: 10px;
@@ -592,6 +596,7 @@
     flex-direction: row; /* 수평 정렬 */
     justify-content: space-around; /* 공간을 고르게 분배 */
     align-items: center; /* 수직 중앙 정렬 */
+    width: 100%;
   }
   .starmember {
       display: flex; /* 수평 정렬을 위한 플렉스 박스 */
@@ -619,6 +624,10 @@
         color: #4e5d6c;
         font-size: 70%;
         gap: 3px;
+        white-space: nowrap;      /* 텍스트 한 줄 유지 */
+        overflow: hidden;         /* 넘치는 텍스트 숨김 */
+        text-overflow: ellipsis;  /* 넘치는 텍스트를 생략 기호로 표시 */
+        display: inline-block;    /* 너비를 지정할 수 있도록 블록 레벨 요소로 설정 */
     }
 
     .starList-detail {
@@ -639,13 +648,18 @@
     }
 
     .type-sub.checked {
-        background-color: #e5c9e7;
+        background-color: #dcffca !important;
     }
 
     .type-sub.checked label {
         color: black;
     }
 
+    /* .type-sub.checked #type-chzzk {
+        background-color: #f6fcf3 !important;
+    } */
+
+    /* 타입 버튼 스타일 */
     .type-sub {
         align-content: center;
         width: 65px;
@@ -655,15 +669,17 @@
         text-align: center;
         margin: 0px 4px;
         height: 55px;
-        background-color: rgb(158, 160, 164);
-        color: #fff;
-        cursor: pointer;
-        display: inline-block;
-    }
-
-    .type-sub:hover {
         background-color: #fff;
         color: rgb(105, 108, 115);
+        cursor: pointer;
+        display: inline-block;
+        box-shadow: -3px 0 1px rgba(0, 0, 0, 0.08), 0 3px 1px rgba(0, 0, 0, 0.08);
+    }
+
+    /* 타입 버튼 마우스 올릴시 스타일 */
+    .type-sub:hover {
+        background-color: #fff;
+        box-shadow: -4px 0 3px rgba(0, 0, 0, 0.1), 0 4px 2px rgba(0, 0, 0, 0.1);
     }
 
     #starList {
@@ -685,6 +701,10 @@
         font-size: 2em;
     }
 
+    #type-chzzk {
+        background: black;
+    }
+
     .container-starSearch {
         display: flex;
         align-items: center;
@@ -698,11 +718,12 @@
         display: flex;
         align-content: center;
         background-color: transparent;
-        border: 1px solid gray;
+        border: 1px solid rgb(230, 230, 230);
         border-radius: 17px;
         color: gray;
         height: 40px;
         margin-right: 10px;
+        background-color: #fff;
     }
 
     .sub-searchInput input{
@@ -721,6 +742,7 @@
         margin-left: 10px;
     }
 
+    /* 캘린더 입력하기 버튼 스타일 */
     .sub-btn-calendar,
     .sub-btn-insertCard{
         align-content: center;
@@ -731,39 +753,133 @@
         text-align: center;
         margin: 0px 4px;
         height: 40px;
-        background-color: rgb(158, 160, 164);
-        color: #fff;
+        background-color: #fff;
+        color: rgb(105, 108, 115);
+        box-shadow: -3px 0 1px rgba(0, 0, 0, 0.08), 0 3px 1px rgba(0, 0, 0, 0.08);
     }
 
     .sub-btn-calendar:hover{
         background-color: #fff;
+        box-shadow: -4px 0 3px rgba(0, 0, 0, 0.1), 0 4px 2px rgba(0, 0, 0, 0.1);
     }
 
     .sub-btn-calendar:hover i{
-        color: rgb(105, 108, 115);
+        color: black;
     }
 
     .sub-btn-insertCard:hover{
         background-color: #fff;
+        box-shadow: -4px 0 3px rgba(0, 0, 0, 0.1), 0 4px 2px rgba(0, 0, 0, 0.1);
     }
 
     .sub-btn-insertCard:hover i{
-        color: rgb(105, 108, 115);
+        color: black;
     }
 
     .sub-btn-calendar i{
-        color: #fff;
+        color: rgb(105, 108, 115);
         font-size: 1.5em;
     }
 
     .sub-btn-insertCard i{
-        color: #fff;
+        color: rgb(105, 108, 115);
         font-size: 1.5em;
     }
 
+    /* 타입 버튼 클릭시 변경 스타일*/
     .type-sub.checked label,
     .type-sub.checked i,
     .type-sub.checked img {
         color: black;
         z-index: 3;
     }
+
+
+    /* .type-sub.checked label,
+    .type-sub.checked i,
+    .type-sub.checked img {
+        color: black;
+        z-index: 3;
+    } */
+
+    /* 중앙에 메시지를 출력하기 위한 스타일 */
+    .no-results {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-size: 24px;
+        color: #555;
+    }
+
+    .type-sub label:hover {
+        cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
+    }
+
+    .clipboard-icon{
+        transform: rotate(180deg); /* 요소를 180도 회전시키는 변환 */
+        opacity: 0;
+    }
+
+    .clipboard-icon.rotate-180:hover{
+        transform: rotate(0deg); /* 요소를 180도 회전시키는 변환 */
+        opacity: 1;
+        transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out; /* 회전 애니메이션 및 투명도 변환 애니메이션 속성 */
+    }
+
+    .bi-three-dots-vertical.rotate-180 {
+        transform: rotate(180deg); /* 요소를 180도 회전시키는 변환 */
+        transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out; /* 회전 애니메이션 및 투명도 변환 애니메이션 속성 */
+        opacity: 0; /* 투명도를 0으로 설정하여 요소가 서서히 사라지도록 함 */
+    }
+
+
+    
+    .bi-three-dots-vertical.show {
+        transform: rotate(180deg); /* 요소를 180도 회전시키는 변환 */
+        opacity: 1;
+        transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out; /* 회전 애니메이션 및 투명도 변환 애니메이션 속성 */
+    }
+
+    .container-typeTitle {
+        width: 100%;
+        position: relative;
+    }
+
+    .container-typeTitle span {
+        position: absolute;
+        width: 35%;
+        top: -60px;
+        color: #555;
+        font-size: 1.3em;
+        letter-spacing: -1px; /* 폰트의 간격을 조절합니다. 음수 값은 글자를 겹치게 합니다. */
+    }
+
+    @media (max-width: 768px) {
+        .col-md-2 {
+            flex: 0 0 48%; /* 한 줄에 2개의 카드를 표시하도록 설정 */
+            max-width: 48%; /* 한 줄에 2개의 카드를 표시하도록 설정 */
+            overflow: hidden;
+        }
+    }
+    
+    @media (min-width: 769px) and (max-width: 992px) {
+        .col-md-2 {
+            flex: 0 0 33%; /* 한 줄에 3개의 카드를 표시하도록 설정 */
+            max-width: 33%; /* 한 줄에 3개의 카드를 표시하도록 설정 */
+            overflow: hidden;
+        }
+    }
+    
+    @media (min-width: 993px) {
+        .col-md-2 {
+            flex: 0 0 16%; /* 한 줄에 4개의 카드를 표시하도록 설정 */
+            max-width: 16%; /* 한 줄에 4개의 카드를 표시하도록 설정 */
+            overflow: hidden;
+        }
+    }
+
+    .justify-content-center{
+        margin-top: 2%;
+    }
+    

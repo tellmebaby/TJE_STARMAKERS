@@ -6,215 +6,551 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index Page</title>
-    <link rel="stylesheet" href="/css/card.css" class="css">
+    <!-- <link rel="stylesheet" href="/css/card.css" class="css"> -->
+    <link class="css" href="/css/starCard.css" rel="stylesheet">
+<!-- 부트스트랩 아이콘 CSS 파일 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+    <style>
+        /*
+        #promotionCarousel .col-lg-3 p-0 {
+            padding-right: 0;
+            padding-left: 0;
+        }
+        */
+        body {
+            background-color: rgb(241, 241, 242);
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+    </style>
     
 
 </head>
 
 
 
-<body>
-    <div layout:fragment="content">
+<body layout:fragment="content">
 
-        <style>
-            /*
-            #promotionCarousel .col-lg-3 p-0 {
-                padding-right: 0;
-                padding-left: 0;
-            }
-            */
-
-            a {
-                text-decoration: none;
-                color: black;
-            }
-         
-        </style>
-
-        <div class="jumbotron text-center bg-image">
-            <div class="overlay d-flex flex-column align-items-center">
-                <h1 class="display-4">스타가 되는 첫걸음</h1>
-                <p class="lead">스타가 되고 싶은 당신을 위한 홍보 플랫폼</p>
-                <div class="d-flex">
-                    <a href="page/starCard/starInsert" class="btn btn-primary btn-lg me-3">무료로 참여하기</a>
-                    <a href="page/starCard/starList" class="btn btn-secondary btn-lg">스타 보러가기</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-
-            <div class="row mb-3 mt-3">
-                <div class="col-md-12 d-flex align-items-center">
-                    <input type="text" class="form-control me-2" id="searchInput" placeholder="검색 키워드 입력">
-                    <button class="btn btn-primary col-2">검색</button>
-                </div>
-            </div>
-
-
+<div class="jumbotron text-center bg-image">
+    <div class="topOverlay d-flex flex-column align-items-center">
+        <h1 class="display-4">스타가 되는 첫걸음</h1>
+        <p class="lead">스타가 되고 싶은 당신을 위한 홍보 플랫폼</p>
+        <div class="d-flex">
+            <a href="page/starCard/starInsert" class="btn btn-primary btn-lg me-3">무료로 참여하기</a>
+            <a href="page/starCard/starList" class="btn btn-secondary btn-lg">스타 보러가기</a>
             
-            <div id="promotionCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-                <div class="carousel-inner" id="carousel-inner">
-                    <!-- Dynamically added carousel items will go here -->
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#promotionCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#promotionCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-
-
-                
-
+        </div>
+        <div class="row mb-3 mt-3">
+            <div class="col-md-12 d-flex align-items-center">
+                <input type="text" class="form-control me-2" id="main-search" placeholder="검색 키워드 입력">
+                <button class="btn btn-primary" id="btn-mainSearch">검색</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div id="promotionCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner" id="carousel-inner">
+            <!-- Dynamically added carousel items will go here -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#promotionCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#promotionCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 
 
-
-
-
-            <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="event-banner">
-                            <img src="/img/sampleBanner.png" class="d-block w-100">
+    <!-- 새추가영역 -->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="content-wrapper" style="height: 150px;">
+                <div class="banner-slider">
+                    <div id="bannerCarousel" class="carousel slide align-items-start" data-bs-ride="carousel" data-bs-interval="5000">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="event-banner align-items-start">
+                                    <img src="/img/sampleBanner.png" class="d-block w-100">
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="event-banner align-items-start">
+                                    <img src="/img/sampleBanner2.png" class="d-block w-100">
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="event-banner align-items-start">
+                                    <img src="/img/sampleBanner3.png" class="d-block w-100">
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="event-banner align-items-start">
+                                    <img src="/img/sampleBanner4.png" class="d-block w-100">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="event-banner">
-                            <img src="/img/sampleBanner2.png" class="d-block w-100">
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="event-banner">
-                            <img src="/img/sampleBanner3.png" class="d-block w-100">
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="event-banner">
-                            <img src="/img/sampleBanner4.png" class="d-block w-100">
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                  </div>
             </div>
-
-
-
-            <div class="row">
-                <div class="col-md-6">
-                    <h3 class="board-h">이벤트 후기 <span class="text-muted"><a href="page/board/reviewBoard/reviewList">더 보기></a></span></h3>
-                    <ul class="list-group">
-                        <li class="list-group-item" th:if="${starListReview.empty}">
-                            조회된 게시물이 없습니다.
-                        </li>
-                        <li class="list-group-item" th:each="starBoard, iterStat : ${starListReview}">
-                            <a th:href="|/page/board/reviewBoard/reviewPost?starNo=${starBoard.starNo}|" th:text="${starBoard.title} + ' [' + ${starBoard.commentCount} + ']'"></a>
-                            <span class="badge text-bg-secondary" th:text="${starBoard.views}"></span>
-                        </li>
-                    </ul>
+          </div>
+          <div class="content-wrapper" style="height: 150px;">
+            
+            <div class="contentIcon-container">
+                <div class="contentIcon1" data-category="music">
+                    <i class="bi bi-music-note"></i>
+                    <p>음악</p>
                 </div>
-                <div class="col-md-6">
-                    <h3 class="board-h">공지사항 <span class="text-muted"><a href="page/board/anBoard/anList">더 보기></a></span></h3>
-                    <ul class="list-group">
-                        <li class="list-group-item" th:if="${starListAnn.empty}">
-                            조회된 게시물이 없습니다.
-                        </li>
-                        <li class="list-group-item" th:each="starBoard, iterStat : ${starListAnn}">
-                            <a th:href="|/page/board/anBoard/anPost?starNo=${starBoard.starNo}|" th:text="${starBoard.title} + ' [' + ${starBoard.commentCount} + ']'"></a>
-                            <span class="badge text-bg-secondary" th:text="${starBoard.views}"></span>
-                        </li>
-                    </ul>
+                <div class="contentIcon-backMusic"></div>
+                <div class="contentIcon2" data-category="game">
+                  <i class="bi bi-controller"></i>
+                  <p>게임</p>
+                </div>
+                <div class="contentIcon-backGame"></div>
+                <div class="contentIcon3" data-category="travel">
+                  <i class="bi bi-backpack2"></i>
+                  <p>여행</p>
+                </div>
+                <div class="contentIcon-backTravel"></div>
+                <div class="contentIcon4" data-category="food">
+                  <i class="bi bi-cake"></i>
+                  <p>음식</p>
+                </div>
+                <div class="contentIcon-backFood"></div>
+                <div class="contentIcon5" data-category="animal">
+                  <i class="bi bi-feather"></i>
+                  <p>동물</p>
+                </div>
+                <div class="contentIcon-backAnimal"></div>
+                <div class="contentIcon6" data-category="asmr">
+                  <i class="bi bi-mic"></i>
+                  <p>ASMR</p>
+                </div>
+                <div class="contentIcon-backAsmr"></div>
+                <div class="contentIcon7" data-category="workOut">
+                  <i class="bi bi-bicycle"></i>
+                  <p>운동</p>
+                </div>
+                <div class="contentIcon-backWork"></div>
+                <div class="contentIcon8" data-category="fashion">
+                  <i class="bi bi-person-arms-up"></i>
+                  <p>패션</p>
+                </div>
+                <div class="contentIcon-backFashion"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+            <div class="starmember-wrapper">
+                <div class="starmember-list">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="starmember-detail">
+                                <div class="col">
+                                    <span class="starmember-title1">#요새뜨는스타</span>
+                                </div>
+                                <div class="col" id="starMemberList"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="starmember-detail">
+                                <div class="col">
+                                    <span class="starmember-title1">#시작하는스타</span>
+                                </div>
+                                <div class="col" id="newStarMember"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+      </div>
+    <!-- 새추가영역 -->
 
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h3 class="board-h">베스트 후기 <span class="text-muted"><a href="page/board/reviewBoard/reviewList">더 보기></a></span></h3>
+            <ul class="list-group">
+                <li class="list-group-item" th:if="${starListReview.empty}">
+                    조회된 게시물이 없습니다.
+                </li>
+                <li class="list-group-item" th:each="starBoard, iterStat : ${starListReview}">
+                    <a th:href="|/page/board/reviewBoard/reviewPost?starNo=${starBoard.starNo}|" th:text="${starBoard.title} + ' [' + ${starBoard.commentCount} + ']'"></a>
+                    <span class="badge text-bg-secondary" th:text="${starBoard.views}"></span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h3 class="board-h">공지사항 <span class="text-muted"><a href="page/board/anBoard/anList">더 보기></a></span></h3>
+            <ul class="list-group">
+                <li class="list-group-item" th:if="${starListAnn.empty}">
+                    조회된 게시물이 없습니다.
+                </li>
+                <li class="list-group-item" th:each="starBoard, iterStat : ${starListAnn}">
+                    <a th:href="|/page/board/anBoard/anPost?starNo=${starBoard.starNo}|" th:text="${starBoard.title} + ' [' + ${starBoard.commentCount} + ']'"></a>
+                    <span class="badge text-bg-secondary" th:text="${starBoard.views}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
 
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const carouselInner = document.getElementById('carousel-inner');
-        
-                // 예시 데이터
-                const cards = [
-                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분', text: '꿀타래' },
-                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분1', text: '꿀타래1' },
-                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분2', text: '꿀타래2' },
-                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분3', text: '꿀타래3' },
-                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분4', text: '꿀타래4' },
-                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분5', text: '꿀타래5' },
-                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분6', text: '꿀타래6' },
-                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분7', text: '꿀타래7' },
-                    { img: 'https://i.pinimg.com/564x/fd/33/ef/fd33ef3e0233db95a5c7681723b40d16.jpg', title: '어쩌다보니천생연분8', text: '꿀타래8' },
-                ];
-        
-                function createCard(cardData) {
-                    return `
-                    <div class="col-lg-3 p-0">
-                        <div class="card">
-                            <img src="${cardData.img}" class="card-img-top" alt="${cardData.title}">
-                            <div class="icon-body">
-                                <img src="/img/icon/afreeca.png" class="content-icon afreeca">
-                                <img src="/img/icon/chzzk.png" class="content-icon chzzk">
-                                <img src="/img/icon/youtube.png" class="content-icon youtube">
-                                <img src="/img/icon/instagram.svg" class="content-icon">
+            $(document).ready(function() {
+                // 페이지 로드 시 실행될 내용
+                $.ajax({
+                    url: "/page/mainlist", // 데이터를 가져올 URL
+                    type: "GET",
+                    dataType: "json", // 반환되는 데이터 형식
+                    success: function(response) {
+                        // 성공적으로 데이터를 가져왔을 때 실행되는 함수
+                        const cards = response; // 서버로부터 받은 데이터
+
+                        // 이후의 처리를 여기에 구현
+                        // 예: 카드 생성, 캐러셀 업데이트 등
+                        const carouselInner = $('#carousel-inner');
+
+                        function createCard(cardData) {
+                            const content = cardData.content;
+                            console.log('헤이 이게 콘텐트야 ' + content);
+                            const categories = cardData.category1.split(',');
+                            const icon1 = categories.includes('afreeca') ? '<img src="/img/icon/afreeca.png" alt="아이콘1" class="content-icon">' : '';
+                            const icon2 = categories.includes('chzzk') ? '<img src="/img/icon/chzzk.png" alt="아이콘2" class="content-icon">' : '';
+                            const icon3 = categories.includes('youtube') ? '<img src="/img/icon/youtube.png" alt="아이콘3" class="content-icon">' : '';
+                            const icon4 = categories.includes('instagram') ? '<img src="/img/icon/instagram.png" alt="아이콘4" class="content-icon">' : '';
+
+                            const categories2 = cardData.category2.split(',');
+                            const musicBtn = categories2.includes('music') ? '<a href="#" class="btn btn-custom">#음악</a>' : '';
+                            const travelBtn = categories2.includes('travel') ? '<a href="#" class="btn btn-custom">#여행</a>' : '';
+                            const foodBtn = categories2.includes('food') ? '<a href="#" class="btn btn-custom">#음식</a>' : '';
+                            const gameBtn = categories2.includes('game') ? '<a href="#" class="btn btn-custom">#게임</a>' : '';
+                            const animalBtn = categories2.includes('animal') ? '<a href="#" class="btn btn-custom">#동물</a>' : '';
+                            const exerciseBtn = categories2.includes('workOut') ? '<a href="#" class="btn btn-custom">#운동</a>' : '';
+                            const fashionBtn = categories2.includes('fashion') ? '<a href="#" class="btn btn-custom">#패션</a>' : '';
+                            const asmrBtn = categories2.includes('asmr') ? '<a href="#" id="asmr-link" class="btn btn-custom">#ASMR</a>' : '';
+
+
+                            return `
+                            <div class="col-md-2 mb-4">
+                                <div class="card standard" ondblclick="animateCard(this)" data-no="${cardData.starNo}">
+                                    <div class="card custom-card" style="background-image: url('/file/img/${cardData.imgNo}');">
+                                        <span class="star">&#9733;</span> 
+                                        <div class="top-container">
+                                            <div class="left-content">
+                                                ${icon1}
+                                                ${icon2}
+                                                ${icon3}
+                                                ${icon4}
+                                            </div>
+                                            <div class="right-content" data-no="${cardData.starNo}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="overlay" style="background-image: url('/file/img/${cardData.imgNo}');"></div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <img src="/file/img/${cardData.userImgId}" alt="작성자 아이콘" class="author-icon">
+                                                ${cardData.title}
+                                            </h5>
+                                            <div class="card-text">${cardData.content}</div>
+                                            <div class="bottom-container">
+                                                <div class="field-links">
+                                                    ${musicBtn}
+                                                    ${travelBtn}
+                                                    ${foodBtn}
+                                                    ${gameBtn}
+                                                    ${animalBtn}
+                                                    ${exerciseBtn}
+                                                    ${fashionBtn}
+                                                    ${asmrBtn}
+                                                </div>
+                                                <div class="star-links">
+                                                    <i class="bi bi-star"></i>
+                                                    <span class="count">${cardData.views}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <h5 class="card-title">${cardData.title}</h5>
-                                <p class="card-text">${cardData.text}</p>
-                            </div>
-                            <div class="icon-container">
-                                <i class="fa-regular fa-thumbs-up icon"></i>
-                            </div>
-                        </div>
-                    </div>
-                    `;
-                }
-        
-                function createCarouselItem(cardsChunk, isActive = false) {
-                    const activeClass = isActive ? 'active' : '';
-                    return `
-                        <div class="carousel-item ${activeClass}">
-                            <div class="row mx-0">
-                                ${cardsChunk.map(createCard).join('')}
-                            </div>
-                        </div>
-                    `;
-                }
-        
-                function chunkArray(array, chunkSize) {
-                    const chunks = [];
-                    for (let i = 0; i < array.length; i += chunkSize) {
-                        chunks.push(array.slice(i, i + chunkSize));
+                            `;
+                        }
+
+
+                        function createCarouselItem(cardsChunk, isActive = false) {
+                            const activeClass = isActive ? 'active' : '';
+                            return `
+                                <div class="carousel-item ${activeClass}">
+                                    <div class="row mx-0">
+                                        ${cardsChunk.map(createCard).join('')}
+                                    </div>
+                                </div>
+                            `;
+                        }
+
+                        function chunkArray(array, chunkSize) {
+                            // 배열을 지정한 크기로 분할하는 로직
+                            const chunks = [];
+                            for (let i = 0; i < array.length; i += chunkSize) {
+                                chunks.push(array.slice(i, i + chunkSize));
+                            }
+                            return chunks;
+                        }
+
+                        // 서버에서 가져온 데이터로 카드 생성
+                        const cardChunks = chunkArray(cards, 6);
+                        cardChunks.forEach((chunk, index) => {
+                            const carouselItem = createCarouselItem(chunk, index === 0);
+                            carouselInner.append(carouselItem);
+                        });
+                  
+                        $('.card-text p span').css({
+                            'background-color': '',
+                            'color': '',
+                            'font-size': '',
+                            // 필요한 다른 스타일 속성들도 여기에 추가할 수 있습니다.
+                        });
+
+                    },
+                    error: function(xhr, status, error) {
+                        // 에러 발생 시 실행되는 함수
+                        console.error("Error:", error);
                     }
-                    return chunks;
-                }
-        
-                // 카드를 4개씩 묶음으로 나누기
-                const cardChunks = chunkArray(cards, 4);
-        
-                // 첫 번째 카드는 active 클래스를 추가하여 활성화
-                cardChunks.forEach((chunk, index) => {
-                    const carouselItem = createCarouselItem(chunk, index === 0);
-                    carouselInner.insertAdjacentHTML('beforeend', carouselItem);
                 });
+
+                        
+                    });
+
+            
+
+       
+            function animateCard(card) {
+                const star = card.querySelector('.star');
+                star.style.display = 'inline'; // 이모티콘 표시
+
+                const x = event.clientX - card.offsetLeft;
+                const y = event.clientY - card.offsetTop;
+                star.style.left = `${x}px`;
+                star.style.top = `${y}px`;
+
+                setTimeout(function() {
+                    star.style.display = 'none'; // 이모티콘 숨김
+                }, 500); // 0.5초 (애니메이션의 총 시간)
+
+                star.style.animation = 'burst 0.5s forwards'; // 애니메이션 시작
+            }
+
+            document.addEventListener('scroll', function() {
+                const bgImage = document.querySelector('.bg-image');
+                const scrolled = window.pageYOffset;
+                const parallaxSpeed = 0.7;
+                bgImage.style.backgroundPositionY = -(scrolled * parallaxSpeed) + 'px';
             });
+
+        // 인기 멤버 가져오기
+        $(document).ready(function() {
+        // 페이지 로드시 AJAX 요청을 보내어 데이터를 가져옴
+            $.ajax({
+                url: "/page/starMember",
+                method: "GET",
+                dataType: "json",
+                success: function(data) {
+                    // 가져온 데이터를 처리하여 HTML로 동적으로 생성하여 삽입
+                    $.each(data, function(index, member) {
+                        const categories2 = member.category2.split(',');
+                        const musicBtn = categories2.includes('music') ? '<a href="#" class="btn btn-custom">#음악</a>' : '';
+                        const travelBtn = categories2.includes('travel') ? '<a href="#" class="btn btn-custom">#여행</a>' : '';
+                        const foodBtn = categories2.includes('food') ? '<a href="#" class="btn btn-custom">#음식</a>' : '';
+                        const gameBtn = categories2.includes('game') ? '<a href="#" class="btn btn-custom">#게임</a>' : '';
+                        const animalBtn = categories2.includes('animal') ? '<a href="#" class="btn btn-custom">#동물</a>' : '';
+                        const exerciseBtn = categories2.includes('workOut') ? '<a href="#" class="btn btn-custom">#운동</a>' : '';
+                        const fashionBtn = categories2.includes('fashion') ? '<a href="#" class="btn btn-custom">#패션</a>' : '';
+                        const asmrBtn = categories2.includes('asmr') ? '<a href="#" id="asmr-link" class="btn btn-custom">#ASMR</a>' : '';
+
+                        var memberHTML = '<div class="starmember">';
+                        memberHTML += '<img class="starmember-img" src="/file/img/' + member.userImgId + '" alt="스타 멤버 ' + (index + 1) + '">';
+                        memberHTML += '<span>' + member.writer + '</span>';
+                        memberHTML += musicBtn;
+                        memberHTML += travelBtn;
+                        memberHTML += foodBtn;
+                        memberHTML += gameBtn;
+                        memberHTML += animalBtn;
+                        memberHTML += exerciseBtn;
+                        memberHTML += fashionBtn;
+                        memberHTML += asmrBtn;
+                        memberHTML += '</div>';
+                        $('#starMemberList').append(memberHTML);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching star members:', error);
+                }
+            });
+        });
+
+        // 신인 가져오기
+        $(document).ready(function() {
+        // 페이지 로드시 AJAX 요청을 보내어 데이터를 가져옴
+            $.ajax({
+                url: "/page/newStarMember",
+                method: "GET",
+                dataType: "json",
+                success: function(data) {
+                    // 가져온 데이터를 처리하여 HTML로 동적으로 생성하여 삽입
+                    $.each(data, function(index, member) {
+                        const categories2 = member.category2.split(',');
+                        const musicBtn = categories2.includes('music') ? '<a href="/page/starCard/starList?option=music" class="btn btn-custom">#음악</a>' : '';
+                        const travelBtn = categories2.includes('travel') ? '<a href="/page/starCard/starList?option=travel" class="btn btn-custom">#여행</a>' : '';
+                        const foodBtn = categories2.includes('food') ? '<a href="/page/starCard/starList?option=food" class="btn btn-custom">#음식</a>' : '';
+                        const gameBtn = categories2.includes('game') ? '<a href="/page/starCard/starList?option=game" class="btn btn-custom">#게임</a>' : '';
+                        const animalBtn = categories2.includes('animal') ? '<a href="/page/starCard/starList?option=animal" class="btn btn-custom">#동물</a>' : '';
+                        const exerciseBtn = categories2.includes('workOut') ? '<a href="/page/starCard/starList?option=workout" class="btn btn-custom">#운동</a>' : '';
+                        const fashionBtn = categories2.includes('fashion') ? '<a href="/page/starCard/starList?option=fashion" class="btn btn-custom">#패션</a>' : '';
+                        const asmrBtn = categories2.includes('asmr') ? '<a href="/page/starCard/starList?option=asmr" id="asmr-link" class="btn btn-custom">#ASMR</a>' : '';
+
+                        var memberHTML = '<div class="starmember">';
+                        memberHTML += '<img class="starmember-img" src="/file/img/' + member.userImgId + '" alt="스타 멤버 ' + (index + 1) + '">';
+                        memberHTML += '<span>' + member.writer + '</span>';
+                        memberHTML += musicBtn;
+                        memberHTML += travelBtn;
+                        memberHTML += foodBtn;
+                        memberHTML += gameBtn;
+                        memberHTML += animalBtn;
+                        memberHTML += exerciseBtn;
+                        memberHTML += fashionBtn;
+                        memberHTML += asmrBtn;
+                        memberHTML += '</div>';
+                        $('#newStarMember').append(memberHTML);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching star members:', error);
+                }
+            });
+        });
+
+
+        $(document).ready(function () {
+            // 검색 버튼 클릭 이벤트
+            $('#btn-mainSearch').click(function () {
+                var keyword = $('#main-search').val(); // 입력된 검색어
+                // 검색 키워드를 인코딩하여 URL 생성
+                var encodedKeyword = encodeURIComponent(keyword);
+                var url = '/page/starCard/starList?type=starCard&keyword=' + encodedKeyword;
+                // 페이지 이동
+                window.location.href = url;
+            });
+
+            // 엔터키로 검색
+            $('#main-search').keypress(function (e) {
+                if (e.which == 13) { // 엔터키 코드
+                    $('#btn-mainSearch').click(); // 검색 버튼 클릭 이벤트 호출
+                }
+            });
+        });
+
+
+        // 카드 공유하기 이벤트
+        // $(document).on({
+        //     mouseenter: function(event) {
+        //         var cardNo = $(this).data('no'); // .right-content의 data-no 속성값 가져오기
+        //         var clipboardIcon = $('<i class="bi bi-clipboard2-plus-fill clipboard-icon"></i>'); // 새로운 클립보드 아이콘 생성
+        //         $(this).find('.bi-three-dots-vertical').hide(); // 기존 아이콘 숨기기
+        //         $(this).append(clipboardIcon); // 새로운 클립보드 아이콘 추가
+        //         clipboardIcon.data('cardNo', cardNo); // 클립보드 아이콘에 cardNo 속성 설정
+        //     },
+        //     mouseleave: function() {
+        //         $('.clipboard-icon').remove(); // 모든 클립보드 아이콘 제거
+        //         $(this).find('.bi-three-dots-vertical').show(); // 기존 아이콘 다시 보이기
+        //     }
+        // }, '.right-content');
+
+        // $(document).on('click', '.right-content', function(event) {
+        //     event.stopPropagation(); // 이벤트 전파 중지
+        //     var cardNo = $(this).find('.clipboard-icon').data('cardNo'); // 클립보드 아이콘의 cardNo 속성 가져오기
+        //     var textArea = document.createElement("textarea");
+        //     textArea.value = 'localHost:8080/page/starCard/starRead?starNo=' + cardNo;
+        //     document.body.appendChild(textArea);
+        //     textArea.select();
+        //     document.execCommand('copy');
+        //     document.body.removeChild(textArea);
+        //     alert('클립보드에 복사되었습니다.');
+        // });
+
+        // 카드 공유하기 이벤트
+$(document).on({
+    mouseenter: function(event) {
+    var cardNo = $(this).data('no'); // .right-content의 data-no 속성값 가져오기
+    console.log('Card No:', cardNo); // cardNo 값을 콘솔에 출력
+    var clipboardIcon = $('<i class="bi bi-clipboard2-plus-fill clipboard-icon"></i>'); // 새로운 클립보드 아이콘 생성
+    $(this).find('.bi-three-dots-vertical').hide(); // 기존 아이콘 숨기기
+    $(this).append(clipboardIcon); // 새로운 클립보드 아이콘 추가
+    $('.clipboard-icon').addClass('rotate-180');
+    clipboardIcon.data('cardNo', cardNo); // 클립보드 아이콘에 cardNo 속성 설정
+    console.log('Clipboard Icon:', clipboardIcon); // 클립보드 아이콘을 콘솔에 출력
+    },
+    mouseleave: function() {
+    $('.clipboard-icon').remove(); // 모든 클립보드 아이콘 제거
+    $(this).find('.bi-three-dots-vertical').show(); // 기존 아이콘 다시 보이기
+    }
+    }, '.right-content'); 
+
+$(document).on('click', '.right-content', function(event) {
+event.stopPropagation(); // 이벤트 전파 중지
+var cardNo = $(this).find('.clipboard-icon').data('cardNo'); // 클립보드 아이콘의 cardNo 속성 가져오기
+var textArea = document.createElement("textarea");
+textArea.value = 'localHost:8080/page/starCard/starRead?starNo=' + cardNo;
+document.body.appendChild(textArea);
+textArea.select();
+document.execCommand('copy');
+document.body.removeChild(textArea);
+alert('클립보드에 복사되었습니다.');
+});
+
+        // contentIcon1부터 contentIcon8까지의 클래스를 가진 요소를 클릭했을 때의 이벤트 핸들러
+for (let i = 1; i <= 8; i++) {
+    $(document).on('click', `.contentIcon${i}`, function(event) {
+        handleContentIconClick(this);
+    });
+}
+
+function handleContentIconClick(element) {
+    event.preventDefault(); // 기본 동작 방지
+
+    const category = $(element).data('category'); // 해당 contentIcon의 data-category 값(category) 가져오기
+    console.log('Clicked category:', category);
+
+    // 페이지 이동을 위한 URL 생성
+    const encodeCategory = encodeURIComponent(category);
+    const url = `/page/starCard/starList?option=${encodeCategory}`;
+
+    // 페이지 이동
+    window.location.href = url;
+}
+
+$(document).ready(function() {
+    $('.btn-custom').on('click', function(event) {
+        event.stopPropagation();  // 다른 이벤트가 발생하지 않도록 막음
+        // 여기서 기본 동작을 수행할 수 있지만, 이 경우에 필요하지 않음
+    });
+});
+
+
         </script>
-   
-    </div>
+
 </body>
-
-
-
 
 </html>
