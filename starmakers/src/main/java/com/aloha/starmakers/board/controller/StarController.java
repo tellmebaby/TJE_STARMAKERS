@@ -458,6 +458,9 @@ public class StarController {
         model.addAttribute("page", page);
         model.addAttribute("option", option);
         model.addAttribute("currentTime", LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        log.info("first Page: " + page.getFirst());
+        log.info("List Page: " + page.getLast());
+        log.info("Total : " + page.getTotal());
 
         List<Option> optionList = new ArrayList<Option>();
         optionList.add(new Option("제목+내용", 0));

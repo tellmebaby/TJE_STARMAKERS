@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.aloha.starmakers.board.dto.Option;
@@ -17,9 +16,6 @@ import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.QnaBoard;
 import com.aloha.starmakers.board.dto.Reply;
 import com.aloha.starmakers.board.dto.StarBoard;
-
-import com.aloha.starmakers.board.service.FileService;
-
 import com.aloha.starmakers.board.service.QnaService;
 import com.aloha.starmakers.board.service.ReplyService;
 import com.aloha.starmakers.board.service.StarService;
@@ -31,6 +27,7 @@ import com.aloha.starmakers.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -52,14 +49,10 @@ public class AdminController {
     private StarService starService;
 
     @Autowired
-    private FileService fileService;
-
-    @Autowired
     private QnaService qnaService;
 
     @Autowired
     private ReplyService replyService;
-
     
     @GetMapping("")
     public String getMethodName() {
@@ -104,7 +97,6 @@ public class AdminController {
         optionList.add(new Option("작성자", 3));
         model.addAttribute("optionList", optionList);
 
-        log.info("starList : " + starList);
         return "/admin/pages/mailbox";
     }
     
@@ -126,7 +118,6 @@ public class AdminController {
         optionList.add(new Option("작성자", 3));
         model.addAttribute("optionList", optionList);
 
-        log.info("starList : " + starList);
         return "/admin/pages/mailboxStar";
     }
 
@@ -148,7 +139,6 @@ public class AdminController {
         optionList.add(new Option("작성자", 3));
         model.addAttribute("optionList", optionList);
 
-        log.info("starList : " + starList);
         return "/admin/pages/mailboxEvent";
     }
 
@@ -170,7 +160,6 @@ public class AdminController {
         optionList.add(new Option("작성자", 3));
         model.addAttribute("optionList", optionList);
 
-        log.info("starList : " + starList);
         return "/admin/pages/mailboxReview";
     }
 
@@ -192,7 +181,6 @@ public class AdminController {
         optionList.add(new Option("작성자", 3));
         model.addAttribute("optionList", optionList);
 
-        log.info("starList : " + starList);
         return "/admin/pages/mailboxAn";
     }
 
@@ -215,10 +203,9 @@ public class AdminController {
 
         return "/admin/pages/mailboxQna";
     }
-  
     @GetMapping("/pages/profile")
-    public String userProfile(@RequestParam("userNo") int userNo,
-                               Model model, Page page, Option option) throws Exception {
+    public String userProfile(@RequestParam("userNo") int userNo
+                             ,Model model, Page page, Option option) throws Exception {
         // user 정보 가져오기
         Users user = userService.selectUserNo(userNo);
         model.addAttribute("user", user);
@@ -256,8 +243,6 @@ public class AdminController {
         } else {
             model.addAttribute("replyTotal", replyTotal);
         }
-
-
         return "/admin/pages/profile";
     }
 
@@ -274,6 +259,7 @@ public class AdminController {
             return "redirect:/admin/pages/profile?error";
     }
     
+    // 전체 게시판 삭제
     @PostMapping("/pages/mailbox/allDelete")
     public String allDelete(@RequestParam("starNos") String starNos, @RequestParam("page") String page) throws Exception {
        
@@ -288,6 +274,7 @@ public class AdminController {
         return "redirect:/admin/pages/" + page;  // 삭제 실패시에도 같은 페이지로 리디렉션
     }
     
+    // Q&A 게시판 
     @PostMapping("/pages/mailbox/qnaDelete")
     public String qnaDelete(@RequestParam("qnaNos") String qnaNos) throws Exception {
        
@@ -299,6 +286,7 @@ public class AdminController {
         } 
         return "redirect:/admin/pages/mailboxQna";  // 삭제 실패시에도 같은 페이지로 리디렉션
     }
+    
     
     
     
