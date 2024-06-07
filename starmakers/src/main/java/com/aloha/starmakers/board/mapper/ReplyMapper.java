@@ -35,5 +35,6 @@ public interface ReplyMapper {
     // 댓글 개수 조회 메서드 추가
     int countByStarNo(@Param("starNo") int starNo) throws Exception;
 
-
+    // 회원별 댓글 조회
+    public List<Reply> selectUser(int userNo) throws Exception;
 }

@@ -47,9 +47,9 @@ public class PayServiceImpl implements PayService {
      * 관리자 회원 결제 조회
      */
     @Override
-    public int totalPrice(int userNo) throws Exception {
+    public Pay totalPrice(int userNo) throws Exception {
 
-       int totalPrice = payMapper.totalPrice(userNo);
+       Pay totalPrice = payMapper.totalPrice(userNo);
        return totalPrice;
         
         

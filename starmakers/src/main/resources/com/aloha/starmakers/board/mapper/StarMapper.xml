@@ -6,7 +6,6 @@
 <mapper namespace="com.aloha.starmakers.board.mapper.StarMapper">
 
     <!-- 게시판 목록 -->
-    <!-- 게시판 목록 -->
     <select id="list" resultType="StarBoard">
         SELECT s.*, file_no as imgNo
         FROM star_board s 
@@ -137,7 +136,13 @@
     <select id="count" resultType="int">
         SELECT COUNT(*)
         FROM star_board
-        WHERE type = #{type}
+         WHERE 
+        <if test="type != null">
+            type = #{type}
+        </if>
+        <if test="type == null">
+            1 = 1
+        </if>
         <if test="option != null and option.keyword != null and option.keyword != ''">
             AND
             <if test="option.code == 0">

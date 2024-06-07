@@ -31,4 +31,6 @@ public interface ReplyService {
     // 댓글 개수 조회
     int countByStarNo(int starNo) throws Exception;
 
+    // 회원별 댓글 조회
+    public List<Reply> selectUser(int userNo) throws Exception;
 }
