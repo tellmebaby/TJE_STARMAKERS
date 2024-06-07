@@ -9,13 +9,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.QnaBoard;
 import com.aloha.starmakers.board.dto.StarBoard;
+
+import com.aloha.starmakers.board.service.FileService;
+
 import com.aloha.starmakers.board.service.QnaService;
+
 import com.aloha.starmakers.board.service.StarService;
 import com.aloha.starmakers.pay.service.PayService;
 import com.aloha.starmakers.user.dto.Users;
@@ -43,7 +48,11 @@ public class AdminController {
     private StarService starService;
 
     @Autowired
+    private FileService fileService;
+
+    @Autowired
     private QnaService qnaService;
+
     
     @GetMapping("")
     public String getMethodName() {
@@ -199,12 +208,45 @@ public class AdminController {
 
         return "/admin/pages/mailboxQna";
     }
+  
     @GetMapping("/pages/profile")
     public String userProfile(@RequestParam("userNo") int userNo,
                                Model model) throws Exception {
+        // user 정보 가져오기
         Users user = userService.selectUserNo(userNo);
         model.addAttribute("user", user);
+        
+        // 프로필 이미지 가져오기
+        int fileNo = fileService.profileSelect(userNo);
+        model.addAttribute("fileNo", fileNo);
+
         return "/admin/pages/profile";
+    }
+
+    @PostMapping("/pages/mailbox/allDelete")
+    public String allDelete(@RequestParam("starNos") String starNos, @RequestParam("page") String page) throws Exception {
+       
+        int result = 0;
+
+
+        result = starService.delete(starNos);
+
+        if (result > 0) {
+            return "redirect:/admin/pages/" + page;
+        } 
+        return "redirect:/admin/pages/" + page;  // 삭제 실패시에도 같은 페이지로 리디렉션
+    }
+    
+    @PostMapping("/pages/mailbox/qnaDelete")
+    public String qnaDelete(@RequestParam("qnaNos") String qnaNos) throws Exception {
+       
+        int result = 0;
+        result = qnaService.delete(qnaNos);
+
+        if (result > 0) {
+            return "redirect:/admin/pages/mailboxQna";
+        } 
+        return "redirect:/admin/pages/mailboxQna";  // 삭제 실패시에도 같은 페이지로 리디렉션
     }
     
     

@@ -84,6 +84,8 @@
             console.log(rereplyContainer)
             rereplyContainer.classList.toggle('visible');
         }
+
+        
         
 
         // 댓글 목록 요청
@@ -124,6 +126,11 @@
         function insertReply() {
             let $content = document.getElementById('reply-content')
             let content = $content.value
+
+            if (content === "") {
+                alert("내용을 입력해주세요.");
+                return;
+            }
             let username = document.getElementById('username').value
             console.log(username)
             let data = {
@@ -216,6 +223,11 @@
             let writer = document.getElementById('update-writer').value
             let content = document.getElementById('update-reply').value
 
+            if (content === "") {
+                alert("내용을 입력해주세요.");
+                return;
+            }
+
             console.log(`수정한 작성자 : ${writer}`)
             console.log(`수정한 내용 :  ${content}`)
 
@@ -302,6 +314,7 @@
             // 답글 작성 UI
             let $editor = document.createElement('div')
             $editor.classList.add('rereply-container')
+            
             // $editor.classList.add('rereply-box')
             $editor.id = 'answer'
 
@@ -356,6 +369,11 @@
 
             let writer = $writer.value
             let content = $content.value
+            
+            if (content === "") {
+                alert("내용을 입력해주세요.");
+                return;
+            }
 
             let username = document.getElementById('username').value
 
@@ -383,6 +401,7 @@
 
                 // 요청 성공 시,
                 if(request.readyState == request.DONE && request.status == 201) {
+                    
                     console.log('답글 등록 성공!');
                     let response = request.responseText
                     if(response == 'SUCCESS') {

@@ -40,11 +40,10 @@
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <img alt="" style="width: 100%; ">
-                  <img id="uploadedImage" class="profile-user-img img-fluid img-circle"
-                       src="/admin/dist/img/user4-128x128.jpg"
-                       alt="User profile picture">
-                       <!-- th:src="|/file/img/${file.fileNo}|" -->
+                  <img id="uploadedImage" style="width: 128px; height: 128px;" class="profile-user-img img-fluid img-circle"
+                  th:src="|/file/img/${fileNo}|"
+                  alt="User profile picture">
+                  <!-- src="/admin/dist/img/user4-128x128.jpg" -->
                 </div>
 
                 <p class="profile-username text-center" th:text="${user.name}"></p>
