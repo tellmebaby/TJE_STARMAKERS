@@ -111,7 +111,7 @@
                 <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
                 </button>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm" onclick="allDelete()">
+                  <button type="button" class="btn btn-default btn-sm">
                     <i class="far fa-trash-alt"></i>
                   </button>
                   <button type="button" class="btn btn-default btn-sm">
@@ -153,8 +153,9 @@
                   <tbody> 
                   <tr th:each="StarBoard : ${starList}">
                     <td>
-                      <div>
-                        <input type="checkbox" id="starNo" name="starNo" th:value="${StarBoard.starNo}">
+                      <div class="icheck-primary">
+                        <input type="checkbox" value="" id="check15">
+                        <label for="check15"></label>
                       </div>
                     </td>
                     <td class="mailbox-star" th:text="${StarBoard.starNo}"></td>
@@ -178,7 +179,7 @@
                   <i class="far fa-square"></i>
                 </button>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm" onclick="allDelete()">
+                  <button type="button" class="btn btn-default btn-sm">
                     <i class="far fa-trash-alt"></i>
                   </button>
                   <button type="button" class="btn btn-default btn-sm">
@@ -272,25 +273,6 @@
       }
     })
   })
-
-  function allDelete() {
-                const checkboxes = document.querySelectorAll('input[name="qnaNo"]:checked');
-            if (checkboxes.length === 0) {
-                alert('하나 이상의 게시물을 선택하십시오.');
-                return;
-            }
-            
-            const confirmDelete = confirm('선택한 게시물을 삭제하시겠습니까?');
-            if (!confirmDelete) {
-                return;
-            }
-                
-            const qnaNos = Array.from(checkboxes).map(checkbox => checkbox.value);
-            const form = document.getElementById('actionForm');
-            form.action = '/page/board/qnaBoard/qnaDelete';
-            form.qnaNos.value = qnaNos.join(',');
-            form.submit();
-        }
 </script>
 </body>
 </html>
