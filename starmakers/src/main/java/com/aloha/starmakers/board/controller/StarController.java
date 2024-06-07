@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.aloha.starmakers.board.dto.Files;
@@ -29,8 +31,13 @@ import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.board.service.LikeService;
 import com.aloha.starmakers.board.service.ReplyService;
 import com.aloha.starmakers.board.service.StarService;
+import com.aloha.starmakers.user.dto.StarUser;
 import com.aloha.starmakers.user.dto.Users;
+
+import com.aloha.starmakers.user.service.UserService;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,7 +58,11 @@ public class StarController {
     private LikeService likeService;
 
     @Autowired
+
+    private UserService userService;
+
     private ReplyService replyService;
+
 
   
 
@@ -130,11 +141,61 @@ public class StarController {
         return "redirect:/page/starCard/starInsert?no=" + no + "&error";
     }
 
-    // 초기화면 설정
+
     @GetMapping("/starCard/starList")
-    public String cardList() throws Exception {
+
+    public String cardList(
+        @RequestParam(value = "type", defaultValue = "starCard") String type,
+        @RequestParam(value = "keyword", required = false) String keyword,
+        @RequestParam Map<String, String> params, // 모든 요청 파라미터를 받아오기 위한 Map
+        Model model, 
+        Page page, 
+        HttpSession session,
+        Option option
+    ) throws Exception {
+
+        Users user = (Users) session.getAttribute("user");
+        List<StarBoard> starList = null;
+        page.setRows(12);
+
+        // URL 파라미터로 받은 옵션 값 설정
+        params.forEach((key, value) -> {
+            if (value.equals("true")) {
+                option.setCategory(key, true);
+            }
+        });
+
+        // 키워드가 있을 경우 검색 조건에 추가
+        if (keyword != null && !keyword.isEmpty()) {
+            log.info("::::::::::검색어 들어왔다 " + keyword);
+            option.setKeyword(keyword);
+        }
+
+        if (user != null) {
+            int userNo = user.getUserNo();
+            starList = starService.list(type, page, option, userNo);
+        } else {
+            starList = starService.list(type, page, option);
+        }
+
+        starList.forEach(star -> {
+            if (star.getCategory1() != null) {
+                List<String> icons = Arrays.stream(star.getCategory1().split(","))
+                        .collect(Collectors.toList());
+                star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
+            }
+        });
+
+        model.addAttribute("starList", starList);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
+
+
         return "/page/starCard/starList";
     }
+
+
+
 
     // 추가 화면 설정
     @GetMapping("/starCard/starList/api")
@@ -152,6 +213,7 @@ public class StarController {
             int userNo = user.getUserNo();
             starList = starService.list(type, page, option, userNo);
         } else {
+            log.info("::::::::::찾았다 요놈!");
             starList = starService.list(type, page, option);
         }
 
@@ -662,4 +724,25 @@ public class StarController {
     }
     
 
+    
+    @GetMapping("/mainlist")
+    @ResponseBody
+    public List<StarBoard> getMainStarList() throws Exception  {
+            String type = "starCard";
+        return starService.mainCardList(type);
+    }
+
+    @GetMapping("/starMember")
+    @ResponseBody
+    public List<StarUser> starMember() throws Exception{
+        return userService.starMemberList();
+    }
+    
+    @GetMapping("/newStarMember")
+    @ResponseBody
+    public List<StarUser> newStarMember() throws Exception{
+        return userService.newMemberList();
+    }
+
+    
 }

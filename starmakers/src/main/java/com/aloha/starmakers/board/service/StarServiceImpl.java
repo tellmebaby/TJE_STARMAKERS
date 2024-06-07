@@ -31,6 +31,7 @@ public class StarServiceImpl implements StarService {
      */
     @Override
     public List<StarBoard> list(String type, Page page, Option option) throws Exception {
+        log.info(":::여기는 서비스 옵션값을 볼까? " + option.getKeyword());
         int total = starMapper.count(option, type);
         page.setTotal(total);
         List<StarBoard> starList = starMapper.list(type, page, option);
@@ -130,6 +131,16 @@ public class StarServiceImpl implements StarService {
         return starList;
     }
 
+
+    /**
+     * 새 메인 카드리스트 요청
+     */
+    @Override
+    public List<StarBoard> mainCardList(String type) throws Exception {
+        List<StarBoard> starList = starMapper.mainCardList(type);
+        return starList;
+    }
+
     @Override
     public List<StarBoard> promotionList(int userNo, Page page, Option option) throws Exception {
 
@@ -143,6 +154,6 @@ public class StarServiceImpl implements StarService {
 
 
 
-    
+
  
 }

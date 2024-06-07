@@ -45,4 +45,58 @@ public class Option {
         this.codeName = codeName;
         this.code = code;
     }
+
+     // 카테고리 필드를 설정하는 메서드
+     public void setCategory(String category, boolean value) {
+        switch (category.toLowerCase()) {
+            case "eventongoing":
+                this.eventOngoing = value;
+                break;
+            case "eventexpired":
+                this.eventExpired = value;
+                break;
+            case "eventupcoming":
+                this.eventUpcoming = value;
+                break;
+            case "instagram":
+                this.instagram = value;
+                break;
+            case "youtube":
+                this.youtube = value;
+                break;
+            case "chzzk":
+                this.chzzk = value;
+                break;
+            case "afreeca":
+                this.afreeca = value;
+                break;
+            case "food":
+                this.food = value;
+                break;
+            case "travel":
+                this.travel = value;
+                break;
+            case "game":
+                this.game = value;
+                break;
+            case "music":
+                this.music = value;
+                break;
+            case "animal":
+                this.animal = value;
+                break;
+            case "workout":
+                this.workOut = value;
+                break;
+            case "asmr":
+                this.asmr = value;
+                break;
+            case "fashion":
+                this.fashion = value;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown category: " + category);
+        }
+    }
 }
+

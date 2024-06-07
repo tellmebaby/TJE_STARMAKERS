@@ -6,251 +6,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index Page</title>
-    <link rel="stylesheet" href="/css/card.css" class="css">
-
+    <link href="/css/starCard.css" rel="stylesheet" class="css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(241, 241, 242);
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
 </head>
 
 
-<body>
-    <div layout:fragment="content">
+    <body layout:fragment="content">
         <div class="container">
-            <form id="searchForm">
-                <div class="search-title d-flex justify-content-between mt-3">
-                    <span>상세검색</span>
-                    <div class="col-4 d-flex justify-content-end">
-                        <a href="starCalendar" class="btn btn-primary col-4 me-1">캘린더보기</a>
-                        <a href="starInsert" class="btn btn-primary col-4 me-1">등록하기</a>
-                    </div>
-                </div>
-                <div class="detail-search mb-3">
-                    <div class="row d-flex align-items-center mb-3">
-                        <div class="col-md-12 d-flex align-items-center">
-                            <h5>상태</h5>
-                            <div class="form-check form-check-inline ms-4">
-                                <input class="form-check-input" type="checkbox" value="" id="eventOngoing" checked>
-                                <label class="form-check-label" for="eventOngoing">
-                                    진행중인 이벤트
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="eventExpired">
-                                <label class="form-check-label" for="eventExpired">
-                                    만료된 이벤트
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="eventUpcoming">
-                                <label class="form-check-label" for="eventUpcoming">
-                                    진행예정 이벤트
-                                </label>
-                            </div>
+                <div class="starList-detail">
+                    <div class="items-eventType">
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="eventOngoing">
+                            <label for="eventOngoing">진행</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="eventExpired">
+                            <label for="eventExpired">종료</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="eventUpcoming">
+                            <label for="eventUpcoming">예정</label>
                         </div>
                     </div>
-
-                    <div class="row d-flex align-items-center mb-3">
-                        <div class="col-md-12 d-flex align-items-center">
-                            <h5>채널</h5>
-                            <div class="form-check form-check-inline ms-4">
-                                <input class="form-check-input" type="checkbox" value="" id="instagram">
-                                <label class="form-check-label" for="instagram">
-                                    인스타그램
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="youtube">
-                                <label class="form-check-label" for="youtube">
-                                    유튜브
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="chzzk">
-                                <label class="form-check-label" for="chzzk">
-                                    치지직
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="afreeca">
-                                <label class="form-check-label" for="afreeca">
-                                    아프리카
-                                </label>
-                            </div>
+                    <div class="items-category1">
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="instagram">
+                            <i class="bi bi-instagram"></i>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="youtube">
+                            <i class="bi bi-youtube"></i>
+                        </div>
+                        <div class="type-sub" id="type-chzzk">
+                            <input class="hide-check" type="checkbox" value="" id="chzzk">
+                            <img src="/img/icon/chzzkLight_logo.gif" alt="치지지로고">
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="afreeca">
+                            <img src="/img/icon/afreeca_logo.svg" alt="아프리카로고">
                         </div>
                     </div>
-
-                    <div class="row d-flex align-items-center">
-                        <div class="col-md-12 d-flex align-items-center">
-                            <h5>분야</h5>
-                            <div class="form-check form-check-inline ms-4">
-                                <input class="form-check-input" type="checkbox" value="" id="food">
-                                <label class="form-check-label" for="food">
-                                    음식
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="travel">
-                                <label class="form-check-label" for="travel">
-                                    여행
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="game">
-                                <label class="form-check-label" for="game">
-                                    게임
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="music">
-                                <label class="form-check-label" for="music">
-                                    음악
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="animal">
-                                <label class="form-check-label" for="animal">
-                                    동물
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="workOut">
-                                <label class="form-check-label" for="workOut">
-                                    운동
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="asmr">
-                                <label class="form-check-label" for="asmr">
-                                    ASMR
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="" id="fashion">
-                                <label class="form-check-label" for="fashion">
-                                    패션
-                                </label>
-                            </div>
+                    <div class="items-category2">
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="food">
+                            <label for="food">음식</label>
                         </div>
-                    </div>
-
-
-                    <div class="row mt-3">
-                        <div class="col-md-12 d-flex align-items-center">
-                            <input type="text" class="form-control me-2" id="searchInput" placeholder="검색 키워드 입력" th:value="${param.txt}">
-                            <button type="submit" class="btn btn-primary col-2">검색</button>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="travel">
+                            <label for="travel">여행</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="game">
+                            <label for="game">게임</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="music">
+                            <label for="music">음악</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="animal">
+                            <label for="animal">동물</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="workOut">
+                            <label for="workOut">운동</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="asmr">
+                            <label for="asmr">ASMR</label>
+                        </div>
+                        <div class="type-sub">
+                            <input class="hide-check" type="checkbox" value="" id="fashion">
+                            <label for="fashion">패션</label>
                         </div>
                     </div>
                 </div>
-            </form>
-
-
-            <div id="promotionCarousel" class="carousel">
-                <div class="row mx-0 mb-5" id="starList">
-
+                <div class="container-starSearch">
+                    <div class="sub-searchInput">
+                        <i id="icon-inSearchBar" class="bi bi-search"></i>
+                        <form id="searchForm">
+                            <input type="text" class="search-bar_input" id="searchInput" placeholder="검색" th:value="${param.txt}">
+                        </form>
+                    </div>
+                    <div class="sub-btn-calendar">
+                        <a href="starCalendar.html" class="btn-starCalendar"><i class="bi bi-calendar-week"></i></a>
+                    </div>
+                    <!-- 비로그인시 -->
+                    <th:block sec:authorize="isAnonymous()"></th:block>
+                    <!-- 로그인시 -->
+                    <th:block sec:authorize="isAuthenticated()">
+                        <div class="sub-btn-insertCard">
+                            <a href="starInsert.html" class="btn-starInsert"><i class="bi bi-pen"></i></a>
+                        </div>
+                    </th:block>
                 </div>
-
-            </div>
-
-
-            <script>
-                $(document).ready(function () {
-                    let page = 0;
-                    const type = 'starCard';
-                    let isLoading = false;
-
-                    function loadMoreCards(resetPage = false) {
-                        if (isLoading) return;
-                        isLoading = true;
-
-                        if (resetPage) page = 0;
-                        page += 1;
-
-                        $.ajax({
-                            url: `/page/starCard/starList/api`,
-                            method: 'GET',
-                            data: {
-                                type: type,
-                                page: page,
-                                eventOngoing: $('#eventOngoing').is(':checked'),
-                                eventExpired: $('#eventExpired').is(':checked'),
-                                eventUpcoming: $('#eventUpcoming').is(':checked'),
-                                instagram: $('#instagram').is(':checked'),
-                                youtube: $('#youtube').is(':checked'),
-                                chzzk: $('#chzzk').is(':checked'),
-                                afreeca: $('#afreeca').is(':checked'),
-                                food: $('#food').is(':checked'),
-                                travel: $('#travel').is(':checked'),
-                                game: $('#game').is(':checked'),
-                                music: $('#music').is(':checked'),
-                                animal: $('#animal').is(':checked'),
-                                workOut: $('#workOut').is(':checked'),
-                                asmr: $('#asmr').is(':checked'),
-                                fashion: $('#fashion').is(':checked'),
-                                keyword: $('#searchInput').val()
-                            },
-                            success: function (data) {
-                                if (resetPage) $('#starList').empty();
-
-                                data.forEach(star => {
-                                    const cardHtml = `
-                                        <div class="col-lg-3 p-0">
-                                            <div class="card ${star.card === '유료홍보' ? 'effect' : ''}" data-no="${star.starNo}">
-                                                ${star.card === '유료홍보' ? '<div class="card-overlay"></div>' : ''}
-                                                <img src="/file/img/${star.imgNo}" class="card-img-top" alt="${star.title}">
-                                                <div class="icon-body">
-                                                    ${star.icons.map(icon => `<img src="/img/icon/${icon}.png" class="content-icon ${icon}">`).join('')}
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title">${star.title}</h5>
-                                                    <p class="card-text">${star.writer}</p>
-                                                </div>
-                                                <div class="icon-container">
-                                                    <i class="fa-thumbs-up icon ${star.likes_chk ? 'fa-solid' : 'fa-regular'}"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    `;
-                                    $('#starList').append(cardHtml);
-                                });
-                                isLoading = false;
-                            },
-                            error: function () {
-                                console.error("Failed to load more cards.");
-                                isLoading = false;
-                            }
-                        });
-                    }
-
-
-                    // 초기 카드 로드
-                    loadMoreCards();
-
-                    // 스크롤 이벤트
-                    $(window).scroll(function () {
-                        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                            loadMoreCards();
-                        }
-                    });
-
-                    // 검색 폼 제출 이벤트
-                    $('#searchForm').submit(function (event) {
-                        event.preventDefault();
-                        loadMoreCards(true);
-                    });
-
-                    // 체크박스 변경 이벤트
-                    $('input[type="checkbox"]').change(function () {
-                        loadMoreCards(true);
-                    });
-
-
-                });
-
-            </script>
-
-
-
-
+                <div class="container-typeTitle"><span class="typeTileText"></span></div>
+                <div id="promotionCarousel" class="carousel">
+                    <div class="row row-cols-2 row-cols-lg-6" id="starList"></div>
+                </div>
 
         </div>
-</body>
+
+        <script src="/js/starList.js"></script>
+    </body>
 
 </html>

@@ -6,11 +6,13 @@
 <mapper namespace="com.aloha.starmakers.board.mapper.StarMapper">
 
     <!-- 게시판 목록 -->
+    <!-- 게시판 목록 -->
     <select id="list" resultType="StarBoard">
         SELECT s.*, file_no as imgNo
         FROM star_board s 
         left join file f
         ON f.star_no=s.star_no 
+
         WHERE 
         <if test="type != null">
             type = #{type}
@@ -18,6 +20,7 @@
         <if test="type == null">
             1 = 1
         </if>
+
         <if test="option.keyword != null and option.keyword != ''">
             AND
             <if test="option.code == 0">
@@ -106,6 +109,28 @@
 
         ORDER BY star_no DESC
         LIMIT #{page.index}, #{page.rows}
+    </select>
+
+    <!-- 새 메인 카드 리스트 요청 -->
+    <select id="mainCardList" resultType="StarBoard">
+    SELECT 
+    s.*,
+    f.file_no AS imgNo,
+    (
+        SELECT file_no 
+        FROM file f2 
+        WHERE f2.user_no = s.user_no AND f2.star_no = 0 
+        ORDER BY f2.reg_date DESC 
+        LIMIT 1
+    ) AS userImgId
+    FROM 
+        star_board s
+    LEFT JOIN 
+        file f ON f.star_no = s.star_no
+    WHERE 
+        s.type = #{type}
+    ORDER BY 
+        s.reg_date DESC;
     </select>
 
       <!-- 데이터 개수 조회 - [검색] -->
