@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.aloha.starmakers.board.dto.Files;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.QnaBoard;
@@ -224,8 +225,25 @@ public class AdminController {
         model.addAttribute("user", user);
         
         // 프로필 이미지 가져오기
-        int fileNo = fileService.profileSelect(userNo);
-        model.addAttribute("fileNo", fileNo);
+        // int fileNo = fileService.profileSelect(userNo);
+        // model.addAttribute("fileNo", fileNo);
+
+        //
+        Integer fileNo = fileService.profileSelect(userNo);
+        if( fileNo > 0 ){
+            Files file = fileService.select(fileNo);
+            model.addAttribute("file", file);
+            log.info("file : " + file);
+
+        } else {
+            Files file = new Files();
+            file.setFileNo(0);
+            model.addAttribute("file", file);
+        }
+
+        // model.addAttribute("user", user);
+        // return "page/mypage/profile";
+        //
 
         // 결제 금액 가져오기
         Pay pay = payService.totalPrice(userNo);
