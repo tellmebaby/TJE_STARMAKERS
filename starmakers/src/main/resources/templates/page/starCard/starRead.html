@@ -176,6 +176,11 @@
     function insertReply() {
       let $content = document.getElementById('reply-content')
       let content = $content.value
+
+      if (content === "") {
+                alert("내용을 입력해주세요.");
+                return;
+            }
       let username = document.getElementById('username').value
       console.log(username)
       let data = {
@@ -406,6 +411,11 @@
 
       let writer = $writer.value
       let content = $content.value
+
+      if (content === "") {
+                alert("내용을 입력해주세요.");
+                return;
+            }
 
       let username = document.getElementById('username').value
 
