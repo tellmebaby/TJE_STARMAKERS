@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.aloha.starmakers.board.dto.Option;
@@ -220,6 +221,32 @@ public class AdminController {
         model.addAttribute("fileNo", fileNo);
 
         return "/admin/pages/profile";
+    }
+
+    @PostMapping("/pages/mailbox/allDelete")
+    public String allDelete(@RequestParam("starNos") String starNos, @RequestParam("page") String page) throws Exception {
+       
+        int result = 0;
+
+
+        result = starService.delete(starNos);
+
+        if (result > 0) {
+            return "redirect:/admin/pages/" + page;
+        } 
+        return "redirect:/admin/pages/" + page;  // 삭제 실패시에도 같은 페이지로 리디렉션
+    }
+    
+    @PostMapping("/pages/mailbox/qnaDelete")
+    public String qnaDelete(@RequestParam("qnaNos") String qnaNos) throws Exception {
+       
+        int result = 0;
+        result = qnaService.delete(qnaNos);
+
+        if (result > 0) {
+            return "redirect:/admin/pages/mailboxQna";
+        } 
+        return "redirect:/admin/pages/mailboxQna";  // 삭제 실패시에도 같은 페이지로 리디렉션
     }
     
     
