@@ -30,4 +30,5 @@ public class Users {
 
     // 권한 
     private String auth;
+    private boolean isBlack;
 }

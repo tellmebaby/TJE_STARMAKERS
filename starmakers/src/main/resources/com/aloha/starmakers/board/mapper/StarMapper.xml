@@ -35,6 +35,9 @@
             <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
             </if>
+            <if test="option.code == 4">
+                s.user_no IN (${option.keyword})
+            </if>
         </if>
 
          <!-- 플랫폼 필터 -->
@@ -158,6 +161,9 @@
             <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
             </if>
+            <if test="option.code == 4">
+                user_no =#{option.keyword}
+            </if>
         </if> 
     </select>
 
@@ -180,6 +186,9 @@
             </if>
             <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
+            </if>
+            <if test="option.code == 4">
+                user_no =#{option.keyword}
             </if>
 
         </if>

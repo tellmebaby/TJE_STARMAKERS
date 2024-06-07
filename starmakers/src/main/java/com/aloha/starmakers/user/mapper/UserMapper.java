@@ -31,6 +31,9 @@ public interface UserMapper {
     // 회원 수정
     public int update(Users user) throws Exception;
 
+    // 회원 권한 수정
+    public int authUpdate(Users user) throws Exception;
+    
     // 회원 탈퇴
     public int delete(Users user) throws Exception;
 

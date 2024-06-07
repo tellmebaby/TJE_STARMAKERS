@@ -24,6 +24,7 @@ import com.aloha.starmakers.board.service.ReplyService;
 import com.aloha.starmakers.board.service.StarService;
 import com.aloha.starmakers.pay.dto.Pay;
 import com.aloha.starmakers.pay.service.PayService;
+import com.aloha.starmakers.user.dto.UserAuth;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.service.UserService;
 
@@ -71,7 +72,6 @@ public class AdminController {
 
         List<Users> userList = userService.list();
         
-        
         // int pay = payService.totalPrice(userNo);
 
         model.addAttribute("userList", userList);
@@ -97,6 +97,7 @@ public class AdminController {
         optionList.add(new Option("제목", 1));
         optionList.add(new Option("내용", 2));
         optionList.add(new Option("작성자", 3));
+        optionList.add(new Option("회원번호", 4));
         model.addAttribute("optionList", optionList);
 
         return "/admin/pages/mailbox";
@@ -210,7 +211,22 @@ public class AdminController {
                              ,Model model, Page page, Option option) throws Exception {
         // user 정보 가져오기
         Users user = userService.selectUserNo(userNo);
+        List<UserAuth> authList = user.getAuthList();
+        String userAuth = "";
+        for (int i = 0; i < authList.size(); i++) {
+            String auth = authList.get(i).getAuth();
+            if(auth.equals("ROLE_GUEST")) {
+                user.setBlack(true);
+            }
+            userAuth += auth;
+            if( i+1 < authList.size() ) {
+                userAuth += ", ";
+            }
+        }
+        user.setAuth(userAuth);
         model.addAttribute("user", user);
+
+
         
         // 프로필 이미지 가져오기
         // int fileNo = fileService.profileSelect(userNo);
@@ -270,6 +286,16 @@ public class AdminController {
             int result = userService.update(user);
             log.info("수정 : " + user);
             int userNo = user.getUserNo();
+            String email = user.getEmail();
+            String auth = user.getAuth();
+            log.info("auth"+auth);
+            if(auth != null){
+                user.setAuth("ROLE_GUEST");
+            } else {
+                user.setAuth("ROLE_USER");
+                }
+            int result2 = userService.authUpdate(user);
+            log.info("회원 권한 수정 성공 : " + result2);
             if(result > 0){
                 log.info("수정성공");
                 return "redirect:/admin/pages/profile?userNo=" + userNo;
