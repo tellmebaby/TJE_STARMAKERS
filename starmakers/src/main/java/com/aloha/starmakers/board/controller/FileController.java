@@ -110,7 +110,7 @@ public class FileController {
 
 
         if ( no == -1) {
-
+            log.info("파일 데이터 없음");
             File noImageFile = new File("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf85dv87L-QUBgTu6c8_OrOjHGFkldiqpx31GaI65ut4X0BbqtUvSPJWxyyuiD9bvKqzA&usqp=CAU");
             byte[] noImageFileData = FileCopyUtils.copyToByteArray(noImageFile);
             HttpHeaders headers = new HttpHeaders();

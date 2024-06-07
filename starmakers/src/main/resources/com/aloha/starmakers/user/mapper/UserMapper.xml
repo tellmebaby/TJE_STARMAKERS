@@ -72,8 +72,23 @@
     
     <!-- 회원 조회 - userNo -->
     <select id="selectUserNo" resultType="Users">
-        SELECT *
+        <!-- SELECT *
         FROM user
+        WHERE user_no = #{userNo} -->
+        SELECT u.user_no
+              ,u.email
+              ,password
+              ,name
+              ,id
+              ,phone
+              ,address
+              ,gender
+              ,birth
+              ,reg_date
+              ,upd_date
+              ,1 enabled
+              ,auth
+        FROM user u LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id  
         WHERE user_no = #{userNo}
     </select>
 

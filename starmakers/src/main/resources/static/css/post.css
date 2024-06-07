@@ -48,6 +48,8 @@
             padding: 30px 30px;
             border: 1px solid;
             border-radius: 5px;
+            min-height: 200px;
+            background-color: white;
             /* text-align: center; */
           }
         .title-container hr {
@@ -463,4 +465,46 @@
             position: absolute;
             top: 10px;
             right: 10px;
+        }
+
+        .container2 .button-box button {
+            font-size: 13px;
+            color : #91ACCF;
+            border: 1px #91ACCF solid;
+            border-radius : 10px;
+            background-color: white;
+            width: 50px;
+            height: 30px;
+            margin-left : 4px;
+        }
+
+        .container2 .button-box input {
+            font-size: 13px;
+            color : white;
+            border: 1px #91ACCF solid;
+            border-radius : 10px;
+            background-color: #91ACCF;
+            width: 50px;
+            height: 30px;
+            margin-left : 4px;
+        }
+
+        .body {
+            background-color: rgb(241, 241, 242) ;
+        }
+
+        .container2 .read-top span {
+            font-size: 12px;
+        }
+
+        .button-box1 .like-btn {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 10px;
+        }
+
+        .button-box1 .like-btn i {
+            
         }

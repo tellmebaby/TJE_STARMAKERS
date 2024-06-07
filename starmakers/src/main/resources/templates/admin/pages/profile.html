@@ -40,8 +40,8 @@
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <img id="uploadedImage" style="width: 128px; height: 128px;" class="profile-user-img img-fluid img-circle"
-                  th:src="|/file/img/${fileNo}|"
+                  <img id="uploadedImage" style="width: 128px; height: 128px; object-fit: cover;" class="profile-user-img img-fluid img-circle"
+                  th:src="|/file/img/${file.fileNo}|"
                   alt="User profile picture">
                   <!-- src="/admin/dist/img/user4-128x128.jpg" -->
                 </div>
@@ -61,8 +61,8 @@
                     <b>결제금액</b> <a class="float-right" th:text="|${totalPrice}원|"></a>
                   </li>
                 </ul>
-                <!-- 이 버튼을 정보 수정하는 걸로 바꿔도 될 듯 -->
-                <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
+                <!-- 이 버튼을 권한 수정하는 걸로 바꿔도 될 듯 -->
+                <a href="#" class="btn btn-primary btn-block" th:text="${user.auth}"></a>
               </div>
               <!-- /.card-body -->
             </div>
