@@ -26,8 +26,6 @@ public class LikeServiceImpl implements LikeService {
 
         Integer like = likeMapper.select(userNo, starNo);
 
-        log.info("qweqr"+like);
-
         StarBoard starBoard = starMapper.select(starNo);
         int likes = starBoard.getLikes();
 

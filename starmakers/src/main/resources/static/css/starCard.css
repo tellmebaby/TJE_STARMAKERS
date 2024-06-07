@@ -106,7 +106,7 @@
 
 #promotionCarousel .card {
     border-radius: 1.25rem;
-    overflow: hidden;
+    /* overflow: hidden; */
     cursor: pointer; /* 마우스 호버시 포인터 모양으로 변경 */
 }
 
@@ -180,11 +180,12 @@
 /* 카드 스타일 */
 .card {
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
     transition: opacity 0.5s, transform 0.5s;
     border-radius: 25px;
     padding: 3px;
     background-clip: padding-box;
+    user-select: none; /* 텍스트 선택 방지 */
 }
 
 .card.standard {
@@ -296,6 +297,7 @@
     text-overflow: ellipsis;
     font-size: 80%;
     line-height: 1.2em;
+    margin-top: 2%;
     max-height: 4.8em; /* 4줄의 최대 높이 */
     min-height: 4.8em; /* 4줄의 최소 높이 */
     background-color: transparent !important;;
@@ -307,6 +309,7 @@
     position: absolute;
     display: none;
     pointer-events: none;
+    z-index: 1000;
 }
 
 @keyframes burst {
@@ -315,7 +318,7 @@
         opacity: 1;
     }
     100% {
-        transform: scale(5);
+        transform: scale(6);
         opacity: 0;
     }
 }
@@ -328,26 +331,15 @@
     padding: 0;
     text-align: center;
     font-size: 0.7em;
-    /* margin-top: 10px; */
-    width: 30px;
+    /* margin-top: 1%; */
+    width: 40px;
+    height: 18px;
+    align-content: center;
 }
 
 #asmr-link {
-    width: 40px;
+    width: 42px;
 }
-
-/* .btn-primary {
-    color: white;
-    background-color: transparent;
-    border: 1px solid white;
-    padding: 3px 3px;
-    text-align: center;
-    font-size: 0.7em;
-    margin-top: 10px;
-    width: 48px;
-} */
-
-
 
 .author-icon {
     width: 20px;
@@ -778,14 +770,6 @@
         color: black;
         z-index: 3;
     }
-
-
-    /* .type-sub.checked label,
-    .type-sub.checked i,
-    .type-sub.checked img {
-        color: black;
-        z-index: 3;
-    } */
 
     /* 중앙에 메시지를 출력하기 위한 스타일 */
     .no-results {

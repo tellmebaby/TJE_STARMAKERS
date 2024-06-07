@@ -16,13 +16,6 @@ checkbox.parent().removeClass('checked'); // 체크 해제된 경우 부모 요�
 }
 }
 
-// 체크박스 이벤트 리스너 설정
-// document.querySelectorAll('.hide-check').forEach(checkbox => {
-// checkbox.addEventListener('change', (event) => {
-// console.log(`${event.target.id} 체크박스가 ${event.target.checked ? '체크되었습니다.' : '체크 해제되었습니다.'}`);
-// toggleCheckboxClass($(event.target));
-// });
-// });
 
 // ID 값을 저장할 배열 초기화
 let checkedIds = [];
@@ -201,9 +194,9 @@ ${exerciseBtn}
 ${fashionBtn}
 ${asmrBtn}
 </div>
-<div class="star-links">
-<i class="bi bi-star"></i>
-<span class="count">${star.views}</span>
+<div class="star-links liked">
+    <i class="fa-regular fa-star"></i>
+    <span class="count">${star.likes}</span>
 </div>
 </div>
 </div>
@@ -213,14 +206,6 @@ ${asmrBtn}
 </div>
 `;
 $('#starList').append(cardHtml);
-
- // 텍스트 설정 함수 호출
-//  const text = `${star.category1},${star.category2}`;
-//  console.log('가져온 텍스트좀 보자 : ' + text);
-//  if (text !== undefined) {
-//     console.log('가져온 텍스트좀 보자 : ' + text);
-//      setTextForTypeTileText(text);
-//  }
 
 });
 
@@ -239,12 +224,6 @@ isLoading = false;
 // 초기 카드 로드
 loadMoreCards();
 
-// 스크롤 이벤트
-// $(window).scroll(function () {
-// if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-// loadMoreCards();
-// }
-// });
 
 // 검색 폼 제출 이벤트
 $('#searchForm').submit(function (event) {
@@ -259,14 +238,6 @@ $('input[type="checkbox"]').change(function () {
 loadMoreCards(true);
 });
 
-// 클릭 이벤트
-// $('.type-sub').on('click', function () {
-// const checkbox = $(this).find('.hide-check');
-// checkbox.prop('checked', !checkbox.prop('checked'));
-// $(this).toggleClass('checked', checkbox.prop('checked'));
-// // Trigger the change event to ensure the filtering works correctly
-// checkbox.trigger('change');
-// });
 
 // 클릭 이벤트
 $('.type-sub').on('click', function () {
@@ -377,7 +348,30 @@ function setTextForTypeTileText(text) {
     });
 }
 
+function animateCard(card) {
 
+    console.log("더블 클릭 이벤트 발생!");
 
+    const star = card.querySelector('.star');
+    star.style.display = 'inline'; // 이모티콘 표시
+
+    // 카드 요소의 위치 및 크기 정보 가져오기
+    const rect = card.getBoundingClientRect();
+
+    // 마우스 포인터 위치 계산
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    // 이모티콘 위치 설정
+    star.style.left = `${x}px`;
+    star.style.top = `${y}px`;
+
+    // 애니메이션 실행 및 이모티콘 숨김 처리
+    star.style.animation = 'burst 0.5s forwards';
+
+    setTimeout(function() {
+        star.style.display = 'none'; // 이모티콘 숨김
+    }, 500); // 0.5초 (애니메이션의 총 시간)
+}
 
 

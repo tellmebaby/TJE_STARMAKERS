@@ -69,18 +69,72 @@
             });
 
             // 더블클릭
-            $(document).on('dblclick', '.card', function (e) {
+            // $(document).on('dblclick', '.card', function (e) {
+            //     clearTimeout(clickTimer);
+            //     isDoubleClick = true;
+
+            //     var userNo = "[[${session.user != null ? session.user.userNo : ''}]]";
+            //     var starNo = $(this).attr("data-no");
+            //     var csrfToken = "[[${_csrf.token}]]";
+
+            //     if (userNo === '') {
+            //         alert("로그인을 하시오!");
+            //         return;
+            //     }
+
+            //     $.ajax({
+            //         url: '/page/like', // 서버의 좋아요 상태를 변경하는 API 엔드포인트
+            //         method: 'POST',
+            //         data: {
+            //             userNo: userNo,
+            //             starNo: starNo
+            //         },
+            //         beforeSend: function (xhr) {
+            //             // 💍 CSRF 토큰을 요청 헤더에 추가
+            //             xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+            //         },
+            //         success: function (response) {
+            //             // 하트 모양 이펙트 추가
+            //             // let heart = $('<div class="heart"></div>');
+            //             // $('body').append(heart);
+            //             // heart.css({
+            //             //     top: e.pageY - 25,
+            //             //     left: e.pageX - 25
+            //             // });
+
+            //             // setTimeout(() => {
+            //             //     heart.remove();
+            //             // }, 1000);
+
+            //              // 좋아요 아이콘 클래스 토글
+            //              $(this).toggleClass('fa-regular fa-solid');
+            //         }.bind(this), // this 바인딩
+            //         error: function (xhr, status, error) {
+            //             console.error("좋아요 상태 변경 실패:", error);
+            //         }
+            //     });
+            // });
+
+            
+            // 더블클릭시 좋아요 저장
+            function handleCardDoubleClick(cardElement) {
+                var $card = $(cardElement); // 현재 클릭된 카드 요소를 저장
+
                 clearTimeout(clickTimer);
                 isDoubleClick = true;
 
                 var userNo = "[[${session.user != null ? session.user.userNo : ''}]]";
-                var starNo = $(this).attr("data-no");
+                var starNo = $card.attr("data-no");
                 var csrfToken = "[[${_csrf.token}]]";
 
                 if (userNo === '') {
                     alert("로그인을 하시오!");
                     return;
                 }
+
+                // 이벤트 전파 중지 및 기본 동작 방지
+                e.preventDefault();
+                e.stopPropagation();
 
                 $.ajax({
                     url: '/page/like', // 서버의 좋아요 상태를 변경하는 API 엔드포인트
@@ -94,27 +148,45 @@
                         xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
                     },
                     success: function (response) {
-                        // 하트 모양 이펙트 추가
-                        let heart = $('<div class="heart"></div>');
-                        $('body').append(heart);
-                        heart.css({
-                            top: e.pageY - 25,
-                            left: e.pageX - 25
-                        });
-
-                        setTimeout(() => {
-                            heart.remove();
-                        }, 1000);
-
                         // 좋아요 아이콘 클래스 토글
-                        $(this).find('.fa-thumbs-up').toggleClass('fa-regular fa-solid');
-                    }.bind(this), // this 바인딩
+                        $card.find('.star-links').toggleClass('liked');
+                    },
                     error: function (xhr, status, error) {
                         console.error("좋아요 상태 변경 실패:", error);
                     }
                 });
+            }
+
+
+
+            // 카드 더블클릭 이벤트에 새로운 함수 바인딩
+            $(document).on('dblclick', '.card', function (e) {
+                // 이벤트 전파 및 기본 동작 방지
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // 더블클릭 처리
+                handleCardDoubleClick(this); // 이벤트 핸들러 내에서 함수 호출
             });
 
+
+
+
+        });
+
+
+
+
+        $(document).on('click', '.star-links i', function(e) {
+            // 아이콘의 클래스 변경
+            $(this).toggleClass('fa-regular fa-solid');
+            // 별 클릭 알림창 표시
+            alert('별 클릭!');
+
+
+            // 이벤트 전파 및 기본 동작 방지
+            e.preventDefault();
+            e.stopPropagation();
         });
 
     </script>
