@@ -4,6 +4,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -328,6 +329,36 @@ public class StarController {
             commentCount = 0;
         }
         starBoard.setCommentCount(commentCount);
+        // 카테고리 한글화
+        HashMap<String, String> categoryMap = new HashMap<>();
+        categoryMap.put("game", "게임");
+        categoryMap.put("music", "음악");
+        categoryMap.put("travel", "여행");
+        categoryMap.put("food", "음식");
+        categoryMap.put("animal", "동물");
+        categoryMap.put("workout", "운동");
+        categoryMap.put("asmr", "ASMR");
+        categoryMap.put("fashion", "패션");
+
+        // 받아온 카테고리2를 콤마로 분리하여 변환된 한글 카테고리들을 저장할 리스트
+        List<String> koreanCategories = new ArrayList<>();
+        
+        // 콤마로 분리된 카테고리들을 배열로 저장
+        String[] categories = starBoard.getCategory2().split(",");
+        
+        // 각 카테고리를 변환하여 리스트에 추가
+        for (String category : categories) {
+            // 카테고리명이 맵에 있는 경우 변환한 값을 리스트에 추가
+            if (categoryMap.containsKey(category)) {
+                koreanCategories.add(categoryMap.get(category));
+            } else {
+                // 맵에 없는 경우 그대로 추가
+                koreanCategories.add(category);
+            }
+        }
+    
+        starBoard.setCategory2(String.join(",", koreanCategories));
+        
         model.addAttribute("starBoard", starBoard);
         return "/page/starCard/starRead";
     }
