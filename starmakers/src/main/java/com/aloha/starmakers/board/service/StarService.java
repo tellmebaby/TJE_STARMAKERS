@@ -38,6 +38,12 @@ public interface StarService {
     // 조회수 증가
     public int views(int starNo) throws Exception;
 
+
+    // 새 메인 페이지 카드리스트 요청
+    public List<StarBoard> mainCardList ( String type ) throws Exception;
+
+
     // 마이페이지 쓴 글 조회
     public List<StarBoard> promotionList(int userNo, Page page, Option option) throws Exception;
+
 }

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.aloha.starmakers.board.dto.Files;
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.user.dto.PasswordResetToken;
+import com.aloha.starmakers.user.dto.StarUser;
 import com.aloha.starmakers.user.dto.UserAuth;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.mapper.PasswordResetTokenMapper;
@@ -167,8 +168,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Users> list() throws Exception {
+    public List<StarUser> starMemberList() throws Exception {
+        return userMapper.starMemberList();
+    }
+
+    @Override
+    public List<StarUser> newMemberList() throws Exception {
         
+        return userMapper.newMemberList();
+    }
+
+    @Override
+    public List<Users> list() throws Exception {
         List<Users> userList = userMapper.list();
         return userList;
     }
@@ -177,6 +188,7 @@ public class UserServiceImpl implements UserService {
     public Users selectUserNo(int userNo) throws Exception {
         Users user = userMapper.selectUserNo(userNo);
         return user;
+
     }
 
 }
