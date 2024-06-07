@@ -98,14 +98,14 @@
                         </form>
                     </div>
                     <div class="sub-btn-calendar">
-                        <a href="starCalendar" class="btn-starCalendar"><i class="bi bi-calendar-week"></i></a>
+                        <a href="/page/starCard/starCalendar" class="btn-starCalendar"><i class="bi bi-calendar-week"></i></a>
                     </div>
                     <!-- 비로그인시 -->
                     <th:block sec:authorize="isAnonymous()"></th:block>
                     <!-- 로그인시 -->
                     <th:block sec:authorize="isAuthenticated()">
                         <div class="sub-btn-insertCard">
-                            <a href="starInsert" class="btn-starInsert"><i class="bi bi-pen"></i></a>
+                            <a href="/page/starCard/starInsert" class="btn-starInsert"><i class="bi bi-pen"></i></a>
                         </div>
                     </th:block>
                 </div>
