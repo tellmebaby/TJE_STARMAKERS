@@ -203,7 +203,7 @@ ${asmrBtn}
 </div>
 <div class="star-links">
 <i class="bi bi-star"></i>
-<span class="count">${star.views}</span>
+<span class="count">${star.likes}</span>
 </div>
 </div>
 </div>
