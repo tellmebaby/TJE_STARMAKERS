@@ -27,6 +27,10 @@
         <result property="auth" column="auth" />
     </resultMap>
 
+    <resultMap type="Pay" id="payMap">
+        <result property="totalPrice" column="total_price"></result>
+    </resultMap>
+
     <!-- 로그인 - username -->
     <select id="login" resultMap="userMap">
         SELECT u.user_no
@@ -92,9 +96,13 @@
            SET phone = #{phone}
               ,address = #{address}
               ,id = #{id}
+              ,email = #{email}
+              ,name = #{name}
               ,upd_date = now()
         WHERE email = #{email}
     </update>
+
+
 
     <!-- 회원 권한 등록 -->
     <insert id="insertAuth">
@@ -191,8 +199,20 @@ LEFT JOIN file AS f ON sb.user_no = f.user_no AND f.star_no = 0
 
     <!-- 관리자 회원 리스트 -->
     <select id="list" resultType="Users">
-        SELECT *
-        FROM user
+        SELECT u.user_no
+              ,u.email
+              ,password
+              ,name
+              ,id
+              ,phone
+              ,address
+              ,gender
+              ,birth
+              ,reg_date
+              ,upd_date
+              ,1 enabled
+              ,auth
+        FROM user u LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id
     </select>
 
 </mapper>

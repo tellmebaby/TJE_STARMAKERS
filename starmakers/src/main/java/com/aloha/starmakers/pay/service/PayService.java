@@ -22,5 +22,5 @@ public interface PayService {
     public int update(Pay pay);
 
     // 관리자 회원별 결제조회
-    public int totalPrice(int userNo) throws Exception;
+    public Pay totalPrice(int userNo) throws Exception;
 }
