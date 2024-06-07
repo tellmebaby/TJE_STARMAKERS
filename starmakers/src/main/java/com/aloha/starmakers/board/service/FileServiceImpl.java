@@ -69,12 +69,12 @@ public class FileServiceImpl implements FileService {
      * 파일 삭제
      */
     @Override
-    public int delete(int no) throws Exception {
+    public int delete(int fileNo) throws Exception {
         // 파일 정보 조회
-        Files file = fileMapper.select(no);
+        Files file = fileMapper.select(fileNo);
 
         // DB 파일 정보 삭제
-        int result = fileMapper.delete(no);
+        int result = fileMapper.delete(fileNo);
 
         // 파일 시스템의 파일 삭제
         if( result > 0 && file != null) {
@@ -112,12 +112,13 @@ public class FileServiceImpl implements FileService {
         List<Files> fileList = fileMapper.listByParent(file);
 
         for (Files deleteFile : fileList) {
-            int no = deleteFile.getFileNo();
-            delete(no);
+            int fileNo = deleteFile.getFileNo();
+            delete(fileNo);
         }
 
+        
         int result = fileMapper.deleteByParent(file);
-        log.info(result + "개의 파일을 삭제하였습니다.");
+        // log.info(result + "개의 파일을 삭제하였습니다.");
 
         return result;
     }
@@ -244,6 +245,14 @@ public class FileServiceImpl implements FileService {
             return -1;
         }
         return result;
+    }
+
+    @Override
+    public int allDelete(int userNo) throws Exception {
+    
+        int result = fileMapper.allDelete(userNo);
+        return result;
+
     }
 
 }

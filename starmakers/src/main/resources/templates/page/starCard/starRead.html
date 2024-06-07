@@ -21,402 +21,8 @@
   <script src="/lib/datePicker.js" type="text/javascript"></script>
   <!-- <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script> -->
   <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-  <style>
-          .top-container {
-          width: 960px;
-          margin: 0 auto;
-        }
-        .writer {
-            display: flex;
-            justify-content: space-around;
-            gap: 10px;
-            padding: 10px 0;
-            width: 960px;
-            margin-top: 50px;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-        .writer label:first-child {
-            font-size: 15px;
-            font-weight: 500;
-        }
-        .writer label:last-child {
-            font-size: 15px;
-            color: rgba(192, 190, 183, 1);
-        }
-       .title-container {
-          width: 960px;
-          margin: 0 auto 15px;
+  <link rel="stylesheet" href="/css/post.css">
 
-          padding: 30px 30px;
-          border: 1px solid;
-          border-radius: 10px;
-        }
-        .title-container span {
-          font-weight: bold;
-          font-size: 20px;
-        }
-        .content-container {
-          width: 960px;
-          margin: 0 auto;
-          padding: 30px 30px;
-          border: 1px solid;
-          /* text-align: center; */
-        }
-        .title-container hr {
-          margin-top: 10px;
-        }
-        h1 {
-          margin-top: 40px;
-          margin-bottom: 10px;
-        }
-
-        /* 버튼 */
-        .button-wrapper {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            padding: 10px 0;
-            width: 960px;
-        }
-        .button-container1 {
-            text-align: right;
-            padding: 10px 0;
-        }
-        .button-container1 button {
-            margin-left: 5px;
-            padding: 7px 20px;
-            background-color: rgba(37, 37, 37, 1);
-            border-radius: 3px;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .button-container1 button:hover {
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
-            font-weight: bolder;
-            color: black;
-        }
-        .button-container2 {
-            text-align: right;
-            padding: 10px 0;
-        }
-        .button-container2 button {
-            margin-left: 5px;
-            padding: 7px 20px;
-            background-color: rgba(192, 190, 183, 1);
-            border-radius: 3px;
-            color: black;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .button-container2 button:hover {
-            background-color: black;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
-            font-weight: bolder;
-            color: white;
-        }
-
-        /* 댓글!!!! 입력*/
-        .reply-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 20px 0;
-            width: 960px;
-        }
-        .reply {
-            margin-left: 30px;
-            font-weight: bold;
-            font-size: 20px;
-        }
-        .reply-box {
-            flex-grow: 1;
-            display: flex;
-            justify-content: space-between;
-            width: 720px;
-            margin: 0 auto 15px;
-            padding: 30px 30px;
-            border: 1px solid;
-            background-color: rgb(240, 240, 240);
-        }
-        .reply-box textarea {
-            /* flex-grow: 1;  */
-            margin-right: 5px;
-            display: block;
-            width: 90%;
-            height: 100px;
-            overflow-y: scroll;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .reply-container button {
-            margin-left: 5px; 
-            padding: 10px 20px;
-            background-color: white;
-            color: black;
-            cursor: pointer;
-            border: 1px solid rgba(192, 190, 183, 1);
-            height: 100px;
-            border-radius: 3px;
-        }
-        .reply-container button:hover {
-            background-color: black;
-            color: white;
-            font-weight: bolder;
-        }
-        
-        /* 댓글 타이틀 */
-        .reply-list {
-            border-bottom: 1.7px solid #000;
-            width: 960px;
-        }
-        .reply-list label {
-            margin: 5px 10px;
-        }
-
-        /* 댓글!!!! 목록 */
-        #reply-list {
-            display: block;
-            border-bottom: 0.7px solid #000;
-            width: 960px;
-            display: block;
-            padding: 10px 5px;
-            box-sizing: border-box;
-        }
-        .reply-top {
-            padding: 5px 10px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .reply-regDate {
-            color: rgba(192, 190, 183, 1);
-        }
-        .reply-regDate .icon {
-            color: #000;
-            margin: 0 20px;
-        }
-        .reply-middle {
-            padding: 5px 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .reply-content {
-            flex-grow: 1;
-            margin-right: 20px;
-        }
-        .reply-button {
-            padding: 5px 0;
-           text-align: right;
-        }
-        .btn-reply-update {
-            padding: 5px 10px;
-            background-color: rgba(192, 190, 183, 1);
-            border-radius: 3px;
-            color: black;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-reply-delete {
-            margin-left: 5px;
-            padding: 5px 10px;
-            background-color: rgba(37, 37, 37, 1);
-            border-radius: 3px;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .reply-rereply {
-            align-items: left;
-            padding: 5px 0px;
-        }
-
-        /* 답글 버튼*/
-        .btn-rereply {
-            padding: 7px 15px;
-            margin-right: 5px;
-            border: none;
-            border-radius: 3px;
-            background-color: transparent;
-            color: rgba(192, 190, 183, 1);
-        }
-/* ---------------------------------------------------------헷갈릴까봐 나눠놓기 
-    답글 입력과 답글 목록은 부모댓글 목록 안에!!!! 있음*/
-         /* 답글!!!! 입력*/
-         /* 답글 눌렀을 때 보이게 하기 */
-         .rereply-container {
-            /* display: none; */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 20px 0;
-            /* padding-left: 20px; */
-            width: 100%;
-            /* border-bottom: 0.7px solid rgba(192, 190, 183, 1); */
-
-            visibility: hidden; /* 숨김 */
-            height: 0; /* 높이 0으로 설정 */
-            overflow: hidden; /* 콘텐츠 오버플로우 숨김 */
-        }
-        .rereply-container.visible {
-            visibility: visible; /* 보임 */
-            height: auto; /* 원래 높이로 설정 */
-            padding: 0;
-            padding-left: 70px;
-            transition: visibility 0.3s, height 0.3s;
-        }
-        .rereply {
-            /* margin-left: 30px;
-            font-weight: bold;
-            font-size: 20px; */
-            margin-left: 70px;
-        }
-        .rereply-box {
-            flex-grow: 1;
-            display: flex;
-            justify-content: space-between;
-            width: 720px;
-            margin: 0 auto 15px;
-            padding: 20px 20px;
-            border: 1px solid rgba(192, 190, 183, 1);
-            border-radius: 3px;
-        }
-        .rereply-box textarea {
-            /* flex-grow: 1;  */
-            margin-right: 5px;
-            display: block;
-            width: 90%;
-            height: 100px;
-            overflow-y: scroll;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .rereply-container button {
-            margin-left: 5px; 
-            padding: 10px 20px;
-            background-color: white;
-            color: black;
-            cursor: pointer;
-            border: 1px solid rgba(192, 190, 183, 1);
-            height: 100px;
-            border-radius: 3px;
-        }
-        .rereply-container button:hover {
-            background-color: black;
-            color: white;
-            font-weight: bolder;
-        }
-
-        /* 답글!!!! 목록 */
-        #rereply-list {
-            display: block;
-            width: 100%;
-            display: block;
-            padding: 10px 5px;
-            box-sizing: border-box;
-            border-top: 0.7px solid rgba(192, 190, 183, 1);
-        }
-        .rereply-top {
-            padding: 5px 10px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .rereply-regDate {
-            color: rgba(192, 190, 183, 1);
-        }
-        .rereply-regDate .icon {
-            color: #000;
-            margin: 0 20px;
-        }
-        .rereply-middle {
-            padding: 5px 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .rereply-content {
-            flex-grow: 1;
-            margin-right: 20px;
-        }
-        .rereply-button {
-            padding: 5px 0;
-           text-align: right;
-        }
-        .btn-rereply-update {
-            padding: 5px 10px;
-            background-color: rgba(192, 190, 183, 1);
-            border-radius: 3px;
-            color: black;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-rereply-delete {
-            margin-left: 5px;
-            padding: 5px 10px;
-            background-color: rgba(37, 37, 37, 1);
-            border-radius: 3px;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-            border: none;
-            cursor: pointer;
-        }
-        .rereply-rereply {
-            align-items: left;
-            padding: 5px 0px;
-        }
-
-        #title {
-          margin: 0 auto 15px;
-
-
-          padding: 30px 30px;
-          border: 1px solid;
-          border-radius: 10px;
-
-        }
-        #content {
-            margin: 0 auto;
-            padding: 30px 30px;
-            border: 1px solid;
-            /* text-align: center; */
-        }
-        .container2 {
-          max-width: 960px;
-        }
-  </style>
 </head>
 
 
@@ -426,148 +32,515 @@
     <h1 class="d-flex justify-content-center mt-3 mb-3">
       홍보 상세
     </h1>
-    <div class="container d-flex justify-content-center">
+
       <div class="container2">
+        <form action="/page/starBoard/delete" method="get" id="read">
+          <input type="hidden" name="starNo" th:value="${starBoard.starNo}">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
-        <!-- 썸네일 이미지 가져와서 아이콘 띄우기 -->
-        
-        <div class="border border-dark rounded mt-3 mb-3" id="title">
-          <!-- <div class="border-bottom border-secondary w-100"> -->
-            <span class="fw-bold fs-3" th:text="${starBoard.title}"></span>
-            <hr>
-          <!-- </div> -->
-        </div>
-        <div class="border border-dark rounded w-100" id="content" >
+
+          <div class="main-image">
+            <div>
+              <img th:src="|/file/img/${starBoard.imgNo}|" class="image rounded mt-auto" alt="썸네일">
+            </div>
+            <div class="text">
+              <span class="fw-bold fs-1 m-0 p-0" th:text="${starBoard.title}"></span>
+              <br>
+              <span class="fw-bold fs-10" th:text="${starBoard.writer}"></span>
+              <br>
+              <div th:text="|${starBoard.category1}|" class="fs-10" id="category1" style="display: flex;">
+              </div>
+              <!-- <img src="/img/icon/instagram.png" class="content-icon instagram" style="max-width: 20px;"> -->
+              <span th:text="|${starBoard.category2}|" class="fs-10" id="category2"></span>
+            </div>
+            <!-- <div class="icon">
+              <i class="fa-regular fa-star"></i>
+            </div> -->
+          </div>
+
+          <div class="content-container2" id="content">
             <span th:utext="${starBoard.content}"></span>
-        </div>
-        <div class="d-flex justify-content-end mt-2">
-          <button class="btn btn-secondary btn-submit col-1 border-0 " type="button" onclick="moveList()">목록</button>
-          <button class="btn btn-dark btn-submit col-1 border-0 ms-2" type="button" onclick="update()">수정</button>
-        </div>
-      </div>
-    </div>
-
-
-
-
-    </div>
-
-
-
-  </div>
-
-  <div class="top-container">
-    <!-- 댓글 등록 -->
-    <div class="reply-container">
-      <div class="reply-box">
-        <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
-        <button type="button">등록</button>
-      </div>
-
-    </div>
-    <div class="reply-list">
-      <label class="reply">댓글</label>
-      <label class="reply-count">댓글 갯수</label>
-    </div>
-    <!-- 댓글 목록 -->
-    <div id="reply-list">
-      <!-- 댓글 -->
-      <div class="reply-top">
-        <span class="reply-writer">${writer}</span>
-        <span class="reply-regDate">${regDate}
-
-          <i class="fa-regular fa-thumbs-up icon"></i>
-
-        </span>
-      </div>
-      <!-- 댓글 내용/ 수정 삭제 버튼 -->
-      <div class="reply-middle">
-        <p class="reply-content">${content}</p>
-        <div class="reply-button">
-          <button class="btn-reply-update">수정</button>
-          <button class="btn-reply-delete">삭제</button>
-        </div>
-      </div>
-      <!-- 답글 쓰기 -->
-      <div class="reply-rereply">
-        <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
-      </div>
-
-      <div class="rereply-container m-2 p-0">
-        <div class="rereply-box">
-          <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
-          <button type="button">등록</button>
-        </div>
-      </div>
-      <!-- 답글!! 목록 -->
-      <div id="rereply-list">
-        <div class="rereply">
-          <!-- 답글 -->
-          <div class="rereply-top">
-            <span class="rereply-writer">${writer}</span>
-            <span class="rereply-regDate">${regDate}
-
-              <i class="fa-regular fa-thumbs-up icon"></i>
-
-            </span>
           </div>
-          <!-- 답글 내용/ 수정 삭제 버튼 -->
-          <div class="rereply-middle">
-            <p class="rereply-content">${content}</p>
-            <div class="rereply-button">
-              <button class="btn-rereply-update">수정</button>
-              <button class="btn-rereply-delete">삭제</button>
-            </div>
+          <div class="d-flex justify-content-end mt-2">
+            <button class="btn btn-secondary btn-submit col-1 border-0 " type="button" onclick="moveList()">목록</button>
+            <button th:if="${session.user} and ${session.user.userNo}==${starBoard.userNo}"
+              class="btn btn-light btn-submit col-1 border-0 ms-2" type="button" onclick="update()">수정</button>
+            <input th:if="${session.user} and ${session.user.userNo}==${starBoard.userNo}"
+              class="btn btn-dark btn-submit col-1 border-0 ms-2" type="submit" onclick="actionDelete()"
+              value="삭제"></input>
           </div>
-          <!-- 답글에 답글 쓰기 -->
-          <div class="rereply-rereply">
-            <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
-          </div>
-          <div class="rereply-container m-0 p-0">
-            <div class="rereply-box">
-              <textarea type="text" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다."></textarea>
-              <button type="button">등록</button>
-            </div>
+        </form>
+        <!-- 댓글 등록 -->
+        <div class="reply-container">
+          <div class="reply-box">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <!-- 사용자 아이디(hidden) -->
+            <input type="hidden" name="username" id="username"
+              th:value="${session.user != null ? session.user.email : '비회원'}">
+            <input type="hidden" name="writer" id="reply-writer"
+              th:value="${session.user != null ? session.user.id : '비회원'}">
+            <textarea type="text" name="content" id="reply-content" placeholder="자유롭게 의견을 작성하세요. 운영원칙에 위배되는 댓글은 삭제될 수 있습니다.
+                  로그인 하신 분만 댓글을 작성할 수 있습니다." th:disabled="${session.user == null}"></textarea>
+            <button type="button" id="btn-reply-insert" class="btn-reply" onclick="insertReply()"
+              th:disabled="${session.user == null}">등록</button>
           </div>
         </div>
-      </div>
-    </div>
-
-
-
-
-
-    <!-- 예시 자료 2 -->
-    <div id="reply-list">
-      <div class="reply-top">
-        <span class="reply-writer">${writer}</span>
-        <span class="reply-regDate">${regDate}
-          <i class="fa-regular fa-thumbs-up icon"></i>
-        </span>
-      </div>
-      <div class="reply-middle">
-        <p class="reply-content">${content}</p>
-        <div class="reply-button">
-          <button class="btn-reply-update">수정</button>
-          <button class="btn-reply-delete">삭제</button>
+        <div class="top-reply-list">
+          <label class="reply">댓글</label>
+          <label class="reply-count" th:text="${starBoard.commentCount} + ' 개'"></label>
         </div>
-      </div>
-      <div class="reply-rereply">
-        <button class="btn-rereply" onclick="toggleRereplyContainer(this)">답글쓰기</button>
+        <!-- 댓글 목록 -->
+        <div id="reply-listbox">
+          <div id="reply-list">
+
+          </div>
+        </div>
+
       </div>
     </div>
-
-
-  </div>
+  
   <script>
-    const no = "[[${starBoard.starNo}]]"
-    function moveList(){
-      location.href='/page/starCard/starList'
+    const starNo = "[[${starBoard.starNo}]]"
+
+    function moveList() {
+      location.href = '/page/starCard/starList'
     }
-    function update(){
-      location.href='/page/starCard/starUpdate?starNo='+ no;
+
+    function update() {
+      location.href = '/page/starCard/starUpdate?starNo=' + starNo;
+    }
+
+    const form = document.getElementById('read')
+    //  th:if="${session.user.userNo}==${starBoard.userNo}"삭제 요청
+    function actionDelete() {
+      let check = confirm('정말로 삭제하시겠습니까?')
+      form.method='post'
+      // form.submit;
+    }
+
+    // console.log(newText)
+    const category1 = document.getElementById('category1')
+    const category1Text = category1.textContent
+    // category1.style.display=inline-block;
+    console.log(category1)
+    const newText1 = category1Text.split(',').map(icon =>
+      `<img src="/img/icon/${icon}.png" class="content-icon ${icon}" style="max-width:20px; margin: 0; margin-right:5px; max-height:20px;">`
+    ).join(' ')
+    category1.innerHTML = newText1
+
+
+    const category2 = document.getElementById('category2')
+    const category2Text = category2.textContent
+
+    var arr = [category2Text.split(',')]
+    console.log(arr)
+    const category2Text2 = category2Text.split(',').map(word => `#${word.trim()}`).join(' ')
+    category2.textContent = category2Text2
+
+    // 댓글 목록 요청
+    replyList()
+
+    // 댓글 목록
+    function replyList() {
+      // AJAX 비동기 요청
+      // 💍 CRSF TOKEN
+      let csrfToken = document.querySelector('input[name="_csrf"]').value;
+      let request = new XMLHttpRequest()
+
+      // 요청 세팅
+      // request.open(요청메소드, URL)
+      request.open('GET', '/page/reply/' + starNo) // 글 번호
+
+      request.onreadystatechange = function () {
+
+        // 요청 성공 시,
+        if (request.readyState == request.DONE && request.status == 200) {
+          // 댓글 목록 확인
+          let response = request.responseText
+          // 서버에서 렌더링한 HTML
+          let data = response
+          let replyList = document.getElementById('reply-listbox')
+          replyList.innerHTML = data
+
+          updateEvent()
+          event()
+        }
+      }
+      request.send()
+    }
+
+    // 댓글 등록
+    let $writer = document.getElementById('reply-writer')
+    let writer = $writer.value
+
+    function insertReply() {
+      let $content = document.getElementById('reply-content')
+      let content = $content.value
+      let username = document.getElementById('username').value
+      console.log(username)
+      let data = {
+        'starNo': starNo,
+        'writer': writer,
+        'content': content,
+        'username': username
+      }
+
+      console.dir(data)
+      // 💍 CRSF TOKEN
+      let csrfToken = document.querySelector('input[name="_csrf"]').value;
+      // var csrfToken = "[[${_csrf.token}]]"
+
+      let request = new XMLHttpRequest()
+
+      request.open('POST', '/page/reply')
+      request.setRequestHeader('Content-Type', 'application/json')
+      request.setRequestHeader('X-CSRF-TOKEN', csrfToken)
+      request.send(JSON.stringify(data))
+
+      request.onreadystatechange = function () {
+
+        // 요청 성공 시,
+        if (request.readyState == request.DONE && request.status == 201) {
+          console.log('댓글 등록 성공!');
+          let response = request.responseText
+          if (response == 'SUCCESS') {
+            replyList()
+            // 댓글 목록 갱신 후 댓글 입력 창 비우기
+            // $writer.value = ''
+            $content.value = ''
+          }
+        }
+      }
     }
   </script>
+  <script>
+    // 이벤트 등록
+
+    function updateEvent() {
+      // 댓글 수정 버튼
+      let $btnUpdate = document.getElementsByClassName('btn-reply-update')
+
+      // 댓글 수정 클릭 이벤트
+
+      for (let i = 0; i < $btnUpdate.length; i++) {
+        $btnUpdate[i].addEventListener('click', function () {
+          let $top = $btnUpdate[i].parentNode
+          // let writer = $top.childNodes[1].textContent
+          let $inner = $top.parentNode
+          let content = $inner.childNodes[1].textContent
+          let $replyBox = $inner.parentNode
+          let $toptop = $replyBox.parentElement
+          console.log($replyBox)
+
+          let replyNo = $btnUpdate[i].getAttribute('data') // 댓글 번호
+
+          // 댓글 수정 모드
+          // 1. 기존 댓글 내용창 숨기기
+          $inner.style.display = 'none';
+          // 2. 수정 UI 출력
+          let $editor = document.createElement('div')
+          $editor.classList.add('inner');
+          $editor.id = 'editor'
+          let editor = `
+                      <input type="hidden" id="update-writer" value="${writer}">
+                      <textarea id="update-reply" cols="100" >${content}</textarea>
+                      <div class="reply-button">
+                          <button class="btn-reply-update" onclick="updateReply(${replyNo})">수정</button>
+                          <button class="btn-reply-delete" onclick="cancelReply(${replyNo})">취소</button>
+                      </div>
+                  `;
+
+          $editor.innerHTML = editor
+          $replyBox.appendChild($editor)
+        })
+
+      }
+
+    }
+
+
+
+    // 댓글 수정 요청
+    function updateReply(replyNo) {
+      // alert('댓글 수정')
+      let writer = document.getElementById('update-writer').value
+      let content = document.getElementById('update-reply').value
+
+      console.log(`수정한 작성자 : ${writer}`)
+      console.log(`수정한 내용 :  ${content}`)
+
+
+      let data = {
+        'replyNo': replyNo,
+        'writer': writer,
+        'content': content
+      }
+
+      console.dir(data)
+
+      // 수정 요청
+      let csrfToken = document.querySelector('input[name="_csrf"]').value;
+      let request = new XMLHttpRequest()
+      request.open('PUT', '/page/reply')
+      request.setRequestHeader('Content-Type', 'application/json')
+      request.setRequestHeader('X-CSRF-TOKEN', csrfToken)
+      request.send(JSON.stringify(data))
+
+      request.onreadystatechange = function () {
+        // 요청 성공 시,
+        if (request.readyState == request.DONE && request.status == 200) {
+          console.log('댓글 수정 성공!');
+          let response = request.responseText
+          alert(response)
+          if (response == 'SUCCESS') {
+            replyList() // 댓글 목록 갱신
+          }
+        }
+      }
+    }
+
+    // 댓글 수정 취소
+    function cancelReply() {
+      const check = confirm("작성중인 내용이 사라집니다.")
+      if (!check)
+        return
+
+      let $editor = document.getElementById('editor')
+      $editor.remove()
+
+      // 원래 있던 inner 다시 가져오기
+      let $inner = document.getElementsByClassName('reply-middle')
+      console.log("취소했을 때 : " + $inner)
+      for (let i = 0; i < $inner.length; i++) {
+        $inner[i].style.display = 'flex'
+
+      }
+
+    }
+
+    // 댓글 삭제
+    function deleteReply(replyNo) {
+
+      const check = confirm("정말로 삭제하시겠습니까?")
+      if (!check)
+        return
+      let csrfToken = document.querySelector('input[name="_csrf"]').value;
+      let request = new XMLHttpRequest();
+
+      request.open('DELETE', `/page/reply/${replyNo}`);
+      request.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+      request.send();
+
+      request.onreadystatechange = function () {
+        if (request.readyState == request.DONE && request.status == 200) {
+          let response = request.responseText
+          if (request.responseText == 'SUCCESS') {
+            replyList();
+          }
+        }
+      }
+    }
+
+
+    // 답글 등록
+    function insertAnswer(element, replyNo) {
+      let $rereplyBox = element.parentNode
+      console.log(`부모 번호 : ${replyNo}`);
+      console.log($rereplyBox);
+      console.log(username.value, writer)
+
+      // 답글 작성 UI
+      let $editor = document.createElement('div')
+      $editor.classList.add('rereply-container')
+      // $editor.classList.add('rereply-box')
+      $editor.id = 'answer'
+
+      let editor = ``
+      editor += `
+
+          <div class="rereply-box">
+                  
+              <input type="hidden" name="writer" id="rereply-writer" value="${writer}">
+              <textarea name="rereply-content" id="rereply-content" type="text" placeholder="
+              로그인하지 않았을 경우, 답글을 등록할 수 없습니다."></textarea>
+              <button type="button" onclick="answer(${replyNo})">등록</button>
+                   
+          </div>
+
+      `
+      $editor.innerHTML = editor
+
+      // 기존 답글 UI 가 있으면 초기화
+      let $answer = document.getElementById("answer");
+      if ($answer) {
+        $answer.parentNode.removeChild($answer);
+      }
+
+      // 요소.after(추가 요소)
+      if ($rereplyBox) {
+        $rereplyBox.after($editor);
+
+        $editor.style.visibility = 'visible';
+        $editor.style.height = 'auto';
+        $editor.style.overflow = 'visible';
+      } else {
+        console.error('$rereplyBox 다시 살펴보기');
+      }
+
+    }
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    // 답글 등록 요청
+    function answer(parentNo) {
+      // TODO:
+      // 1. answer-writer, answer-content 값을 가져오고
+      // 2. data = {부모번호, 작성자, 내용}
+      // 3. POST = /reply 요청
+      let $writer = document.getElementById('rereply-writer')
+      let $content = document.getElementById('rereply-content')
+
+      let writer = $writer.value
+      let content = $content.value
+
+      let username = document.getElementById('username').value
+
+      console.log(username, content)
+
+
+      let data = {
+        'starNo': starNo, // 글 번호
+        'parentNo': parentNo, // 부모 댓글 번호
+        'writer': writer,
+        'content': content,
+        'username': username
+      }
+
+      console.dir(data)
+      let csrfToken = document.querySelector('input[name="_csrf"]').value;
+      let request = new XMLHttpRequest()
+
+      request.open('POST', '/page/reply')
+      request.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+      request.setRequestHeader('Content-Type', 'application/json')
+      request.send(JSON.stringify(data))
+
+      request.onreadystatechange = function () {
+
+        // 요청 성공 시,
+        if (request.readyState == request.DONE && request.status == 201) {
+          console.log('답글 등록 성공!');
+          let response = request.responseText
+          if (response == 'SUCCESS') {
+            replyList() // 댓글 목록 갱신
+          }
+        }
+      }
+    }
+
+    function event() {
+      // 답글 수정 버튼
+      let $btnUpdate = document.getElementsByClassName('btn-rereply-update')
+
+      // 답글 수정 클릭 이벤트
+      for (let i = 0; i < $btnUpdate.length; i++) {
+        $btnUpdate[i].addEventListener('click', function () {
+          let $top = $btnUpdate[i].parentNode
+          // let writer = $top.childNodes[1].textContent
+          let $inner = $top.parentNode
+          let content = $inner.childNodes[1].textContent
+          let $replyBox = $inner.parentNode
+          let $toptop = $replyBox.parentElement
+          console.log($replyBox)
+
+          let replyNo = $btnUpdate[i].getAttribute('data') // 답글 번호
+
+          // 답글 수정 모드
+          // 1. 기존 답글 내용창 숨기기
+          $inner.style.display = 'none';
+          // 2. 수정 UI 출력
+          let $editor = document.createElement('div')
+          $editor.classList.add('inner');
+          $editor.id = 'editor'
+          let editor = `
+                      <input type="hidden" id="update-writer" value="${writer}">
+                      <textarea id="update-reply" cols="80" >${content}</textarea>
+                      <div class="reply-button">
+                          <button class="btn-reply-update" onclick="updateRereply(${replyNo})">수정</button>
+                          <button class="btn-reply-delete" onclick="cancelRereply(${replyNo})">취소</button>
+                      </div>
+                  `;
+
+          $editor.innerHTML = editor
+          $replyBox.appendChild($editor)
+
+        })
+      }
+    }
+
+    // 답글 수정 요청
+    function updateRereply(replyNo) {
+      // alert('답글 수정')
+      let writer = document.getElementById('update-writer').value
+      let content = document.getElementById('update-reply').value
+
+      console.log(`수정한 작성자 : ${writer}`)
+      console.log(`수정한 내용 :  ${content}`)
+
+
+      let data = {
+        'replyNo': replyNo,
+        'writer': writer,
+        'content': content
+      }
+
+      console.dir(data)
+
+      // 수정 요청
+      let csrfToken = document.querySelector('input[name="_csrf"]').value;
+      let request = new XMLHttpRequest()
+      request.open('PUT', '/page/reply')
+      request.setRequestHeader('Content-Type', 'application/json')
+      request.setRequestHeader('X-CSRF-TOKEN', csrfToken)
+      request.send(JSON.stringify(data))
+
+      request.onreadystatechange = function () {
+        // 요청 성공 시,
+        if (request.readyState == request.DONE && request.status == 200) {
+          console.log('댓글 수정 성공!');
+          let response = request.responseText
+          alert(response)
+          if (response == 'SUCCESS') {
+            replyList() // 댓글 목록 갱신
+          }
+        }
+      }
+    }
+
+    // 답글 수정 취소
+    function cancelRereply() {
+      const check = confirm("작성중인 내용이 사라집니다.")
+      if (!check)
+        return
+
+      let $editor = document.getElementById('editor')
+      $editor.remove()
+
+      // 원래 있던 inner 다시 가져오기
+      let $inner = document.getElementsByClassName('rereply-middle')
+      console.log("취소했을 때 : " + $inner)
+      for (let i = 0; i < $inner.length; i++) {
+        $inner[i].style.display = 'flex'
+
+      }
+
+    }
+  </script>
+
 
 </th:block>
 

@@ -16,6 +16,9 @@ public interface UserService {
 
     // 조회
     public Users select(String username) throws Exception;
+    
+    // 회원 조회 - userNo
+    public Users selectUserNo(int userNo) throws Exception;
 
     // 회원 가입
     public int join(Users user) throws Exception;
@@ -47,11 +50,15 @@ public interface UserService {
 
     public void updatePassword(String email, String newPassword);
 
+
     // 인기 회원 조회
     public List<StarUser> starMemberList() throws Exception;
 
     // 최근 회원 조회
     public List<StarUser> newMemberList() throws Exception;
+
+    // 관리자 회원 리스트
+    public List<Users> list() throws Exception;
 
 
 

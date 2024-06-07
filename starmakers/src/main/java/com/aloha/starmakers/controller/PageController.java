@@ -21,7 +21,10 @@ import com.aloha.starmakers.board.dto.QnaBoard;
 import com.aloha.starmakers.board.dto.StarBoard;
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.board.service.QnaService;
+import com.aloha.starmakers.board.service.ReplyService;
 import com.aloha.starmakers.board.service.StarService;
+import com.aloha.starmakers.pay.dto.Pay;
+import com.aloha.starmakers.pay.service.PayService;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.service.UserService;
 
@@ -49,6 +52,12 @@ public class PageController {
     @Autowired
     private FileService fileService;
 
+    @Autowired
+    private PayService payService;
+
+    @Autowired
+    private ReplyService replyService;
+
     // @GetMapping("mypage/{path}")
     // public String getMethodName2(@PathVariable("path") String path, HttpSession session, Model model) {    
     //     Users user = (Users) session.getAttribute("user");   
@@ -60,7 +69,7 @@ public class PageController {
     // public String read(@RequestParam("userNo") int userNo, Model model) throws Exception {
     public String read(Principal principal
                       ,HttpSession session
-                      , Model model) throws Exception {
+                      ,Model model) throws Exception {
         // Princiapl 로 유저 가져오기
         // CustomUser loginUser = (CustomUser) principal;
         // int userNo = loginUser.getUser().getUserNo();
@@ -208,25 +217,33 @@ public class PageController {
     /* ------------------------------------------------------------- */
     /* 결제내역 */
     @GetMapping("/mypage/payment")
-    public String list(Model model, HttpSession session, Page page, Option option) throws Exception {
-
-        
+    public String payList(Model model, HttpSession session) throws Exception {
 
         Users user = (Users) session.getAttribute("user");
+
+        int userNo = user.getUserNo();
+        List<Pay> payList = payService.userList(userNo);
+
         model.addAttribute("user", user);
-        model.addAttribute("page", page);
-        model.addAttribute("option", option);
+        model.addAttribute("payList", payList);
+        log.info("userNo : " + userNo);
         return "/page/mypage/payment";
     }
 
     /* 내가 쓴 글 */
     @GetMapping("/mypage/promotion")
-    public String as(Model model, HttpSession session, Page page, Option option) throws Exception {
+    public String promotionList(Model model, HttpSession session, Page page, Option option) throws Exception {
 
         Users user = (Users) session.getAttribute("user");
+        int userNo = user.getUserNo();
+
+        List<StarBoard> promotionList = starService.promotionList(userNo, page, option);
+
         model.addAttribute("user", user);
+        model.addAttribute("promotionList", promotionList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
+        log.info("userNo : " + userNo);
         return "/page/mypage/promotion";
     }
     
@@ -263,11 +280,12 @@ public class PageController {
 
     @GetMapping("/mypage/reviewPost")
     public String reviewRead(@RequestParam("starNo") int starNo, Model model) throws Exception {
-        StarBoard starBoard = starService.select(starNo);
 
+        StarBoard starBoard = starService.select(starNo);
+        int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+        starBoard.setCommentCount(commentCount);
         // 모델 등록
         model.addAttribute("starBoard", starBoard);
-
         starService.views(starNo);
 
         // 뷰페이지 지정
@@ -296,6 +314,12 @@ public class PageController {
         
         return "redirect:/page/mypage/reviewUpdate?qnaNo=" + starNo + "$error";
     }
+
+    @GetMapping("/mypage/archive")
+    public String archive(StarBoard starBoard) throws Exception {
+        return "/page/mypage/archive";
+    }
+    
 
 
 }

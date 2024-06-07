@@ -42,6 +42,14 @@
           border: 1px solid;
           /* text-align: center; */
         }
+        .content-container2 {
+            width: 100%;
+            margin: 0 auto;
+            padding: 30px 30px;
+            border: 1px solid;
+            border-radius: 5px;
+            /* text-align: center; */
+          }
         .title-container hr {
           margin-top: 10px;
         }
@@ -103,6 +111,21 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
             font-weight: bolder;
             color: white;
+        }
+        .button-container3 {
+            text-align: right;
+            padding: 10px 0;
+        }
+        .button-container3 input {
+            margin-left: 5px;
+            padding: 7px 20px;
+            border-radius: 3px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            border: none;
+            cursor: pointer;
         }
 
         /* 댓글!!!! 입력*/
@@ -170,16 +193,25 @@
         /* 댓글!!!! 목록 */
         #reply-list {
             display: block;
-            border-bottom: 0.7px solid #000;
+            /* border-bottom: 0.7px solid #000; */
             width: 100%;
             display: block;
             padding: 10px 5px;
             box-sizing: border-box;
         }
+        #reply-line {
+            border-top: 0.7px solid #000;
+        }
+        #reply-listbox {
+            border-bottom: 0.7px solid #000;
+        }
         .reply-top {
             padding: 5px 10px;
             display: flex;
             justify-content: space-between;
+        }
+        .reply-writer {
+            font-weight: bold;
         }
         .reply-regDate {
             color: rgba(192, 190, 183, 1);
@@ -193,14 +225,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 10px;
         }
         .reply-content {
             flex-grow: 1;
             margin-right: 20px;
         }
         .reply-button {
+            flex-shrink: 0;
             padding: 5px 0;
-           text-align: right;
+            text-align: right;
+            display: flex;
         }
         .btn-reply-update {
             padding: 5px 10px;
@@ -318,15 +353,19 @@
             display: block;
             width: 100%;
             display: block;
-            padding: 10px 5px;
+            padding: 0 10px 5px;
             box-sizing: border-box;
-            /* border-top: 0.7px solid rgba(192, 190, 183, 1); */
-            border-top: 0.7px solid red;
+            border-top: 0.7px solid rgba(192, 190, 183, 1);
+            /* border-top: 0.7px solid red; */
         }
         .rereply-top {
             padding: 5px 10px;
             display: flex;
             justify-content: space-between;
+
+        }
+        .rereply-writer {
+            font-weight: bold;
         }
         .rereply-regDate {
             color: rgba(192, 190, 183, 1);
@@ -340,14 +379,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 10px;
         }
         .rereply-content {
             flex-grow: 1;
             margin-right: 20px;
         }
         .rereply-button {
+            flex-shrink: 0;
             padding: 5px 0;
-           text-align: right;
+            text-align: right;
+            display: flex;
         }
         .btn-rereply-update {
             padding: 5px 10px;
@@ -377,4 +419,48 @@
         .rereply-rereply {
             align-items: left;
             padding: 5px 0px;
+        }
+
+        /* 댓글 수정 */
+        .inner {
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-image {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 960px; /* 컨테이너 안으로 */
+            margin: 0 auto;
+        }
+        
+        .main-image img {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: cover;
+        }
+        
+        .main-image .text {
+            position: absolute;
+            /* top: 80%; */
+            bottom: 10px;
+            left: 10px;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+            /* width: 100%; */
+            /* transform: translate(-50%, -50%); */
+            padding: 10px;
+      
+            width: 92%;
+            color: #FFF;
+          
+        }
+        
+        .main-image .icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
         }

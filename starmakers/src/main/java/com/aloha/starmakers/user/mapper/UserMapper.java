@@ -25,6 +25,9 @@ public interface UserMapper {
     // 회원 조회
     public Users read(String email) throws Exception; 
 
+    // 회원 조회 - userNo
+    public Users selectUserNo(int userNo) throws Exception;
+
     // 회원 수정
     public int update(Users user) throws Exception;
 
@@ -40,8 +43,12 @@ public interface UserMapper {
     // 아이디 중복 확인
     public int selectId( Users user ) throws Exception;
 
+
     // 인기 회원 조회
     public List<StarUser> starMemberList() throws Exception;
+
+    // 관리자 회원 리스트
+    public List<Users> list() throws Exception;
 
     // 최근 회원 조회
     public List<StarUser> newMemberList() throws Exception;

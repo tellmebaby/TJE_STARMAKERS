@@ -35,3 +35,8 @@ VALUES ('joeun', 'This is a comment for star_no 10.', NOW(), NOW(), NULL, 10, NU
 
 SELECT *
 FROM reply
+
+
+
+SELECT *
+FROM `user`

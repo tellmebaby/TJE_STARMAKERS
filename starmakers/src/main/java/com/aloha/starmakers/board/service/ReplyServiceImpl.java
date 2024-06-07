@@ -7,12 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.aloha.starmakers.board.dto.Reply;
 import com.aloha.starmakers.board.mapper.ReplyMapper;
+import com.aloha.starmakers.user.dto.Users;
+import com.aloha.starmakers.user.mapper.UserMapper;
 
 @Service
 public class ReplyServiceImpl implements ReplyService {
 
     @Autowired
     private ReplyMapper replyMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public List<Reply> list() throws Exception {
@@ -33,7 +38,10 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public int insert(Reply reply) throws Exception {
+    public int insert(Reply reply, String userId) throws Exception {
+
+        Users user = userMapper.login(userId);
+        reply.setUserNo(user.getUserNo());
         int result = replyMapper.insert(reply);
         int parentNo = reply.getParentNo();
 

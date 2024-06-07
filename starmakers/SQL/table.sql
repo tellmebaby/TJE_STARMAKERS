@@ -45,15 +45,18 @@ CREATE TABLE message
 
 
 DROP TABLE IF EXISTS payment_info ;
-CREATE TABLE payment_info
-(
-  pay_no     INT         NOT NULL AUTO_INCREMENT COMMENT '결제데이터번호',
-  code       INT         NOT NULL COMMENT '상품코드',
-  price      VARCHAR(30) NOT NULL COMMENT '결제가격',
-  user_no    INT         NOT NULL COMMENT '유저데이터번호',
-  product_no INT         NOT NULL COMMENT '상품데이터번호',
-  PRIMARY KEY (pay_no)
-) COMMENT '결제정보';
+CREATE TABLE `payment_info` (
+   `pay_no` INT(10) NOT NULL AUTO_INCREMENT COMMENT '결제데이터번호',
+   `product_title` VARCHAR(50) NOT NULL COMMENT '상품명' COLLATE 'utf8mb4_0900_ai_ci',
+   `code` VARCHAR(50) NOT NULL COMMENT '결제코드' COLLATE 'utf8mb4_0900_ai_ci',
+   `price` INT(10) NOT NULL DEFAULT '0' COMMENT '결제가격',
+   `user_no` INT(10) NOT NULL COMMENT '유저데이터번호',
+   `star_no` INT(10) NOT NULL COMMENT '상품데이터번호',
+   `reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '결제일',
+   `status` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_0900_ai_ci',
+   PRIMARY KEY (`pay_no`) USING BTREE
+)
+COMMENT='결제정보'
 
 DROP TABLE IF EXISTS persistent_logins;
 CREATE TABLE persistent_logins
@@ -121,6 +124,11 @@ REFERENCES star_board(star_no)
 ON DELETE CASCADE;
 -- star_board의 star_no 값을 참조하여 reply 테이블의 star_no 을 외래키로 설정
 
+ALTER TABLE reply
+ADD CONSTRAINT fk_reply_user FOREIGN KEY (user_no) REFERENCES user(user_no);
+-- user 테이블의 user_no 값을 참조하여 reply 테이블의 user_no을 외래키로 지정
+ALTER TABLE reply DROP FOREIGN KEY fk_reply_user;
+
 
 
 DROP TABLE IF EXISTS star_board ;
@@ -129,13 +137,13 @@ CREATE TABLE star_board
   star_no   INT         NOT NULL AUTO_INCREMENT COMMENT '이벤트데이터번호',
   title     VARCHAR(100) NOT NULL COMMENT '제목', -- 제목의 길이를 더 늘렸습니다.
   writer    VARCHAR(50)  NOT NULL COMMENT '작성자', -- 작성자 길이 조정.
-  content   TEXT        NOT NULL COMMENT '내용',
+  content   long        NOT NULL COMMENT '내용',
   reg_date  TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성일자',
   upd_date  TIMESTAMP   NULL     COMMENT '수정일자',
   views     INT         NOT NULL  DEFAULT '0'   COMMENT '조회수',
   user_no   INT         NOT NULL COMMENT '유저데이터번호',
   pay_no    INT         NULL     COMMENT '결제데이터번호',
-  likes     INT         NOT NULL DEFAULT 0 COMMENT '좋아요수',
+  likes     INT         NOT NULL DEFAULT '0' COMMENT '좋아요수',
   status    VARCHAR(20) NULL     COMMENT '상태', -- 상태의 길이 지정.
   card    VARCHAR(20) NULL     COMMENT '카드구분',
   category1 VARCHAR(100) NULL     COMMENT '종류1', -- 카테고리1 길이 지정.

@@ -12,7 +12,15 @@
         FROM star_board s 
         left join file f
         ON f.star_no=s.star_no 
-        WHERE type = #{type}
+
+        WHERE 
+        <if test="type != null">
+            type = #{type}
+        </if>
+        <if test="type == null">
+            1 = 1
+        </if>
+
         <if test="option.keyword != null and option.keyword != ''">
             AND
             <if test="option.code == 0">
@@ -190,8 +198,8 @@
 
     <!-- 글 등록 -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="starNo">
-        INSERT INTO star_board(title, writer, content, user_no, pay_no, card, category1, category2, type, start_date, end_date)
-        VALUES (#{title}, #{writer}, #{content},#{userNo},#{payNo},#{card},#{category1},#{category2},#{type},#{startDate},#{endDate})
+        INSERT INTO star_board(title, writer, content, user_no, pay_no, card, category1, category2, type, start_date, end_date, status)
+        VALUES (#{title}, #{writer}, #{content},#{userNo},#{payNo},#{card},#{category1},#{category2},#{type},#{startDate},#{endDate},#{status})
     </insert>
 
     <!-- 글 등록 -->
@@ -204,13 +212,18 @@
     <insert id="payment">
 
     </insert>
+
+    
     <!-- 글 조회 -->
     <select id="select" resultType="StarBoard">
-        SELECT * FROM star_board
-        WHERE star_no = #{starNo}
+        SELECT s.*, file_no as imgNo
+        FROM star_board s 
+        left join file f
+        ON f.star_no=s.star_no
+        WHERE s.star_no = #{starNo}
     </select>
 
-    <!-- 글 수정 -->
+        <!-- 글 수정 -->
     <update id="update">
         UPDATE star_board
         SET title = #{title},
@@ -218,6 +231,9 @@
             content = #{content},
             likes=#{likes},
             views=#{views},
+            status=#{status},
+            category1=#{category1},
+            category2=#{category2},
             upd_date = now()
         WHERE star_no = #{starNo}
     </update>
@@ -235,5 +251,23 @@
         DELETE FROM star_board
         WHERE star_no IN (${starNo})
     </delete>
+
+    <!-- 마이페이지 쓴 글 조회 -->
+    <select id="promotionList" resultType="StarBoard">
+        SELECT 
+            sb.user_no,
+            sb.title, 
+            sb.category1, 
+            sb.reg_date, 
+            sb.status, 
+            pi.price as star_price
+        FROM star_board sb
+        LEFT JOIN payment_info pi
+        ON  pi.user_no = sb.user_no
+        AND pi.star_no = sb.star_no
+        WHERE 
+            sb.user_no = #{userNo}
+        ORDER BY sb.reg_date DESC
+    </select>
 
 </mapper>

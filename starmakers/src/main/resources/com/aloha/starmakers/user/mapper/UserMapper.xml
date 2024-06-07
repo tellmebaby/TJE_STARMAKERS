@@ -65,6 +65,13 @@
         FROM user u LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id
         WHERE u.email = #{email}
     </select>
+    
+    <!-- 회원 조회 - userNo -->
+    <select id="selectUserNo" resultType="Users">
+        SELECT *
+        FROM user
+        WHERE user_no = #{userNo}
+    </select>
 
     <!-- 회원 가입 -->
     <insert id="join">
@@ -114,6 +121,7 @@
         FROM user
         WHERE id = #{id}
     </select>
+
 
     <!-- 인기회원조회 -->
     <select id="starMemberList" resultType="StarUser">
@@ -180,5 +188,11 @@ LEFT JOIN file AS f ON sb.user_no = f.user_no AND f.star_no = 0
     LIMIT 5;
     </select>
 
+
+    <!-- 관리자 회원 리스트 -->
+    <select id="list" resultType="Users">
+        SELECT *
+        FROM user
+    </select>
 
 </mapper>

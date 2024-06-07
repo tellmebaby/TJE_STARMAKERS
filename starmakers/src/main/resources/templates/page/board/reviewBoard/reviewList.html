@@ -6,187 +6,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>후기</title>
-    <style>
-        /* .container {
-            width: 960px;
-            margin: 0 auto;
-        } */
-        .search-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 10px;
-            border: none;
-            padding-right: 10px;
-        }
-
-        .search-container select,
-        .search-container input[type="text"] {
-            margin-left: 5px;
-            padding: 5px;
-            background-color: rgba(0, 0, 0, 0.1);
-            border-radius: 3px;
-            border: none;
-        }
-
-        .search-container button {
-            margin-left: 5px;
-            padding: 6px 15px;
-            background-color: rgba(51, 130, 246, 1);
-            color: white;
-            border-radius: 3px;
-            border: none;
-        }
-
-        .search-container button:hover {
-            padding: 6px 15px;
-            background-color: rgba(41, 75, 254, 1);
-            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
-            font-weight: bolder;
-            color: white;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            padding: 14px;
-            text-align: center;
-        }
-
-        td {
-            padding: 7px;
-            border-bottom: 0.7px solid #000;
-        }
-
-        thead {
-            border-bottom: 2px solid #000;
-        }
-
-        tbody {
-            padding-bottom: 400px;
-        }
-
-        .no-data {
-            height: 400px;
-        }
-
-        .button-container {
-            text-align: right;
-            padding: 10px 0;
-        }
-
-        .button-container a {
-            margin-left: 5px;
-            padding: 7px 12px;
-            background-color: rgba(51, 130, 246, 1);
-            border-radius: 3px;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: normal;
-        }
-
-        .button-container a:hover {
-            background-color: rgba(41, 75, 254, 1);
-            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
-            font-weight: bolder;
-            color: white;
-        }
-
-        a {
-            text-decoration: none;
-            color: black;
-        }
-
-        .fa-star {
-            color: gold;
-            font-size: 17px;
-            /* 아이콘 크기 조정 */
-            margin-right: 10px;
-            animation: twinkle2 1.5s infinite alternate;
-            transition: transform 0.3s ease-in-out;
-            /* 크기 변화 애니메이션 */
-        }
-
-        @keyframes twinkle2 {
-            0% {
-                opacity: 0.8;
-                color: gold;
-                transform: scale(1);
-                text-shadow: 0 0 5px rgba(255, 223, 0, 0.8), 0 0 10px rgba(255, 223, 0, 0.8);
-            }
-
-            50% {
-                color: lightgoldenrodyellow;
-                opacity: 1;
-                transform: scale(1.2);
-                text-shadow: 0 0 10px rgba(255, 223, 0, 0.9), 0 0 20px rgba(255, 223, 0, 0.9);
-            }
-
-            100% {
-                opacity: 0.8;
-                color: gold;
-                transform: scale(1);
-                text-shadow: 0 0 5px rgba(255, 223, 0, 0.8), 0 0 10px rgba(255, 223, 0, 0.8);
-            }
-        }
-
-
-        @keyframes twinkle {
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                color: orangered;
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .notice-row {
-            background-color: #f0f0f0;
-            /* 회색 배경색 */
-        }
-
-        .twinkle {
-            color: orange;
-            animation: twinkle 1s infinite;
-        }
-
-        .status-waiting {
-            color: grey;
-            /* 답변 대기일 때의 색상 */
-        }
-
-        .status-completed {
-            color: darkblue;
-            /* 답변 완료일 때의 색상 */
-            font-weight: bold;
-        }
-
-        .fixed {
-            background-color: #f0f0f0;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/list.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <th:block layout:fragment="content">
 
         <div class="container">
-            <h3>후기</h3>
+            <div class="line"></div>
+            <div class="black-han-sans-regular">
+                <p>후기</p>
+            </div>
+            <div class="noto-sans-kr">
+                <p>참여하신 이벤트나 홍보 후기를 자유롭게 남겨주세요 :D</p>
+            </div>
+
 
             <div class="search-container">
                 <form action="/page/board/reviewBoard/reviewList" method="get">
                     <select name="code">
-                        <option th:each="item : ${optionList}" th:value="${item.code}" th:text="${item.keyword}"
+                        <option th:each="item : ${optionList}" th:value="${item.code}" th:text="${item.codeName}"
                             th:selected="${item.code == option.code}"></option>
                     </select>
                     <input type="text" name="keyword" placeholder="검색어를 입력하세요" th:value="${param.keyword}">
@@ -197,27 +40,30 @@
             <table>
                 <thead>
                     <tr>
-                        <th width="70">번호</th>
+                        <th width="70">No</th>
                         <th width="300">제목</th>
                         <th width="150">작성자</th>
                         <th width="200">작성일</th>
-                        <th width="150">좋아요</th>
+                        <th width="150"><i class="fa-regular fa-thumbs-up"></i></th>
                         <th width="100">조회수</th>
                     </tr>
                 </thead>
-                <!-- <th:block th:if="${starList.isEmpty()}">
+                <th:block th:if="${starList.isEmpty()}">
                     <tr>
                         <td colspan="6" align="center" style="padding-top: 183.49px; padding-bottom: 183.49px;">
                             조회된 게시글이 없습니다.
                         </td>
                     </tr>
-                </th:block> -->
+                </th:block>
                 <tbody>
                     <th:block th:each="starBoard : ${starList}">
                         <tr th:if="${starBoard.type == 'review'}">
                             <td align="center" th:text="${starBoard.starNo}"></td>
                             <td>
-                                <a th:href="|reviewPost?starNo=${starBoard.starNo}|" th:text="${starBoard.title}"></a>
+                                <a th:href="|reviewPost?starNo=${starBoard.starNo}|" th:text="${starBoard.title} + ' [' + ${starBoard.commentCount} + ']'"></a>
+                                <th:block th:if="${starBoard.regDate.after(#dates.createToday())}">
+                                    <img th:src="@{/img/new.png}" style="width:15px; height:15px;">
+                                </th:block>
                             </td>
                             <td align="center" th:text="${starBoard.writer}"></td>
                             <td align="center">
@@ -236,19 +82,23 @@
                     </th:block>
                     <!-- 로그인 시 -->
                     <th:block sec:authorize="isAuthenticated()">
-                        <a href="/page/board/reviewBoard/reviewInsert" class="btn btn-primary">후기 등록</a>
+                        <a href="/page/board/reviewBoard/reviewInsert" class="btnn" style="background-color: #91ACCF;">✏글쓰기</a>
                     </th:block>
                 </div>
                 
         <!-- 페이지네이션 -->
         <center>
-            <div>
+            <div class="pagination">
                 <!-- [ 처음으로 ]-->
-                <a th:href="|/page/board/reviewBoard/reviewList?page=${page.first}&code=${option.code}&keyword=${option.keyword}|">&laquo;</a>
+                <a th:href="|/page/board/reviewBoard/reviewList?page=${page.first}&code=${option.code}&keyword=${option.keyword}|"><span class="material-symbols-outlined">
+                    first_page
+                    </span></a>
     
                 <!-- [ 이전 ] -->
                 <th:block th:if="${page.page != page.first}">
-                    <a th:href="|/page/board/reviewBoard/reviewList?page=${page.prev}&code=${option.code}&keyword=${option.keyword}|">&lt;</a>
+                    <a th:href="|/page/board/reviewBoard/reviewList?page=${page.prev}&code=${option.code}&keyword=${option.keyword}|"><span class="material-symbols-outlined">
+                        chevron_backward
+                        </span></a>
                 </th:block>
     
                 <th:block th:each="no : ${#numbers.sequence(page.start, page.end)}">  <!--(1,10)모델에 담은 페이지가 아니라 그냥 1부터 10 --> 
@@ -263,19 +113,23 @@
                         </b>
                     </th:block>
                     <th:block th:if="${page.page != no}">
-                        <a th:href="|/page/board/reviewBoard/reviewList?page=${no}&code=${option.code}&keyword=${option.keyword}|" th:text="${no}"></a>
+                        <a th:href="|/page/board/reviewBoard/reviewList?page=${no}&code=${option.code}&keyword=${option.keyword}|" th:text="${no}" style="padding: 0 7px;"></a>
                     </th:block>
                 </th:block>
     
                 <!-- [ 다음 ] -->
                 <th:block th:if="${page.page != page.last}">
-                    <a th:href="|/page/board/reviewBoard/reviewList?page=${page.next}&code=${option.code}&keyword=${option.keyword}|">&gt;</a>
+                    <a th:href="|/page/board/reviewBoard/reviewList?page=${page.next}&code=${option.code}&keyword=${option.keyword}|" class="material-symbols-outlined">
+                        chevron_forward
+                        </a>
                 </th:block>
     
                 <!-- [ 마지막 ]-->
-                <a th:href="|/page/board/reviewBoard/reviewList?page=${page.last}&code=${option.code}&keyword=${option.keyword}|">&raquo;</a>
+                <a th:href="|/page/board/reviewBoard/reviewList?page=${page.last}&code=${option.code}&keyword=${option.keyword}|"><span class="material-symbols-outlined">
+                    last_page
+                    </span></a>
             </div>
-            </center>
+        </center>
             </div>
 
     </th:block>
