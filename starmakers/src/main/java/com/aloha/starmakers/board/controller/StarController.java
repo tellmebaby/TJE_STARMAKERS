@@ -58,9 +58,9 @@ public class StarController {
     private LikeService likeService;
 
     @Autowired
-
     private UserService userService;
 
+    @Autowired
     private ReplyService replyService;
 
 
@@ -320,7 +320,13 @@ public class StarController {
         StarBoard starBoard = starService.select(starNo);
         // 조회수 증가
         starService.views(starNo);
-        int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+        int commentCount ;
+        if( starNo > 0 ) {
+            log.info("스타 번호 있는지 볼게요" + starNo);
+            commentCount = replyService.countByStarNo(starBoard.getStarNo());
+        }else{
+            commentCount = 0;
+        }
         starBoard.setCommentCount(commentCount);
         model.addAttribute("starBoard", starBoard);
         return "/page/starCard/starRead";
