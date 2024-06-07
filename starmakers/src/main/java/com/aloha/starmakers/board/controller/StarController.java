@@ -452,6 +452,12 @@ public class StarController {
             int commentCount = replyService.countByStarNo(starBoard.getStarNo());
             starBoard.setCommentCount(commentCount);
         }
+
+        log.info(" 가져온거 몇개얌 : " + starList.size());
+        for (StarBoard starBoard : starList) {
+            log.info("로그 갑니다" + starBoard.getTitle() );
+        } 
+
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
@@ -462,6 +468,7 @@ public class StarController {
         optionList.add(new Option("제목", 1));
         optionList.add(new Option("내용", 2));
         optionList.add(new Option("작성자", 3));
+
         model.addAttribute("optionList", optionList);
 
         return "/page/board/eventBoard/eventList";
@@ -469,6 +476,8 @@ public class StarController {
 
     @PostMapping("/board/eventBoard/eventInsert")
     public String eventInsertPro(StarBoard starBoard, String username) throws Exception {
+        
+        starBoard.setType("event");
         int result = starService.insert(starBoard, username);
         // 리다이렉트
         // 데이터 처리 성공
