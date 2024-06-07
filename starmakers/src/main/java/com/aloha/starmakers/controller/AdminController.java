@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.StarBoard;
+import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.board.service.StarService;
 import com.aloha.starmakers.pay.service.PayService;
 import com.aloha.starmakers.user.dto.Users;
@@ -39,6 +40,9 @@ public class AdminController {
     
     @Autowired
     private StarService starService;
+
+    @Autowired
+    private FileService fileService;
     
     @GetMapping("")
     public String getMethodName() {
@@ -155,8 +159,14 @@ public class AdminController {
     @GetMapping("/pages/profile")
     public String userProfile(@RequestParam("userNo") int userNo,
                                Model model) throws Exception {
+        // user 정보 가져오기
         Users user = userService.selectUserNo(userNo);
         model.addAttribute("user", user);
+        
+        // 프로필 이미지 가져오기
+        int fileNo = fileService.profileSelect(userNo);
+        model.addAttribute("fileNo", fileNo);
+
         return "/admin/pages/profile";
     }
     
