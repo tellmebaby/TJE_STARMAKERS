@@ -23,14 +23,7 @@
             <div class="row mb-2">
               <div class="col-sm-6">
                 <h1>Q&A</h1>
-              </div>
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Q&A</li>
-                </ol>
-              </div>
-
+              
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -177,29 +170,6 @@
               <!-- /.float-right -->
             </div>
             <div class="table-responsive mailbox-messages">
-              <table class="table table-hover table-striped">
-                <input type="hidden" name="qnaNos" id="qnaNos">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>번호</th>
-                    <th>작성자</th>
-                    <th>제목</th>
-                    <th>작성일자</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr th:each="qnaBoard : ${qnaList}">
-                    <td>
-                      <div class="icheck-primary">
-                        <input type="checkbox" th:id="|qnaNo${qnaBoard.qnaNo}|" name="qnaNo"
-                          th:value="${qnaBoard.qnaNo}">
-                        <label th:for="|qnaNo${qnaBoard.qnaNo}|"></label>
-                      </div>
-
-                      <!-- /.btn-group -->
-                    </div>
-                    <!-- /.float-right -->
                   </div>
                   <div class="table-responsive mailbox-messages">
                     <table class="table table-hover table-striped">

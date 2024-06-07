@@ -70,7 +70,10 @@
             <span th:utext="${starBoard.content}"></span>
           </div>
           <div class="button-box1">
-            <button class="like-btn"><i class="fa-regular fa-star"></i></button>
+            <button class="like-btn" data-user-no="[[${session.user != null ? session.user.userNo : ''}]]" data-star-no="[[${starBoard.starNo}]]">
+              <i class="fa fa-star fa-regular [[${#lists.contains(session.user.likedStars, starBoard.starNo) ? 'fa-solid' : 'fa-regular'}]]"></i>
+          </button>
+          <span id="like-count" th:text="${starBoard.likes}"></span>
           </div>
           <div class="d-flex justify-content-end mt-2 button-box">
             <button class="btn-list" type="button" onclick="moveList()">목록</button>
@@ -114,6 +117,50 @@
     </div>
   
   <script>
+    
+    $(document).on('click', '.like-btn', function (e) {
+        e.preventDefault(); // 기본 동작 방지
+
+        var userNo = "[[${session.user != null ? session.user.userNo : ''}]]";
+        var starNo = "[[${starBoard.starNo}]]";
+        var csrfToken = "[[${_csrf.token}]]";
+
+        if (userNo === '') {
+            alert("로그인을 하시오!");
+            return;
+        }
+
+        $.ajax({
+            url: '/page/like',
+            method: 'POST',
+            contentType: 'application/x-www-form-urlencoded',
+            data: {
+                userNo: userNo,
+                starNo: starNo
+            },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+            },
+            success: function (response) {
+                var likeIcon = $(this).find('i.fa-star');
+                var likeCount = $('#like-count');
+
+                if (response.liked) {
+                    likeIcon.removeClass('fa-regular').addClass('fa-solid');
+                    likeCount.text(parseInt(likeCount.text()) + 1);
+                } else {
+                    likeIcon.removeClass('fa-solid').addClass('fa-regular');
+                    likeCount.text(parseInt(likeCount.text()) - 1);
+                }
+            }.bind(this),
+            error: function (xhr, status, error) {
+                console.error("좋아요 상태 변경 실패:", error);
+            }
+        });
+    });
+
+
+
     const starNo = "[[${starBoard.starNo}]]"
 
     function moveList() {
