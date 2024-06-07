@@ -139,7 +139,7 @@
             <!-- DIRECT CHAT -->
             <div class="card direct-chat direct-chat-primary">
               <div class="card-header">
-                <h3 class="card-title">Direct Chat</h3>
+                <h3 class="card-title">1:1 채팅</h3>
 
                 <div class="card-tools">
                   <span title="3 New Messages" class="badge badge-primary">3</span>
@@ -160,18 +160,7 @@
                 <div class="direct-chat-messages">
                   <!-- Message. Default to the left -->
                   <div class="direct-chat-msg">
-                    <div class="direct-chat-infos clearfix">
-                      <span class="direct-chat-name float-left">Alexander Pierce</span>
-                      <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
-                    </div>
-                    <!-- /.direct-chat-infos -->
-                    <img class="direct-chat-img" src="admin/dist/img/user1-128x128.jpg" alt="message user image">
-                    <!-- /.direct-chat-img -->
-                    <div class="direct-chat-text">
-                      Is this template really for free? That's unbelievable!
-                    </div>
-                    <!-- /.direct-chat-text -->
-                  </div>
+
                   <!-- /.direct-chat-msg -->
 
                   <!-- Message to the right -->
@@ -184,7 +173,7 @@
                     <img class="direct-chat-img" src="admin/dist/img/user3-128x128.jpg" alt="message user image">
                     <!-- /.direct-chat-img -->
                     <div class="direct-chat-text">
-                      You better believe it!
+                      하..
                     </div>
                     <!-- /.direct-chat-text -->
                   </div>
@@ -200,7 +189,7 @@
                     <img class="direct-chat-img" src="admin/dist/img/user1-128x128.jpg" alt="message user image">
                     <!-- /.direct-chat-img -->
                     <div class="direct-chat-text">
-                      Working with AdminLTE on a great new app! Wanna join?
+                      아아아아~
                     </div>
                     <!-- /.direct-chat-text -->
                   </div>
@@ -325,11 +314,13 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
-                <form action="#" method="post">
+                <form id="messageForm">
                   <div class="input-group">
-                    <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                      <input type="hidden" id="inputCsrf" name="${_csrf.parameterName}" value="${_csrf.token}">
+                      <input type="text" name="content" placeholder="입력하세요 ..." class="form-control" id="chatInput">
+                      <input type="hidden" name="code" value="toAdmin">
                     <span class="input-group-append">
-                      <button type="button" class="btn btn-primary">Send</button>
+                      <button type="submit" class="btn btn-primary">보내기</button>
                     </span>
                   </div>
                 </form>
@@ -528,7 +519,7 @@
 
                 <div class="card-tools">
                   <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
+                    <i class="fas fa-minus"></i>chart tab-pane active
                   </button>
                   <button type="button" class="btn bg-info btn-sm" data-card-widget="remove">
                     <i class="fas fa-times"></i>
