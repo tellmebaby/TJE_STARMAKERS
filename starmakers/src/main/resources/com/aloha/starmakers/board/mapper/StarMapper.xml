@@ -6,7 +6,6 @@
 <mapper namespace="com.aloha.starmakers.board.mapper.StarMapper">
 
     <!-- 게시판 목록 -->
-    <!-- 게시판 목록 -->
     <select id="list" resultType="StarBoard">
         SELECT s.*, file_no as imgNo
         FROM star_board s 

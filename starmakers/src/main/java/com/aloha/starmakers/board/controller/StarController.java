@@ -453,10 +453,6 @@ public class StarController {
             starBoard.setCommentCount(commentCount);
         }
 
-        log.info(" 가져온거 몇개얌 : " + starList.size());
-        for (StarBoard starBoard : starList) {
-            log.info("로그 갑니다" + starBoard.getTitle() );
-        } 
 
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
