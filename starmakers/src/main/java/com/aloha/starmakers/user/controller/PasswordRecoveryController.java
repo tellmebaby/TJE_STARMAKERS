@@ -39,7 +39,7 @@ public class PasswordRecoveryController {
         String resetUrl = httpServletRequest.getRequestURL().toString().replace("/recover", "/reset?token=") + token;
 
         // Send email
-        emailService.sendPasswordResetEmail(email, resetUrl);
+        // emailService.sendPasswordResetEmail(email, resetUrl);
 
         return ResponseEntity.ok("Password reset email sent.");
     }
