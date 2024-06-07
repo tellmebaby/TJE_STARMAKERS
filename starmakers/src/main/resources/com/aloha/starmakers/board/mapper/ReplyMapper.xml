@@ -79,5 +79,11 @@
      WHERE star_no = #{starNo}
 </select>
 
+<!-- 댓글 조회 - user기준 -->
+<select id="selectUser" resultType="reply">
+     SELECT *
+     FROM reply
+     WHERE user_no = #{userNo}
+</select>
 
 </mapper>

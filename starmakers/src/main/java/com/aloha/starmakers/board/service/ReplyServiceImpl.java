@@ -97,5 +97,11 @@ public class ReplyServiceImpl implements ReplyService {
         int result = replyMapper.countByStarNo(starNo);
         return result;
     }
+
+    @Override
+    public List<Reply>  selectUser(int userNo) throws Exception {
+        List<Reply>  reply = replyMapper.selectUser(userNo);
+        return reply;
+    }
     
 }

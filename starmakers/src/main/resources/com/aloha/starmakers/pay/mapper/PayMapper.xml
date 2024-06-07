@@ -5,6 +5,10 @@
 
 <mapper namespace="com.aloha.starmakers.pay.mapper.PayMapper">
 
+    <resultMap type="Pay" id="payMap">
+        <result property="totalPrice" column="total_price"></result>
+    </resultMap>
+
     <insert id="insert" useGeneratedKeys="true" keyProperty="payNo">
         INSERT INTO payment_info ( code, price, user_no, star_no, status, product_title )
         VALUES ( #{code}, #{price}, #{userNo}, #{starNo}, #{status}, #{productTitle} )
@@ -45,7 +49,7 @@
     </update>
 
     <!-- 관리자 회원별 결제 조회 -->
-    <select id="totalPrice" resultType="int">
+    <select id="totalPrice" resultType="Pay">
         SELECT sum(price) as total_price
         FROM payment_info
         WHERE user_no = #{userNo}
