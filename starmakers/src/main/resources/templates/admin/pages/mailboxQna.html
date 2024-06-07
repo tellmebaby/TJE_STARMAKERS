@@ -21,12 +21,12 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1>Inbox</h1>
+                <h1>Q&A</h1>
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Inbox</li>
+                  <li class="breadcrumb-item active">Q&A</li>
                 </ol>
               </div>
             </div>
@@ -145,17 +145,19 @@
                     <table class="table table-hover table-striped">
                       <input type="hidden" name="qnaNos" id="qnaNos">
                       <thead>
-                        <tr>
+                        <tr align="center">
                           <th></th>
                           <th>번호</th>
                           <th>작성자</th>
                           <th>제목</th>
                           <th>작성일자</th>
+                          <th>상태</th>
+                          <th></th>
                         </tr>
                       </thead>
-                      <tbody> 
+                      <tbody align="center"> 
                       <tr th:each="qnaBoard : ${qnaList}">
-                        <td>
+                        <td >
                           <div class="icheck-primary">
                             <input type="checkbox" th:id="|qnaNo${qnaBoard.qnaNo}|" name="qnaNo" th:value="${qnaBoard.qnaNo}">
                             <label th:for="|qnaNo${qnaBoard.qnaNo}|"></label>
@@ -166,6 +168,15 @@
                         <td class="mailbox-subject" th:text="${qnaBoard.title}" style="width: 300px;"></td>
                         <td class="mailbox-date">
                           <span th:text="${#dates.format(qnaBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                        </td>
+                        <td class="mailbox-qna" th:text="${qnaBoard.status}"></td>
+                        <td>
+                          <div th:if="${qnaBoard.status} == '답변 대기'">
+                            <button type="button"><a th:href="@{/page/board/qnaBoard/qnaPost(qnaNo=${qnaBoard.qnaNo})}">답변 등록</a></button>
+                          </div>
+                          <div th:if="${qnaBoard.status} == '답변 완료'">
+                            <button type="button"><a th:href="@{/page/board/qnaBoard/qnaPost(qnaNo=${qnaBoard.qnaNo})}">편집</a></button>
+                          </div>
                         </td>
                       </tr>
                       </tbody>
