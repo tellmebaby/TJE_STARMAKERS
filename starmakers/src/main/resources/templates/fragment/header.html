@@ -51,6 +51,9 @@
                                 <img id="thumbnail" class="rounded-circle rounded-circle-custom" alt="Thumbnail Image">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <li><a class="dropdown-item" href="/admin">관리자</a></li>
+                                </th:block>
                                 <li><a class="dropdown-item" href="/page/mypage/profile">마이페이지</a></li>
                                 <li>
                                     <form action="/logout" method="post" class="dropdown-item">

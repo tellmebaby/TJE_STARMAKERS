@@ -90,7 +90,10 @@
                           <span th:text="${user.phone}"></span>
                       </td>
                       <td class="project-state">
-                          <span class="badge badge-success" th:text="${user.auth}"></span>
+                          <!-- <tr th:each="auth : ${authList}"></tr> -->
+                          <span th:if="${user.auth}=='ROLE_ADMIN'" class="badge badge-dark" th:text="${user.auth}"></span>
+                          <span th:if="${user.auth}=='ROLE_USER'" class="badge badge-success" th:text="${user.auth}"></span>
+                          <span th:if="${user.auth}=='ROLE_GUEST'" class="badge badge-danger" th:text="${user.auth}"></span>
                           <!-- <span class="badge badge-success" th:text="${user.totalPrice}"></span> -->
                       </td>
                       <td class="project-actions text-right">
