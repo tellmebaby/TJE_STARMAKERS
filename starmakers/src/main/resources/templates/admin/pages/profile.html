@@ -243,27 +243,26 @@
                       <!-- timeline time label -->
                       <div class="time-label">
                         <span class="bg-danger">
-                          10 Feb. 2014
+                          메세지 주고받은 날짜${message.regDate} yyyy-mm-dd
                         </span>
                       </div>
                       <!-- /.timeline-label -->
                       <!-- timeline item -->
                       <div>
-                        <i class="fas fa-envelope bg-primary"></i>
+                        <!-- th:each로 messageList 만들어서 반복돌려야하나..? -->
+                         <!-- code가 toAdmin인지 toUser인지에따라 관리자/회원 나눠서 띄우면 될 듯 -->
+                        <!-- <i th:if="${message.code}==toAdmin" class="fas fa-envelope bg-primary"></i> -->
 
                         <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 12:05</span>
+                          <span class="time"><i class="far fa-clock"></i>${message.regDate} hh:mm</span>
 
                           <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
 
                           <div class="timeline-body">
-                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                            quora plaxo ideeli hulu weebly balihoo...
+                            message.content
                           </div>
                           <div class="timeline-footer">
-                            <a href="#" class="btn btn-primary btn-sm">Read more</a>
+                            <!-- <a href="#" class="btn btn-primary btn-sm">Read more</a> -->
                             <a href="#" class="btn btn-danger btn-sm">Delete</a>
                           </div>
                         </div>
