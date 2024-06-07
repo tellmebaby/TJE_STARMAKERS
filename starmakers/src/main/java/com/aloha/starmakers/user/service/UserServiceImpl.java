@@ -175,6 +175,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<StarUser> newMemberList() throws Exception {
         return userMapper.newMemberList();
+    }
 
     @Override
     public List<Users> list() throws Exception {
