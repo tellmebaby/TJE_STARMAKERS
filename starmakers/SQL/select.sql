@@ -107,6 +107,7 @@ LEFT JOIN file AS f ON sb.user_no = f.user_no AND f.star_no = 0;
 
 -- 최근에 글올린 유저
 SELECT 
+    sb.star_no,
     sb.writer,
     sb.views,
     sb.user_no,
@@ -130,3 +131,36 @@ WHERE
 ORDER BY 
     sb.reg_date DESC
 LIMIT 5;
+
+
+SELECT 
+    sb.writer,
+    sb.views,
+    sb.user_no,
+    sb.likes,
+    sb.category2,
+    sb.star_no,  -- 가장 높은 조회수 게시물의 star_no
+    f.file_no AS userImgId
+FROM (
+    SELECT 
+        s.user_no,
+        s.writer,
+        s.views,
+        s.likes,
+        s.category2,
+        s.star_no,
+        COALESCE(s.views, 0) + COALESCE(s.likes, 0) AS total_score
+    FROM 
+        star_board s
+    WHERE 
+        s.card IS NOT NULL
+        AND s.views = (
+            SELECT MAX(inner_s.views)
+            FROM star_board inner_s
+            WHERE inner_s.user_no = s.user_no
+        )
+    ORDER BY 
+        total_score DESC
+    LIMIT 5
+) AS sb
+LEFT JOIN file AS f ON sb.user_no = f.user_no AND f.star_no = 0;

@@ -11,4 +11,5 @@ public class StarUser {
     private int likes;
     private String category2;
     private int userImgId;
+    private int starNo;
 }
