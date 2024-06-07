@@ -14,10 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
 
-
 import com.aloha.starmakers.board.dto.Files;
-import com.aloha.starmakers.board.mapper.FileMapper;
-
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.user.dto.PasswordResetToken;
 import com.aloha.starmakers.user.dto.StarUser;
@@ -71,8 +68,13 @@ public class UserServiceImpl implements UserService {
         // 세션의 정보 등록
         user = userMapper.select(username);
         Files file = fileService.selectByUserNoAndStarNo(user.getUserNo());
-        log.info(":::::::::::::fileno : " + file.getFileNo() );
-        user.setUserImgId(file.getFileNo());
+        if ( file != null ){
+            log.info(":::::::::::::fileno : " + file.getFileNo() );
+            user.setUserImgId(file.getFileNo());
+        }else{
+            log.info(":::::::::::::파일이 없어요");
+            user.setUserImgId(0);
+        }
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
 
@@ -173,6 +175,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<StarUser> newMemberList() throws Exception {
         return userMapper.newMemberList();
+
+    @Override
+    public List<Users> list() throws Exception {
+        List<Users> userList = userMapper.list();
+        return userList;
+    }
+
+    @Override
+    public Users selectUserNo(int userNo) throws Exception {
+        Users user = userMapper.selectUserNo(userNo);
+        return user;
+
     }
 
 }

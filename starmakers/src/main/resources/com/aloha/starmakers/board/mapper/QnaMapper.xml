@@ -123,7 +123,7 @@
     </delete>
 
     <!-- 조회수 -->
-    <update id="view">
+    <update id="views">
         UPDATE qna_board
            SET views = views + 1
         WHERE qna_no = #{qnaNo}

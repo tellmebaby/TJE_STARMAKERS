@@ -1,6 +1,5 @@
 package com.aloha.starmakers.board.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +46,8 @@ public class StarServiceImpl implements StarService {
     public int insert(StarBoard starBoard, String username) throws Exception {
         Users user = userMapper.login(username);
         starBoard.setUserNo(user.getUserNo());
-        starBoard.setWriter(user.getName());
-        // starBoard.setCard("무료홍보");
+        starBoard.setWriter(user.getId());
+        
         // 정보 등록
         starMapper.insert(starBoard);
         
@@ -63,7 +62,7 @@ public class StarServiceImpl implements StarService {
     public int payInsert(StarBoard starBoard, String username) throws Exception {
         Users user = userMapper.login(username);
         starBoard.setUserNo(user.getUserNo());
-        starBoard.setWriter(user.getName());
+        starBoard.setWriter(user.getId());
         starBoard.setCard("유료홍보요청");
         // Date strDate = starBoard.getStartDate();
         // Date endDate = starBoard.getEndDate();
@@ -132,6 +131,7 @@ public class StarServiceImpl implements StarService {
         return starList;
     }
 
+
     /**
      * 새 메인 카드리스트 요청
      */
@@ -140,6 +140,20 @@ public class StarServiceImpl implements StarService {
         List<StarBoard> starList = starMapper.mainCardList(type);
         return starList;
     }
+
+    @Override
+    public List<StarBoard> promotionList(int userNo, Page page, Option option) throws Exception {
+
+        List<StarBoard> promotionList = starMapper.promotionList(userNo, page, option);
+        log.info("userNo : " + userNo);
+        return promotionList;
+    }
+
+    
+
+
+
+
 
  
 }

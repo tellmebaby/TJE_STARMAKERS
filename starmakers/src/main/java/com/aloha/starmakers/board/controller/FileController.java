@@ -199,4 +199,24 @@ public class FileController {
         }
     }
 
+    @DeleteMapping("/allDelete")
+    public ResponseEntity<String> allDelete(@RequestParam("user_no") int userNo) {
+        try {
+            // 파일 정보 가져오기
+            Integer fileNo = fileService.profileSelect(userNo);
+            if (fileNo != null && fileNo > 0) {
+                int result = fileService.allDelete(userNo);
+                if (result > 0) {
+                    return ResponseEntity.ok("파일이 성공적으로 삭제되었습니다.");
+                } else {
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 삭제에 실패하였습니다.");
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("파일이 존재하지 않습니다.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 삭제 실패: " + e.getMessage());
+        }
+    }
+
 }

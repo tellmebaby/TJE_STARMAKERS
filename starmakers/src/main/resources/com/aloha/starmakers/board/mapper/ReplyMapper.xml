@@ -16,8 +16,10 @@
      SELECT *
      FROM reply
      WHERE star_no = #{starNo}
-     ORDER BY parent_no DESC
-             ,reg_date ASC
+     ORDER BY 
+     CASE WHEN parent_no = reply_no THEN reply_no ELSE parent_no END DESC,
+          CASE WHEN parent_no = reply_no THEN 0 ELSE 1 END, 
+          reg_date DESC; 
 </select>
 
 <!-- 댓글 조회 -->
@@ -29,15 +31,15 @@
 
 <!-- 댓글 등록 -->
 <insert id="insert">
-     INSERT INTO reply (star_no, parent_no, writer, content)
-     VALUES (#{starNo}, #{parentNo}, #{writer}, #{content})
+     INSERT INTO reply (user_no, star_no, parent_no, writer, content)
+     VALUES (#{userNo}, #{starNo}, #{parentNo}, #{writer}, #{content})
 </insert>
 
 <!-- 댓글 수정 -->
 <update id="update">
      UPDATE reply                       <!-- 댓글 수정할 때 parentNo 수정할 필요 X-->
-        SET writer = #{writer}
-           ,content = #{content}
+        SET writer = #{writer},
+        content = #{content}
            <if test="parentNo != 0">
                ,parent_no = #{parentNo} <!-- 답글 수정할 때는 수정 -->
           </if>

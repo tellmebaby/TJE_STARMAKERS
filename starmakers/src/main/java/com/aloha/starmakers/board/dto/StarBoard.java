@@ -28,4 +28,9 @@ public class StarBoard {
     private List Icons;
     private int commentCount;
     private int likes_chk;
-    private int userImgId;}
+
+    private int userImgId;
+
+    private int starPrice;
+}
+

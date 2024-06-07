@@ -12,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import com.aloha.starmakers.security.CustomAccessDeniedHandler;
 import com.aloha.starmakers.security.LoginSuccessHandler;
@@ -72,6 +73,9 @@ public class SecurityConfig {
         //         .authorizeRequests(requests -> requests
         //                 .antMatchers("/message/**").authenticated()
         //                 .anyRequest().permitAll());
+
+        // CSRF 토큰을 쿠키에 저장하고, /payments/** 경로에 대한 요청이 인증된 사용자만 접근할 수 있도록 설정
+        // http.csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
 
         return http.build();
     }

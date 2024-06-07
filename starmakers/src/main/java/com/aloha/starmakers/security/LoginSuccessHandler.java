@@ -14,10 +14,8 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.stereotype.Component;
 
 import com.aloha.starmakers.board.dto.Files;
-import com.aloha.starmakers.board.mapper.FileMapper;
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.user.dto.CustomUser;
-import com.aloha.starmakers.user.dto.Users;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -85,7 +83,6 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
             log.info(":::::::::::::fileno : " + file.getFileNo() );
             user.getUser().setUserImgId(file.getFileNo());
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         // 세션의 정보 등록
