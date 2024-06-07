@@ -1,6 +1,5 @@
 package com.aloha.starmakers.controller;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,13 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.QnaBoard;
 import com.aloha.starmakers.board.dto.Reply;
 import com.aloha.starmakers.board.dto.StarBoard;
+import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.board.service.QnaService;
 import com.aloha.starmakers.board.service.ReplyService;
 import com.aloha.starmakers.board.service.StarService;
@@ -25,10 +27,6 @@ import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -53,6 +51,9 @@ public class AdminController {
 
     @Autowired
     private ReplyService replyService;
+
+    @Autowired
+    private FileService fileService;
     
     @GetMapping("")
     public String getMethodName() {
