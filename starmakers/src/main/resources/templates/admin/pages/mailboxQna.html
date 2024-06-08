@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head th:replace="/admin/header :: head"></head>
-
-<body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
-  <div class="wrapper">
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="/admin/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-    </div>
-
-
-    <!-- 사이드바 -->
-    <div th:replace="/admin/sidebar :: sidebar"></div>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>Inbox</h1>
+  <head th:replace="/admin/header :: head"></head>
+  <body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
+    <form id="actionForm" action="" method="post">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      <div class="wrapper">
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+          <img class="animation__shake" src="/admin/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+        </div>
+      
+      
+        <!-- 사이드바 -->
+        <div th:replace="/admin/sidebar :: sidebar"></div>
+    
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>Q&A</h1>
+              
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -168,31 +170,43 @@
               <!-- /.float-right -->
             </div>
             <div class="table-responsive mailbox-messages">
-              <table class="table table-hover table-striped">
-                <input type="hidden" name="qnaNos" id="qnaNos">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>번호</th>
-                    <th>작성자</th>
-                    <th>제목</th>
-                    <th>작성일자</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr th:each="qnaBoard : ${qnaList}">
-                    <td>
-                      <div class="icheck-primary">
-                        <input type="checkbox" th:id="|qnaNo${qnaBoard.qnaNo}|" name="qnaNo"
-                          th:value="${qnaBoard.qnaNo}">
-                        <label th:for="|qnaNo${qnaBoard.qnaNo}|"></label>
-                      </div>
-                    </td>
-                    <td class="mailbox-qna" th:text="${qnaBoard.qnaNo}"></td>
-                    <td class="mailbox-name" th:text="${qnaBoard.writer}"></td>
-                    <td class="mailbox-subject" th:text="${qnaBoard.title}" style="width: 300px;"></td>
-                    <td class="mailbox-date">
-                      <span th:text="${#dates.format(qnaBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                  </div>
+                  <div class="table-responsive mailbox-messages">
+                    <table class="table table-hover table-striped">
+                      <input type="hidden" name="qnaNos" id="qnaNos">
+                      <thead>
+                        <tr align="center">
+                          <th></th>
+                          <th>번호</th>
+                          <th>작성자</th>
+                          <th>제목</th>
+                          <th>작성일자</th>
+                          <th>상태</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody align="center"> 
+                      <tr th:each="qnaBoard : ${qnaList}">
+                        <td >
+                          <div class="icheck-primary">
+                            <input type="checkbox" th:id="|qnaNo${qnaBoard.qnaNo}|" name="qnaNo" th:value="${qnaBoard.qnaNo}">
+                            <label th:for="|qnaNo${qnaBoard.qnaNo}|"></label>
+                          </div>
+                        </td>
+                        <td class="mailbox-star" th:text="${qnaBoard.qnaNo}"></td>
+                        <td class="mailbox-name" th:text="${qnaBoard.writer}"></td>
+                        <td class="mailbox-subject" th:text="${qnaBoard.title}" style="width: 300px;"></td>
+                        <td class="mailbox-date">
+                          <span th:text="${#dates.format(qnaBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                        </td>
+                        <td class="mailbox-qna" th:text="${qnaBoard.status}"></td>
+                        <td>
+                          <div th:if="${qnaBoard.status} == '답변 대기'">
+                            <button type="button"><a th:href="@{/page/board/qnaBoard/qnaPost(qnaNo=${qnaBoard.qnaNo})}">답변 등록</a></button>
+                          </div>
+                          <div th:if="${qnaBoard.status} == '답변 완료'">
+                            <button type="button"><a th:href="@{/page/board/qnaBoard/qnaPost(qnaNo=${qnaBoard.qnaNo})}">편집</a></button>
+                          </div>
                         </td>
                       </tr>
                       </tbody>

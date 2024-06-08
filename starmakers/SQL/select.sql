@@ -246,3 +246,53 @@ FROM message
 
  INSERT INTO message (content, code, reply_no, pay_no, qna_no, user_no)
 VALUES ('안녕', 'ToUser', 0, 0, 0, 2)
+
+SELECT like_no
+FROM action
+where user_no=1 and star_no=4;
+
+SELECT 
+    s.*,
+    f.file_no AS imgNo,
+    (
+        SELECT file_no 
+        FROM file f2 
+        WHERE f2.user_no = s.user_no AND f2.star_no = 0 
+        ORDER BY f2.reg_date DESC 
+        LIMIT 1
+    ) AS userImgId
+    FROM 
+        star_board s
+    LEFT JOIN 
+        file f ON f.star_no = s.star_no
+    WHERE 
+        s.type = 'starcard'
+    ORDER BY 
+        s.reg_date DESC;
+
+
+SELECT
+    s.*,
+    f.file_no AS imgNo,
+    (
+        SELECT file_no 
+        FROM file f2 
+        WHERE f2.user_no = s.user_no AND f2.star_no = 0 
+        ORDER BY f2.reg_date DESC 
+        LIMIT 1
+    ) AS userImgId,
+    CASE
+        WHEN a.star_no IS NOT NULL THEN 'liked'
+        ELSE 'nothing'
+    END AS action
+FROM 
+    star_board s
+LEFT JOIN 
+    file f ON f.star_no = s.star_no
+LEFT JOIN
+    action a ON a.star_no = s.star_no AND a.user_no = 1
+WHERE 
+    s.type = 'starCard'
+ORDER BY 
+    s.reg_date DESC;
+

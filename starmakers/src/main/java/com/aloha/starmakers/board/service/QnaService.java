@@ -25,6 +25,9 @@ public interface QnaService {
     // 답변 등록
     public int insertAnswer(QnaBoard qnaBoard) throws Exception;
 
+    // 답변 삭제
+    public int deleteAnswer(QnaBoard qnaBoard) throws Exception;
+
     // 검색 목록
     public List<QnaBoard> search(Option option) throws Exception;
 

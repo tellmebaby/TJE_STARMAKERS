@@ -9,6 +9,8 @@ import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.StarBoard;
 
+import groovyjarjarantlr4.v4.codegen.model.ExceptionClause;
+
 @Mapper
 public interface StarMapper {
 
@@ -61,5 +63,6 @@ public interface StarMapper {
                                         ,@Param("page") Page page
                                         ,@Param("option") Option option) throws Exception;
 
-
+    // 로그인 유저 모든 카드 불러오기
+    public List<StarBoard> getMainCardListForLoggedInUser( int userNo, String type ) throws Exception;
 }

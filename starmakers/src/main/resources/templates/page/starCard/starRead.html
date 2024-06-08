@@ -29,16 +29,24 @@
 <!-- layout:decorate 쓸 때 본문 내용은 <th:block layout:fragment="content"></th:block> 안에 적어야 화면에 뜸 -->
 <th:block layout:fragment="content" class="align-items-center ml-5">
   <div class="body lg" style="max-width: 900 ;">
-    <h1 class="d-flex justify-content-center mt-3 mb-3">
-      홍보 상세
-    </h1>
+    <h1 class="d-flex justify-content-center pt-3 mb-3 starTitle" th:text="${starBoard.title}"> </h1>
 
       <div class="container2">
         <form action="/page/starBoard/delete" method="get" id="read">
           <input type="hidden" name="starNo" th:value="${starBoard.starNo}">
           <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
-
+          <div class="d-flex justify-content-between fw-light fs-6 read-top">
+            <span class="col-4" th:text="|기간 ${#dates.format(starBoard.startDate, 'yyyy-MM-dd')}~${#dates.format(starBoard.endDate, 'yyyy-MM-dd')}|"></span>
+            <span class="col-4 align-items-center" th:text="|작성일 ${#dates.format(starBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}|"></span>
+            <div class="d-flex justify-content-end col-4">
+              <span ><i class="fa-solid fa-star"></i> </span>
+              <span th:text="${starBoard.likes}"></span>
+              <span class="ms-2"><i class="fa-regular fa-eye"></i> </span>
+              <span th:text="${starBoard.views}"></span>
+            </div>
+            <!-- <span th:text="|view${starBoard.views}  likes${starBoard.likes}|"></span> -->
+          </div>
           <div class="main-image">
             <div>
               <img th:src="|/file/img/${starBoard.imgNo}|" class="image rounded mt-auto" alt="썸네일">
@@ -61,15 +69,24 @@
           <div class="content-container2" id="content">
             <span th:utext="${starBoard.content}"></span>
           </div>
-          <div class="d-flex justify-content-end mt-2">
-            <button class="btn btn-secondary btn-submit col-1 border-0 " type="button" onclick="moveList()">목록</button>
+          <div class="button-box1">
+            <button class="like-btn" data-user-no="[[${session.user != null ? session.user.userNo : ''}]]" data-star-no="[[${starBoard.starNo}]]">
+              <i class="fa fa-star fa-regular [[${#lists.contains(session.user.likedStars, starBoard.starNo) ? 'fa-solid' : 'fa-regular'}]]"></i>
+          </button>
+          <span id="like-count" th:text="${starBoard.likes}"></span>
+          </div>
+          <div class="d-flex justify-content-end mt-2 button-box">
+            <button class="btn-list" type="button" onclick="moveList()">목록</button>
             <button th:if="${session.user} and ${session.user.userNo}==${starBoard.userNo}"
-              class="btn btn-light btn-submit col-1 border-0 ms-2" type="button" onclick="update()">수정</button>
+              class="btn-update" type="button" onclick="update()">수정</button>
             <input th:if="${session.user} and ${session.user.userNo}==${starBoard.userNo}"
-              class="btn btn-dark btn-submit col-1 border-0 ms-2" type="submit" onclick="actionDelete()"
+              class="btn-delete" type="submit" onclick="actionDelete()"
               value="삭제"></input>
           </div>
         </form>
+        <!-- 좋아요 버튼 -->
+        
+
         <!-- 댓글 등록 -->
         <div class="reply-container">
           <div class="reply-box">
@@ -100,6 +117,50 @@
     </div>
   
   <script>
+    
+    $(document).on('click', '.like-btn', function (e) {
+        e.preventDefault(); // 기본 동작 방지
+
+        var userNo = "[[${session.user != null ? session.user.userNo : ''}]]";
+        var starNo = "[[${starBoard.starNo}]]";
+        var csrfToken = "[[${_csrf.token}]]";
+
+        if (userNo === '') {
+            alert("로그인을 하시오!");
+            return;
+        }
+
+        $.ajax({
+            url: '/page/like',
+            method: 'POST',
+            contentType: 'application/x-www-form-urlencoded',
+            data: {
+                userNo: userNo,
+                starNo: starNo
+            },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+            },
+            success: function (response) {
+                var likeIcon = $(this).find('i.fa-star');
+                var likeCount = $('#like-count');
+
+                if (response.liked) {
+                    likeIcon.removeClass('fa-regular').addClass('fa-solid');
+                    likeCount.text(parseInt(likeCount.text()) + 1);
+                } else {
+                    likeIcon.removeClass('fa-solid').addClass('fa-regular');
+                    likeCount.text(parseInt(likeCount.text()) - 1);
+                }
+            }.bind(this),
+            error: function (xhr, status, error) {
+                console.error("좋아요 상태 변경 실패:", error);
+            }
+        });
+    });
+
+
+
     const starNo = "[[${starBoard.starNo}]]"
 
     function moveList() {

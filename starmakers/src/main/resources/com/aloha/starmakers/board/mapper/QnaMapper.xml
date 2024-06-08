@@ -116,6 +116,14 @@
         WHERE qna_no = #{qnaNo}
     </update>
 
+    <!-- 답변 삭제 -->
+    <update id="deleteAnswer">
+        UPDATE qna_board
+        SET answer = NULL,
+            status = '답변 대기'
+        WHERE qna_no = #{qnaNo}
+    </update>
+
     <!-- 게시글 삭제 -->
     <delete id="delete">
         DELETE FROM qna_board

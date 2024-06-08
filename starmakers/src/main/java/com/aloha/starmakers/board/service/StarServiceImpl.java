@@ -152,7 +152,11 @@ public class StarServiceImpl implements StarService {
     }
 
     
-
+    @Override
+    public List<StarBoard> getMainCardListForLoggedInUser( int userNo, String type ) throws Exception{
+        List<StarBoard> starList = starMapper.getMainCardListForLoggedInUser(userNo, type);
+        return starList;
+    }
 
 
 

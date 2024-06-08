@@ -758,22 +758,60 @@ public class StarController {
         return "redirect:/page/board/anBoard/anUpdate?qnaNo=" + no + "$error";
     }
 
+    // @PostMapping("/like")
+    // public ResponseEntity<String> like(@RequestParam("userNo") int userNo, @RequestParam("starNo") int starNo) {
+    //     try {
+    //         boolean liked = likeService.toggleLike(userNo, starNo);
+    //         return ResponseEntity.ok(liked ? "Liked" : "Unliked");
+    //     } catch (Exception e) {
+    //         return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
+    //     }
+    // }
+    
+    // read 페이지에서 적용되게 하려고 수정해본 것...혹시 몰라 위에 원래 코드는 주석처리 해둠요
     @PostMapping("/like")
-    public ResponseEntity<String> like(@RequestParam("userNo") int userNo, @RequestParam("starNo") int starNo) {
+    public ResponseEntity<Map<String, Object>> like(@RequestParam("userNo") int userNo, @RequestParam("starNo") int starNo) {
+        Map<String, Object> response = new HashMap<>();
         try {
             boolean liked = likeService.toggleLike(userNo, starNo);
-            return ResponseEntity.ok(liked ? "Liked" : "Unliked");
+            response.put("liked", liked);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
+            response.put("error", "An error occurred: " + e.getMessage());
+            return ResponseEntity.status(500).body(response);
         }
     }
-    
+
+    @PostMapping("/checkLike")
+    public ResponseEntity<Integer> checkLiked(@RequestBody Map<String, Integer> payload, HttpSession session) throws Exception {
+        int starNo = payload.get("starNo");
+        Users user = (Users) session.getAttribute("user");
+        if (user != null) {
+            int result = likeService.checkLiked(user.getUserNo(), starNo);
+            int likeCheck ;
+            if ( result > 0 ) {
+                likeCheck = 1;
+            }else{
+                likeCheck = 0;
+            }
+            // log.info("있나 유저 넘 이랑 스타 넘 : " + user.getUserNo() + "," + starNo + "=" + likeCheck);
+            return ResponseEntity.ok(likeCheck);
+        }
+        return ResponseEntity.ok(0);
+    }
+
+
 
     
     @GetMapping("/mainlist")
     @ResponseBody
-    public List<StarBoard> getMainStarList() throws Exception  {
+    public List<StarBoard> getMainStarList( HttpSession session ) throws Exception  {
             String type = "starCard";
+            Users user = (Users) session.getAttribute("user");
+            if( user != null){
+                int userNo = user.getUserNo();
+                return starService.getMainCardListForLoggedInUser(userNo, type);
+            }
         return starService.mainCardList(type);
     }
 

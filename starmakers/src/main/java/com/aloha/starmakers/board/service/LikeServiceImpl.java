@@ -21,12 +21,11 @@ public class LikeServiceImpl implements LikeService {
     @Autowired
     private StarMapper starMapper;
 
+    
     @Override
     public boolean toggleLike(int userNo, int starNo) throws Exception {
 
         Integer like = likeMapper.select(userNo, starNo);
-
-        log.info("qweqr"+like);
 
         StarBoard starBoard = starMapper.select(starNo);
         int likes = starBoard.getLikes();
@@ -50,6 +49,13 @@ public class LikeServiceImpl implements LikeService {
         }
 
         return false;
+    }
+
+    // 좋아요 확인
+    @Override
+    public int checkLiked(int userNo, int starNo) throws Exception {
+        Integer like = likeMapper.select(userNo, starNo);
+        return like != null ? like.intValue() : 0;
     }
     
 }

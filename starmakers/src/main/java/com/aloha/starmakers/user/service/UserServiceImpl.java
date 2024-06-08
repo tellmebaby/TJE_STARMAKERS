@@ -191,4 +191,10 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public int authUpdate(Users user) throws Exception {
+        int result = userMapper.authUpdate(user);
+        return result;
+    }
+
 }
