@@ -1,4 +1,4 @@
--- Active: 1714701530602@@127.0.0.1@3306@joeun
+-- Active: 1717071708994@@127.0.0.1@3306@joeun
 SELECT COUNT(*)
 FROM user
 WHERE name = "김조은" AND email = "joeun@naver.com";
@@ -240,6 +240,12 @@ WHERE
 SELECT COUNT(*)
      FROM reply
      WHERE star_no = 3;
+
+SELECT *
+FROM message
+
+ INSERT INTO message (content, code, reply_no, pay_no, qna_no, user_no)
+VALUES ('안녕', 'ToUser', 0, 0, 0, 2)
 
 SELECT like_no
 FROM action
