@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head th:replace="/admin/header :: head"></head>
   <body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
     <form id="actionForm" action="" method="post">
@@ -21,141 +22,172 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1>Inbox</h1>
-              </div>
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Inbox</li>
-                </ol>
-              </div>
+                <h1>Q&A</h1>
+              
             </div>
-          </div><!-- /.container-fluid -->
-        </section>
-    
-        <!-- Main content -->
-        <section class="content">
-          <div class="row">
-            <div class="col-md-3">
-              <a href="compose.html" class="btn btn-primary btn-block mb-3">Compose</a>
-    
-              <div class="card">
-                <div class="card-header">
-                  <h3 class="card-title">⭐게시판⭐</h3>
-    
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="card-body p-0">
-                  <ul class="nav nav-pills flex-column">
-                    <li class="nav-item active">
-                      <a href="/admin/pages/mailbox" class="nav-link">
-                        <i class="fas fa-inbox"></i> 전체
-                        <span class="badge bg-primary float-right"></span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="/admin/pages/mailboxStar" class="nav-link">
-                        <i class="far fa-envelope"></i> 홍보
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="/admin/pages/mailboxEvent" class="nav-link">
-                        <i class="far fa-file-alt"></i> 이벤트
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="/admin/pages/mailboxReview" class="nav-link">
-                        <i class="fas fa-filter"></i> 후기
-                        <span class="badge bg-warning float-right"></span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="/admin/pages/mailboxAn" class="nav-link">
-                        <i class="far fa-trash-alt"></i> 공지
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="/admin/pages/mailboxQna" class="nav-link">
-                        <i class="far fa-trash-alt"></i> Q&A
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <!-- /.card-body -->
-              </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Inbox</li>
+              </ol>
             </div>
-            <!-- /.col -->
-            <div class="col-md-9">
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="row">
+          <div class="col-md-3">
+            <a href="compose.html" class="btn btn-primary btn-block mb-3">Compose</a>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">⭐이벤트 게시판⭐</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body p-0">
+                <ul class="nav nav-pills flex-column">
+                  <li class="nav-item active">
+                    <a href="/admin/pages/mailbox" class="nav-link">
+                      <i class="fas fa-inbox"></i> 전체
+                      <span class="badge bg-primary float-right"></span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/admin/pages/mailboxQna" class="nav-link">
+                      <i class="far fa-envelope"></i> 홍보
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/admin/pages/mailboxQna" class="nav-link">
+                      <i class="far fa-file-alt"></i> 이벤트
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/admin/pages/mailboxReview" class="nav-link">
+                      <i class="fas fa-filter"></i> 후기
+                      <span class="badge bg-warning float-right"></span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/admin/pages/mailboxAn" class="nav-link">
+                      <i class="far fa-trash-alt"></i> 공지
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="/admin/pages/mailboxQna" class="nav-link">
+                      <i class="far fa-trash-alt"></i> Q&A
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-md-9">
+            <form action="/admin/pages/mailbox" method="get" id="keyword">
               <div class="card card-primary card-outline">
                 <div class="card-header">
                   <h3 class="card-title">⭐Q&A 게시판⭐</h3>
-    
+
+
                   <div class="card-tools">
                     <div class="input-group input-group-sm">
-                      <input type="text" class="form-control" placeholder="Search Mail">
+                      <select name="code" class="form-control mr-2">
+                        <option th:each="item : ${optionList}" th:value="${item.code}" th:text="${item.codeName}"
+                          th:selected="${item.code == option.code}"></option>
+                      </select>
+                      <input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요"
+                        th:value="${param.keyword}">
                       <div class="input-group-append">
-                        <div class="btn btn-primary">
+                        <div class="btn btn-primary" onclick="document.getElementById('keyword').submit();">
                           <i class="fas fa-search"></i>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- /.card-tools -->
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body p-0">
-                  <div class="mailbox-controls">
-                    <!-- Check all button -->
-                    <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
-                    </button>
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-default btn-sm" onclick="allDelete()">
-                        <i class="far fa-trash-alt"></i>
-                      </button>
-                      <button type="button" class="btn btn-default btn-sm">
-                        <i class="fas fa-reply"></i>
-                      </button>
-                      <button type="button" class="btn btn-default btn-sm">
-                        <i class="fas fa-share"></i>
-                      </button>
-                    </div>
-                    <!-- /.btn-group -->
+            </form>
+            <form id="actionForm" action="" method="post">
+              <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+              <input type="hidden" name="page" value="mailbox">
+              <!-- /.card-tools -->
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body p-0">
+            <div class="mailbox-controls">
+              <!-- Check all button -->
+              <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
+              </button>
+              <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm" onclick="qnaDelete()">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+                <!-- 처음으로 -->
+                <button type="button" class="btn btn-default btn-sm">
+                  <a th:href="|/admin/pages/mailboxQna?page=${page.first}&code=${option.code}&keyword=${option.keyword}|">
+                    <i class="fas fa-reply"></i>
+                  </a>
+                </button>
+                <!-- 마지막으로 -->
+                <button type="button" class="btn btn-default btn-sm">
+                  <a th:href="|/admin/pages/mailboxQna?page=${page.last}&code=${option.code}&keyword=${option.keyword}|">
+                    <i class="fas fa-share"></i>
+                  </a>
+                </button>
+              </div>
+              <div class="float-right">
+                <!-- [ 이전 ] -->
+                <div class="btn-group">
+                  <th:block th:if="${page.page != page.first}">
                     <button type="button" class="btn btn-default btn-sm">
-                      <i class="fas fa-sync-alt"></i>
+                      <a
+                        th:href="|/admin/pages/mailboxQna?page=${page.prev}&code=${option.code}&keyword=${option.keyword}|">
+                        <i class="fas fa-chevron-left"></i>
+                      </a>
                     </button>
-                    <div class="float-right">
-                      1-50/200
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm">
-                          <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button type="button" class="btn btn-default btn-sm">
-                          <i class="fas fa-chevron-right"></i>
-                        </button>
-                      </div>
-                      <!-- /.btn-group -->
-                    </div>
-                    <!-- /.float-right -->
+                  </th:block>
+                  <span class="btn btn-default btn-sm disabled">
+                    <span th:text="${page.page}">1</span> / <span th:text="${page.last}">1</span>
+                  </span>
+                  <th:block th:if="${page.page != page.last}">
+                    <button type="button" class="btn btn-default btn-sm">
+                      <a
+                        th:href="|/admin/pages/mailboxQna?page=${page.next}&code=${option.code}&keyword=${option.keyword}|">
+                        <i class="fas fa-chevron-right"></i>
+                      </a>
+                    </button>
+                  </th:block>
+                </div>
+                <!-- /.btn-group -->
+              </div>
+              <!-- /.float-right -->
+            </div>
+            <div class="table-responsive mailbox-messages">
                   </div>
                   <div class="table-responsive mailbox-messages">
                     <table class="table table-hover table-striped">
                       <input type="hidden" name="qnaNos" id="qnaNos">
                       <thead>
-                        <tr>
+                        <tr align="center">
                           <th></th>
                           <th>번호</th>
                           <th>작성자</th>
                           <th>제목</th>
                           <th>작성일자</th>
+                          <th>상태</th>
+                          <th></th>
                         </tr>
                       </thead>
-                      <tbody> 
+                      <tbody align="center"> 
                       <tr th:each="qnaBoard : ${qnaList}">
-                        <td>
+                        <td >
                           <div class="icheck-primary">
                             <input type="checkbox" th:id="|qnaNo${qnaBoard.qnaNo}|" name="qnaNo" th:value="${qnaBoard.qnaNo}">
                             <label th:for="|qnaNo${qnaBoard.qnaNo}|"></label>
@@ -166,6 +198,15 @@
                         <td class="mailbox-subject" th:text="${qnaBoard.title}" style="width: 300px;"></td>
                         <td class="mailbox-date">
                           <span th:text="${#dates.format(qnaBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                        </td>
+                        <td class="mailbox-qna" th:text="${qnaBoard.status}"></td>
+                        <td>
+                          <div th:if="${qnaBoard.status} == '답변 대기'">
+                            <button type="button"><a th:href="@{/page/board/qnaBoard/qnaPost(qnaNo=${qnaBoard.qnaNo})}">답변 등록</a></button>
+                          </div>
+                          <div th:if="${qnaBoard.status} == '답변 완료'">
+                            <button type="button"><a th:href="@{/page/board/qnaBoard/qnaPost(qnaNo=${qnaBoard.qnaNo})}">편집</a></button>
+                          </div>
                         </td>
                       </tr>
                       </tbody>
@@ -182,35 +223,45 @@
                       <i class="far fa-square"></i>
                     </button>
                     <div class="btn-group">
-                      <button type="button" class="btn btn-default btn-sm" onclick="allDelete()">
+                      <button type="button" class="btn btn-default btn-sm" onclick="qnaDelete()">
                         <i class="far fa-trash-alt"></i>
                       </button>
-                      <button type="button" class="btn btn-default btn-sm">
-                        <i class="fas fa-reply"></i>
-                      </button>
-                      <button type="button" class="btn btn-default btn-sm">
-                        <i class="fas fa-share"></i>
-                      </button>
-                    </div>
                     <!-- /.btn-group -->
+                    <!-- 처음으로 -->
                     <button type="button" class="btn btn-default btn-sm">
-                      <i class="fas fa-sync-alt"></i>
+                      <a th:href="|/admin/pages/mailboxQna?page=${page.first}&code=${option.code}&keyword=${option.keyword}|">
+                        <i class="fas fa-reply"></i>
+                      </a>
                     </button>
+                    <!-- 마지막으로 -->
+                    <button type="button" class="btn btn-default btn-sm">
+                      <a th:href="|/admin/pages/mailboxQna?page=${page.last}&code=${option.code}&keyword=${option.keyword}|">
+                      <i class="fas fa-share"></i>
+                      </a>
+                    </button>
+                  </div>
                     <div class="float-right">
-                      1-50/200
+                      <!-- [ 이전 ] -->
                       <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm">
-                          <i class="fas fa-chevron-left"></i>
+                        <th:block th:if="${page.page != page.first}">
+                              <button type="button" class="btn btn-default btn-sm">
+                                <a th:href="|/admin/pages/mailboxQna?page=${page.prev}&code=${option.code}&keyword=${option.keyword}|">
+                                    <i class="fas fa-chevron-left"></i>
+                                </a>
+                            </th:block>
                         </button>
-                        <button type="button" class="btn btn-default btn-sm">
-                          <i class="fas fa-chevron-right"></i>
+                        <span class="btn btn-default btn-sm disabled">
+                          <span th:text="${page.page}">1</span> / <span th:text="${page.last}">1</span>
+                      </span>
+                        <th:block th:if="${page.page != page.last}">
+                              <button type="button" class="btn btn-default btn-sm">
+                                <a th:href="|/admin/pages/mailboxQna?page=${page.next}&code=${option.code}&keyword=${option.keyword}|">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </th:block>
                         </button>
                       </div>
-                      <!-- /.btn-group -->
-                    </div>
-                    <!-- /.float-right -->
                   </div>
-                </div>
               </div>
               <!-- /.card -->
             </div>
@@ -263,8 +314,8 @@
       $(this).data('clicks', !clicks)
     })
 
-    //Handle starring for font awesome
-    $('.mailbox-star').click(function (e) {
+    //Handle qnaring for font awesome
+    $('.mailbox-qna').click(function (e) {
       e.preventDefault()
       //detect type
       var $this = $(this).find('a > i')
@@ -272,13 +323,13 @@
 
       //Switch states
       if (fa) {
-        $this.toggleClass('fa-star')
-        $this.toggleClass('fa-star-o')
+        $this.toggleClass('fa-qna')
+        $this.toggleClass('fa-qna-o')
       }
     })
   })
 
-  function allDelete() {
+  function qnaDelete() {
                 const checkboxes = document.querySelectorAll('input[name="qnaNo"]:checked');
             if (checkboxes.length === 0) {
                 alert('하나 이상의 게시물을 선택하십시오.');

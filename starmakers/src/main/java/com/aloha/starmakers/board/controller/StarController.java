@@ -458,6 +458,9 @@ public class StarController {
         model.addAttribute("page", page);
         model.addAttribute("option", option);
         model.addAttribute("currentTime", LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        log.info("first Page: " + page.getFirst());
+        log.info("List Page: " + page.getLast());
+        log.info("Total : " + page.getTotal());
 
         List<Option> optionList = new ArrayList<Option>();
         optionList.add(new Option("제목+내용", 0));
@@ -755,13 +758,27 @@ public class StarController {
         return "redirect:/page/board/anBoard/anUpdate?qnaNo=" + no + "$error";
     }
 
+    // @PostMapping("/like")
+    // public ResponseEntity<String> like(@RequestParam("userNo") int userNo, @RequestParam("starNo") int starNo) {
+    //     try {
+    //         boolean liked = likeService.toggleLike(userNo, starNo);
+    //         return ResponseEntity.ok(liked ? "Liked" : "Unliked");
+    //     } catch (Exception e) {
+    //         return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
+    //     }
+    // }
+    
+    // read 페이지에서 적용되게 하려고 수정해본 것...혹시 몰라 위에 원래 코드는 주석처리 해둠요
     @PostMapping("/like")
-    public ResponseEntity<String> like(@RequestParam("userNo") int userNo, @RequestParam("starNo") int starNo) {
+    public ResponseEntity<Map<String, Object>> like(@RequestParam("userNo") int userNo, @RequestParam("starNo") int starNo) {
+        Map<String, Object> response = new HashMap<>();
         try {
             boolean liked = likeService.toggleLike(userNo, starNo);
-            return ResponseEntity.ok(liked ? "Liked" : "Unliked");
+            response.put("liked", liked);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
+            response.put("error", "An error occurred: " + e.getMessage());
+            return ResponseEntity.status(500).body(response);
         }
     }
 
@@ -783,7 +800,7 @@ public class StarController {
         return ResponseEntity.ok(0);
     }
 
-    
+
 
     
     @GetMapping("/mainlist")

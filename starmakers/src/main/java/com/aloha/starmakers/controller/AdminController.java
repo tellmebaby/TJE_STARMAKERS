@@ -1,6 +1,5 @@
 package com.aloha.starmakers.controller;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,24 +10,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.aloha.starmakers.board.dto.Files;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.QnaBoard;
+import com.aloha.starmakers.board.dto.Reply;
 import com.aloha.starmakers.board.dto.StarBoard;
-
 import com.aloha.starmakers.board.service.FileService;
-
 import com.aloha.starmakers.board.service.QnaService;
-
+import com.aloha.starmakers.board.service.ReplyService;
 import com.aloha.starmakers.board.service.StarService;
+import com.aloha.starmakers.pay.dto.Pay;
 import com.aloha.starmakers.pay.service.PayService;
+import com.aloha.starmakers.user.dto.UserAuth;
 import com.aloha.starmakers.user.dto.Users;
 import com.aloha.starmakers.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -48,11 +49,13 @@ public class AdminController {
     private StarService starService;
 
     @Autowired
-    private FileService fileService;
-
-    @Autowired
     private QnaService qnaService;
 
+    @Autowired
+    private ReplyService replyService;
+
+    @Autowired
+    private FileService fileService;
     
     @GetMapping("")
     public String getMethodName() {
@@ -68,12 +71,11 @@ public class AdminController {
     public String userList(Model model) throws Exception {
 
         List<Users> userList = userService.list();
-        Users user = new Users();
-        int userNo = user.getUserNo();
         
         // int pay = payService.totalPrice(userNo);
 
         model.addAttribute("userList", userList);
+        // model.addAttribute("pay", pay);
         // model.addAttribute("pay", pay);
 
         return "/admin/pages/projects";
@@ -95,9 +97,9 @@ public class AdminController {
         optionList.add(new Option("제목", 1));
         optionList.add(new Option("내용", 2));
         optionList.add(new Option("작성자", 3));
+        optionList.add(new Option("회원번호", 4));
         model.addAttribute("optionList", optionList);
 
-        log.info("starList : " + starList);
         return "/admin/pages/mailbox";
     }
     
@@ -119,7 +121,6 @@ public class AdminController {
         optionList.add(new Option("작성자", 3));
         model.addAttribute("optionList", optionList);
 
-        log.info("starList : " + starList);
         return "/admin/pages/mailboxStar";
     }
 
@@ -141,7 +142,6 @@ public class AdminController {
         optionList.add(new Option("작성자", 3));
         model.addAttribute("optionList", optionList);
 
-        log.info("starList : " + starList);
         return "/admin/pages/mailboxEvent";
     }
 
@@ -163,7 +163,6 @@ public class AdminController {
         optionList.add(new Option("작성자", 3));
         model.addAttribute("optionList", optionList);
 
-        log.info("starList : " + starList);
         return "/admin/pages/mailboxReview";
     }
 
@@ -185,7 +184,6 @@ public class AdminController {
         optionList.add(new Option("작성자", 3));
         model.addAttribute("optionList", optionList);
 
-        log.info("starList : " + starList);
         return "/admin/pages/mailboxAn";
     }
 
@@ -208,21 +206,105 @@ public class AdminController {
 
         return "/admin/pages/mailboxQna";
     }
-  
     @GetMapping("/pages/profile")
-    public String userProfile(@RequestParam("userNo") int userNo,
-                               Model model) throws Exception {
+    public String userProfile(@RequestParam("userNo") int userNo
+                             ,Model model, Page page, Option option) throws Exception {
         // user 정보 가져오기
         Users user = userService.selectUserNo(userNo);
+        List<UserAuth> authList = user.getAuthList();
+        String userAuth = "";
+        for (int i = 0; i < authList.size(); i++) {
+            String auth = authList.get(i).getAuth();
+            if(auth.equals("ROLE_GUEST")) {
+                user.setBlack(true);
+            }
+            userAuth += auth;
+            if( i+1 < authList.size() ) {
+                userAuth += ", ";
+            }
+        }
+        user.setAuth(userAuth);
         model.addAttribute("user", user);
+
+
         
         // 프로필 이미지 가져오기
-        int fileNo = fileService.profileSelect(userNo);
-        model.addAttribute("fileNo", fileNo);
+        // int fileNo = fileService.profileSelect(userNo);
+        // model.addAttribute("fileNo", fileNo);
 
+        //
+        Integer fileNo = fileService.profileSelect(userNo);
+        if( fileNo > 0 ){
+            Files file = fileService.select(fileNo);
+            model.addAttribute("file", file);
+            log.info("file : " + file);
+
+        } else {
+            Files file = new Files();
+            file.setFileNo(0);
+            model.addAttribute("file", file);
+        }
+
+        // model.addAttribute("user", user);
+        // return "page/mypage/profile";
+        //
+
+        // 결제 금액 가져오기
+        Pay pay = payService.totalPrice(userNo);
+        if ( pay != null ){
+            int totalPrice = pay.getTotalPrice();
+            model.addAttribute("totalPrice", totalPrice);
+        } else {
+            int totalPrice = 0;
+            model.addAttribute("totalPrice", totalPrice);
+        }
+
+        // 작성글 정보 가져오기
+        List<StarBoard> starBoard = starService.promotionList(userNo, page, option);
+        int boardTotal = 0;
+        if (starBoard != null && !starBoard.isEmpty()){
+            boardTotal = starBoard.size();
+        } else {
+            boardTotal = 0;
+        }
+        model.addAttribute("boardTotal", boardTotal);
+
+        // 작성 댓글 정보 가져오기
+        List<Reply> replyList = replyService.selectUser(userNo);
+        int replyTotal = 0;
+        if(replyList != null && !replyList.isEmpty()){
+            replyTotal = replyList.size();
+            model.addAttribute("replyTotal", replyTotal);
+        } else {
+            model.addAttribute("replyTotal", replyTotal);
+        }
         return "/admin/pages/profile";
     }
 
+    @PostMapping("/pages/profileUpdate")
+    public String profileUpdate(Users user) throws Exception {
+            int result = userService.update(user);
+            log.info("수정 : " + user);
+            int userNo = user.getUserNo();
+            String email = user.getEmail();
+            String auth = user.getAuth();
+            log.info("auth"+auth);
+            if(auth != null){
+                user.setAuth("ROLE_GUEST");
+            } else {
+                user.setAuth("ROLE_USER");
+                }
+            int result2 = userService.authUpdate(user);
+            log.info("회원 권한 수정 성공 : " + result2);
+            if(result > 0){
+                log.info("수정성공");
+                return "redirect:/admin/pages/profile?userNo=" + userNo;
+            }
+            log.info("수정 실패");
+            return "redirect:/admin/pages/profile?error";
+    }
+    
+    // 전체 게시판 삭제
     @PostMapping("/pages/mailbox/allDelete")
     public String allDelete(@RequestParam("starNos") String starNos, @RequestParam("page") String page) throws Exception {
        
@@ -237,6 +319,7 @@ public class AdminController {
         return "redirect:/admin/pages/" + page;  // 삭제 실패시에도 같은 페이지로 리디렉션
     }
     
+    // Q&A 게시판 
     @PostMapping("/pages/mailbox/qnaDelete")
     public String qnaDelete(@RequestParam("qnaNos") String qnaNos) throws Exception {
        
@@ -248,6 +331,7 @@ public class AdminController {
         } 
         return "redirect:/admin/pages/mailboxQna";  // 삭제 실패시에도 같은 페이지로 리디렉션
     }
+    
     
     
     

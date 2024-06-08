@@ -17,6 +17,8 @@ import com.aloha.starmakers.board.dto.QnaBoard;
 import com.aloha.starmakers.board.service.QnaService;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -147,15 +149,27 @@ public class QnaController {
 
     @PostMapping("/qnaPost")
     public String insertAnswerPro(QnaBoard qnaBoard, Model model) throws Exception {
-
+        log.info("답변수정");
         int result = qnaService.insertAnswer(qnaBoard);
         if(result > 0) {
-        return "redirect:/page/board/qnaBoard/qnaList"; 
+        return "redirect:/admin/pages/mailboxQna"; 
         }
         int qnaNo = qnaBoard.getQnaNo();
         return "redirect:/page/board/qnaBoard/qnaPost?qnaNo=" + qnaNo + "&error";
 
     }
+
+    @PostMapping("/qnaPost/deleteAnswer")
+    public String deleteAnswerPro(QnaBoard qnaBoard, Model model) throws Exception {
+        log.info("답변삭제");
+        int result = qnaService.deleteAnswer(qnaBoard);
+        if(result > 0) {
+        return "redirect:/admin/pages/mailboxQna"; 
+        }
+        int qnaNo = qnaBoard.getQnaNo();
+        return "redirect:/page/board/qnaBoard/qnaPost?qnaNo=" + qnaNo + "&error";
+    }
+    
 
 }
     

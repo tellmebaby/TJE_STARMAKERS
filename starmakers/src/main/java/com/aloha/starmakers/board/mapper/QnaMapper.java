@@ -31,6 +31,9 @@ public interface QnaMapper {
     // 답변 등록()
     public int insertAnswer(QnaBoard qnaBoard) throws Exception;
 
+    // 답변 삭제
+    public int deleteAnswer(QnaBoard qnaBoard) throws Exception;
+
     // 게시글 번호(기본키) 최댓값
     public int maxPk() throws Exception;
 

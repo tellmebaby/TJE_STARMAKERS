@@ -31,9 +31,11 @@ public class StarServiceImpl implements StarService {
      */
     @Override
     public List<StarBoard> list(String type, Page page, Option option) throws Exception {
-        log.info(":::여기는 서비스 옵션값을 볼까? " + option.getKeyword());
         int total = starMapper.count(option, type);
         page.setTotal(total);
+        log.info(page.toString());
+        log.info(option.toString());
+        log.info(":::여기는 서비스 옵션값을 볼까? " + option.getKeyword());
         List<StarBoard> starList = starMapper.list(type, page, option);
 
         return starList;

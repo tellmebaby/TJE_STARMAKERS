@@ -66,6 +66,11 @@ public class QnaServiceImpl implements QnaService {
         return result;
     }
 
+    public int deleteAnswer(QnaBoard qnaBoard) throws Exception {
+        int result = qnaMapper.deleteAnswer(qnaBoard);
+        return result;
+    }
+
 
     @Override
     public int delete(String qnaNoList) throws Exception {

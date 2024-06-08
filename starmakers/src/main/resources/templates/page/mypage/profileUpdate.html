@@ -82,6 +82,7 @@
                             <tr>
                                 <td class="fw-bold fs-5 text-center align-middle border-0">이름</td>
                                 <td class="fs-5 align-middle border-0" th:text="${user.name}"></td>
+                                <input type="hidden" name="name" th:value="${user.name}">
                             </tr>
                             <tr>
                                 <td class="fw-bold fs-5 text-center align-middle border-0">전화번호</td>

@@ -26,6 +26,9 @@ public interface UserService {
     // 회원 수정
     public int update(Users user) throws Exception;
 
+    // 회원 권한 수정
+    public int authUpdate(Users user) throws Exception;
+
     // 마이페이지
 
     // 회원 조회

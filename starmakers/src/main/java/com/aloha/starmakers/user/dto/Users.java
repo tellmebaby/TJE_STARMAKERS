@@ -27,4 +27,8 @@ public class Users {
 
     // 권한 목록
     private List<UserAuth> authList;
+
+    // 권한 
+    private String auth;
+    private boolean isBlack;
 }

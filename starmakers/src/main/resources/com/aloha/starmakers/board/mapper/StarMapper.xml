@@ -35,6 +35,9 @@
             <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
             </if>
+            <if test="option.code == 4">
+                s.user_no IN (${option.keyword})
+            </if>
         </if>
 
          <!-- 플랫폼 필터 -->
@@ -164,7 +167,13 @@
     <select id="count" resultType="int">
         SELECT COUNT(*)
         FROM star_board
-        WHERE type = #{type}
+         WHERE 
+        <if test="type != null">
+            type = #{type}
+        </if>
+        <if test="type == null">
+            1 = 1
+        </if>
         <if test="option != null and option.keyword != null and option.keyword != ''">
             AND
             <if test="option.code == 0">
@@ -179,6 +188,9 @@
             </if>
             <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
+            </if>
+            <if test="option.code == 4">
+                user_no =#{option.keyword}
             </if>
         </if> 
     </select>
@@ -202,6 +214,9 @@
             </if>
             <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
+            </if>
+            <if test="option.code == 4">
+                user_no =#{option.keyword}
             </if>
 
         </if>
