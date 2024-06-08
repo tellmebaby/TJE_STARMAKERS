@@ -764,13 +764,37 @@ public class StarController {
             return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
         }
     }
+
+    @PostMapping("/checkLike")
+    public ResponseEntity<Integer> checkLiked(@RequestBody Map<String, Integer> payload, HttpSession session) throws Exception {
+        int starNo = payload.get("starNo");
+        Users user = (Users) session.getAttribute("user");
+        if (user != null) {
+            int result = likeService.checkLiked(user.getUserNo(), starNo);
+            int likeCheck ;
+            if ( result > 0 ) {
+                likeCheck = 1;
+            }else{
+                likeCheck = 0;
+            }
+            // log.info("있나 유저 넘 이랑 스타 넘 : " + user.getUserNo() + "," + starNo + "=" + likeCheck);
+            return ResponseEntity.ok(likeCheck);
+        }
+        return ResponseEntity.ok(0);
+    }
+
     
 
     
     @GetMapping("/mainlist")
     @ResponseBody
-    public List<StarBoard> getMainStarList() throws Exception  {
+    public List<StarBoard> getMainStarList( HttpSession session ) throws Exception  {
             String type = "starCard";
+            Users user = (Users) session.getAttribute("user");
+            if( user != null){
+                int userNo = user.getUserNo();
+                return starService.getMainCardListForLoggedInUser(userNo, type);
+            }
         return starService.mainCardList(type);
     }
 

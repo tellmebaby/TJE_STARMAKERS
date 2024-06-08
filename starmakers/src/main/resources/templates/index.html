@@ -201,8 +201,12 @@
 </div>
 
         <script>
+            const token = $("meta[name='_csrf']").attr("content");
+            const header = $("meta[name='_csrf_header']").attr("content");
+
             $(document).ready(function() {
                 // 페이지 로드 시 실행될 내용
+            
                 $.ajax({
                     url: "/page/mainlist", // 데이터를 가져올 URL
                     type: "GET",
@@ -214,7 +218,8 @@
                         // 이후의 처리를 여기에 구현
                         // 예: 카드 생성, 캐러셀 업데이트 등
                         const carouselInner = $('#carousel-inner');
-
+                        let user = "[[${session.user != null ? session.user.userNo : ''}]]";
+                        
                         function createCard(cardData) {
                             const content = cardData.content;
                             console.log('헤이 이게 콘텐트야 ' + content);
@@ -235,9 +240,57 @@
                             const asmrBtn = categories2.includes('asmr') ? '<a href="/page/starCard/starList?option=almr" id="asmr-link" class="btn btn-custom">#ASMR</a>' : '';
 
 
+                            let starLinksHtml = ''; // 좋아요 버튼이 담길 변수
+                            let likeVar = ''; // 좋아요 수를 담을 변수
+                            let starNo = cardData.starNo;
+                            
+
+                            // 좋아요 수 처리
+                            if (cardData.likes < 100) {
+                                // 99까지는 그대로 표시
+                                likeVar = cardData.likes;
+                            } else {
+                                // 100부터 0.001을 곱해서 'k'를 붙여서 표시
+                                likeVar = (cardData.likes * 0.001).toFixed(1) + ' k';
+                            }
+                            
+                            let viewVar = ''; // 조회수 처리
+
+                            if (cardData.views < 100) {
+                                // 99까지는 그대로 표시
+                                viewVar = cardData.views
+                            } else {
+                                // 100 부터 0.001을 곱해서 'k'를 붙여서 표시
+                                viewVar = (cardData.views * 0.001).toFixed(1) + ' k';
+                            }
+
+                            // 로그인 상태 확인
+                            if (user !== '') {
+
+                                    let starIconType = '';
+                                    if (cardData.action === 'liked') {
+                                        starIconType = `<i id="changeStar" class="fa-solid fa-star"></i>`;
+                                    } else {
+                                        starIconType = `<i id="changeStar" class="fa-regular fa-star"></i>`;
+                                    }
+                                    
+                                    // 로그인 상태일 때 좋아요 버튼 추가
+                                    starLinksHtml = `
+                                        <div class="star-links liked">
+                                            ${starIconType}
+                                            <span class="count">${likeVar} like</span>
+                                        </div>`;
+                                }else{
+                                    starLinksHtml = `
+                                        <div class="star-links liked">
+                                            <span class="count">${viewVar} view</span>
+                                        </div>`;
+                                }
+                            
+                                 
                             return `
                             <div class="col-md-2 mb-4">
-                                <div class="card standard" ondblclick="animateCard(this)" data-no="${cardData.starNo}">
+                                <div class="card standard" ondblclick="animateCard(this, ${cardData.starNo})" data-no="${cardData.starNo}">
                                     <div class="card custom-card" style="background-image: url('/file/img/${cardData.imgNo}');">
                                         <span class="star">&#9733;</span> 
                                         <div class="top-container">
@@ -271,10 +324,7 @@
                                                     ${fashionBtn}
                                                     ${asmrBtn}
                                                 </div>
-                                                <div class="star-links">
-                                                    <i class="bi bi-star"></i>
-                                                    <span class="count">${cardData.views}</span>
-                                                </div>
+                                                    ${starLinksHtml}
                                             </div>
                                         </div>
                                     </div>
@@ -294,6 +344,7 @@
                                 </div>
                             `;
                         }
+
 
                         function chunkArray(array, chunkSize) {
                             // 배열을 지정한 크기로 분할하는 로직
@@ -318,6 +369,8 @@
                             // 필요한 다른 스타일 속성들도 여기에 추가할 수 있습니다.
                         });
 
+                        
+
                     },
                     error: function(xhr, status, error) {
                         // 에러 발생 시 실행되는 함수
@@ -327,10 +380,13 @@
 
                         
             });
+
+            
        
-            function animateCard(card) {
+            function animateCard(card, starNo) {
 
                 console.log("더블 클릭 이벤트 발생!");
+                toggleIconClass();
 
                 const star = card.querySelector('.star');
                 star.style.display = 'inline'; // 이모티콘 표시
@@ -352,7 +408,20 @@
                 setTimeout(function() {
                     star.style.display = 'none'; // 이모티콘 숨김
                 }, 500); // 0.5초 (애니메이션의 총 시간)
+
+                // 여기서부터 starNo를 사용할 수 있습니다.
+                console.log("starNo:", starNo);
+                var userNo = "[[${session.user != null ? session.user.userNo : ''}]]";
+                if ( userNo != null) {
+                    console.log("유저번호가 있어요 : " + userNo);
+                }
+                if (token != null) {
+                    console.log("crsfToken 이 있어요 : " + token);
+                }
+                likeCard(starNo, token, userNo);
+
             }
+            
 
             document.addEventListener('scroll', function() {
                 const bgImage = document.querySelector('.bg-image');
@@ -547,7 +616,39 @@ $(document).ready(function() {
     });
 });
 
+// 스타 아이콘 변경
+function toggleIconClass() {
+    // 아이콘의 클래스 변경
+    $('.star-links i').toggleClass('fa-regular fa-solid');
+}
 
+function likeCard(starNo, token, userNo) {
+
+    if (userNo === '') {
+        alert("로그인을 하시오!");
+        return;
+    }
+
+    $.ajax({
+        url: '/page/like', // 서버의 좋아요 상태를 변경하는 API 엔드포인트
+        method: 'POST',
+        data: {
+            userNo: userNo,
+            starNo: starNo
+        },
+        beforeSend: function(xhr) {
+                xhr.setRequestHeader(header, token); // CSRF 토큰을 헤더에 포함
+            },
+        success: function (response) {
+            console.log('Message sent successfully:', response); // 성공 시 응답 출력
+        }.bind(this), // this 바인딩
+        error: function(xhr, status, error) {
+                console.error('Error sending message:', status, error); // 에러 시 상태 및 에러 메시지 출력
+                console.log(xhr.responseText);
+                // 메시지 전송 실패 시 에러 처리
+            }
+    });
+}
 
         </script>
 

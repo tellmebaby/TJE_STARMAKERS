@@ -5,6 +5,8 @@ let isLoading = false;
 
 $(document).ready(function () {
 
+
+
 // toggleCheckboxClass 함수 정의
 function toggleCheckboxClass(checkbox) {
 const category = checkbox.attr('id');
@@ -195,7 +197,7 @@ ${fashionBtn}
 ${asmrBtn}
 </div>
 <div class="star-links liked">
-    <i class="fa-regular fa-star"></i>
+    <i id="changeStar" class="fa-regular fa-star"></i>
     <span class="count">${star.likes}</span>
 </div>
 </div>
@@ -211,6 +213,7 @@ $('#starList').append(cardHtml);
 
  // applyStyles 함수 호출
  applyStyles();
+//  $('.card').on('dblclick', likeCard);
 
 isLoading = false;
 },
@@ -346,9 +349,13 @@ function setTextForTypeTileText(text) {
         const newText = Array.from(new Set(text.split(',').map(item => mapping[item.trim().toUpperCase()]).filter(Boolean))).map(item => `#${item}`).join(' '); // 수정된 부분
         element.textContent = newText;
     });
+
+    
 }
 
 function animateCard(card) {
+
+    toggleIconClass();
 
     console.log("더블 클릭 이벤트 발생!");
 
@@ -373,5 +380,142 @@ function animateCard(card) {
         star.style.display = 'none'; // 이모티콘 숨김
     }, 500); // 0.5초 (애니메이션의 총 시간)
 }
+
+
+ // 더블클릭 이벤트 핸들러
+//  function handleCardDoubleClick(cardElement, event) {
+//     var $card = $(cardElement); // 현재 클릭된 카드 요소를 저장
+
+//     clearTimeout(clickTimer); // 기존의 클릭 타이머를 제거하여 단일 클릭을 방지
+//     isDoubleClick = true;
+
+//     var userNo = "[[${session.user != null ? session.user.userNo : ''}]]";
+//     var starNo = $card.attr("data-no");
+//     var csrfToken = "[[${_csrf.token}]]";
+
+//     if (userNo === '') {
+//         alert("로그인을 하시오!");
+//         return;
+//     }
+
+//     // AJAX 요청을 통해 서버에 좋아요 상태를 변경
+//     $.ajax({
+//         url: '/page/like', // 서버의 좋아요 상태를 변경하는 API 엔드포인트
+//         method: 'POST',
+//         data: {
+//             userNo: userNo,
+//             starNo: starNo
+//         },
+//         beforeSend: function (xhr) {
+//             // CSRF 토큰을 요청 헤더에 추가
+//             xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+//         },
+//         success: function (response) {
+//             // 좋아요 아이콘 클래스 토글
+//             $card.find('.star-links').toggleClass('liked');
+//             // 애니메이션 실행
+//             animateCard(cardElement, event);
+//         },
+//         error: function (xhr, status, error) {
+//             console.error("좋아요 상태 변경 실패:", error);
+//         }
+//     });
+// }
+
+// 더블클릭 애니메이션 함수
+// function animateCard(card, event) {
+//     console.log("더블 클릭 이벤트 발생!");
+
+//     const star = card.querySelector('.star');
+//     star.style.display = 'inline'; // 이모티콘 표시
+
+//     // 카드 요소의 위치 및 크기 정보 가져오기
+//     const rect = card.getBoundingClientRect();
+
+//     // 마우스 포인터 위치 계산
+//     const x = event.clientX - rect.left;
+//     const y = event.clientY - rect.top;
+
+//     // 이모티콘 위치 설정
+//     star.style.left = `${x}px`;
+//     star.style.top = `${y}px`;
+
+//     // 애니메이션 실행 및 이모티콘 숨김 처리
+//     star.style.animation = 'burst 0.5s forwards';
+
+//     setTimeout(function() {
+//         star.style.display = 'none'; // 이모티콘 숨김
+//     }, 500); // 0.5초 (애니메이션의 총 시간)
+// }
+
+// // 카드의 더블클릭 이벤트 리스너 설정
+// $(document).on('dblclick', '.card', function (e) {
+//     handleCardDoubleClick(this, e);
+
+//     // 이벤트 전파 중지 및 기본 동작 방지
+//     e.preventDefault();
+//     e.stopPropagation();
+// });
+
+// 아이콘 클릭 이벤트 리스너 설정
+// $(document).on('click', '.star-links i', function (e) {
+//     // 아이콘의 클래스 변경
+//     $(this).toggleClass('fa-regular fa-solid');
+
+//     // 이벤트 전파 및 기본 동작 방지
+//     e.preventDefault();
+//     e.stopPropagation();
+// });
+
+function toggleIconClass() {
+    // 아이콘의 클래스 변경
+    $('.star-links i').toggleClass('fa-regular fa-solid');
+}
+
+// function likeCard(e) {
+//     clearTimeout(clickTimer);
+//     isDoubleClick = true;
+
+//     var userNo = "[[${session.user != null ? session.user.userNo : ''}]]";
+//     var starNo = $(this).attr("data-no");
+//     var csrfToken = "[[${_csrf.token}]]";
+
+//     if (userNo === '') {
+//         alert("로그인을 하시오!");
+//         return;
+//     }
+
+//     $.ajax({
+//         url: '/page/like', // 서버의 좋아요 상태를 변경하는 API 엔드포인트
+//         method: 'POST',
+//         data: {
+//             userNo: userNo,
+//             starNo: starNo
+//         },
+//         beforeSend: function (xhr) {
+//             // 💍 CSRF 토큰을 요청 헤더에 추가
+//             xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+//         },
+//         success: function (response) {
+//             // 하트 모양 이펙트 추가
+//             let heart = $('<div class="heart"></div>');
+//             $('body').append(heart);
+//             heart.css({
+//                 top: e.pageY - 25,
+//                 left: e.pageX - 25
+//             });
+
+//             setTimeout(() => {
+//                 heart.remove();
+//             }, 1000);
+
+//             // 좋아요 아이콘 클래스 토글
+//             $(this).find('.fa-thumbs-up').toggleClass('fa-regular fa-solid');
+//         }.bind(this), // this 바인딩
+//         error: function (xhr, status, error) {
+//             console.error("좋아요 상태 변경 실패:", error);
+//         }
+//     });
+// }
 
 

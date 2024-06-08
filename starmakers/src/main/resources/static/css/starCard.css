@@ -417,6 +417,9 @@
     height: 1.5em;
 }
 
+.star-links > span {
+    font-size: 0.5em;
+}
 .count {
     /* margin-top: 10px; */
     font-size: 70%;
