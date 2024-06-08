@@ -46,4 +46,6 @@ public interface StarService {
     // 마이페이지 쓴 글 조회
     public List<StarBoard> promotionList(int userNo, Page page, Option option) throws Exception;
 
+    // 로그인 유저 모든카드 불러오기
+    public List<StarBoard> getMainCardListForLoggedInUser( int userNo, String type ) throws Exception;
 }

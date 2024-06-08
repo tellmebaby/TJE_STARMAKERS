@@ -32,5 +32,7 @@ public class StarBoard {
     private int userImgId;
 
     private int starPrice;
+
+    private String action;
 }
 
