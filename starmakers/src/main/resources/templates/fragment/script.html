@@ -240,18 +240,57 @@
     // $(document).on('click', '.card', function (e) {
     //     var $this = $(this);
     //     var no = $this.attr("data-no");
+    //     console.log("가져온 star-no :" + no);
+    //     if ( no != null) {
 
-    //     clickTimer = setTimeout(() => {
-    //         if (!isDoubleClick) {
-    //             window.location = "/page/starCard/starRead?starNo=" + no;
-    //         }
-    //         isDoubleClick = false; // 초기화
-    //     }, 250);
-
-    //     // 이벤트 전파 및 기본 동작 방지
-    //     e.preventDefault();
-    //     e.stopPropagation();
+    //         clickTimer = setTimeout(() => {
+    //             if (!isDoubleClick) {
+    //                 window.location = "/page/starCard/starRead?starNo=" + no;
+    //             }
+    //             isDoubleClick = false; // 초기화
+    //         }, 250);
+    
+    //         // 이벤트 전파 및 기본 동작 방지
+    //         e.preventDefault();
+    //         e.stopPropagation();
+    //     }
     // });
+
+//     var isDoubleClick = false;
+// var clickTimer;
+
+// $(document).on('click', '.card', function (e) {
+//     var $this = $(this);
+//     var no = $this.attr("data-no");
+//     console.log("가져온 star-no :" + no);
+//     if (no != null) {
+//         // 클릭 버퍼링을 위한 타이머 설정
+//         if (!isDoubleClick) {
+//             clickTimer = setTimeout(() => {
+//                 // 더블 클릭이 아닌 경우 실행될 동작
+//                 window.location = "/page/starCard/starRead?starNo=" + no;
+//                 clearTimeout(clickTimer); // 타이머 제거
+//             }, 250);
+//         }
+//         // 더블 클릭 상태로 변경
+//         isDoubleClick = true;
+
+//         // 이벤트 전파 및 기본 동작 방지
+//         e.preventDefault();
+//         e.stopPropagation();
+//     }
+// });
+
+// // 더블 클릭 감지를 위한 타이머 초기화
+// $(document).on('dblclick', '.card', function (e) {
+//     clearTimeout(clickTimer); // 단일 클릭 타이머 제거
+//     isDoubleClick = true; // 더블 클릭 상태로 변경
+
+//     // 이벤트 전파 및 기본 동작 방지
+//     e.preventDefault();
+//     e.stopPropagation();
+// });
+
 
     // // 더블클릭 이벤트 핸들러
     // function handleCardDoubleClick(cardElement, event) {
