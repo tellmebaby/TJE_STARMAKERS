@@ -86,22 +86,6 @@ public class MessageController {
         return ResponseEntity.ok(messages);
     }
     
-    // @GetMapping("/messageClose")
-    // public ResponseEntity<?> closeMessage(HttpSession session) {
-    //     Users user = (Users) session.getAttribute("user");
-    //     if (user != null) {
-    //         int result = messageService.updateMessageByUser(user.getUserNo());
-    //         if (result > 0) {
-    //             log.info("대화종료 성공");
-    //             return ResponseEntity.noContent().build(); // HTTP 204 No Content
-    //         } else {
-    //             log.info("메세지 코드 수정 실패");
-    //             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("메세지 코드 수정 실패");
-    //         }
-    //     }
-    //     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("유저 정보 없음");
-    // }
-
     @GetMapping("/messageClose")
     public ResponseEntity<?> closeMessage(HttpSession session) {
         Users user = (Users) session.getAttribute("user");

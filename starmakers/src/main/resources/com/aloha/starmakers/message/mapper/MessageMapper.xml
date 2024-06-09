@@ -56,7 +56,7 @@
         UPDATE message
         SET code = CONCAT(code, 'Closed')
         WHERE user_no = #{userNo}
-        AND (code = 'toAdmin' OR code = 'toUser');
+        AND (code = 'toAdmin' OR code = 'toUser')
     </update>
 
     <!--1:1채팅창 메세지 가져오기-->
@@ -64,6 +64,6 @@
         SELECT * 
         FROM message 
         WHERE user_no = #{userNo}
-        AND (code = 'toUser' OR code = 'toAdmin');
+        AND (code = 'toUser' OR code = 'toAdmin')
     </select>
 </mapper>
