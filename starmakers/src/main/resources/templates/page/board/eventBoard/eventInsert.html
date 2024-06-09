@@ -31,11 +31,12 @@
     <h1 class="d-flex justify-content-center mb-3 mt-3">
       이벤트 등록
     </h1>
-    <form action="/page/board/eventBoard/eventInsert" method="post" id="eventInsert">
+    <form action="/page/board/eventBoard/eventInsert" method="post" id="eventInsert" enctype="multipart/form-data">
 
       <div class="container">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <input type="hidden" name="username" th:value="${session.user.email}">
+        <input type="hidden" name="type" value="event">
         <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
           <span class="input-group-text mb-3 col-2">
             배너 기간

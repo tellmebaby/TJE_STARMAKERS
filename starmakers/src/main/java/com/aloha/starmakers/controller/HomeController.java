@@ -92,9 +92,12 @@ public class HomeController {
             int commentCount = replyService.countByStarNo(starBoard.getStarNo());
             starBoard.setCommentCount(commentCount);
         }
+
+        List<StarBoard> starListEvent = starService.list("event", page, option);
         
         model.addAttribute("starListReview", starListReview.stream().limit(5).collect(Collectors.toList()));
         model.addAttribute("starListAnn", starListAnn.stream().limit(5).collect(Collectors.toList()));
+        model.addAttribute("starListEvent", starListEvent);
         // index 페이지를 반환합니다.
         return "index";
     }

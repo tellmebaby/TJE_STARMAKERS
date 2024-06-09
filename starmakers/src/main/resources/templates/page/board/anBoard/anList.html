@@ -6,16 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>공지사항</title>
     <link rel="stylesheet" href="/css/list.css">
+    <link rel="stylesheet" href="/css/starCard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Honk&family=Noto+Sans+KR:wght@100..900&family=Rubik+Scribble&display=swap" rel="stylesheet">
 </head>
 <body>
     <th:block layout:fragment="content" >
 
-        <div class="container">
-            <div class="event-banner">
+        <div class="container" style="padding: 10px;">
+            <!-- <div class="event-banner">
                 <img src="/img/sampleBanner.png" alt="">
-            </div>
-        <h3>공지사항</h3>
-
+            </div> -->
+            
+            
+        <h3 class="notice">Notice</h3>
+        <div class="eventtext">
+        <label >📢운영수칙을 준수하여 활동에 피해가 없도록 하시길 바랍니다;)</label>
+        </div>
             <div class="search-container">
                 <form action="/page/board/anBoard/anList" method="get">
                     <select name="code">
@@ -101,7 +110,7 @@
                 </th:block>
                 <!-- 로그인 시 -->
                 <th:block sec:authorize="isAuthenticated()">
-                    <a href="/page/board/anBoard/anInsert" class="btn btn-primary">공지 등록</a>
+                    <a href="/page/board/anBoard/anInsert" class="btnn" style="background-color: #91ACCF;">✏글쓰기</a>
                 </th:block>
             </div>
         
@@ -153,6 +162,7 @@
         
     </div>
     </th:block>
+    
 
 </body>
 

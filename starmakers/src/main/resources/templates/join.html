@@ -6,17 +6,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tiny5&display=swap" rel="stylesheet">
     <title>회원가입</title>
     <style>
+        body {
+            
+        }
+        .join-container {
+            /* display: flex; */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            padding: 20px 0;
+        }
         .signup-form {
+            margin-top: 40px;
             width: 100%;
             max-width: 400px;
             padding: 15px;
             margin: auto;
             background-color: #fff;
-            border-radius: 5px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+            
         }
-
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
         #input-btn {
             width: 100%;
         }
@@ -29,17 +55,31 @@
 
         /* 폼 전체 스타일 */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         /* 입력 필드 스타일 */
         .form-control {
-            border-radius: 5px;
+            /* width: 100%; */
+            /* padding: 10px; */
+            border-radius: 3px;
+            border: 1px solid #ccc;
         }
 
         /* 버튼 스타일 */
-        .btn {
+        .joinbtn {
+            /* width: 100%; */
+            padding: 10px;
+            border: none;
             border-radius: 5px;
+            background-color: #91ACCF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .joinbtn:hover {
+            background-color: #a2bfe6;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         /* 인증 코드 입력 부분 스타일 */
@@ -51,6 +91,19 @@
         .input-group {
             display: flex;
             align-items: center;
+        }
+        .input-group button {
+            margin-left: 10px;
+            padding: 7px 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #e6b2c3;
+            color: white;
+            cursor: pointer;
+        }
+
+        .input-group button:hover {
+            background-color: #E7A5BC;
         }
 
         /* 인증 코드 입력 필드와 버튼을 한 줄에 나타내기 */
@@ -64,8 +117,8 @@
             max-width: 500px;
             margin: auto;
             padding: 20px;
-            border-radius: 10px;
-            background-color: #f9f9f9;
+            /* border-radius: 10px; */
+            /* background-color: #f9f9f9; */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -73,11 +126,27 @@
         label{
             padding-bottom: 5px;
         }
+        h1 {
+            font-family: "Tiny5", sans-serif;
+            font-weight: 400;
+            font-style: normal
+        }
+        .join-style {
+            background: radial-gradient(circle at center, #91ACCF, transparent 40%);
+        }
     </style>
 </head>
 
 <body layout:fragment="content" class="join">
+<div class="join-container">
+    <center><h1>JOIN</h1></center>
+    <div class="join-style">
     <div class="signup-form">
+        <div style="height: 140px;
+            display: flex; 
+            flex-wrap: wrap;
+            align-content: space-around;
+            justify-content: center;"><img style="width: 100px;"src="/img/logo_ex4.png"></div>
         <form action="/join" method="post">
             <input type="hidden" id="inputCsrf" name="_csrf" th:value="${_csrf.token}">
             <div class="form-group">
@@ -158,11 +227,12 @@
                 <input type="text" name="address_detail" class="form-control" placeholder="상세주소" required>
             </div>
 
-            <button id="input-btn" class="btn btn-lg btn-primary btn-block" type="submit">가입하기</button>
+            <button id="input-btn" class="joinbtn btn-lg btn-primary btn-block" type="submit">가입하기</button>
+        </div>
         </form>
 
     </div>
-
+</div>
 
 
     <script>
@@ -411,6 +481,21 @@
 
     </script>
 
+    <!-- 스타일 스크립트 -->
+     <script>
+        const inputFields = document.querySelectorAll('.form-control');
+
+        inputFields.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.classList.add('highlight-input');
+            });
+
+            input.addEventListener('blur', function() {
+                this.classList.remove('highlight-input');
+            });
+        });
+
+     </script>
 
 </body>
 

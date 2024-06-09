@@ -447,12 +447,13 @@ public class StarController {
     public String eventList(@RequestParam(value = "type", defaultValue = "event") String type, Model model, Page page,
             Option option) throws Exception {
 
+        List<StarBoard> starListEvent = starService.list("event", page, option);
+        model.addAttribute("starListEvent", starListEvent);
         List<StarBoard> starList = starService.list(type, page, option);
         for (StarBoard starBoard : starList) {
             int commentCount = replyService.countByStarNo(starBoard.getStarNo());
             starBoard.setCommentCount(commentCount);
         }
-
 
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
@@ -473,14 +474,39 @@ public class StarController {
         return "/page/board/eventBoard/eventList";
     }
 
-    @PostMapping("/board/eventBoard/eventInsert")
-    public String eventInsertPro(StarBoard starBoard, String username) throws Exception {
+    // @PostMapping("/board/eventBoard/eventInsert")
+    // public String eventInsertPro(StarBoard starBoard, String username) throws Exception {
         
-        starBoard.setType("event");
-        int result = starService.insert(starBoard, username);
+    //     starBoard.setType("event");
+    //     int result = starService.insert(starBoard, username);
+    //     // 리다이렉트
+    //     // 데이터 처리 성공
+    //     if (result > 0) {
+    //         return "redirect:/page/board/eventBoard/eventList";
+    //     }
+
+    //     // 데이터 처리 실패
+    //     int no = starBoard.getStarNo();
+    //     return "redirect:/page/board/eventBoard/eventInsert?starNo=" + no + "&error";
+    // }
+
+    @PostMapping("/board/eventBoard/eventInsert")
+    public String eventInsertPro(StarBoard starBoard, String username,
+            @RequestParam(value = "image", required = false) MultipartFile file, HttpSession session)
+            throws Exception {
+        
+        int starNo = starService.insert(starBoard, username); // starBoard 등록
+
+        Users user = (Users) session.getAttribute("user");
+        int userNo = user.getUserNo();
+
         // 리다이렉트
         // 데이터 처리 성공
-        if (result > 0) {
+        if (starNo > 0) {
+            // 파일 처리 로직
+            if (file != null && !file.isEmpty()) {
+                fileService.upload(file, starNo, userNo); // file 등록
+            }
             return "redirect:/page/board/eventBoard/eventList";
         }
 
@@ -547,6 +573,26 @@ public class StarController {
         return "redirect:/page/mypage/event?error";  // 삭제 실패시에도 같은 페이지로 리디렉션
 
     }
+    /**
+     * 글 1개 삭제
+     * @param starNo
+     * @return
+     * @throws Exception 
+     */
+    @PostMapping("/board/eventBoard/delete")
+    public String eventDeletePost(@RequestParam("starNo") int starNo) throws Exception {
+        String starNos = starNo+"";
+        int result = starService.delete(starNos);
+        if(result>0){
+            log.info("삭제 완료");
+        }
+        else {
+            log.info("삭제 실패");
+        }
+        return "redirect:/page/board/eventBoard/eventList";
+    }
+
+
 
     // 아래부터 review 게시판
 
@@ -583,7 +629,9 @@ public class StarController {
     @GetMapping("/board/reviewBoard/reviewList")
     public String reviewList(@RequestParam(value = "type", defaultValue = "review") String type, Model model, Page page,
             Option option) throws Exception {
-
+        
+        List<StarBoard> starListEvent = starService.list("event", page, option);
+        model.addAttribute("starListEvent", starListEvent);
         List<StarBoard> starList = starService.list(type, page, option);
         for (StarBoard starBoard : starList) {
             int commentCount = replyService.countByStarNo(starBoard.getStarNo());
@@ -674,6 +722,8 @@ public class StarController {
     public String anList(@RequestParam(value = "type", defaultValue = "an") String type, Model model, Page page,
             Option option) throws Exception {
 
+        List<StarBoard> starListEvent = starService.list("event", page, option);
+        model.addAttribute("starListEvent", starListEvent);
         List<StarBoard> starList = starService.list(type, page, option);
         for (StarBoard starBoard : starList) {
             int commentCount = replyService.countByStarNo(starBoard.getStarNo());
@@ -756,6 +806,25 @@ public class StarController {
         int no = starBoard.getStarNo();
 
         return "redirect:/page/board/anBoard/anUpdate?qnaNo=" + no + "$error";
+    }
+
+    /**
+     * 글 1개 삭제
+     * @param starNo
+     * @return
+     * @throws Exception 
+     */
+    @PostMapping("/board/anBoard/delete")
+    public String anDeletePost(@RequestParam("starNo") int starNo) throws Exception {
+        String starNos = starNo+"";
+        int result = starService.delete(starNos);
+        if(result>0){
+            log.info("삭제 완료");
+        }
+        else {
+            log.info("삭제 실패");
+        }
+        return "redirect:/page/board/anBoard/anList";
     }
 
     // @PostMapping("/like")
