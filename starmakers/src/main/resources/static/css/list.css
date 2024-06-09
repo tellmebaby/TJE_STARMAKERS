@@ -3,6 +3,14 @@
     margin: 0 auto;
     
 } */
+.notice {
+    font-family: "Montserrat Subrayada", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    padding-top: 50px;
+    font-size: 40px;
+}
 .event {
     font-family: "Honk", system-ui;
     font-optical-sizing: auto;
