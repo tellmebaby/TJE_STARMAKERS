@@ -453,4 +453,5 @@ public class AdminController {
         }
         return "redirect:/admin/pages/" + page; // 삭제 실패시에도 같은 페이지로 리디렉션
     }
+
 }

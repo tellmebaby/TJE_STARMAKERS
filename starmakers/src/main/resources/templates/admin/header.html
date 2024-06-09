@@ -4,6 +4,8 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
     <title>당 스 만</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -27,9 +29,7 @@
     <!-- summernote -->
     <link rel="stylesheet" href="/admin/plugins/summernote/summernote-bs4.min.css">
 
+
     <!-- fullCalendar -->
-   <link rel="stylesheet" href="/admin/plugins/fullcalendar/main.css">
+    <link rel="stylesheet" href="/admin/plugins/fullcalendar/main.css">
 </head>
-
-
-   
