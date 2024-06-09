@@ -1,22 +1,24 @@
-document.getElementById('chatButton').addEventListener('click', function() {
-    this.classList.toggle('open');
-});
-
-document.getElementById('chatInput').addEventListener('click', function(event) {
-    event.stopPropagation();
-});
-
-document.addEventListener('click', function(event) {
-    const chatButton = document.getElementById('chatButton');
-    if (!chatButton.contains(event.target)) {
-        chatButton.classList.remove('open');
-    }
-});
-
-const token = $("meta[name='_csrf']").attr("content");
-const header = $("meta[name='_csrf_header']").attr("content");
-
+// 1. 문서가 준비되었는지 확인
 $(document).ready(function() {
+    // 2. 클릭 이벤트 리스너 설정
+    document.getElementById('chatButton').addEventListener('click', function() {
+        this.classList.toggle('open');
+    });
+
+    document.getElementById('chatInput').addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
+
+    document.addEventListener('click', function(event) {
+        const chatButton = document.getElementById('chatButton');
+        if (!chatButton.contains(event.target)) {
+            chatButton.classList.remove('open');
+        }
+    });
+
+    const token = $("meta[name='_csrf']").attr("content");
+    const header = $("meta[name='_csrf_header']").attr("content");
+
     function fetchMessages() {
         $.ajax({
             type: 'GET',
