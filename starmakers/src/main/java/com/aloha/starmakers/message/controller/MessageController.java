@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.security.access.AccessDeniedException;
 
 import com.aloha.starmakers.message.dto.Message;
 import com.aloha.starmakers.message.service.MessageService;
@@ -72,7 +74,7 @@ public class MessageController {
         messageService.deleteMessage(messageNo);
     }
 
-    @GetMapping("/getMessagesByUser")
+    @GetMapping("/getChatMessagesByUser")
     public ResponseEntity<List<Message>> getMessagesByUser(HttpSession session) {
         Users user = (Users) session.getAttribute("user");
         if (user == null) {
@@ -80,8 +82,43 @@ public class MessageController {
         }
 
         int userNo = user.getUserNo();
-        List<Message> messages = messageService.getMessageByUser(userNo);
+        List<Message> messages = messageService.getChatMessageByUser(userNo);
         return ResponseEntity.ok(messages);
     }
+    
+    // @GetMapping("/messageClose")
+    // public ResponseEntity<?> closeMessage(HttpSession session) {
+    //     Users user = (Users) session.getAttribute("user");
+    //     if (user != null) {
+    //         int result = messageService.updateMessageByUser(user.getUserNo());
+    //         if (result > 0) {
+    //             log.info("대화종료 성공");
+    //             return ResponseEntity.noContent().build(); // HTTP 204 No Content
+    //         } else {
+    //             log.info("메세지 코드 수정 실패");
+    //             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("메세지 코드 수정 실패");
+    //         }
+    //     }
+    //     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("유저 정보 없음");
+    // }
+
+    @GetMapping("/messageClose")
+    public ResponseEntity<?> closeMessage(HttpSession session) {
+        Users user = (Users) session.getAttribute("user");
+        if (user != null) {
+            int result = messageService.updateMessageByUser(user.getUserNo());
+            if (result > 0) {
+                log.info("대화종료 성공");
+                return ResponseEntity.noContent().build(); // HTTP 204 No Content
+            } else {
+                log.info("메세지 코드 수정 실패");
+                // 여기서 접근 거부 오류를 반환하는 경우
+                throw new AccessDeniedException("메세지 코드 수정 실패");
+            }
+        }
+        throw new AccessDeniedException("유저 정보 없음");
+        // return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("유저 정보 없음");
+    }
+
     
 }
