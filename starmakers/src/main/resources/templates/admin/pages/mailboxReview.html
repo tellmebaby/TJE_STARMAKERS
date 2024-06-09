@@ -3,6 +3,9 @@
 
 <head th:replace="/admin/header :: head"></head>
 
+<!--폰트어썸  -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+rel="stylesheet">
 <body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
   <div class="wrapper">
     <!-- Preloader -->
@@ -58,12 +61,12 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/admin/pages/mailboxReview" class="nav-link">
+                    <a href="/admin/pages/mailboxStar" class="nav-link">
                       <i class="far fa-envelope"></i> 홍보
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/admin/pages/mailboxReview" class="nav-link">
+                    <a href="/admin/pages/mailboxEvent" class="nav-link">
                       <i class="far fa-file-alt"></i> 이벤트
                     </a>
                   </li>
@@ -127,6 +130,9 @@
                 <button type="button" class="btn btn-default btn-sm" onclick="allDelete()">
                   <i class="far fa-trash-alt"></i>
                 </button>
+                <button type="button" class="btn btn-default btn-sm" onclick="starUpdate()">
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </button>
                 <!-- 처음으로 -->
                 <button type="button" class="btn btn-default btn-sm">
                   <a th:href="|/admin/pages/mailboxReview?page=${page.first}&code=${option.code}&keyword=${option.keyword}|">
@@ -171,7 +177,7 @@
               <table class="table table-hover table-striped">
                 <input type="hidden" name="starNos" id="starNos">
                 <thead>
-                  <tr>
+                  <tr align="center">
                     <th></th>
                     <th>번호</th>
                     <th>작성자</th>
@@ -179,7 +185,7 @@
                     <th>작성일자</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody align="center">
                   <tr th:each="StarBoard : ${starList}">
                     <td>
                       <div class="icheck-primary">
@@ -190,7 +196,9 @@
                     </td>
                     <td class="mailbox-star" th:text="${StarBoard.starNo}"></td>
                     <td class="mailbox-name" th:text="${StarBoard.writer}"></td>
-                    <td class="mailbox-subject" th:text="${StarBoard.title}" style="width: 300px;"></td>
+                    <td class="mailbox-subject">
+                      <a th:href="|/page/board/reviewBoard/reviewPost?starNo=${StarBoard.starNo}|" th:text="${StarBoard.title}" style="width: 300px; color: black;"></a>
+                    </td>
                     <td class="mailbox-date">
                       <span th:text="${#dates.format(StarBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
                         </td>
@@ -211,6 +219,9 @@
                     <div class="btn-group">
                       <button type="button" class="btn btn-default btn-sm" onclick="allDelete()">
                         <i class="far fa-trash-alt"></i>
+                      </button>
+                      <button type="button" class="btn btn-default btn-sm" onclick="starUpdate()">
+                        <i class="fa-regular fa-pen-to-square"></i>
                       </button>
                     <!-- /.btn-group -->
                     <!-- 처음으로 -->
@@ -333,6 +344,21 @@
             form.starNos.value = starNos.join(',');
             form.submit();
         }
+    function starUpdate() {
+      const checkboxes = document.querySelectorAll('input[name="starNo"]:checked');
+      if (checkboxes.length === 0) {
+          alert('하나의 게시물을 선택하십시오.');
+          return;
+      }
+      
+      if (checkboxes.length > 1) {
+          alert('수정할 게시물 하나만 선택하십시오.');
+          return;
+      }
+      
+      const starNo = checkboxes[0].value;
+      window.location.href = `/page/board/reviewBoard/reviewUpdate?starNo=${starNo}`;
+    }
 </script>
 </body>
 </html>

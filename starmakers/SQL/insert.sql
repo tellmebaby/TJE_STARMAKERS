@@ -40,3 +40,10 @@ FROM reply
 
 SELECT *
 FROM `user`
+
+INSERT INTO user ( name, id, email, password, phone, address, gender, birth )
+VALUES ( '관리자', 'admin', 'admin@naver.com', '$2a$12$TrN..KcVjciCiz.5Vj96YOBljeVTTGJ9AUKmtfbGpgc9hmC7BxQ92', '010-1234-1234', '인천시', '', '2024-01-01' );
+
+INSERT INTO user_auth ( user_id,  auth )
+VALUES ( 'admin@naver.com', 'ROLE_USER' ),
+       ( 'admin@naver.com', 'ROLE_ADMIN' )
