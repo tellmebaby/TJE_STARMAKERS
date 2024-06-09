@@ -602,8 +602,11 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="admin/dist/js/pages/dashboard.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script>
+    var csrfToken = "[[${_csrf.token}]]"
+</script>
 <!-- 채팅 -->
-<script src="/js/adminChat.js"></script>
+<script src="/js/adminChat.js" th:inline="javascript"></script>
 
 </body>
 </html>
