@@ -75,6 +75,44 @@
                 display: block;
             }
 
+            .chat-btn-close {
+                display: inline-block;
+            }
+
+            #closeChatButton {
+                text-decoration: none;
+                position: relative;
+            }
+
+            #closeChatButton i {
+                font-size: 2em; /* 2배 크기 */
+                color: white;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+            }
+
+            .tooltip {
+                visibility: hidden;
+                width: 120px;
+                background-color: black;
+                color: white;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                position: absolute;
+                z-index: 1;
+                bottom: 125%;
+                left: 50%;
+                margin-left: -60px;
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+
+            #closeChatButton:hover .tooltip {
+                visibility: visible;
+                opacity: 1;
+            }
+
+
 
     </style>
     <footer>
@@ -118,6 +156,12 @@
                             <input type="text" class="form-control" name="content" placeholder="입력하세요..." id="chatInput">
                             <input type="hidden" name="code" value="toAdmin">
                         </form>
+                    </div>
+                    <div class="chat-btn-close">
+                        <a href="#" id="closeChatButton">
+                            <i class="fa-solid fa-comment-slash"></i>
+                            <span class="tooltip">1:1 문의를 종료합니다.</span>
+                        </a>
                     </div>
                 </div>
             </div>

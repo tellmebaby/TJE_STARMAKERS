@@ -77,4 +77,13 @@ public class MessageServiceImpl implements MessageService {
         return messageMapper.updateView(userNo, to);
     }
 
+    public int updateMessageByUser( int userNo ) {
+        return messageMapper.updateMessageByUser(userNo);
+    }
+    
+    // 1:1 대화 받아오기
+    @Override
+    public List<Message> getChatMessageByUser(int userNo) {
+        return messageMapper.getChatMessageByUser(userNo);
+    }
 }

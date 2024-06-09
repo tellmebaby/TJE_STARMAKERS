@@ -40,4 +40,9 @@ public interface MessageMapper {
 
     @Update("UPDATE message SET view = 0 WHERE user_no = #{userNo} AND code = #{to}")
     int updateView(@Param("userNo") int userNo, @Param("to") String to);
+    // 대화종료
+    public int updateMessageByUser(int userNo);
+
+    // 1:1 대화 받아오기
+    public List<Message> getChatMessageByUser(int userNo);
 }

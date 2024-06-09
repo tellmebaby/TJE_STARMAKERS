@@ -3,6 +3,9 @@
 
 <head th:replace="/admin/header :: head"></head>
 
+<!--폰트어썸  -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+rel="stylesheet">
 <body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
   <div class="wrapper">
     <!-- Preloader -->
@@ -127,6 +130,9 @@
                 <button type="button" class="btn btn-default btn-sm" onclick="allDelete()">
                   <i class="far fa-trash-alt"></i>
                 </button>
+                <button type="button" class="btn btn-default btn-sm" onclick="allUpdate()">
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </button>
                 <!-- 처음으로 -->
                 <button type="button" class="btn btn-default btn-sm">
                   <a th:href="|/admin/pages/mailbox?page=${page.first}&code=${option.code}&keyword=${option.keyword}|">
@@ -171,7 +177,7 @@
               <table class="table table-hover table-striped">
                 <input type="hidden" name="starNos" id="starNos">
                 <thead>
-                  <tr>
+                  <tr align="center">
                     <th></th>
                     <th>번호</th>
                     <th>게시판</th>
@@ -180,12 +186,12 @@
                     <th>작성일자</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody align="center">
                   <tr th:each="StarBoard : ${starList}">
                     <td>
                       <div class="icheck-primary">
                         <input type="checkbox" th:id="|starNo${StarBoard.starNo}|" name="starNo"
-                          th:value="${StarBoard.starNo}">
+                            th:value="${StarBoard.starNo}" th:data-type="${StarBoard.type}">
                         <label th:for="|starNo${StarBoard.starNo}|"></label>
                       </div>
                     </td>
@@ -199,7 +205,12 @@
                       </span>
                     </td>
                     <td class="mailbox-name" th:text="${StarBoard.writer}"></td>
-                    <td class="mailbox-subject" th:text="${StarBoard.title}" style="width: 300px;"></td>
+                    <td class="mailbox-subject">
+                      <a th:if="${StarBoard.type} == 'event'" th:href="|/page/board/eventBoard/eventPost?starNo=${StarBoard.starNo}|" th:text="${StarBoard.title}" style="width: 300px; color: black;"></a>
+                      <a th:if="${StarBoard.type} == 'review'" th:href="|/page/board/reviewBoard/reviewPost?starNo=${StarBoard.starNo}|" th:text="${StarBoard.title}" style="width: 300px; color: black;"></a>
+                      <a th:if="${StarBoard.type} == 'an'" th:href="|/page/board/anBoard/anPost?starNo=${StarBoard.starNo}|" th:text="${StarBoard.title}" style="width: 300px; color: black;"></a>
+                      <a th:if="${StarBoard.type} == 'starCard'" th:href="|/page/starCard/starRead?starNo=${StarBoard.starNo}|" th:text="${StarBoard.title}" style="width: 300px; color: black;"></a>
+                  </td>
                     <td class="mailbox-date">
                       <span th:text="${#dates.format(StarBoard.regDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
                         </td>
@@ -220,6 +231,9 @@
                     <div class="btn-group">
                       <button type="button" class="btn btn-default btn-sm" onclick="allDelete()">
                         <i class="far fa-trash-alt"></i>
+                      </button>
+                      <button type="button" class="btn btn-default btn-sm" onclick="allUpdate()">
+                        <i class="fa-regular fa-pen-to-square"></i>
                       </button>
                     <!-- /.btn-group -->
                     <!-- 처음으로 -->
@@ -342,6 +356,40 @@
             form.starNos.value = starNos.join(',');
             form.submit();
         }
+
+    function allUpdate() {
+    const checkboxes = document.querySelectorAll('input[name="starNo"]:checked');
+    if (checkboxes.length === 0) {
+        alert('하나의 게시물을 선택하십시오.');
+        return;
+    }
+    
+    if (checkboxes.length > 1) {
+        alert('수정할 게시물 하나만 선택하십시오.');
+        return;
+    }
+    
+    const checkbox = checkboxes[0];
+    const starNo = checkbox.value;
+    const type = checkbox.getAttribute('data-type');
+    
+    let url = '';
+
+    if (type === 'event') {
+        url = `/page/board/eventBoard/eventUpdate?starNo=${starNo}`;
+    } else if (type === 'review') {
+        url = `/page/board/reviewBoard/reviewUpdate?starNo=${starNo}`;
+    } else if (type === 'an') {
+        url = `/page/board/anBoard/anUpdate?starNo=${starNo}`;
+    } else if (type === 'starCard') {
+        url = `/page/starCard/starUpdate?starNo=${starNo}`;
+    } else {
+        alert('알 수 없는 게시물 타입입니다.');
+        return;
+    }
+    
+    window.location.href = url;
+}
 </script>
 </body>
 </html>
