@@ -1,12 +1,13 @@
 package com.aloha.starmakers.message.dto;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import lombok.Data;
 
 @Data
 public class Message {
-    
+
     private int messageNo;
     private String content;
     private String code;
@@ -15,4 +16,8 @@ public class Message {
     private int payNo;
     private int qnaNo;
     private int userNo;
+    private int view;
+    private String name;
+    private int imgNo;
+    private int count;
 }

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.aloha.starmakers.board.dto.Files;
@@ -35,6 +36,14 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/file")
 public class FileController {
+
+    // URL에서 이미지 데이터를 가져오는 메서드
+    private byte[] getImageDataFromURL(String imageURL) throws IOException {
+        // RestTemplate을 사용하여 이미지를 URL에서 가져오기
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<byte[]> response = restTemplate.getForEntity(imageURL, byte[].class);
+        return response.getBody();
+    }
 
     @Autowired
     private FileService fileService;
@@ -110,12 +119,17 @@ public class FileController {
 
 
         if ( no == -1) {
-            log.info("파일 데이터 없음");
-            File noImageFile = new File("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf85dv87L-QUBgTu6c8_OrOjHGFkldiqpx31GaI65ut4X0BbqtUvSPJWxyyuiD9bvKqzA&usqp=CAU");
-            byte[] noImageFileData = FileCopyUtils.copyToByteArray(noImageFile);
+
+            // 이미지 URL
+            String imageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf85dv87L-QUBgTu6c8_OrOjHGFkldiqpx31GaI65ut4X0BbqtUvSPJWxyyuiD9bvKqzA&usqp=CAU";
+
+            // 이미지를 URL에서 가져오기
+            byte[] imageData = getImageDataFromURL(imageURL);
+
+            // 이미지 데이터와 헤더 설정 후 반환
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_JPEG);
-            return new ResponseEntity<>(noImageFileData, headers, HttpStatus.OK);         
+            return new ResponseEntity<>(imageData, headers, HttpStatus.OK);
           
         }
         
