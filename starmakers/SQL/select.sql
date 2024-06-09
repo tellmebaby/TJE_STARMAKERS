@@ -1,4 +1,4 @@
--- Active: 1717071708994@@127.0.0.1@3306@joeun
+-- Active: 1714701530602@@127.0.0.1@3306@joeun
 SELECT COUNT(*)
 FROM user
 WHERE name = "김조은" AND email = "joeun@naver.com";
@@ -295,4 +295,3 @@ WHERE
     s.type = 'starCard'
 ORDER BY 
     s.reg_date DESC;
-

@@ -32,4 +32,10 @@ public interface MessageMapper {
 
     // DELETE
     public int deleteMessage(int messageNo);
+
+    // 대화종료
+    public int updateMessageByUser(int userNo);
+
+    // 1:1 대화 받아오기
+    public List<Message> getChatMessageByUser(int userNo);
 }

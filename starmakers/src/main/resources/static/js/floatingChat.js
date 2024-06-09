@@ -19,17 +19,42 @@ $(document).ready(function() {
     const token = $("meta[name='_csrf']").attr("content");
     const header = $("meta[name='_csrf_header']").attr("content");
 
+    // function fetchMessages() {
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: '/message/getChatMessagesByUser', // 서버에서 메시지를 가져오는 엔드포인트
+    //         success: function(response) {
+    //             console.log('Messages fetched successfully:', response);
+    //             renderMessages(response);
+    //         },
+    //         error: function(xhr, status, error) {
+    //             console.error('Error fetching messages:', status, error);
+    //             console.log(xhr.responseText);
+    //         }
+    //     });
+    // }
+
     function fetchMessages() {
         $.ajax({
             type: 'GET',
-            url: '/message/getMessagesByUser', // 서버에서 메시지를 가져오는 엔드포인트
+            url: '/message/getChatMessagesByUser',
             success: function(response) {
                 console.log('Messages fetched successfully:', response);
-                renderMessages(response);
+                if (response.length > 0) {
+                    // 데이터가 있는 경우
+                    renderMessages(response);
+                    $('.chat-btn-close').show(); // 버튼 표시
+                } else {
+                    // 데이터가 없는 경우
+                    console.log('No messages available.');
+                    $('.chat-btn-close').hide(); // 버튼 숨김
+                }
             },
             error: function(xhr, status, error) {
                 console.error('Error fetching messages:', status, error);
                 console.log(xhr.responseText);
+                // 데이터가 없는 경우도 여기로 올 수 있으므로, 아래와 같이 처리해야 함
+                $('.chat-btn-close').hide(); // 버튼 숨김
             }
         });
     }
@@ -93,6 +118,9 @@ $(document).ready(function() {
                 console.log('Message sent successfully:', response); // 성공 시 응답 출력
                 // 메시지 전송 성공 시 추가 작업 수행
                 $('#chatInput').val(''); // 입력창 비우기
+                // 메시지 전송 성공 시 해당 요소 다시 보이게 함
+                $('.chat-btn-close').show(); // 버튼 표시
+
                 
                 // 새 메시지 바로 표시
                 var newMessage = $('<p></p>').text(formData.content).css({
@@ -115,4 +143,28 @@ $(document).ready(function() {
             }
         });
     });
+
+    // 대화종료
+    document.getElementById('closeChatButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        const chatMessages = $('#chatMessages');
+        chatMessages.empty(); // 기존 메시지 비우기
+
+
+        fetch('/message/messageClose')
+            .then(response => {
+                if (response.status === 204) {
+                    console.log('대화종료 성공');
+                    // 필요시 추가 동작 추가 가능
+                    $('.chat-btn-close').hide(); // 버튼 숨김
+                } else {
+                    return response.text().then(text => {
+                        console.error('Error:', text);
+                        alert('오류 발생: ' + text);
+                    });
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
 });
