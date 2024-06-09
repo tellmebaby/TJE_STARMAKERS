@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 import com.aloha.starmakers.message.dto.Message;
 import com.aloha.starmakers.message.mapper.MessageMapper;
 
+import groovy.util.logging.Slf4j;
+
+@lombok.extern.slf4j.Slf4j
 @Service
-public class MessageServiceImpl implements MessageService{
+public class MessageServiceImpl implements MessageService {
 
     @Autowired
     private MessageMapper messageMapper;
@@ -25,7 +28,6 @@ public class MessageServiceImpl implements MessageService{
         Message message = messageMapper.getMessageById(messageNo);
         return message;
     }
-
 
     @Override
     public int updateMessage(Message message) {
@@ -63,6 +65,16 @@ public class MessageServiceImpl implements MessageService{
         return messagesList;
     }
 
-  
-    
+    @Override
+    public List<Message> getMessagesList() {
+        List<Message> messagesList = messageMapper.getMessagesList();
+        log.info(messagesList.toString());
+        return messagesList;
+    }
+
+    @Override
+    public int updateView(int userNo, String to) {
+        return messageMapper.updateView(userNo, to);
+    }
+
 }

@@ -47,6 +47,7 @@ CREATE TABLE message
   pay_no     INT         NOT NULL COMMENT '결제데이터번호',
   qna_no     INT         NOT NULL COMMENT '질의응답데이터번호',
   user_no    INT         NOT NULL COMMENT '유저데이터번호',
+  view       INT         NOT NULL DEFAULT '1',
   PRIMARY KEY (message_no)
 ) COMMENT '알림메세지';
 

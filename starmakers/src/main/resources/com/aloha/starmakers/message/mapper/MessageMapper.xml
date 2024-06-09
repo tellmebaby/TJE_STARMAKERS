@@ -31,7 +31,7 @@
     </select>
     <!-- LIST by user_no -->
     <select id="getMessageByUser" resultType="Message">
-        SELECT * FROM message WHERE user_no = #{userNo}
+        SELECT m.*,u.name FROM message m join user u ON u.user_no = m.user_no WHERE m.user_no = #{userNo}
     </select>
 
     <!-- UPDATE -->
@@ -50,6 +50,28 @@
     <delete id="deleteMessage">
         DELETE FROM message WHERE message_no = #{messageNo}
     </delete>
+
+    <select id="getMessagesList" resultType="Message">
+        WITH RankedMessages AS (
+            SELECT 
+                m.*, 
+                u.name,
+                SUM(CASE WHEN m.code = 'toAdmin' THEN m.view ELSE 0 END) OVER (PARTITION BY m.user_no) AS count,
+                ROW_NUMBER() OVER (PARTITION BY m.user_no ORDER BY m.message_no DESC) AS rn
+            FROM 
+                message m
+            JOIN 
+                user u ON u.user_no = m.user_no
+        )
+        SELECT 
+            *
+        FROM 
+            RankedMessages
+        WHERE 
+            rn = 1
+        ORDER BY 
+            view DESC, message_no DESC;
+    </select>
 
 
 </mapper>

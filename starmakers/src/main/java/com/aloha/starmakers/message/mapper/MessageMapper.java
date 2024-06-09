@@ -3,6 +3,8 @@ package com.aloha.starmakers.message.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 import com.aloha.starmakers.message.dto.Message;
 
@@ -32,4 +34,10 @@ public interface MessageMapper {
 
     // DELETE
     public int deleteMessage(int messageNo);
+
+    // 1대1 채팅리스트
+    public List<Message> getMessagesList();
+
+    @Update("UPDATE message SET view = 0 WHERE user_no = #{userNo} AND code = #{to}")
+    int updateView(@Param("userNo") int userNo, @Param("to") String to);
 }

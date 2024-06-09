@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aloha.starmakers.board.dto.Files;
 import com.aloha.starmakers.board.dto.Option;
@@ -398,6 +399,5 @@ public class AdminController {
         List<Message> messages = messageService.getMessageByUser(userNo);
         return ResponseEntity.ok(messages);
     }
-    
-    
+
 }
