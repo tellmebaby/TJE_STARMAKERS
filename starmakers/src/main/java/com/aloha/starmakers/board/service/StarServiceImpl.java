@@ -49,10 +49,10 @@ public class StarServiceImpl implements StarService {
         Users user = userMapper.login(username);
         starBoard.setUserNo(user.getUserNo());
         starBoard.setWriter(user.getId());
-        
+
         // 정보 등록
         starMapper.insert(starBoard);
-        
+
         return starBoard.getStarNo();
     }
 
@@ -68,13 +68,12 @@ public class StarServiceImpl implements StarService {
         starBoard.setCard("유료홍보요청");
         // Date strDate = starBoard.getStartDate();
         // Date endDate = starBoard.getEndDate();
-        
+
         // 정보 등록
         int result = starMapper.insert(starBoard);
-        
+
         return result;
     }
-
 
     /**
      * 글 조회
@@ -82,7 +81,7 @@ public class StarServiceImpl implements StarService {
     @Override
     public StarBoard select(int starNo) throws Exception {
         StarBoard starBoard = starMapper.select(starNo);
-      
+
         return starBoard;
     }
 
@@ -91,7 +90,6 @@ public class StarServiceImpl implements StarService {
         int result = starMapper.update(starBoard);
         return result;
     }
-
 
     /**
      * 조회수 증가
@@ -133,7 +131,6 @@ public class StarServiceImpl implements StarService {
         return starList;
     }
 
-
     /**
      * 새 메인 카드리스트 요청
      */
@@ -151,15 +148,32 @@ public class StarServiceImpl implements StarService {
         return promotionList;
     }
 
-    
     @Override
-    public List<StarBoard> getMainCardListForLoggedInUser( int userNo, String type ) throws Exception{
+    public List<StarBoard> getMainCardListForLoggedInUser(int userNo, String type) throws Exception {
         List<StarBoard> starList = starMapper.getMainCardListForLoggedInUser(userNo, type);
         return starList;
     }
 
+    @Override
+    public int approve(String starNoList) throws Exception {
+        int result = starMapper.approve(starNoList);
+        return result;
+    }
 
+    @Override
+    public int companion(String starNoList) throws Exception {
+        int result = starMapper.companion(starNoList);
+        return result;
+    }
 
+    @Override
+    public List<StarBoard> list(String type, Page page, Option option, int userNo, int status) throws Exception {
+        int total = starMapper.count(option, type);
+        page.setTotal(total);
+        // log.info(page.toString());
+        // log.info(option.toString());
+        List<StarBoard> starList = starMapper.list(type, page, option, 0, status);
+        return starList;
+    }
 
- 
 }
