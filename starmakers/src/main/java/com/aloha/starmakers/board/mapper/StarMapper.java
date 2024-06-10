@@ -33,6 +33,9 @@ public interface StarMapper {
     public List<StarBoard> list(@Param("type") String type,
             @Param("page") Page page, @Param("option") Option option, @Param("userNo") int userNo, @Param("status") int status) throws Exception;
 
+    // 목록 조회 - 갯수 조회
+    public List<StarBoard> countList() throws Exception;
+
     // 글 등록
     public int insert(StarBoard starBoard) throws Exception;
 
@@ -69,4 +72,5 @@ public interface StarMapper {
 
     // 관리자 홍보카드 조회
     public List<StarBoard> adminStarCard(String type, Page page,@Param("option") Option option, int status)  throws Exception;
+    
 }
