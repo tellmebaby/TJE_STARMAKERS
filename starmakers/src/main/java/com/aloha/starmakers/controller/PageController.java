@@ -319,6 +319,11 @@ public class PageController {
     public String archive(StarBoard starBoard) throws Exception {
         return "/page/mypage/archive";
     }
+
+    @GetMapping("/mypage/archive2")
+    public String archive2(StarBoard starBoard) throws Exception {
+        return "/page/mypage/archive2";
+    }
     
 
 

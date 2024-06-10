@@ -878,6 +878,7 @@ public class StarController {
             String type = "starCard";
             Users user = (Users) session.getAttribute("user");
             if( user != null){
+                log.info("유저정보가 있어" + user);
                 int userNo = user.getUserNo();
                 return starService.getMainCardListForLoggedInUser(userNo, type);
             }

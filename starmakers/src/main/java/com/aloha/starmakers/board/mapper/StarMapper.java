@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.StarBoard;
+import com.aloha.starmakers.user.dto.Users;
 
 import groovyjarjarantlr4.v4.codegen.model.ExceptionClause;
 
@@ -64,5 +65,5 @@ public interface StarMapper {
                                         ,@Param("option") Option option) throws Exception;
 
     // 로그인 유저 모든 카드 불러오기
-    public List<StarBoard> getMainCardListForLoggedInUser( int userNo, String type ) throws Exception;
+    public List<StarBoard> getMainCardListForLoggedInUser(@Param("userNo") int userNo,@Param("type") String type ) throws Exception;
 }
