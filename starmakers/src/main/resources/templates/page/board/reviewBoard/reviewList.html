@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-color: #f5f5f5;">
     <th:block layout:fragment="content">
 
         <div class="container">
@@ -22,7 +22,7 @@
                 <p>후기</p>
             </div>
             <div class="noto-sans-kr">
-                <p>참여하신 이벤트나 홍보 후기를 자유롭게 남겨주세요 :D</p>
+                <label>참여하신 이벤트나 홍보 후기를 자유롭게 남겨주세요 :D</label>
             </div>
 
 
@@ -36,15 +36,15 @@
                     <button type="submit">검색</button>
                 </form>
             </div>
-
-            <table>
+            <div style="background-color: white; border-radius: 10px; display: flex; justify-content: center; padding-bottom: 14px; ">
+            <table style="width: 97%;">
                 <thead>
                     <tr>
                         <th width="70">No</th>
                         <th width="300">제목</th>
                         <th width="150">작성자</th>
                         <th width="200">작성일</th>
-                        <th width="150"><i class="fa-regular fa-thumbs-up"></i></th>
+                        <th width="150" style="font-size: large;">★</th>
                         <th width="100">조회수</th>
                     </tr>
                 </thead>
@@ -75,6 +75,7 @@
                     </th:block>
                 </tbody>
             </table>
+        </div>
             <div class="button-container">
                 <!-- 비 로그인 시 -->
                     <th:block sec:authorize="isAnonymous()">
