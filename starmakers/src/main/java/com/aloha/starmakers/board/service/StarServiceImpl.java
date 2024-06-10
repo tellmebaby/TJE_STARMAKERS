@@ -144,6 +144,13 @@ public class StarServiceImpl implements StarService {
     }
 
     @Override
+    public List<StarBoard> getMainCardListForLoggedInUser( int userNo, String type ) throws Exception{
+        log.info("유저번호 받아왔나 여기는 서비스 : " + userNo);
+        List<StarBoard> starList = starMapper.getMainCardListForLoggedInUser(userNo, type);
+        return starList;
+    }
+
+    @Override
     public List<StarBoard> promotionList(int userNo, Page page, Option option) throws Exception {
 
         List<StarBoard> promotionList = starMapper.promotionList(userNo, page, option);
@@ -152,11 +159,6 @@ public class StarServiceImpl implements StarService {
     }
 
     
-    @Override
-    public List<StarBoard> getMainCardListForLoggedInUser( int userNo, String type ) throws Exception{
-        List<StarBoard> starList = starMapper.getMainCardListForLoggedInUser(userNo, type);
-        return starList;
-    }
 
 
 
