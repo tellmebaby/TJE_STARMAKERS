@@ -66,6 +66,7 @@ public class AdminController {
     private MessageService messageService;
 
     @GetMapping("")
+
     public String index(HttpSession session, Model model) throws Exception {
         Users user = (Users) session.getAttribute("user");
         if (user != null) {
@@ -89,6 +90,17 @@ public class AdminController {
             totalPrice += pay.getPrice();
         }
         model.addAttribute("totalPrice", totalPrice);
+
+       // 작성글 정보 가져오기
+       List<StarBoard> starBoard = starService.countList();
+       int boardTotal = 0;
+       if (starBoard != null && !starBoard.isEmpty()) {
+           boardTotal = starBoard.size();
+       } else {
+           boardTotal = 0;
+       }
+        model.addAttribute("boardTotal", boardTotal);
+
         return "/admin/index";
     }
 
@@ -149,6 +161,7 @@ public class AdminController {
         optionList.add(new Option("제목", 1));
         optionList.add(new Option("내용", 2));
         optionList.add(new Option("작성자", 3));
+        optionList.add(new Option("회원번호", 4));
         model.addAttribute("optionList", optionList);
 
         return "/admin/pages/mailboxStar";
@@ -170,6 +183,7 @@ public class AdminController {
         optionList.add(new Option("제목", 1));
         optionList.add(new Option("내용", 2));
         optionList.add(new Option("작성자", 3));
+        optionList.add(new Option("회원번호", 4));
         model.addAttribute("optionList", optionList);
 
         return "/admin/pages/mailboxEvent";
@@ -191,6 +205,7 @@ public class AdminController {
         optionList.add(new Option("제목", 1));
         optionList.add(new Option("내용", 2));
         optionList.add(new Option("작성자", 3));
+        optionList.add(new Option("회원번호", 4));
         model.addAttribute("optionList", optionList);
 
         return "/admin/pages/mailboxReview";
@@ -212,6 +227,7 @@ public class AdminController {
         optionList.add(new Option("제목", 1));
         optionList.add(new Option("내용", 2));
         optionList.add(new Option("작성자", 3));
+        optionList.add(new Option("회원번호", 4));
         model.addAttribute("optionList", optionList);
 
         return "/admin/pages/mailboxAn";
@@ -232,6 +248,7 @@ public class AdminController {
         optionList.add(new Option("제목", 1));
         optionList.add(new Option("내용", 2));
         optionList.add(new Option("작성자", 3));
+        optionList.add(new Option("회원번호", 4));
         model.addAttribute("optionList", optionList);
 
         return "/admin/pages/mailboxQna";

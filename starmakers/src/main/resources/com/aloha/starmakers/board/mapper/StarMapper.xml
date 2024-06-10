@@ -221,9 +221,9 @@
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
             </if>
             <if test="option.code == 4">
-                user_no =#{option.keyword}
+                user_no = #{option.keyword}
             </if>
-        </if> 
+        </if>
     </select>
 
     <!-- 게시글 목록 검색 -->
@@ -368,6 +368,7 @@
         AND pi.star_no = sb.star_no
         WHERE 
             sb.user_no = #{userNo}
+        AND sb.type = 'starCard'
         ORDER BY sb.reg_date DESC
     </select>
 
@@ -385,7 +386,9 @@
          WHERE star_no IN (${starNo})  
     </update>
 
+    <select id="countList" resultType="starBoard">
+        SELECT *
+        FROM star_board
+    </select>
 
-
-    
 </mapper>

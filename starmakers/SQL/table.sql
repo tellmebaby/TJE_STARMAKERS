@@ -1,10 +1,6 @@
 
-<<<<<<< HEAD
--- Active: 1717071708994@@127.0.0.1@3306@joeun
-=======
-
 -- Active: 1714701530602@@127.0.0.1@3306@joeun
->>>>>>> fefeb600769e6df6f4ea50f8839eb41a2be00cf2
+
 CREATE TABLE `email` (
 
 	e_no INT(10) NOT NULL AUTO_INCREMENT,

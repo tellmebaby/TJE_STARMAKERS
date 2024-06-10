@@ -8,9 +8,6 @@ import org.apache.ibatis.annotations.Param;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.StarBoard;
-import com.aloha.starmakers.user.dto.Users;
-
-import groovyjarjarantlr4.v4.codegen.model.ExceptionClause;
 
 @Mapper
 public interface StarMapper {
@@ -35,6 +32,9 @@ public interface StarMapper {
     // 목록 조회 - 페이징, 검색
     public List<StarBoard> list(@Param("type") String type,
             @Param("page") Page page, @Param("option") Option option, @Param("userNo") int userNo, @Param("status") int status) throws Exception;
+
+    // 목록 조회 - 갯수 조회
+    public List<StarBoard> countList() throws Exception;
 
     // 글 등록
     public int insert(StarBoard starBoard) throws Exception;
@@ -72,4 +72,5 @@ public interface StarMapper {
 
     // 관리자 홍보카드 조회
     public List<StarBoard> adminStarCard(String type, Page page,@Param("option") Option option, int status)  throws Exception;
+    
 }

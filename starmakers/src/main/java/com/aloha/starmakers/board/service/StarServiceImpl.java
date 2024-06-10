@@ -175,6 +175,13 @@ public class StarServiceImpl implements StarService {
         return starList;
     }
 
+    @Override
+    public List<StarBoard> countList() throws Exception {
+
+        List<StarBoard> starList = starMapper.countList();
+        return starList;
+    }
+
 
 
 }
