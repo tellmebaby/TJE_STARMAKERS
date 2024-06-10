@@ -221,7 +221,7 @@
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
             </if>
             <if test="option.code == 4">
-                user_no =#{option.keyword}
+                user_no = #{option.keyword}
             </if>
         </if> 
     </select>
@@ -369,6 +369,7 @@
         AND pi.star_no = sb.star_no
         WHERE 
             sb.user_no = #{userNo}
+        AND sb.type = 'starCard'
         ORDER BY sb.reg_date DESC
     </select>
 
