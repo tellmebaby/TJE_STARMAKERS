@@ -80,7 +80,7 @@
           </div>
           <!-- /.col -->
           <div class="col-md-9">
-            <form action="/admin/pages/mailbox" method="get" id="keyword">
+            <form action="/admin/pages/gallery" method="get" id="keyword">
               <div class="card card-primary card-outline">
                 <div class="card-header">
                   <h3 class="card-title">⭐홍보 게시판⭐</h3>
@@ -122,13 +122,13 @@
                 </button>
                 <!-- 처음으로 -->
                 <button type="button" class="btn btn-default btn-sm">
-                  <a th:href="|/admin/pages/mailboxStar?page=${page.first}&code=${option.code}&keyword=${option.keyword}|">
+                  <a th:href="|/admin/pages/gallery?page=${page.first}&code=${option.code}&status=${status}&keyword=${option.keyword}|">
                     <i class="fas fa-reply"></i>
                   </a>
                 </button>
                 <!-- 마지막으로 -->
                 <button type="button" class="btn btn-default btn-sm">
-                  <a th:href="|/admin/pages/mailboxStar?page=${page.last}&code=${option.code}&keyword=${option.keyword}|">
+                  <a th:href="|/admin/pages/gallery?page=${page.last}&code=${option.code}&status=${status}&keyword=${option.keyword}|">
                     <i class="fas fa-share"></i>
                   </a>
                 </button>
@@ -139,7 +139,7 @@
                   <th:block th:if="${page.page != page.first}">
                     <button type="button" class="btn btn-default btn-sm">
                       <a
-                        th:href="|/admin/pages/mailboxStar?page=${page.prev}&code=${option.code}&keyword=${option.keyword}|">
+                        th:href="|/admin/pages/gallery?page=${page.prev}&code=${option.code}&status=${status}&keyword=${option.keyword}|">
                         <i class="fas fa-chevron-left"></i>
                       </a>
                   </th:block>
@@ -150,7 +150,7 @@
                   <th:block th:if="${page.page != page.last}">
                     <button type="button" class="btn btn-default btn-sm">
                       <a
-                        th:href="|/admin/pages/gallery=${page.next}&code=${option.code}&keyword=${option.keyword}|">
+                        th:href="|/admin/pages/gallery?page=${page.next}&code=${option.code}&status=${status}&keyword=${option.keyword}|">
                         <i class="fas fa-chevron-right"></i>
                       </a>
                   </th:block>
@@ -164,7 +164,7 @@
               <table class="table table-hover table-striped">
                 <input type="hidden" name="starNos" id="starNos">
                 <thead>
-                  <tr>
+                  <tr  align="center">
                     <th></th>
                     <th>번호</th>
                     <th>작성자</th>
@@ -173,7 +173,7 @@
                     <th>상태</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody align="center">
                   <tr th:each="StarBoard : ${starList}">
                     <td>
                       <div class="icheck-primary">
@@ -185,7 +185,9 @@
                     <td class="mailbox-star" th:text="${StarBoard.starNo}"></td>
                     <td class="mailbox-name" th:text="${StarBoard.writer}"></td>
                     <td class="mailbox-subject">
-                      <a th:href="@{/page/starCard/starRead(starNo=${StarBoard.starNo})}"
+                      <!-- <a th:href="@{/page/starCard/starRead(starNo=${StarBoard.starNo})}"
+                          th:text="${StarBoard.title}"></a> -->
+                      <a th:href="@{/admin/pages/adminStarRead(starNo=${StarBoard.starNo})}"
                           th:text="${StarBoard.title}"></a>
                     </td>
                     <td class="mailbox-date">

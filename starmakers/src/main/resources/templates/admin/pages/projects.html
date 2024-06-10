@@ -51,7 +51,7 @@
         <div class="card-body p-0">
           <table class="table table-striped projects">
               <thead>
-                  <tr>
+                  <tr align="center">
                       <th style="width: 1%">
                           NO
                       </th>
@@ -71,7 +71,7 @@
                       </th>
                   </tr>
               </thead>
-              <tbodcy>
+              <tbody align="center">
                   <tr th:each="user : ${userList}">
                       <td>
                           <span th:text="${user.userNo}"></span>
@@ -117,7 +117,7 @@
                           
                       </td>
                   </tr>
-              </tbodcy>
+              </tbody>
           </table>
         </div>
         <!-- /.card-body -->

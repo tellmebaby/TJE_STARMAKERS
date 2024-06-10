@@ -2,9 +2,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" th:fragment="sidebar">
   <!-- Brand Logo -->
   <a href="/admin" class="brand-link">
-    <img src="/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    <img src="/img/logo_x.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
       style="opacity: .8">
-    <span class="brand-text font-weight-light">AdminLTE 3</span>
+    <AdminPage class="brand-text font-weight-light">StarMakers<br>AdminPage</span>
   </a>
 
   <!-- Sidebar -->
@@ -12,15 +12,16 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        <img src="/img/logo_x.png" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">관리자</a>
+        <!-- <span class="d-block" id="adminName" style="color: white;"></span> -->
+         <span class="d-block text-white" th:text="${session.user.name}"></span>
       </div>
     </div>
 
     <!-- SidebarSearch Form -->
-    <div class="form-inline">
+    <!-- <div class="form-inline">
       <div class="input-group" data-widget="sidebar-search">
         <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -29,7 +30,7 @@
           </button>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
@@ -42,7 +43,7 @@
             <i class="nav-icon fas fa-th"></i>
             <p>
               회원관리
-              <span class="right badge badge-danger">New</span>
+              <!-- <span class="right badge badge-danger">New</span> -->
             </p>
           </a>
         </li>
@@ -61,9 +62,9 @@
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-edit"></i>
             <p>
-              <i class="fas fa-angle-left right"></i>
+              <!-- <i class="fas fa-angle-left right"></i> -->
               서비스관리
-              <span class="right badge badge-danger">New</span>
+              <!-- <span class="right badge badge-danger">New</span> -->
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -73,18 +74,13 @@
                 <p>홍보카드</p>
               </a>
             </li>
+           
             <li class="nav-item">
-              <a href="/admin/pages/gallery" class="nav-link">
-                <i class="nav-icon far fa-image"></i>
-                <p>배너</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/admin/pages/mailbox" class="nav-link">
+              <a href="/admin/pages/design" class="nav-link">
                 <i class="nav-icon far fa-image"></i>
                 <p>디자인요청
-                  <i class="fas fa-angle-left right"></i>
-                  <span class="badge badge-info right">6</span>
+                  <!-- <i class="fas fa-angle-left right"></i> -->
+                  <!-- <span class="badge badge-info right">6</span> -->
                 </p>
               </a>
             </li>
@@ -97,7 +93,7 @@
             <i class="nav-icon fas fa-th"></i>
             <p>
               고객센터
-              <span class="right badge badge-danger">New</span>
+              <!-- <span class="right badge badge-danger">New</span> -->
             </p>
           </a>
         </li>
@@ -108,8 +104,8 @@
 
 
 
-        <li class="nav-header">EXAMPLES</li>
-        <li class="nav-item">
+        <!-- <li class="nav-header">EXAMPLES</li> -->
+        <!-- <li class="nav-item">
           <a href="/admin/pages/calendar" class="nav-link">
             <i class="nav-icon far fa-calendar-alt"></i>
             <p>
@@ -145,10 +141,12 @@
             </li>
 
           </ul>
-        </li>
+        </li> -->
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
   </div>
   <!-- /.sidebar -->
 </aside>
+
+
