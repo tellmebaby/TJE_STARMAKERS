@@ -156,6 +156,7 @@ public class StarController {
     ) throws Exception {
 
         Users user = (Users) session.getAttribute("user");
+        
         List<StarBoard> starList = null;
         page.setRows(12);
 
@@ -204,7 +205,7 @@ public class StarController {
             @RequestParam(value = "type", defaultValue = "starCard") String type,
             Page page,
             Option option,
-            HttpSession session) throws Exception {
+            HttpSession session, Model model) throws Exception {
         Users user = (Users) session.getAttribute("user");
         List<StarBoard> starList;
 
@@ -216,6 +217,7 @@ public class StarController {
         } else {
             log.info("::::::::::찾았다 요놈!");
             starList = starService.list(type, page, option);
+            model.addAttribute("user", user);
         }
 
         starList.forEach(star -> {
