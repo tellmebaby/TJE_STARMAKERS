@@ -1,7 +1,8 @@
 let page = 0; // page 변수 초기화
 const type = 'starCard';
 let isLoading = false;
-
+const token = $("meta[name='_csrf']").attr("content");
+const header = $("meta[name='_csrf_header']").attr("content");
 
 $(document).ready(function () {
 
@@ -100,6 +101,9 @@ $('.card-text p span').css({
 });
 }
 
+
+
+
 function loadMoreCards(resetPage = false, keyword = '') {
 let isLoading = false; // isLoading 변수 초기화
 
@@ -138,7 +142,6 @@ keyword: keyword
 },  
 success: function (data) {
 console.log("Data received:", data);
-
 if (resetPage) $('#starList').empty();
 
 data.forEach(star => {
@@ -158,11 +161,63 @@ const exerciseBtn = categories2.includes('workOut') ? '<a href="#" class="btn bt
 const fashionBtn = categories2.includes('fashion') ? '<a href="#" class="btn btn-custom" data-category="fashion">#패션</a>' : '';
 const asmrBtn = categories2.includes('asmr') ? '<a href="#" class="btn btn-custom" data-category="asmr">#ASMR</a>' : '';
 
+
+let user = '[[${user}]]';
+console.log('유저가 없어야되는데?' + user);
+let starLinksHtml = ''; // 좋아요 버튼이 담길 변수
+let likeVar = ''; // 좋아요 수를 담을 변수
+let starNo = star.starNo;
+
+
+// 좋아요 수 처리
+if (star.likes < 100) {
+    // 99까지는 그대로 표시
+    likeVar = star.likes;
+} else {
+    // 100부터 0.001을 곱해서 'k'를 붙여서 표시
+    likeVar = (star.likes * 0.001).toFixed(1) + ' k';
+}
+
+let viewVar = ''; // 조회수 처리
+
+if (star.views < 100) {
+    // 99까지는 그대로 표시
+    viewVar = star.views
+} else {
+    // 100 부터 0.001을 곱해서 'k'를 붙여서 표시
+    viewVar = (star.views * 0.001).toFixed(1) + ' k';
+}
+
+// 로그인 상태 확인
+if (user !== '') {
+    console.log('유저정보가 있어서 스타를 줄게' + user);
+        let starIconType = '';
+        if (star.action === 'liked') {
+            starIconType = `<i id="changeStar" class="fa-solid fa-star"></i>`;
+        } else {
+            starIconType = `<i id="changeStar" class="fa-regular fa-star"></i>`;
+        }
+        
+        // 로그인 상태일 때 좋아요 버튼 추가
+        starLinksHtml = `
+            <div class="star-links liked" data-no="${star.starNo}">
+                ${starIconType}
+                <span class="count">${likeVar} like</span>
+            </div>`;
+    }else{
+        starLinksHtml = `
+            <div class="star-links liked" data-no="${star.starNo}">
+                <span class="count">${viewVar} view</span>
+            </div>`;
+    }
+
+
+
 const cardHtml = `
 <div class="col-md-2 mb-4">
 <div id="card-effect" class="card ${star.card === '유료홍보' ? 'effect' : ''}" data-no="${star.starNo}">
 ${star.card === '유료홍보' ? '<div class="card-overlay"></div>' : ''}
-<div class="card ${star.card === '유료홍보' ? 'prime' : 'standard'}" ondblclick="animateCard(this)">
+<div class="card ${star.card === '유료홍보' ? 'prime' : 'standard'}" ondblclick="animateCard(this, ${star.starNo})" data-no="${star.starNo}">
 <div class="card custom-card" style="background-image: url('/file/img/${star.imgNo}');">
 <span class="star">&#9733;</span>
 <div class="top-container">
@@ -179,7 +234,7 @@ ${icon4}
 </div>
 </div> 
 <div class="overlay" style="background-image: url('/file/img/${star.imgNo}');"></div>
-<div class="card-body">
+<div class="card-body" data-no="${star.starNo}">
 <h5 class="card-title">
 <img src="/file/img/${star.userImgId}" alt="작성자 아이콘" class="author-icon">
 ${star.title}
@@ -196,10 +251,7 @@ ${exerciseBtn}
 ${fashionBtn}
 ${asmrBtn}
 </div>
-<div class="star-links liked">
-    <i id="changeStar" class="fa-regular fa-star"></i>
-    <span class="count">${star.likes}</span>
-</div>
+    ${starLinksHtml}
 </div>
 </div>
 </div>
@@ -214,6 +266,15 @@ $('#starList').append(cardHtml);
  // applyStyles 함수 호출
  applyStyles();
 //  $('.card').on('dblclick', likeCard);
+// 클래스 클릭 이벤트 핸들러
+$('.card-body').on('click', function(e) {
+    // data-no 값을 가져옴
+    var no = $(this).data('no');
+    // 페이지 이동
+    if (no != null) {
+        window.location = "/page/starCard/starRead?starNo=" + no;
+    }
+});
 
 isLoading = false;
 },
@@ -228,6 +289,8 @@ isLoading = false;
 loadMoreCards();
 
 
+
+
 // 검색 폼 제출 이벤트
 $('#searchForm').submit(function (event) {
 event.preventDefault();
@@ -240,6 +303,8 @@ loadMoreCards(true, keyword);
 $('input[type="checkbox"]').change(function () {
 loadMoreCards(true);
 });
+
+
 
 
 // 클릭 이벤트
@@ -263,6 +328,8 @@ $('.type-sub').on('click', function () {
     // 텍스트 설정 함수 호출
     setTextForTypeTileText(checkedIds.join(', ')); // 배열을 문자열로 변환하여 텍스트 설정 함수 호출
 });
+
+
 
 // a 태그 클릭 시 체크박스 선택 및 change 이벤트 트리거
 $(document).on('click', '.btn-custom', function(event) {
@@ -385,11 +452,13 @@ $(document).ready(function () {
 });
 
 // 더블 클릭시 별아이콘 바꾸기 및 별터지기 애니메이션 로그인 필요
-function animateCard(card) {
-
-    toggleIconClass();
+function animateCard(card, starNo) {
+    event.preventDefault(); // 기본 동작 방지
+                // 원클릭 이벤트 제거
+    $(this).off('click');
 
     console.log("더블 클릭 이벤트 발생!");
+    toggleIconClass(starNo);
 
     const star = card.querySelector('.star');
     star.style.display = 'inline'; // 이모티콘 표시
@@ -411,10 +480,86 @@ function animateCard(card) {
     setTimeout(function() {
         star.style.display = 'none'; // 이모티콘 숨김
     }, 500); // 0.5초 (애니메이션의 총 시간)
+
+    // 여기서부터 starNo를 사용할 수 있습니다.
+    console.log("starNo:", starNo);
+    var userNo = "[[${session.user != null ? session.user.userNo : ''}]]";
+    if ( userNo != null) {
+        console.log("유저번호가 있어요 : " + userNo);
+    }
+    if (token != null) {
+        console.log("crsfToken 이 있어요 : " + token);
+    }
+    likeCard(starNo, token, userNo);
+
 }
 
-// 별아이콘 바꾸기 
-function toggleIconClass() {
-    // 아이콘의 클래스 변경
-    $('.star-links i').toggleClass('fa-regular fa-solid');
+ // 좋아요 기록하기
+ function likeCard(starNo, token, userNo) {
+
+    if (userNo === '') {
+        alert("로그인을 하시오!");
+        event.preventDefault(); // 기본 동작 방지
+        return;
+    }
+
+    $.ajax({
+        url: '/page/like', // 서버의 좋아요 상태를 변경하는 API 엔드포인트
+        method: 'POST',
+        data: {
+            userNo: userNo,
+            starNo: starNo
+        },
+        beforeSend: function(xhr) {
+                xhr.setRequestHeader(header, token); // CSRF 토큰을 헤더에 포함
+            },
+        success: function (response) {
+            console.log('Message sent successfully:', response); // 성공 시 응답 출력
+        }.bind(this), // this 바인딩
+        error: function(xhr, status, error) {
+                console.error('Error sending message:', status, error); // 에러 시 상태 및 에러 메시지 출력
+                console.log(xhr.responseText);
+                // 메시지 전송 실패 시 에러 처리
+            }
+    });
 }
+
+
+
+ // 스타 아이콘 변경
+ function toggleIconClass(starNo) {
+    // 아이콘의 클래스 변경
+    $('.star-links[data-no="' + starNo + '"] i').toggleClass('fa-regular fa-solid');
+
+    // i 태그의 형제인 span.count 태그의 문자값에서 숫자를 찾아내어 조작
+    $('.star-links[data-no="' + starNo + '"] i').each(function() {
+        const isSolid = $(this).hasClass('fa-solid');
+        const countSpan = $(this).siblings('span.count');
+        let numberText = countSpan.text().trim().match(/\d+(\.\d+)?/)[0];
+        // 소수인지 판단 정수일 때 true
+        let isInteger = !numberText.includes('.');
+        let number = parseInt(numberText);
+
+        if (isInteger) {
+            // 정수일 경우
+            if (isSolid) {
+                // 숫자에 1을 더하기
+                if (number <= 98) {
+                    number += 1;
+                } else if (number === 99) {
+                    number = 0.1;
+                }
+            } else { // fa-regular 클래스가 추가되었을 때
+                if (number <= 99) {
+                    number -= 1;
+                } 
+            }
+            // 조작한 결과를 적용
+            countSpan.text(number + ' like');
+        }
+    });
+
+       
+}
+
+ 
