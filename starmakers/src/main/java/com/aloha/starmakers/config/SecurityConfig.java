@@ -40,8 +40,11 @@ public class SecurityConfig {
 
         // ✅ 인가 설정
         http.authorizeRequests(requests -> requests
-                                            .antMatchers("/**").permitAll()
-                                            .anyRequest().permitAll()
+                                            // .antMatchers("/**").permitAll()
+                                            // .antMatchers("/", "/**").hasAnyRole("ADMIN", "USER")
+                                            .antMatchers("/css/**", "/js/**", "/img/**").permitAll()
+                                            .antMatchers("/admin", "/admin/**").hasRole("ADMIN")
+                                            // .anyRequest().permitAll()
                                             );
 
         // 🔐 폼 로그인 설정
