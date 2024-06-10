@@ -108,74 +108,18 @@
                 </if>
             )
         </if>
+
     
         ORDER BY star_no DESC
         LIMIT #{page.index}, #{page.rows}
     </select>
 
-    <!-- 게시판 목록 -->
-    <select id="list" resultType="StarBoard">
-        SELECT s.*, file_no as imgNo
-        FROM star_board s 
-        left join file f
-        ON f.star_no=s.star_no 
-
-        WHERE 
-        <if test="type != null">
-            type = #{type}
-        </if>
-        <if test="type == null">
-            1 = 1
-        </if>
-
-        <if test="option.keyword != null and option.keyword != ''">
-            AND
-            <if test="option.code == 0">
-                (title LIKE CONCAT('%', #{option.keyword}, '%')
-                OR content LIKE CONCAT('%', #{option.keyword}, '%'))
-            </if>
-            <if test="option.code == 1">
-                title LIKE CONCAT('%', #{option.keyword}, '%')
-            </if>
-            <if test="option.code == 2">
-                content LIKE CONCAT('%', #{option.keyword}, '%')
-            </if>
-            <if test="option.code == 3">
-                writer LIKE CONCAT('%', #{option.keyword}, '%')
-            </if>
-            <if test="option.code == 4">
-                s.user_no IN (${option.keyword})
-            </if>
-        </if>
-
-        
-        <!-- 요청 상태 -->
-        <if test="option.status or option.approve or option.companion ">
-            AND (
-                1 = 0
-                <!-- 요청 -->
-                <if test="option.status == 0">
-                    OR status LIKE '%홍보요청%'
-                </if>
-                <!-- 승인 -->
-                <if test="option.status == 1">
-                    OR status LIKE '%승인%'
-                </if>
-                <!-- 반려 -->
-                <if test="option.status == 2">
-                    OR s.start_date &gt; NOW()
-                    OR status LIKE '%반려%'
-                </if>
-            )
-        </if>
-        ORDER BY star_no DESC
-        LIMIT #{page.index}, #{page.rows}
-    </select>
 
 
     <!-- 새 메인 카드 리스트 요청 -->
     <select id="mainCardList" resultType="StarBoard">
     SELECT 
+
     s.*,
     f.file_no AS imgNo,
     (
@@ -309,6 +253,35 @@
         </if>
         ORDER BY reg_date DESC
         
+    </select>
+
+    <!-- 관리자 페이지 홍보 카드 리스트 조회 -->
+    <select id="adminStarCard" resultType="StarBoard">
+        SELECT *
+        FROM star_board
+        WHERE type='starCard'
+        <if test = "option.status">
+            AND
+            <if test = "option.status == null">
+                1=0
+            </if>
+            <if test="option.status == 0">
+                OR status = ''
+                OR status = '홍보요청'
+                OR status = '승인'
+                OR status = '반려'
+            </if>
+            <if test="option.status == 1">
+                status = '홍보요청'
+            </if>
+            <if test="option.status == 2">
+                status = '승인'
+            </if>
+            <if test="option.status == 3">
+                status = '반려'
+            </if>
+        </if>
+        ORDER BY reg_date DESC
     </select>
 
     <!-- 게시글 번호 최댓값 -->

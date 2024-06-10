@@ -31,12 +31,9 @@ public interface StarService {
                                 ,Page page
                                 ,Option option,
                                 int userNo) throws Exception;
-                                
-    public List<StarBoard> list(String type 
-                                ,Page page
-                                ,Option option
-                                ,int userNo
-                                ,int status) throws Exception;
+
+    // 관리자 홍보카드 조회
+    public List<StarBoard> adminStarCard(String type, Page page, Option option, int status)  throws Exception;
 
     // 글 등록(무료)
     public int insert(StarBoard starBoard, String username) throws Exception;

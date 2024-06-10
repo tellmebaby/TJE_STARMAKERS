@@ -41,7 +41,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">⭐게시판⭐</h3>
+                <h3 class="card-title">요청 상태</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -117,6 +117,9 @@
                 <button type="button" class="btn btn-default btn-sm" onclick="approve()">
                   승인
                 </button>
+                <button type="button" class="btn btn-default btn-sm" onclick="companion()">
+                  반려
+                </button>
                 <!-- 처음으로 -->
                 <button type="button" class="btn btn-default btn-sm">
                   <a th:href="|/admin/pages/mailboxStar?page=${page.first}&code=${option.code}&keyword=${option.keyword}|">
@@ -147,7 +150,7 @@
                   <th:block th:if="${page.page != page.last}">
                     <button type="button" class="btn btn-default btn-sm">
                       <a
-                        th:href="|/admin/pages/mailboxStar?page=${page.next}&code=${option.code}&keyword=${option.keyword}|">
+                        th:href="|/admin/pages/gallery=${page.next}&code=${option.code}&keyword=${option.keyword}|">
                         <i class="fas fa-chevron-right"></i>
                       </a>
                   </th:block>

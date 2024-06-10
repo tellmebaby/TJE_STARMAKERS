@@ -344,11 +344,7 @@ public class AdminController {
         }
         return "redirect:/admin/pages/mailboxQna"; // 삭제 실패시에도 같은 페이지로 리디렉션
     }
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> fefeb600769e6df6f4ea50f8839eb41a2be00cf2
     @PostMapping("/insertToAdmin")
     public ResponseEntity<String> insertPro(@RequestBody Message messageDTO, HttpSession session) {
         Users user = (Users) session.getAttribute("user");
@@ -370,11 +366,9 @@ public class AdminController {
         message.setUserNo(userNo);
 
         int result = messageService.insertMessage(message);
-<<<<<<< HEAD
         if(result > 0){
-=======
-        if (result > 0) {
->>>>>>> fefeb600769e6df6f4ea50f8839eb41a2be00cf2
+
+
             log.info("Insert successful!");
             return ResponseEntity.ok("Message saved successfully");
         }
@@ -409,16 +403,14 @@ public class AdminController {
         return ResponseEntity.ok(messages);
     }
 
-<<<<<<< HEAD
-=======
+
     @GetMapping("/pages/gallery")
-    public String gallery(@RequestParam(value = "type", defaultValue = "starCard") String type,
-                        @RequestParam(value = "status", defaultValue = "0") int status, Model model, Page page,
+    public String gallery(String type, @RequestParam(value = "status", defaultValue = "0") int status, Model model, Page page,
             Option option) throws Exception {
 
-        log.info(type);
-        List<StarBoard> starList = starService.list(type, page, option,0, status);
-
+        type = "starCard";        
+        List<StarBoard> starList = starService.adminStarCard(type, page, option, status);
+        log.info("option.code : " + option.getCode());        
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
@@ -465,5 +457,4 @@ public class AdminController {
         return "redirect:/admin/pages/" + page; // 삭제 실패시에도 같은 페이지로 리디렉션
     }
 
->>>>>>> fefeb600769e6df6f4ea50f8839eb41a2be00cf2
 }

@@ -68,9 +68,8 @@ public interface StarMapper {
             @Param("option") Option option) throws Exception;
 
     // 로그인 유저 모든 카드 불러오기
-<<<<<<< HEAD
     public List<StarBoard> getMainCardListForLoggedInUser(@Param("userNo") int userNo,@Param("type") String type ) throws Exception;
-=======
-    public List<StarBoard> getMainCardListForLoggedInUser(int userNo, String type) throws Exception;
->>>>>>> fefeb600769e6df6f4ea50f8839eb41a2be00cf2
+
+    // 관리자 홍보카드 조회
+    public List<StarBoard> adminStarCard(String type, Page page,@Param("option") Option option, int status)  throws Exception;
 }

@@ -155,16 +155,6 @@ public class StarServiceImpl implements StarService {
         return promotionList;
     }
 
-<<<<<<< HEAD
-    
-=======
-    @Override
-    public List<StarBoard> getMainCardListForLoggedInUser(int userNo, String type) throws Exception {
-        List<StarBoard> starList = starMapper.getMainCardListForLoggedInUser(userNo, type);
-        return starList;
-    }
->>>>>>> fefeb600769e6df6f4ea50f8839eb41a2be00cf2
-
     @Override
     public int approve(String starNoList) throws Exception {
         int result = starMapper.approve(starNoList);
@@ -178,13 +168,13 @@ public class StarServiceImpl implements StarService {
     }
 
     @Override
-    public List<StarBoard> list(String type, Page page, Option option, int userNo, int status) throws Exception {
+    public List<StarBoard> adminStarCard(String type, Page page, Option option, int status) throws Exception {
         int total = starMapper.count(option, type);
         page.setTotal(total);
-        // log.info(page.toString());
-        // log.info(option.toString());
-        List<StarBoard> starList = starMapper.list(type, page, option, 0, status);
+        List<StarBoard> starList = starMapper.adminStarCard(type, page, option, status);
         return starList;
     }
+
+
 
 }
