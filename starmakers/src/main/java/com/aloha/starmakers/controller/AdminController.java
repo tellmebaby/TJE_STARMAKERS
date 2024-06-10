@@ -39,10 +39,6 @@ import com.aloha.starmakers.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
-
-
-
-
 @Slf4j
 @Controller
 @RequestMapping("/admin")
@@ -53,7 +49,7 @@ public class AdminController {
 
     @Autowired
     private PayService payService;
-    
+
     @Autowired
     private StarService starService;
 
@@ -68,22 +64,22 @@ public class AdminController {
 
     @Autowired
     private MessageService messageService;
-    
+
     @GetMapping("")
     public String getMethodName() {
         return "/admin/index";
     }
 
     @GetMapping("/pages/{path}")
-    public String getMethodName2(@PathVariable("path") String path) {        
-        return "admin/pages/"+path;
-    } 
+    public String getMethodName2(@PathVariable("path") String path) {
+        return "admin/pages/" + path;
+    }
 
     @GetMapping("/pages/projects")
     public String userList(Model model) throws Exception {
 
         List<Users> userList = userService.list();
-        
+
         // int pay = payService.totalPrice(userNo);
 
         model.addAttribute("userList", userList);
@@ -99,7 +95,7 @@ public class AdminController {
 
         log.info(type);
         List<StarBoard> starList = starService.list(type, page, option);
-        
+
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
@@ -114,14 +110,14 @@ public class AdminController {
 
         return "/admin/pages/mailbox";
     }
-    
+
     @GetMapping("/pages/mailboxStar")
     public String StarList(@RequestParam(value = "type", defaultValue = "starCard") String type, Model model, Page page,
             Option option) throws Exception {
 
         log.info(type);
-        List<StarBoard> starList = starService.list(type, page, option);
-        
+        List<StarBoard> starList = starService.list(type, page, option, 0);
+
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
@@ -142,7 +138,7 @@ public class AdminController {
 
         log.info(type);
         List<StarBoard> starList = starService.list(type, page, option);
-        
+
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
@@ -163,7 +159,7 @@ public class AdminController {
 
         log.info(type);
         List<StarBoard> starList = starService.list(type, page, option);
-        
+
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
@@ -184,7 +180,7 @@ public class AdminController {
 
         log.info(type);
         List<StarBoard> starList = starService.list(type, page, option);
-        
+
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
@@ -202,9 +198,9 @@ public class AdminController {
     @GetMapping("/pages/mailboxQna")
     public String qnaList(Model model, Page page,
             Option option) throws Exception {
-        
+
         List<QnaBoard> qnaList = qnaService.list(page, option);
-            
+
         model.addAttribute("qnaList", qnaList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
@@ -218,35 +214,30 @@ public class AdminController {
 
         return "/admin/pages/mailboxQna";
     }
+
     @GetMapping("/pages/profile")
-    public String userProfile(@RequestParam("userNo") int userNo
-                             ,Model model, Page page, Option option) throws Exception {
+    public String userProfile(@RequestParam("userNo") int userNo, Model model, Page page, Option option)
+            throws Exception {
         // user 정보 가져오기
         Users user = userService.selectUserNo(userNo);
         List<UserAuth> authList = user.getAuthList();
         String userAuth = "";
         for (int i = 0; i < authList.size(); i++) {
             String auth = authList.get(i).getAuth();
-            if(auth.equals("ROLE_GUEST")) {
+            if (auth.equals("ROLE_GUEST")) {
                 user.setBlack(true);
             }
             userAuth += auth;
-            if( i+1 < authList.size() ) {
+            if (i + 1 < authList.size()) {
                 userAuth += ", ";
             }
         }
         user.setAuth(userAuth);
         model.addAttribute("user", user);
 
-
-        
         // 프로필 이미지 가져오기
-        // int fileNo = fileService.profileSelect(userNo);
-        // model.addAttribute("fileNo", fileNo);
-
-        //
         Integer fileNo = fileService.profileSelect(userNo);
-        if( fileNo > 0 ){
+        if (fileNo > 0) {
             Files file = fileService.select(fileNo);
             model.addAttribute("file", file);
             log.info("file : " + file);
@@ -263,7 +254,7 @@ public class AdminController {
 
         // 결제 금액 가져오기
         Pay pay = payService.totalPrice(userNo);
-        if ( pay != null ){
+        if (pay != null) {
             int totalPrice = pay.getTotalPrice();
             model.addAttribute("totalPrice", totalPrice);
         } else {
@@ -274,7 +265,7 @@ public class AdminController {
         // 작성글 정보 가져오기
         List<StarBoard> starBoard = starService.promotionList(userNo, page, option);
         int boardTotal = 0;
-        if (starBoard != null && !starBoard.isEmpty()){
+        if (starBoard != null && !starBoard.isEmpty()) {
             boardTotal = starBoard.size();
         } else {
             boardTotal = 0;
@@ -284,66 +275,80 @@ public class AdminController {
         // 작성 댓글 정보 가져오기
         List<Reply> replyList = replyService.selectUser(userNo);
         int replyTotal = 0;
-        if(replyList != null && !replyList.isEmpty()){
+        if (replyList != null && !replyList.isEmpty()) {
             replyTotal = replyList.size();
             model.addAttribute("replyTotal", replyTotal);
         } else {
             model.addAttribute("replyTotal", replyTotal);
         }
+
+        // 메세지 가져오기
+        List<Message> messageList = messageService.getMessageByUser(userNo);
+        model.addAttribute("messageList", messageList);
+        // if(messageList != null && !messageList.isEmpty()){
+        // model.addAttribute("messageList", messageList);
+        // } else {
+        // messageList = [];
+        // model.addAttribute("messageList", messageList);
+        // }
         return "/admin/pages/profile";
     }
 
     @PostMapping("/pages/profileUpdate")
     public String profileUpdate(Users user) throws Exception {
-            int result = userService.update(user);
-            log.info("수정 : " + user);
-            int userNo = user.getUserNo();
-            String email = user.getEmail();
-            String auth = user.getAuth();
-            log.info("auth"+auth);
-            if(auth != null){
-                user.setAuth("ROLE_GUEST");
-            } else {
-                user.setAuth("ROLE_USER");
-                }
-            int result2 = userService.authUpdate(user);
-            log.info("회원 권한 수정 성공 : " + result2);
-            if(result > 0){
-                log.info("수정성공");
-                return "redirect:/admin/pages/profile?userNo=" + userNo;
-            }
-            log.info("수정 실패");
-            return "redirect:/admin/pages/profile?error";
+        int result = userService.update(user);
+        log.info("수정 : " + user);
+        int userNo = user.getUserNo();
+        String email = user.getEmail();
+        String auth = user.getAuth();
+        log.info("auth" + auth);
+        if (auth != null) {
+            user.setAuth("ROLE_GUEST");
+        } else {
+            user.setAuth("ROLE_USER");
+        }
+        int result2 = userService.authUpdate(user);
+        log.info("회원 권한 수정 성공 : " + result2);
+        if (result > 0) {
+            log.info("수정성공");
+            return "redirect:/admin/pages/profile?userNo=" + userNo;
+        }
+        log.info("수정 실패");
+        return "redirect:/admin/pages/profile?error";
     }
-    
+
     // 전체 게시판 삭제
     @PostMapping("/pages/mailbox/allDelete")
-    public String allDelete(@RequestParam("starNos") String starNos, @RequestParam("page") String page) throws Exception {
-       
-        int result = 0;
+    public String allDelete(@RequestParam("starNos") String starNos, @RequestParam("page") String page)
+            throws Exception {
 
+        int result = 0;
 
         result = starService.delete(starNos);
 
         if (result > 0) {
             return "redirect:/admin/pages/" + page;
-        } 
-        return "redirect:/admin/pages/" + page;  // 삭제 실패시에도 같은 페이지로 리디렉션
+        }
+        return "redirect:/admin/pages/" + page; // 삭제 실패시에도 같은 페이지로 리디렉션
     }
-    
-    // Q&A 게시판 
+
+    // Q&A 게시판
     @PostMapping("/pages/mailbox/qnaDelete")
     public String qnaDelete(@RequestParam("qnaNos") String qnaNos) throws Exception {
-       
+
         int result = 0;
         result = qnaService.delete(qnaNos);
 
         if (result > 0) {
             return "redirect:/admin/pages/mailboxQna";
-        } 
-        return "redirect:/admin/pages/mailboxQna";  // 삭제 실패시에도 같은 페이지로 리디렉션
+        }
+        return "redirect:/admin/pages/mailboxQna"; // 삭제 실패시에도 같은 페이지로 리디렉션
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> fefeb600769e6df6f4ea50f8839eb41a2be00cf2
     @PostMapping("/insertToAdmin")
     public ResponseEntity<String> insertPro(@RequestBody Message messageDTO, HttpSession session) {
         Users user = (Users) session.getAttribute("user");
@@ -365,7 +370,11 @@ public class AdminController {
         message.setUserNo(userNo);
 
         int result = messageService.insertMessage(message);
+<<<<<<< HEAD
         if(result > 0){
+=======
+        if (result > 0) {
+>>>>>>> fefeb600769e6df6f4ea50f8839eb41a2be00cf2
             log.info("Insert successful!");
             return ResponseEntity.ok("Message saved successfully");
         }
@@ -400,4 +409,61 @@ public class AdminController {
         return ResponseEntity.ok(messages);
     }
 
+<<<<<<< HEAD
+=======
+    @GetMapping("/pages/gallery")
+    public String gallery(@RequestParam(value = "type", defaultValue = "starCard") String type,
+                        @RequestParam(value = "status", defaultValue = "0") int status, Model model, Page page,
+            Option option) throws Exception {
+
+        log.info(type);
+        List<StarBoard> starList = starService.list(type, page, option,0, status);
+
+        model.addAttribute("starList", starList);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
+
+        List<Option> optionList = new ArrayList<Option>();
+        optionList.add(new Option("제목+내용", 0));
+        optionList.add(new Option("제목", 1));
+        optionList.add(new Option("내용", 2));
+        optionList.add(new Option("작성자", 3));
+        model.addAttribute("optionList", optionList);
+
+        return "/admin/pages/gallery";
+    }
+
+    // 홍보 승인
+    @PostMapping("/pages/gallery/approve")
+    public String starApprove(@RequestParam("starNos") String starNos, @RequestParam("page") String page)
+            throws Exception {
+
+        int result = 0;
+
+        result = starService.approve(starNos);
+
+        if (result > 0) {
+            log.info("홍보 승인---------------");
+            return "redirect:/admin/pages/" + page;
+        }
+        return "redirect:/admin/pages/" + page; // 삭제 실패시에도 같은 페이지로 리디렉션
+    }
+
+    // 홍보 반려
+    @PostMapping("/pages/gallery/companion")
+    public String starCompanion(@RequestParam("starNos") String starNos, @RequestParam("page") String page)
+            throws Exception {
+
+        int result = 0;
+
+        result = starService.companion(starNos);
+
+        if (result > 0) {
+            log.info("홍보 반려---------------");
+            return "redirect:/admin/pages/" + page;
+        }
+        return "redirect:/admin/pages/" + page; // 삭제 실패시에도 같은 페이지로 리디렉션
+    }
+
+>>>>>>> fefeb600769e6df6f4ea50f8839eb41a2be00cf2
 }
