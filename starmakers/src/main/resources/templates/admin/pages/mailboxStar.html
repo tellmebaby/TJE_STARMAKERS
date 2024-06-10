@@ -93,12 +93,11 @@ rel="stylesheet">
           </div>
           <!-- /.col -->
           <div class="col-md-9">
-            <form action="/admin/pages/mailbox" method="get" id="keyword">
+                  <div class="card-tools">
+            <form action="/admin/pages/mailboxStar" method="get" id="keyword" onsubmit="return validateForm();">
               <div class="card card-primary card-outline">
                 <div class="card-header">
                   <h3 class="card-title">⭐홍보 게시판⭐</h3>
-
-
                   <div class="card-tools">
                     <div class="input-group input-group-sm">
                       <select name="code" class="form-control mr-2">
@@ -359,6 +358,16 @@ rel="stylesheet">
           const starNo = checkboxes[0].value;
           window.location.href = `/page/starCard/starUpdate?starNo=${starNo}`;
         }
+function validateForm() {
+  var keyword = document.forms["keyword"]["keyword"].value;
+  var code = document.forms["keyword"]["code"].value;
+
+  if (code == 4 && !/^[0-9]+$/.test(keyword)) {
+      alert("번호 검색은 숫자만 입력 가능합니다.");
+      return false; // 폼 제출 중단
+  }
+  return true; // 폼 제출 허용
+}
 </script>
 </body>
 </html>

@@ -5,7 +5,6 @@ import java.util.List;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.StarBoard;
-import com.aloha.starmakers.user.dto.Users;
 
 
 
@@ -13,6 +12,14 @@ public interface StarService {
 
     // 글 삭제
     public int delete(String starNoList) throws Exception;
+
+    // 홍보 승인
+    public int approve(String starNoList) throws Exception;
+
+    // 홍보 반려
+    public int companion(String starNoList) throws Exception;
+
+
 
     // 목록 조회 - 페이징, 검색
     public List<StarBoard> list(String type 
@@ -23,6 +30,9 @@ public interface StarService {
                                 ,Page page
                                 ,Option option,
                                 int userNo) throws Exception;
+
+    // 관리자 홍보카드 조회
+    public List<StarBoard> adminStarCard(String type, Page page, Option option, int status)  throws Exception;
 
     // 글 등록(무료)
     public int insert(StarBoard starBoard, String username) throws Exception;

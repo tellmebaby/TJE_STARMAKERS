@@ -109,13 +109,17 @@
             )
         </if>
 
+    
         ORDER BY star_no DESC
         LIMIT #{page.index}, #{page.rows}
     </select>
 
+
+
     <!-- 새 메인 카드 리스트 요청 -->
     <select id="mainCardList" resultType="StarBoard">
     SELECT 
+
     s.*,
     f.file_no AS imgNo,
     (
@@ -217,7 +221,7 @@
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
             </if>
             <if test="option.code == 4">
-                user_no =#{option.keyword}
+                user_no = #{option.keyword}
             </if>
         </if> 
     </select>
@@ -249,6 +253,35 @@
         </if>
         ORDER BY reg_date DESC
         
+    </select>
+
+    <!-- 관리자 페이지 홍보 카드 리스트 조회 -->
+    <select id="adminStarCard" resultType="StarBoard">
+        SELECT *
+        FROM star_board
+        WHERE type='starCard'
+        <if test = "option.status">
+            AND
+            <if test = "option.status == null">
+                1=0
+            </if>
+            <if test="option.status == 0">
+                OR status = ''
+                OR status = '홍보요청'
+                OR status = '승인'
+                OR status = '반려'
+            </if>
+            <if test="option.status == 1">
+                status = '홍보요청'
+            </if>
+            <if test="option.status == 2">
+                status = '승인'
+            </if>
+            <if test="option.status == 3">
+                status = '반려'
+            </if>
+        </if>
+        ORDER BY reg_date DESC
     </select>
 
     <!-- 게시글 번호 최댓값 -->
@@ -336,7 +369,23 @@
         AND pi.star_no = sb.star_no
         WHERE 
             sb.user_no = #{userNo}
+        AND sb.type = 'starCard'
         ORDER BY sb.reg_date DESC
     </select>
 
+
+    <!-- 홍보 승인으로 수정 -->
+    <update id="approve">
+        UPDATE star_board
+           SET status = "승인"
+         WHERE star_no IN (${starNo})  
+    </update>
+
+    <update id="companion">
+        UPDATE star_board
+           SET status = "반려"
+         WHERE star_no IN (${starNo})  
+    </update>
+
+    
 </mapper>

@@ -25,6 +25,9 @@
             <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
             </if>
+            <if test="option.code == 4">
+                user_no = #{option.keyword}
+            </if>
         </if>
         ORDER BY reg_date DESC
         LIMIT #{page.index}, #{page.rows}
@@ -50,6 +53,9 @@
             <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
             </if>
+            <if test="option.code == 4">
+                user_no =#{option.keyword}
+            </if>
         </if>
         
     </select>
@@ -73,6 +79,9 @@
             </if>
             <if test="option.code == 3">
                 writer LIKE CONCAT('%', #{option.keyword}, '%')
+            </if>
+            <if test="option.code == 4">
+                user_no =#{option.keyword}
             </if>
         </if>
         ORDER BY reg_date DESC

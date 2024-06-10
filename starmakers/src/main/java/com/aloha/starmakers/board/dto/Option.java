@@ -15,7 +15,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class Option {
-
+    private int status;
     private String keyword; // 선언만 했을 때는 null
     private int code;
     private String codeName;
@@ -45,6 +45,11 @@ public class Option {
         this.codeName = codeName;
         this.code = code;
     }
+
+    public Option(int status){
+        this.status = status;
+    }
+
 
      // 카테고리 필드를 설정하는 메서드
      public void setCategory(String category, boolean value) {
