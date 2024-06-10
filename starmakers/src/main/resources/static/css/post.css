@@ -1,4 +1,85 @@
 
+.notice {
+    font-family: "Montserrat Subrayada", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    padding-top: 50px;
+    font-size: 50px;
+}
+.event {
+    font-family: "Honk", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "MORF" 15,
+    "SHLN" 50;
+    text-align: center;
+    padding-top: 50px;
+    font-size: 50px;
+    position: relative;
+    overflow: hidden;
+}
+.event::before {
+    content: '';
+    position: absolute;
+    top: -50%; 
+    left: -50%;
+    width: 150%; 
+    height: 150%;
+    background: linear-gradient(13deg, rgba(255, 255, 255, 0.3) 0%, transparent 80%);
+    z-index: 1;
+    animation: shine 2s infinite alternate;
+}
+@keyframes shine {
+    from {
+        transform: translateY(-50%) rotate(-45deg);
+    }
+    to {
+        transform: translateY(50%) rotate(45deg);
+    }
+}
+
+.event span {
+    position: relative;
+    z-index: 2; /* 텍스트가 가장 위에 오도록 설정 */
+    color: #FFF; /* 텍스트의 색상을 밝은 색으로 설정 */
+    display: inline-block; /* 텍스트의 너비만큼 요소를 설정 */
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7); /* 텍스트에 반사되는 빛 효과를 줍니다. */
+}
+.eventtext {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    padding-top: 10px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+.black-han-sans-regular {
+    font-family: "Black Han Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;padding: 0;
+    text-align: center;
+    padding-top: 50px;
+}
+.black-han-sans-regular p {
+    color:#91ACCF;
+    font-size: 50px;
+    margin: 0;padding: 0;
+    /* border-bottom: 1px solid black; */
+}
+.noto-sans-kr {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 50px;
+  }
         .container2 {
           max-width: 960px;
           margin: 0 auto;

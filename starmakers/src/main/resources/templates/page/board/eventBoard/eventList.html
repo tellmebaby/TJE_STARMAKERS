@@ -11,13 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Honk&family=Noto+Sans+KR:wght@100..900&family=Rubik+Scribble&display=swap" rel="stylesheet">
-    
-
 </head>
 <body style="background-color: #f5f5f5;">
     <th:block layout:fragment="content">
 
-    
         <div class="container" style="padding: 10px;">
             
         <h3 class="event">EVENT</h3>
@@ -42,7 +39,7 @@
                         <th width="300">제목</th>
                         <th width="150">작성자</th>
                         <th width="200">작성일</th>
-                        <th width="150">좋아요</th>
+                        <th width="150" style="font-size: large;">★</th>
                         <th width="100">조회수</th>
                     </tr>
                 </thead>
@@ -98,9 +95,7 @@
                         <td align="center" th:text="${starBoard.likes}"></td>
                         <td align="center" th:text="${starBoard.views}"></td>
                     </tr>
-                </th:block>
-
-                
+                </th:block>                
             </table>
         </div>
             <div class="button-container">
@@ -109,7 +104,7 @@
                         <!-- 여기에는 아무것도 표시되지 않음 -->
                     </th:block>
                     <!-- 로그인 시 -->
-                    <th:block sec:authorize="isAuthenticated()">
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                         <a href="/page/board/eventBoard/eventInsert" class="btnn" style="background-color: #91ACCF;">✏글쓰기</a>
                     </th:block>
                 </div>

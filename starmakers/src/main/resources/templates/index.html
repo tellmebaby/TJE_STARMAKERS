@@ -77,7 +77,8 @@
                         <div class="carousel-inner">
                             <div th:each="starBoard, iterStat : ${starListEvent}" th:classappend="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
                                 <div class="event-banner align-items-start">
-                                    <img th:src="|/file/img/${starBoard.imgNo}|" class="image rounded mt-auto" alt="썸네일">
+                                    <a th:href="|/page/board/eventBoard/eventPost?starNo=${starBoard.starNo}|">
+                                        <img th:src="|/file/img/${starBoard.imgNo}|" class="image rounded mt-auto" alt="썸네일" style="object-fit: cover;"></a>
                                 </div>
                             </div>
                         </div>

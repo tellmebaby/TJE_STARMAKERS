@@ -86,6 +86,12 @@ public class StarServiceImpl implements StarService {
     }
 
     @Override
+    public StarBoard select(int starNo, int userNo) throws Exception {
+        StarBoard starBoard = starMapper.readUserBoard(starNo, userNo);
+        return starBoard;
+    }
+
+    @Override
     public int update(StarBoard starBoard) throws Exception {
         int result = starMapper.update(starBoard);
         return result;
@@ -181,6 +187,8 @@ public class StarServiceImpl implements StarService {
         List<StarBoard> starList = starMapper.countList();
         return starList;
     }
+
+    
 
 
 

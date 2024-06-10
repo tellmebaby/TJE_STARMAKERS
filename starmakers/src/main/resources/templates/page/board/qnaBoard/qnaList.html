@@ -6,12 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Q&A</title>
     <link rel="stylesheet" href="/css/list.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Honk&family=Noto+Sans+KR:wght@100..900&family=Rubik+Scribble&display=swap" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #f5f5f5;">
     <th:block layout:fragment="content">
 
         <div class="container">
-        <h3>Q&A 게시판</h3>
+        <h3 class="notice">Q&A</h3>
+            <div class="eventtext">
+            <label>당스만을 이용하면서 궁금한 점을 자유롭게 문의하세요:)</label>
+            </div>
             <div class="search-container">
                 <form action="/page/board/qnaBoard/qnaList" method="get">
                     <select name="code">
@@ -22,8 +29,8 @@
                     <button type="submit">검색</button>
                 </form>
             </div>
-
-            <table>
+            <div style="background-color: white; border-radius: 10px; display: flex; justify-content: center; padding-bottom: 14px; ">
+            <table style="width: 97%;">
                 <thead>
                     <tr>
                         <td width="70"></td>
@@ -88,8 +95,8 @@
                     <td align="center" th:text="${qnaBoard.views}"></td>
                 </tr>
                 </th:block>
-
             </table>
+        </div>
             <div class="button-container">
             <!-- 비 로그인 시 -->
                 <th:block sec:authorize="isAnonymous()">
