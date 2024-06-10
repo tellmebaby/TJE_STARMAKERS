@@ -8,9 +8,6 @@ import org.apache.ibatis.annotations.Param;
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.StarBoard;
-import com.aloha.starmakers.user.dto.Users;
-
-import groovyjarjarantlr4.v4.codegen.model.ExceptionClause;
 
 @Mapper
 public interface StarMapper {
