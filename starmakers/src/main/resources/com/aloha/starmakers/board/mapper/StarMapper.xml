@@ -223,7 +223,7 @@
             <if test="option.code == 4">
                 user_no = #{option.keyword}
             </if>
-        </if> 
+        </if>
     </select>
 
     <!-- 게시글 목록 검색 -->
@@ -387,5 +387,8 @@
          WHERE star_no IN (${starNo})  
     </update>
 
-    
+    <select id="countList" resultType="starBoard">
+        SELECT *
+        FROM star_board
+    </select>
 </mapper>

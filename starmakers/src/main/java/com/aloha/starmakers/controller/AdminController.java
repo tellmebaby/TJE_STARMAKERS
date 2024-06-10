@@ -66,7 +66,17 @@ public class AdminController {
     private MessageService messageService;
 
     @GetMapping("")
-    public String getMethodName() {
+    public String index(Model model) throws Exception {
+
+       // 작성글 정보 가져오기
+       List<StarBoard> starBoard = starService.countList();
+       int boardTotal = 0;
+       if (starBoard != null && !starBoard.isEmpty()) {
+           boardTotal = starBoard.size();
+       } else {
+           boardTotal = 0;
+       }
+        model.addAttribute("boardTotal", boardTotal);
         return "/admin/index";
     }
 
