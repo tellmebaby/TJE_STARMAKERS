@@ -16,6 +16,7 @@ INSERT INTO user_auth( user_id, auth )
 
 delete from user_auth where auth_no = 2;
 
+select * from star_board;
 SELECT * from file;
    
         SELECT s.*, file_no as imgNo

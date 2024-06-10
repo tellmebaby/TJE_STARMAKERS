@@ -266,7 +266,6 @@
                 1=0
             </if>
             <if test="option.status == 0">
-                OR status = ''
                 OR status = '홍보요청'
                 OR status = '승인'
                 OR status = '반려'
@@ -385,6 +384,8 @@
            SET status = "반려"
          WHERE star_no IN (${starNo})  
     </update>
+
+
 
     
 </mapper>

@@ -65,7 +65,7 @@
                     </li>
                   </ul>
                   <!-- 이 버튼을 권한 수정하는 걸로 바꿔도 될 듯 -->
-                  <a href="#" class="btn btn-primary btn-block" th:text="${user.auth}"></a>
+                  <div class="badge badge-primary btn-block align-items-center p-3" th:text="${user.auth}"></div>
                 </div>
                 <!-- /.card-body -->
               </div>
@@ -73,12 +73,12 @@
 
               <!-- About Me Box -->
               <!-- 이게 필요한가..? -->
-              <div class="card card-primary">
+              <div class="">
                 <div class="card-header">
-                  <h3 class="card-title">About Me</h3>
+                  <!-- <h3 class="card-title">About Me</h3> -->
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
+                <!-- <div class="card-body">
                   <strong><i class="fas fa-book mr-1"></i> Education</strong>
 
                   <p class="text-muted">
@@ -109,7 +109,7 @@
 
                   <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim
                     neque.</p>
-                </div>
+                </div> -->
                 <!-- /.card-body -->
               </div>
               <!-- /.card -->
@@ -119,17 +119,23 @@
               <div class="card">
                 <div class="card-header p-2">
                   <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li> -->
                     <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">1 : 1 채팅</a></li>
                     <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">정보 수정</a></li>
                   </ul>
-                </div><!-- /.card-header -->
+                </div>
+                <!-- /.card-header -->
                 <div class="card-body">
                   <div class="tab-content">
-                    <div class="active tab-pane" id="activity">
+                    <!-- <div class="active tab-pane" id="activity">
+                    <div class="user-block">
+                      <span class="username" th:text="|${user.name} 님|"></span>
+                      <span class="description">회원 정보 수정 가능</span>
+                    </div>
+                    </div> -->
                       <!-- Post -->
                       <!-- 게시판 / 제목 /  -->
-                      <div class="post">
+                      <!-- <div class="post">
                         <div class="user-block">
                           <img class="img-circle img-bordered-sm" src="/admin/dist/img/user1-128x128.jpg"
                             alt="user image">
@@ -138,9 +144,9 @@
                             <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
                           </span>
                           <span class="description">Shared publicly - 7:30 PM today</span>
-                        </div>
+                        </div> -->
                         <!-- /.user-block -->
-                        <p>
+                        <!-- <p>
                           Lorem ipsum represents a long-held tradition for designers,
                           typographers and the like. Some people hate it and argue for
                           its demise, but others ignore the hate as they create awesome
@@ -159,11 +165,11 @@
                         </p>
 
                         <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
-                      </div>
+                      </div> -->
                       <!-- /.post -->
 
                       <!-- Post -->
-                      <div class="post clearfix">
+                      <!-- <div class="post clearfix">
                         <div class="user-block">
                           <img class="img-circle img-bordered-sm" src="/admin/dist/img/user7-128x128.jpg"
                             alt="User Image">
@@ -172,9 +178,9 @@
                             <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
                           </span>
                           <span class="description">Sent you a message - 3 days ago</span>
-                        </div>
+                        </div> -->
                         <!-- /.user-block -->
-                        <p>
+                        <!-- <p>
                           Lorem ipsum represents a long-held tradition for designers,
                           typographers and the like. Some people hate it and argue for
                           its demise, but others ignore the hate as they create awesome
@@ -190,11 +196,11 @@
                             </div>
                           </div>
                         </form>
-                      </div>
+                      </div> -->
                       <!-- /.post -->
 
                       <!-- Post -->
-                      <div class="post">
+                      <!-- <div class="post">
                         <div class="user-block">
                           <img class="img-circle img-bordered-sm" src="/admin/dist/img/user6-128x128.jpg"
                             alt="User Image">
@@ -203,33 +209,33 @@
                             <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
                           </span>
                           <span class="description">Posted 5 photos - 5 days ago</span>
-                        </div>
+                        </div> -->
                         <!-- /.user-block -->
-                        <div class="row mb-3">
+                        <!-- <div class="row mb-3">
                           <div class="col-sm-6">
                             <img class="img-fluid" src="/admin/dist/img/photo1.png" alt="Photo">
-                          </div>
+                          </div> -->
                           <!-- /.col -->
-                          <div class="col-sm-6">
+                          <!-- <div class="col-sm-6">
                             <div class="row">
                               <div class="col-sm-6">
                                 <img class="img-fluid mb-3" src="/admin/dist/img/photo2.png" alt="Photo">
                                 <img class="img-fluid" src="/admin/dist/img/photo3.jpg" alt="Photo">
-                              </div>
+                              </div> -->
                               <!-- /.col -->
-                              <div class="col-sm-6">
+                              <!-- <div class="col-sm-6">
                                 <img class="img-fluid mb-3" src="/admin/dist/img/photo4.jpg" alt="Photo">
                                 <img class="img-fluid" src="/admin/dist/img/photo1.png" alt="Photo">
-                              </div>
+                              </div> -->
                               <!-- /.col -->
-                            </div>
+                            <!-- </div> -->
                             <!-- /.row -->
-                          </div>
+                          <!-- </div> -->
                           <!-- /.col -->
-                        </div>
+                        <!-- </div> -->
                         <!-- /.row -->
 
-                        <p>
+                        <!-- <p>
                           <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
                           <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
                           <span class="float-right">
@@ -240,9 +246,9 @@
                         </p>
 
                         <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
-                      </div>
+                      </div> -->
                       <!-- /.post -->
-                    </div>
+                    <!-- </div> -->
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="timeline">
                       <!-- The timeline -->

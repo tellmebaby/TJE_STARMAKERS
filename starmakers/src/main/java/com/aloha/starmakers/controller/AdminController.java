@@ -1,6 +1,7 @@
 package com.aloha.starmakers.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aloha.starmakers.board.dto.Files;
 import com.aloha.starmakers.board.dto.Option;
@@ -66,7 +66,29 @@ public class AdminController {
     private MessageService messageService;
 
     @GetMapping("")
-    public String getMethodName() {
+    public String index(HttpSession session, Model model) throws Exception {
+        Users user = (Users) session.getAttribute("user");
+        if (user != null) {
+            log.info("안녕? 유저?" + user);
+            model.addAttribute("user", user);
+        } 
+
+        List<Users> userList = userService.list();
+        int userTotal = 0;
+        if (userList != null && !userList.isEmpty()) {
+            userTotal = userList.size();
+        } else {
+            userTotal = 0;
+        }
+        model.addAttribute("userTotal", userTotal);
+
+        // 결제 금액 가져오기
+        List<Pay> payList = payService.totalList();
+        int totalPrice = 0;
+        for (Pay pay : payList) {
+            totalPrice += pay.getPrice();
+        }
+        model.addAttribute("totalPrice", totalPrice);
         return "/admin/index";
     }
 
@@ -366,8 +388,7 @@ public class AdminController {
         message.setUserNo(userNo);
 
         int result = messageService.insertMessage(message);
-        if(result > 0){
-
+        if (result > 0) {
 
             log.info("Insert successful!");
             return ResponseEntity.ok("Message saved successfully");
@@ -403,17 +424,18 @@ public class AdminController {
         return ResponseEntity.ok(messages);
     }
 
-
     @GetMapping("/pages/gallery")
-    public String gallery(String type, @RequestParam(value = "status", defaultValue = "0") int status, Model model, Page page,
+    public String gallery(String type, @RequestParam(value = "status", defaultValue = "0") int status, Model model,
+            Page page,
             Option option) throws Exception {
 
-        type = "starCard";        
+        type = "starCard";
         List<StarBoard> starList = starService.adminStarCard(type, page, option, status);
-        log.info("option.code : " + option.getCode());        
+        log.info("option.code : " + option.getCode());
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
+        model.addAttribute("status", status);
 
         List<Option> optionList = new ArrayList<Option>();
         optionList.add(new Option("제목+내용", 0));
@@ -455,6 +477,81 @@ public class AdminController {
             return "redirect:/admin/pages/" + page;
         }
         return "redirect:/admin/pages/" + page; // 삭제 실패시에도 같은 페이지로 리디렉션
+    }
+
+    @GetMapping("/pages/adminStarRead")
+    public String adminStarRead(@RequestParam("starNo") int starNo, Model model) throws Exception {
+        StarBoard starBoard = starService.select(starNo);
+        // 조회수 증가
+        // starService.views(starNo);
+        int commentCount;
+        if (starNo > 0) {
+            commentCount = replyService.countByStarNo(starBoard.getStarNo());
+        } else {
+            commentCount = 0;
+        }
+        starBoard.setCommentCount(commentCount);
+        // 카테고리 한글화
+        HashMap<String, String> categoryMap = new HashMap<>();
+        categoryMap.put("game", "게임");
+        categoryMap.put("music", "음악");
+        categoryMap.put("travel", "여행");
+        categoryMap.put("food", "음식");
+        categoryMap.put("animal", "동물");
+        categoryMap.put("workout", "운동");
+        categoryMap.put("asmr", "ASMR");
+        categoryMap.put("fashion", "패션");
+
+        // 받아온 카테고리2를 콤마로 분리하여 변환된 한글 카테고리들을 저장할 리스트
+        List<String> koreanCategories = new ArrayList<>();
+
+        // 콤마로 분리된 카테고리들을 배열로 저장
+        String[] categories = starBoard.getCategory2().split(",");
+
+        // 각 카테고리를 변환하여 리스트에 추가
+        for (String category : categories) {
+            // 카테고리명이 맵에 있는 경우 변환한 값을 리스트에 추가
+            if (categoryMap.containsKey(category)) {
+                koreanCategories.add(categoryMap.get(category));
+            } else {
+                // 맵에 없는 경우 그대로 추가
+                koreanCategories.add(category);
+            }
+        }
+
+        starBoard.setCategory2(String.join(",", koreanCategories));
+
+        model.addAttribute("starBoard", starBoard);
+        return "admin/pages/adminStarRead";
+    }
+
+    @GetMapping("/pages/design")
+    public String design(String type, @RequestParam(value = "status", defaultValue = "4") int status, Model model,
+            Page page,
+            Option option) throws Exception {
+        // int status=4;
+        type = "design";
+        log.info(type);
+        List<StarBoard> starList = starService.list(type, page, option, 4);
+        List<StarBoard> starDesign = new ArrayList<>();
+        for (StarBoard starBoard : starList) {
+            log.info(starBoard.getCard());
+            if (starBoard.getCard().equals("디자인의뢰")) {
+                starDesign.add(starBoard);
+            }
+        }
+        model.addAttribute("starDesign", starDesign);
+        model.addAttribute("page", page);
+        model.addAttribute("option", option);
+
+        List<Option> optionList = new ArrayList<Option>();
+        optionList.add(new Option("제목+내용", 0));
+        optionList.add(new Option("제목", 1));
+        optionList.add(new Option("내용", 2));
+        optionList.add(new Option("작성자", 3));
+        model.addAttribute("optionList", optionList);
+
+        return "/admin/pages/design";
     }
 
 }
