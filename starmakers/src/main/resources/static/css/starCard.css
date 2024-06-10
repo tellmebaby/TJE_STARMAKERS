@@ -107,7 +107,7 @@
 #promotionCarousel .card {
     border-radius: 1.25rem;
     /* overflow: hidden; */
-    cursor: pointer; /* 마우스 호버시 포인터 모양으로 변경 */
+    
 }
 
 .icon-container {
@@ -260,6 +260,10 @@
     text-align: left;
     padding: 10px;
     box-sizing: border-box;
+}
+
+.card-body:hover {
+    cursor: pointer;
 }
 
 .card:hover .overlay,

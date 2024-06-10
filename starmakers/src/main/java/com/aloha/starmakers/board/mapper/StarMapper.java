@@ -76,4 +76,9 @@ public interface StarMapper {
     // 관리자 홍보카드 조회
     public List<StarBoard> adminStarCard(String type, Page page,@Param("option") Option option, int status)  throws Exception;
     
+    // 마이페이지 내보관함 카드
+    public List<StarBoard> getStarCardsByUserNo( @Param("userNo") int userNo ) throws Exception;
+
+    // 목록조회 getStarList
+    public List<StarBoard> getStarList(@Param("type") String type, @Param("page") Page page, @Param("option") Option option, @Param("userNo") int userNo ) throws Exception;
 }

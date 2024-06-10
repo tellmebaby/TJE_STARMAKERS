@@ -45,11 +45,120 @@
 
         <script>
 
-            document.addEventListener('DOMContentLoaded', function () {
+            // document.addEventListener('DOMContentLoaded', function () {
 
 
 
-                var colorIndex = 0; // 색상 인덱스 변수 추가
+            //     var colorIndex = 0; // 색상 인덱스 변수 추가
+            //     var colors = [
+            //         '#008000', // 진한 녹색 (Dark Green)
+            //         '#000080', // 진한 파란색 (Navy Blue)
+            //         '#800080', // 진한 보라색 (Dark Purple)
+            //         '#404040', // 진한 회색 (Dark Gray)
+            //         '#800000', // 진한 빨간색 (Dark Red)
+            //         '#FF1493', // 진한 분홍색 (Deep Pink)
+            //         '#FF8C00', // 진한 주황색 (Dark Orange)
+            //         '#1E90FF', // 진한 하늘색 (Dodger Blue)
+            //         '#A52A2A', // 진한 갈색 (Brown)
+            //         '#4B0082', // 진한 인디고 (Indigo)
+            //         '#556B2F', // 다크 올리브 그린 (Dark Olive Green)
+            //         '#FF4500', // 오렌지 레드 (Orange Red)
+            //         '#2E8B57', // 시 서 그린 (Sea Green)
+            //         '#DAA520', // 골든 로드 (Goldenrod)
+            //         '#9932CC', // 다크 오키드 (Dark Orchid)
+            //         '#8B0000', // 다크 레드 (Dark Red)
+            //         '#9400D3', // 다크 바이올렛 (Dark Violet)
+            //         '#4682B4', // 스틸 블루 (Steel Blue)
+            //         '#008B8B', // 다크 사이언 (Dark Cyan)
+            //         '#B8860B', // 다크 골든로드 (Dark Goldenrod)
+            //         '#B22222', // 파이어브릭 (Firebrick)
+            //         '#5F9EA0', // 케이던 블루 (Cadet Blue)
+            //         '#A52A2A', // 브라운 (Brown)
+            //         '#7FFF00', // 차트리즈 (Chartreuse)
+            //         '#D2691E', // 초콜릿 (Chocolate)
+            //         '#FF6347', // 토마토 (Tomato)
+            //         '#8B4513', // 새들 브라운 (Saddle Brown)
+            //         '#6A5ACD', // 슬레이트 블루 (Slate Blue)
+            //         '#D2B48C', // 탠 (Tan)
+            //         '#FF69B4', // 핫핑크 (Hot Pink)
+            //     ];
+
+            //     // HTML 엔티티 디코딩 함수
+            //     function decodeHtml(html) {
+            //         var txt = document.createElement("textarea");
+            //         txt.innerHTML = html;
+            //         return txt.value;
+            //     }
+
+            //     // 서버에서 넘겨받은 데이터를 디코딩하여 JSON 객체로 파싱합니다.
+            //     var rawData = `[[${starList}]]`;
+            //     var decodedData = decodeHtml(rawData);
+            //     var starList = JSON.parse(decodedData);
+
+            //     // FullCalendar 이벤트 형식에 맞게 데이터를 변환합니다.
+            //     var events = starList.map(function (star) {
+            //         return {
+            //             title: star.title,
+            //             start: new Date(star.startDate),
+            //             end: new Date(star.endDate),
+            //             description: star.content,
+            //             starNo: star.starNo,
+            //             card :star.card,
+            //             imgNo : star.imgNo,
+            //             titles : star.title,
+            //             writer : star.writer,
+            //             likes_chk : star.likes_chk,
+            //             icons : star.icons,
+
+            //             color: getNextColor()
+            //         };
+            //     });
+
+
+
+            //     var calendarEl = document.getElementById('calendar');
+            //     var calendar = new FullCalendar.Calendar(calendarEl, {
+            //         locale: 'ko',
+            //         initialView: 'dayGridMonth',
+            //         events: events,
+            //         eventClick: function (info) {
+            //             const event = info.event;
+            //             const star = event.extendedProps;
+            //             console.log(star);
+
+            //             const cardHtml = `
+            //                             <div class=" p-0">
+            //                                 <div class="card ${star.card === '유료홍보' ? 'effect' : ''}" data-no="${star.starNo}">
+            //                                     ${star.card === '유료홍보' ? '<div class="card-overlay"></div>' : ''}
+            //                                     <img src="/file/img/${star.imgNo}" class="card-img-top" alt="${star.title}">
+            //                                     <div class="icon-body">
+            //                                         ${star.icons.map(icon => `<img src="/img/icon/${icon}.png" class="content-icon ${icon}">`).join('')}
+            //                                     </div>
+            //                                     <div class="card-body">
+            //                                         <h5 class="card-title">${star.titles}</h5>
+            //                                         <p class="card-text">${star.writer}</p>
+            //                                     </div>
+            //                                     <div class="icon-container">
+            //                                         <i class="fa-thumbs-up icon ${star.likes_chk ? 'fa-solid' : 'fa-regular'}"></i>
+            //                                     </div>
+            //                                 </div>
+            //                             </div>
+            //                         `;
+            //             $('#cardContainer').html(cardHtml);
+            //         }
+            //     });
+            //     calendar.render();
+
+            //     // 다음 색상을 반환하는 함수
+            //     function getNextColor() {
+            //         var color = colors[colorIndex];
+            //         colorIndex = (colorIndex + 1) % colors.length;
+            //         return color;
+            //     }
+            // });
+
+    document.addEventListener('DOMContentLoaded', function () {
+                 var colorIndex = 0; // 색상 인덱스 변수 추가
                 var colors = [
                     '#008000', // 진한 녹색 (Dark Green)
                     '#000080', // 진한 파란색 (Navy Blue)
@@ -82,80 +191,66 @@
                     '#D2B48C', // 탠 (Tan)
                     '#FF69B4', // 핫핑크 (Hot Pink)
                 ];
+    // AJAX 요청을 통해 서버로부터 데이터를 받아옵니다.
+    $.ajax({
+        url: '/page/getStarCalendar',
+        type: 'GET',
+        dataType: 'json',
+        success: function (starList) {
+            // 서버에서 받아온 데이터를 FullCalendar의 이벤트 형식에 맞게 변환합니다.
+            var events = starList.map(function (star) {
+                return {
+                    title: star.title,
+                    start: new Date(star.startDate),
+                    end: new Date(star.endDate),
+                    description: star.content,
+                    starNo: star.starNo,
+                    card: star.card,
+                    imgNo: star.imgNo,
+                    titles: star.title,
+                    writer: star.writer,
+                    likes_chk: star.likes_chk,
+                    icons: star.icons,
+                    color: getNextColor()
+                };
+            });
 
-                // HTML 엔티티 디코딩 함수
-                function decodeHtml(html) {
-                    var txt = document.createElement("textarea");
-                    txt.innerHTML = html;
-                    return txt.value;
-                }
+            // FullCalendar를 초기화하고 데이터를 전달하여 캘린더를 렌더링합니다.
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'ko',
+                initialView: 'dayGridMonth',
+                events: events,
+                eventClick: function (info) {
+                    // 클릭된 이벤트에 대한 처리를 수행합니다.
+                    const event = info.event;
+                    const star = event.extendedProps;
+                    console.log(star);
 
-                // 서버에서 넘겨받은 데이터를 디코딩하여 JSON 객체로 파싱합니다.
-                var rawData = `[[${starList}]]`;
-                var decodedData = decodeHtml(rawData);
-                var starList = JSON.parse(decodedData);
-
-                // FullCalendar 이벤트 형식에 맞게 데이터를 변환합니다.
-                var events = starList.map(function (star) {
-                    return {
-                        title: star.title,
-                        start: new Date(star.startDate),
-                        end: new Date(star.endDate),
-                        description: star.content,
-                        starNo: star.starNo,
-                        card :star.card,
-                        imgNo : star.imgNo,
-                        titles : star.title,
-                        writer : star.writer,
-                        likes_chk : star.likes_chk,
-                        icons : star.icons,
-
-                        color: getNextColor()
-                    };
-                });
-
-
-
-                var calendarEl = document.getElementById('calendar');
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                    locale: 'ko',
-                    initialView: 'dayGridMonth',
-                    events: events,
-                    eventClick: function (info) {
-                        const event = info.event;
-                        const star = event.extendedProps;
-                        console.log(star);
-
-                        const cardHtml = `
-                                        <div class=" p-0">
-                                            <div class="card ${star.card === '유료홍보' ? 'effect' : ''}" data-no="${star.starNo}">
-                                                ${star.card === '유료홍보' ? '<div class="card-overlay"></div>' : ''}
-                                                <img src="/file/img/${star.imgNo}" class="card-img-top" alt="${star.title}">
-                                                <div class="icon-body">
-                                                    ${star.icons.map(icon => `<img src="/img/icon/${icon}.png" class="content-icon ${icon}">`).join('')}
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title">${star.titles}</h5>
-                                                    <p class="card-text">${star.writer}</p>
-                                                </div>
-                                                <div class="icon-container">
-                                                    <i class="fa-thumbs-up icon ${star.likes_chk ? 'fa-solid' : 'fa-regular'}"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    `;
-                        $('#cardContainer').html(cardHtml);
-                    }
-                });
-                calendar.render();
-
-                // 다음 색상을 반환하는 함수
-                function getNextColor() {
-                    var color = colors[colorIndex];
-                    colorIndex = (colorIndex + 1) % colors.length;
-                    return color;
+                    // 이벤트에 대한 정보를 사용하여 카드를 생성하거나 다른 작업을 수행합니다.
+                    const cardHtml = `
+                        <div class=" p-0">
+                            <!-- 카드 HTML 구성 요소 -->
+                        </div>
+                    `;
+                    $('#cardContainer').html(cardHtml);
                 }
             });
+            calendar.render();
+        },
+        error: function (xhr, status, error) {
+            console.error('서버로부터 데이터를 받아오는 중 에러가 발생했습니다:', error);
+            // 에러 처리를 수행하거나 사용자에게 적절한 메시지를 표시할 수 있습니다.
+        }
+    });
+
+    // 다음 색상을 반환하는 함수
+    function getNextColor() {
+        var color = colors[colorIndex];
+        colorIndex = (colorIndex + 1) % colors.length;
+        return color;
+    }
+});
 
 
 

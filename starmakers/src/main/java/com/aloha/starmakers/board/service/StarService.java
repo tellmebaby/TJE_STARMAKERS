@@ -68,4 +68,9 @@ public interface StarService {
     // 로그인 유저 모든카드 불러오기
     public List<StarBoard> getMainCardListForLoggedInUser( int userNo, String type ) throws Exception;
     
+    // 마이페이지 내보관함 카드
+    public List<StarBoard> getStarCardsByUserNo( int userNo ) throws Exception;
+
+    // 목록조회 getStarList
+    public List<StarBoard> getStarList(String type, Page page, Option option, int userNo) throws Exception;
 }
