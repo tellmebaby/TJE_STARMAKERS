@@ -1,4 +1,4 @@
--- Active: 1714701530602@@127.0.0.1@3306@joeun
+-- Active: 1716943546664@@127.0.0.1@3306@joeun
 SELECT COUNT(*)
 FROM user
 WHERE name = "김조은" AND email = "joeun@naver.com";
@@ -296,6 +296,7 @@ WHERE
 ORDER BY 
     s.reg_date DESC;
 
+
 SELECT sb.*
 FROM star_board sb
 JOIN action a ON sb.star_no = a.star_no
@@ -306,3 +307,40 @@ SELECT sb.*, file.file_no AS imgNo
         JOIN action a ON sb.star_no = a.star_no
         LEFT JOIN file ON sb.star_no = file.star_no
         WHERE sb.type = 'starCard' AND a.user_no = 1;
+
+SELECT u.user_no
+              ,u.email
+              ,password
+              ,name
+              ,id
+              ,phone
+              ,address
+              ,gender
+              ,birth
+              ,reg_date
+              ,upd_date
+              ,1 enabled
+              ,auth
+        FROM user u 
+             LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id
+        WHERE u.socia_code = 3519723416
+        ;
+
+
+        SELECT u.user_no
+              ,u.email
+              ,password
+              ,name
+              ,id
+              ,phone
+              ,address
+              ,gender
+              ,birth
+              ,reg_date
+              ,upd_date
+              ,1 enabled
+              ,auth
+        FROM user u 
+             LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id
+        WHERE u.socia_code = 3519723416
+

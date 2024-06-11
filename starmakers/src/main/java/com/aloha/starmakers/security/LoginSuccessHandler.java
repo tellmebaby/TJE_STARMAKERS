@@ -10,12 +10,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import com.aloha.starmakers.board.dto.Files;
 import com.aloha.starmakers.board.service.FileService;
 import com.aloha.starmakers.user.dto.CustomUser;
+import com.aloha.starmakers.user.dto.Users;
+import com.aloha.starmakers.user.mapper.UserMapper;
+import com.aloha.starmakers.user.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,7 +33,8 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
     @Autowired
     private FileService fileService;
     
-
+    @Autowired 
+    private UserMapper userMapper;
     
     /**
      * 인증 성공 시 실행되는 메소드
@@ -70,11 +75,44 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 
         // 인증된 사용자 정보 - (아이디/패스워드/권한)
         // User user = (User) authentication.getPrincipal();
-        CustomUser user = (CustomUser) authentication.getPrincipal();
+        log.info("::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+        log.info("::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+        log.info("::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+        log.info("::::::::::::::::::::::::::::::::::::::::::::::::::::::");
+        log.info("authentication: " + authentication);
+
+        CustomUser user = null;
+        if( authentication instanceof OAuth2AuthenticationToken ) {
+            log.info("*** " + authentication.getPrincipal());
+            log.info("*********************************");
+            log.info("*********************************");
+            log.info("*********************************");
+            log.info("*** " + authentication.getDetails());
+            
+            
+            Users socialUser = new Users();
+            String id = authentication.getName();
+            socialUser.setId(id);
+            socialUser.setEmail(id);
+            try {
+                socialUser = userMapper.read(id);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            user = new CustomUser(socialUser);
+
+            // 최초 소셜 로그인
+            if( socialUser.getId() == null ) {
+                response.sendRedirect("/page/mypage/profileUpdate?first");
+            }
+        }
+        else {
+            user = (CustomUser) authentication.getPrincipal();
+        }
 
         log.info("아이디 : " + user.getUsername());
         log.info("패스워드 : " + user.getPassword());       // 보안상 노출❌
-        log.info("권한 : " + user.getAuthorities());    
+        // log.info("권한 : " + user.getAuthorities());    
 
         // 사용자 이미지 관련 수정
         Files file;

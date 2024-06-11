@@ -252,6 +252,7 @@ public class StarController {
 
         page.setRows(60); // 한 번에 불러올 행 수 설정
 
+
         if (user != null) {
             int userNo = user.getUserNo();
             starList = starService.getStarList(type, page, option, userNo);

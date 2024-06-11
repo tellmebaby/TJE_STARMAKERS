@@ -8,98 +8,98 @@ $(document).ready(function () {
 
 
 
-// toggleCheckboxClass 함수 정의
-function toggleCheckboxClass(checkbox) {
-const category = checkbox.attr('id');
-if (checkbox.is(':checked')) {
-console.log(category + "이 체크되었어");
-checkbox.parent().addClass('checked'); // 체크된 경우 부모 요소에 'checked' 클래스 추가
-} else {
-checkbox.parent().removeClass('checked'); // 체크 해제된 경우 부모 요소에서 'checked' 클래스 제거
-}
-}
-
-
-// ID 값을 저장할 배열 초기화
-let checkedIds = [];
-
-// 체크박스 이벤트 리스너 설정
-document.querySelectorAll('.hide-check').forEach(checkbox => {
-    checkbox.addEventListener('change', (event) => {
-        const checkboxId = event.target.id; // 체크박스의 ID 값 가져오기
-        console.log(`${checkboxId} 체크박스가 ${event.target.checked ? '체크되었습니다.' : '체크 해제되었습니다.'}`);
-        toggleCheckboxClass($(event.target));
-        
-        // 체크되었을 때
-        if (event.target.checked) {
-            // 배열에 아이디 추가
-            checkedIds.push(checkboxId);
-        } else { // 체크 해제되었을 때
-            // 배열에서 해당 아이디 제거
-            checkedIds = checkedIds.filter(id => id !== checkboxId);
+    // toggleCheckboxClass 함수 정의
+    function toggleCheckboxClass(checkbox) {
+        const category = checkbox.attr('id');
+        if (checkbox.is(':checked')) {
+            console.log(category + "이 체크되었어");
+            checkbox.parent().addClass('checked'); // 체크된 경우 부모 요소에 'checked' 클래스 추가
+        } else {
+            checkbox.parent().removeClass('checked'); // 체크 해제된 경우 부모 요소에서 'checked' 클래스 제거
         }
-        
-        // 텍스트 설정 함수 호출
-        setTextForTypeTileText(checkedIds.join(', ')); // 배열을 문자열로 변환하여 텍스트 설정 함수 호출
+    }
+
+
+    // ID 값을 저장할 배열 초기화
+    let checkedIds = [];
+
+    // 체크박스 이벤트 리스너 설정
+    document.querySelectorAll('.hide-check').forEach(checkbox => {
+        checkbox.addEventListener('change', (event) => {
+            const checkboxId = event.target.id; // 체크박스의 ID 값 가져오기
+            console.log(`${checkboxId} 체크박스가 ${event.target.checked ? '체크되었습니다.' : '체크 해제되었습니다.'}`);
+            toggleCheckboxClass($(event.target));
+
+            // 체크되었을 때
+            if (event.target.checked) {
+                // 배열에 아이디 추가
+                checkedIds.push(checkboxId);
+            } else { // 체크 해제되었을 때
+                // 배열에서 해당 아이디 제거
+                checkedIds = checkedIds.filter(id => id !== checkboxId);
+            }
+
+            // 텍스트 설정 함수 호출
+            setTextForTypeTileText(checkedIds.join(', ')); // 배열을 문자열로 변환하여 텍스트 설정 함수 호출
+        });
     });
-});
 
-// 페이지 로드 시 URL에서 키워드 추출
-const urlParams = new URLSearchParams(window.location.search);
-const option = urlParams.get('option');
-const keyword = urlParams.get('keyword');
-console.log('가져온 옵션값이다 : ' + option);
-
-
-if (option && option.trim() !== "") {
-// 해당 카테고리 체크박스를 선택
-console.log('옵션값이 있어서 체크박스 선택 실행합니다');
-const checkbox = $(`#${option}`);
-checkbox.prop('checked', true);
-toggleCheckboxClass(checkbox);
-}
-
-// 검색어가 있을 경우 초기 검색 수행
-if (keyword) {
-// 검색어를 검색 입력란에 출력
-$('#searchInput').val(keyword);
-// 카드 리스트를 불러오는 함수 호출
-loadMoreCards(true, keyword);
-} else {
-// 카드 리스트를 불러오는 함수 호출
-loadMoreCards(true);
-}
-
-// 체크박스 변경 이벤트
-$('input[type="checkbox"]').change(function () {
-loadMoreCards(true);
-});
-
-// 검색 폼 제출 이벤트
-$('#searchForm').submit(function (event) {
-event.preventDefault();
-const keyword = $('#searchInput').val();
-console.log("Search submitted. Keyword:", keyword);
-loadMoreCards(true, keyword);
-});
-
-// 스크롤 이벤트
-$(window).scroll(function () {
-if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-loadMoreCards();
-}
-});
+    // 페이지 로드 시 URL에서 키워드 추출
+    const urlParams = new URLSearchParams(window.location.search);
+    const option = urlParams.get('option');
+    const keyword = urlParams.get('keyword');
+    console.log('가져온 옵션값이다 : ' + option);
 
 
+    if (option && option.trim() !== "") {
+        // 해당 카테고리 체크박스를 선택
+        console.log('옵션값이 있어서 체크박스 선택 실행합니다');
+        const checkbox = $(`#${option}`);
+        checkbox.prop('checked', true);
+        toggleCheckboxClass(checkbox);
+    }
 
-function applyStyles() {
-$('.card-text p span').css({
-'background-color': '',
-'color': '',
-'font-size': '',
-// 필요한 다른 스타일 속성들도 여기에 추가할 수 있습니다.
-});
-}
+    // 검색어가 있을 경우 초기 검색 수행
+    if (keyword) {
+        // 검색어를 검색 입력란에 출력
+        $('#searchInput').val(keyword);
+        // 카드 리스트를 불러오는 함수 호출
+        loadMoreCards(true, keyword);
+    } else {
+        // 카드 리스트를 불러오는 함수 호출
+        loadMoreCards(true);
+    }
+
+    // 체크박스 변경 이벤트
+    $('input[type="checkbox"]').change(function () {
+        loadMoreCards(true);
+    });
+
+    // 검색 폼 제출 이벤트
+    $('#searchForm').submit(function (event) {
+        event.preventDefault();
+        const keyword = $('#searchInput').val();
+        console.log("Search submitted. Keyword:", keyword);
+        loadMoreCards(true, keyword);
+    });
+
+    // 스크롤 이벤트
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+            loadMoreCards();
+        }
+    });
+
+
+
+    function applyStyles() {
+        $('.card-text p span').css({
+            'background-color': '',
+            'color': '',
+            'font-size': '',
+            // 필요한 다른 스타일 속성들도 여기에 추가할 수 있습니다.
+        });
+    }
 
 
 
@@ -259,9 +259,8 @@ ${asmrBtn}
 </div>
 </div>
 `;
-$('#starList').append(cardHtml);
+                    $('#starList').append(cardHtml);
 
-});
 
  // applyStyles 함수 호출
  applyStyles();
@@ -276,17 +275,21 @@ $('.card-body').on('click', function(e) {
     }
 });
 
-isLoading = false;
-},
-error: function () {
-console.error("Failed to load more cards.");
-isLoading = false;
-}
-});
-}
+                // applyStyles 함수 호출
+                applyStyles();
+                //  $('.card').on('dblclick', likeCard);
 
-// 초기 카드 로드
-loadMoreCards();
+                isLoading = false;
+            },
+            error: function () {
+                console.error("Failed to load more cards.");
+                isLoading = false;
+            }
+        });
+    }
+
+    // 초기 카드 로드
+    loadMoreCards();
 
 
 
@@ -299,12 +302,18 @@ console.log("Search submitted. Keyword:", keyword);
 loadMoreCards(true, keyword);
 });
 
-// 체크박스 변경 이벤트
-$('input[type="checkbox"]').change(function () {
-loadMoreCards(true);
-});
+    // 검색 폼 제출 이벤트
+    $('#searchForm').submit(function (event) {
+        event.preventDefault();
+        const keyword = $('#searchInput').val();
+        console.log("Search submitted. Keyword:", keyword);
+        loadMoreCards(true, keyword);
+    });
 
-
+    // 체크박스 변경 이벤트
+    $('input[type="checkbox"]').change(function () {
+        loadMoreCards(true);
+    });
 
 
 // 클릭 이벤트
@@ -316,75 +325,85 @@ $('.type-sub').on('click', function () {
     // Trigger the change event to ensure the filtering works correctly
     checkbox.trigger('change');
 
-    // 체크 상태에 따라 배열에 추가 또는 삭제
-    if (checkbox.prop('checked')) {
-        // 배열에 아이디 추가
-        checkedIds.push(checkboxId);
-    } else {
-        // 배열에서 해당 아이디 제거
-        checkedIds = checkedIds.filter(id => id !== checkboxId);
-    }
+    // 클릭 이벤트
+    $('.type-sub').on('click', function () {
+        const checkbox = $(this).find('.hide-check');
+        const checkboxId = checkbox.attr('id'); // 체크박스의 ID 값 가져오기
+        checkbox.prop('checked', !checkbox.prop('checked'));
+        $(this).toggleClass('checked', checkbox.prop('checked'));
+        // Trigger the change event to ensure the filtering works correctly
+        checkbox.trigger('change');
 
-    // 텍스트 설정 함수 호출
-    setTextForTypeTileText(checkedIds.join(', ')); // 배열을 문자열로 변환하여 텍스트 설정 함수 호출
-});
+        // 체크 상태에 따라 배열에 추가 또는 삭제
+        if (checkbox.prop('checked')) {
+            // 배열에 아이디 추가
+            checkedIds.push(checkboxId);
+        } else {
+            // 배열에서 해당 아이디 제거
+            checkedIds = checkedIds.filter(id => id !== checkboxId);
+        }
 
-
-
-// a 태그 클릭 시 체크박스 선택 및 change 이벤트 트리거
-$(document).on('click', '.btn-custom', function(event) {
-event.stopPropagation(); // 이벤트 전파 중지
-event.preventDefault();
-const category = $(this).data('category');
-const checkbox = $(`#${category}`);
-
-if (checkbox.length) {
-// 체크박스의 상태 변경
-checkbox.prop('checked', !checkbox.prop('checked'));
-
-// 체크박스의 상태에 따라 CSS 클래스 토글
-if (checkbox.is(':checked')) {
-console.log(category + "이 체크되었어");
-checkbox.parent().addClass('checked'); // 체크된 경우 부모 요소에 'checked' 클래스 추가
-} else {
-checkbox.parent().removeClass('checked'); // 체크 해제된 경우 부모 요소에서 'checked' 클래스 제거
-}
-
-// Trigger the change event to ensure the filtering works correctly
-checkbox.trigger('change');
-}
-});
+        // 텍스트 설정 함수 호출
+        setTextForTypeTileText(checkedIds.join(', ')); // 배열을 문자열로 변환하여 텍스트 설정 함수 호출
+    });
 
 
-// 카드 공유하기 이벤트
-$(document).on({
-    mouseenter: function(event) {
-    var cardNo = $(this).data('no'); // .right-content의 data-no 속성값 가져오기
-    console.log('Card No:', cardNo); // cardNo 값을 콘솔에 출력
-    var clipboardIcon = $('<i class="bi bi-clipboard2-plus-fill clipboard-icon"></i>'); // 새로운 클립보드 아이콘 생성
-    $(this).find('.bi-three-dots-vertical').hide(); // 기존 아이콘 숨기기
-    $(this).append(clipboardIcon); // 새로운 클립보드 아이콘 추가
-    $('.clipboard-icon').addClass('rotate-180');
-    clipboardIcon.data('cardNo', cardNo); // 클립보드 아이콘에 cardNo 속성 설정
-    console.log('Clipboard Icon:', clipboardIcon); // 클립보드 아이콘을 콘솔에 출력
-    },
-    mouseleave: function() {
-    $('.clipboard-icon').remove(); // 모든 클립보드 아이콘 제거
-    $(this).find('.bi-three-dots-vertical').show(); // 기존 아이콘 다시 보이기
-    }
-    }, '.right-content'); 
 
-$(document).on('click', '.right-content', function(event) {
-event.stopPropagation(); // 이벤트 전파 중지
-var cardNo = $(this).find('.clipboard-icon').data('cardNo'); // 클립보드 아이콘의 cardNo 속성 가져오기
-var textArea = document.createElement("textarea");
-textArea.value = 'localHost:8080/page/starCard/starRead?starNo=' + cardNo;
-document.body.appendChild(textArea);
-textArea.select();
-document.execCommand('copy');
-document.body.removeChild(textArea);
-alert('클립보드에 복사되었습니다.');
-});
+
+    // a 태그 클릭 시 체크박스 선택 및 change 이벤트 트리거
+    $(document).on('click', '.btn-custom', function (event) {
+        event.stopPropagation(); // 이벤트 전파 중지
+        event.preventDefault();
+        const category = $(this).data('category');
+        const checkbox = $(`#${category}`);
+
+        if (checkbox.length) {
+            // 체크박스의 상태 변경
+            checkbox.prop('checked', !checkbox.prop('checked'));
+
+            // 체크박스의 상태에 따라 CSS 클래스 토글
+            if (checkbox.is(':checked')) {
+                console.log(category + "이 체크되었어");
+                checkbox.parent().addClass('checked'); // 체크된 경우 부모 요소에 'checked' 클래스 추가
+            } else {
+                checkbox.parent().removeClass('checked'); // 체크 해제된 경우 부모 요소에서 'checked' 클래스 제거
+            }
+
+            // Trigger the change event to ensure the filtering works correctly
+            checkbox.trigger('change');
+        }
+    });
+
+
+    // 카드 공유하기 이벤트
+    $(document).on({
+        mouseenter: function (event) {
+            var cardNo = $(this).data('no'); // .right-content의 data-no 속성값 가져오기
+            console.log('Card No:', cardNo); // cardNo 값을 콘솔에 출력
+            var clipboardIcon = $('<i class="bi bi-clipboard2-plus-fill clipboard-icon"></i>'); // 새로운 클립보드 아이콘 생성
+            $(this).find('.bi-three-dots-vertical').hide(); // 기존 아이콘 숨기기
+            $(this).append(clipboardIcon); // 새로운 클립보드 아이콘 추가
+            $('.clipboard-icon').addClass('rotate-180');
+            clipboardIcon.data('cardNo', cardNo); // 클립보드 아이콘에 cardNo 속성 설정
+            console.log('Clipboard Icon:', clipboardIcon); // 클립보드 아이콘을 콘솔에 출력
+        },
+        mouseleave: function () {
+            $('.clipboard-icon').remove(); // 모든 클립보드 아이콘 제거
+            $(this).find('.bi-three-dots-vertical').show(); // 기존 아이콘 다시 보이기
+        }
+    }, '.right-content');
+
+    $(document).on('click', '.right-content', function (event) {
+        event.stopPropagation(); // 이벤트 전파 중지
+        var cardNo = $(this).find('.clipboard-icon').data('cardNo'); // 클립보드 아이콘의 cardNo 속성 가져오기
+        var textArea = document.createElement("textarea");
+        textArea.value = 'localHost:8080/page/starCard/starRead?starNo=' + cardNo;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        alert('클립보드에 복사되었습니다.');
+    });
 });
 
 
@@ -393,7 +412,7 @@ function setTextForTypeTileText(text) {
     var elements = document.querySelectorAll('.typeTileText');
 
     // 각 요소의 텍스트 값을 설정합니다.
-    elements.forEach(function(element) {
+    elements.forEach(function (element) {
         console.log("Setting text:", text); // 콘솔에 설정된 텍스트 출력
         const mapping = {
             'MUSIC': '음악',
@@ -409,15 +428,15 @@ function setTextForTypeTileText(text) {
             'AFREECA': '아프리카',
             'ASMR': 'ASMR',
             'FASHION': '패션',
-            'INSTAGRAM':'INSTAGRAM',
-            'YOUTUBE':'YOUTUBE'
+            'INSTAGRAM': 'INSTAGRAM',
+            'YOUTUBE': 'YOUTUBE'
         };
 
         const newText = Array.from(new Set(text.split(',').map(item => mapping[item.trim().toUpperCase()]).filter(Boolean))).map(item => `#${item}`).join(' '); // 수정된 부분
         element.textContent = newText;
     });
 
-    
+
 }
 
 $(document).ready(function () {
@@ -477,7 +496,7 @@ function animateCard(card, starNo) {
     // 애니메이션 실행 및 이모티콘 숨김 처리
     star.style.animation = 'burst 0.5s forwards';
 
-    setTimeout(function() {
+    setTimeout(function () {
         star.style.display = 'none'; // 이모티콘 숨김
     }, 500); // 0.5초 (애니메이션의 총 시간)
 

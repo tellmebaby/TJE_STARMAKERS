@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserService {
     private PasswordResetTokenMapper PasswordResetTokenMapper;
 
 
+
     @Override
     public boolean login(Users user, HttpServletRequest request) throws Exception {
         // // 💍 토큰 생성
@@ -102,9 +103,12 @@ public class UserServiceImpl implements UserService {
             UserAuth userAuth = new UserAuth();
             userAuth.setUserId(email);              // ✅ 아이디(이메일)
             userAuth.setAuth("ROLE_USER");
-            result = userMapper.insertAuth(userAuth);
+            int result2 = userMapper.insertAuth(userAuth);
+            if(result2>0){
+
+            }
         }
-        return result;
+        return user.getUserNo();
     }
 
     @Override
@@ -195,6 +199,19 @@ public class UserServiceImpl implements UserService {
     public int authUpdate(Users user) throws Exception {
         int result = userMapper.authUpdate(user);
         return result;
+    }
+
+    @Override
+    public Users selectcocd(Users user) throws Exception {
+        Users uesr2 = userMapper.selectcocd(user);
+        if(uesr2==null){
+            int result = userMapper.join(user);
+            if(result>0){
+                Users user3 = userMapper.selectUserNo(user.getUserNo());
+                return user3;
+            }
+        }
+        return uesr2;
     }
 
 }
