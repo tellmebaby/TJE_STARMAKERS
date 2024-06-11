@@ -228,14 +228,7 @@ public class StarController {
                 star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
             }
         });
-        List<StarBoard> starList2 = new ArrayList();
-        for (StarBoard starBoard : starList) {
-            if(starBoard.getStatus() == "승인" && starBoard.getStatus().equals("승인")){
-                starList2.add(starBoard);
-            }
-            
-        }
-        model.addAttribute("starList2", starList2);
+
         model.addAttribute("starList", starList);
         model.addAttribute("page", page);
         model.addAttribute("option", option);
@@ -275,6 +268,15 @@ public class StarController {
                 star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
             }
         });
+
+        // 승인 글만 리스트로 출력
+        // List<StarBoard> starList2 = new ArrayList();
+        // for (StarBoard starBoard : starList) {
+        //     if(starBoard.getStatus() == "승인" || starBoard.getStatus().equals("승인")){
+        //         starList2.add(starBoard);
+        //         log.info(starBoard.getStatus());
+        //     }
+        // }
 
         return ResponseEntity.ok(starList);
     }
