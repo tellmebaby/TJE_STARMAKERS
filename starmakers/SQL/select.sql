@@ -297,7 +297,17 @@ ORDER BY
     s.reg_date DESC;
 
 
---
+SELECT sb.*
+FROM star_board sb
+JOIN action a ON sb.star_no = a.star_no
+WHERE sb.type = 'starCard' AND a.user_no = 1;
+
+SELECT sb.*, file.file_no AS imgNo
+        FROM star_board sb
+        JOIN action a ON sb.star_no = a.star_no
+        LEFT JOIN file ON sb.star_no = file.star_no
+        WHERE sb.type = 'starCard' AND a.user_no = 1;
+
 SELECT u.user_no
               ,u.email
               ,password
@@ -333,3 +343,4 @@ SELECT u.user_no
         FROM user u 
              LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id
         WHERE u.socia_code = 3519723416
+

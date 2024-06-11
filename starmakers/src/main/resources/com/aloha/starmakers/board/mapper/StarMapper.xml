@@ -118,25 +118,25 @@
 
     <!-- 새 메인 카드 리스트 요청 -->
     <select id="mainCardList" resultType="StarBoard">
-    SELECT 
-
-    s.*,
-    f.file_no AS imgNo,
-    (
-        SELECT file_no 
-        FROM file f2 
-        WHERE f2.user_no = s.user_no AND f2.star_no = 0 
-        ORDER BY f2.reg_date DESC 
-        LIMIT 1
-    ) AS userImgId
-    FROM 
-        star_board s
-    LEFT JOIN 
-        file f ON f.star_no = s.star_no
-    WHERE 
-        s.type = #{type}
-    ORDER BY 
-        s.reg_date DESC;
+        SELECT 
+        s.*,
+        f.file_no AS imgNo,
+        (
+            SELECT file_no 
+            FROM file f2 
+            WHERE f2.user_no = s.user_no AND f2.star_no = 0 
+            ORDER BY f2.reg_date DESC 
+            LIMIT 1
+        ) AS userImgId
+        FROM 
+            star_board s
+        LEFT JOIN 
+            file f ON f.star_no = s.star_no
+        WHERE 
+            s.type = #{type}
+        ORDER BY 
+            s.reg_date DESC
+        LIMIT 60
     </select>
 
     <!-- 로그인 유저 메인 카드 리스트 요청 -->
@@ -192,6 +192,7 @@
         s.type = #{type}
     ORDER BY 
         s.reg_date DESC
+    LIMIT 60
 </select>
 
       <!-- 데이터 개수 조회 - [검색] -->
@@ -422,6 +423,123 @@
     <select id="countList" resultType="starBoard">
         SELECT *
         FROM star_board
+    </select>
+
+    <!-- 마이페이지 내 보관함 카드 -->
+    <select id="getStarCardsByUserNo" resultType="starBoard">
+        SELECT sb.*, 
+       file.file_no AS imgNo,
+       'liked' AS action
+        FROM star_board sb
+        JOIN action a ON sb.star_no = a.star_no
+        LEFT JOIN file ON sb.star_no = file.star_no
+        WHERE sb.type = 'starCard' AND a.user_no = #{userNo};
+    </select>
+
+    <!-- 홍보페이지 카드목록 -->
+    <select id="getStarList" resultType="StarBoard">
+        SELECT s.*, 
+        f.file_no AS imgNo,
+        CASE WHEN a.user_no IS NOT NULL THEN 'liked' ELSE NULL END AS action
+        FROM star_board s 
+        LEFT JOIN file f ON f.star_no = s.star_no 
+        LEFT JOIN action a ON a.star_no = s.star_no AND a.user_no = #{userNo} 
+        WHERE 
+            <if test="type != null">
+                s.type = #{type}
+            </if>
+            <if test="type == null">
+                1 = 1
+            </if>
+            <if test="option.keyword != null and option.keyword != ''">
+                AND
+                <if test="option.code == 0">
+                    (s.title LIKE CONCAT('%', #{option.keyword}, '%')
+                    OR s.content LIKE CONCAT('%', #{option.keyword}, '%'))
+                </if>
+                <if test="option.code == 1">
+                    s.title LIKE CONCAT('%', #{option.keyword}, '%')
+                </if>
+                <if test="option.code == 2">
+                    s.content LIKE CONCAT('%', #{option.keyword}, '%')
+                </if>
+                <if test="option.code == 3">
+                    s.writer LIKE CONCAT('%', #{option.keyword}, '%')
+                </if>
+                <if test="option.code == 4">
+                    s.user_no IN (${option.keyword})
+                </if>
+            </if>
+            <!-- 플랫폼 필터 -->
+            <if test="option.instagram or option.youtube or option.chzzk or option.afreeca">
+                AND (
+                    1 = 0
+                    <if test="option.instagram">
+                        OR s.category1 LIKE '%instagram%'
+                    </if>
+                    <if test="option.youtube">
+                        OR s.category1 LIKE '%youtube%'
+                    </if>
+                    <if test="option.chzzk">
+                        OR s.category1 LIKE '%chzzk%'
+                    </if>
+                    <if test="option.afreeca">
+                        OR s.category1 LIKE '%afreeca%'
+                    </if>
+                )
+            </if>
+            <!-- 분야 필터 -->
+            <if test="option.food or option.travel or option.game or option.music or option.animal or option.workOut or option.asmr or option.fashion">
+                AND (
+                    1 = 0
+                    <if test="option.food">
+                        OR s.category2 LIKE '%food%'
+                    </if>
+                    <if test="option.travel">
+                        OR s.category2 LIKE '%travel%'
+                    </if>
+                    <if test="option.game">
+                        OR s.category2 LIKE '%game%'
+                    </if>
+                    <if test="option.music">
+                        OR s.category2 LIKE '%music%'
+                    </if>
+                    <if test="option.animal">
+                        OR s.category2 LIKE '%animal%'
+                    </if>
+                    <if test="option.workOut">
+                        OR s.category2 LIKE '%workOut%'
+                    </if>
+                    <if test="option.asmr">
+                        OR s.category2 LIKE '%asmr%'
+                    </if>
+                    <if test="option.fashion">
+                        OR s.category2 LIKE '%fashion%'
+                    </if>
+                )
+            </if>
+            <!-- 상태 -->
+            <if test="option.eventOngoing or option.eventExpired or option.eventUpcoming ">
+                AND (
+                    1 = 0
+                    <!-- 진행중 -->
+                    <if test="option.eventOngoing">
+                        OR NOW() BETWEEN s.start_date AND DATE_ADD(s.end_date, INTERVAL 1 DAY)
+                    </if>
+                    <!-- 만료 -->
+                    <if test="option.eventExpired">
+                        OR s.end_date &lt; NOW()
+                    </if>
+                    <!-- 진행예정 -->
+                    <if test="option.eventUpcoming">
+                        OR s.start_date &gt; NOW()
+                    </if>
+                )
+            </if>
+        ORDER BY s.star_no DESC
+        LIMIT #{page.index}, #{page.rows}
+
+
     </select>
 
 </mapper>

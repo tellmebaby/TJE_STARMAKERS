@@ -78,36 +78,77 @@ public class StarController {
     }
 
     @GetMapping("/starCard/starCalendar")
-    public String starCalendarList(@RequestParam(value = "type", defaultValue = "starCard") String type, Model model,
-            Page page, HttpSession session, Option option) throws Exception {
+    public String starCalendarList() {
+    // public String starCalendarList(@RequestParam(value = "type", defaultValue = "starCard") String type, Model model,
+    //         Page page, HttpSession session, Option option) throws Exception {
 
-        Users user = (Users) session.getAttribute("user");
+        // Users user = (Users) session.getAttribute("user");
 
-        List<StarBoard> starList = null;
+        // List<StarBoard> starList = null;
 
-        page.setRows(5);
+        // page.setRows(5);
 
-        if (user != null) {
-            int userNo = user.getUserNo();
-            starList = starService.list(type, page, option, userNo);
-        } else {
-            starList = starService.list(type, page, option);
-        }
+        // if (user != null) {
+        //     int userNo = user.getUserNo();
+        //     starList = starService.getStarList(type, page, option, userNo);
+        // } else {
+        //     log.info("::::::::::찾았다 요놈!");
+        //     starList = starService.list(type, page, option);
+        // }
 
-        starList.forEach(star -> {
-            if (star.getCategory1() != null) {
-                List<String> icons = Arrays.stream(star.getCategory1().split(","))
-                        .collect(Collectors.toList());
-                star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
-            }
-        });
+        // starList.forEach(star -> {
+        //     if (star.getCategory1() != null) {
+        //         List<String> icons = Arrays.stream(star.getCategory1().split(","))
+        //                 .collect(Collectors.toList());
+        //         star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
+        //     }
+        // });
 
-        ObjectMapper mapper = new ObjectMapper();
-        String starListJson = mapper.writeValueAsString(starList);
-        model.addAttribute("starList", starListJson);
+        // // ObjectMapper mapper = new ObjectMapper();
+        // // String starListJson = mapper.writeValueAsString(starList);
+        // model.addAttribute("starList", starList);
 
         return "/page/starCard/starCalendar";
     }
+
+
+    @GetMapping("/getStarCalendar")
+    @ResponseBody
+    public List<StarBoard> getStarCalendarList(
+        @RequestParam(value = "type", defaultValue = "starCard") String type,
+        Page page,
+        HttpSession session,
+        Option option
+    ) {
+        Users user = (Users) session.getAttribute("user");
+        List<StarBoard> starList = null;
+        page.setRows(5);
+    
+        try {
+            if (user != null) {
+                int userNo = user.getUserNo();
+                starList = starService.getStarList(type, page, option, userNo);
+            } else {
+                log.info("사용자 정보를 찾을 수 없습니다.");
+                starList = starService.list(type, page, option);
+            }
+    
+            starList.forEach(star -> {
+                if (star.getCategory1() != null) {
+                    List<String> icons = Arrays.stream(star.getCategory1().split(","))
+                        .collect(Collectors.toList());
+                    star.setIcons(icons); // star 객체에 아이콘 리스트를 설정
+                }
+            });
+        } catch (Exception e) {
+            log.error("별 리스트를 가져오는 중 오류가 발생했습니다.", e);
+            // 예외 처리를 수행하거나 사용자에게 적절한 오류 페이지를 보여줄 수 있습니다.
+            // 예: return "errorPage";
+        }
+    
+        return starList;
+    }
+
 
     /**
      * 글 등록 요청
@@ -158,7 +199,7 @@ public class StarController {
         Users user = (Users) session.getAttribute("user");
         
         List<StarBoard> starList = null;
-        page.setRows(12);
+        // page.setRows(12 * 4);
 
         // URL 파라미터로 받은 옵션 값 설정
         params.forEach((key, value) -> {
@@ -209,15 +250,15 @@ public class StarController {
         Users user = (Users) session.getAttribute("user");
         List<StarBoard> starList;
 
-        page.setRows(18); // 한 번에 불러올 행 수 설정
+        page.setRows(60); // 한 번에 불러올 행 수 설정
+
 
         if (user != null) {
             int userNo = user.getUserNo();
-            starList = starService.list(type, page, option, userNo);
+            starList = starService.getStarList(type, page, option, userNo);
         } else {
             log.info("::::::::::찾았다 요놈!");
             starList = starService.list(type, page, option);
-            model.addAttribute("user", user);
         }
 
         starList.forEach(star -> {
@@ -930,5 +971,16 @@ public class StarController {
         return userService.newMemberList();
     }
 
+    @GetMapping("/mypageStarlist")
+    @ResponseBody
+    public List<StarBoard> getMypageStarList( HttpSession session ) throws Exception  {
+            Users user = (Users) session.getAttribute("user");
+            if( user != null){
+                log.info("유저정보가 있어" + user);
+                int userNo = user.getUserNo();
+                return starService.getStarCardsByUserNo(userNo);
+            }
+        return starService.mainCardList("starCard");
+    }
     
 }

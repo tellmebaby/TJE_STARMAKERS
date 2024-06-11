@@ -188,8 +188,19 @@ public class StarServiceImpl implements StarService {
         return starList;
     }
 
-    
+    /**
+     * myPage 내 보관함 카드목록
+     */
+    @Override
+    public List<StarBoard> getStarCardsByUserNo( int userNo ) throws Exception {
+        return starMapper.getStarCardsByUserNo(userNo);
+    }
 
-
-
+    @Override
+    // 목록조회 getStarList
+    public List<StarBoard> getStarList(String type, Page page, Option option, int userNo) throws Exception {
+        int total = starMapper.count(option, type);
+        page.setTotal(total);
+        return starMapper.getStarList(type, page, option, userNo);
+    }
 }
