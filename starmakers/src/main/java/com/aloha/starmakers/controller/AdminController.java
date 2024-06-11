@@ -583,7 +583,7 @@ public class AdminController {
         } else {
             starBoard = starService.select(starNo);
         }
-
+        
         int commentCount = replyService.countByStarNo(starBoard.getStarNo());
         starBoard.setCommentCount(commentCount);
         starService.views(starNo);

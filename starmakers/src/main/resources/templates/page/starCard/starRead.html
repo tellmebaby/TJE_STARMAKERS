@@ -22,6 +22,8 @@
   <!-- <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script> -->
   <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="/css/post.css">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
 </head>
 
@@ -29,7 +31,7 @@
 <!-- layout:decorate 쓸 때 본문 내용은 <th:block layout:fragment="content"></th:block> 안에 적어야 화면에 뜸 -->
 <th:block layout:fragment="content" class="align-items-center ml-5">
   <div class="body lg" style="max-width: 900 ;">
-    <h1 class="d-flex justify-content-center pt-3 mb-3 starTitle" th:text="${starBoard.title}"> </h1>
+    <h1 class="d-flex justify-content-center pt-3 mb-3 black-han-sans-regular starTitle" th:text="${starBoard.title}"> </h1>
 
       <div class="container2">
         <form action="/page/starBoard/delete" method="get" id="read">
