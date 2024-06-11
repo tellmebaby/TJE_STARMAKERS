@@ -55,4 +55,7 @@ public interface UserMapper {
 
     // 최근 회원 조회
     public List<StarUser> newMemberList() throws Exception;
+
+    //소셜로그인시 회원검색
+    public Users selectcocd(Users user) throws Exception;
 }

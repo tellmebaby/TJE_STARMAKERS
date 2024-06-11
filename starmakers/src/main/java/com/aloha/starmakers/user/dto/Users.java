@@ -20,6 +20,8 @@ public class Users {
     private int enabled;
     private String gender;
     private String birth;
+    private String address_detail;
+    private String sociaCode;
 
     private int userImgId;
 
