@@ -2,10 +2,11 @@ package com.aloha.starmakers.board.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.aloha.starmakers.board.dto.Option;
 import com.aloha.starmakers.board.dto.Page;
 import com.aloha.starmakers.board.dto.StarBoard;
-import com.aloha.starmakers.user.dto.Users;
 
 
 
@@ -13,6 +14,14 @@ public interface StarService {
 
     // 글 삭제
     public int delete(String starNoList) throws Exception;
+
+    // 홍보 승인
+    public int approve(String starNoList) throws Exception;
+
+    // 홍보 반려
+    public int companion(String starNoList) throws Exception;
+
+
 
     // 목록 조회 - 페이징, 검색
     public List<StarBoard> list(String type 
@@ -23,6 +32,12 @@ public interface StarService {
                                 ,Page page
                                 ,Option option,
                                 int userNo) throws Exception;
+                                
+    // 목록 조회 - 갯수 조회
+    public List<StarBoard> countList() throws Exception;
+
+    // 관리자 홍보카드 조회
+    public List<StarBoard> adminStarCard(String type, Page page, Option option, int status)  throws Exception;
 
     // 글 등록(무료)
     public int insert(StarBoard starBoard, String username) throws Exception;
@@ -32,6 +47,9 @@ public interface StarService {
 
     // 글 조회
     public StarBoard select(int starNo) throws Exception;
+
+    // 글 조회(로그인시)
+    public StarBoard select(int starNo, int userNo) throws Exception;
 
     // 글 수정
     public int update(StarBoard starBoard) throws Exception;
@@ -49,4 +67,5 @@ public interface StarService {
 
     // 로그인 유저 모든카드 불러오기
     public List<StarBoard> getMainCardListForLoggedInUser( int userNo, String type ) throws Exception;
+    
 }

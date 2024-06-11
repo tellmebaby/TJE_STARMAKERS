@@ -28,7 +28,6 @@ rel="stylesheet">
 }
 </style>
   <body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
-    <form id="actionForm" action="" method="post">
       <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
       <div class="wrapper">
         <!-- Preloader -->
@@ -47,7 +46,6 @@ rel="stylesheet">
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1>Q&A</h1>
               
             </div>
             <div class="col-sm-6">
@@ -64,11 +62,10 @@ rel="stylesheet">
       <section class="content">
         <div class="row">
           <div class="col-md-3">
-            <a href="compose.html" class="btn btn-primary btn-block mb-3">Compose</a>
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">⭐Q&A 게시판⭐</h3>
+                <h3 class="card-title">⭐게시판⭐</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -116,18 +113,15 @@ rel="stylesheet">
             </div>
           </div>
           <!-- /.col -->
-          <div class="col-md-9">
-            <form action="/admin/pages/mailbox" method="get" id="keyword">
+         <div class="col-md-9">
+            <form action="/admin/pages/mailboxQna" method="get" id="keyword" onsubmit="return validateForm();">
               <div class="card card-primary card-outline">
                 <div class="card-header">
                   <h3 class="card-title">⭐Q&A 게시판⭐</h3>
-
-
                   <div class="card-tools">
                     <div class="input-group input-group-sm">
                       <select name="code" class="form-control mr-2">
-                        <option th:each="item : ${optionList}" th:value="${item.code}" th:text="${item.codeName}"
-                          th:selected="${item.code == option.code}"></option>
+                        <option th:each="item : ${optionList}" th:value="${item.code}" th:text="${item.codeName}" th:selected="${item.code == option.code}"></option>
                       </select>
                       <input type="text" name="keyword" class="form-control" placeholder="검색어를 입력하세요"
                         th:value="${param.keyword}">
@@ -156,7 +150,7 @@ rel="stylesheet">
                 </button>
                 <button type="button" class="btn btn-default btn-sm" onclick="qnaUpdate()">
                   <i class="fa-regular fa-pen-to-square"></i>
-                </button>
+                </button> 
                 <!-- 처음으로 -->
                 <button type="button" class="btn btn-default btn-sm">
                   <a th:href="|/admin/pages/mailboxQna?page=${page.first}&code=${option.code}&keyword=${option.keyword}|">
@@ -325,7 +319,6 @@ rel="stylesheet">
       <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
-    </form>
 
 <!-- jQuery -->
 <script src="/admin/plugins/jquery/jquery.min.js"></script>
@@ -401,6 +394,16 @@ rel="stylesheet">
           const qnaNo = checkboxes[0].value;
           window.location.href = `/page/board/qnaBoard/qnaUpdate?qnaNo=${qnaNo}`;
         }
+  function validateForm() {
+    var keyword = document.forms["keyword"]["keyword"].value;
+    var code = document.forms["keyword"]["code"].value;
+
+    if (code == 4 && !/^[0-9]+$/.test(keyword)) {
+        alert("번호 검색은 숫자만 입력 가능합니다.");
+        return false; // 폼 제출 중단
+    }
+    return true; // 폼 제출 허용
+  }
 </script>
 </body>
 </html>

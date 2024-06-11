@@ -12,14 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Honk&family=Noto+Sans+KR:wght@100..900&family=Rubik+Scribble&display=swap" rel="stylesheet">
 </head>
-<body>
+<body  style="background-color: #f5f5f5;">
     <th:block layout:fragment="content" >
 
         <div class="container" style="padding: 10px;">
-            <!-- <div class="event-banner">
-                <img src="/img/sampleBanner.png" alt="">
-            </div> -->
-            
             
         <h3 class="notice">Notice</h3>
         <div class="eventtext">
@@ -35,15 +31,15 @@
                     <button type="submit">검색</button>
                 </form>
             </div>
-                
-            <table>
+            <div style="background-color: white; border-radius: 10px; display: flex; justify-content: center; padding-bottom: 14px; ">
+            <table style="width: 97%;">
                 <thead>
                     <tr>
                         <th width="70">번호</th>
                         <th width="300">제목</th>
                         <th width="150">작성자</th>
                         <th width="200">작성일</th>
-                        <th width="150">좋아요</th>
+                        <th width="150" style="font-size: large;">★</th>
                         <th width="100">조회수</th>
                     </tr>
                 </thead>
@@ -75,7 +71,6 @@
                     <td align="center" >439</td>
                 </tr>
 
-
                 <th:block th:if="${starList.isEmpty()}">
                     <tr>
                         <td colspan="6" align="center" style="padding-top: 183.49px; padding-bottom: 183.49px;">
@@ -101,15 +96,15 @@
                         <td align="center" th:text="${starBoard.views}"></td>
                     </tr>
                 </th:block>
-                
             </table>
+        </div>
             <div class="button-container">
                 <!-- 비 로그인 시 -->
                 <th:block sec:authorize="isAnonymous()">
                     <!-- 여기에는 아무것도 표시되지 않음 -->
                 </th:block>
                 <!-- 로그인 시 -->
-                <th:block sec:authorize="isAuthenticated()">
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                     <a href="/page/board/anBoard/anInsert" class="btnn" style="background-color: #91ACCF;">✏글쓰기</a>
                 </th:block>
             </div>

@@ -1,6 +1,8 @@
 
--- Active: 1717071708994@@127.0.0.1@3306@joeun
+-- Active: 1714701530602@@127.0.0.1@3306@joeun
+
 CREATE TABLE `email` (
+
 	e_no INT(10) NOT NULL AUTO_INCREMENT,
 	email VARCHAR(100) NOT NULL,
 	token VARCHAR(100) NOT NULL,

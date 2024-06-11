@@ -1,5 +1,5 @@
 
--- Active: 1716511247384@@127.0.0.1@3306@joeun
+-- Active: 1717858325619@@127.0.0.1@3306@joeun
 
 
 
@@ -11,9 +11,13 @@ TRUNCATE user_auth;
 -- 사용자
 INSERT INTO user ( name, id, email, password, phone, address, gender, birth )
 VALUES ( '김조은', 'joeun', 'joeun@naver.com', '$2a$12$TrN..KcVjciCiz.5Vj96YOBljeVTTGJ9AUKmtfbGpgc9hmC7BxQ92', '010-1234-1234', '인천시', '', '2024-01-01' );
+INSERT INTO user ( name, id, email, password, phone, address, gender, birth )
+VALUES ( '관리자', 'admin', 'admin@gmail.com', '$2a$12$TrN..KcVjciCiz.5Vj96YOBljeVTTGJ9AUKmtfbGpgc9hmC7BxQ92', '010-1234-1234', '인천시', '', '2024-01-01' );
 
 INSERT INTO user_auth ( user_id,  auth )
 VALUES ( 'joeun@naver.com', 'ROLE_USER' );
+INSERT INTO user_auth ( user_id,  auth )
+VALUES ( 'admin@gmail.com', 'ROLE_ADMIN' );
 
 
 INSERT INTO star_board (title, writer, content, user_no, type)
@@ -35,6 +39,9 @@ VALUES ('joeun', 'This is a comment for star_no 10.', NOW(), NOW(), NULL, 10, NU
 
 SELECT *
 FROM reply
+
+INSERT INTO message (message_no, content, code, reg_date, reply_no, pay_no, qna_no, user_no)
+VALUES ('3', '관리자메세지', 'toUser', NOW(), 0, 0, 0, 0);
 
 
 

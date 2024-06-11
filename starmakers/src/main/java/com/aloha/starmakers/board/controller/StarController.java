@@ -156,6 +156,7 @@ public class StarController {
     ) throws Exception {
 
         Users user = (Users) session.getAttribute("user");
+        
         List<StarBoard> starList = null;
         page.setRows(12);
 
@@ -204,7 +205,7 @@ public class StarController {
             @RequestParam(value = "type", defaultValue = "starCard") String type,
             Page page,
             Option option,
-            HttpSession session) throws Exception {
+            HttpSession session, Model model) throws Exception {
         Users user = (Users) session.getAttribute("user");
         List<StarBoard> starList;
 
@@ -216,6 +217,7 @@ public class StarController {
         } else {
             log.info("::::::::::찾았다 요놈!");
             starList = starService.list(type, page, option);
+            model.addAttribute("user", user);
         }
 
         starList.forEach(star -> {
@@ -524,11 +526,23 @@ public class StarController {
      * @throws Exception
      */
     @GetMapping("/board/eventBoard/eventPost")
-    public String eventSelect(@RequestParam("starNo") int starNo, Model model) throws Exception {
-        StarBoard starBoard = starService.select(starNo);
+    public String eventSelect(@RequestParam("starNo") int starNo, Model model, HttpSession session) throws Exception {
+
+
+        Users user = (Users) session.getAttribute("user");
+
+        StarBoard starBoard = null;
+        if (user != null) {
+            int userNo = user.getUserNo();
+            starBoard = starService.select(starNo,userNo);
+        } else {
+            starBoard = starService.select(starNo);
+        }
+
         int commentCount = replyService.countByStarNo(starBoard.getStarNo());
         starBoard.setCommentCount(commentCount);
         starService.views(starNo);
+
         model.addAttribute("starBoard", starBoard);
         return "/page/board/eventBoard/eventPost";
     }
@@ -680,12 +694,21 @@ public class StarController {
      * @throws Exception
      */
     @GetMapping("/board/reviewBoard/reviewPost")
-    public String reviewSelect(@RequestParam("starNo") int starNo, Model model) throws Exception {
-        StarBoard starBoard = starService.select(starNo);
+    public String reviewSelect(@RequestParam("starNo") int starNo, Model model, HttpSession session) throws Exception {
+        Users user = (Users) session.getAttribute("user");
+
+        StarBoard starBoard = null;
+        if (user != null) {
+            int userNo = user.getUserNo();
+            starBoard = starService.select(starNo,userNo);
+        } else {
+            starBoard = starService.select(starNo);
+        }
+
         int commentCount = replyService.countByStarNo(starBoard.getStarNo());
         starBoard.setCommentCount(commentCount);
-        int views = starService.views(starNo);
-        log.info(views + " 증가");
+        starService.views(starNo);
+
         model.addAttribute("starBoard", starBoard);
         return "/page/board/reviewBoard/reviewPost";
     }
@@ -765,11 +788,21 @@ public class StarController {
      * @throws Exception
      */
     @GetMapping("/board/anBoard/anPost")
-    public String anSelect(@RequestParam("starNo") int starNo, Model model) throws Exception {
-        StarBoard starBoard = starService.select(starNo);
+    public String anSelect(@RequestParam("starNo") int starNo, Model model, HttpSession session) throws Exception {
+        Users user = (Users) session.getAttribute("user");
+
+        StarBoard starBoard = null;
+        if (user != null) {
+            int userNo = user.getUserNo();
+            starBoard = starService.select(starNo,userNo);
+        } else {
+            starBoard = starService.select(starNo);
+        }
+
         int commentCount = replyService.countByStarNo(starBoard.getStarNo());
         starBoard.setCommentCount(commentCount);
         starService.views(starNo);
+
         model.addAttribute("starBoard", starBoard);
         return "/page/board/anBoard/anPost";
     }
