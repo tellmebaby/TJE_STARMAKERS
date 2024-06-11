@@ -570,5 +570,27 @@ public class AdminController {
 
         return "/admin/pages/design";
     }
+    
+    @GetMapping("/pages/adminDesign")
+    public String adminDesign(@RequestParam("starNo") int starNo, Model model, HttpSession session) throws Exception {
 
+        Users user = (Users) session.getAttribute("user");
+
+        StarBoard starBoard = null;
+        if (user != null) {
+            int userNo = user.getUserNo();
+            starBoard = starService.select(starNo,userNo);
+        } else {
+            starBoard = starService.select(starNo);
+        }
+
+        int commentCount = replyService.countByStarNo(starBoard.getStarNo());
+        starBoard.setCommentCount(commentCount);
+        starService.views(starNo);
+
+        model.addAttribute("starBoard", starBoard);
+        return "/admin/pages/adminDesign";
+    }
+
+    
 }
