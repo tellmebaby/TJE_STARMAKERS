@@ -172,16 +172,17 @@ DROP TABLE IF EXISTS user;
 CREATE TABLE user
 (
   user_no  INT         NOT NULL AUTO_INCREMENT COMMENT '유저데이터번호',
-  name     VARCHAR(20) NOT NULL COMMENT '이름',
-  id       VARCHAR(30) NOT NULL COMMENT '아이디',
-  email    VARCHAR(50) NOT NULL COMMENT '이메일',
-  password VARCHAR(100) NOT NULL COMMENT '비밀번호', -- 비밀번호 길이 지정.
-  phone    VARCHAR(15) NOT NULL COMMENT '전화번호', -- 전화번호 길이 지정.
+  name     VARCHAR(20) NULL COMMENT '이름',
+  id       VARCHAR(30) NULL COMMENT '아이디',
+  email    VARCHAR(50) NULL COMMENT '이메일',
+  password VARCHAR(100) NULL COMMENT '비밀번호', -- 비밀번호 길이 지정.
+  phone    VARCHAR(15) NULL COMMENT '전화번호', -- 전화번호 길이 지정.
   address  VARCHAR(100) NULL     COMMENT '주소', -- 주소 길이 지정.
-  reg_date TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록일자',
+  reg_date TIMESTAMP   NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록일자',
   upd_date TIMESTAMP   NULL     COMMENT '수정일자',
-  gender   VARCHAR(10) NOT NULL COMMENT '성별',
-  birth    VARCHAR(20) NOT NULL COMMENT '생년월일',
+  gender   VARCHAR(10) NULL COMMENT '성별',
+  birth    VARCHAR(20) NULL COMMENT '생년월일',
+  socia_code VARCHAR(100) NULL COMMENT '소셜시리얼',
   PRIMARY KEY (user_no)
 ) COMMENT '회원정보';
 

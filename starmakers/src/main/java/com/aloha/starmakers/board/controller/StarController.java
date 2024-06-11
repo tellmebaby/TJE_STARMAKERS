@@ -209,7 +209,7 @@ public class StarController {
         Users user = (Users) session.getAttribute("user");
         List<StarBoard> starList;
 
-        page.setRows(12); // 한 번에 불러올 행 수 설정
+        page.setRows(18); // 한 번에 불러올 행 수 설정
 
         if (user != null) {
             int userNo = user.getUserNo();

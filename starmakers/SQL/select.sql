@@ -1,4 +1,4 @@
--- Active: 1714701530602@@127.0.0.1@3306@joeun
+-- Active: 1716943546664@@127.0.0.1@3306@joeun
 SELECT COUNT(*)
 FROM user
 WHERE name = "김조은" AND email = "joeun@naver.com";
@@ -295,3 +295,41 @@ WHERE
     s.type = 'starCard'
 ORDER BY 
     s.reg_date DESC;
+
+
+--
+SELECT u.user_no
+              ,u.email
+              ,password
+              ,name
+              ,id
+              ,phone
+              ,address
+              ,gender
+              ,birth
+              ,reg_date
+              ,upd_date
+              ,1 enabled
+              ,auth
+        FROM user u 
+             LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id
+        WHERE u.socia_code = 3519723416
+        ;
+
+
+        SELECT u.user_no
+              ,u.email
+              ,password
+              ,name
+              ,id
+              ,phone
+              ,address
+              ,gender
+              ,birth
+              ,reg_date
+              ,upd_date
+              ,1 enabled
+              ,auth
+        FROM user u 
+             LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id
+        WHERE u.socia_code = 3519723416

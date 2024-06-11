@@ -63,6 +63,9 @@ public interface UserService {
     // 관리자 회원 리스트
     public List<Users> list() throws Exception;
 
+    //소셜로그인시 회원검색
+    public Users selectcocd(Users user) throws Exception;
+
 
 
 }

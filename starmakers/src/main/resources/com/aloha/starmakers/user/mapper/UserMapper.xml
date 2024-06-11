@@ -93,9 +93,9 @@
     </select>
 
     <!-- 회원 가입 -->
-    <insert id="join">
-        INSERT INTO user ( name, id, email, password, phone, address, gender, birth )
-        VALUES ( #{name}, #{id}, #{email}, #{password}, #{phone}, #{address}, #{gender}, #{birth} )
+    <insert id="join" useGeneratedKeys="true" keyProperty="userNo">
+        INSERT INTO user ( name, id, email, password, phone, address, gender, birth, socia_code )
+        VALUES ( #{name}, #{id}, #{email}, #{password}, #{phone}, #{address}, #{gender}, #{birth}, #{sociaCode} )
     </insert>
 
     <!-- 마이페이지 조회 -->
@@ -236,4 +236,30 @@ LEFT JOIN file AS f ON sb.user_no = f.user_no AND f.star_no = 0
         FROM user u LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id
     </select>
 
+    <!-- 소셜로그인 조회 -->
+    <!-- <select id="selectcocd" resultType="Users">
+        SELECT *
+        FROM user Where socia_code=#{sociaCode}
+    </select> -->
+
+
+    <!-- 소셜정보로 회원 조회 -->
+    <select id="selectcocd" resultMap="userMap">
+        SELECT u.user_no
+              ,u.email
+              ,password
+              ,name
+              ,id
+              ,phone
+              ,address
+              ,gender
+              ,birth
+              ,reg_date
+              ,upd_date
+              ,1 enabled
+              ,auth
+        FROM user u 
+            LEFT OUTER JOIN user_auth auth ON u.email = auth.user_id
+        WHERE u.socia_code = #{sociaCode}
+    </select>
 </mapper>
