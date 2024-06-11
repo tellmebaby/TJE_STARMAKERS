@@ -47,8 +47,16 @@ public class StarServiceImpl implements StarService {
     @Override
     public int insert(StarBoard starBoard, String username) throws Exception {
         Users user = userMapper.login(username);
+
+
         starBoard.setUserNo(user.getUserNo());
-        starBoard.setWriter(user.getId());
+        if (user.getId() == null || user.getId().equals("")) {
+            starBoard.setWriter(user.getName()); 
+        }else{
+            starBoard.setWriter(user.getId());
+        }
+
+        
 
         // 정보 등록
         starMapper.insert(starBoard);
@@ -64,7 +72,11 @@ public class StarServiceImpl implements StarService {
     public int payInsert(StarBoard starBoard, String username) throws Exception {
         Users user = userMapper.login(username);
         starBoard.setUserNo(user.getUserNo());
-        starBoard.setWriter(user.getId());
+        if (user.getId() == null || user.getId().equals("")) {
+            starBoard.setWriter(user.getName()); 
+        }else{
+            starBoard.setWriter(user.getId());
+        }
         starBoard.setCard("유료홍보요청");
         // Date strDate = starBoard.getStartDate();
         // Date endDate = starBoard.getEndDate();
