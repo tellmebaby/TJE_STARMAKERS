@@ -1,8 +1,7 @@
 
--- Active: 1714701530602@@127.0.0.1@3306@joeun
-
+-- Active: 1716759486779@@127.0.0.1@3306@joeun
+DROP TABLE IF EXISTS email ;
 CREATE TABLE `email` (
-
 	e_no INT(10) NOT NULL AUTO_INCREMENT,
 	email VARCHAR(100) NOT NULL,
 	token VARCHAR(100) NOT NULL,
@@ -128,17 +127,7 @@ CREATE TABLE reply
   PRIMARY KEY (reply_no)
 ) COMMENT '댓글';
 
-ALTER TABLE reply
-ADD CONSTRAINT FK_REPLY_STAR_NO
-FOREIGN KEY (star_no)
-REFERENCES star_board(star_no)
-ON DELETE CASCADE;
--- star_board의 star_no 값을 참조하여 reply 테이블의 star_no 을 외래키로 설정
 
-ALTER TABLE reply
-ADD CONSTRAINT fk_reply_user FOREIGN KEY (user_no) REFERENCES user(user_no);
--- user 테이블의 user_no 값을 참조하여 reply 테이블의 user_no을 외래키로 지정
-ALTER TABLE reply DROP FOREIGN KEY fk_reply_user;
 
 
 
@@ -165,8 +154,15 @@ CREATE TABLE star_board
   PRIMARY KEY (star_no)
 ) COMMENT '통합게시판';
 
-SELECT *
-FROM star_board
+
+ALTER TABLE reply
+ADD CONSTRAINT FK_REPLY_STAR_NO
+FOREIGN KEY (star_no)
+REFERENCES star_board(star_no)
+ON DELETE CASCADE;
+-- star_board의 star_no 값을 참조하여 reply 테이블의 star_no 을 외래키로 설정
+
+
 
 DROP TABLE IF EXISTS user;
 CREATE TABLE user
@@ -186,13 +182,6 @@ CREATE TABLE user
   PRIMARY KEY (user_no)
 ) COMMENT '회원정보';
 
-INSERT INTO user (name, id, email, password, phone, address, gender, birth)
-VALUES ('홍길동', 'user', 'user@example.com', '123456', '010-1234-5678', '서울시 강남구', '남성', '1990-01-01');
-
-INSERT INTO user (name, id, email, password, phone, address, gender, birth)
-VALUES ('관리자', 'admin', 'admin@example.com', '123456', '010-1234-5678', '본사', '남성', '1997-01-01');
-
-
 DROP TABLE IF EXISTS user_auth;
 CREATE TABLE user_auth
 (
@@ -201,6 +190,13 @@ CREATE TABLE user_auth
   auth    VARCHAR(100) NOT NULL,
   PRIMARY KEY (auth_no)
 );
+
+
+ALTER TABLE reply
+ADD CONSTRAINT fk_reply_user FOREIGN KEY (user_no) REFERENCES user(user_no);
+-- user 테이블의 user_no 값을 참조하여 reply 테이블의 user_no을 외래키로 지정
+ALTER TABLE reply DROP FOREIGN KEY fk_reply_user;
+
 
 DROP TABLE IF EXISTS password_reset_token;
 -- email 인증 으로 비밀번호 변경 토큰 테이블 
@@ -212,6 +208,9 @@ CREATE TABLE password_reset_token
   expiry_date DATETIME   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록일자',
   PRIMARY KEY (id)
 ) COMMENT '비밀번호 변경 인증이메일 토큰';
+
+
+
 
 -- ALTER TABLE star_board
 --   ADD CONSTRAINT FK_user_TO_star_board
