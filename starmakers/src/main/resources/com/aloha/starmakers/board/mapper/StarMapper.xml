@@ -13,8 +13,13 @@
         ON f.star_no=s.star_no 
 
         WHERE 
+           
         <if test="type != null">
             type = #{type}
+
+            <if test="type=='starCard'">
+            AND s.status = '승인'
+            </if>
         </if>
         <if test="type == null">
             1 = 1
@@ -133,7 +138,7 @@
         LEFT JOIN 
             file f ON f.star_no = s.star_no
         WHERE 
-            s.type = #{type}
+            s.type = #{type} and s.status = '승인'
         ORDER BY 
             s.reg_date DESC
         LIMIT 60
@@ -447,6 +452,9 @@
         WHERE 
             <if test="type != null">
                 s.type = #{type}
+                <if test="type=='starCard'">
+                   AND s.status = '승인'
+                </if>
             </if>
             <if test="type == null">
                 1 = 1
