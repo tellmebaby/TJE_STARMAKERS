@@ -359,7 +359,7 @@
         if (request.readyState == request.DONE && request.status == 200) {
           console.log('댓글 수정 성공!');
           let response = request.responseText
-          alert(response)
+          // alert(response)
           if (response == 'SUCCESS') {
             replyList() // 댓글 목록 갱신
           }
