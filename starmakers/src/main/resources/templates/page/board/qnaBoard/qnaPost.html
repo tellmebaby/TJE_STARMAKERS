@@ -4,6 +4,7 @@
 
 <head>
   <link rel="stylesheet" href="/css/starCard.css">
+  <link rel="stylesheet" href="/css/post.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@400;700&display=swap" rel="stylesheet">
@@ -337,9 +338,7 @@
     // 삭제 요청
     function actionDelete() {
       let check = confirm('정말로 삭제하시겠습니까?')
-        if( check ) {
-          form.submit;
-        }
+        form.method='post'
     }
 
     function deleteAnswer() {
