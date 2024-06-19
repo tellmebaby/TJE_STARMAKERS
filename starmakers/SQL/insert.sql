@@ -58,7 +58,7 @@
 
         INSERT INTO star_board (title, writer, content, user_no, type)
         VALUES 
-        ('이벤트제목1', '김조은', '내용1', 1, 'event'),
+        ('이벤트제목', '김조은', '내용1', 1, 'event'),
         ('이벤트제목2', '김연아', '내용2', 3, 'event'),
         ('이벤트제목3', '박보검', '내용3', 4, 'event'),
         ('이벤트제목4', '손예진', '내용4', 5, 'event'),
