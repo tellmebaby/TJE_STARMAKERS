@@ -1,3 +1,4 @@
+-- Active: 1717721626738@@127.0.0.1@3306@joeun
 SELECT * from star_board where user_no = 1;
 
 

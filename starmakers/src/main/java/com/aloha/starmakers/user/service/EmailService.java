@@ -32,7 +32,7 @@ public class EmailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(toEmail);
         message.setSubject("이메일 인증");
-        message.setText("인증 링크: http://localhost:8080/verify?token=" + token);
+        message.setText("인증 링크: http://192.168.30.137:8080/verify?token=" + token);
 
         emailSender.send(message);
 
