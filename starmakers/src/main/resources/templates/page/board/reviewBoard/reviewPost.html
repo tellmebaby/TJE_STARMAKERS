@@ -317,7 +317,6 @@ $(document).on('click', '.like-btn', function (e) {
                 if(request.readyState == request.DONE && request.status == 200) {
                     console.log('댓글 수정 성공!');
                     let response = request.responseText
-                    alert(response)
                     if(response == 'SUCCESS') {
                         replyList() // 댓글 목록 갱신
                     }
@@ -539,7 +538,6 @@ $(document).on('click', '.like-btn', function (e) {
                 if(request.readyState == request.DONE && request.status == 200) {
                     console.log('댓글 수정 성공!');
                     let response = request.responseText
-                    alert(response)
                     if(response == 'SUCCESS') {
                         replyList() // 댓글 목록 갱신
                     }
