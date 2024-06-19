@@ -8,7 +8,7 @@
 .side-menu {
     width: 200px;
     margin-right: 30px;
-    margin-top: 25px;
+    margin-top: 172px;
 }
 
 .nav-links a {
@@ -21,10 +21,4 @@
 
 .nav-links a:hover {
     color: #000;
-}
-
-.nav-links h1 {
-    font-size: 42px;
-    margin-bottom: 100px;
-    font-weight: bolder;
 }
