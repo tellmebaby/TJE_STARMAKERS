@@ -95,6 +95,18 @@
     .reg-date {
         font-style: italic;
     }
+
+    .scroll-hidden {
+      height: 200px; /* 예제 높이 */
+      overflow-y: scroll;
+      -ms-overflow-style: none;  /* Internet Explorer 10+ */
+      scrollbar-width: none;  /* Firefox */
+    }
+
+    .scroll-hidden::-webkit-scrollbar {
+      display: none;  /* Safari and Chrome */
+    }
+
 </style>
 
 <body class="hold-transition sidebar-mini layout-fixed sidebar-collapse">
@@ -148,7 +160,7 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         <!-- Conversations are loaded here -->
-                        <div class="direct-chat-messages" id="chatMessages">
+                        <div class="direct-chat-messages scroll-hidden" id="chatMessages">
                             <!-- Messages will be dynamically loaded here -->
                         </div>
                         <!--/.direct-chat-messages-->
