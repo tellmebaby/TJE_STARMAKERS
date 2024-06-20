@@ -601,9 +601,6 @@ public class StarController {
             @RequestParam(value = "image", required = false) MultipartFile file,
             HttpSession session) throws Exception {
 
-
-    
-                
         int starNo = starBoard.getStarNo();
         int result = starService.update(starBoard);
         log.info("수정 결과 :" + result);
@@ -632,10 +629,10 @@ public class StarController {
                 fileService.upload(file, starNo, userNo); // file 등록
             }
             log.info("파일 확인 안 됨");
-            return "redirect:/page/board/eventBoard/eventUpdate?no=" + starNo;
+            return "redirect:/page/board/eventBoard/eventPost?starNo=" + starNo;
         }
 
-        return "redirect:/page/board/eventBoard/eventUpdate";
+        return "redirect:/page/board/eventBoard/eventPost?starNo=" + starNo;
     }
 
     @PostMapping("/board/eventBoard/eventDelete")
@@ -882,6 +879,8 @@ public class StarController {
     public String anUpdate(@RequestParam("starNo") int starNo, Model model) throws Exception {
         StarBoard starBoard = starService.select(starNo);
         model.addAttribute("starBoard", starBoard);
+        log.info("수정왜안됨");
+        log.info(starBoard.toString());
         return "/page/board/anBoard/anUpdate";
     }
 
