@@ -141,10 +141,10 @@ public class QnaController {
         result = qnaService.delete(qnaNos);
 
         if (result > 0) {
-            return "redirect:/page/mypage/inquiry";
+            return "redirect:/page/board/qnaBoard/qnaList";
         }
         
-        return "redirect:/page/mypage/inquiry";  // 삭제 실패시에도 같은 페이지로 리디렉션
+        return "redirect:/page/board/qnaBoard/qnaList";  // 삭제 실패시에도 같은 페이지로 리디렉션
     }
 
     @PostMapping("/qnaPost")

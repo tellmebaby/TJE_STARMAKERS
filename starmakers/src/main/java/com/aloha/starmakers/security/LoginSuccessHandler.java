@@ -102,9 +102,9 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
             user = new CustomUser(socialUser);
 
             // 최초 소셜 로그인
-            if( socialUser.getId() == null ) {
-                response.sendRedirect("/page/mypage/profileUpdate?first");
-            }
+            // if( socialUser.getId() == null ) {
+            //     response.sendRedirect("/page/mypage/profileUpdate?first");
+            // }
         }
         else {
             user = (CustomUser) authentication.getPrincipal();

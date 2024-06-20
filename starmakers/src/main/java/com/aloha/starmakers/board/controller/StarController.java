@@ -237,7 +237,7 @@ public class StarController {
         Users user = (Users) session.getAttribute("user");
         List<StarBoard> starList;
 
-        page.setRows(60); // 한 번에 불러올 행 수 설정
+        page.setRows(24); // 한 번에 불러올 행 수 설정
 
         if (user != null) {
             int userNo = user.getUserNo();
@@ -413,6 +413,7 @@ public class StarController {
     public String update(@RequestParam("starNo") int starNo, Model model) throws Exception {
         StarBoard starBoard = starService.select(starNo);
         model.addAttribute("starBoard", starBoard);
+        
         return "/page/starCard/starUpdate";
     }
 
