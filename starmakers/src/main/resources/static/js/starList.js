@@ -517,7 +517,7 @@ function animateCard(card, starNo) {
  function likeCard(starNo, token, userNo) {
 
     if (userNo === '') {
-        alert("로그인을 하시오!");
+        alert("로그인이 필요합니다.");
         event.preventDefault(); // 기본 동작 방지
         return;
     }
