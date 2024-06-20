@@ -1,36 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-layout:decorate="~{/layout/default_layout}">
+    layout:decorate="~{/layout/default_layout}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <title>페이지 소개</title>
     <style>
+        .noto-sans-kr {
+            font-family: "Noto Sans KR", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 15px;
+            font-style: normal;
+        }
+
         .intro-section {
             padding: 50px 0;
         }
+
         .intro-section img {
             max-width: 100%;
             height: auto;
             border-radius: 5px;
         }
+
         .intro-section:nth-child(odd) .intro-img {
             order: 1;
         }
+
         .intro-section:nth-child(even) .intro-img {
             order: 2;
         }
+
         .intro-section:nth-child(odd) .intro-text {
             order: 2;
         }
+
         .intro-section:nth-child(even) .intro-text {
             order: 1;
         }
-
-            </style>
+    </style>
 </head>
+
 <body layout:fragment="content">
-    <div class="container">
+    <div class="container noto-sans-kr">
         <!-- 소개 섹션 1 -->
         <div class="row intro-section">
             <div class="col-md-6 intro-img">
@@ -89,7 +105,7 @@ layout:decorate="~{/layout/default_layout}">
             </div>
             <div class="col-md-6 intro-text">
                 <h2>"당신의 채널을 세계에 알리세요</h2>
-                <p>스트리머 여러분, 더 많은 시청자를 원하시나요? 당스만은 신진 스트리머를 위한 최적의 홍보 플랫폼입니다. 
+                <p>스트리머 여러분, 더 많은 시청자를 원하시나요? 당스만은 신진 스트리머를 위한 최적의 홍보 플랫폼입니다.
                     광고 캠페인과 이벤트 배너를 통해 당신의 채널을 널리 알려보세요. 지금 당스만에 가입하고 스타로 성장하세요.
                 </p>
             </div>
@@ -101,4 +117,5 @@ layout:decorate="~{/layout/default_layout}">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 </body>
+
 </html>

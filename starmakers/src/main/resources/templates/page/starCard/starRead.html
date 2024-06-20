@@ -30,8 +30,8 @@
 
 <!-- layout:decorate 쓸 때 본문 내용은 <th:block layout:fragment="content"></th:block> 안에 적어야 화면에 뜸 -->
 <th:block layout:fragment="content" class="align-items-center ml-5">
-  <div class="body lg" style="max-width: 900 ;">
-    <h1 class="d-flex justify-content-center pt-3 mb-3 black-han-sans-regular starTitle" th:text="${starBoard.title}"> </h1>
+  <div class="body lg " style="max-width: 900 ;">
+    <h1 class="d-flex justify-content-center pt-3 mb-3 black-han-sans-regular starTitle  " th:text="${starBoard.title}"> </h1>
 
       <div class="container2">
         <form action="/page/starBoard/delete" method="get" id="read">
@@ -54,9 +54,9 @@
               <img th:src="|/file/img/${starBoard.imgNo}|" class="image rounded mt-auto" alt="썸네일">
             </div>
             <div class="text">
-              <span class="fw-bold fs-1 m-0 p-0" th:text="${starBoard.title}"></span>
+              <span class=" fs-1 m-0 p-0  black-han-sans-regular" th:text="${starBoard.title}"></span>
               <br>
-              <span class="fw-bold fs-10" th:text="${starBoard.writer}"></span>
+              <span class="fw-bold fs-10 eventtext" th:text="${starBoard.writer}"></span>
               <br>
               <div th:text="|${starBoard.category1}|" class="fs-10" id="category1" style="display: flex;">
               </div>
