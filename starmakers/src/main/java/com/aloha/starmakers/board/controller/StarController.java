@@ -447,12 +447,13 @@ public class StarController {
                 fileService.deleteByParent(file2); // 기존 파일 삭제
 
                 fileService.upload(file, starNo, userNo); // file 등록
+            } else {
+                log.info("파일 확인 안 됨");
             }
-            log.info("파일 확인 안 됨");
             return "redirect:/page/starCard/starRead?starNo=" + starNo;
         }
 
-        return "redirect:/page/starCard/starRead?starNo=" + starNo + "$error";
+        return "redirect:/page/starCard/starRead?starNo=" + starNo;
     }
 
     /**
