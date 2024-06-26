@@ -1,6 +1,3 @@
-# TJE_STARMAKERS
-SpringBootProject
-
 # 당스만_STARMAKERS
 개인 프로모션 대행 서비스
 
