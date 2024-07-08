@@ -38,12 +38,12 @@
 ### 6. 종합 평가
 
 # 1. 프로젝트 개요
-## 1-1 프로젝트 소개
+## 1-1. 프로젝트 소개
 - 크레이에터들은 오늘도 미디어산업에 뛰어듬.
 - 하지만 대부분 알려지지 않고 사라짐.
 - 꿈을 가진 크리에이터들의 도전적인 컨텐츠를 소개
 - 새로운 컨텐츠를 찾는 이들과의 접점을 마련
-## 1-2 기획 의도
+## 1-2. 기획 의도
 - 통합 프로모션
   - 여러 플랫폼의 통합
   - 다양한 콘텐츠를 쉽게 더 많은 사람들에게 노출
@@ -59,8 +59,34 @@
 <summary><h3>ℹ️메뉴 구조도</h3></summary>
 <div markdown="1">
   <img src="./img/메뉴구조도.png" />
-  <img src="[https://github.com/tellmebaby/TJE_STARMAKERS/assets/28bf24bd-6852-4616-951b-3456fb0c3807](https://github.com/tellmebaby/TJE_STARMAKERS/issues/213#issue-2394580851)">
 </div>
 </details>
 
+## 3. 프로젝트 진행 과정
 
+## 3-1. 수행 절차 및 방법
+<details>
+<summary><h3>ℹ️수행 절차 및 방법</h3></summary>
+<div markdown="1">
+  <img src="./img/수행 절차 및 방법.png" />
+</div>
+</details>
+
+## 3-2. 수행 절차 및 방법
+
+<details>
+<summary><h3>ℹ️프로젝트 수행 결과</h3></summary>
+<div markdown="1">
+  <img src="./img/프로젝트 수행 결과.png" />
+</div>
+</details>
+
+## 요구사항 정의서
+<details>
+<summary><h3>ℹ️요구사항 정의서</h3></summary>
+<div markdown="1">
+  <img src="./img/요구사항 정의서 1.png" />
+  <img src="./img/요구사항 정의서 2.png" />
+  <img src="./img/요구사항 정의서 3.png" />
+</div>
+</details>
