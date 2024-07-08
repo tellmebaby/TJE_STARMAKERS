@@ -58,7 +58,7 @@
 <details>
 <summary><h3>ℹ️메뉴 구조도</h3></summary>
 <div markdown="1">
-<img src="https://github.com/tellmebaby/TJE_STARMAKERS/assets/28bf24bd-6852-4616-951b-3456fb0c3807">
+  <img src="[https://github.com/tellmebaby/TJE_STARMAKERS/assets/28bf24bd-6852-4616-951b-3456fb0c3807](https://github.com/tellmebaby/TJE_STARMAKERS/issues/213#issue-2394580851)">
 </div>
 </details>
 
